@@ -1,511 +1,2109 @@
 {
-  "name": "playlists",
-  "version": 1,
-  "sheikhs": [
+ "name": "playlists",
+ "version": 1,
+ "sheikhs": [
+  {
+   "id": 1,
+   "slug": "said-bouti",
+   "name": "محمد سعيد رمضان البوطي",
+   "name_display": "سعيد رمضان البوطي",
+   "aliases": [
+    "البوطي"
+   ],
+   "group": 1,
+   "photo": "playlists/img/said-bouti.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": "https://naseemalsham.com",
+   "books": [
     {
-      "id": 1,
-      "slug": "said-bouti",
-      "name": "محمد سعيد رمضان البوطي",
-      "name_display": "سعيد رمضان البوطي",
-      "aliases": [
-        "البوطي"
-      ],
-      "group": 1,
-      "photo": "playlists/img/said-bouti.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null,
-      "website": "https://naseemalsham.com"
+     "title": "(mktbtypdf.com)-‫الإنسان-مسير-أم-مخير",
+     "url": "https://archive.org/details/mktbtypdf.com_202401"
     },
     {
-      "id": 2,
-      "slug": "habib-ali-aljifri",
-      "name": "الحبيب علي الجفري",
-      "name_display": "الحبيب علي الجفري",
-      "aliases": [
-        "علي الجفري"
-      ],
-      "group": 1,
-      "photo": "playlists/img/habib-ali-aljifri.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null,
-      "website": "https://alhabibali.com"
+     "title": "003345 الاسلام ملاذ كل المجتمعات الانسانية لماذا وكيف ؟",
+     "url": "https://archive.org/details/AAlexandrina-003345"
     },
     {
-      "id": 3,
-      "slug": "habib-omar-ibn-hafiz",
-      "name": "الحبيب عمر بن حفيظ",
-      "name_display": "الحبيب عمر بن حفيظ",
-      "aliases": [
-        "ابن حفيظ"
-      ],
-      "group": 1,
-      "photo": "playlists/img/habib-omar-ibn-hafiz.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null,
-      "website": "https://alhabibomar.com"
+     "title": "003892 كبرى اليقينيات الكونية وجود الخالق ووظيفة المخلوق",
+     "url": "https://archive.org/search?query=title%3A%22003892%20%D9%83%D8%A8%D8%B1%D9%89%20%D8%A7%D9%84%D9%8A%D9%82%D9%8A%D9%86%D9%8A%D8%A7%D8%AA%20%D8%A7%D9%84%D9%83%D9%88%D9%86%D9%8A%D8%A9%20%D9%88%D8%AC%D9%88%D8%AF%20%D8%A7%D9%84%D8%AE%D8%A7%D9%84%D9%82%20%D9%88%D9%88%D8%B8%D9%8A%D9%81%D8%A9%20%D8%A7%D9%84%D9%85%D8%AE%D9%84%D9%88%D9%82%22"
     },
     {
-      "id": 4,
-      "slug": "mouloud-sariri",
-      "name": "مولود السريري",
-      "name_display": "مولود السريري",
-      "aliases": [],
-      "group": 1,
-      "photo": "playlists/img/mouloud-sariri.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null,
-      "website": "https://assariry.com"
+     "title": "004096 حرية الانسان فى ظل عبوديته لله",
+     "url": "https://archive.org/details/AAlexandrina-004096"
     },
     {
-      "id": 5,
-      "slug": "bardouni-husaymi",
-      "name": "محمد البردوني الحسيمي",
-      "name_display": "محمد البردوني الحسيمي",
-      "aliases": [
-        "البردوني"
-      ],
-      "group": 1,
-      "photo": "playlists/img/bardouni-husaymi.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null,
-      "website": null
+     "title": "020024 العقوبات الاسلامية وعقدة التناقض بينها وبين ما يسمى بطبيعة",
+     "url": "https://archive.org/details/AAlexandrina-020024"
     },
     {
-      "id": 6,
-      "slug": "sharawi",
-      "name": "محمد متولي الشعراوي",
-      "name_display": "الشعراوي",
-      "aliases": [
-        "متولي الشعراوي"
-      ],
-      "group": 1,
-      "photo": "playlists/img/sharawi.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null,
-      "website": null
+     "title": "097566 - منهج تربوى فريد فى القران",
+     "url": "https://archive.org/details/AAlexandrina-097566"
     },
     {
-      "id": 7,
-      "slug": "maath-hawa",
-      "name": "معاذ سعيد حوى",
-      "name_display": "معاذ سعيد حوى",
-      "aliases": [
-        "معاذ حوى"
-      ],
-      "group": 1,
-      "photo": "playlists/img/maath-hawa.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null,
-      "website": "https://muath-hawwa.com"
+     "title": "098394 مجمل الشبهات التى تثار حول تطبيق الشريعة الاسلامية ف الحديث",
+     "url": "https://archive.org/details/AAlexandrina-098394"
     },
     {
-      "id": 8,
-      "slug": "ahmed-alsayed",
-      "name": "أحمد السيد",
-      "name_display": "أحمد السيد",
-      "aliases": [],
-      "group": 1,
-      "photo": "playlists/img/ahmed-alsayed.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null,
-      "website": "https://ahmadalsayed.net"
+     "title": "101351",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%A7%D9%84%D8%AF%D8%B9%D9%88%D8%A9%20%D9%88%D8%A3%D8%AD%D9%88%D8%A7%D9%84%20%D8%A7%D9%84%D9%85%D8%B3%D9%84%D9%85%D9%8A%D9%86/%D9%87%D9%83%D8%B0%D8%A7%20%D9%81%D9%84%D9%86%D8%AF%D8%B9%20%D8%A5%D9%84%D9%89%20%D8%A7%D9%84%D8%A5%D8%B3%D9%84%D8%A7%D9%85%20-%20%D8%A7%D9%84%D8%A8%D9%88%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%20%D9%88%D8%A7%D9%84%D9%81%D8%A7%D8%B1%D8%A7%D8%A8%D9%8A/101351.docx"
     },
     {
-      "id": 9,
-      "slug": "adham-alasimi",
-      "name": "أدهم العاسمي",
-      "name_display": "أدهم العاسمي",
-      "aliases": [
-        "العاسمي"
-      ],
-      "group": 1,
-      "photo": "playlists/img/adham-alasimi.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null,
-      "website": null
+     "title": "101351",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%A7%D9%84%D8%AF%D8%B9%D9%88%D8%A9%20%D9%88%D8%A3%D8%AD%D9%88%D8%A7%D9%84%20%D8%A7%D9%84%D9%85%D8%B3%D9%84%D9%85%D9%8A%D9%86/%D9%87%D9%83%D8%B0%D8%A7%20%D9%81%D9%84%D9%86%D8%AF%D8%B9%20%D8%A5%D9%84%D9%89%20%D8%A7%D9%84%D8%A5%D8%B3%D9%84%D8%A7%D9%85%20-%20%D8%A7%D9%84%D8%A8%D9%88%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%20%D9%88%D8%A7%D9%84%D9%81%D8%A7%D8%B1%D8%A7%D8%A8%D9%8A/101351.txt"
     },
     {
-      "id": 10,
-      "slug": "ali-gomaa",
-      "name": "علي جمعة",
-      "name_display": "علي جمعة",
-      "aliases": [],
-      "group": 1,
-      "photo": "playlists/img/ali-gomaa.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null,
-      "website": null
+     "title": "124394 العناية بالعبادات اساس لابد منه لتثبيت المجتمع الاسلامى",
+     "url": "https://archive.org/details/AAlexandrina-124394"
     },
     {
-      "id": 11,
-      "slug": "said-kamali",
-      "name": "سعيد الكملي",
-      "name_display": "سعيد الكملي",
-      "aliases": [
-        "الكملي"
-      ],
-      "group": 2,
-      "photo": "playlists/img/said-kamali.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null,
-      "website": "https://saidelkamali.com"
+     "title": "Al Marat bain Tughyan un nizam al gharabi ,كتاب المرأة بين طغيان النظام الغربي ولطائف التش",
+     "url": "https://archive.org/details/al-marat-bain-tughyan-un-nizam-al-gharabi"
     },
     {
-      "id": 12,
-      "slug": "fadhel-samarrai",
-      "name": "فاضل صالح السامرائي",
-      "name_display": "فاضل السامرائي",
-      "aliases": [
-        "السامرائي"
-      ],
-      "group": 2,
-      "photo": "playlists/img/fadhel-samarrai.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null,
-      "website": null
+     "title": "MazhabiaBT",
+     "url": "https://archive.org/details/mazhabiabt"
     },
     {
-      "id": 13,
-      "slug": "ayman-abdelrahim",
-      "name": "أيمن عبد الرحيم",
-      "name_display": "أيمن عبد الرحيم",
-      "aliases": [],
-      "group": 2,
-      "photo": "playlists/img/ayman-abdelrahim.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null,
-      "website": null
+     "title": "Zavabitu'l-Maslahati Fi'ş-Şeriati'l-İslamiyye, Dr. Ramazan el-Buti",
+     "url": "https://archive.org/details/ZavabitulMaslahatiFisSeriatilIslamiyyeDr.RamazanElButi"
     },
     {
-      "id": 14,
-      "slug": "daddo",
-      "name": "محمد الحسن ولد الددو",
-      "name_display": "الددو",
-      "aliases": [
-        "ولد الددو",
-        "الددو"
-      ],
-      "group": 2,
-      "photo": "playlists/img/daddo.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null,
-      "website": "https://dedewnet.com"
+     "title": "salafiyah-buthi",
+     "url": "https://archive.org/details/salafiyah-buthi"
     },
     {
-      "id": 15,
-      "slug": "awn-alqudoumi",
-      "name": "عون القدومي",
-      "name_display": "عون القدومي",
-      "aliases": [],
-      "group": 2,
-      "photo": "playlists/img/awn-alqudoumi.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null,
-      "website": "https://awnqaddoumi.com"
+     "title": "البوطى-كتاب السلفية مرحلة زمانية مباركة لا مذهب إسلامى",
+     "url": "https://archive.org/details/bfleifel_gmail_201505"
     },
     {
-      "id": 16,
-      "slug": "ali-mahmoud-alomari",
-      "name": "علي محمود العمري",
-      "name_display": "علي محمود العمري",
-      "aliases": [
-        "العمري"
-      ],
-      "group": 2,
-      "photo": "playlists/img/ali-mahmoud-alomari.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null,
-      "website": null
+     "title": "السلفية مرحلة زمنية مباركة لا مذهب إسلامي",
+     "url": "https://archive.org/details/Salafi-Booti"
     },
     {
-      "id": 17,
-      "slug": "aboubakr-almashhour",
-      "name": "أبو بكر المشهور بن أحمد بن إسماعيل",
-      "name_display": "أبو بكر المشهور",
-      "aliases": [
-        "المشهور"
-      ],
-      "group": 2,
-      "photo": "playlists/img/aboubakr-almashhour.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null,
-      "website": "https://alhabibabobakr.com"
+     "title": "الشورى في الإسلام مما خطه العلامة محمد سيعد رمضان البوطي في حياته ونشر بعد استشهاده",
+     "url": "https://archive.org/details/Al-Shura_fi_al-Islam"
     },
     {
-      "id": 18,
-      "slug": "osama-alazhari",
-      "name": "أسامة الأزهري",
-      "name_display": "أسامة الأزهري",
-      "aliases": [
-        "الأزهري"
-      ],
-      "group": 2,
-      "photo": "playlists/img/osama-alazhari.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null,
-      "website": null
+     "title": "فقه السيرة النبوية - محمد سعيد رمضان البوطي",
+     "url": "https://archive.org/details/qaisalkanas_gmail_20160310"
     },
     {
-      "id": 19,
-      "slug": "muhammad-abdelwahid-hanbali",
-      "name": "محمد عبد الواحد الازهري الحنبلي",
-      "name_display": "محمد عبد الواحد الازهري الحنبلي",
-      "aliases": [
-        "الحنبلي"
-      ],
-      "group": 2,
-      "photo": "playlists/img/muhammad-abdelwahid-hanbali.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null,
-      "website": null
+     "title": "كبرى اليقينيات الكونية ، وجود الخالق ووظيفة المخلوق # الشيخ محمد سعيد رمضان البوطي",
+     "url": "https://archive.org/details/20260731_20260731_0946"
     },
     {
-      "id": 20,
-      "slug": "abdelkader-alhussein",
-      "name": "عبد القادر الحسين",
-      "name_display": "عبد القادر الحسين",
-      "aliases": [],
-      "group": 2,
-      "photo": "playlists/img/abdelkader-alhussein.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null,
-      "website": null
-    },
-    {
-      "id": 21,
-      "slug": "hamza-belkacem",
-      "name": "حمزة بلقاسم",
-      "name_display": "حمزة بلقاسم",
-      "aliases": [],
-      "group": 2,
-      "photo": "playlists/img/hamza-belkacem.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null,
-      "website": null
-    },
-    {
-      "id": 22,
-      "slug": "bensaib",
-      "name": "بن سايب",
-      "name_display": "بن سايب",
-      "aliases": [
-        "ابن سايب"
-      ],
-      "group": 2,
-      "photo": "playlists/img/bensaib.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null,
-      "website": null
-    },
-    {
-      "id": 23,
-      "slug": "fathi-safi",
-      "name": "فتحي صافي",
-      "name_display": "فتحي صافي",
-      "aliases": [],
-      "group": 2,
-      "photo": "playlists/img/fathi-safi.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null,
-      "website": null
-    },
-    {
-      "id": 24,
-      "slug": "dhaker-alhashimi",
-      "name": "ذاكر الهاشمي",
-      "name_display": "ذاكر الهاشمي",
-      "aliases": [
-        "الهاشمي"
-      ],
-      "group": 2,
-      "photo": "playlists/img/dhaker-alhashimi.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null,
-      "website": null
-    },
-    {
-      "id": 25,
-      "slug": "saif-alasri",
-      "name": "سيف العصري",
-      "name_display": "سيف العصري",
-      "aliases": [
-        "العصري"
-      ],
-      "group": 2,
-      "photo": "playlists/img/saif-alasri.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null,
-      "website": null
-    },
-    {
-      "id": 26,
-      "slug": "hatem-alaouni",
-      "name": "حاتم العوني",
-      "name_display": "حاتم العوني",
-      "aliases": [
-        "العوني"
-      ],
-      "group": 2,
-      "photo": "playlists/img/hatem-alaouni.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null,
-      "website": "https://dr-alawni.com"
-    },
-    {
-      "id": 27,
-      "slug": "alfahham",
-      "name": "محمد الفحام",
-      "name_display": "الفحام",
-      "aliases": [
-        "فحام"
-      ],
-      "group": 2,
-      "photo": "playlists/img/alfahham.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null,
-      "website": null
-    },
-    {
-      "id": 28,
-      "slug": "ahmed-abdelmonem",
-      "name": "أحمد عبد المنعم",
-      "name_display": "أحمد عبد المنعم",
-      "aliases": [],
-      "group": 2,
-      "photo": "playlists/img/ahmed-abdelmonem.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null,
-      "website": null
-    },
-    {
-      "id": 29,
-      "slug": "fadhel-sulaiman",
-      "name": "فاضل سليمان",
-      "name_display": "فاضل سليمان",
-      "aliases": [],
-      "group": 2,
-      "photo": "playlists/img/fadhel-sulaiman.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null,
-      "website": "https://fadelsoliman.com"
-    },
-    {
-      "id": 30,
-      "slug": "samir-mustafa",
-      "name": "سمير مصطفى",
-      "name_display": "سمير مصطفى",
-      "aliases": [],
-      "group": 3,
-      "photo": "playlists/img/samir-mustafa.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null,
-      "website": null
-    },
-    {
-      "id": 31,
-      "slug": "muhammad-almaghrimi",
-      "name": "محمد المقرمي",
-      "name_display": "محمد المقرمي",
-      "aliases": [
-        "المقرمي"
-      ],
-      "group": 3,
-      "photo": "playlists/img/muhammad-almaghrimi.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null,
-      "website": "https://m-almagrami.net"
-    },
-    {
-      "id": 32,
-      "slug": "almughamisi",
-      "name": "صالح المغامسي",
-      "name_display": "المغامسي",
-      "aliases": [
-        "صالح المغامسي"
-      ],
-      "group": 3,
-      "photo": "playlists/img/almughamisi.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null,
-      "website": "https://alrasekhoon.com"
-    },
-    {
-      "id": 33,
-      "slug": "alshanqiti",
-      "name": "الشنقيطي",
-      "name_display": "الشنقيطي",
-      "aliases": [],
-      "group": 3,
-      "photo": "playlists/img/alshanqiti.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null,
-      "website": null
+     "title": "من روائع القرآن محمد سعيد رمضان البوطي",
+     "url": "https://archive.org/details/yahyasadeq2015_gmail_201806"
     }
-  ]
+   ]
+  },
+  {
+   "id": 2,
+   "slug": "habib-ali-aljifri",
+   "name": "الحبيب علي الجفري",
+   "name_display": "الحبيب علي الجفري",
+   "aliases": [
+    "علي الجفري"
+   ],
+   "group": 1,
+   "photo": "playlists/img/habib-ali-aljifri.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": "https://alhabibali.com",
+   "books": [
+    {
+     "title": "Book التصوف [0195813] --- الحبيب علي الجفري (مؤلف) تيسير كمال عزب (اعداد)",
+     "url": "https://archive.org/details/AAskZad-0195813"
+    },
+    {
+     "title": "Book لا تحزن ... لا تغضب ... لن يخزيك الله [0195653] --- الحبيب علي الجفري (مؤلف) شريف كما",
+     "url": "https://archive.org/details/AAskZad-0195653"
+    }
+   ]
+  },
+  {
+   "id": 3,
+   "slug": "habib-omar-ibn-hafiz",
+   "name": "الحبيب عمر بن حفيظ",
+   "name_display": "الحبيب عمر بن حفيظ",
+   "aliases": [
+    "ابن حفيظ"
+   ],
+   "group": 1,
+   "photo": "playlists/img/habib-omar-ibn-hafiz.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": "https://alhabibomar.com",
+   "books": [
+    {
+     "title": "الإمداد",
+     "url": "https://archive.org/details/Fyd-Alimdad"
+    },
+    {
+     "title": "Mamlatkat al-Qalb wal-A'da",
+     "url": "https://archive.org/details/mamlatkatalqalbwalada"
+    },
+    {
+     "title": "assharab",
+     "url": "https://archive.org/details/assharab.attahoor"
+    },
+    {
+     "title": "الحياض المطهرة لواردي المدينة المنورة",
+     "url": "https://archive.org/details/hayad_mutaharah"
+    },
+    {
+     "title": "ثقافة الخطيب",
+     "url": "https://archive.org/details/Thagaft-alkhateeb"
+    },
+    {
+     "title": "خلقنا للحبيب عمر بن حفيظ",
+     "url": "https://archive.org/details/mohammedswalih4_gmail_20190405"
+    }
+   ]
+  },
+  {
+   "id": 4,
+   "slug": "mouloud-sariri",
+   "name": "مولود السريري",
+   "name_display": "مولود السريري",
+   "aliases": [],
+   "group": 1,
+   "photo": "playlists/img/mouloud-sariri.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": "https://assariry.com",
+   "books": [
+    {
+     "title": "CharhTelemcani",
+     "url": "https://archive.org/details/CharhTelemcani"
+    },
+    {
+     "title": "KanounTN",
+     "url": "https://archive.org/details/kanountn"
+    }
+   ]
+  },
+  {
+   "id": 5,
+   "slug": "bardouni-husaymi",
+   "name": "محمد البردوني الحسيمي",
+   "name_display": "محمد البردوني الحسيمي",
+   "aliases": [
+    "البردوني"
+   ],
+   "group": 1,
+   "photo": "playlists/img/bardouni-husaymi.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null,
+   "books": [
+    {
+     "title": "الفتح الرباني بالتعليق على نظم الدلائي",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A7%D9%84%D9%81%D8%AA%D8%AD%20%D8%A7%D9%84%D8%B1%D8%A8%D8%A7%D9%86%D9%8A%20%D8%A8%D8%A7%D9%84%D8%AA%D8%B9%D9%84%D9%8A%D9%82%20%D8%B9%D9%84%D9%89%20%D9%86%D8%B8%D9%85%20%D8%A7%D9%84%D8%AF%D9%84%D8%A7%D8%A6%D9%8A%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "إتحاف ذوي الفضل بتحقيق وشرح تحفة الحكام",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A5%D8%AA%D8%AD%D8%A7%D9%81%20%D8%B0%D9%88%D9%8A%20%D8%A7%D9%84%D9%81%D8%B6%D9%84%20%D8%A8%D8%AA%D8%AD%D9%82%D9%8A%D9%82%20%D9%88%D8%B4%D8%B1%D8%AD%20%D8%AA%D8%AD%D9%81%D8%A9%20%D8%A7%D9%84%D8%AD%D9%83%D8%A7%D9%85%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "الدرر البهية في شرح المقدمة العزية",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A7%D9%84%D8%AF%D8%B1%D8%B1%20%D8%A7%D9%84%D8%A8%D9%87%D9%8A%D8%A9%20%D9%81%D9%8A%20%D8%B4%D8%B1%D8%AD%20%D8%A7%D9%84%D9%85%D9%82%D8%AF%D9%85%D8%A9%20%D8%A7%D9%84%D8%B9%D8%B2%D9%8A%D8%A9%22+AND+mediatype%3Atexts"
+    }
+   ]
+  },
+  {
+   "id": 6,
+   "slug": "sharawi",
+   "name": "محمد متولي الشعراوي",
+   "name_display": "الشعراوي",
+   "aliases": [
+    "متولي الشعراوي"
+   ],
+   "group": 1,
+   "photo": "playlists/img/sharawi.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null,
+   "books": [
+    {
+     "title": "100سؤال وجواب فى الفقه الاسلامى 08262 محمد متولي الشعراوي",
+     "url": "https://archive.org/details/BBib-Alex-08262"
+    },
+    {
+     "title": "101124",
+     "url": "https://archive.org/details/waq101124"
+    },
+    {
+     "title": "102366",
+     "url": "https://archive.org/details/waq102366"
+    },
+    {
+     "title": "103321",
+     "url": "https://archive.org/details/waq103321"
+    },
+    {
+     "title": "114498",
+     "url": "https://archive.org/details/waq114498"
+    },
+    {
+     "title": "169 -2016-مجلة عالم الفكر",
+     "url": "https://archive.org/details/ESHANDAWIY3"
+    },
+    {
+     "title": "410004 تفسير الشعراوى خواطر فضيلة الشيخ محمد متولى ال الكريم",
+     "url": "https://archive.org/details/AAlexandrina-410004"
+    },
+    {
+     "title": "430045 - فى تربية الانسان المسلم",
+     "url": "https://archive.org/details/AAlexandrina-430045"
+    },
+    {
+     "title": "431137 تفسير الشعراوى خواطر فضيلة الشيخ محمد متولى ال الكريم",
+     "url": "https://archive.org/details/AAlexandrina-431137"
+    },
+    {
+     "title": "44023",
+     "url": "https://archive.org/details/waq44023"
+    },
+    {
+     "title": "79051",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%A7%D9%84%D8%AA%D9%81%D8%A7%D8%B3%D9%8A%D8%B1/%D8%AA%D9%81%D8%B3%D9%8A%D8%B1%20%D8%A7%D9%84%D8%B4%D8%B9%D8%B1%D8%A7%D9%88%D9%8A/79051.docx"
+    },
+    {
+     "title": "79051",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%A7%D9%84%D8%AA%D9%81%D8%A7%D8%B3%D9%8A%D8%B1/%D8%AA%D9%81%D8%B3%D9%8A%D8%B1%20%D8%A7%D9%84%D8%B4%D8%B9%D8%B1%D8%A7%D9%88%D9%8A/79051.txt"
+    },
+    {
+     "title": "Al-Fateha",
+     "url": "https://archive.org/details/AlFateha_201905"
+    },
+    {
+     "title": "Book 200سؤال وجواب في الفقه الاسلامي [0196257] --- محمد متولي الشعراوي (مؤلف) مركز التراث ",
+     "url": "https://archive.org/details/AAskZad-0196257"
+    },
+    {
+     "title": "Book الأحاديث القدسية [0195711] --- محمد متولي الشعراوي (مؤلف)",
+     "url": "https://archive.org/details/AAskZad-0195711"
+    },
+    {
+     "title": "Book الأحاديث القدسية [0195724] --- محمد متولي الشعراوي (مؤلف)",
+     "url": "https://archive.org/details/AAskZad-0195724"
+    },
+    {
+     "title": "Book الزوجة الصالحة [0196090] --- محمد متولي الشعراوي (مؤلف)",
+     "url": "https://archive.org/details/AAskZad-0196090"
+    },
+    {
+     "title": "Book الطب البديل [0195887] --- محمد متولي الشعراوي (مؤلف) شريف كمال عزب (اعداد)",
+     "url": "https://archive.org/details/AAskZad-0195887"
+    },
+    {
+     "title": "Book الفتاوى [0195672] --- محمد متولي الشعراوي (مؤلف) مركز التراث لخدمة الكتاب والسنة (تحق",
+     "url": "https://archive.org/details/AAskZad-0195672"
+    },
+    {
+     "title": "Book صلاة الخاشعين [0195942] --- محمد متولي الشعراوي (مؤلف)",
+     "url": "https://archive.org/details/AAskZad-0195942"
+    },
+    {
+     "title": "sharawy 01",
+     "url": "https://archive.org/details/alhelawy03"
+    },
+    {
+     "title": "الإنسان الكامل محمد صلى الله عليه و سلم 13323 محمد متولي الشعراوي",
+     "url": "https://archive.org/details/BBib-Alex-13323"
+    },
+    {
+     "title": "التربية فى مدرسة النبوه 11302 محمد متولي الشعراوي",
+     "url": "https://archive.org/details/BBib-Alex-11302"
+    },
+    {
+     "title": "الحياة و الموت 13518 محمد متولي الشعراوي",
+     "url": "https://archive.org/details/BBib-Alex-13518"
+    },
+    {
+     "title": "الخير و الشر 13539 محمد متولي الشعراوي",
+     "url": "https://archive.org/details/BBib-Alex-13539"
+    },
+    {
+     "title": "الله والنفس البشرية 10208 محمد متولي الشعراوي",
+     "url": "https://archive.org/details/BBib-Alex-10208"
+    },
+    {
+     "title": "تفسير القرآن الكريم الشيخ محمد متولي الشعراوي مفهرس",
+     "url": "https://archive.org/details/20260602_20260602_1724"
+    },
+    {
+     "title": "جامع البيان في العبادات والأحكام الجزء 01 09119 محمد متولي الشعراوي",
+     "url": "https://archive.org/details/BBib-Alex-09119"
+    },
+    {
+     "title": "جامع البيان في العبادات والأحكام الجزء 02 09123 محمد متولي الشعراوي",
+     "url": "https://archive.org/details/BBib-Alex-09123"
+    },
+    {
+     "title": "جامع البيان في العبادات والأحكام الجزء 03 09124 محمد متولي الشعراوي",
+     "url": "https://archive.org/details/BBib-Alex-09124"
+    },
+    {
+     "title": "جامع البيان في العبادات والأحكام الجزء 05 09125 محمد متولي الشعراوي",
+     "url": "https://archive.org/details/BBib-Alex-09125"
+    },
+    {
+     "title": "جامع البيان في العبادات والأحكام الجزء 09 09129 محمد متولي الشعراوي",
+     "url": "https://archive.org/details/BBib-Alex-09129"
+    },
+    {
+     "title": "جامع البيان في العبادات والأحكام الجزء 12 09122 محمد متولي الشعراوي",
+     "url": "https://archive.org/details/BBib-Alex-09122"
+    },
+    {
+     "title": "خواطر الشعراوي المجلد 1",
+     "url": "https://archive.org/details/ELshandawily1"
+    },
+    {
+     "title": "دعاء الأنبياء و الصالحين 17119 محمد متولي الشعراوي",
+     "url": "https://archive.org/details/BBib-Alex-17119"
+    },
+    {
+     "title": "عذاب النار و اهوال يوم القيامة 16732 محمد متولي الشعراوي",
+     "url": "https://archive.org/details/BBib-Alex-16732"
+    }
+   ]
+  },
+  {
+   "id": 7,
+   "slug": "maath-hawa",
+   "name": "معاذ سعيد حوى",
+   "name_display": "معاذ سعيد حوى",
+   "aliases": [
+    "معاذ حوى"
+   ],
+   "group": 1,
+   "photo": "playlists/img/maath-hawa.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": "https://muath-hawwa.com",
+   "books": [
+    {
+     "title": "01\\06 مقدمات في التزكية الجزء الأول",
+     "url": "https://archive.org/details/1_20260823_202608"
+    },
+    {
+     "title": "02 شرح المباحث الأصلية طبعة 2",
+     "url": "https://archive.org/details/02-2_20201010"
+    },
+    {
+     "title": "04 التزكية تصوف أهل السنة ط4 شرح المباحث الأصلية 25 2 2022",
+     "url": "https://archive.org/details/04-4-25-2-2022"
+    },
+    {
+     "title": "1- مقدمات في التزكية الجزء الأول",
+     "url": "https://archive.org/details/2_20260906_20260906"
+    },
+    {
+     "title": "60370",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%A7%D9%84%D8%B9%D9%82%D9%8A%D8%AF%D8%A9/%D8%A7%D9%84%D8%A3%D8%B3%D8%A7%D8%B3%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%B3%D9%86%D8%A9%20%D9%88%D9%81%D9%82%D9%87%D9%87%D8%A7%202%20%D8%A7%D9%84%D8%B9%D9%82%D8%A7%D8%A6%D8%AF%20-%20%D8%AD%D9%88%D9%89%20-%20%D8%B7%20%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%201-3/60370.docx"
+    },
+    {
+     "title": "60370",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%A7%D9%84%D8%B9%D9%82%D9%8A%D8%AF%D8%A9/%D8%A7%D9%84%D8%A3%D8%B3%D8%A7%D8%B3%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%B3%D9%86%D8%A9%20%D9%88%D9%81%D9%82%D9%87%D9%87%D8%A7%202%20%D8%A7%D9%84%D8%B9%D9%82%D8%A7%D8%A6%D8%AF%20-%20%D8%AD%D9%88%D9%89%20-%20%D8%B7%20%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%201-3/60370.txt"
+    },
+    {
+     "title": "79301",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D9%81%D9%82%D9%87%20%D8%B9%D8%A7%D9%85/%D8%A7%D9%84%D8%A3%D8%B3%D8%A7%D8%B3%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%B3%D9%86%D8%A9%20%D9%88%D9%81%D9%82%D9%87%D9%87%D8%A7%203%20%D8%A7%D9%84%D8%B9%D8%A8%D8%A7%D8%AF%D8%A7%D8%AA%20-%20%D8%AD%D9%88%D9%89%20-%20%D8%B7%20%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%2001-07/79301.docx"
+    },
+    {
+     "title": "79301",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D9%81%D9%82%D9%87%20%D8%B9%D8%A7%D9%85/%D8%A7%D9%84%D8%A3%D8%B3%D8%A7%D8%B3%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%B3%D9%86%D8%A9%20%D9%88%D9%81%D9%82%D9%87%D9%87%D8%A7%203%20%D8%A7%D9%84%D8%B9%D8%A8%D8%A7%D8%AF%D8%A7%D8%AA%20-%20%D8%AD%D9%88%D9%89%20-%20%D8%B7%20%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%2001-07/79301.txt"
+    },
+    {
+     "title": "Book الإسلام [1143215] --- سعيد حوى (مؤلف)",
+     "url": "https://archive.org/details/AAskZad-1143215"
+    },
+    {
+     "title": "Book الإسلام [1143232] --- سعيد حوى (مؤلف)",
+     "url": "https://archive.org/details/AAskZad-1143232"
+    },
+    {
+     "title": "Book الإسلام [1143235] --- سعيد حوى (مؤلف)",
+     "url": "https://archive.org/details/AAskZad-1143235"
+    },
+    {
+     "title": "Book الإسلام [1143394] --- سعيد حوى (مؤلف)",
+     "url": "https://archive.org/details/AAskZad-1143394"
+    },
+    {
+     "title": "Book الله جل جلاله [1142833] --- سعيد حوى (مؤلف)",
+     "url": "https://archive.org/details/AAskZad-1142833"
+    },
+    {
+     "title": "Book تربيتنا الروحية [1143701] --- سعيد حوى (مؤلف)",
+     "url": "https://archive.org/details/AAskZad-1143701"
+    },
+    {
+     "title": "Book جند الله تنظيما [1142891] --- سعيد حوى (مؤلف)",
+     "url": "https://archive.org/details/AAskZad-1142891"
+    },
+    {
+     "title": "Book جند الله ثقافة وأخلاقا [1143006] --- سعيد حوى (مؤلف)",
+     "url": "https://archive.org/details/AAskZad-1143006"
+    },
+    {
+     "title": "Book جولات في الفقهين الكبير والأكبر وأصولهما [1142869] --- سعيد حوى (مؤلف)",
+     "url": "https://archive.org/details/AAskZad-1142869"
+    },
+    {
+     "title": "Book من أجل خطوة إلى الأمام على طريق الجهاد المبارك [1142827] --- سعيد حوى (مؤلف)",
+     "url": "https://archive.org/details/AAskZad-1142827"
+    },
+    {
+     "title": "asassera",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%A7%D9%84%D8%B3%D9%8A%D8%B1%D8%A9%20%D9%88%D8%A7%D9%84%D8%B4%D9%85%D8%A7%D8%A6%D9%84/%D8%A7%D9%84%D8%A3%D8%B3%D8%A7%D8%B3%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%B3%D9%86%D8%A9%201%20%D8%A7%D9%84%D8%B3%D9%8A%D8%B1%D8%A9%20%D8%A7%D9%84%D9%86%D8%A8%D9%88%D9%8A%D8%A9%20-%20%D8%AD%D9%88%D9%89%201-4/asassera.docx"
+    },
+    {
+     "title": "asassera",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%A7%D9%84%D8%B3%D9%8A%D8%B1%D8%A9%20%D9%88%D8%A7%D9%84%D8%B4%D9%85%D8%A7%D8%A6%D9%84/%D8%A7%D9%84%D8%A3%D8%B3%D8%A7%D8%B3%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%B3%D9%86%D8%A9%201%20%D8%A7%D9%84%D8%B3%D9%8A%D8%B1%D8%A9%20%D8%A7%D9%84%D9%86%D8%A8%D9%88%D9%8A%D8%A9%20-%20%D8%AD%D9%88%D9%89%201-4/asassera.txt"
+    },
+    {
+     "title": "asastfseer",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%A7%D9%84%D8%AA%D9%81%D8%A7%D8%B3%D9%8A%D8%B1/%D8%A7%D9%84%D8%A3%D8%B3%D8%A7%D8%B3%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%AA%D9%81%D8%B3%D9%8A%D8%B1%20-%20%D8%AD%D9%88%D9%89%20-%20%D8%B7%20%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B71%20%201-11/asastfseer.docx"
+    },
+    {
+     "title": "asastfseer",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%A7%D9%84%D8%AA%D9%81%D8%A7%D8%B3%D9%8A%D8%B1/%D8%A7%D9%84%D8%A3%D8%B3%D8%A7%D8%B3%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%AA%D9%81%D8%B3%D9%8A%D8%B1%20-%20%D8%AD%D9%88%D9%89%20-%20%D8%B7%20%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B71%20%201-11/asastfseer.txt"
+    },
+    {
+     "title": "العبادات فى الإسلام المجلد 03 08383 سعيد حوى",
+     "url": "https://archive.org/details/BBib-Alex-08383"
+    },
+    {
+     "title": "العبادات فى الإسلام المجلد 07 08384 سعيد حوى",
+     "url": "https://archive.org/details/BBib-Alex-08384"
+    },
+    {
+     "title": "تربيتنا الروحية [17457] --- سعيد حوى",
+     "url": "https://archive.org/details/BBib-Alex-17457"
+    }
+   ]
+  },
+  {
+   "id": 8,
+   "slug": "ahmed-alsayed",
+   "name": "أحمد السيد",
+   "name_display": "أحمد السيد",
+   "aliases": [],
+   "group": 1,
+   "photo": "playlists/img/ahmed-alsayed.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": "https://ahmadalsayed.net",
+   "books": [
+    {
+     "title": "Al Sayed 2",
+     "url": "https://archive.org/details/al-sayed-2"
+    },
+    {
+     "title": "إلى الجيل الصاعد",
+     "url": "https://archive.org/details/20230629_20230629_1405"
+    },
+    {
+     "title": "إلى الجيل الصاعد",
+     "url": "https://archive.org/details/20200506_20200506_1820"
+    },
+    {
+     "title": "إلى الجيل الصاعد",
+     "url": "https://archive.org/details/20210708_20210708_0109"
+    },
+    {
+     "title": "التفكير الناقد للجيل الصاعد",
+     "url": "https://archive.org/details/i7atahtnjs"
+    },
+    {
+     "title": "المنهاج من ميراث النبوة ط 3",
+     "url": "https://archive.org/details/3_20250507"
+    },
+    {
+     "title": "المنهاج من ميراث النبوة",
+     "url": "https://archive.org/details/i7atahmnhjmn"
+    },
+    {
+     "title": "المنهاج من ميراث النبوة",
+     "url": "https://archive.org/details/20240124_20240124_0617"
+    },
+    {
+     "title": "رحلتي مع كتاب إلى الجيل الصاعد تم بحمد الله",
+     "url": "https://archive.org/details/20200609_20200609_0727"
+    },
+    {
+     "title": "سابغات",
+     "url": "https://archive.org/search?query=title%3A%22%D8%B3%D8%A7%D8%A8%D8%BA%D8%A7%D8%AA%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "كامل الصورة (جزآن)",
+     "url": "https://archive.org/search?query=title%3A%22%D9%83%D8%A7%D9%85%D9%84%20%D8%A7%D9%84%D8%B5%D9%88%D8%B1%D8%A9%20%28%D8%AC%D8%B2%D8%A2%D9%86%29%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "البناء العقدي للجيل الصاعد",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A7%D9%84%D8%A8%D9%86%D8%A7%D8%A1%20%D8%A7%D9%84%D8%B9%D9%82%D8%AF%D9%8A%20%D9%84%D9%84%D8%AC%D9%8A%D9%84%20%D8%A7%D9%84%D8%B5%D8%A7%D8%B9%D8%AF%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "تثبيت حجية السنة",
+     "url": "https://archive.org/search?query=title%3A%22%D8%AA%D8%AB%D8%A8%D9%8A%D8%AA%20%D8%AD%D8%AC%D9%8A%D8%A9%20%D8%A7%D9%84%D8%B3%D9%86%D8%A9%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "أفي السنة شك",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A3%D9%81%D9%8A%20%D8%A7%D9%84%D8%B3%D9%86%D8%A9%20%D8%B4%D9%83%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "أصول الخطأ في الشبهات المثارة",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A3%D8%B5%D9%88%D9%84%20%D8%A7%D9%84%D8%AE%D8%B7%D8%A3%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%B4%D8%A8%D9%87%D8%A7%D8%AA%20%D8%A7%D9%84%D9%85%D8%AB%D8%A7%D8%B1%D8%A9%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "محاسن الإسلام",
+     "url": "https://archive.org/search?query=title%3A%22%D9%85%D8%AD%D8%A7%D8%B3%D9%86%20%D8%A7%D9%84%D8%A5%D8%B3%D9%84%D8%A7%D9%85%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "بوصلة المصلح",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A8%D9%88%D8%B5%D9%84%D8%A9%20%D8%A7%D9%84%D9%85%D8%B5%D9%84%D8%AD%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "أنوار الأنبياء",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A3%D9%86%D9%88%D8%A7%D8%B1%20%D8%A7%D9%84%D8%A3%D9%86%D8%A8%D9%8A%D8%A7%D8%A1%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "المعين على فهم تطبيقات المحدثين",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A7%D9%84%D9%85%D8%B9%D9%8A%D9%86%20%D8%B9%D9%84%D9%89%20%D9%81%D9%87%D9%85%20%D8%AA%D8%B7%D8%A8%D9%8A%D9%82%D8%A7%D8%AA%20%D8%A7%D9%84%D9%85%D8%AD%D8%AF%D8%AB%D9%8A%D9%86%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "معالجة القرآن لنفوس المصلحين",
+     "url": "https://archive.org/search?query=title%3A%22%D9%85%D8%B9%D8%A7%D9%84%D8%AC%D8%A9%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%20%D9%84%D9%86%D9%81%D9%88%D8%B3%20%D8%A7%D9%84%D9%85%D8%B5%D9%84%D8%AD%D9%8A%D9%86%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "مقاومة التفاهة",
+     "url": "https://archive.org/search?query=title%3A%22%D9%85%D9%82%D8%A7%D9%88%D9%85%D8%A9%20%D8%A7%D9%84%D8%AA%D9%81%D8%A7%D9%87%D8%A9%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "القبس الوهاج",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A7%D9%84%D9%82%D8%A8%D8%B3%20%D8%A7%D9%84%D9%88%D9%87%D8%A7%D8%AC%22+AND+mediatype%3Atexts"
+    }
+   ]
+  },
+  {
+   "id": 9,
+   "slug": "adham-alasimi",
+   "name": "أدهم العاسمي",
+   "name_display": "أدهم العاسمي",
+   "aliases": [
+    "العاسمي"
+   ],
+   "group": 1,
+   "photo": "playlists/img/adham-alasimi.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null,
+   "books": [
+    {
+     "title": "كتاب النحو المبسط",
+     "url": "https://archive.org/details/elementaryarabic"
+    },
+    {
+     "title": "ملخص-دروس-علم-المنطق-من1-الى-27",
+     "url": "https://archive.org/details/127_20190709"
+    },
+    {
+     "title": "(لا كتب منشورة — وعظ وتسجيلات؛ المنزّل مفرغات دروسه)",
+     "url": "https://archive.org/search?query=title%3A%22%28%D9%84%D8%A7%20%D9%83%D8%AA%D8%A8%20%D9%85%D9%86%D8%B4%D9%88%D8%B1%D8%A9%20%E2%80%94%20%D9%88%D8%B9%D8%B8%20%D9%88%D8%AA%D8%B3%D8%AC%D9%8A%D9%84%D8%A7%D8%AA%D8%9B%20%D8%A7%D9%84%D9%85%D9%86%D8%B2%D9%91%D9%84%20%D9%85%D9%81%D8%B1%D8%BA%D8%A7%D8%AA%20%D8%AF%D8%B1%D9%88%D8%B3%D9%87%29%22+AND+mediatype%3Atexts"
+    }
+   ]
+  },
+  {
+   "id": 10,
+   "slug": "ali-gomaa",
+   "name": "علي جمعة",
+   "name_display": "علي جمعة",
+   "aliases": [],
+   "group": 1,
+   "photo": "playlists/img/ali-gomaa.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null,
+   "books": [
+    {
+     "title": "143993",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%A3%D8%B5%D9%88%D9%84%20%D8%A7%D9%84%D9%81%D9%82%D9%87%20%D9%88%D8%A7%D9%84%D9%82%D9%88%D8%A7%D8%B9%D8%AF%20%D8%A7%D9%84%D9%81%D9%82%D9%87%D9%8A%D8%A9/%D8%A7%D9%84%D9%85%D8%AF%D8%AE%D9%84%20%D8%A5%D9%84%D9%89%20%D8%AF%D8%B1%D8%A7%D8%B3%D8%A9%20%D8%A7%D9%84%D9%85%D8%B0%D8%A7%D9%87%D8%A8%20%D8%A7%D9%84%D9%81%D9%82%D9%87%D9%8A%D8%A9_%D8%AC%D9%85%D8%B9%D8%A9__%D8%AF%D8%A7%D8%B1%20%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85_4/143993.docx"
+    },
+    {
+     "title": "143993",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%A3%D8%B5%D9%88%D9%84%20%D8%A7%D9%84%D9%81%D9%82%D9%87%20%D9%88%D8%A7%D9%84%D9%82%D9%88%D8%A7%D8%B9%D8%AF%20%D8%A7%D9%84%D9%81%D9%82%D9%87%D9%8A%D8%A9/%D8%A7%D9%84%D9%85%D8%AF%D8%AE%D9%84%20%D8%A5%D9%84%D9%89%20%D8%AF%D8%B1%D8%A7%D8%B3%D8%A9%20%D8%A7%D9%84%D9%85%D8%B0%D8%A7%D9%87%D8%A8%20%D8%A7%D9%84%D9%81%D9%82%D9%87%D9%8A%D8%A9_%D8%AC%D9%85%D8%B9%D8%A9__%D8%AF%D8%A7%D8%B1%20%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85_4/143993.txt"
+    },
+    {
+     "title": "Book التكشيف الإقتصادي للتراث - ملف رقم 1 - الإئتمان والإتاوة [1158790] --- علي جمعة محمد ",
+     "url": "https://archive.org/details/AAskZad-1158790"
+    },
+    {
+     "title": "Book التكشيف الإقتصادي للتراث - ملف رقم 102 - الزكاة [1158789] --- علي جمعة محمد (اعداد) أ",
+     "url": "https://archive.org/details/AAskZad-1158789"
+    },
+    {
+     "title": "Book التكشيف الإقتصادي للتراث - ملف رقم 12- الأراضي (إجراءات الرسول - ص) [1158675] --- علي",
+     "url": "https://archive.org/details/AAskZad-1158675"
+    },
+    {
+     "title": "Book التكشيف الإقتصادي للتراث - ملف رقم 120 - الزكاة [1138928] --- علي جمعة محمد (اعداد) أ",
+     "url": "https://archive.org/details/AAskZad-1138928"
+    },
+    {
+     "title": "Book التكشيف الإقتصادي للتراث - ملف رقم 123- الزكاة [1139176] --- علي جمعة محمد (اعداد) أح",
+     "url": "https://archive.org/details/AAskZad-1139176"
+    },
+    {
+     "title": "Book التكشيف الإقتصادي للتراث - ملف رقم 124 - الزكاة (25) [1139219] --- علي جمعة محمد (اعد",
+     "url": "https://archive.org/details/AAskZad-1139219"
+    },
+    {
+     "title": "Book التكشيف الإقتصادي للتراث - ملف رقم 132 - السرقات - السفاتج والصكوك - سلع تجارية [1158",
+     "url": "https://archive.org/details/AAskZad-1158771"
+    },
+    {
+     "title": "Book التكشيف الإقتصادي للتراث - ملف رقم 134 - السلم والسلف التسليف [1158738] --- علي جمعة ",
+     "url": "https://archive.org/details/AAskZad-1158738"
+    },
+    {
+     "title": "Book التكشيف الإقتصادي للتراث - ملف رقم 146 - الضياع والملكيات [1139304] --- علي جمعة محمد",
+     "url": "https://archive.org/details/AAskZad-1139304"
+    },
+    {
+     "title": "Book التكشيف الإقتصادي للتراث - ملف رقم 161 - الغنائم [1139277] --- علي جمعة محمد (اعداد) ",
+     "url": "https://archive.org/details/AAskZad-1139277"
+    },
+    {
+     "title": "Book التكشيف الإقتصادي للتراث - ملف رقم 187 - نظام الري - النظرة إلى الأرض [1139248] --- ع",
+     "url": "https://archive.org/details/AAskZad-1139248"
+    },
+    {
+     "title": "Book التكشيف الإقتصادي للتراث - ملف رقم 193- النقود [1139228] --- علي جمعة محمد (مؤلف) أحم",
+     "url": "https://archive.org/details/AAskZad-1139228"
+    },
+    {
+     "title": "Book التكشيف الإقتصادي للتراث - ملف رقم 20 - الأسواق [1158685] --- علي جمعة محمد (مؤلف) أح",
+     "url": "https://archive.org/details/AAskZad-1158685"
+    },
+    {
+     "title": "Book التكشيف الإقتصادي للتراث - ملف رقم 205 - الوقف [1139289] --- علي جمعة محمد (اعداد) أح",
+     "url": "https://archive.org/details/AAskZad-1139289"
+    },
+    {
+     "title": "Book التكشيف الإقتصادي للتراث - ملف رقم 23 - الإقطاع (1) [1158682] --- علي جمعة محمد (مؤلف",
+     "url": "https://archive.org/details/AAskZad-1158682"
+    },
+    {
+     "title": "Book التكشيف الإقتصادي للتراث - ملف رقم 24 - الإقطاع (2) [1158681] --- علي جمعة محمد (مؤلف",
+     "url": "https://archive.org/details/AAskZad-1158681"
+    },
+    {
+     "title": "Book التكشيف الإقتصادي للتراث - ملف رقم 25- الإقطاع (3) [1158680] --- علي جمعة محمد (مؤلف)",
+     "url": "https://archive.org/details/AAskZad-1158680"
+    },
+    {
+     "title": "Book التكشيف الإقتصادي للتراث - ملف رقم 32 - الأوزان والمكاييل (3) - الايعاز - براءة [1158",
+     "url": "https://archive.org/details/AAskZad-1158662"
+    },
+    {
+     "title": "Book التكشيف الإقتصادي للتراث - ملف رقم 34 - البيع أحكامه وأنواعه (1) [1158660] --- علي جم",
+     "url": "https://archive.org/details/AAskZad-1158660"
+    },
+    {
+     "title": "Book التكشيف الإقتصادي للتراث - ملف رقم 35 - البيع أحكامه وأنواعه (2) [1158659] --- علي جم",
+     "url": "https://archive.org/details/AAskZad-1158659"
+    },
+    {
+     "title": "Book التكشيف الإقتصادي للتراث - ملف رقم 54- البيع أحكامه وأنواعه (21) [1158702] --- علي جم",
+     "url": "https://archive.org/details/AAskZad-1158702"
+    },
+    {
+     "title": "Book التكشيف الإقتصادي للتراث - ملف رقم 58- التجارة (3) [1158699] --- علي جمعة محمد (مؤلف)",
+     "url": "https://archive.org/details/AAskZad-1158699"
+    },
+    {
+     "title": "Book التكشيف الإقتصادي للتراث - ملف رقم 73 - الجزية [1139237] --- علي جمعة محمد (اعداد) أح",
+     "url": "https://archive.org/details/AAskZad-1139237"
+    },
+    {
+     "title": "Book التكشيف الإقتصادي للتراث - ملف رقم 83 - الخراج (ضريبة الأرض والوارد) [1138915] --- عل",
+     "url": "https://archive.org/details/AAskZad-1138915"
+    },
+    {
+     "title": "Book التكشيف الإقتصادي للتراث - ملف رقم 87- الديات [1158753] --- علي جمعة محمد (اعداد) أحم",
+     "url": "https://archive.org/details/AAskZad-1158753"
+    },
+    {
+     "title": "Book التكشيف الإقتصادي للتراث - ملف رقم31- الأوزان والمكاييل والمقاييس (2) [1158666] --- ع",
+     "url": "https://archive.org/details/AAskZad-1158666"
+    },
+    {
+     "title": "Book التكشيف الإقتصادي للتراث - ملف رقم51 - البيع أحكامه وأنواعه(18) [1158705] --- علي جمع",
+     "url": "https://archive.org/details/AAskZad-1158705"
+    },
+    {
+     "title": "Book التكشيف الإقتصادي للتراث - ملف رقم53 - البيع أحكامه وأنواعه (20) [1158703] --- علي جم",
+     "url": "https://archive.org/details/AAskZad-1158703"
+    },
+    {
+     "title": "Book التكشيف الاقتصادي للتراث - ملف رقم 182 - المهور - موارد التجارة (الصادرات) [1158786] ",
+     "url": "https://archive.org/details/AAskZad-1158786"
+    },
+    {
+     "title": "Book التكشيف الاقتصادي للتراث - ملف رقم 86 - الديات [1158777] --- علي جمعة محمد (اعداد) أح",
+     "url": "https://archive.org/details/AAskZad-1158777"
+    },
+    {
+     "title": "الأحكام الشرعية في الأحوال الشخصية — المجلد الأول",
+     "url": "https://archive.org/details/ali-gomaa-supervised-works"
+    },
+    {
+     "title": "حاشية الإمام البيجوري على جوهرة التوحيد للشيخ اللقاني # د. علي جمعة محمد الشافعي",
+     "url": "https://archive.org/details/20260726_20260726_0812"
+    },
+    {
+     "title": "علم أصول الفقه وعلاقته بالفلسفة الإسلامية # د. علي جمعة محمد",
+     "url": "https://archive.org/details/20260729_20260729_0955"
+    }
+   ]
+  },
+  {
+   "id": 11,
+   "slug": "said-kamali",
+   "name": "سعيد الكملي",
+   "name_display": "سعيد الكملي",
+   "aliases": [
+    "الكملي"
+   ],
+   "group": 2,
+   "photo": "playlists/img/said-kamali.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": "https://saidelkamali.com",
+   "books": [
+    {
+     "title": "جني الثمرات من نظم الورقات للدكتور سعيد الكملي",
+     "url": "https://archive.org/details/20201223_20201223_1942"
+    },
+    {
+     "title": "جني الثمرات من نظم الورقات",
+     "url": "https://archive.org/details/20201008_20201008_0321"
+    },
+    {
+     "title": "الأحكام الشرعية في الأسفار الجوية",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A7%D9%84%D8%A3%D8%AD%D9%83%D8%A7%D9%85%20%D8%A7%D9%84%D8%B4%D8%B1%D8%B9%D9%8A%D8%A9%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%A3%D8%B3%D9%81%D8%A7%D8%B1%20%D8%A7%D9%84%D8%AC%D9%88%D9%8A%D8%A9%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "النقد والتعليل لبناء الأحكام على ما أصل في البيان والتحصيل",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A7%D9%84%D9%86%D9%82%D8%AF%20%D9%88%D8%A7%D9%84%D8%AA%D8%B9%D9%84%D9%8A%D9%84%20%D9%84%D8%A8%D9%86%D8%A7%D8%A1%20%D8%A7%D9%84%D8%A3%D8%AD%D9%83%D8%A7%D9%85%20%D8%B9%D9%84%D9%89%20%D9%85%D8%A7%20%D8%A3%D8%B5%D9%84%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%A8%D9%8A%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%AA%D8%AD%D8%B5%D9%8A%D9%84%22+AND+mediatype%3Atexts"
+    }
+   ]
+  },
+  {
+   "id": 12,
+   "slug": "fadhel-samarrai",
+   "name": "فاضل صالح السامرائي",
+   "name_display": "فاضل السامرائي",
+   "aliases": [
+    "السامرائي"
+   ],
+   "group": 2,
+   "photo": "playlists/img/fadhel-samarrai.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null,
+   "books": [
+    {
+     "title": "00 45265",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%A7%D9%84%D9%86%D8%AD%D9%88%20%D9%88%D8%A7%D9%84%D8%B5%D8%B1%D9%81/%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D9%86%D8%AD%D9%88%20-%20%D8%A7%D9%84%D8%B3%D8%A7%D9%85%D8%B1%D8%A7%D8%A6%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D9%81%D9%83%D8%B1%201-4/00_45265.docx"
+    },
+    {
+     "title": "00 45265",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%A7%D9%84%D9%86%D8%AD%D9%88%20%D9%88%D8%A7%D9%84%D8%B5%D8%B1%D9%81/%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D9%86%D8%AD%D9%88%20-%20%D8%A7%D9%84%D8%B3%D8%A7%D9%85%D8%B1%D8%A7%D8%A6%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D9%81%D9%83%D8%B1%201-4/00_45265.txt"
+    },
+    {
+     "title": "01 45265",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%A7%D9%84%D9%86%D8%AD%D9%88%20%D9%88%D8%A7%D9%84%D8%B5%D8%B1%D9%81/%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D9%86%D8%AD%D9%88%20-%20%D8%A7%D9%84%D8%B3%D8%A7%D9%85%D8%B1%D8%A7%D8%A6%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D9%81%D9%83%D8%B1%201-4/01_45265.docx"
+    },
+    {
+     "title": "01 45265",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%A7%D9%84%D9%86%D8%AD%D9%88%20%D9%88%D8%A7%D9%84%D8%B5%D8%B1%D9%81/%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D9%86%D8%AD%D9%88%20-%20%D8%A7%D9%84%D8%B3%D8%A7%D9%85%D8%B1%D8%A7%D8%A6%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D9%81%D9%83%D8%B1%201-4/01_45265.txt"
+    },
+    {
+     "title": "02 45266",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%A7%D9%84%D9%86%D8%AD%D9%88%20%D9%88%D8%A7%D9%84%D8%B5%D8%B1%D9%81/%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D9%86%D8%AD%D9%88%20-%20%D8%A7%D9%84%D8%B3%D8%A7%D9%85%D8%B1%D8%A7%D8%A6%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D9%81%D9%83%D8%B1%201-4/02_45266.docx"
+    },
+    {
+     "title": "02 45266",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%A7%D9%84%D9%86%D8%AD%D9%88%20%D9%88%D8%A7%D9%84%D8%B5%D8%B1%D9%81/%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D9%86%D8%AD%D9%88%20-%20%D8%A7%D9%84%D8%B3%D8%A7%D9%85%D8%B1%D8%A7%D8%A6%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D9%81%D9%83%D8%B1%201-4/02_45266.txt"
+    },
+    {
+     "title": "03 45267",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%A7%D9%84%D9%86%D8%AD%D9%88%20%D9%88%D8%A7%D9%84%D8%B5%D8%B1%D9%81/%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D9%86%D8%AD%D9%88%20-%20%D8%A7%D9%84%D8%B3%D8%A7%D9%85%D8%B1%D8%A7%D8%A6%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D9%81%D9%83%D8%B1%201-4/03_45267.docx"
+    },
+    {
+     "title": "03 45267",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%A7%D9%84%D9%86%D8%AD%D9%88%20%D9%88%D8%A7%D9%84%D8%B5%D8%B1%D9%81/%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D9%86%D8%AD%D9%88%20-%20%D8%A7%D9%84%D8%B3%D8%A7%D9%85%D8%B1%D8%A7%D8%A6%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D9%81%D9%83%D8%B1%201-4/03_45267.txt"
+    },
+    {
+     "title": "04 45268",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%A7%D9%84%D9%86%D8%AD%D9%88%20%D9%88%D8%A7%D9%84%D8%B5%D8%B1%D9%81/%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D9%86%D8%AD%D9%88%20-%20%D8%A7%D9%84%D8%B3%D8%A7%D9%85%D8%B1%D8%A7%D8%A6%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D9%81%D9%83%D8%B1%201-4/04_45268.docx"
+    },
+    {
+     "title": "04 45268",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%A7%D9%84%D9%86%D8%AD%D9%88%20%D9%88%D8%A7%D9%84%D8%B5%D8%B1%D9%81/%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D9%86%D8%AD%D9%88%20-%20%D8%A7%D9%84%D8%B3%D8%A7%D9%85%D8%B1%D8%A7%D8%A6%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D9%81%D9%83%D8%B1%201-4/04_45268.txt"
+    },
+    {
+     "title": "61609",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D9%84%D9%85%D8%B3%D8%A7%D8%AA%20%D8%A8%D9%8A%D8%A7%D9%86%D9%8A%D8%A9%20%D9%81%D9%8A%20%D9%86%D8%B5%D9%88%D8%B5%20%D9%85%D9%86%20%D8%A7%D9%84%D8%AA%D9%86%D8%B2%D9%8A%D9%84%20-%20%D8%A7%D9%84%D8%B3%D8%A7%D9%85%D8%B1%D8%A7%D8%A6%D9%8A%20-%20%D8%B7%20%D8%B9%D9%85%D8%A7%D8%B1/61609.docx"
+    },
+    {
+     "title": "61609",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D9%84%D9%85%D8%B3%D8%A7%D8%AA%20%D8%A8%D9%8A%D8%A7%D9%86%D9%8A%D8%A9%20%D9%81%D9%8A%20%D9%86%D8%B5%D9%88%D8%B5%20%D9%85%D9%86%20%D8%A7%D9%84%D8%AA%D9%86%D8%B2%D9%8A%D9%84%20-%20%D8%A7%D9%84%D8%B3%D8%A7%D9%85%D8%B1%D8%A7%D8%A6%D9%8A%20-%20%D8%B7%20%D8%B9%D9%85%D8%A7%D8%B1/61609.txt"
+    }
+   ]
+  },
+  {
+   "id": 13,
+   "slug": "ayman-abdelrahim",
+   "name": "أيمن عبد الرحيم",
+   "name_display": "أيمن عبد الرحيم",
+   "aliases": [],
+   "group": 2,
+   "photo": "playlists/img/ayman-abdelrahim.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null,
+   "books": [
+    {
+     "title": "جمهرة أعمال م أيمن عبدالرحيم",
+     "url": "https://archive.org/search?query=title%3A%22%D8%AC%D9%85%D9%87%D8%B1%D8%A9%20%D8%A3%D8%B9%D9%85%D8%A7%D9%84%20%D9%85%20%D8%A3%D9%8A%D9%85%D9%86%20%D8%B9%D8%A8%D8%AF%D8%A7%D9%84%D8%B1%D8%AD%D9%8A%D9%85%22"
+    },
+    {
+     "title": "(لا كتب منشورة — دورات مرئية: العلوم الإنسانية، التاريخ الإسلامي، التأسيس اللغوي)",
+     "url": "https://archive.org/search?query=title%3A%22%28%D9%84%D8%A7%20%D9%83%D8%AA%D8%A8%20%D9%85%D9%86%D8%B4%D9%88%D8%B1%D8%A9%20%E2%80%94%20%D8%AF%D9%88%D8%B1%D8%A7%D8%AA%20%D9%85%D8%B1%D8%A6%D9%8A%D8%A9%3A%20%D8%A7%D9%84%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D8%A5%D9%86%D8%B3%D8%A7%D9%86%D9%8A%D8%A9%D8%8C%20%D8%A7%D9%84%D8%AA%D8%A7%D8%B1%D9%8A%D8%AE%20%D8%A7%D9%84%D8%A5%D8%B3%D9%84%D8%A7%D9%85%D9%8A%D8%8C%20%D8%A7%D9%84%D8%AA%D8%A3%D8%B3%D9%8A%D8%B3%20%D8%A7%D9%84%D9%84%D8%BA%D9%88%D9%8A%29%22+AND+mediatype%3Atexts"
+    }
+   ]
+  },
+  {
+   "id": 14,
+   "slug": "daddo",
+   "name": "محمد الحسن ولد الددو",
+   "name_display": "الددو",
+   "aliases": [
+    "ولد الددو",
+    "الددو"
+   ],
+   "group": 2,
+   "photo": "playlists/img/daddo.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": "https://dedewnet.com",
+   "books": [
+    {
+     "title": "15",
+     "url": "https://archive.org/details/waraqat_DEDDOW"
+    },
+    {
+     "title": "1",
+     "url": "https://archive.org/details/sharhnwawiaddw"
+    },
+    {
+     "title": "Takfier",
+     "url": "https://archive.org/details/takfier_201910"
+    },
+    {
+     "title": "الرقية الشرعية الددو",
+     "url": "https://archive.org/details/20230621_20230621_1337"
+    },
+    {
+     "title": "هل الديمقراطية من الإسلام",
+     "url": "https://archive.org/details/almarbaty86_gmail_201609"
+    }
+   ]
+  },
+  {
+   "id": 15,
+   "slug": "awn-alqudoumi",
+   "name": "عون القدومي",
+   "name_display": "عون القدومي",
+   "aliases": [],
+   "group": 2,
+   "photo": "playlists/img/awn-alqudoumi.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": "https://awnqaddoumi.com",
+   "books": [
+    {
+     "title": "العلوم النبوية",
+     "url": "https://archive.org/details/Alolom-Annabawiyah"
+    },
+    {
+     "title": "غاية المأمول في خدمة الداعي والمدعو والرسول",
+     "url": "https://archive.org/search?query=title%3A%22%D8%BA%D8%A7%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D8%A3%D9%85%D9%88%D9%84%20%D9%81%D9%8A%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%A7%D9%84%D8%AF%D8%A7%D8%B9%D9%8A%20%D9%88%D8%A7%D9%84%D9%85%D8%AF%D8%B9%D9%88%20%D9%88%D8%A7%D9%84%D8%B1%D8%B3%D9%88%D9%84%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "البدر المنير في قراءة سيرة البشير النذير",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A7%D9%84%D8%A8%D8%AF%D8%B1%20%D8%A7%D9%84%D9%85%D9%86%D9%8A%D8%B1%20%D9%81%D9%8A%20%D9%82%D8%B1%D8%A7%D8%A1%D8%A9%20%D8%B3%D9%8A%D8%B1%D8%A9%20%D8%A7%D9%84%D8%A8%D8%B4%D9%8A%D8%B1%20%D8%A7%D9%84%D9%86%D8%B0%D9%8A%D8%B1%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "سبيل الهدى والرشاد",
+     "url": "https://archive.org/search?query=title%3A%22%D8%B3%D8%A8%D9%8A%D9%84%20%D8%A7%D9%84%D9%87%D8%AF%D9%89%20%D9%88%D8%A7%D9%84%D8%B1%D8%B4%D8%A7%D8%AF%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "معالم الهداية في منهاج الدعوة",
+     "url": "https://archive.org/search?query=title%3A%22%D9%85%D8%B9%D8%A7%D9%84%D9%85%20%D8%A7%D9%84%D9%87%D8%AF%D8%A7%D9%8A%D8%A9%20%D9%81%D9%8A%20%D9%85%D9%86%D9%87%D8%A7%D8%AC%20%D8%A7%D9%84%D8%AF%D8%B9%D9%88%D8%A9%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "إرشاد الحائر في أحكام السفر",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A5%D8%B1%D8%B4%D8%A7%D8%AF%20%D8%A7%D9%84%D8%AD%D8%A7%D8%A6%D8%B1%20%D9%81%D9%8A%20%D8%A3%D8%AD%D9%83%D8%A7%D9%85%20%D8%A7%D9%84%D8%B3%D9%81%D8%B1%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "الأنوار النبوية في الآداب المرضية",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A7%D9%84%D8%A3%D9%86%D9%88%D8%A7%D8%B1%20%D8%A7%D9%84%D9%86%D8%A8%D9%88%D9%8A%D8%A9%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%A2%D8%AF%D8%A7%D8%A8%20%D8%A7%D9%84%D9%85%D8%B1%D8%B6%D9%8A%D8%A9%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "إتحاف الأنام بأحكام الصيام",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A5%D8%AA%D8%AD%D8%A7%D9%81%20%D8%A7%D9%84%D8%A3%D9%86%D8%A7%D9%85%20%D8%A8%D8%A3%D8%AD%D9%83%D8%A7%D9%85%20%D8%A7%D9%84%D8%B5%D9%8A%D8%A7%D9%85%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "زاد العابد في فضائل المساجد",
+     "url": "https://archive.org/search?query=title%3A%22%D8%B2%D8%A7%D8%AF%20%D8%A7%D9%84%D8%B9%D8%A7%D8%A8%D8%AF%20%D9%81%D9%8A%20%D9%81%D8%B6%D8%A7%D8%A6%D9%84%20%D8%A7%D9%84%D9%85%D8%B3%D8%A7%D8%AC%D8%AF%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "مقالات في فقه التحولات",
+     "url": "https://archive.org/search?query=title%3A%22%D9%85%D9%82%D8%A7%D9%84%D8%A7%D8%AA%20%D9%81%D9%8A%20%D9%81%D9%82%D9%87%20%D8%A7%D9%84%D8%AA%D8%AD%D9%88%D9%84%D8%A7%D8%AA%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "معالم الدعوة المحمدية",
+     "url": "https://archive.org/search?query=title%3A%22%D9%85%D8%B9%D8%A7%D9%84%D9%85%20%D8%A7%D9%84%D8%AF%D8%B9%D9%88%D8%A9%20%D8%A7%D9%84%D9%85%D8%AD%D9%85%D8%AF%D9%8A%D8%A9%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "تكوين الذات",
+     "url": "https://archive.org/search?query=title%3A%22%D8%AA%D9%83%D9%88%D9%8A%D9%86%20%D8%A7%D9%84%D8%B0%D8%A7%D8%AA%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "القدس مبنى ومعنى",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A7%D9%84%D9%82%D8%AF%D8%B3%20%D9%85%D8%A8%D9%86%D9%89%20%D9%88%D9%85%D8%B9%D9%86%D9%89%22+AND+mediatype%3Atexts"
+    }
+   ]
+  },
+  {
+   "id": 16,
+   "slug": "ali-mahmoud-alomari",
+   "name": "علي محمود العمري",
+   "name_display": "علي محمود العمري",
+   "aliases": [
+    "العمري"
+   ],
+   "group": 2,
+   "photo": "playlists/img/ali-mahmoud-alomari.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null,
+   "books": [
+    {
+     "title": "المحصل في فلسفة الحداثة",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A7%D9%84%D9%85%D8%AD%D8%B5%D9%84%20%D9%81%D9%8A%20%D9%81%D9%84%D8%B3%D9%81%D8%A9%20%D8%A7%D9%84%D8%AD%D8%AF%D8%A7%D8%AB%D8%A9%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "النسبية في الفكر الإسلامي",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A7%D9%84%D9%86%D8%B3%D8%A8%D9%8A%D8%A9%20%D9%81%D9%8A%20%D8%A7%D9%84%D9%81%D9%83%D8%B1%20%D8%A7%D9%84%D8%A5%D8%B3%D9%84%D8%A7%D9%85%D9%8A%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "فلسفة علم الكلام: دراسة في المقدمات والمقاصد والمناهج الكلامية",
+     "url": "https://archive.org/search?query=title%3A%22%D9%81%D9%84%D8%B3%D9%81%D8%A9%20%D8%B9%D9%84%D9%85%20%D8%A7%D9%84%D9%83%D9%84%D8%A7%D9%85%3A%20%D8%AF%D8%B1%D8%A7%D8%B3%D8%A9%20%D9%81%D9%8A%20%D8%A7%D9%84%D9%85%D9%82%D8%AF%D9%85%D8%A7%D8%AA%20%D9%88%D8%A7%D9%84%D9%85%D9%82%D8%A7%D8%B5%D8%AF%20%D9%88%D8%A7%D9%84%D9%85%D9%86%D8%A7%D9%87%D8%AC%20%D8%A7%D9%84%D9%83%D9%84%D8%A7%D9%85%D9%8A%D8%A9%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "مدخل إلى دراسة فلسفة الدين",
+     "url": "https://archive.org/search?query=title%3A%22%D9%85%D8%AF%D8%AE%D9%84%20%D8%A5%D9%84%D9%89%20%D8%AF%D8%B1%D8%A7%D8%B3%D8%A9%20%D9%81%D9%84%D8%B3%D9%81%D8%A9%20%D8%A7%D9%84%D8%AF%D9%8A%D9%86%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "في ستة أيام: بحث في خلق السموات والأرض",
+     "url": "https://archive.org/search?query=title%3A%22%D9%81%D9%8A%20%D8%B3%D8%AA%D8%A9%20%D8%A3%D9%8A%D8%A7%D9%85%3A%20%D8%A8%D8%AD%D8%AB%20%D9%81%D9%8A%20%D8%AE%D9%84%D9%82%20%D8%A7%D9%84%D8%B3%D9%85%D9%88%D8%A7%D8%AA%20%D9%88%D8%A7%D9%84%D8%A3%D8%B1%D8%B6%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "المنطق القديم",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A7%D9%84%D9%85%D9%86%D8%B7%D9%82%20%D8%A7%D9%84%D9%82%D8%AF%D9%8A%D9%85%22+AND+mediatype%3Atexts"
+    }
+   ]
+  },
+  {
+   "id": 17,
+   "slug": "aboubakr-almashhour",
+   "name": "أبو بكر المشهور بن أحمد بن إسماعيل",
+   "name_display": "أبو بكر المشهور",
+   "aliases": [
+    "المشهور"
+   ],
+   "group": 2,
+   "photo": "playlists/img/aboubakr-almashhour.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": "https://alhabibabobakr.com",
+   "books": [
+    {
+     "title": "fiqh tahawwulat",
+     "url": "https://archive.org/details/Fiqh_tahawwulat_mktbhazzaen"
+    },
+    {
+     "title": "لوامع النور",
+     "url": "https://archive.org/details/20230316_20230316_1353"
+    },
+    {
+     "title": "النبذة الصغرى لمعرفة الركن الرابع من أركان الدين",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A7%D9%84%D9%86%D8%A8%D8%B0%D8%A9%20%D8%A7%D9%84%D8%B5%D8%BA%D8%B1%D9%89%20%D9%84%D9%85%D8%B9%D8%B1%D9%81%D8%A9%20%D8%A7%D9%84%D8%B1%D9%83%D9%86%20%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9%20%D9%85%D9%86%20%D8%A3%D8%B1%D9%83%D8%A7%D9%86%20%D8%A7%D9%84%D8%AF%D9%8A%D9%86%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "الأسس والمنطلقات في فقه التحولات",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A7%D9%84%D8%A3%D8%B3%D8%B3%20%D9%88%D8%A7%D9%84%D9%85%D9%86%D8%B7%D9%84%D9%82%D8%A7%D8%AA%20%D9%81%D9%8A%20%D9%81%D9%82%D9%87%20%D8%A7%D9%84%D8%AA%D8%AD%D9%88%D9%84%D8%A7%D8%AA%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "إحياء لغة الإسلام العالمية",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A5%D8%AD%D9%8A%D8%A7%D8%A1%20%D9%84%D8%BA%D8%A9%20%D8%A7%D9%84%D8%A5%D8%B3%D9%84%D8%A7%D9%85%20%D8%A7%D9%84%D8%B9%D8%A7%D9%84%D9%85%D9%8A%D8%A9%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "إحياء منهجية النمط الأوسط من سادة الصلح",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A5%D8%AD%D9%8A%D8%A7%D8%A1%20%D9%85%D9%86%D9%87%D8%AC%D9%8A%D8%A9%20%D8%A7%D9%84%D9%86%D9%85%D8%B7%20%D8%A7%D9%84%D8%A3%D9%88%D8%B3%D8%B7%20%D9%85%D9%86%20%D8%B3%D8%A7%D8%AF%D8%A9%20%D8%A7%D9%84%D8%B5%D9%84%D8%AD%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "الطرف الأحور في تاريخ مخلاف أحور",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A7%D9%84%D8%B7%D8%B1%D9%81%20%D8%A7%D9%84%D8%A3%D8%AD%D9%88%D8%B1%20%D9%81%D9%8A%20%D8%AA%D8%A7%D8%B1%D9%8A%D8%AE%20%D9%85%D8%AE%D9%84%D8%A7%D9%81%20%D8%A3%D8%AD%D9%88%D8%B1%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "سلسلة أعلام الفكر والدعوة في حضرموت",
+     "url": "https://archive.org/search?query=title%3A%22%D8%B3%D9%84%D8%B3%D9%84%D8%A9%20%D8%A3%D8%B9%D9%84%D8%A7%D9%85%20%D8%A7%D9%84%D9%81%D9%83%D8%B1%20%D9%88%D8%A7%D9%84%D8%AF%D8%B9%D9%88%D8%A9%20%D9%81%D9%8A%20%D8%AD%D8%B6%D8%B1%D9%85%D9%88%D8%AA%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "الرموز والأصابع",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A7%D9%84%D8%B1%D9%85%D9%88%D8%B2%20%D9%88%D8%A7%D9%84%D8%A3%D8%B5%D8%A7%D8%A8%D8%B9%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "بين يدي الدجال",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A8%D9%8A%D9%86%20%D9%8A%D8%AF%D9%8A%20%D8%A7%D9%84%D8%AF%D8%AC%D8%A7%D9%84%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "كشف الغمة عن هذه الأمة",
+     "url": "https://archive.org/search?query=title%3A%22%D9%83%D8%B4%D9%81%20%D8%A7%D9%84%D8%BA%D9%85%D8%A9%20%D8%B9%D9%86%20%D9%87%D8%B0%D9%87%20%D8%A7%D9%84%D8%A3%D9%85%D8%A9%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "الوثيقة",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A7%D9%84%D9%88%D8%AB%D9%8A%D9%82%D8%A9%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "فقه الدعوة في المرحلة المعاصرة",
+     "url": "https://archive.org/search?query=title%3A%22%D9%81%D9%82%D9%87%20%D8%A7%D9%84%D8%AF%D8%B9%D9%88%D8%A9%20%D9%81%D9%8A%20%D8%A7%D9%84%D9%85%D8%B1%D8%AD%D9%84%D8%A9%20%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D8%B5%D8%B1%D8%A9%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "فقه الدعوة للمرأة المسلمة",
+     "url": "https://archive.org/search?query=title%3A%22%D9%81%D9%82%D9%87%20%D8%A7%D9%84%D8%AF%D8%B9%D9%88%D8%A9%20%D9%84%D9%84%D9%85%D8%B1%D8%A3%D8%A9%20%D8%A7%D9%84%D9%85%D8%B3%D9%84%D9%85%D8%A9%22+AND+mediatype%3Atexts"
+    }
+   ]
+  },
+  {
+   "id": 18,
+   "slug": "osama-alazhari",
+   "name": "أسامة الأزهري",
+   "name_display": "أسامة الأزهري",
+   "aliases": [
+    "الأزهري"
+   ],
+   "group": 2,
+   "photo": "playlists/img/osama-alazhari.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null,
+   "books": [
+    {
+     "title": "asanead",
+     "url": "https://archive.org/details/asanead"
+    },
+    {
+     "title": "asaned almesreen",
+     "url": "https://archive.org/details/asaned_almesreen"
+    },
+    {
+     "title": "الحق المبين في الرد على من تلاعب بالدين",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A7%D9%84%D8%AD%D9%82%20%D8%A7%D9%84%D9%85%D8%A8%D9%8A%D9%86%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%B1%D8%AF%20%D8%B9%D9%84%D9%89%20%D9%85%D9%86%20%D8%AA%D9%84%D8%A7%D8%B9%D8%A8%20%D8%A8%D8%A7%D9%84%D8%AF%D9%8A%D9%86%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "جمهرة أعلام الأزهر (10 مجلدات)",
+     "url": "https://archive.org/search?query=title%3A%22%D8%AC%D9%85%D9%87%D8%B1%D8%A9%20%D8%A3%D8%B9%D9%84%D8%A7%D9%85%20%D8%A7%D9%84%D8%A3%D8%B2%D9%87%D8%B1%20%2810%20%D9%85%D8%AC%D9%84%D8%AF%D8%A7%D8%AA%29%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "الإحياء الكبير: لمعالم المنهج الأزهري",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A7%D9%84%D8%A5%D8%AD%D9%8A%D8%A7%D8%A1%20%D8%A7%D9%84%D9%83%D8%A8%D9%8A%D8%B1%3A%20%D9%84%D9%85%D8%B9%D8%A7%D9%84%D9%85%20%D8%A7%D9%84%D9%85%D9%86%D9%87%D8%AC%20%D8%A7%D9%84%D8%A3%D8%B2%D9%87%D8%B1%D9%8A%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "الشخصية الوطنية المصرية",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A7%D9%84%D8%B4%D8%AE%D8%B5%D9%8A%D8%A9%20%D8%A7%D9%84%D9%88%D8%B7%D9%86%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D8%B5%D8%B1%D9%8A%D8%A9%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "صانع السعادة",
+     "url": "https://archive.org/search?query=title%3A%22%D8%B5%D8%A7%D9%86%D8%B9%20%D8%A7%D9%84%D8%B3%D8%B9%D8%A7%D8%AF%D8%A9%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "المدخل إلى علوم الحديث الشريف",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A7%D9%84%D9%85%D8%AF%D8%AE%D9%84%20%D8%A5%D9%84%D9%89%20%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB%20%D8%A7%D9%84%D8%B4%D8%B1%D9%8A%D9%81%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "المفارق والمعارض",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A7%D9%84%D9%85%D9%81%D8%A7%D8%B1%D9%82%20%D9%88%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D8%B1%D8%B6%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "درء الفتنة عن حديث الافتراق",
+     "url": "https://archive.org/search?query=title%3A%22%D8%AF%D8%B1%D8%A1%20%D8%A7%D9%84%D9%81%D8%AA%D9%86%D8%A9%20%D8%B9%D9%86%20%D8%AD%D8%AF%D9%8A%D8%AB%20%D8%A7%D9%84%D8%A7%D9%81%D8%AA%D8%B1%D8%A7%D9%82%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "صلة الأقارب ومراحم الأباعد",
+     "url": "https://archive.org/search?query=title%3A%22%D8%B5%D9%84%D8%A9%20%D8%A7%D9%84%D8%A3%D9%82%D8%A7%D8%B1%D8%A8%20%D9%88%D9%85%D8%B1%D8%A7%D8%AD%D9%85%20%D8%A7%D9%84%D8%A3%D8%A8%D8%A7%D8%B9%D8%AF%22+AND+mediatype%3Atexts"
+    }
+   ]
+  },
+  {
+   "id": 19,
+   "slug": "muhammad-abdelwahid-hanbali",
+   "name": "محمد عبد الواحد الازهري الحنبلي",
+   "name_display": "محمد عبد الواحد الازهري الحنبلي",
+   "aliases": [
+    "الحنبلي"
+   ],
+   "group": 2,
+   "photo": "playlists/img/muhammad-abdelwahid-hanbali.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null,
+   "books": [
+    {
+     "title": "01",
+     "url": "https://archive.org/details/sharh_dalil"
+    },
+    {
+     "title": "الحنابلة والاستغاثة",
+     "url": "https://archive.org/details/20191026_20191026_1748"
+    }
+   ]
+  },
+  {
+   "id": 20,
+   "slug": "abdelkader-alhussein",
+   "name": "عبد القادر الحسين",
+   "name_display": "عبد القادر الحسين",
+   "aliases": [],
+   "group": 2,
+   "photo": "playlists/img/abdelkader-alhussein.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null,
+   "books": [
+    {
+     "title": "معايير القبول والرد لتفسير النص القرآني",
+     "url": "https://archive.org/details/20250311_20250311_1615"
+    }
+   ]
+  },
+  {
+   "id": 21,
+   "slug": "hamza-belkacem",
+   "name": "حمزة بلقاسم",
+   "name_display": "حمزة بلقاسم",
+   "aliases": [],
+   "group": 2,
+   "photo": "playlists/img/hamza-belkacem.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null,
+   "books": [
+    {
+     "title": "igmnhush",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%A3%D8%B5%D9%88%D9%84%20%D8%A7%D9%84%D9%81%D9%82%D9%87%20%D9%88%D8%A7%D9%84%D9%82%D9%88%D8%A7%D8%B9%D8%AF%20%D8%A7%D9%84%D9%81%D9%82%D9%87%D9%8A%D8%A9/%D8%A7%D9%84%D8%A7%D8%AC%D8%AA%D9%87%D8%A7%D8%AF%20%D9%81%D9%8A%20%D9%85%D9%86%D8%A7%D8%B7%20%D8%A7%D9%84%D8%AD%D9%83%D9%85%20%D8%A7%D9%84%D8%B4%D8%B1%D8%B9%D9%8A-%D8%A7%D9%84%D8%B2%D8%A8%D9%8A%D8%AF%D9%8A/igmnhush.docx"
+    },
+    {
+     "title": "igmnhush",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%A3%D8%B5%D9%88%D9%84%20%D8%A7%D9%84%D9%81%D9%82%D9%87%20%D9%88%D8%A7%D9%84%D9%82%D9%88%D8%A7%D8%B9%D8%AF%20%D8%A7%D9%84%D9%81%D9%82%D9%87%D9%8A%D8%A9/%D8%A7%D9%84%D8%A7%D8%AC%D8%AA%D9%87%D8%A7%D8%AF%20%D9%81%D9%8A%20%D9%85%D9%86%D8%A7%D8%B7%20%D8%A7%D9%84%D8%AD%D9%83%D9%85%20%D8%A7%D9%84%D8%B4%D8%B1%D8%B9%D9%8A-%D8%A7%D9%84%D8%B2%D8%A8%D9%8A%D8%AF%D9%8A/igmnhush.txt"
+    },
+    {
+     "title": "(لا كتب منشورة — دروس شفوية: شرح مختصر خليل، تعليق الجلالين)",
+     "url": "https://archive.org/search?query=title%3A%22%28%D9%84%D8%A7%20%D9%83%D8%AA%D8%A8%20%D9%85%D9%86%D8%B4%D9%88%D8%B1%D8%A9%20%E2%80%94%20%D8%AF%D8%B1%D9%88%D8%B3%20%D8%B4%D9%81%D9%88%D9%8A%D8%A9%3A%20%D8%B4%D8%B1%D8%AD%20%D9%85%D8%AE%D8%AA%D8%B5%D8%B1%20%D8%AE%D9%84%D9%8A%D9%84%D8%8C%20%D8%AA%D8%B9%D9%84%D9%8A%D9%82%20%D8%A7%D9%84%D8%AC%D9%84%D8%A7%D9%84%D9%8A%D9%86%29%22+AND+mediatype%3Atexts"
+    }
+   ]
+  },
+  {
+   "id": 22,
+   "slug": "bensaib",
+   "name": "بن سايب",
+   "name_display": "بن سايب",
+   "aliases": [
+    "ابن سايب"
+   ],
+   "group": 2,
+   "photo": "playlists/img/bensaib.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null,
+   "books": [
+    {
+     "title": "purification of the heart",
+     "url": "https://archive.org/search?query=title%3A%22purification%20of%20the%20heart%22"
+    },
+    {
+     "title": "مطهرة القلوب من قترة العيوب",
+     "url": "https://archive.org/search?query=title%3A%22%D9%85%D8%B7%D9%87%D8%B1%D8%A9%20%D8%A7%D9%84%D9%82%D9%84%D9%88%D8%A8%20%D9%85%D9%86%20%D9%82%D8%AA%D8%B1%D8%A9%20%D8%A7%D9%84%D8%B9%D9%8A%D9%88%D8%A8%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "الرسالة",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%22+AND+mediatype%3Atexts"
+    }
+   ]
+  },
+  {
+   "id": 23,
+   "slug": "fathi-safi",
+   "name": "فتحي صافي",
+   "name_display": "فتحي صافي",
+   "aliases": [],
+   "group": 2,
+   "photo": "playlists/img/fathi-safi.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null,
+   "books": [
+    {
+     "title": "00 82881",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D8%A7%D9%84%D8%AC%D8%AF%D9%88%D9%84%20%D9%81%D9%8A%20%D8%A5%D8%B9%D8%B1%D8%A7%D8%A8%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%20%D9%88%D8%B5%D8%B1%D9%81%D9%87%20-%20%D8%B5%D8%A7%D9%81%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%A5%D9%8A%D9%85%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%B1%D8%B4%D9%8A%D8%AF%20-%20%D8%B71%20%201-16/00_82881.docx"
+    },
+    {
+     "title": "00 82881",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D8%A7%D9%84%D8%AC%D8%AF%D9%88%D9%84%20%D9%81%D9%8A%20%D8%A5%D8%B9%D8%B1%D8%A7%D8%A8%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%20%D9%88%D8%B5%D8%B1%D9%81%D9%87%20-%20%D8%B5%D8%A7%D9%81%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%A5%D9%8A%D9%85%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%B1%D8%B4%D9%8A%D8%AF%20-%20%D8%B71%20%201-16/00_82881.txt"
+    },
+    {
+     "title": "01 82881",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D8%A7%D9%84%D8%AC%D8%AF%D9%88%D9%84%20%D9%81%D9%8A%20%D8%A5%D8%B9%D8%B1%D8%A7%D8%A8%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%20%D9%88%D8%B5%D8%B1%D9%81%D9%87%20-%20%D8%B5%D8%A7%D9%81%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%A5%D9%8A%D9%85%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%B1%D8%B4%D9%8A%D8%AF%20-%20%D8%B71%20%201-16/01_82881.docx"
+    },
+    {
+     "title": "01 82881",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D8%A7%D9%84%D8%AC%D8%AF%D9%88%D9%84%20%D9%81%D9%8A%20%D8%A5%D8%B9%D8%B1%D8%A7%D8%A8%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%20%D9%88%D8%B5%D8%B1%D9%81%D9%87%20-%20%D8%B5%D8%A7%D9%81%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%A5%D9%8A%D9%85%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%B1%D8%B4%D9%8A%D8%AF%20-%20%D8%B71%20%201-16/01_82881.txt"
+    },
+    {
+     "title": "02 82882",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D8%A7%D9%84%D8%AC%D8%AF%D9%88%D9%84%20%D9%81%D9%8A%20%D8%A5%D8%B9%D8%B1%D8%A7%D8%A8%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%20%D9%88%D8%B5%D8%B1%D9%81%D9%87%20-%20%D8%B5%D8%A7%D9%81%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%A5%D9%8A%D9%85%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%B1%D8%B4%D9%8A%D8%AF%20-%20%D8%B71%20%201-16/02_82882.docx"
+    },
+    {
+     "title": "02 82882",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D8%A7%D9%84%D8%AC%D8%AF%D9%88%D9%84%20%D9%81%D9%8A%20%D8%A5%D8%B9%D8%B1%D8%A7%D8%A8%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%20%D9%88%D8%B5%D8%B1%D9%81%D9%87%20-%20%D8%B5%D8%A7%D9%81%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%A5%D9%8A%D9%85%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%B1%D8%B4%D9%8A%D8%AF%20-%20%D8%B71%20%201-16/02_82882.txt"
+    },
+    {
+     "title": "03 82883",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D8%A7%D9%84%D8%AC%D8%AF%D9%88%D9%84%20%D9%81%D9%8A%20%D8%A5%D8%B9%D8%B1%D8%A7%D8%A8%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%20%D9%88%D8%B5%D8%B1%D9%81%D9%87%20-%20%D8%B5%D8%A7%D9%81%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%A5%D9%8A%D9%85%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%B1%D8%B4%D9%8A%D8%AF%20-%20%D8%B71%20%201-16/03_82883.docx"
+    },
+    {
+     "title": "03 82883",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D8%A7%D9%84%D8%AC%D8%AF%D9%88%D9%84%20%D9%81%D9%8A%20%D8%A5%D8%B9%D8%B1%D8%A7%D8%A8%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%20%D9%88%D8%B5%D8%B1%D9%81%D9%87%20-%20%D8%B5%D8%A7%D9%81%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%A5%D9%8A%D9%85%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%B1%D8%B4%D9%8A%D8%AF%20-%20%D8%B71%20%201-16/03_82883.txt"
+    },
+    {
+     "title": "04 82884",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D8%A7%D9%84%D8%AC%D8%AF%D9%88%D9%84%20%D9%81%D9%8A%20%D8%A5%D8%B9%D8%B1%D8%A7%D8%A8%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%20%D9%88%D8%B5%D8%B1%D9%81%D9%87%20-%20%D8%B5%D8%A7%D9%81%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%A5%D9%8A%D9%85%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%B1%D8%B4%D9%8A%D8%AF%20-%20%D8%B71%20%201-16/04_82884.docx"
+    },
+    {
+     "title": "04 82884",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D8%A7%D9%84%D8%AC%D8%AF%D9%88%D9%84%20%D9%81%D9%8A%20%D8%A5%D8%B9%D8%B1%D8%A7%D8%A8%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%20%D9%88%D8%B5%D8%B1%D9%81%D9%87%20-%20%D8%B5%D8%A7%D9%81%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%A5%D9%8A%D9%85%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%B1%D8%B4%D9%8A%D8%AF%20-%20%D8%B71%20%201-16/04_82884.txt"
+    },
+    {
+     "title": "05 82885",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D8%A7%D9%84%D8%AC%D8%AF%D9%88%D9%84%20%D9%81%D9%8A%20%D8%A5%D8%B9%D8%B1%D8%A7%D8%A8%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%20%D9%88%D8%B5%D8%B1%D9%81%D9%87%20-%20%D8%B5%D8%A7%D9%81%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%A5%D9%8A%D9%85%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%B1%D8%B4%D9%8A%D8%AF%20-%20%D8%B71%20%201-16/05_82885.docx"
+    },
+    {
+     "title": "05 82885",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D8%A7%D9%84%D8%AC%D8%AF%D9%88%D9%84%20%D9%81%D9%8A%20%D8%A5%D8%B9%D8%B1%D8%A7%D8%A8%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%20%D9%88%D8%B5%D8%B1%D9%81%D9%87%20-%20%D8%B5%D8%A7%D9%81%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%A5%D9%8A%D9%85%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%B1%D8%B4%D9%8A%D8%AF%20-%20%D8%B71%20%201-16/05_82885.txt"
+    },
+    {
+     "title": "06 82886",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D8%A7%D9%84%D8%AC%D8%AF%D9%88%D9%84%20%D9%81%D9%8A%20%D8%A5%D8%B9%D8%B1%D8%A7%D8%A8%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%20%D9%88%D8%B5%D8%B1%D9%81%D9%87%20-%20%D8%B5%D8%A7%D9%81%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%A5%D9%8A%D9%85%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%B1%D8%B4%D9%8A%D8%AF%20-%20%D8%B71%20%201-16/06_82886.docx"
+    },
+    {
+     "title": "06 82886",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D8%A7%D9%84%D8%AC%D8%AF%D9%88%D9%84%20%D9%81%D9%8A%20%D8%A5%D8%B9%D8%B1%D8%A7%D8%A8%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%20%D9%88%D8%B5%D8%B1%D9%81%D9%87%20-%20%D8%B5%D8%A7%D9%81%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%A5%D9%8A%D9%85%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%B1%D8%B4%D9%8A%D8%AF%20-%20%D8%B71%20%201-16/06_82886.txt"
+    },
+    {
+     "title": "07 82887",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D8%A7%D9%84%D8%AC%D8%AF%D9%88%D9%84%20%D9%81%D9%8A%20%D8%A5%D8%B9%D8%B1%D8%A7%D8%A8%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%20%D9%88%D8%B5%D8%B1%D9%81%D9%87%20-%20%D8%B5%D8%A7%D9%81%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%A5%D9%8A%D9%85%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%B1%D8%B4%D9%8A%D8%AF%20-%20%D8%B71%20%201-16/07_82887.docx"
+    },
+    {
+     "title": "07 82887",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D8%A7%D9%84%D8%AC%D8%AF%D9%88%D9%84%20%D9%81%D9%8A%20%D8%A5%D8%B9%D8%B1%D8%A7%D8%A8%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%20%D9%88%D8%B5%D8%B1%D9%81%D9%87%20-%20%D8%B5%D8%A7%D9%81%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%A5%D9%8A%D9%85%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%B1%D8%B4%D9%8A%D8%AF%20-%20%D8%B71%20%201-16/07_82887.txt"
+    },
+    {
+     "title": "08 82888",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D8%A7%D9%84%D8%AC%D8%AF%D9%88%D9%84%20%D9%81%D9%8A%20%D8%A5%D8%B9%D8%B1%D8%A7%D8%A8%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%20%D9%88%D8%B5%D8%B1%D9%81%D9%87%20-%20%D8%B5%D8%A7%D9%81%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%A5%D9%8A%D9%85%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%B1%D8%B4%D9%8A%D8%AF%20-%20%D8%B71%20%201-16/08_82888.docx"
+    },
+    {
+     "title": "08 82888",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D8%A7%D9%84%D8%AC%D8%AF%D9%88%D9%84%20%D9%81%D9%8A%20%D8%A5%D8%B9%D8%B1%D8%A7%D8%A8%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%20%D9%88%D8%B5%D8%B1%D9%81%D9%87%20-%20%D8%B5%D8%A7%D9%81%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%A5%D9%8A%D9%85%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%B1%D8%B4%D9%8A%D8%AF%20-%20%D8%B71%20%201-16/08_82888.txt"
+    },
+    {
+     "title": "09 82889",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D8%A7%D9%84%D8%AC%D8%AF%D9%88%D9%84%20%D9%81%D9%8A%20%D8%A5%D8%B9%D8%B1%D8%A7%D8%A8%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%20%D9%88%D8%B5%D8%B1%D9%81%D9%87%20-%20%D8%B5%D8%A7%D9%81%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%A5%D9%8A%D9%85%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%B1%D8%B4%D9%8A%D8%AF%20-%20%D8%B71%20%201-16/09_82889.docx"
+    },
+    {
+     "title": "09 82889",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D8%A7%D9%84%D8%AC%D8%AF%D9%88%D9%84%20%D9%81%D9%8A%20%D8%A5%D8%B9%D8%B1%D8%A7%D8%A8%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%20%D9%88%D8%B5%D8%B1%D9%81%D9%87%20-%20%D8%B5%D8%A7%D9%81%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%A5%D9%8A%D9%85%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%B1%D8%B4%D9%8A%D8%AF%20-%20%D8%B71%20%201-16/09_82889.txt"
+    },
+    {
+     "title": "10 82890",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D8%A7%D9%84%D8%AC%D8%AF%D9%88%D9%84%20%D9%81%D9%8A%20%D8%A5%D8%B9%D8%B1%D8%A7%D8%A8%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%20%D9%88%D8%B5%D8%B1%D9%81%D9%87%20-%20%D8%B5%D8%A7%D9%81%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%A5%D9%8A%D9%85%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%B1%D8%B4%D9%8A%D8%AF%20-%20%D8%B71%20%201-16/10_82890.docx"
+    },
+    {
+     "title": "10 82890",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D8%A7%D9%84%D8%AC%D8%AF%D9%88%D9%84%20%D9%81%D9%8A%20%D8%A5%D8%B9%D8%B1%D8%A7%D8%A8%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%20%D9%88%D8%B5%D8%B1%D9%81%D9%87%20-%20%D8%B5%D8%A7%D9%81%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%A5%D9%8A%D9%85%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%B1%D8%B4%D9%8A%D8%AF%20-%20%D8%B71%20%201-16/10_82890.txt"
+    },
+    {
+     "title": "11 82891",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D8%A7%D9%84%D8%AC%D8%AF%D9%88%D9%84%20%D9%81%D9%8A%20%D8%A5%D8%B9%D8%B1%D8%A7%D8%A8%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%20%D9%88%D8%B5%D8%B1%D9%81%D9%87%20-%20%D8%B5%D8%A7%D9%81%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%A5%D9%8A%D9%85%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%B1%D8%B4%D9%8A%D8%AF%20-%20%D8%B71%20%201-16/11_82891.docx"
+    },
+    {
+     "title": "11 82891",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D8%A7%D9%84%D8%AC%D8%AF%D9%88%D9%84%20%D9%81%D9%8A%20%D8%A5%D8%B9%D8%B1%D8%A7%D8%A8%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%20%D9%88%D8%B5%D8%B1%D9%81%D9%87%20-%20%D8%B5%D8%A7%D9%81%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%A5%D9%8A%D9%85%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%B1%D8%B4%D9%8A%D8%AF%20-%20%D8%B71%20%201-16/11_82891.txt"
+    },
+    {
+     "title": "12 82892",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D8%A7%D9%84%D8%AC%D8%AF%D9%88%D9%84%20%D9%81%D9%8A%20%D8%A5%D8%B9%D8%B1%D8%A7%D8%A8%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%20%D9%88%D8%B5%D8%B1%D9%81%D9%87%20-%20%D8%B5%D8%A7%D9%81%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%A5%D9%8A%D9%85%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%B1%D8%B4%D9%8A%D8%AF%20-%20%D8%B71%20%201-16/12_82892.docx"
+    },
+    {
+     "title": "12 82892",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D8%A7%D9%84%D8%AC%D8%AF%D9%88%D9%84%20%D9%81%D9%8A%20%D8%A5%D8%B9%D8%B1%D8%A7%D8%A8%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%20%D9%88%D8%B5%D8%B1%D9%81%D9%87%20-%20%D8%B5%D8%A7%D9%81%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%A5%D9%8A%D9%85%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%B1%D8%B4%D9%8A%D8%AF%20-%20%D8%B71%20%201-16/12_82892.txt"
+    },
+    {
+     "title": "13 82893",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D8%A7%D9%84%D8%AC%D8%AF%D9%88%D9%84%20%D9%81%D9%8A%20%D8%A5%D8%B9%D8%B1%D8%A7%D8%A8%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%20%D9%88%D8%B5%D8%B1%D9%81%D9%87%20-%20%D8%B5%D8%A7%D9%81%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%A5%D9%8A%D9%85%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%B1%D8%B4%D9%8A%D8%AF%20-%20%D8%B71%20%201-16/13_82893.docx"
+    },
+    {
+     "title": "13 82893",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D8%A7%D9%84%D8%AC%D8%AF%D9%88%D9%84%20%D9%81%D9%8A%20%D8%A5%D8%B9%D8%B1%D8%A7%D8%A8%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%20%D9%88%D8%B5%D8%B1%D9%81%D9%87%20-%20%D8%B5%D8%A7%D9%81%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%A5%D9%8A%D9%85%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%B1%D8%B4%D9%8A%D8%AF%20-%20%D8%B71%20%201-16/13_82893.txt"
+    },
+    {
+     "title": "14 82894",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D8%A7%D9%84%D8%AC%D8%AF%D9%88%D9%84%20%D9%81%D9%8A%20%D8%A5%D8%B9%D8%B1%D8%A7%D8%A8%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%20%D9%88%D8%B5%D8%B1%D9%81%D9%87%20-%20%D8%B5%D8%A7%D9%81%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%A5%D9%8A%D9%85%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%B1%D8%B4%D9%8A%D8%AF%20-%20%D8%B71%20%201-16/14_82894.docx"
+    },
+    {
+     "title": "14 82894",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D8%A7%D9%84%D8%AC%D8%AF%D9%88%D9%84%20%D9%81%D9%8A%20%D8%A5%D8%B9%D8%B1%D8%A7%D8%A8%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%20%D9%88%D8%B5%D8%B1%D9%81%D9%87%20-%20%D8%B5%D8%A7%D9%81%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%A5%D9%8A%D9%85%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%B1%D8%B4%D9%8A%D8%AF%20-%20%D8%B71%20%201-16/14_82894.txt"
+    },
+    {
+     "title": "15 82895",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D8%A7%D9%84%D8%AC%D8%AF%D9%88%D9%84%20%D9%81%D9%8A%20%D8%A5%D8%B9%D8%B1%D8%A7%D8%A8%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%20%D9%88%D8%B5%D8%B1%D9%81%D9%87%20-%20%D8%B5%D8%A7%D9%81%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%A5%D9%8A%D9%85%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%B1%D8%B4%D9%8A%D8%AF%20-%20%D8%B71%20%201-16/15_82895.docx"
+    },
+    {
+     "title": "15 82895",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D8%A7%D9%84%D8%AC%D8%AF%D9%88%D9%84%20%D9%81%D9%8A%20%D8%A5%D8%B9%D8%B1%D8%A7%D8%A8%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%20%D9%88%D8%B5%D8%B1%D9%81%D9%87%20-%20%D8%B5%D8%A7%D9%81%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%A5%D9%8A%D9%85%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%B1%D8%B4%D9%8A%D8%AF%20-%20%D8%B71%20%201-16/15_82895.txt"
+    },
+    {
+     "title": "16 82896",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D8%A7%D9%84%D8%AC%D8%AF%D9%88%D9%84%20%D9%81%D9%8A%20%D8%A5%D8%B9%D8%B1%D8%A7%D8%A8%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%20%D9%88%D8%B5%D8%B1%D9%81%D9%87%20-%20%D8%B5%D8%A7%D9%81%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%A5%D9%8A%D9%85%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%B1%D8%B4%D9%8A%D8%AF%20-%20%D8%B71%20%201-16/16_82896.docx"
+    },
+    {
+     "title": "16 82896",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D8%A7%D9%84%D8%AC%D8%AF%D9%88%D9%84%20%D9%81%D9%8A%20%D8%A5%D8%B9%D8%B1%D8%A7%D8%A8%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%20%D9%88%D8%B5%D8%B1%D9%81%D9%87%20-%20%D8%B5%D8%A7%D9%81%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%A5%D9%8A%D9%85%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%B1%D8%B4%D9%8A%D8%AF%20-%20%D8%B71%20%201-16/16_82896.txt"
+    },
+    {
+     "title": "فقه العبادات على المذهب الشافعي",
+     "url": "https://archive.org/search?query=title%3A%22%D9%81%D9%82%D9%87%20%D8%A7%D9%84%D8%B9%D8%A8%D8%A7%D8%AF%D8%A7%D8%AA%20%D8%B9%D9%84%D9%89%20%D8%A7%D9%84%D9%85%D8%B0%D9%87%D8%A8%20%D8%A7%D9%84%D8%B4%D8%A7%D9%81%D8%B9%D9%8A%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "الفقه الحنفي الميسر",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A7%D9%84%D9%81%D9%82%D9%87%20%D8%A7%D9%84%D8%AD%D9%86%D9%81%D9%8A%20%D8%A7%D9%84%D9%85%D9%8A%D8%B3%D8%B1%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "الحج والعمرة: أحكام وآداب",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A7%D9%84%D8%AD%D8%AC%20%D9%88%D8%A7%D9%84%D8%B9%D9%85%D8%B1%D8%A9%3A%20%D8%A3%D8%AD%D9%83%D8%A7%D9%85%20%D9%88%D8%A2%D8%AF%D8%A7%D8%A8%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "الدار الآخرة",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A7%D9%84%D8%AF%D8%A7%D8%B1%20%D8%A7%D9%84%D8%A2%D8%AE%D8%B1%D8%A9%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "الرقية الشرعية والأوراد النبوية",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A7%D9%84%D8%B1%D9%82%D9%8A%D8%A9%20%D8%A7%D9%84%D8%B4%D8%B1%D8%B9%D9%8A%D8%A9%20%D9%88%D8%A7%D9%84%D8%A3%D9%88%D8%B1%D8%A7%D8%AF%20%D8%A7%D9%84%D9%86%D8%A8%D9%88%D9%8A%D8%A9%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "من فتاوى الناس وأسئلتهم",
+     "url": "https://archive.org/search?query=title%3A%22%D9%85%D9%86%20%D9%81%D8%AA%D8%A7%D9%88%D9%89%20%D8%A7%D9%84%D9%86%D8%A7%D8%B3%20%D9%88%D8%A3%D8%B3%D8%A6%D9%84%D8%AA%D9%87%D9%85%22+AND+mediatype%3Atexts"
+    }
+   ]
+  },
+  {
+   "id": 24,
+   "slug": "dhaker-alhashimi",
+   "name": "ذاكر الهاشمي",
+   "name_display": "ذاكر الهاشمي",
+   "aliases": [
+    "الهاشمي"
+   ],
+   "group": 2,
+   "photo": "playlists/img/dhaker-alhashimi.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null,
+   "books": [
+    {
+     "title": "Energy Hoax",
+     "url": "https://archive.org/details/Energy_Hoax"
+    },
+    {
+     "title": "كراسة قراءة النفس – د. عبد الرحمن ذاكر الهاشمي",
+     "url": "https://archive.org/details/Qiraat_Nafs"
+    }
+   ]
+  },
+  {
+   "id": 25,
+   "slug": "saif-alasri",
+   "name": "سيف العصري",
+   "name_display": "سيف العصري",
+   "aliases": [
+    "العصري"
+   ],
+   "group": 2,
+   "photo": "playlists/img/saif-alasri.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null,
+   "books": [
+    {
+     "title": "alqawlultamam",
+     "url": "https://archive.org/details/alqawlultamam"
+    },
+    {
+     "title": "qawltamam",
+     "url": "https://archive.org/details/qawltamam"
+    },
+    {
+     "title": "القول التمام بإثبات التفويض ط.5",
+     "url": "https://archive.org/details/5_20260201_20260201"
+    },
+    {
+     "title": "كتاب البدعة الإضافية دراسة تأصيلية تطبيقية – سيف علي العصري",
+     "url": "https://archive.org/details/20200924_20200924_0411"
+    },
+    {
+     "title": "المقدمات الفقهية النافعة والأسئلة المذهبية",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A7%D9%84%D9%85%D9%82%D8%AF%D9%85%D8%A7%D8%AA%20%D8%A7%D9%84%D9%81%D9%82%D9%87%D9%8A%D8%A9%20%D8%A7%D9%84%D9%86%D8%A7%D9%81%D8%B9%D8%A9%20%D9%88%D8%A7%D9%84%D8%A3%D8%B3%D8%A6%D9%84%D8%A9%20%D8%A7%D9%84%D9%85%D8%B0%D9%87%D8%A8%D9%8A%D8%A9%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "المدخل إلى تاريخ التشريع الإسلامي ومذاهبه",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A7%D9%84%D9%85%D8%AF%D8%AE%D9%84%20%D8%A5%D9%84%D9%89%20%D8%AA%D8%A7%D8%B1%D9%8A%D8%AE%20%D8%A7%D9%84%D8%AA%D8%B4%D8%B1%D9%8A%D8%B9%20%D8%A7%D9%84%D8%A5%D8%B3%D9%84%D8%A7%D9%85%D9%8A%20%D9%88%D9%85%D8%B0%D8%A7%D9%87%D8%A8%D9%87%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "حسن المحاضرة بشرح منظومة آداب البحث",
+     "url": "https://archive.org/search?query=title%3A%22%D8%AD%D8%B3%D9%86%20%D8%A7%D9%84%D9%85%D8%AD%D8%A7%D8%B6%D8%B1%D8%A9%20%D8%A8%D8%B4%D8%B1%D8%AD%20%D9%85%D9%86%D8%B8%D9%88%D9%85%D8%A9%20%D8%A2%D8%AF%D8%A7%D8%A8%20%D8%A7%D9%84%D8%A8%D8%AD%D8%AB%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "تعليقات على شرح إيساغوجي",
+     "url": "https://archive.org/search?query=title%3A%22%D8%AA%D8%B9%D9%84%D9%8A%D9%82%D8%A7%D8%AA%20%D8%B9%D9%84%D9%89%20%D8%B4%D8%B1%D8%AD%20%D8%A5%D9%8A%D8%B3%D8%A7%D8%BA%D9%88%D8%AC%D9%8A%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "تحقيق حاشية القورصاوي",
+     "url": "https://archive.org/search?query=title%3A%22%D8%AA%D8%AD%D9%82%D9%8A%D9%82%20%D8%AD%D8%A7%D8%B4%D9%8A%D8%A9%20%D8%A7%D9%84%D9%82%D9%88%D8%B1%D8%B5%D8%A7%D9%88%D9%8A%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "صفحات وعبر من الحياة العلمية",
+     "url": "https://archive.org/search?query=title%3A%22%D8%B5%D9%81%D8%AD%D8%A7%D8%AA%20%D9%88%D8%B9%D8%A8%D8%B1%20%D9%85%D9%86%20%D8%A7%D9%84%D8%AD%D9%8A%D8%A7%D8%A9%20%D8%A7%D9%84%D8%B9%D9%84%D9%85%D9%8A%D8%A9%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "الورد القطيف من معاني الروض النظيف",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A7%D9%84%D9%88%D8%B1%D8%AF%20%D8%A7%D9%84%D9%82%D8%B7%D9%8A%D9%81%20%D9%85%D9%86%20%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D8%B1%D9%88%D8%B6%20%D8%A7%D9%84%D9%86%D8%B8%D9%8A%D9%81%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "البيان اللطيف شرح الروض النظيف",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A7%D9%84%D8%A8%D9%8A%D8%A7%D9%86%20%D8%A7%D9%84%D9%84%D8%B7%D9%8A%D9%81%20%D8%B4%D8%B1%D8%AD%20%D8%A7%D9%84%D8%B1%D9%88%D8%B6%20%D8%A7%D9%84%D9%86%D8%B8%D9%8A%D9%81%22+AND+mediatype%3Atexts"
+    }
+   ]
+  },
+  {
+   "id": 26,
+   "slug": "hatem-alaouni",
+   "name": "حاتم العوني",
+   "name_display": "حاتم العوني",
+   "aliases": [
+    "العوني"
+   ],
+   "group": 2,
+   "photo": "playlists/img/hatem-alaouni.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": "https://dr-alawni.com",
+   "books": [
+    {
+     "title": "1565355413",
+     "url": "https://archive.org/details/1565355413"
+    },
+    {
+     "title": "36142",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%A7%D9%84%D8%AA%D8%B1%D8%A7%D8%AC%D9%85%20%D9%88%D8%A7%D9%84%D8%B7%D8%A8%D9%82%D8%A7%D8%AA/%D8%B0%D9%8A%D9%84%20%D9%84%D8%B3%D8%A7%D9%86%20%D8%A7%D9%84%D9%85%D9%8A%D8%B2%D8%A7%D9%86%20-%20%D8%A7%D9%84%D8%B9%D9%88%D9%86%D9%8A%20-%20%D8%B7%20%D8%B9%D8%A7%D9%84%D9%85%20%D8%A7%D9%84%D9%81%D9%88%D8%A7%D8%A6%D8%AF/36142.docx"
+    },
+    {
+     "title": "36142",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%A7%D9%84%D8%AA%D8%B1%D8%A7%D8%AC%D9%85%20%D9%88%D8%A7%D9%84%D8%B7%D8%A8%D9%82%D8%A7%D8%AA/%D8%B0%D9%8A%D9%84%20%D9%84%D8%B3%D8%A7%D9%86%20%D8%A7%D9%84%D9%85%D9%8A%D8%B2%D8%A7%D9%86%20-%20%D8%A7%D9%84%D8%B9%D9%88%D9%86%D9%8A%20-%20%D8%B7%20%D8%B9%D8%A7%D9%84%D9%85%20%D8%A7%D9%84%D9%81%D9%88%D8%A7%D8%A6%D8%AF/36142.txt"
+    },
+    {
+     "title": "48110",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB/%D8%AE%D9%84%D8%A7%D8%B5%D8%A9%20%D8%A7%D9%84%D8%AA%D8%A3%D8%B5%D9%8A%D9%84%20%D9%84%D8%B9%D9%84%D9%85%20%D8%A7%D9%84%D8%AC%D8%B1%D8%AD%20%D9%88%D8%A7%D9%84%D8%AA%D8%B9%D8%AF%D9%8A%D9%84%20-%20%D8%A7%D9%84%D8%B9%D9%88%D9%86%D9%8A%20-%20%D8%B7%20%D8%B9%D8%A7%D9%84%D9%85%20%D8%A7%D9%84%D9%81%D9%88%D8%A7%D8%A6%D8%AF/48110.docx"
+    },
+    {
+     "title": "48110",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB/%D8%AE%D9%84%D8%A7%D8%B5%D8%A9%20%D8%A7%D9%84%D8%AA%D8%A3%D8%B5%D9%8A%D9%84%20%D9%84%D8%B9%D9%84%D9%85%20%D8%A7%D9%84%D8%AC%D8%B1%D8%AD%20%D9%88%D8%A7%D9%84%D8%AA%D8%B9%D8%AF%D9%8A%D9%84%20-%20%D8%A7%D9%84%D8%B9%D9%88%D9%86%D9%8A%20-%20%D8%B7%20%D8%B9%D8%A7%D9%84%D9%85%20%D8%A7%D9%84%D9%81%D9%88%D8%A7%D8%A6%D8%AF/48110.txt"
+    },
+    {
+     "title": "55620",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB/%D8%A5%D8%AC%D9%85%D8%A7%D8%B9%20%D8%A7%D9%84%D9%85%D8%AD%D8%AF%D8%AB%D9%8A%D9%86%20%D8%B9%D9%84%D9%89%20%D8%B9%D8%AF%D9%85%20%D8%A7%D8%B4%D8%AA%D8%B1%D8%A7%D8%B7%20%D8%A7%D9%84%D8%B9%D9%84%D9%85%20%D8%A8%D8%A7%D9%84%D8%B3%D9%85%D8%A7%D8%B9%20-%20%D8%A7%D9%84%D8%B9%D9%88%D9%86%D9%8A%20-%20%D8%B7%20%D8%B9%D8%A7%D9%84%D9%85%20%D8%A7%D9%84%D9%81%D9%88%D8%A7%D8%A6%D8%AF/55620.docx"
+    },
+    {
+     "title": "55620",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB/%D8%A5%D8%AC%D9%85%D8%A7%D8%B9%20%D8%A7%D9%84%D9%85%D8%AD%D8%AF%D8%AB%D9%8A%D9%86%20%D8%B9%D9%84%D9%89%20%D8%B9%D8%AF%D9%85%20%D8%A7%D8%B4%D8%AA%D8%B1%D8%A7%D8%B7%20%D8%A7%D9%84%D8%B9%D9%84%D9%85%20%D8%A8%D8%A7%D9%84%D8%B3%D9%85%D8%A7%D8%B9%20-%20%D8%A7%D9%84%D8%B9%D9%88%D9%86%D9%8A%20-%20%D8%B7%20%D8%B9%D8%A7%D9%84%D9%85%20%D8%A7%D9%84%D9%81%D9%88%D8%A7%D8%A6%D8%AF/55620.txt"
+    },
+    {
+     "title": "70507",
+     "url": "https://archive.org/details/waq70507"
+    },
+    {
+     "title": "a550n",
+     "url": "https://archive.org/details/a550n"
+    },
+    {
+     "title": "alhadeeth-alshareef-wa-tahadeiat-alaasr",
+     "url": "https://archive.org/details/alhadeeth-alshareef-wa-tahadeiat-alaasr"
+    },
+    {
+     "title": "الأسس العقلية لمنهج نقد المحدثين حاتم العوني - إحياء",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A7%D9%84%D8%A3%D8%B3%D8%B3%20%D8%A7%D9%84%D8%B9%D9%82%D9%84%D9%8A%D8%A9%20%D9%84%D9%85%D9%86%D9%87%D8%AC%20%D9%86%D9%82%D8%AF%20%D8%A7%D9%84%D9%85%D8%AD%D8%AF%D8%AB%D9%8A%D9%86%20%D8%AD%D8%A7%D8%AA%D9%85%20%D8%A7%D9%84%D8%B9%D9%88%D9%86%D9%8A%20-%20%D8%A5%D8%AD%D9%8A%D8%A7%D8%A1%22"
+    },
+    {
+     "title": "كتاب السنة من مسائل حرب بن إسماعيل الحنظلي الكرماني",
+     "url": "https://archive.org/details/98494946"
+    },
+    {
+     "title": "مفهوم شرك العبادة",
+     "url": "https://archive.org/search?query=title%3A%22%D9%85%D9%81%D9%87%D9%88%D9%85%20%D8%B4%D8%B1%D9%83%20%D8%A7%D9%84%D8%B9%D8%A8%D8%A7%D8%AF%D8%A9%22"
+    }
+   ]
+  },
+  {
+   "id": 27,
+   "slug": "alfahham",
+   "name": "محمد الفحام",
+   "name_display": "الفحام",
+   "aliases": [
+    "فحام"
+   ],
+   "group": 2,
+   "photo": "playlists/img/alfahham.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null,
+   "books": [
+    {
+     "title": "144229 هجرة الرسول صلى الله عليه وسلم",
+     "url": "https://archive.org/details/AAlexandrina-144229"
+    },
+    {
+     "title": "عمر نظرة عصرية جديدة 07398 الفحام, محمد محمد",
+     "url": "https://archive.org/details/BBib-Alex-07398"
+    }
+   ]
+  },
+  {
+   "id": 28,
+   "slug": "ahmed-abdelmonem",
+   "name": "أحمد عبد المنعم",
+   "name_display": "أحمد عبد المنعم",
+   "aliases": [],
+   "group": 2,
+   "photo": "playlists/img/ahmed-abdelmonem.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null,
+   "books": [
+    {
+     "title": "هدايات الأجزاء",
+     "url": "https://archive.org/search?query=title%3A%22%D9%87%D8%AF%D8%A7%D9%8A%D8%A7%D8%AA%20%D8%A7%D9%84%D8%A3%D8%AC%D8%B2%D8%A7%D8%A1%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "مجالس القرآن",
+     "url": "https://archive.org/search?query=title%3A%22%D9%85%D8%AC%D8%A7%D9%84%D8%B3%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "من وحي التنزيل",
+     "url": "https://archive.org/search?query=title%3A%22%D9%85%D9%86%20%D9%88%D8%AD%D9%8A%20%D8%A7%D9%84%D8%AA%D9%86%D8%B2%D9%8A%D9%84%22+AND+mediatype%3Atexts"
+    }
+   ]
+  },
+  {
+   "id": 29,
+   "slug": "fadhel-sulaiman",
+   "name": "فاضل سليمان",
+   "name_display": "فاضل سليمان",
+   "aliases": [],
+   "group": 2,
+   "photo": "playlists/img/fadhel-sulaiman.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": "https://fadelsoliman.com",
+   "books": [
+    {
+     "title": "0126 كتاب pdf أقباط مسلمون قبل محمد - لفاضل سليمان - تقديم وتذييل د. محمد عمارة",
+     "url": "https://archive.org/details/0126-pdf-."
+    },
+    {
+     "title": "4 349015330305083110",
+     "url": "https://archive.org/details/4349015330305083110"
+    },
+    {
+     "title": "أقباط مسلمون قبل محمد صلى الله عليه وسلم فاضل سليمان",
+     "url": "https://archive.org/details/elhilalymohamad_gmail_20170913"
+    },
+    {
+     "title": "تدبر سورة النساء في 61 ليلة",
+     "url": "https://archive.org/search?query=title%3A%22%D8%AA%D8%AF%D8%A8%D8%B1%20%D8%B3%D9%88%D8%B1%D8%A9%20%D8%A7%D9%84%D9%86%D8%B3%D8%A7%D8%A1%20%D9%81%D9%8A%2061%20%D9%84%D9%8A%D9%84%D8%A9%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "تدبر سورة مريم",
+     "url": "https://archive.org/search?query=title%3A%22%D8%AA%D8%AF%D8%A8%D8%B1%20%D8%B3%D9%88%D8%B1%D8%A9%20%D9%85%D8%B1%D9%8A%D9%85%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "الإيجاز في شرح الإسلام",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A7%D9%84%D8%A5%D9%8A%D8%AC%D8%A7%D8%B2%20%D9%81%D9%8A%20%D8%B4%D8%B1%D8%AD%20%D8%A7%D9%84%D8%A5%D8%B3%D9%84%D8%A7%D9%85%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "الإسلام: دين سلام أم دين حروب",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A7%D9%84%D8%A5%D8%B3%D9%84%D8%A7%D9%85%3A%20%D8%AF%D9%8A%D9%86%20%D8%B3%D9%84%D8%A7%D9%85%20%D8%A3%D9%85%20%D8%AF%D9%8A%D9%86%20%D8%AD%D8%B1%D9%88%D8%A8%22+AND+mediatype%3Atexts"
+    },
+    {
+     "title": "القرآن: استكشاف للحرية",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%3A%20%D8%A7%D8%B3%D8%AA%D9%83%D8%B4%D8%A7%D9%81%20%D9%84%D9%84%D8%AD%D8%B1%D9%8A%D8%A9%22+AND+mediatype%3Atexts"
+    }
+   ]
+  },
+  {
+   "id": 30,
+   "slug": "samir-mustafa",
+   "name": "سمير مصطفى",
+   "name_display": "سمير مصطفى",
+   "aliases": [],
+   "group": 3,
+   "photo": "playlists/img/samir-mustafa.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null,
+   "books": [
+    {
+     "title": "(لا كتب منشورة — خطب ومحاضرات صوتية ومرئية)",
+     "url": "https://archive.org/search?query=title%3A%22%28%D9%84%D8%A7%20%D9%83%D8%AA%D8%A8%20%D9%85%D9%86%D8%B4%D9%88%D8%B1%D8%A9%20%E2%80%94%20%D8%AE%D8%B7%D8%A8%20%D9%88%D9%85%D8%AD%D8%A7%D8%B6%D8%B1%D8%A7%D8%AA%20%D8%B5%D9%88%D8%AA%D9%8A%D8%A9%20%D9%88%D9%85%D8%B1%D8%A6%D9%8A%D8%A9%29%22+AND+mediatype%3Atexts"
+    }
+   ]
+  },
+  {
+   "id": 31,
+   "slug": "muhammad-almaghrimi",
+   "name": "محمد المقرمي",
+   "name_display": "محمد المقرمي",
+   "aliases": [
+    "المقرمي"
+   ],
+   "group": 3,
+   "photo": "playlists/img/muhammad-almaghrimi.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": "https://m-almagrami.net",
+   "books": [
+    {
+     "title": "الطريق إلى الله",
+     "url": "https://archive.org/search?query=title%3A%22%D8%A7%D9%84%D8%B7%D8%B1%D9%8A%D9%82%20%D8%A5%D9%84%D9%89%20%D8%A7%D9%84%D9%84%D9%87%22+AND+mediatype%3Atexts"
+    }
+   ]
+  },
+  {
+   "id": 32,
+   "slug": "almughamisi",
+   "name": "صالح المغامسي",
+   "name_display": "المغامسي",
+   "aliases": [
+    "صالح المغامسي"
+   ],
+   "group": 3,
+   "photo": "playlists/img/almughamisi.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": "https://alrasekhoon.com",
+   "books": [
+    {
+     "title": "hm1948",
+     "url": "https://archive.org/details/hm1948"
+    }
+   ]
+  },
+  {
+   "id": 33,
+   "slug": "alshanqiti",
+   "name": "الشنقيطي",
+   "name_display": "الشنقيطي",
+   "aliases": [],
+   "group": 3,
+   "photo": "playlists/img/alshanqiti.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null,
+   "books": [
+    {
+     "title": "00 35856",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B4%D8%B1%D9%88%D8%AD%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB/%D9%83%D9%88%D8%AB%D8%B1%20%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B1%D9%8A%20%D9%81%D9%8A%20%D9%83%D8%B4%D9%81%20%D8%AE%D8%A8%D8%A7%D9%8A%D8%A7%20%D8%B5%D8%AD%D9%8A%D8%AD%20%D8%A7%D9%84%D8%A8%D8%AE%D8%A7%D8%B1%D9%8A%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%201-14/00_35856.docx"
+    },
+    {
+     "title": "00 35856",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B4%D8%B1%D9%88%D8%AD%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB/%D9%83%D9%88%D8%AB%D8%B1%20%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B1%D9%8A%20%D9%81%D9%8A%20%D9%83%D8%B4%D9%81%20%D8%AE%D8%A8%D8%A7%D9%8A%D8%A7%20%D8%B5%D8%AD%D9%8A%D8%AD%20%D8%A7%D9%84%D8%A8%D8%AE%D8%A7%D8%B1%D9%8A%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%201-14/00_35856.txt"
+    },
+    {
+     "title": "00 69934s",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%A7%D9%84%D8%AA%D9%81%D8%A7%D8%B3%D9%8A%D8%B1/%D8%A7%D9%84%D8%B9%D8%B0%D8%A8%20%D8%A7%D9%84%D9%86%D9%85%D9%8A%D8%B1%20%D9%85%D9%86%20%D9%85%D8%AC%D8%A7%D9%84%D8%B3%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%AA%D9%81%D8%B3%D9%8A%D8%B1%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D9%85%D8%AC%D9%85%D8%B9%2001-05/00_69934s.docx"
+    },
+    {
+     "title": "00 69934s",
+     "url": "https://archive.org/details/waq69934"
+    },
+    {
+     "title": "00 69934s",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%A7%D9%84%D8%AA%D9%81%D8%A7%D8%B3%D9%8A%D8%B1/%D8%A7%D9%84%D8%B9%D8%B0%D8%A8%20%D8%A7%D9%84%D9%86%D9%85%D9%8A%D8%B1%20%D9%85%D9%86%20%D9%85%D8%AC%D8%A7%D9%84%D8%B3%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%AA%D9%81%D8%B3%D9%8A%D8%B1%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D9%85%D8%AC%D9%85%D8%B9%2001-05/00_69934s.txt"
+    },
+    {
+     "title": "00 69939",
+     "url": "https://archive.org/details/WAQ69939"
+    },
+    {
+     "title": "015",
+     "url": "https://archive.org/details/Fadael_Moaweah"
+    },
+    {
+     "title": "01 35856",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B4%D8%B1%D9%88%D8%AD%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB/%D9%83%D9%88%D8%AB%D8%B1%20%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B1%D9%8A%20%D9%81%D9%8A%20%D9%83%D8%B4%D9%81%20%D8%AE%D8%A8%D8%A7%D9%8A%D8%A7%20%D8%B5%D8%AD%D9%8A%D8%AD%20%D8%A7%D9%84%D8%A8%D8%AE%D8%A7%D8%B1%D9%8A%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%201-14/01_35856.docx"
+    },
+    {
+     "title": "01 35856",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B4%D8%B1%D9%88%D8%AD%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB/%D9%83%D9%88%D8%AB%D8%B1%20%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B1%D9%8A%20%D9%81%D9%8A%20%D9%83%D8%B4%D9%81%20%D8%AE%D8%A8%D8%A7%D9%8A%D8%A7%20%D8%B5%D8%AD%D9%8A%D8%AD%20%D8%A7%D9%84%D8%A8%D8%AE%D8%A7%D8%B1%D9%8A%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%201-14/01_35856.txt"
+    },
+    {
+     "title": "01 69934s",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%A7%D9%84%D8%AA%D9%81%D8%A7%D8%B3%D9%8A%D8%B1/%D8%A7%D9%84%D8%B9%D8%B0%D8%A8%20%D8%A7%D9%84%D9%86%D9%85%D9%8A%D8%B1%20%D9%85%D9%86%20%D9%85%D8%AC%D8%A7%D9%84%D8%B3%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%AA%D9%81%D8%B3%D9%8A%D8%B1%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D9%85%D8%AC%D9%85%D8%B9%2001-05/01_69934s.docx"
+    },
+    {
+     "title": "01 69934s",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%A7%D9%84%D8%AA%D9%81%D8%A7%D8%B3%D9%8A%D8%B1/%D8%A7%D9%84%D8%B9%D8%B0%D8%A8%20%D8%A7%D9%84%D9%86%D9%85%D9%8A%D8%B1%20%D9%85%D9%86%20%D9%85%D8%AC%D8%A7%D9%84%D8%B3%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%AA%D9%81%D8%B3%D9%8A%D8%B1%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D9%85%D8%AC%D9%85%D8%B9%2001-05/01_69934s.txt"
+    },
+    {
+     "title": "02 35857",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B4%D8%B1%D9%88%D8%AD%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB/%D9%83%D9%88%D8%AB%D8%B1%20%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B1%D9%8A%20%D9%81%D9%8A%20%D9%83%D8%B4%D9%81%20%D8%AE%D8%A8%D8%A7%D9%8A%D8%A7%20%D8%B5%D8%AD%D9%8A%D8%AD%20%D8%A7%D9%84%D8%A8%D8%AE%D8%A7%D8%B1%D9%8A%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%201-14/02_35857.docx"
+    },
+    {
+     "title": "02 35857",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B4%D8%B1%D9%88%D8%AD%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB/%D9%83%D9%88%D8%AB%D8%B1%20%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B1%D9%8A%20%D9%81%D9%8A%20%D9%83%D8%B4%D9%81%20%D8%AE%D8%A8%D8%A7%D9%8A%D8%A7%20%D8%B5%D8%AD%D9%8A%D8%AD%20%D8%A7%D9%84%D8%A8%D8%AE%D8%A7%D8%B1%D9%8A%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%201-14/02_35857.txt"
+    },
+    {
+     "title": "02 69935s",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%A7%D9%84%D8%AA%D9%81%D8%A7%D8%B3%D9%8A%D8%B1/%D8%A7%D9%84%D8%B9%D8%B0%D8%A8%20%D8%A7%D9%84%D9%86%D9%85%D9%8A%D8%B1%20%D9%85%D9%86%20%D9%85%D8%AC%D8%A7%D9%84%D8%B3%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%AA%D9%81%D8%B3%D9%8A%D8%B1%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D9%85%D8%AC%D9%85%D8%B9%2001-05/02_69935s.docx"
+    },
+    {
+     "title": "02 69935s",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%A7%D9%84%D8%AA%D9%81%D8%A7%D8%B3%D9%8A%D8%B1/%D8%A7%D9%84%D8%B9%D8%B0%D8%A8%20%D8%A7%D9%84%D9%86%D9%85%D9%8A%D8%B1%20%D9%85%D9%86%20%D9%85%D8%AC%D8%A7%D9%84%D8%B3%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%AA%D9%81%D8%B3%D9%8A%D8%B1%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D9%85%D8%AC%D9%85%D8%B9%2001-05/02_69935s.txt"
+    },
+    {
+     "title": "03 35858",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B4%D8%B1%D9%88%D8%AD%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB/%D9%83%D9%88%D8%AB%D8%B1%20%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B1%D9%8A%20%D9%81%D9%8A%20%D9%83%D8%B4%D9%81%20%D8%AE%D8%A8%D8%A7%D9%8A%D8%A7%20%D8%B5%D8%AD%D9%8A%D8%AD%20%D8%A7%D9%84%D8%A8%D8%AE%D8%A7%D8%B1%D9%8A%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%201-14/03_35858.docx"
+    },
+    {
+     "title": "03 35858",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B4%D8%B1%D9%88%D8%AD%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB/%D9%83%D9%88%D8%AB%D8%B1%20%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B1%D9%8A%20%D9%81%D9%8A%20%D9%83%D8%B4%D9%81%20%D8%AE%D8%A8%D8%A7%D9%8A%D8%A7%20%D8%B5%D8%AD%D9%8A%D8%AD%20%D8%A7%D9%84%D8%A8%D8%AE%D8%A7%D8%B1%D9%8A%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%201-14/03_35858.txt"
+    },
+    {
+     "title": "03 69936s",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%A7%D9%84%D8%AA%D9%81%D8%A7%D8%B3%D9%8A%D8%B1/%D8%A7%D9%84%D8%B9%D8%B0%D8%A8%20%D8%A7%D9%84%D9%86%D9%85%D9%8A%D8%B1%20%D9%85%D9%86%20%D9%85%D8%AC%D8%A7%D9%84%D8%B3%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%AA%D9%81%D8%B3%D9%8A%D8%B1%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D9%85%D8%AC%D9%85%D8%B9%2001-05/03_69936s.docx"
+    },
+    {
+     "title": "03 69936s",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%A7%D9%84%D8%AA%D9%81%D8%A7%D8%B3%D9%8A%D8%B1/%D8%A7%D9%84%D8%B9%D8%B0%D8%A8%20%D8%A7%D9%84%D9%86%D9%85%D9%8A%D8%B1%20%D9%85%D9%86%20%D9%85%D8%AC%D8%A7%D9%84%D8%B3%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%AA%D9%81%D8%B3%D9%8A%D8%B1%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D9%85%D8%AC%D9%85%D8%B9%2001-05/03_69936s.txt"
+    },
+    {
+     "title": "04 35859",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B4%D8%B1%D9%88%D8%AD%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB/%D9%83%D9%88%D8%AB%D8%B1%20%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B1%D9%8A%20%D9%81%D9%8A%20%D9%83%D8%B4%D9%81%20%D8%AE%D8%A8%D8%A7%D9%8A%D8%A7%20%D8%B5%D8%AD%D9%8A%D8%AD%20%D8%A7%D9%84%D8%A8%D8%AE%D8%A7%D8%B1%D9%8A%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%201-14/04_35859.docx"
+    },
+    {
+     "title": "04 35859",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B4%D8%B1%D9%88%D8%AD%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB/%D9%83%D9%88%D8%AB%D8%B1%20%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B1%D9%8A%20%D9%81%D9%8A%20%D9%83%D8%B4%D9%81%20%D8%AE%D8%A8%D8%A7%D9%8A%D8%A7%20%D8%B5%D8%AD%D9%8A%D8%AD%20%D8%A7%D9%84%D8%A8%D8%AE%D8%A7%D8%B1%D9%8A%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%201-14/04_35859.txt"
+    },
+    {
+     "title": "04 69937s",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%A7%D9%84%D8%AA%D9%81%D8%A7%D8%B3%D9%8A%D8%B1/%D8%A7%D9%84%D8%B9%D8%B0%D8%A8%20%D8%A7%D9%84%D9%86%D9%85%D9%8A%D8%B1%20%D9%85%D9%86%20%D9%85%D8%AC%D8%A7%D9%84%D8%B3%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%AA%D9%81%D8%B3%D9%8A%D8%B1%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D9%85%D8%AC%D9%85%D8%B9%2001-05/04_69937s.docx"
+    },
+    {
+     "title": "04 69937s",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%A7%D9%84%D8%AA%D9%81%D8%A7%D8%B3%D9%8A%D8%B1/%D8%A7%D9%84%D8%B9%D8%B0%D8%A8%20%D8%A7%D9%84%D9%86%D9%85%D9%8A%D8%B1%20%D9%85%D9%86%20%D9%85%D8%AC%D8%A7%D9%84%D8%B3%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%AA%D9%81%D8%B3%D9%8A%D8%B1%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D9%85%D8%AC%D9%85%D8%B9%2001-05/04_69937s.txt"
+    },
+    {
+     "title": "05 35860",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B4%D8%B1%D9%88%D8%AD%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB/%D9%83%D9%88%D8%AB%D8%B1%20%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B1%D9%8A%20%D9%81%D9%8A%20%D9%83%D8%B4%D9%81%20%D8%AE%D8%A8%D8%A7%D9%8A%D8%A7%20%D8%B5%D8%AD%D9%8A%D8%AD%20%D8%A7%D9%84%D8%A8%D8%AE%D8%A7%D8%B1%D9%8A%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%201-14/05_35860.docx"
+    },
+    {
+     "title": "05 35860",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B4%D8%B1%D9%88%D8%AD%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB/%D9%83%D9%88%D8%AB%D8%B1%20%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B1%D9%8A%20%D9%81%D9%8A%20%D9%83%D8%B4%D9%81%20%D8%AE%D8%A8%D8%A7%D9%8A%D8%A7%20%D8%B5%D8%AD%D9%8A%D8%AD%20%D8%A7%D9%84%D8%A8%D8%AE%D8%A7%D8%B1%D9%8A%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%201-14/05_35860.txt"
+    },
+    {
+     "title": "05 69938s",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%A7%D9%84%D8%AA%D9%81%D8%A7%D8%B3%D9%8A%D8%B1/%D8%A7%D9%84%D8%B9%D8%B0%D8%A8%20%D8%A7%D9%84%D9%86%D9%85%D9%8A%D8%B1%20%D9%85%D9%86%20%D9%85%D8%AC%D8%A7%D9%84%D8%B3%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%AA%D9%81%D8%B3%D9%8A%D8%B1%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D9%85%D8%AC%D9%85%D8%B9%2001-05/05_69938s.docx"
+    },
+    {
+     "title": "05 69938s",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%A7%D9%84%D8%AA%D9%81%D8%A7%D8%B3%D9%8A%D8%B1/%D8%A7%D9%84%D8%B9%D8%B0%D8%A8%20%D8%A7%D9%84%D9%86%D9%85%D9%8A%D8%B1%20%D9%85%D9%86%20%D9%85%D8%AC%D8%A7%D9%84%D8%B3%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%AA%D9%81%D8%B3%D9%8A%D8%B1%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D9%85%D8%AC%D9%85%D8%B9%2001-05/05_69938s.txt"
+    },
+    {
+     "title": "06 35861",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B4%D8%B1%D9%88%D8%AD%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB/%D9%83%D9%88%D8%AB%D8%B1%20%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B1%D9%8A%20%D9%81%D9%8A%20%D9%83%D8%B4%D9%81%20%D8%AE%D8%A8%D8%A7%D9%8A%D8%A7%20%D8%B5%D8%AD%D9%8A%D8%AD%20%D8%A7%D9%84%D8%A8%D8%AE%D8%A7%D8%B1%D9%8A%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%201-14/06_35861.docx"
+    },
+    {
+     "title": "06 35861",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B4%D8%B1%D9%88%D8%AD%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB/%D9%83%D9%88%D8%AB%D8%B1%20%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B1%D9%8A%20%D9%81%D9%8A%20%D9%83%D8%B4%D9%81%20%D8%AE%D8%A8%D8%A7%D9%8A%D8%A7%20%D8%B5%D8%AD%D9%8A%D8%AD%20%D8%A7%D9%84%D8%A8%D8%AE%D8%A7%D8%B1%D9%8A%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%201-14/06_35861.txt"
+    },
+    {
+     "title": "07 35862",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B4%D8%B1%D9%88%D8%AD%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB/%D9%83%D9%88%D8%AB%D8%B1%20%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B1%D9%8A%20%D9%81%D9%8A%20%D9%83%D8%B4%D9%81%20%D8%AE%D8%A8%D8%A7%D9%8A%D8%A7%20%D8%B5%D8%AD%D9%8A%D8%AD%20%D8%A7%D9%84%D8%A8%D8%AE%D8%A7%D8%B1%D9%8A%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%201-14/07_35862.docx"
+    },
+    {
+     "title": "07 35862",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B4%D8%B1%D9%88%D8%AD%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB/%D9%83%D9%88%D8%AB%D8%B1%20%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B1%D9%8A%20%D9%81%D9%8A%20%D9%83%D8%B4%D9%81%20%D8%AE%D8%A8%D8%A7%D9%8A%D8%A7%20%D8%B5%D8%AD%D9%8A%D8%AD%20%D8%A7%D9%84%D8%A8%D8%AE%D8%A7%D8%B1%D9%8A%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%201-14/07_35862.txt"
+    },
+    {
+     "title": "08 35863",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B4%D8%B1%D9%88%D8%AD%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB/%D9%83%D9%88%D8%AB%D8%B1%20%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B1%D9%8A%20%D9%81%D9%8A%20%D9%83%D8%B4%D9%81%20%D8%AE%D8%A8%D8%A7%D9%8A%D8%A7%20%D8%B5%D8%AD%D9%8A%D8%AD%20%D8%A7%D9%84%D8%A8%D8%AE%D8%A7%D8%B1%D9%8A%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%201-14/08_35863.docx"
+    },
+    {
+     "title": "08 35863",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B4%D8%B1%D9%88%D8%AD%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB/%D9%83%D9%88%D8%AB%D8%B1%20%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B1%D9%8A%20%D9%81%D9%8A%20%D9%83%D8%B4%D9%81%20%D8%AE%D8%A8%D8%A7%D9%8A%D8%A7%20%D8%B5%D8%AD%D9%8A%D8%AD%20%D8%A7%D9%84%D8%A8%D8%AE%D8%A7%D8%B1%D9%8A%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%201-14/08_35863.txt"
+    },
+    {
+     "title": "09 35864",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B4%D8%B1%D9%88%D8%AD%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB/%D9%83%D9%88%D8%AB%D8%B1%20%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B1%D9%8A%20%D9%81%D9%8A%20%D9%83%D8%B4%D9%81%20%D8%AE%D8%A8%D8%A7%D9%8A%D8%A7%20%D8%B5%D8%AD%D9%8A%D8%AD%20%D8%A7%D9%84%D8%A8%D8%AE%D8%A7%D8%B1%D9%8A%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%201-14/09_35864.docx"
+    },
+    {
+     "title": "09 35864",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B4%D8%B1%D9%88%D8%AD%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB/%D9%83%D9%88%D8%AB%D8%B1%20%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B1%D9%8A%20%D9%81%D9%8A%20%D9%83%D8%B4%D9%81%20%D8%AE%D8%A8%D8%A7%D9%8A%D8%A7%20%D8%B5%D8%AD%D9%8A%D8%AD%20%D8%A7%D9%84%D8%A8%D8%AE%D8%A7%D8%B1%D9%8A%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%201-14/09_35864.txt"
+    },
+    {
+     "title": "10 35865",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B4%D8%B1%D9%88%D8%AD%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB/%D9%83%D9%88%D8%AB%D8%B1%20%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B1%D9%8A%20%D9%81%D9%8A%20%D9%83%D8%B4%D9%81%20%D8%AE%D8%A8%D8%A7%D9%8A%D8%A7%20%D8%B5%D8%AD%D9%8A%D8%AD%20%D8%A7%D9%84%D8%A8%D8%AE%D8%A7%D8%B1%D9%8A%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%201-14/10_35865.docx"
+    },
+    {
+     "title": "10 35865",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B4%D8%B1%D9%88%D8%AD%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB/%D9%83%D9%88%D8%AB%D8%B1%20%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B1%D9%8A%20%D9%81%D9%8A%20%D9%83%D8%B4%D9%81%20%D8%AE%D8%A8%D8%A7%D9%8A%D8%A7%20%D8%B5%D8%AD%D9%8A%D8%AD%20%D8%A7%D9%84%D8%A8%D8%AE%D8%A7%D8%B1%D9%8A%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%201-14/10_35865.txt"
+    },
+    {
+     "title": "10",
+     "url": "https://archive.org/details/Al-Islam_Shankety"
+    },
+    {
+     "title": "11 35866",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B4%D8%B1%D9%88%D8%AD%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB/%D9%83%D9%88%D8%AB%D8%B1%20%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B1%D9%8A%20%D9%81%D9%8A%20%D9%83%D8%B4%D9%81%20%D8%AE%D8%A8%D8%A7%D9%8A%D8%A7%20%D8%B5%D8%AD%D9%8A%D8%AD%20%D8%A7%D9%84%D8%A8%D8%AE%D8%A7%D8%B1%D9%8A%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%201-14/11_35866.docx"
+    },
+    {
+     "title": "11 35866",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B4%D8%B1%D9%88%D8%AD%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB/%D9%83%D9%88%D8%AB%D8%B1%20%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B1%D9%8A%20%D9%81%D9%8A%20%D9%83%D8%B4%D9%81%20%D8%AE%D8%A8%D8%A7%D9%8A%D8%A7%20%D8%B5%D8%AD%D9%8A%D8%AD%20%D8%A7%D9%84%D8%A8%D8%AE%D8%A7%D8%B1%D9%8A%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%201-14/11_35866.txt"
+    },
+    {
+     "title": "12 35867",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B4%D8%B1%D9%88%D8%AD%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB/%D9%83%D9%88%D8%AB%D8%B1%20%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B1%D9%8A%20%D9%81%D9%8A%20%D9%83%D8%B4%D9%81%20%D8%AE%D8%A8%D8%A7%D9%8A%D8%A7%20%D8%B5%D8%AD%D9%8A%D8%AD%20%D8%A7%D9%84%D8%A8%D8%AE%D8%A7%D8%B1%D9%8A%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%201-14/12_35867.docx"
+    },
+    {
+     "title": "12 35867",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B4%D8%B1%D9%88%D8%AD%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB/%D9%83%D9%88%D8%AB%D8%B1%20%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B1%D9%8A%20%D9%81%D9%8A%20%D9%83%D8%B4%D9%81%20%D8%AE%D8%A8%D8%A7%D9%8A%D8%A7%20%D8%B5%D8%AD%D9%8A%D8%AD%20%D8%A7%D9%84%D8%A8%D8%AE%D8%A7%D8%B1%D9%8A%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%201-14/12_35867.txt"
+    },
+    {
+     "title": "13 35868",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B4%D8%B1%D9%88%D8%AD%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB/%D9%83%D9%88%D8%AB%D8%B1%20%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B1%D9%8A%20%D9%81%D9%8A%20%D9%83%D8%B4%D9%81%20%D8%AE%D8%A8%D8%A7%D9%8A%D8%A7%20%D8%B5%D8%AD%D9%8A%D8%AD%20%D8%A7%D9%84%D8%A8%D8%AE%D8%A7%D8%B1%D9%8A%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%201-14/13_35868.docx"
+    },
+    {
+     "title": "13 35868",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B4%D8%B1%D9%88%D8%AD%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB/%D9%83%D9%88%D8%AB%D8%B1%20%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B1%D9%8A%20%D9%81%D9%8A%20%D9%83%D8%B4%D9%81%20%D8%AE%D8%A8%D8%A7%D9%8A%D8%A7%20%D8%B5%D8%AD%D9%8A%D8%AD%20%D8%A7%D9%84%D8%A8%D8%AE%D8%A7%D8%B1%D9%8A%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%201-14/13_35868.txt"
+    },
+    {
+     "title": "14 35869",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B4%D8%B1%D9%88%D8%AD%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB/%D9%83%D9%88%D8%AB%D8%B1%20%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B1%D9%8A%20%D9%81%D9%8A%20%D9%83%D8%B4%D9%81%20%D8%AE%D8%A8%D8%A7%D9%8A%D8%A7%20%D8%B5%D8%AD%D9%8A%D8%AD%20%D8%A7%D9%84%D8%A8%D8%AE%D8%A7%D8%B1%D9%8A%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%201-14/14_35869.docx"
+    },
+    {
+     "title": "14 35869",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B4%D8%B1%D9%88%D8%AD%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB/%D9%83%D9%88%D8%AB%D8%B1%20%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%86%D9%8A%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B1%D9%8A%20%D9%81%D9%8A%20%D9%83%D8%B4%D9%81%20%D8%AE%D8%A8%D8%A7%D9%8A%D8%A7%20%D8%B5%D8%AD%D9%8A%D8%AD%20%D8%A7%D9%84%D8%A8%D8%AE%D8%A7%D8%B1%D9%8A%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%201-14/14_35869.txt"
+    },
+    {
+     "title": "17587",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%A7%D9%84%D8%AA%D8%A7%D8%B1%D9%8A%D8%AE/%D8%A7%D9%84%D8%AF%D8%B1%20%D8%A7%D9%84%D8%AB%D9%85%D9%8A%D9%86%20%D9%81%D9%8A%20%D9%85%D8%B9%D8%A7%D9%84%D9%85%20%D8%AF%D8%A7%D8%B1%20%D8%A7%D9%84%D8%B1%D8%B3%D9%88%D9%84%20%D8%A7%D9%84%D8%A3%D9%85%D9%8A%D9%86%20%D8%B5%D9%84%D9%89%20%D8%A7%D9%84%D9%84%D9%87%20%D8%B9%D9%84%D9%8A%D9%87%20%D9%88%D8%B3%D9%84%D9%85%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D9%82%D8%A8%D9%84%D8%A9%20%D8%B73/17587.docx"
+    },
+    {
+     "title": "17587",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%A7%D9%84%D8%AA%D8%A7%D8%B1%D9%8A%D8%AE/%D8%A7%D9%84%D8%AF%D8%B1%20%D8%A7%D9%84%D8%AB%D9%85%D9%8A%D9%86%20%D9%81%D9%8A%20%D9%85%D8%B9%D8%A7%D9%84%D9%85%20%D8%AF%D8%A7%D8%B1%20%D8%A7%D9%84%D8%B1%D8%B3%D9%88%D9%84%20%D8%A7%D9%84%D8%A3%D9%85%D9%8A%D9%86%20%D8%B5%D9%84%D9%89%20%D8%A7%D9%84%D9%84%D9%87%20%D8%B9%D9%84%D9%8A%D9%87%20%D9%88%D8%B3%D9%84%D9%85%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D9%82%D8%A8%D9%84%D8%A9%20%D8%B73/17587.txt"
+    },
+    {
+     "title": "29045",
+     "url": "https://archive.org/details/waq29045"
+    },
+    {
+     "title": "31391",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D8%AF%D9%81%D8%B9%20%D8%A5%D9%8A%D9%87%D8%A7%D9%85%20%D8%A7%D9%84%D8%A7%D8%B6%D8%B7%D8%B1%D8%A7%D8%A8%20%D8%B9%D9%86%20%D8%A2%D9%8A%D8%A7%D8%AA%20%D8%A7%D9%84%D9%83%D8%AA%D8%A7%D8%A8%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D8%A8%D9%86%20%D8%AA%D9%8A%D9%85%D9%8A%D8%A9/31391.docx"
+    },
+    {
+     "title": "31391",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D8%AF%D9%81%D8%B9%20%D8%A5%D9%8A%D9%87%D8%A7%D9%85%20%D8%A7%D9%84%D8%A7%D8%B6%D8%B7%D8%B1%D8%A7%D8%A8%20%D8%B9%D9%86%20%D8%A2%D9%8A%D8%A7%D8%AA%20%D8%A7%D9%84%D9%83%D8%AA%D8%A7%D8%A8%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D8%A8%D9%86%20%D8%AA%D9%8A%D9%85%D9%8A%D8%A9/31391.txt"
+    },
+    {
+     "title": "33247",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%A3%D8%B5%D9%88%D9%84%20%D8%A7%D9%84%D9%81%D9%82%D9%87%20%D9%88%D8%A7%D9%84%D9%82%D9%88%D8%A7%D8%B9%D8%AF%20%D8%A7%D9%84%D9%81%D9%82%D9%87%D9%8A%D8%A9/%D8%A7%D9%84%D9%85%D8%B5%D8%A7%D9%84%D8%AD%20%D8%A7%D9%84%D9%85%D8%B1%D8%B3%D9%84%D8%A9%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%AC%D8%A7%D9%85%D8%B9%D8%A9%20%D8%A7%D9%84%D8%A5%D8%B3%D9%84%D8%A7%D9%85%D9%8A%D8%A9/33247.docx"
+    },
+    {
+     "title": "33247",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%A3%D8%B5%D9%88%D9%84%20%D8%A7%D9%84%D9%81%D9%82%D9%87%20%D9%88%D8%A7%D9%84%D9%82%D9%88%D8%A7%D8%B9%D8%AF%20%D8%A7%D9%84%D9%81%D9%82%D9%87%D9%8A%D8%A9/%D8%A7%D9%84%D9%85%D8%B5%D8%A7%D9%84%D8%AD%20%D8%A7%D9%84%D9%85%D8%B1%D8%B3%D9%84%D8%A9%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%AC%D8%A7%D9%85%D8%B9%D8%A9%20%D8%A7%D9%84%D8%A5%D8%B3%D9%84%D8%A7%D9%85%D9%8A%D8%A9/33247.txt"
+    },
+    {
+     "title": "3785",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%A8%D8%AD%D9%88%D8%AB%20%D9%88%D9%85%D8%B3%D8%A7%D8%A6%D9%84/%D8%A3%D8%AD%D9%83%D8%A7%D9%85%20%D8%A7%D9%84%D8%AC%D8%B1%D8%A7%D8%AD%D8%A9%20%D8%A7%D9%84%D8%B7%D8%A8%D9%8A%D8%A9%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%B5%D8%AD%D8%A7%D8%A8%D8%A9/3785.docx"
+    },
+    {
+     "title": "3785",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%A8%D8%AD%D9%88%D8%AB%20%D9%88%D9%85%D8%B3%D8%A7%D8%A6%D9%84/%D8%A3%D8%AD%D9%83%D8%A7%D9%85%20%D8%A7%D9%84%D8%AC%D8%B1%D8%A7%D8%AD%D8%A9%20%D8%A7%D9%84%D8%B7%D8%A8%D9%8A%D8%A9%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%B5%D8%AD%D8%A7%D8%A8%D8%A9/3785.txt"
+    },
+    {
+     "title": "4 6051109892108845731",
+     "url": "https://archive.org/details/mgrby1_gmail_G"
+    },
+    {
+     "title": "69929s",
+     "url": "https://archive.org/details/FP69929s"
+    },
+    {
+     "title": "69933 1",
+     "url": "https://archive.org/details/waq69933_1"
+    },
+    {
+     "title": "69933 2",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D9%85%D9%86%D8%B9%20%D8%AC%D9%88%D8%A7%D8%B2%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D8%B2%20%D9%81%D9%8A%20%D8%A7%D9%84%D9%85%D9%86%D8%B2%D9%84%20%D9%84%D9%84%D8%AA%D8%B9%D8%A8%D8%AF%20%D9%88%D8%A7%D9%84%D8%A5%D8%B9%D8%AC%D8%A7%D8%B2%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D9%85%D8%AC%D9%85%D8%B9/69933_2.docx"
+    },
+    {
+     "title": "69933 2",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B9%D9%84%D9%88%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86/%D9%85%D9%86%D8%B9%20%D8%AC%D9%88%D8%A7%D8%B2%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D8%B2%20%D9%81%D9%8A%20%D8%A7%D9%84%D9%85%D9%86%D8%B2%D9%84%20%D9%84%D9%84%D8%AA%D8%B9%D8%A8%D8%AF%20%D9%88%D8%A7%D9%84%D8%A5%D8%B9%D8%AC%D8%A7%D8%B2%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D9%85%D8%AC%D9%85%D8%B9/69933_2.txt"
+    },
+    {
+     "title": "69946",
+     "url": "https://archive.org/details/waq69946"
+    },
+    {
+     "title": "69946s",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%A7%D9%84%D8%A8%D9%84%D8%AF%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%AC%D8%BA%D8%B1%D8%A7%D9%81%D9%8A%D8%A7%20%D9%88%D8%A7%D9%84%D8%B1%D8%AD%D9%84%D8%A7%D8%AA/%D8%B1%D8%AD%D9%84%D8%A9%20%D8%A7%D9%84%D8%AD%D8%AC%20%D8%A5%D9%84%D9%89%20%D8%A8%D9%8A%D8%AA%20%D8%A7%D9%84%D9%84%D9%87%20%D8%A7%D9%84%D8%AD%D8%B1%D8%A7%D9%85%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D9%85%D8%AC%D9%85%D8%B9/69946s.docx"
+    },
+    {
+     "title": "69946s",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%A7%D9%84%D8%A8%D9%84%D8%AF%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%AC%D8%BA%D8%B1%D8%A7%D9%81%D9%8A%D8%A7%20%D9%88%D8%A7%D9%84%D8%B1%D8%AD%D9%84%D8%A7%D8%AA/%D8%B1%D8%AD%D9%84%D8%A9%20%D8%A7%D9%84%D8%AD%D8%AC%20%D8%A5%D9%84%D9%89%20%D8%A8%D9%8A%D8%AA%20%D8%A7%D9%84%D9%84%D9%87%20%D8%A7%D9%84%D8%AD%D8%B1%D8%A7%D9%85%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D9%85%D8%AC%D9%85%D8%B9/69946s.txt"
+    },
+    {
+     "title": "69962-1s",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%A7%D9%84%D8%A8%D9%84%D8%AF%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%AC%D8%BA%D8%B1%D8%A7%D9%81%D9%8A%D8%A7%20%D9%88%D8%A7%D9%84%D8%B1%D8%AD%D9%84%D8%A7%D8%AA/%D8%A7%D9%84%D8%B1%D8%AD%D9%84%D8%A9%20%D8%A5%D9%84%D9%89%20%D8%A5%D9%81%D8%B1%D9%8A%D9%82%D9%8A%D8%A7%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A-%20%D8%B7%20%D8%B9%D8%A7%D9%84%D9%85%20%D8%A7%D9%84%D9%81%D9%88%D8%A7%D8%A6%D8%AF%20%D9%88%D8%A7%D9%84%D9%85%D8%AC%D9%85%D8%B9/69962-1s.docx"
+    },
+    {
+     "title": "69962-1s",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%A7%D9%84%D8%A8%D9%84%D8%AF%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%AC%D8%BA%D8%B1%D8%A7%D9%81%D9%8A%D8%A7%20%D9%88%D8%A7%D9%84%D8%B1%D8%AD%D9%84%D8%A7%D8%AA/%D8%A7%D9%84%D8%B1%D8%AD%D9%84%D8%A9%20%D8%A5%D9%84%D9%89%20%D8%A5%D9%81%D8%B1%D9%8A%D9%82%D9%8A%D8%A7%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A-%20%D8%B7%20%D8%B9%D8%A7%D9%84%D9%85%20%D8%A7%D9%84%D9%81%D9%88%D8%A7%D8%A6%D8%AF%20%D9%88%D8%A7%D9%84%D9%85%D8%AC%D9%85%D8%B9/69962-1s.txt"
+    },
+    {
+     "title": "69962-2",
+     "url": "https://archive.org/details/waq69962-2"
+    },
+    {
+     "title": "70344",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%B4%D8%B1%D9%88%D8%AD%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB/%D8%B4%D8%B1%D8%AD%20%D8%B3%D9%86%D9%86%20%D8%A7%D9%84%D9%86%D8%B3%D8%A7%D8%A6%D9%8A%20%D8%B4%D8%B1%D9%88%D9%82%20%D8%A3%D9%86%D9%88%D8%A7%D8%B1%20%D8%A7%D9%84%D9%85%D9%86%D9%86%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%AD%D9%85%D9%8A%D8%B6%D9%8A/70344.docx"
+    },
+    {
+     "title": "70344",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%B4%D8%B1%D9%88%D8%AD%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB/%D8%B4%D8%B1%D8%AD%20%D8%B3%D9%86%D9%86%20%D8%A7%D9%84%D9%86%D8%B3%D8%A7%D8%A6%D9%8A%20%D8%B4%D8%B1%D9%88%D9%82%20%D8%A3%D9%86%D9%88%D8%A7%D8%B1%20%D8%A7%D9%84%D9%85%D9%86%D9%86%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A7%D9%84%D8%AD%D9%85%D9%8A%D8%B6%D9%8A/70344.txt"
+    },
+    {
+     "title": "85104",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/docx/%D8%A7%D9%84%D9%81%D8%AA%D8%A7%D9%88%D9%89/%D9%85%D8%AC%D8%A7%D9%84%D8%B3%20%D9%85%D8%B9%20%D9%81%D8%B6%D9%8A%D9%84%D8%A9%20%D8%A7%D9%84%D8%B4%D9%8A%D8%AE%20%D9%85%D8%AD%D9%85%D8%AF%20%D8%A7%D9%84%D8%A3%D9%85%D9%8A%D9%86%20%D8%A7%D9%84%D8%AC%D9%83%D9%86%D9%8A%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A3%D9%88%D9%82%D8%A7%D9%81%20%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/85104.docx"
+    },
+    {
+     "title": "85104",
+     "url": "https://huggingface.co/datasets/ieasybooks-org/shamela-waqfeya-library/resolve/main/txt/%D8%A7%D9%84%D9%81%D8%AA%D8%A7%D9%88%D9%89/%D9%85%D8%AC%D8%A7%D9%84%D8%B3%20%D9%85%D8%B9%20%D9%81%D8%B6%D9%8A%D9%84%D8%A9%20%D8%A7%D9%84%D8%B4%D9%8A%D8%AE%20%D9%85%D8%AD%D9%85%D8%AF%20%D8%A7%D9%84%D8%A3%D9%85%D9%8A%D9%86%20%D8%A7%D9%84%D8%AC%D9%83%D9%86%D9%8A%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%A7%D9%84%D8%B4%D9%86%D9%82%D9%8A%D8%B7%D9%8A%20-%20%D8%B7%20%D8%A3%D9%88%D9%82%D8%A7%D9%81%20%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/85104.txt"
+    }
+   ]
+  }
+ ]
 }
