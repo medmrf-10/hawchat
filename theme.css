@@ -1,0 +1,41 @@
+/* hawchat — ثيم des/durus v1 (مستخرج، انظر THEME.md) */
+:root{
+  --bg:#0b0f1a;
+  --bgt:rgba(11,15,26,.92);
+  --card:#141b2e;
+  --card2:#1a2238;
+  --border:#2a3350;
+  --txt:#f5f1e8;
+  --dim:#8b93b0;
+  --acc:#c9a24b;
+  --acc2:#e8c97a;
+  --acc3:#8b7cf6;
+  --ok:#46c96d;
+  --skel:#141d3a;
+  --r-lg:18px;
+  --r-md:12px;
+  --r-sm:8px;
+  --font-ar:'Amiri','Noto Naskh Arabic','Traditional Arabic',serif;
+  --font-ui:'IBM Plex Sans Arabic','Amiri','Noto Naskh Arabic',system-ui,sans-serif;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{overflow-x:hidden}
+body{background:var(--bg);color:var(--txt);font-family:var(--font-ui);min-height:100dvh;line-height:1.7;
+  padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+
+/* عناصر الثيم المعيارية */
+.hd{position:sticky;top:0;z-index:40;background:var(--bgt);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.hd-in{max-width:1100px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px}
+.brand{font-family:var(--font-ar);font-weight:700;font-size:1.35rem;background:linear-gradient(135deg,var(--acc2),var(--acc));-webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg)}
+.chip{flex:0 0 auto;background:var(--card);border:1px solid var(--border);border-radius:99px;color:var(--dim);font-family:inherit;font-size:.72rem;padding:8px 14px;cursor:pointer;min-height:36px}
+.chip.on{background:var(--acc);border-color:var(--acc2);color:var(--bg);font-weight:800}
+.btn{width:42px;height:42px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--card);color:var(--acc2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem}
+.flab{font-size:.62rem;color:var(--dim);letter-spacing:.06em;white-space:nowrap}
+@keyframes cin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.cin{animation:cin .4s both}
+::selection{background:var(--acc);color:var(--bg)}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:99px}
+::-webkit-scrollbar-track{background:transparent}
