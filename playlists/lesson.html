@@ -31,9 +31,9 @@
 .ctrl .tm{margin-inline-start:auto;color:var(--acc2);font-size:.85rem;font-variant-numeric:tabular-nums}
 .stage{min-height:200px;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:var(--r-lg);margin-top:14px;padding:34px 26px}
 .stage .ph{font-family:var(--font-ar);font-size:1.5rem;line-height:2.3;text-align:center;color:var(--txt)}
-.stage .ph .w{color:var(--txt);opacity:.45;border-radius:6px;padding:0 3px;transition:opacity .12s,background .12s,color .12s;cursor:pointer}
-.stage .ph .w.read{opacity:.8}
-.stage .ph .w.on{background:var(--acc);color:#0b0f1a;opacity:1}
+.stage .ph .w{color:#9aa3b5;opacity:.55;border-radius:6px;padding:0 3px;transition:opacity .12s,color .12s;cursor:pointer}
+.stage .ph .w.read{color:var(--acc);opacity:.75}
+.stage .ph .w.on{opacity:1}
 .stage .wait{color:var(--dim);font-size:.9rem}
 .pos{color:var(--dim);font-size:.75rem;text-align:center;margin-top:10px}
 .nav{display:flex;justify-content:space-between;margin-top:16px}
@@ -107,13 +107,20 @@ function tick(){
   let wi=-1;
   for(let k=0;k<ph.length;k++){if(tm>=ph[k][1]&&tm<ph[k][2]+0.25){wi=k;break}}
   if(wi<0){for(let k=ph.length-1;k>=0;k--){if(ph[k][1]<=tm){wi=k;break}}}
+  const spans=document.querySelectorAll('#stage .w');
   if(wi!==curW){
-    const spans=document.querySelectorAll('#stage .w');
     for(let k=0;k<spans.length;k++){
       spans[k].classList.toggle('on',k===wi);
       spans[k].classList.toggle('read',wi>=0&&k<wi);
+      if(k!==wi){spans[k].style.background='';spans[k].style.webkitBackgroundClip='';spans[k].style.backgroundClip='';spans[k].style.color=''}
     }
     curW=wi;
+  }
+  if(wi>=0&&spans[wi]){
+    const w=ph[wi],f=Math.max(0,Math.min(1,(tm-w[1])/Math.max(.05,w[2]-w[1])));
+    const p=Math.round(f*100),sp=spans[wi];
+    sp.style.background='linear-gradient(to left,var(--acc) '+p+'%,#9aa3b5 '+p+'%)';
+    sp.style.webkitBackgroundClip='text';sp.style.backgroundClip='text';sp.style.color='transparent';
   }
 }
 function seekPhrase(i){
