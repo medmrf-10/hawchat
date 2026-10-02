@@ -1,478 +1,511 @@
 {
-  "name": "playlists",
-  "version": 1,
-  "sheikhs": [
-    {
-      "id": 1,
-      "slug": "said-bouti",
-      "name": "محمد سعيد رمضان البوطي",
-      "name_display": "سعيد رمضان البوطي",
-      "aliases": [
-        "البوطي"
-      ],
-      "group": 1,
-      "photo": "playlists/img/said-bouti.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null
-    },
-    {
-      "id": 2,
-      "slug": "habib-ali-aljifri",
-      "name": "الحبيب علي الجفري",
-      "name_display": "الحبيب علي الجفري",
-      "aliases": [
-        "علي الجفري"
-      ],
-      "group": 1,
-      "photo": "playlists/img/habib-ali-aljifri.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null
-    },
-    {
-      "id": 3,
-      "slug": "habib-omar-ibn-hafiz",
-      "name": "الحبيب عمر بن حفيظ",
-      "name_display": "الحبيب عمر بن حفيظ",
-      "aliases": [
-        "ابن حفيظ"
-      ],
-      "group": 1,
-      "photo": "playlists/img/habib-omar-ibn-hafiz.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null
-    },
-    {
-      "id": 4,
-      "slug": "mouloud-sariri",
-      "name": "مولود السريري",
-      "name_display": "مولود السريري",
-      "aliases": [],
-      "group": 1,
-      "photo": "playlists/img/mouloud-sariri.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null
-    },
-    {
-      "id": 5,
-      "slug": "bardouni-husaymi",
-      "name": "محمد البردوني الحسيمي",
-      "name_display": "محمد البردوني الحسيمي",
-      "aliases": [
-        "البردوني"
-      ],
-      "group": 1,
-      "photo": "playlists/img/bardouni-husaymi.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null
-    },
-    {
-      "id": 6,
-      "slug": "sharawi",
-      "name": "محمد متولي الشعراوي",
-      "name_display": "الشعراوي",
-      "aliases": [
-        "متولي الشعراوي"
-      ],
-      "group": 1,
-      "photo": "playlists/img/sharawi.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null
-    },
-    {
-      "id": 7,
-      "slug": "maath-hawa",
-      "name": "معاذ سعيد حوى",
-      "name_display": "معاذ سعيد حوى",
-      "aliases": [
-        "معاذ حوى"
-      ],
-      "group": 1,
-      "photo": "playlists/img/maath-hawa.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null
-    },
-    {
-      "id": 8,
-      "slug": "ahmed-alsayed",
-      "name": "أحمد السيد",
-      "name_display": "أحمد السيد",
-      "aliases": [],
-      "group": 1,
-      "photo": "playlists/img/ahmed-alsayed.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null
-    },
-    {
-      "id": 9,
-      "slug": "adham-alasimi",
-      "name": "أدهم العاسمي",
-      "name_display": "أدهم العاسمي",
-      "aliases": [
-        "العاسمي"
-      ],
-      "group": 1,
-      "photo": "playlists/img/adham-alasimi.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null
-    },
-    {
-      "id": 10,
-      "slug": "ali-gomaa",
-      "name": "علي جمعة",
-      "name_display": "علي جمعة",
-      "aliases": [],
-      "group": 1,
-      "photo": "playlists/img/ali-gomaa.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null
-    },
-    {
-      "id": 11,
-      "slug": "said-kamali",
-      "name": "سعيد الكملي",
-      "name_display": "سعيد الكملي",
-      "aliases": [
-        "الكملي"
-      ],
-      "group": 2,
-      "photo": "playlists/img/said-kamali.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null
-    },
-    {
-      "id": 12,
-      "slug": "fadhel-samarrai",
-      "name": "فاضل صالح السامرائي",
-      "name_display": "فاضل السامرائي",
-      "aliases": [
-        "السامرائي"
-      ],
-      "group": 2,
-      "photo": "playlists/img/fadhel-samarrai.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null
-    },
-    {
-      "id": 13,
-      "slug": "ayman-abdelrahim",
-      "name": "أيمن عبد الرحيم",
-      "name_display": "أيمن عبد الرحيم",
-      "aliases": [],
-      "group": 2,
-      "photo": "playlists/img/ayman-abdelrahim.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null
-    },
-    {
-      "id": 14,
-      "slug": "daddo",
-      "name": "محمد الحسن ولد الددو",
-      "name_display": "الددو",
-      "aliases": [
-        "ولد الددو",
-        "الددو"
-      ],
-      "group": 2,
-      "photo": "playlists/img/daddo.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null
-    },
-    {
-      "id": 15,
-      "slug": "awn-alqudoumi",
-      "name": "عون القدومي",
-      "name_display": "عون القدومي",
-      "aliases": [],
-      "group": 2,
-      "photo": "playlists/img/awn-alqudoumi.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null
-    },
-    {
-      "id": 16,
-      "slug": "ali-mahmoud-alomari",
-      "name": "علي محمود العمري",
-      "name_display": "علي محمود العمري",
-      "aliases": [
-        "العمري"
-      ],
-      "group": 2,
-      "photo": "playlists/img/ali-mahmoud-alomari.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null
-    },
-    {
-      "id": 17,
-      "slug": "aboubakr-almashhour",
-      "name": "أبو بكر المشهور بن أحمد بن إسماعيل",
-      "name_display": "أبو بكر المشهور",
-      "aliases": [
-        "المشهور"
-      ],
-      "group": 2,
-      "photo": "playlists/img/aboubakr-almashhour.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null
-    },
-    {
-      "id": 18,
-      "slug": "osama-alazhari",
-      "name": "أسامة الأزهري",
-      "name_display": "أسامة الأزهري",
-      "aliases": [
-        "الأزهري"
-      ],
-      "group": 2,
-      "photo": "playlists/img/osama-alazhari.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null
-    },
-    {
-      "id": 19,
-      "slug": "muhammad-abdelwahid-hanbali",
-      "name": "محمد عبد الواحد الازهري الحنبلي",
-      "name_display": "محمد عبد الواحد الازهري الحنبلي",
-      "aliases": [
-        "الحنبلي"
-      ],
-      "group": 2,
-      "photo": "playlists/img/muhammad-abdelwahid-hanbali.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null
-    },
-    {
-      "id": 20,
-      "slug": "abdelkader-alhussein",
-      "name": "عبد القادر الحسين",
-      "name_display": "عبد القادر الحسين",
-      "aliases": [],
-      "group": 2,
-      "photo": "playlists/img/abdelkader-alhussein.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null
-    },
-    {
-      "id": 21,
-      "slug": "hamza-belkacem",
-      "name": "حمزة بلقاسم",
-      "name_display": "حمزة بلقاسم",
-      "aliases": [],
-      "group": 2,
-      "photo": "playlists/img/hamza-belkacem.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null
-    },
-    {
-      "id": 22,
-      "slug": "bensaib",
-      "name": "بن سايب",
-      "name_display": "بن سايب",
-      "aliases": [
-        "ابن سايب"
-      ],
-      "group": 2,
-      "photo": "playlists/img/bensaib.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null
-    },
-    {
-      "id": 23,
-      "slug": "fathi-safi",
-      "name": "فتحي صافي",
-      "name_display": "فتحي صافي",
-      "aliases": [],
-      "group": 2,
-      "photo": "playlists/img/fathi-safi.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null
-    },
-    {
-      "id": 24,
-      "slug": "dhaker-alhashimi",
-      "name": "ذاكر الهاشمي",
-      "name_display": "ذاكر الهاشمي",
-      "aliases": [
-        "الهاشمي"
-      ],
-      "group": 2,
-      "photo": "playlists/img/dhaker-alhashimi.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null
-    },
-    {
-      "id": 25,
-      "slug": "saif-alasri",
-      "name": "سيف العصري",
-      "name_display": "سيف العصري",
-      "aliases": [
-        "العصري"
-      ],
-      "group": 2,
-      "photo": "playlists/img/saif-alasri.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null
-    },
-    {
-      "id": 26,
-      "slug": "hatem-alaouni",
-      "name": "حاتم العوني",
-      "name_display": "حاتم العوني",
-      "aliases": [
-        "العوني"
-      ],
-      "group": 2,
-      "photo": "playlists/img/hatem-alaouni.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null
-    },
-    {
-      "id": 27,
-      "slug": "alfahham",
-      "name": "محمد الفحام",
-      "name_display": "الفحام",
-      "aliases": [
-        "فحام"
-      ],
-      "group": 2,
-      "photo": "playlists/img/alfahham.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null
-    },
-    {
-      "id": 28,
-      "slug": "ahmed-abdelmonem",
-      "name": "أحمد عبد المنعم",
-      "name_display": "أحمد عبد المنعم",
-      "aliases": [],
-      "group": 2,
-      "photo": "playlists/img/ahmed-abdelmonem.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null
-    },
-    {
-      "id": 29,
-      "slug": "fadhel-sulaiman",
-      "name": "فاضل سليمان",
-      "name_display": "فاضل سليمان",
-      "aliases": [],
-      "group": 2,
-      "photo": "playlists/img/fadhel-sulaiman.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null
-    },
-    {
-      "id": 30,
-      "slug": "samir-mustafa",
-      "name": "سمير مصطفى",
-      "name_display": "سمير مصطفى",
-      "aliases": [],
-      "group": 3,
-      "photo": "playlists/img/samir-mustafa.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null
-    },
-    {
-      "id": 31,
-      "slug": "muhammad-almaghrimi",
-      "name": "محمد المقرمي",
-      "name_display": "محمد المقرمي",
-      "aliases": [
-        "المقرمي"
-      ],
-      "group": 3,
-      "photo": "playlists/img/muhammad-almaghrimi.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null
-    },
-    {
-      "id": 32,
-      "slug": "almughamisi",
-      "name": "صالح المغامسي",
-      "name_display": "المغامسي",
-      "aliases": [
-        "صالح المغامسي"
-      ],
-      "group": 3,
-      "photo": "playlists/img/almughamisi.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null
-    },
-    {
-      "id": 33,
-      "slug": "alshanqiti",
-      "name": "الشنقيطي",
-      "name_display": "الشنقيطي",
-      "aliases": [],
-      "group": 3,
-      "photo": "playlists/img/alshanqiti.jpg",
-      "channels": [],
-      "series": [],
-      "status": "pending",
-      "notes": null
-    }
-  ]
+ "name": "playlists",
+ "version": 1,
+ "sheikhs": [
+  {
+   "id": 1,
+   "slug": "said-bouti",
+   "name": "محمد سعيد رمضان البوطي",
+   "name_display": "سعيد رمضان البوطي",
+   "aliases": [
+    "البوطي"
+   ],
+   "group": 1,
+   "photo": "playlists/img/said-bouti.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": "https://naseemalsham.com"
+  },
+  {
+   "id": 2,
+   "slug": "habib-ali-aljifri",
+   "name": "الحبيب علي الجفري",
+   "name_display": "الحبيب علي الجفري",
+   "aliases": [
+    "علي الجفري"
+   ],
+   "group": 1,
+   "photo": "playlists/img/habib-ali-aljifri.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": "https://alhabibali.com"
+  },
+  {
+   "id": 3,
+   "slug": "habib-omar-ibn-hafiz",
+   "name": "الحبيب عمر بن حفيظ",
+   "name_display": "الحبيب عمر بن حفيظ",
+   "aliases": [
+    "ابن حفيظ"
+   ],
+   "group": 1,
+   "photo": "playlists/img/habib-omar-ibn-hafiz.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": "https://alhabibomar.com"
+  },
+  {
+   "id": 4,
+   "slug": "mouloud-sariri",
+   "name": "مولود السريري",
+   "name_display": "مولود السريري",
+   "aliases": [],
+   "group": 1,
+   "photo": "playlists/img/mouloud-sariri.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": "https://assariry.com"
+  },
+  {
+   "id": 5,
+   "slug": "bardouni-husaymi",
+   "name": "محمد البردوني الحسيمي",
+   "name_display": "محمد البردوني الحسيمي",
+   "aliases": [
+    "البردوني"
+   ],
+   "group": 1,
+   "photo": "playlists/img/bardouni-husaymi.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null
+  },
+  {
+   "id": 6,
+   "slug": "sharawi",
+   "name": "محمد متولي الشعراوي",
+   "name_display": "الشعراوي",
+   "aliases": [
+    "متولي الشعراوي"
+   ],
+   "group": 1,
+   "photo": "playlists/img/sharawi.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null
+  },
+  {
+   "id": 7,
+   "slug": "maath-hawa",
+   "name": "معاذ سعيد حوى",
+   "name_display": "معاذ سعيد حوى",
+   "aliases": [
+    "معاذ حوى"
+   ],
+   "group": 1,
+   "photo": "playlists/img/maath-hawa.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": "https://muath-hawwa.com"
+  },
+  {
+   "id": 8,
+   "slug": "ahmed-alsayed",
+   "name": "أحمد السيد",
+   "name_display": "أحمد السيد",
+   "aliases": [],
+   "group": 1,
+   "photo": "playlists/img/ahmed-alsayed.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": "https://ahmadalsayed.net"
+  },
+  {
+   "id": 9,
+   "slug": "adham-alasimi",
+   "name": "أدهم العاسمي",
+   "name_display": "أدهم العاسمي",
+   "aliases": [
+    "العاسمي"
+   ],
+   "group": 1,
+   "photo": "playlists/img/adham-alasimi.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null
+  },
+  {
+   "id": 10,
+   "slug": "ali-gomaa",
+   "name": "علي جمعة",
+   "name_display": "علي جمعة",
+   "aliases": [],
+   "group": 1,
+   "photo": "playlists/img/ali-gomaa.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null
+  },
+  {
+   "id": 11,
+   "slug": "said-kamali",
+   "name": "سعيد الكملي",
+   "name_display": "سعيد الكملي",
+   "aliases": [
+    "الكملي"
+   ],
+   "group": 2,
+   "photo": "playlists/img/said-kamali.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": "https://saidelkamali.com"
+  },
+  {
+   "id": 12,
+   "slug": "fadhel-samarrai",
+   "name": "فاضل صالح السامرائي",
+   "name_display": "فاضل السامرائي",
+   "aliases": [
+    "السامرائي"
+   ],
+   "group": 2,
+   "photo": "playlists/img/fadhel-samarrai.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null
+  },
+  {
+   "id": 13,
+   "slug": "ayman-abdelrahim",
+   "name": "أيمن عبد الرحيم",
+   "name_display": "أيمن عبد الرحيم",
+   "aliases": [],
+   "group": 2,
+   "photo": "playlists/img/ayman-abdelrahim.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null
+  },
+  {
+   "id": 14,
+   "slug": "daddo",
+   "name": "محمد الحسن ولد الددو",
+   "name_display": "الددو",
+   "aliases": [
+    "ولد الددو",
+    "الددو"
+   ],
+   "group": 2,
+   "photo": "playlists/img/daddo.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null
+  },
+  {
+   "id": 15,
+   "slug": "awn-alqudoumi",
+   "name": "عون القدومي",
+   "name_display": "عون القدومي",
+   "aliases": [],
+   "group": 2,
+   "photo": "playlists/img/awn-alqudoumi.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": "https://awnqaddoumi.com"
+  },
+  {
+   "id": 16,
+   "slug": "ali-mahmoud-alomari",
+   "name": "علي محمود العمري",
+   "name_display": "علي محمود العمري",
+   "aliases": [
+    "العمري"
+   ],
+   "group": 2,
+   "photo": "playlists/img/ali-mahmoud-alomari.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null
+  },
+  {
+   "id": 17,
+   "slug": "aboubakr-almashhour",
+   "name": "أبو بكر المشهور بن أحمد بن إسماعيل",
+   "name_display": "أبو بكر المشهور",
+   "aliases": [
+    "المشهور"
+   ],
+   "group": 2,
+   "photo": "playlists/img/aboubakr-almashhour.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": "https://alhabibabobakr.com"
+  },
+  {
+   "id": 18,
+   "slug": "osama-alazhari",
+   "name": "أسامة الأزهري",
+   "name_display": "أسامة الأزهري",
+   "aliases": [
+    "الأزهري"
+   ],
+   "group": 2,
+   "photo": "playlists/img/osama-alazhari.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null
+  },
+  {
+   "id": 19,
+   "slug": "muhammad-abdelwahid-hanbali",
+   "name": "محمد عبد الواحد الازهري الحنبلي",
+   "name_display": "محمد عبد الواحد الازهري الحنبلي",
+   "aliases": [
+    "الحنبلي"
+   ],
+   "group": 2,
+   "photo": "playlists/img/muhammad-abdelwahid-hanbali.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null
+  },
+  {
+   "id": 20,
+   "slug": "abdelkader-alhussein",
+   "name": "عبد القادر الحسين",
+   "name_display": "عبد القادر الحسين",
+   "aliases": [],
+   "group": 2,
+   "photo": "playlists/img/abdelkader-alhussein.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null
+  },
+  {
+   "id": 21,
+   "slug": "hamza-belkacem",
+   "name": "حمزة بلقاسم",
+   "name_display": "حمزة بلقاسم",
+   "aliases": [],
+   "group": 2,
+   "photo": "playlists/img/hamza-belkacem.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null
+  },
+  {
+   "id": 22,
+   "slug": "bensaib",
+   "name": "بن سايب",
+   "name_display": "بن سايب",
+   "aliases": [
+    "ابن سايب"
+   ],
+   "group": 2,
+   "photo": "playlists/img/bensaib.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null
+  },
+  {
+   "id": 23,
+   "slug": "fathi-safi",
+   "name": "فتحي صافي",
+   "name_display": "فتحي صافي",
+   "aliases": [],
+   "group": 2,
+   "photo": "playlists/img/fathi-safi.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null
+  },
+  {
+   "id": 24,
+   "slug": "dhaker-alhashimi",
+   "name": "ذاكر الهاشمي",
+   "name_display": "ذاكر الهاشمي",
+   "aliases": [
+    "الهاشمي"
+   ],
+   "group": 2,
+   "photo": "playlists/img/dhaker-alhashimi.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null
+  },
+  {
+   "id": 25,
+   "slug": "saif-alasri",
+   "name": "سيف العصري",
+   "name_display": "سيف العصري",
+   "aliases": [
+    "العصري"
+   ],
+   "group": 2,
+   "photo": "playlists/img/saif-alasri.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null
+  },
+  {
+   "id": 26,
+   "slug": "hatem-alaouni",
+   "name": "حاتم العوني",
+   "name_display": "حاتم العوني",
+   "aliases": [
+    "العوني"
+   ],
+   "group": 2,
+   "photo": "playlists/img/hatem-alaouni.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": "https://dr-alawni.com"
+  },
+  {
+   "id": 27,
+   "slug": "alfahham",
+   "name": "محمد الفحام",
+   "name_display": "الفحام",
+   "aliases": [
+    "فحام"
+   ],
+   "group": 2,
+   "photo": "playlists/img/alfahham.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null
+  },
+  {
+   "id": 28,
+   "slug": "ahmed-abdelmonem",
+   "name": "أحمد عبد المنعم",
+   "name_display": "أحمد عبد المنعم",
+   "aliases": [],
+   "group": 2,
+   "photo": "playlists/img/ahmed-abdelmonem.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null
+  },
+  {
+   "id": 29,
+   "slug": "fadhel-sulaiman",
+   "name": "فاضل سليمان",
+   "name_display": "فاضل سليمان",
+   "aliases": [],
+   "group": 2,
+   "photo": "playlists/img/fadhel-sulaiman.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": "https://fadelsoliman.com"
+  },
+  {
+   "id": 30,
+   "slug": "samir-mustafa",
+   "name": "سمير مصطفى",
+   "name_display": "سمير مصطفى",
+   "aliases": [],
+   "group": 3,
+   "photo": "playlists/img/samir-mustafa.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null
+  },
+  {
+   "id": 31,
+   "slug": "muhammad-almaghrimi",
+   "name": "محمد المقرمي",
+   "name_display": "محمد المقرمي",
+   "aliases": [
+    "المقرمي"
+   ],
+   "group": 3,
+   "photo": "playlists/img/muhammad-almaghrimi.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": "https://m-almagrami.net"
+  },
+  {
+   "id": 32,
+   "slug": "almughamisi",
+   "name": "صالح المغامسي",
+   "name_display": "المغامسي",
+   "aliases": [
+    "صالح المغامسي"
+   ],
+   "group": 3,
+   "photo": "playlists/img/almughamisi.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null
+  },
+  {
+   "id": 33,
+   "slug": "alshanqiti",
+   "name": "الشنقيطي",
+   "name_display": "الشنقيطي",
+   "aliases": [],
+   "group": 3,
+   "photo": "playlists/img/alshanqiti.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null
+  }
+ ]
 }
