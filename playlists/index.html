@@ -46,8 +46,10 @@ async function j(u){try{const r=await fetch(u);return r.ok?await r.json():null}c
 (async()=>{
   const data=await j('shuyukh.json');
   const photos=await j('photos.json')||{};
-  const channels=await j('channels.json')||[];
-  const ch={};for(const c of channels)if(c.verified&&c.url)ch[c.name]=c.url;
+  const chd=await j('channels.json')||{};
+  const meta=await j('data/sheikhs.json')||{sheikhs:[]};
+  const slugs={};for(const s of (meta.sheikhs||[])){for(const n of [s.name_display,s.name,...(s.aliases||[])]){slugs[n]=s.slug;slugs[normalize(n)]=s.slug}}
+  const ch={};for(const grp of (chd.channels||[]))for(const c of (grp.items||[]))if(c.verified&&c.url)ch[c.name]=c.url;
   const g=document.getElementById('groups');
   if(!data||!data.groups){g.innerHTML='<p class="sub">تعذر تحميل القائمة.</p>';return}
   let total=0;
@@ -59,19 +61,20 @@ async function j(u){try{const r=await fetch(u);return r.ok?await r.json():null}c
       total++;
       const p=photos[name]||photos[normalize(name)];
       const url=ch[name];
-      const a=document.createElement(url?'a':'div');
+      const slug=slugs[name]||slugs[normalize(name)];
+      const a=document.createElement('a');
       a.className='sh cin';
-      if(url){a.href=url;a.target='_blank';a.rel='noopener'}
+      a.href='sheikh.html?s='+encodeURIComponent(slug||normalize(name));
       const init=name.replace(/^ال/,'').trim()[0]||'؟';
       a.innerHTML='<div class="ph">'+(p?'<img src="'+p+'" alt="" loading="lazy" onerror="this.remove()">':'')+'<span>'+init+'</span></div>'
         +'<div class="nm">'+name+'</div>'
-        +'<span class="ch'+(url?' ok':'')+'">'+(url?'القناة الرسمية ↗':'بانتظار القناة')+'</span>';
+        +'<span class="ch'+(url?' ok':'')+'">'+(url?'القناة موثقة':'بانتظار القناة')+'</span>';
       grid.appendChild(a);
     }
     sec.appendChild(grid);g.appendChild(sec);
   }
   document.getElementById('count').textContent=total+' شيخاً ضمن '+data.groups.length+' مجموعات';
-  function normalize(s){return s}
+  function normalize(s){return (s||'').replace(/[أإآ]/g,'ا').replace(/\s+/g,' ').trim()}
 })();
 if('serviceWorker' in navigator)navigator.serviceWorker.register('../sw.js').catch(()=>{});
 </script>
