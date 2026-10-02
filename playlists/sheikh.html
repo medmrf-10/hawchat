@@ -66,7 +66,7 @@ function domain(u){try{return new URL(u).hostname.replace(/^www\./,'')}catch(e){
 function norm(s){return (s||'').replace(/[أإآ]/g,'ا').replace(/\s+/g,' ').trim()}
 (async()=>{
   const slug=new URLSearchParams(location.search).get('s')||'';
-  const [data,photos,chs]=await Promise.all([j('data/sheikhs.json'),j('photos.json'),j('channels.json')]);
+  const [data,photos,chs,sidx]=await Promise.all([j('data/sheikhs.json'),j('photos.json'),j('channels.json'),j('series/index.json')]);
   const sh=data&&data.sheikhs?data.sheikhs.find(x=>x.slug===slug):null;
   const B=document.getElementById('body');
   if(!sh){B.innerHTML='<div class="empty">لم يُعثر على الشيخ المطلوب. <a href="." style="color:var(--acc2)">عودة للقائمة</a></div>';return}
@@ -99,10 +99,12 @@ function norm(s){return (s||'').replace(/[أإآ]/g,'ا').replace(/\s+/g,' ').tr
     h+='<a class="lnk" href="'+esc(c.url)+'" target="_blank" rel="noopener"><span class="yts">'+YT+'</span><span class="t">'+esc(c.label||domain(c.url))+'</span></a>'}
   if(!anyCh)h+='<div class="empty">يُضاف لاحقاً</div>';
   h+='</div>';
-  // series
+  // series — من سجل السلاسل + تعريفات sheikhs.json
+  const sers=[...(sidx?sidx.series.filter(x=>x.sheikh_slug===sh.slug):[]),...(sh.series||[])];
   h+='<div class="sec cin"><h2>السلاسل المختارة</h2>';
-  if(sh.series&&sh.series.length){for(const s of sh.series){
-    h+='<a class="lnk" href="'+esc(s.url||'#')+'" '+(s.url?'target="_blank" rel="noopener"':'')+'><span class="ic">≡</span><span class="t">'+esc(s.title)+'<span class="d">'+(s.count||'')+'</span></span><span class="arw">↗</span></a>'}}
+  if(sers.length){for(const s of sers){
+    const href=s.slug?'series.html?s='+encodeURIComponent(s.slug):(s.url||'#');
+    h+='<a class="lnk" href="'+esc(href)+'" '+(s.url?'target="_blank" rel="noopener"':'')+'><span class="ic">≡</span><span class="t">'+esc(s.title)+'<span class="d">'+(s.count? s.count+' درساً':'')+(s.status?' — '+esc(s.status):'')+'</span></span><span class="arw">‹</span></a>'}}
   else h+='<div class="empty">تُنتقى وتُضاف لاحقاً</div>';
   h+='</div>';
   // books
