@@ -12,77 +12,230 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-.wrap{max-width:960px;margin:0 auto;padding:16px}
-.intro{color:var(--dim);font-size:.82rem;margin:10px 0 4px}
-.sh{background:linear-gradient(145deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:var(--r-lg);margin-top:14px;overflow:hidden}
-.sh>.hd2{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer}
-.sh>.hd2 .nm{font-weight:700;font-size:1rem;flex:1}
-.sh>.hd2 img{width:44px;height:44px;border-radius:50%;object-fit:cover;border:1px solid var(--border)}
-.sh>.hd2 .cnt{color:var(--dim);font-size:.75rem}
-.sh .body{display:none;border-top:1px solid var(--border)}
-.sh.open .body{display:block}
-.sr{display:flex;align-items:center;gap:10px;padding:10px 16px;border-top:1px solid rgba(201,162,75,.06);font-size:.85rem}
-.sr:first-child{border-top:0}
-.sr .t{flex:1;line-height:1.5}
-.sr .m{color:var(--dim);font-size:.72rem;white-space:nowrap}
-.badge{font-size:.68rem;padding:3px 9px;border-radius:99px;border:1px solid var(--border);white-space:nowrap}
-.badge.ok{color:#7bd88f;border-color:rgba(123,216,143,.4);background:rgba(123,216,143,.08)}
-.badge.part{color:#e8c96a;border-color:rgba(232,201,106,.4);background:rgba(232,201,106,.08)}
-.badge.unk{color:var(--dim)}
-.badge.pub{color:var(--acc);border-color:var(--acc);background:rgba(201,162,75,.12)}
-.badge.aln{color:#8fb8ff;border-color:rgba(143,184,255,.4);background:rgba(143,184,255,.08)}
-.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.72rem;color:var(--dim);margin-top:10px}
+.wrap{max-width:900px;margin:0 auto;padding:12px 14px}
+.bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:6px 0 10px}
+.bar .sp{flex:1}
+.chip{font-size:.7rem;padding:4px 12px;border-radius:99px;border:1px solid var(--border);color:var(--dim);background:var(--card);cursor:pointer;user-select:none}
+.chip.on{color:var(--acc2);border-color:var(--acc);background:rgba(201,162,75,.12)}
+.btn2{font-size:.74rem;padding:6px 14px;border-radius:var(--r-md);border:1px solid var(--acc);background:rgba(201,162,75,.14);color:var(--acc2);cursor:pointer;font-family:inherit}
+.btn2.ghost{border-color:var(--border);background:var(--card);color:var(--dim)}
+.inp{font-size:.78rem;padding:6px 12px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--card);color:var(--txt);font-family:inherit;width:150px}
+.shh{position:sticky;top:56px;z-index:5;display:flex;align-items:center;gap:9px;padding:8px 10px;margin:12px -8px 2px;background:rgba(11,15,26,.92);backdrop-filter:blur(8px);border-radius:8px;font-size:.86rem;font-weight:700}
+.shh .nm{flex:1}
+.shh img{width:30px;height:30px;border-radius:50%;object-fit:cover;border:1px solid var(--border)}
+.shh .cnt{color:var(--dim);font-size:.68rem;font-weight:400}
+.row{display:flex;align-items:center;gap:7px;padding:6px 8px;border-bottom:1px solid rgba(201,162,75,.05);font-size:.82rem;border-radius:6px}
+.row:hover{background:rgba(201,162,75,.04)}
+.row.dragging{opacity:.35;background:rgba(201,162,75,.1)}
+.row .grip{color:var(--dim);cursor:grab;font-size:.85rem;letter-spacing:-2px;padding:0 2px;user-select:none;touch-action:none}
+.mv{display:flex;flex-direction:column;gap:0}
+.mv b{font-size:.6rem;color:var(--dim);cursor:pointer;padding:0 4px;line-height:1.4;user-select:none;font-weight:400}
+.mv b:hover{color:var(--acc2)}
+.row .t{flex:1;min-width:0;line-height:1.45;overflow:hidden}
+.row .t a{color:inherit;text-decoration:none}
+.row .t a:hover{color:var(--acc2)}
+.row .st{color:var(--dim);font-size:.66rem;white-space:nowrap}
+.row .dots{display:flex;gap:3px;align-items:center}
+.dot{width:7px;height:7px;border-radius:50%;border:1.2px solid var(--border)}
+.dot.on{background:var(--acc);border-color:var(--acc)}
+.dot.half{background:linear-gradient(90deg,var(--acc) 50%,transparent 50%);border-color:var(--acc)}
+.tag{font-size:.62rem;padding:2px 9px;border-radius:99px;border:1px solid var(--border);color:var(--dim);cursor:pointer;user-select:none;white-space:nowrap;min-width:44px;text-align:center}
+.tag.want{color:#7bd88f;border-color:rgba(123,216,143,.5);background:rgba(123,216,143,.1)}
+.tag.strong{color:var(--acc);border-color:var(--acc);background:rgba(201,162,75,.16);font-weight:700}
+.tag.no{color:#e88f8f;border-color:rgba(232,143,143,.4);background:rgba(232,143,143,.07)}
+.row.hide{display:none}
+.ytl{color:var(--dim);text-decoration:none;display:inline-flex}
+.ytl:hover{color:var(--acc2)}
+.ytl svg{width:15px;height:15px}
+.src{font-size:.58rem;color:var(--dim);border:1px dashed var(--border);border-radius:4px;padding:1px 5px;white-space:nowrap}
+.src.ag{color:#8fb8ff}
+.src.mu{color:#e8c96a}
+.src.du{color:#b78fff}
+.legend{font-size:.66rem;color:var(--dim);margin-top:4px}
+#toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--card2);border:1px solid var(--border);color:var(--txt);padding:8px 18px;border-radius:99px;font-size:.78rem;opacity:0;transition:.25s;pointer-events:none;z-index:50}
+#toast.on{opacity:1}
+#toast.err{border-color:#e88f8f;color:#e88f8f}
 .empty{color:var(--dim);padding:20px}
 </style>
 </head>
 <body>
 <header class="hd"><div class="hd-in">
-  <a href="../" class="btn" aria-label="رجوع" style="text-decoration:none">→</a>
+  <a href="../turath/" class="btn" aria-label="رجوع" style="text-decoration:none">→</a>
   <img src="../icons/icon-192.png" alt="" width="30" height="30" style="border-radius:8px">
   <span class="brand">hawchat</span>
-  <span class="sub" style="color:var(--dim);font-size:.8rem">متابعة التفريغات</span>
+  <span class="sub" style="color:var(--dim);font-size:.8rem">متابعة التفريغات — تنظيف وترتيب</span>
 </div></header>
 <main><div class="wrap">
-<p class="intro cin">حالة تفريغ سلاسل المشايخ: مفرغة بالكامل، جزئياً، أو منشورة على الموقع — تُحدَّث مع كل دفعة.</p>
-<div class="legend cin">
-  <span><span class="badge ok">مفرغة بالكامل</span></span>
-  <span><span class="badge part">مفرغة جزئياً</span></span>
-  <span><span class="badge aln">محاذاة</span></span>
-  <span><span class="badge pub">منشورة</span></span>
+<div class="bar cin">
+  <input class="inp" id="q" placeholder="بحث…">
+  <span class="chip on" data-f="all">الكل</span>
+  <span class="chip" data-f="tr">مفرغة</span>
+  <span class="chip" data-f="notr">غير مفرغة</span>
+  <span class="chip" data-f="want">مرغوبة</span>
+  <span class="chip" data-f="strong">بشدة</span>
+  <span class="chip" data-f="no">غير مرغوبة</span>
+  <span class="chip" data-f="none">بلا تعليم</span>
+  <span class="sp"></span>
+  <button class="btn2 ghost" id="dl">تنزيل JSON</button>
+  <button class="btn2" id="sav">حفظ</button>
 </div>
+<div class="legend cin">⋮⋮ اسحب للترتيب · انقر العلامة لتبديل: — ← مرغوبة ← بشدة ← غير مرغوبة · النقاط: مقترحة/مفرغة/محاذاة/منشورة · المصدر: <span class="src mu">متعلّى</span> <span class="src du">دروس</span> <span class="src ag">أجي</span></div>
 <div id="app"></div>
 </div></main>
+<div id="toast"></div>
 <script>
-async function j(u){try{const r=await fetch(u);return r.ok?await r.json():null}catch(e){return null}}
+const REPO={o:'medmrf-10',r:'hawchat',br:'main',path:'track/wants.json'};
+const LS='hw_track_wants_v1',LT='hw_ghtok';
+let wants={version:1,updated_at:null,groups:{}};
+let DATA=null,pubSet={},pubSlug={},flt='all',q='';
 function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-(async()=>{
-  const [tr,meta,ph,sidx]=await Promise.all([j('data.json'),j('../playlists/data/sheikhs.json'),j('../playlists/photos.json'),j('../playlists/series/index.json')]);
+function toast(m,e){const t=document.getElementById('toast');t.textContent=m;t.className='on'+(e?' err':'');clearTimeout(t._t);t._t=setTimeout(()=>t.className='',2600)}
+async function j(u){try{const r=await fetch(u);return r.ok?await r.json():null}catch(e){return null}}
+function rid(s){return s.yt?s.yt.split('list=')[1]:'t:'+s.t}
+function grp(sl){return wants.groups[sl]||(wants.groups[sl]={order:[],tags:{}})}
+function loadLS(){try{const s=JSON.parse(localStorage.getItem(LS));if(s&&s.groups){wants=s;return true}}catch(e){}return false}
+function saveLS(){wants.updated_at=new Date().toISOString();localStorage.setItem(LS,JSON.stringify(wants))}
+if(location.hash.startsWith('#t=')){try{localStorage.setItem(LT,location.hash.slice(3));history.replaceState(null,'',location.pathname)}catch(e){}}
+const TAGS=['','want','strong','no'],TLBL={'':'—',want:'مرغوبة',strong:'بشدة',no:'لا'};
+function dots(s,pub){
+  const al=s.al==='done'||(s.al&&/\//.test(s.al));
+  return '<span class="dots">'
+    +'<span class="dot on"></span>'
+    +'<span class="dot'+(s.st==='complete'?' on':s.st==='partial'?' half':'')+'"></span>'
+    +'<span class="dot'+(s.al==='done'?' on':al?' half':'')+'"></span>'
+    +'<span class="dot'+(pub?' on':'')+'"></span></span>';
+}
+function srcc(s){
+  const src=s.src||'agy';
+  if(src.includes('mutalaa')&&src.includes('durus'))return '<span class="src">م+د</span>';
+  if(src.includes('mutalaa'))return '<span class="src mu">متعلّى</span>';
+  if(src.includes('durus'))return '<span class="src du">دروس</span>';
+  return '<span class="src ag">أجي</span>';
+}
+function match(s,sl){
+  const tg=grp(sl).tags[rid(s)]||'';
+  if(q&&s.t.indexOf(q)<0)return false;
+  if(flt==='all')return true;
+  if(flt==='tr')return s.st==='complete';
+  if(flt==='notr')return s.st!=='complete';
+  if(flt==='none')return !tg;
+  return tg===(flt==='want'?'want':flt);
+}
+function render(){
   const app=document.getElementById('app');
-  if(!tr){app.innerHTML='<p class="empty">لا بيانات.</p>';return}
-  const pub={};for(const s of (sidx?sidx.series:[]))pub[s.sheikh_slug]=(pub[s.sheikh_slug]||0)+1;
-  const msl={};for(const x of (meta?meta.sheikhs:[]))msl[x.slug]=x;
-  let h='';
-  const slugs=Object.keys(tr.sheikhs).sort((a,b)=>(tr.sheikhs[b].length)-(tr.sheikhs[a].length));
+  const slugs=Object.keys(DATA.sheikhs).sort((a,b)=>(DATA.sheikhs[b].length)-(DATA.sheikhs[a].length));
+  let h='',shown=0;
   for(const sl of slugs){
-    const list=tr.sheikhs[sl];
-    const m=msl[sl]||{};
-    const name=m.name_display||m.name||(sl==='غير-مصنف'?'غير مصنفة':sl);
-    const img=(ph&&(ph[name]||ph[m.name]))||m.photo;
-    const comp=list.filter(x=>x.st==='complete').length;
-    h+='<div class="sh cin"><div class="hd2" onclick="this.parentElement.classList.toggle(\'open\')">'
-      +(img?'<img src="../playlists/'+esc(img.replace(/^playlists\//,''))+'" alt="">':'')
-      +'<span class="nm">'+esc(name)+'</span>'
-      +'<span class="cnt">'+list.length+' سلسلة · '+comp+' مكتملة'+(pub[sl]?' · '+pub[sl]+' منشورة':'')+'</span></div>';
-    h+='<div class="body">';
-    for(const s of list){
-      const pub2=sidx&&sidx.series.some(x=>x.sheikh_slug===sl&&s.t.includes(x.title.slice(0,12)));
-      const badge=s.st==='complete'?'<span class="badge ok">مفرغة بالكامل</span>':s.st==='partial'?'<span class="badge part">جزئية</span>':'<span class="badge unk">غير محدد</span>';
-      const aln=s.al==='done'?'<span class="badge aln">محاذاة</span>':s.al?'<span class="badge aln">محاذاة '+esc(s.al)+'</span>':'';
-      h+='<div class="sr"><span class="t">'+esc(s.t)+'</span><span class="m">'+(s.exp?s.n+'/'+s.exp:s.n+' درس')+'</span>'+aln+(pub2?'<span class="badge pub">منشورة</span>':badge)+'</div>';
+    const g=grp(sl);
+    let list=DATA.sheikhs[sl].map((s,i)=>({s,i}));
+    const ord=g.order.filter(x=>x);
+    list.sort((a,b)=>{const ia=ord.indexOf(rid(a.s)),ib=ord.indexOf(rid(b.s));
+      return (ia<0?9999:ia)-(ib<0?9999:ib)||a.i-b.i});
+    let rows='';
+    for(const {s} of list){
+      if(!match(s,sl))continue;shown++;
+      const r=rid(s),tg=g.tags[r]||'';
+      const pub=!!pubSet[sl+'|'+s.t.slice(0,12)],pSlug=pubSlug[sl+'|'+s.t.slice(0,12)];
+      const num=s.exp?s.n+'/'+s.exp:s.n;
+      const hrs=s.hours!=null?' · '+s.hours+'س':'';
+      const tH=pSlug?'<a href="../turath/series.html?s='+encodeURIComponent(pSlug)+'">'+esc(s.t)+'</a>':esc(s.t);
+      const yt=s.yt?'<a class="ytl" href="'+esc(s.yt)+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.85-.46-5.58a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.15 1 12 1 12s0 3.85.46 5.58a2.78 2.78 0 0 0 1.94 2c1.72.42 8.6.42 8.6.42s8.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.85 23 12 23 12zM9.75 15.5v-7l6 3.5-6 3.5z"/></svg></a>':'';
+      rows+='<div class="row" draggable="true" data-r="'+esc(r)+'" data-sl="'+esc(sl)+'">'
+        +'<span class="grip">⋮⋮</span>'
+        +'<span class="mv"><b data-mv="-1">▲</b><b data-mv="1">▼</b></span>'
+        +'<span class="t">'+tH+'</span>'
+        +srcc(s)
+        +'<span class="st">'+num+' درس'+hrs+'</span>'
+        +dots(s,pub)
+        +'<span class="tag'+(tg?' '+tg:'')+'" data-r="'+esc(r)+'">'+TLBL[tg]+'</span>'
+        +yt+'</div>';
     }
-    h+='</div></div>';
+    if(!rows)continue;
+    const m=DATA.meta&&DATA.meta[sl]||{};
+    const comp=DATA.sheikhs[sl].filter(x=>x.st==='complete').length;
+    h+='<div class="shh">'+(m.img?'<img src="'+esc(m.img)+'" alt="">':'')
+      +'<span class="nm">'+esc(m.name||sl)+'</span>'
+      +'<span class="cnt">'+DATA.sheikhs[sl].length+' سلسلة · '+comp+' مفرغة</span></div>'
+      +'<div class="grows" data-sl="'+esc(sl)+'">'+rows+'</div>';
   }
-  app.innerHTML=h;
+  app.innerHTML=h||'<div class="empty">لا نتائج مطابقة.</div>';
+  bind();
+}
+function bind(){
+  document.querySelectorAll('.tag').forEach(t=>t.onclick=e=>{
+    e.stopPropagation();
+    const r=t.dataset.r,sl=t.closest('.row').dataset.sl,g=grp(sl);
+    const cur=g.tags[r]||'',nxt=TAGS[(TAGS.indexOf(cur)+1)%TAGS.length];
+    if(nxt)g.tags[r]=nxt;else delete g.tags[r];
+    t.className='tag'+(nxt?' '+nxt:'');t.textContent=TLBL[nxt];
+    saveLS();toast('حُفظت محلياً — اضغط «حفظ» لرفعها');
+  });
+  let dragEl=null;
+  document.querySelectorAll('.row').forEach(r=>{
+    r.addEventListener('dragstart',e=>{dragEl=r;r.classList.add('dragging')});
+    r.addEventListener('dragend',()=>{r.classList.remove('dragging');persistOrder(r.closest('.grows'))});
+    r.addEventListener('dragover',e=>{e.preventDefault();
+      const b=r.closest('.grows');if(!dragEl||!b||!b.contains(dragEl))return;
+      const rect=r.getBoundingClientRect(),after=(e.clientY-rect.top)>rect.height/2;
+      b.insertBefore(dragEl,after?r.nextSibling:r);});
+  });
+  document.querySelectorAll('.mv b').forEach(b=>b.onclick=e=>{
+    e.stopPropagation();const r=b.closest('.row'),box=r.closest('.grows');
+    const sib=b.dataset.mv==='-1'?r.previousElementSibling:r.nextElementSibling;
+    if(!sib||!sib.classList.contains('row'))return;
+    box.insertBefore(r,b.dataset.mv==='-1'?sib:sib.nextSibling);
+    persistOrder(box);saveLS();toast('حُفظ الترتيب محلياً');
+  });
+}
+function persistOrder(box){
+  const sl=box.dataset.sl,g=grp(sl);
+  g.order=[...box.querySelectorAll('.row')].map(r=>r.dataset.r);
+  saveLS();
+}
+async function ghReq(m,u,body){
+  const t=localStorage.getItem(LT);if(!t)throw new Error('no-token');
+  const r=await fetch('https://api.github.com'+u,{method:m,headers:{Authorization:'Bearer '+t,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'},body:body?JSON.stringify(body):null});
+  if(r.status===404)return null;
+  if(!r.ok){const e=await r.text();throw new Error(r.status+' '+e.slice(0,120))}
+  return r.json();
+}
+function payload(){return {version:1,updated_at:wants.updated_at,groups:wants.groups}}
+document.getElementById('dl').onclick=()=>{
+  const b=new Blob([JSON.stringify(payload(),null,1)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='wants.json';a.click();
+};
+document.getElementById('sav').onclick=async()=>{
+  toast('يحفظ…');saveLS();
+  const t=localStorage.getItem(LT);
+  if(!t){toast('لا رمز — اضغط «تنزيل JSON» أو مرّر الرمز برابط #t=',1);return}
+  try{
+    const cur=await ghReq('GET','/repos/'+REPO.o+'/'+REPO.r+'/contents/'+REPO.path+'?ref='+REPO.br);
+    const b64=btoa(unescape(encodeURIComponent(JSON.stringify(payload(),null,1))));
+    const body={message:'track: حفظ ترتيب وتعليم السلاسل',content:b64,branch:REPO.br};
+    if(cur&&cur.sha)body.sha=cur.sha;
+    await ghReq('PUT','/repos/'+REPO.o+'/'+REPO.r+'/contents/'+REPO.path,body);
+    toast('حُفظ في track/wants.json ✓');
+  }catch(e){toast('فشل: '+e.message,1)}
+};
+document.getElementById('q').oninput=e=>{q=e.target.value.trim();render()};
+document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{
+  document.querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));
+  c.classList.add('on');flt=c.dataset.f;render();
+});
+(async()=>{
+  const [tr,meta,ph,sidx,wf]=await Promise.all([j('data.json'),j('../playlists/data/sheikhs.json'),j('../playlists/photos.json'),j('../playlists/series/index.json'),j('wants.json')]);
+  if(!tr){document.getElementById('app').innerHTML='<p class="empty">لا بيانات.</p>';return}
+  const msl={};for(const x of (meta?meta.sheikhs:[]))msl[x.slug]=x;
+  DATA={sheikhs:tr.sheikhs,meta:{}};
+  for(const sl in tr.sheikhs){
+    const m=msl[sl]||{},nm=m.name_display||m.name||sl;
+    let im=(ph&&(ph[nm]||ph[m.name]))||m.photo||null;
+    if(im&&im[0]!=='h'&&im[0]!=='.')im='../playlists/'+im.replace(/^playlists\//,'');
+    DATA.meta[sl]={name:nm,img:im};
+  }
+  for(const s of (sidx?sidx.series:[]))if(s.sheikh_slug){pubSet[s.sheikh_slug+'|'+(s.title||'').slice(0,12)]=1;pubSlug[s.sheikh_slug+'|'+(s.title||'').slice(0,12)]=s.slug}
+  if(!loadLS()&&wf&&wf.groups)wants=wf;else if(wf&&wf.groups&&(!wants.updated_at||(wf.updated_at&&wf.updated_at>wants.updated_at)))wants=wf;
+  render();
 })();
 if('serviceWorker' in navigator)navigator.serviceWorker.register('../sw.js').catch(()=>{});
 </script>
