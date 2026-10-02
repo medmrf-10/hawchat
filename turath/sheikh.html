@@ -227,36 +227,13 @@ function bindWants(slug){
   h+='<div class="sec cin"><h2>حالة التفريغات</h2>';
   const tlist=(tr&&tr.sheikhs&&tr.sheikhs[slug])||[];
   if(tlist.length){
-    const comp=tlist.filter(x=>x.st==='complete').length,part=tlist.filter(x=>x.st==='partial').length,pubn=tlist.filter(x=>x.pub||0).length;
-    h+='<div class="wbar"><span class="n">'+tlist.length+' سلسلة — '+comp+' مفرغة · '+part+' جزئية'+(pubn?' · '+pubn+' منشورة':'')+'</span>'
-      +'<button class="wbtn gh" id="wdl">JSON ⤓</button><button class="wbtn" id="wsav">حفظ</button></div>';
-    h+='<div id="wrows" data-sl="'+esc(slug)+'">';
-    const wg=(wants.groups[slug]||{order:[],tags:{}});
-    const ord=wg.order||[];
-    const idx=tlist.map((t,i)=>({t,i})).sort((a,b)=>{const ia=ord.indexOf(ridOf(a.t)),ib=ord.indexOf(ridOf(b.t));return (ia<0?9999:ia)-(ib<0?9999:ib)||a.i-b.i});
     const GRP=[['done','تم تفريغه',x=>x.st==='complete'],['doing','يجري تفريغه',x=>x.st==='partial'],['none','لم يُفرَّغ',x=>x.st!=='complete'&&x.st!=='partial']];
+    h+='<div class="wbar"><span class="n">'+tlist.length+' سلسلة</span></div>';
     for(const [gk,gl,gf] of GRP){
-      const rows=idx.filter(x=>gf(x.t));
-      if(!rows.length)continue;
-      h+='<div class="wgrp '+gk+'"><div class="gh">'+gl+'<span class="c">'+rows.length+'</span></div>';
-      for(const {t} of rows){
-        const r=ridOf(t),tg=(wg.tags||{})[r]||'';
-        const pub3=(sidx&&sidx.series.some(x=>x.sheikh_slug===slug&&t.t.includes(x.title.slice(0,12))))||t.pub;
-        const alP=t.al==='done',alH=!alP&&t.al&&/\//.test(t.al);
-        const num=t.exp?t.n+'/'+t.exp:t.n;
-        const hrs=t.hours!=null?'·'+t.hours+'س':'';
-        const pSlug=pub3&&sidx?(sidx.series.find(x=>x.sheikh_slug===slug&&t.t.includes(x.title.slice(0,12)))||{}).slug:null;
-        const tH=pSlug?'<a href="series.html?s='+encodeURIComponent(pSlug)+'">'+esc(t.t)+'</a>':esc(t.t);
-        h+='<div class="trow" draggable="true" data-r="'+esc(r)+'">'
-          +'<span class="grip">⋮⋮</span><span class="tmv"><b data-mv="-1">▲</b><b data-mv="1">▼</b></span>'
-          +'<span class="t">'+tH+'</span>'
-          +'<span class="m">'+num+' '+hrs+'</span>'
-          +'<span class="tdots"><i class="on"></i><i class="'+(t.st==='complete'?'on':t.st==='partial'?'half':'')+'"></i><i class="'+(alP?'on':alH?'half':'')+'"></i><i class="'+(pub3?'on':'')+'"></i></span>'
-          +'<span class="ttag'+(tg?' '+tg:'')+'" data-r="'+esc(r)+'">'+({want:'مرغوبة',strong:'بشدة',no:'لا'}[tg]||'—')+'</span>'
-          +(t.yt?'<a class="yl" href="'+esc(t.yt)+'" target="_blank" rel="noopener" title="قائمة يوتيوب"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.85-.46-5.58a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.15 1 12 1 12s0 3.85.46 5.58a2.78 2.78 0 0 0 1.94 2c1.72.42 8.6.42 8.6.42s8.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.85 23 12 23 12zM9.75 15.5v-7l6 3.5-6 3.5z"/></svg></a>':'')
-          +'</div>'}
-      h+='</div>'}
-    h+='</div><div id="wtoast"></div>'
+      const cnt=tlist.filter(gf).length;
+      if(!cnt)continue;
+      h+='<a class="lnk" href="list.html?s='+encodeURIComponent(slug)+'&g='+gk+'"><span class="ic">'+({done:'✓',doing:'◐',none:'○'}[gk])+'</span><span class="t">'+gl+'<span class="d">'+cnt+' سلسلة</span></span><span class="arw">‹</span></a>'}
+    h+='<div id="wtoast"></div>'
   }else h+='<div class="empty">لا بيانات تفريغ لهذا الشيخ بعد</div>';
   h+='</div>';
   // books
