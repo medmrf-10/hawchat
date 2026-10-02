@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>السلاسل المختارة — hawchat</title>
+<meta name="theme-color" content="#0b0f1a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="hawchat">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="icon" type="image/png" href="../icons/icon-192.png">
+<link rel="apple-touch-icon" href="../icons/favicon-180.png">
+<link rel="stylesheet" href="../theme.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+.wrap{max-width:1100px;margin:0 auto;padding:16px}
+.gtitle{font-family:var(--font-ar);font-size:1.15rem;font-weight:700;color:var(--acc2);margin:26px 0 12px;display:flex;align-items:center;gap:10px}
+.gtitle::after{content:"";flex:1;height:1px;background:var(--border)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.sh{display:block;background:linear-gradient(145deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:var(--r-lg);padding:16px 12px;text-decoration:none;color:var(--txt);text-align:center;transition:border-color .15s,transform .15s}
+.sh:hover{border-color:var(--acc);transform:translateY(-2px)}
+.sh .ph{width:72px;height:72px;margin:0 auto 10px;border-radius:50%;background:var(--skel);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;font-family:var(--font-ar);font-size:1.5rem;font-weight:700;color:var(--acc2)}
+.sh .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.sh .nm{font-family:var(--font-ar);font-size:1rem;font-weight:700;line-height:1.5}
+.sh .ch{display:inline-block;margin-top:8px;font-size:.68rem;color:var(--dim)}
+.sh .ch.ok{color:var(--acc2)}
+.sub{color:var(--dim);font-size:.8rem}
+</style>
+</head>
+<body>
+<header class="hd"><div class="hd-in">
+  <a href="../" class="btn" aria-label="رجوع" style="text-decoration:none">→</a>
+  <img src="../icons/icon-192.png" alt="" width="30" height="30" style="border-radius:8px">
+  <span class="brand">hawchat</span>
+  <span class="sub">السلاسل المختارة</span>
+</div></header>
+<main><div class="wrap">
+  <h1 class="cin" style="font-family:var(--font-ar);font-size:1.6rem;font-weight:700;background:linear-gradient(135deg,var(--acc2),var(--acc));-webkit-background-clip:text;background-clip:text;color:transparent;margin:8px 0 4px">السلاسل المختارة</h1>
+  <p class="sub cin" id="count"></p>
+  <div id="groups"></div>
+</div></main>
+<script>
+async function j(u){try{const r=await fetch(u);return r.ok?await r.json():null}catch(e){return null}}
+(async()=>{
+  const data=await j('shuyukh.json');
+  const photos=await j('photos.json')||{};
+  const channels=await j('channels.json')||[];
+  const ch={};for(const c of channels)if(c.verified&&c.url)ch[c.name]=c.url;
+  const g=document.getElementById('groups');
+  if(!data||!data.groups){g.innerHTML='<p class="sub">تعذر تحميل القائمة.</p>';return}
+  let total=0;
+  for(const gr of data.groups){
+    const sec=document.createElement('section');
+    sec.innerHTML='<div class="gtitle">المجموعة '+gr.id+'</div>';
+    const grid=document.createElement('div');grid.className='grid';
+    for(const name of gr.names){
+      total++;
+      const p=photos[name]||photos[normalize(name)];
+      const url=ch[name];
+      const a=document.createElement(url?'a':'div');
+      a.className='sh cin';
+      if(url){a.href=url;a.target='_blank';a.rel='noopener'}
+      const init=name.replace(/^ال/,'').trim()[0]||'؟';
+      a.innerHTML='<div class="ph">'+(p?'<img src="'+p+'" alt="" loading="lazy" onerror="this.remove()">':'')+'<span>'+init+'</span></div>'
+        +'<div class="nm">'+name+'</div>'
+        +'<span class="ch'+(url?' ok':'')+'">'+(url?'القناة الرسمية ↗':'بانتظار القناة')+'</span>';
+      grid.appendChild(a);
+    }
+    sec.appendChild(grid);g.appendChild(sec);
+  }
+  document.getElementById('count').textContent=total+' شيخاً ضمن '+data.groups.length+' مجموعات';
+  function normalize(s){return s}
+})();
+if('serviceWorker' in navigator)navigator.serviceWorker.register('../sw.js').catch(()=>{});
+</script>
+</body>
+</html>
