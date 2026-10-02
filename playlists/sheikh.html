@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>شيخ — hawchat</title>
+<meta name="theme-color" content="#0b0f1a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="hawchat">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="icon" type="image/png" href="../icons/icon-192.png">
+<link rel="apple-touch-icon" href="../icons/favicon-180.png">
+<link rel="stylesheet" href="../theme.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+.wrap{max-width:1100px;margin:0 auto;padding:16px}
+.hero{display:flex;gap:18px;align-items:center;margin:10px 0 8px}
+.ph{width:96px;height:96px;border-radius:50%;background:var(--skel);border:2px solid var(--acc);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;font-family:var(--font-ar);font-size:2rem;font-weight:700;color:var(--acc2);flex-shrink:0}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hname{font-family:var(--font-ar);font-size:1.5rem;font-weight:700;background:linear-gradient(135deg,var(--acc2),var(--acc));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hsub{color:var(--dim);font-size:.8rem;margin-top:4px}
+.fcard{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:16px;margin-top:14px}
+.ftitle{font-family:var(--font-ar);font-size:1.05rem;font-weight:700;color:var(--acc2);margin-bottom:10px}
+.frow{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);font-size:.88rem}
+.frow:last-child{border-bottom:none}
+.flab{color:var(--dim);font-size:.75rem;min-width:120px}
+.fval{flex:1}
+.fval a{color:var(--acc2);text-decoration:none;border-bottom:1px dotted var(--acc)}
+.fval a:hover{color:var(--acc)}
+.empty{color:var(--dim);font-size:.8rem}
+.lchip{display:inline-block;border:1px solid var(--border);border-radius:99px;padding:3px 12px;font-size:.72rem;background:var(--card2);margin:0 6px 6px 0}
+</style>
+</head>
+<body>
+<header class="hd"><div class="hd-in">
+  <a href="./" class="btn" aria-label="رجوع" style="text-decoration:none">→</a>
+  <img src="../icons/icon-192.png" alt="" width="30" height="30" style="border-radius:8px">
+  <span class="brand">hawchat</span>
+  <span class="hsub">السلاسل المختارة</span>
+</div></header>
+<main><div class="wrap">
+  <div class="hero cin">
+    <div class="ph"><span id="init"></span></div>
+    <div>
+      <div class="hname" id="nm">—</div>
+      <div class="hsub" id="grp"></div>
+      <div class="hsub" id="lists"></div>
+    </div>
+  </div>
+  <div class="fcard cin"><div class="ftitle">الروابط الرسمية</div>
+    <div class="frow"><span class="flab">قناة يوتيوب</span><span class="fval" id="fyt"><span class="empty">— لم تُضف بعد</span></span></div>
+    <div class="frow"><span class="flab">الموقع الرسمي</span><span class="fval" id="fsite"><span class="empty">— لم يُضف بعد</span></span></div>
+    <div class="frow"><span class="flab">منصات أخرى</span><span class="fval" id="fmore"><span class="empty">— لم تُضف بعد</span></span></div>
+  </div>
+  <div class="fcard cin"><div class="ftitle">القوائم التي ينتمي إليها</div><div id="mlists"><span class="empty">لا ينتمي لأي قائمة بعد</span></div></div>
+  <div class="fcard cin"><div class="ftitle">السلاسل</div><div id="series"><span class="empty">لم تُختر سلاسل بعد — تُضاف لاحقاً</span></div></div>
+  <div class="fcard cin"><div class="ftitle">ملاحظات</div><div id="notes"><span class="empty">—</span></div></div>
+</div></main>
+<script>
+const LS='hw_lists_v1';
+const name=new URLSearchParams(location.search).get('s')||'';
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+async function j(u){try{const r=await fetch(u);return r.ok?await r.json():null}catch(e){return null}}
+(async()=>{
+  document.getElementById('nm').textContent=name||'غير معروف';
+  document.getElementById('init').textContent=(name.replace(/^ال/,'').trim()[0]||'؟');
+  document.title=name+' — hawchat';
+  const data=await j('shuyukh.json'),meta=await j('data/sheikhs.json'),channels=await j('channels.json')||[];
+  const photos=await j('photos.json')||{};
+  let grp='';
+  if(data&&data.groups)for(const g of data.groups)if(g.names.includes(name))grp='المجموعة '+g.id;
+  document.getElementById('grp').textContent=grp;
+  const ph=photos[name];if(ph){const d=document.querySelector('.ph');const i=document.createElement('img');i.src=ph;i.onerror=()=>i.remove();d.appendChild(i)}
+  // meta record by name
+  const rec=meta&&meta.sheikhs?meta.sheikhs.find(s=>s.name_display===name||s.name===name||(s.aliases||[]).includes(name)):null;
+  const ch=channels.find(c=>c.name===name&&c.verified)||(rec&&rec.channels&&rec.channels[0]&&{url:rec.channels[0].url});
+  if(ch&&ch.url)document.getElementById('fyt').innerHTML='<a href="'+ch.url+'" target="_blank" rel="noopener">'+esc(ch.url)+' ↗</a>';
+  const site=rec&&(rec.site||rec.website);if(site)document.getElementById('fsite').innerHTML='<a href="'+site+'" target="_blank" rel="noopener">'+esc(site)+' ↗</a>';
+  if(rec&&rec.notes)document.getElementById('notes').textContent=rec.notes;
+  if(rec&&rec.series&&rec.series.length)document.getElementById('series').innerHTML=rec.series.map(s=>'<span class="lchip">'+esc(s)+'</span>').join('');
+  // lists from localStorage then file
+  let st=null;try{st=JSON.parse(localStorage.getItem(LS))}catch(e){}
+  if(!st||!st.lists)st=await j('lists.json');
+  const mine=(st&&st.lists?st.lists:[]).filter(l=>l.members.some(m=>m.name===name));
+  if(mine.length)document.getElementById('mlists').innerHTML=mine.map(l=>'<span class="lchip">'+esc(l.name)+'</span>').join('');
+})();
+if('serviceWorker' in navigator)navigator.serviceWorker.register('../sw.js').catch(()=>{});
+</script>
+</body>
+</html>
