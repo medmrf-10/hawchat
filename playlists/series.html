@@ -49,7 +49,7 @@ function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&l
     +(d.playlist?'<a href="'+esc(d.playlist)+'" target="_blank" rel="noopener">قائمة يوتيوب ↗</a>':'')
     +'</div></div>';
   for(const l of d.lessons){
-    h+='<a class="ls cin" href="lesson.html?s='+encodeURIComponent(slug)+'&l='+l.n+'"><span class="num">'+l.n+'</span><span class="t">'+esc(l.title)+'</span><span class="ply">▶</span></a>';
+    h+='<a class="ls cin" href="lesson.html?s='+encodeURIComponent(slug)+'&l='+l.n+'"><span class="num">'+l.n+'</span><span class="t">'+esc(l.title)+(l.dur?'<span class="d" style="display:block;color:var(--dim);font-size:.72rem">'+esc(l.dur)+' د</span>':'')+'</span><span class="ply">▶</span></a>';
   }
   app.innerHTML=h;
 })();

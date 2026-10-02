@@ -57,7 +57,7 @@ function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&l
   document.title=l.title+' — '+d.title;
   const prev=d.lessons.find(x=>x.n===ln-1), next=d.lessons.find(x=>x.n===ln+1);
   let h='<div class="crumb cin"><a href="sheikh.html?s='+esc(d.sheikh_slug)+'">'+esc(d.sheikh)+'</a> ← <a href="series.html?s='+encodeURIComponent(slug)+'">'+esc(d.title)+'</a></div>';
-  h+='<div class="hero cin"><h1>الدرس '+l.n+': '+esc(l.title)+'</h1><div class="meta">'+d.count+' درساً في السلسلة</div></div>';
+  h+='<div class="hero cin"><h1>الدرس '+l.n+': '+esc(l.title)+'</h1><div class="meta">'+d.count+' درساً في السلسلة'+(l.dur?' · '+esc(l.dur)+' د':'')+'</div></div>';
   if(l.video){
     h+='<div class="player" id="pl"><div class="cover" onclick="this.parentElement.innerHTML=\'<iframe src=https://www.youtube.com/embed/'+esc(l.video)+'?autoplay=1 allowfullscreen></iframe>\'"><span class="big">▶</span><span>تشغيل الدرس من يوتيوب — '+esc(l.video)+'</span></div></div>';
   }
