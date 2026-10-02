@@ -30,6 +30,7 @@
 .badge.part{color:#e8c96a;border-color:rgba(232,201,106,.4);background:rgba(232,201,106,.08)}
 .badge.unk{color:var(--dim)}
 .badge.pub{color:var(--acc);border-color:var(--acc);background:rgba(201,162,75,.12)}
+.badge.aln{color:#8fb8ff;border-color:rgba(143,184,255,.4);background:rgba(143,184,255,.08)}
 .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.72rem;color:var(--dim);margin-top:10px}
 .empty{color:var(--dim);padding:20px}
 </style>
@@ -46,6 +47,7 @@
 <div class="legend cin">
   <span><span class="badge ok">مفرغة بالكامل</span></span>
   <span><span class="badge part">مفرغة جزئياً</span></span>
+  <span><span class="badge aln">محاذاة</span></span>
   <span><span class="badge pub">منشورة</span></span>
 </div>
 <div id="app"></div>
@@ -75,7 +77,8 @@ function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&l
     for(const s of list){
       const pub2=sidx&&sidx.series.some(x=>x.sheikh_slug===sl&&s.t.includes(x.title.slice(0,12)));
       const badge=s.st==='complete'?'<span class="badge ok">مفرغة بالكامل</span>':s.st==='partial'?'<span class="badge part">جزئية</span>':'<span class="badge unk">غير محدد</span>';
-      h+='<div class="sr"><span class="t">'+esc(s.t)+'</span><span class="m">'+(s.exp?s.n+'/'+s.exp:s.n+' درس')+'</span>'+(pub2?'<span class="badge pub">منشورة</span>':badge)+'</div>';
+      const aln=s.al==='done'?'<span class="badge aln">محاذاة</span>':s.al?'<span class="badge aln">محاذاة '+esc(s.al)+'</span>':'';
+      h+='<div class="sr"><span class="t">'+esc(s.t)+'</span><span class="m">'+(s.exp?s.n+'/'+s.exp:s.n+' درس')+'</span>'+aln+(pub2?'<span class="badge pub">منشورة</span>':badge)+'</div>';
     }
     h+='</div></div>';
   }
