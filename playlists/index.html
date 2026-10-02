@@ -199,7 +199,7 @@ async function ghReq(m,u,body){
   if(!r.ok){const e=await r.text();throw new Error(r.status+' '+e.slice(0,120))}
   return r.json();
 }
-const SAVE_HOOK='';
+const SAVE_HOOK={url:'https://app.devin.ai/api/webhooks/automations/org-887203f280914dbebc435ef90ec8623d/auto-1728f2644c594ca0805047f7188c18af',secret:'5o-U83D3WRk4A5en4oabNWaFxEBPF3n9TRxUXQjYxkg'};
 async function saveRepo(){
   st('يحفظ…');
   const payload={version:1,updated_at:new Date().toISOString(),lists:state.lists.map(l=>({id:l.id,name:l.name,members:l.members.map(m=>({name:m.name,channel:_ch[m.name]||m.channel||null}))}))};
@@ -214,9 +214,9 @@ async function saveRepo(){
       st('حُفظت '+payload.lists.length+' قائمة في الريبو ✓','ok');return;
     }catch(e){st('فشل الحفظ المباشر: '+e.message,'err');return}
   }
-  if(SAVE_HOOK){
+  if(SAVE_HOOK.url){
     try{
-      const r=await fetch(SAVE_HOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+      const r=await fetch(SAVE_HOOK.url,{method:'POST',headers:{'Content-Type':'application/json','X-Webhook-Secret':SAVE_HOOK.secret},body:JSON.stringify(payload)});
       if(!r.ok)throw new Error(r.status);
       st('أُرسل الحفظ — يظهر في الريبو خلال دقائق ✓','ok');return;
     }catch(e){st('فشل إرسال الحفظ: '+e.message,'err');return}
