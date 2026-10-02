@@ -60,7 +60,7 @@ async function t(u){try{const r=await fetch(u);return r.ok?await r.text():null}c
 function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function fmtT(s){s=Math.max(0,Math.floor(s));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
 
-let YTP=null,AL=null,PH=[],curPh=-1,curW=-1,timer=null;
+let YTP=null,AL=null,PH=[],curPh=-1,curW=-1,timer=null,pendPlay=false;
 
 /* normalize alignment shapes to [[word,s,e,seg],...] then group into
    display phrases by punctuation / seg id / max length */
@@ -124,7 +124,7 @@ function seekPhrase(i){
 function mountPlayer(vid){
   const tag=document.createElement('script');tag.src='https://www.youtube.com/iframe_api';document.head.appendChild(tag);
   window.onYouTubeIframeAPIReady=()=>{
-    YTP=new YT.Player('yfp',{events:{onReady:()=>{timer=setInterval(tick,150)}}});
+    YTP=new YT.Player('yfp',{events:{onReady:()=>{timer=setInterval(tick,150);const b=document.querySelector('.btn.main');if(b)b.textContent='تشغيل';if(pendPlay){YTP.playVideo();pendPlay=false}}}});
   };
 }
 document.addEventListener('click',e=>{
@@ -150,7 +150,7 @@ document.addEventListener('click',e=>{
     AL=aln;PH=buildPhrases(normAlign(aln));
     h+='<div class="player"><iframe id="yfp" src="https://www.youtube.com/embed/'+esc(l.video)+'?enablejsapi=1&rel=0" allowfullscreen></iframe></div>';
     h+='<div class="ctrl">'
-      +'<button class="btn main" onclick="YTP&&YTP.playVideo()">تشغيل</button>'
+      +'<button class="btn main" onclick="if(YTP){YTP.playVideo()}else{pendPlay=true;this.textContent=\'جارٍ التحميل…\'}">تشغيل</button>'
       +'<button class="btn" onclick="YTP&&YTP.pauseVideo()">إيقاف</button>'
       +'<button class="btn" onclick="seekPhrase(curPh-1)">الجملة السابقة</button>'
       +'<button class="btn" onclick="seekPhrase(curPh+1)">الجملة التالية</button>'
