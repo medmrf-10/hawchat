@@ -1,1 +1,11 @@
-{"version": 1, "updated_at": "2026-10-02T20:47:51Z", "lists": [{"id": "ltest2", "name": "اختبار2", "members": []}]}
+{
+  "version": 1,
+  "updated_at": "2026-10-02T20:49:11.005Z",
+  "lists": [
+    {
+      "id": "lmurfongqav0d",
+      "name": "قائمة اختبار المتصفح",
+      "members": []
+    }
+  ]
+}
