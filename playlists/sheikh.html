@@ -77,11 +77,15 @@ function norm(s){return (s||'').replace(/[أإآ]/g,'ا').replace(/\s+/g,' ').tr
       ?'<a class="lnk" href="'+esc(sh.website)+'" target="_blank" rel="noopener"><span class="ic">🌐</span><span class="t">'+esc(domain(sh.website))+'<span class="d">'+esc(sh.website)+'</span></span><span class="arw">↗</span></a>'
       :'<div class="empty">يُضاف لاحقاً</div>')
     +'</div>';
-  // channels
+  // channels — concise rows: label + handle only (no long notes)
   h+='<div class="sec cin"><h2>القنوات الرسمية</h2>';
   let anyCh=false;
-  for(const c of yts){anyCh=true;
-    h+='<a class="lnk" href="'+esc(c.url)+'" target="_blank" rel="noopener"><span class="ic">▶</span><span class="t">'+esc(c.note||domain(c.url))+(c.verified?'<span class="tag">موثقة</span>':'')+'<span class="d">'+esc(c.url)+'</span></span><span class="arw">↗</span></a>'}
+  const rows=[];
+  for(const c of yts){rows.push({u:c.url,t:'القناة الرسمية',v:c.verified});
+    for(const m of (c.more||[]))rows.push({u:m.url,t:'قناة أرشيفية / بديلة',v:false});}
+  for(const r of rows){anyCh=true;
+    const hdl=(r.u.match(/@([\w.\-]+)/)||[])[1];
+    h+='<a class="lnk" href="'+esc(r.u)+'" target="_blank" rel="noopener"><span class="ic">▶</span><span class="t">'+esc(r.t)+(r.v?' <span class="tag">موثقة</span>':'')+'<span class="d">'+(hdl?'@'+esc(hdl):esc(domain(r.u)))+'</span></span><span class="arw">↗</span></a>'}
   for(const c of (sh.channels||[])){anyCh=true;
     h+='<a class="lnk" href="'+esc(c.url)+'" target="_blank" rel="noopener"><span class="ic">▶</span><span class="t">'+esc(c.label||domain(c.url))+'<span class="d">'+esc(c.url)+'</span></span><span class="arw">↗</span></a>'}
   if(!anyCh)h+='<div class="empty">يُضاف لاحقاً</div>';
