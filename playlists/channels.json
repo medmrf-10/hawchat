@@ -11,35 +11,45 @@
           "youtube_channel_id": "UC3ZeMI_oHM5-xcmPL2D0Ggg",
           "url": "https://www.youtube.com/@naseemalsham1",
           "verified": true,
-          "note": "قناة «الإمام الشهيد البوطي» — القناة الأرشيفية الرسمية لنسيم الشام (naseemalsham.com) المديرة لتراثه، آلاف الدروس والسلاسل."
+          "note": "قناة «الإمام الشهيد البوطي» — القناة الأرشيفية الرسمية لنسيم الشام (naseemalsham.com) المديرة لتراثه، آلاف الدروس والسلاسل.",
+          "yt_title": "الإمام الشهيد البوطي",
+          "avatar": "img/yt-UC3ZeMI_oHM5-xcmPL2D0Ggg.jpg"
         },
         {
           "name": "الحبيب علي الجفري",
           "youtube_channel_id": "UC9AGtdHF1KIrx_ql9INA8cg",
           "url": "https://www.youtube.com/@Alhabibali",
           "verified": true,
-          "note": "القناة الرسمية لموقع alhabibali.com — مئات المجالس والسلاسل."
+          "note": "القناة الرسمية لموقع alhabibali.com — مئات المجالس والسلاسل.",
+          "yt_title": "alhabib ali al jifri الحبيب علي الجفري",
+          "avatar": "img/yt-UC9AGtdHF1KIrx_ql9INA8cg.jpg"
         },
         {
           "name": "الحبيب عمر بن حفيظ",
           "youtube_channel_id": "UCg4WWlji1lydn6Op8m7tWkw",
           "url": "https://www.youtube.com/@HabibOmarCom",
           "verified": true,
-          "note": "قناته الرسمية المرتبطة بموقعه alhabibomar.com — دروس ومواسم ومجالس."
+          "note": "قناته الرسمية المرتبطة بموقعه alhabibomar.com — دروس ومواسم ومجالس.",
+          "yt_title": "‫الحبيب عمر بن حفيظ (‪Habib Omar Bin Hafidh‬‏)‬‎",
+          "avatar": "img/yt-UCg4WWlji1lydn6Op8m7tWkw.jpg"
         },
         {
           "name": "مولود السريري",
           "youtube_channel_id": "UCMmTpgyPCsiRneUn4y-u7eg",
           "url": "https://www.youtube.com/@assariry",
           "verified": true,
-          "note": "القناة الرسمية المرتبطة بموقعه assariry.com — مواعظ ودروس علمية. (المعرّف القديم UCCkrgSQaGGuYDyY5Vg5B5mQ يُحوّل إليها تلقائياً.)"
+          "note": "القناة الرسمية المرتبطة بموقعه assariry.com — مواعظ ودروس علمية. (المعرّف القديم UCCkrgSQaGGuYDyY5Vg5B5mQ يُحوّل إليها تلقائياً.)",
+          "yt_title": "أكاديمية إرث الأنبياء irt elanbiyae Academy",
+          "avatar": "img/yt-UCMmTpgyPCsiRneUn4y-u7eg.jpg"
         },
         {
           "name": "محمد البردوني الحسيمي",
           "youtube_channel_id": "UCZTyYgGeVgGASTQ3cLKVRxw",
           "url": "https://www.youtube.com/channel/UCZTyYgGeVgGASTQ3cLKVRxw",
           "verified": true,
-          "note": "قناة «الشيخ محمد البردوني» — الشيخ المغربي المقصود (لا علاقة لها بالشاعر عبد الله البردوني). محتواها أخف من البقية."
+          "note": "قناة «الشيخ محمد البردوني» — الشيخ المغربي المقصود (لا علاقة لها بالشاعر عبد الله البردوني). محتواها أخف من البقية.",
+          "yt_title": "الشيخ محمد  البردوني",
+          "avatar": "img/yt-UCZTyYgGeVgGASTQ3cLKVRxw.jpg"
         }
       ]
     },
@@ -51,14 +61,18 @@
           "youtube_channel_id": "UCijSEIUA72pyzSNOf_lx5ng",
           "url": "https://www.youtube.com/@alsharawiofficial",
           "verified": true,
-          "note": "«القناة الرسمية لفضيلة الشيخ محمد متولي الشعراوي» — أرشيف خواطره وتفسيره كاملاً."
+          "note": "«القناة الرسمية لفضيلة الشيخ محمد متولي الشعراوي» — أرشيف خواطره وتفسيره كاملاً.",
+          "yt_title": "القناة الرسمية لفضيلة الشيخ محمد متولي الشعراوي",
+          "avatar": "img/yt-UCijSEIUA72pyzSNOf_lx5ng.jpg"
         },
         {
           "name": "معاذ سعيد حوى",
           "youtube_channel_id": "UCY4XdkNxYeXbq6dqHbe0Lxg",
           "url": "https://www.youtube.com/channel/UCY4XdkNxYeXbq6dqHbe0Lxg",
           "verified": true,
-          "note": "«القناة الرسمية للدكتور معاذ سعيد حوى» — ابن سعيد حوى (المقصود بالقائمة؛ ليس أباه). موقعه muath-hawwa.com."
+          "note": "«القناة الرسمية للدكتور معاذ سعيد حوى» — ابن سعيد حوى (المقصود بالقائمة؛ ليس أباه). موقعه muath-hawwa.com.",
+          "yt_title": "الدكتور معاذ سعيد حوا dr. moath hawwa",
+          "avatar": "img/yt-UCY4XdkNxYeXbq6dqHbe0Lxg.jpg"
         },
         {
           "name": "أحمد السيد",
@@ -67,8 +81,16 @@
           "verified": true,
           "note": "قناته الرسمية (موقعه ahmadalsayed.net) — سلاسل علمية كاملة.",
           "more": [
-            { "youtube_channel_id": "UCKEZl-LJ-NIfJbLEV_At1pw", "url": "https://www.youtube.com/@alsayyed_ah_2", "note": "القناة الاحتياطية الرسمية" }
-          ]
+            {
+              "youtube_channel_id": "UCKEZl-LJ-NIfJbLEV_At1pw",
+              "url": "https://www.youtube.com/@alsayyed_ah_2",
+              "note": "القناة الاحتياطية الرسمية",
+              "yt_title": "أحمد السيد | القناة الاحتياطية",
+              "avatar": "img/yt-UCKEZl-LJ-NIfJbLEV_At1pw.jpg"
+            }
+          ],
+          "yt_title": "أحمد السيد | القناة الاحتياطية",
+          "avatar": "img/yt-UCKEZl-LJ-NIfJbLEV_At1pw.jpg"
         },
         {
           "name": "أدهم العاسمي",
@@ -77,15 +99,25 @@
           "verified": true,
           "note": "«القناة الرسمية الثانية» — قناته الحالية بعد سرقة قناته الأولى (معلن من الشيخ نفسه).",
           "more": [
-            { "youtube_channel_id": "UCbnknD_pt--Ep6Y4XmzaAiA", "url": "https://www.youtube.com/@Adhm_Alasmi", "note": "قناته الإنجليزية المدبلجة الرسمية" }
-          ]
+            {
+              "youtube_channel_id": "UCbnknD_pt--Ep6Y4XmzaAiA",
+              "url": "https://www.youtube.com/@Adhm_Alasmi",
+              "note": "قناته الإنجليزية المدبلجة الرسمية",
+              "yt_title": "Sheikh Adhm Alasmi English Dubbed Channel",
+              "avatar": "img/yt-UCbnknD_pt--Ep6Y4XmzaAiA.jpg"
+            }
+          ],
+          "yt_title": "الشيخ أدهم العاسمي",
+          "avatar": "img/yt-UCVD3hjykftErHKRXrQ8rozA.jpg"
         },
         {
           "name": "علي جمعة",
           "youtube_channel_id": "UC_Ki0lMY7HUOSKVTAEd3WLA",
           "url": "https://www.youtube.com/channel/UC_Ki0lMY7HUOSKVTAEd3WLA",
           "verified": true,
-          "note": "«القناة الرسمية الوحيدة» لأ.د. علي جمعة (معلنها في وصف القناة)."
+          "note": "«القناة الرسمية الوحيدة» لأ.د. علي جمعة (معلنها في وصف القناة).",
+          "yt_title": "أ.د علي جمعة Dr Ali Gomaa",
+          "avatar": "img/yt-UC_Ki0lMY7HUOSKVTAEd3WLA.jpg"
         }
       ]
     },
@@ -97,7 +129,9 @@
           "youtube_channel_id": "UCASAOTD6fMPEg8jmO4nPblQ",
           "url": "https://www.youtube.com/@elkamali",
           "verified": true,
-          "note": "قناته الرسمية (2.6م مشترك، +2000 فيديو) المرتبطة بموقعه saidelkamali.com."
+          "note": "قناته الرسمية (2.6م مشترك، +2000 فيديو) المرتبطة بموقعه saidelkamali.com.",
+          "yt_title": "قناة الشَّيخ سَعيد الكَمَلي",
+          "avatar": "img/yt-UCASAOTD6fMPEg8jmO4nPblQ.jpg"
         },
         {
           "name": "فاضل السامرائي",
@@ -106,15 +140,25 @@
           "verified": true,
           "note": "قناة «لمسات بيانية» — قناة برنامجه ودروسه المعتمدة.",
           "more": [
-            { "youtube_channel_id": "UCNoISMJpY721smhYfkytzvQ", "url": "https://www.youtube.com/@Nafa7atBayaneh", "note": "قناة «نفحات بيانية» — أرشيفية معتمدة" }
-          ]
+            {
+              "youtube_channel_id": "UCNoISMJpY721smhYfkytzvQ",
+              "url": "https://www.youtube.com/@Nafa7atBayaneh",
+              "note": "قناة «نفحات بيانية» — أرشيفية معتمدة",
+              "yt_title": "نفحات بيانية | Dr. Fadel Al-Samarrai",
+              "avatar": "img/yt-UCNoISMJpY721smhYfkytzvQ.jpg"
+            }
+          ],
+          "yt_title": "سبحان الله استغفر الله",
+          "avatar": "img/yt-UCQX24KckbgLqWgjYKBDVJ7g.jpg"
         },
         {
           "name": "أيمن عبد الرحيم",
           "youtube_channel_id": "UCQywk1Q7YQ_UITeh4fr6Ejg",
           "url": "https://www.youtube.com/@AymanComplete",
           "verified": true,
-          "note": "«أيمن عبدالرحيم، الأعمال الكاملة» — الأرشيف الرسمي الكامل لدروسه وسلاسله."
+          "note": "«أيمن عبدالرحيم، الأعمال الكاملة» — الأرشيف الرسمي الكامل لدروسه وسلاسله.",
+          "yt_title": "أيمن عبدالرحيم, الأعمال الكاملة",
+          "avatar": "img/yt-UCQywk1Q7YQ_UITeh4fr6Ejg.jpg"
         },
         {
           "name": "الددو",
@@ -123,36 +167,52 @@
           "verified": true,
           "note": "«القناة الرسمية للشيخ محمد الحسن الددو» (معرّف قديم UCifZUETjBgcsFaS-ewfb3YQ يُحوّل إليها).",
           "more": [
-            { "youtube_channel_id": "UCaL8kHU0cqCcgJS2lKAYKhQ", "url": "https://www.youtube.com/channel/UCaL8kHU0cqCcgJS2lKAYKhQ", "note": "خدمة تراث الشيخ ولد الددو — أرشيف شروحه العلمية" }
-          ]
+            {
+              "youtube_channel_id": "UCaL8kHU0cqCcgJS2lKAYKhQ",
+              "url": "https://www.youtube.com/channel/UCaL8kHU0cqCcgJS2lKAYKhQ",
+              "note": "خدمة تراث الشيخ ولد الددو — أرشيف شروحه العلمية",
+              "yt_title": "خدمة تراث الشيخ ولد الددو الشنقيطي",
+              "avatar": "img/yt-UCaL8kHU0cqCcgJS2lKAYKhQ.jpg"
+            }
+          ],
+          "yt_title": "مركز تكوين العلماء",
+          "avatar": "img/yt-UC_nqVsSwqxUPCawqncGqfAw.jpg"
         },
         {
           "name": "عون القدومي",
           "youtube_channel_id": "UC6ONlOefotuAzK0xenm14pQ",
           "url": "https://www.youtube.com/@aounalkaddoumi",
           "verified": true,
-          "note": "قناته الرسمية المرتبطة بموقعه awnqaddoumi.com (+3100 فيديو)."
+          "note": "قناته الرسمية المرتبطة بموقعه awnqaddoumi.com (+3100 فيديو).",
+          "yt_title": "عون القدومي",
+          "avatar": "img/yt-UC6ONlOefotuAzK0xenm14pQ.jpg"
         },
         {
           "name": "علي محمود العمري",
           "youtube_channel_id": "UCBZ9mBjX_L5szWixhVrFMdg",
           "url": "https://www.youtube.com/channel/UCBZ9mBjX_L5szWixhVrFMdg",
           "verified": true,
-          "note": "«القناة الرسمية لنشر دروس ومحاضرات الشيخ الدكتور علي العمري» — بإذن الشيخ وطلابه. هو علي العمري الداعية السعودي المعروف (صاحب قناة فور شباب سابقاً)."
+          "note": "«القناة الرسمية لنشر دروس ومحاضرات الشيخ الدكتور علي العمري» — بإذن الشيخ وطلابه. هو علي العمري الداعية السعودي المعروف (صاحب قناة فور شباب سابقاً).",
+          "yt_title": "الدكتور علي محمود العمري",
+          "avatar": "img/yt-UCBZ9mBjX_L5szWixhVrFMdg.jpg"
         },
         {
           "name": "أبو بكر المشهور",
           "youtube_channel_id": "UCleOeW9WqxmpHSoUbX6VUzQ",
           "url": "https://www.youtube.com/@alhabibabobakr",
           "verified": true,
-          "note": "قناة الحبيب أبي بكر المشهور العدني الرسمية (موقعه alhabibabobakr.com)."
+          "note": "قناة الحبيب أبي بكر المشهور العدني الرسمية (موقعه alhabibabobakr.com).",
+          "yt_title": "الحبيب أبوبكر المشهور Alhabibabobakr",
+          "avatar": "img/yt-UCleOeW9WqxmpHSoUbX6VUzQ.jpg"
         },
         {
           "name": "أسامة الأزهري",
           "youtube_channel_id": "UCefCJYVgTZjUo6feYGmtqyA",
           "url": "https://www.youtube.com/channel/UCefCJYVgTZjUo6feYGmtqyA",
           "verified": true,
-          "note": "قناته الشخصية الرسمية «أسامة السيد الأزهري» — دروسه ولقاءاته."
+          "note": "قناته الشخصية الرسمية «أسامة السيد الأزهري» — دروسه ولقاءاته.",
+          "yt_title": "أسامة السيد الأزهري Usama Elsayed Alazhary",
+          "avatar": "img/yt-UCefCJYVgTZjUo6feYGmtqyA.jpg"
         },
         {
           "name": "محمد عبد الواحد الأزهري الحنبلي",
@@ -161,15 +221,25 @@
           "verified": true,
           "note": "«القناة الرسمية الوحيدة» للشيخ (منشورة عبر الرواق المنهجي والحنبلي).",
           "more": [
-            { "youtube_channel_id": "UCbgvKzAVVwMWe0Zd_cHIgpQ", "url": "https://www.youtube.com/channel/UCbgvKzAVVwMWe0Zd_cHIgpQ", "note": "قناة الأرشيف" }
-          ]
+            {
+              "youtube_channel_id": "UCbgvKzAVVwMWe0Zd_cHIgpQ",
+              "url": "https://www.youtube.com/channel/UCbgvKzAVVwMWe0Zd_cHIgpQ",
+              "note": "قناة الأرشيف",
+              "yt_title": "ارشيف - الشيخ محمد عبد الواحد الأزهري الحنبلي",
+              "avatar": "img/yt-UCbgvKzAVVwMWe0Zd_cHIgpQ.jpg"
+            }
+          ],
+          "yt_title": "محمد عبد الواحد الأزهري الحنبلي",
+          "avatar": "img/yt-UC6C8t36dH9mDT_wGZKhhTrA.jpg"
         },
         {
           "name": "عبد القادر الحسين",
           "youtube_channel_id": "UCn0OT2nnFRJPxVFiet_Y_AQ",
           "url": "https://www.youtube.com/@dr.abdulkaderalhousien",
           "verified": true,
-          "note": "قناته الرسمية (أستاذ التفسير وعلوم القرآن، دمشق/يلوا). معرّفه القديم UC8tuM3Akyeh2b8UvtdQTTVQ يُحوّل إليها."
+          "note": "قناته الرسمية (أستاذ التفسير وعلوم القرآن، دمشق/يلوا). معرّفه القديم UC8tuM3Akyeh2b8UvtdQTTVQ يُحوّل إليها.",
+          "yt_title": "أهل الحق أهل السنة والجماعة ",
+          "avatar": "img/yt-UCn0OT2nnFRJPxVFiet_Y_AQ.jpg"
         },
         {
           "name": "حمزة بلقاسم",
@@ -178,22 +248,34 @@
           "verified": true,
           "note": "لا قناة شخصية عاملة موثقة؛ قناة «جامع الجزائر» الرسمية تستضيف دوراته وكراسيه العلمية (كرسي الونشريسي) بثاً وأرشيفاً — هي مصدر سلاسله المعتمد.",
           "more": [
-            { "youtube_channel_id": "UCVdA8QF9DKgi23chynxejfQ", "url": "https://www.youtube.com/@hamzabelkacem", "note": "حساب يحمل اسمه — محتوى ضعيف، غير موثق كمصدر سلاسل" }
-          ]
+            {
+              "youtube_channel_id": "UCVdA8QF9DKgi23chynxejfQ",
+              "url": "https://www.youtube.com/@hamzabelkacem",
+              "note": "حساب يحمل اسمه — محتوى ضعيف، غير موثق كمصدر سلاسل",
+              "yt_title": "- hamza Belkacem ",
+              "avatar": "img/yt-UCVdA8QF9DKgi23chynxejfQ.jpg"
+            }
+          ],
+          "yt_title": "جامع الجزائر",
+          "avatar": "img/yt-UCbBPPsU0zQSZb_ZnePeuSgg.jpg"
         },
         {
           "name": "بن سايب",
           "youtube_channel_id": "UCe0wzduVIzfg-hEqGvWoKAg",
           "url": "https://www.youtube.com/channel/UCe0wzduVIzfg-hEqGvWoKAg",
           "verified": true,
-          "note": "الشيخ د. عبد العزيز بن سايب (الجزائري) — قناة علمية لدروسه ومحاضراته؛ هو «بن سايب» المعروف في أوساط السلاسل."
+          "note": "الشيخ د. عبد العزيز بن سايب (الجزائري) — قناة علمية لدروسه ومحاضراته؛ هو «بن سايب» المعروف في أوساط السلاسل.",
+          "yt_title": "فضيلة الشيخ د. عبد العزيز بن سايب",
+          "avatar": "img/yt-UCe0wzduVIzfg-hEqGvWoKAg.jpg"
         },
         {
           "name": "فتحي صافي",
           "youtube_channel_id": "UCguDnAbci3fGXfQlxVr6rtA",
           "url": "https://www.youtube.com/@Fathisafi594",
           "verified": true,
-          "note": "«القناة الرسمية» لدروس الشيخ فتحي أحمد صافي رحمه الله (400+ ألف مشترك)."
+          "note": "«القناة الرسمية» لدروس الشيخ فتحي أحمد صافي رحمه الله (400+ ألف مشترك).",
+          "yt_title": "دروس الشيخ فتحي أحمد صافي",
+          "avatar": "img/yt-UCguDnAbci3fGXfQlxVr6rtA.jpg"
         },
         {
           "name": "ذاكر الهاشمي",
@@ -202,43 +284,61 @@
           "verified": true,
           "note": "قناة «فقه النفس/مكاني Makany» — قناة برنامجه ومشروعه (الشيخ ذاكر الهاشمي، فقه النفس). محتواها الرئيسي دروسه.",
           "more": [
-            { "youtube_channel_id": "UCRi8XZ7oFZxoRvrqWu8hX7g", "url": "https://www.youtube.com/channel/UCRi8XZ7oFZxoRvrqWu8hX7g", "note": "مقتطفات فقه النفس — معلنة غير رسمية" }
-          ]
+            {
+              "youtube_channel_id": "UCRi8XZ7oFZxoRvrqWu8hX7g",
+              "url": "https://www.youtube.com/channel/UCRi8XZ7oFZxoRvrqWu8hX7g",
+              "note": "مقتطفات فقه النفس — معلنة غير رسمية",
+              "yt_title": "مقتطفات فقه النفس | قناة غير رسمية",
+              "avatar": "img/yt-UCRi8XZ7oFZxoRvrqWu8hX7g.jpg"
+            }
+          ],
+          "yt_title": "فقه النفس/ مكاني Makany",
+          "avatar": "img/yt-UC2hgUdruvEzm4-sxTWrP2zg.jpg"
         },
         {
           "name": "سيف العصري",
           "youtube_channel_id": "UCiOc7H2MVWR13jIbhUb0PQw",
           "url": "https://www.youtube.com/channel/UCiOc7H2MVWR13jIbhUb0PQw",
           "verified": true,
-          "note": "«الدكتور سيف العصري» — قناته العلمية الدعوية الرسمية."
+          "note": "«الدكتور سيف العصري» — قناته العلمية الدعوية الرسمية.",
+          "yt_title": "الدكتور سيف العصري",
+          "avatar": "img/yt-UCiOc7H2MVWR13jIbhUb0PQw.jpg"
         },
         {
           "name": "حاتم العوني",
           "youtube_channel_id": "UCr3zt96slzXB5wuUARG1xdQ",
           "url": "https://www.youtube.com/channel/UCr3zt96slzXB5wuUARG1xdQ",
           "verified": true,
-          "note": "«القناة الرسمية» المرتبطة بموقعه dr-alawni.com مباشرة."
+          "note": "«القناة الرسمية» المرتبطة بموقعه dr-alawni.com مباشرة.",
+          "yt_title": "الشريف حاتم بن عارف العوني",
+          "avatar": "img/yt-UCr3zt96slzXB5wuUARG1xdQ.jpg"
         },
         {
           "name": "الفحام",
           "youtube_channel_id": "UCI-V9-RviatMgZBRv3z3eCQ",
           "url": "https://www.youtube.com/channel/UCI-V9-RviatMgZBRv3z3eCQ",
           "verified": true,
-          "note": "«القناة الرسمية والوحيدة» للشيخ محمد الفحام (الجزائري — شروح الصحيحين وغيرها)."
+          "note": "«القناة الرسمية والوحيدة» للشيخ محمد الفحام (الجزائري — شروح الصحيحين وغيرها).",
+          "yt_title": "الشيخ محمد الفحام Sh. Mohammad ALFaham",
+          "avatar": "img/yt-UCI-V9-RviatMgZBRv3z3eCQ.jpg"
         },
         {
           "name": "أحمد عبد المنعم",
           "youtube_channel_id": "UCCy0qwIz722Gi2MtjYlrQeg",
           "url": "https://www.youtube.com/channel/UCCy0qwIz722Gi2MtjYlrQeg",
           "verified": true,
-          "note": "قناة «إنه القرآن» — برنامجه ومشروعه القرآني المعتمد (الشيخ أحمد عبد المنعم مقدم برنامج إنه القرآن)."
+          "note": "قناة «إنه القرآن» — برنامجه ومشروعه القرآني المعتمد (الشيخ أحمد عبد المنعم مقدم برنامج إنه القرآن).",
+          "yt_title": "إنه القرآن",
+          "avatar": "img/yt-UCCy0qwIz722Gi2MtjYlrQeg.jpg"
         },
         {
           "name": "فاضل سليمان",
           "youtube_channel_id": "UCtYQjpwiwXxGxZs-3x91ihQ",
           "url": "https://www.youtube.com/@FadelSoliman212",
           "verified": true,
-          "note": "قناة مؤسسة جسور (Bridges Foundation) التي يديرها — قناته الرسمية الفعلية (موقعه fadelsoliman.com يشير إليها)."
+          "note": "قناة مؤسسة جسور (Bridges Foundation) التي يديرها — قناته الرسمية الفعلية (موقعه fadelsoliman.com يشير إليها).",
+          "yt_title": "Islam in brief",
+          "avatar": "img/yt-UCtYQjpwiwXxGxZs-3x91ihQ.jpg"
         }
       ]
     },
@@ -250,21 +350,27 @@
           "youtube_channel_id": "UCoN4xm9D5J5D3kVQOueOSMw",
           "url": "https://www.youtube.com/@samirmoustafa",
           "verified": true,
-          "note": "«قناة الشيخ سمير مصطفى الرسمية» — +4100 فيديو (صحيح مسلم، الوابل الصيب)."
+          "note": "«قناة الشيخ سمير مصطفى الرسمية» — +4100 فيديو (صحيح مسلم، الوابل الصيب).",
+          "yt_title": "الراشدين للمرئيات الإسلامية",
+          "avatar": "img/yt-UCoN4xm9D5J5D3kVQOueOSMw.jpg"
         },
         {
           "name": "محمد المقرمي",
           "youtube_channel_id": "UC_0LNCisiIGMBqX13SGTIdw",
           "url": "https://www.youtube.com/@al_Maqrami",
           "verified": true,
-          "note": "قناة الشيخ (المهندس) محمد المقرمي اليمني الرسمية (موقعه m-almagrami.net)."
+          "note": "قناة الشيخ (المهندس) محمد المقرمي اليمني الرسمية (موقعه m-almagrami.net).",
+          "yt_title": "الشيخ(المهندس) | محمد المقرمي",
+          "avatar": "img/yt-UC_0LNCisiIGMBqX13SGTIdw.jpg"
         },
         {
           "name": "المغامسي",
           "youtube_channel_id": "UCfpli4VHoS12syPkPxHl7XA",
           "url": "https://www.youtube.com/@Alrasekhoon",
           "verified": true,
-          "note": "قناة الشيخ صالح المغامسي الرسمية بإدارة موقع الراسخون في العلم (8.5 ألف فيديو)."
+          "note": "قناة الشيخ صالح المغامسي الرسمية بإدارة موقع الراسخون في العلم (8.5 ألف فيديو).",
+          "yt_title": "الشيخ صالح المغامسي",
+          "avatar": "img/yt-UCfpli4VHoS12syPkPxHl7XA.jpg"
         },
         {
           "name": "الشنقيطي",
@@ -273,8 +379,16 @@
           "verified": true,
           "note": "الشيخ محمد بن علي الشنقيطي (صاحب تفسير أضواء البيان، دروس جدة) — المقصود الأشهر باسم «الشنقيطي» في أوساط السلاسل.",
           "more": [
-            { "youtube_channel_id": "UC-iVxB_fhfGIBduALRHgJVA", "url": "https://www.youtube.com/channel/UC-iVxB_fhfGIBduALRHgJVA", "note": "بديل: الشيخ محمد بن محمد المختار الجكني الشنقيطي — مدرس الحرمين بالمدينة (shankeety.net) إن كان هو المقصود" }
-          ]
+            {
+              "youtube_channel_id": "UC-iVxB_fhfGIBduALRHgJVA",
+              "url": "https://www.youtube.com/channel/UC-iVxB_fhfGIBduALRHgJVA",
+              "note": "بديل: الشيخ محمد بن محمد المختار الجكني الشنقيطي — مدرس الحرمين بالمدينة (shankeety.net) إن كان هو المقصود",
+              "yt_title": "فضيلة الشيخ محمد بن محمد المختار الجكني الشنقيطي",
+              "avatar": "img/yt-UC-iVxB_fhfGIBduALRHgJVA.jpg"
+            }
+          ],
+          "yt_title": "قناة الشيخ محمد بن علي الشنقيطي",
+          "avatar": "img/yt-UCUNFQ0Z8HAyEThg27lt6ccA.jpg"
         }
       ]
     }

@@ -28,6 +28,9 @@
 .lnk{display:flex;align-items:center;gap:10px;padding:11px 14px;border:1px solid var(--border);border-radius:var(--r-md);text-decoration:none;color:var(--txt);margin-bottom:8px;transition:border-color .15s}
 .lnk:hover{border-color:var(--acc)}
 .lnk .ic{width:34px;height:34px;min-width:34px;border-radius:8px;background:var(--card2);display:flex;align-items:center;justify-content:center;color:var(--acc2);font-size:.95rem}
+.lnk .av{width:40px;height:40px;min-width:40px;border-radius:50%;object-fit:cover;border:1px solid var(--border);background:var(--skel)}
+.lnk .yts{min-width:26px;display:flex;align-items:center;justify-content:center;color:var(--acc2)}
+.lnk .yts svg{width:20px;height:20px;display:block}
 .lnk .t{flex:1;font-size:.88rem}
 .lnk .d{display:block;font-size:.68rem;color:var(--dim);margin-top:2px}
 .lnk .arw{color:var(--dim);font-size:.8rem}
@@ -77,17 +80,18 @@ function norm(s){return (s||'').replace(/[أإآ]/g,'ا').replace(/\s+/g,' ').tr
       ?'<a class="lnk" href="'+esc(sh.website)+'" target="_blank" rel="noopener"><span class="ic">🌐</span><span class="t">'+esc(domain(sh.website))+'<span class="d">'+esc(sh.website)+'</span></span><span class="arw">↗</span></a>'
       :'<div class="empty">يُضاف لاحقاً</div>')
     +'</div>';
-  // channels — concise rows: label + handle only (no long notes)
+  // channels — YouTube-style rows: channel avatar + real channel title (yt_title), opens channel
   h+='<div class="sec cin"><h2>القنوات الرسمية</h2>';
   let anyCh=false;
   const rows=[];
-  for(const c of yts){rows.push({u:c.url,t:'القناة الرسمية',v:c.verified});
-    for(const m of (c.more||[]))rows.push({u:m.url,t:'قناة أرشيفية / بديلة',v:false});}
+  for(const c of yts){rows.push({u:c.url,t:c.yt_title||'القناة الرسمية',v:c.verified,a:c.avatar,main:true});
+    for(const m of (c.more||[]))rows.push({u:m.url,t:m.yt_title||'قناة إضافية',v:false,a:m.avatar,main:false});}
+  const YT='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.85-.46-5.58a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.15 1 12 1 12s0 3.85.46 5.58a2.78 2.78 0 0 0 1.94 2c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.85 23 12 23 12zM9.75 15.5v-7l6 3.5-6 3.5z"/></svg>';
   for(const r of rows){anyCh=true;
-    const hdl=(r.u.match(/@([\w.\-]+)/)||[])[1];
-    h+='<a class="lnk" href="'+esc(r.u)+'" target="_blank" rel="noopener"><span class="ic">▶</span><span class="t">'+esc(r.t)+(r.v?' <span class="tag">موثقة</span>':'')+'<span class="d">'+(hdl?'@'+esc(hdl):esc(domain(r.u)))+'</span></span><span class="arw">↗</span></a>'}
+    const av=r.a?'<img class="av" src="'+esc(r.a)+'" alt="" loading="lazy" onerror="this.outerHTML=\'<span class=yts>'+YT+'</span>\'">':'<span class="yts">'+YT+'</span>';
+    h+='<a class="lnk" href="'+esc(r.u)+'" target="_blank" rel="noopener">'+av+'<span class="t">'+esc(r.t)+(r.v?' <span class="tag">موثقة</span>':'')+'<span class="d">يوتيوب '+(r.main?'':'· قناة إضافية')+'</span></span><span class="arw">↗</span></a>'}
   for(const c of (sh.channels||[])){anyCh=true;
-    h+='<a class="lnk" href="'+esc(c.url)+'" target="_blank" rel="noopener"><span class="ic">▶</span><span class="t">'+esc(c.label||domain(c.url))+'<span class="d">'+esc(c.url)+'</span></span><span class="arw">↗</span></a>'}
+    h+='<a class="lnk" href="'+esc(c.url)+'" target="_blank" rel="noopener"><span class="yts">'+YT+'</span><span class="t">'+esc(c.label||domain(c.url))+'<span class="d">يوتيوب</span></span><span class="arw">↗</span></a>'}
   if(!anyCh)h+='<div class="empty">يُضاف لاحقاً</div>';
   h+='</div>';
   // series
