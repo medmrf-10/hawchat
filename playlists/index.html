@@ -44,6 +44,10 @@ body.assign .sh .plus{display:flex}
 .tbtn:hover{border-color:var(--acc)}
 .tbtn.gold{background:var(--acc);color:var(--bg);font-weight:800;border-color:var(--acc)}
 .tbtn.on{border-color:var(--acc3);color:var(--acc3)}
+#flt{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 4px}
+.fchip{height:34px;padding:0 16px;border-radius:99px;border:1px solid var(--border);background:var(--card);color:var(--dim);font-family:var(--font-ui);font-size:.78rem;cursor:pointer;transition:border-color .15s,color .15s}
+.fchip:hover{border-color:var(--acc);color:var(--txt)}
+.fchip.on{background:var(--acc);color:var(--bg);border-color:var(--acc);font-weight:800}
 #st{font-size:.75rem;color:var(--dim)}
 #st.ok{color:var(--ok)}#st.err{color:#e06565}
 .mchips{display:flex;flex-wrap:wrap;gap:8px}
@@ -83,6 +87,7 @@ body.assign .sh .plus{display:flex}
     <span id="st"></span>
   </div>
   <div id="lists"></div>
+  <div id="flt"></div>
   <div id="groups"></div>
 </div></main>
 <div class="mov" id="mov"><div class="mbox">
@@ -94,7 +99,7 @@ body.assign .sh .plus{display:flex}
 <script>
 const REPO={o:'medmrf-10',r:'hawchat',br:'main',path:'playlists/lists.json'};
 const LS='hw_lists_v1',LT='hw_ghtok';
-let groups=[],chMap={},state={version:1,updated_at:null,lists:[]},assign=false,curSh=null;
+let groups=[],chMap={},state={version:1,updated_at:null,lists:[]},assign=false,curSh=null,flt=null;
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 function st(msg,cls){const e=document.getElementById('st');e.textContent=msg;e.className=cls||''}
 function loadLS(){try{const s=JSON.parse(localStorage.getItem(LS));if(s&&s.lists){state=s;return true}}catch(e){}return false}
@@ -120,13 +125,24 @@ function renderLists(){
     w.appendChild(g);w.appendChild(c);
   }
 }
+function renderFlt(){
+  const w=document.getElementById('flt');w.innerHTML='';
+  if(!state.lists.length)return;
+  const mk=(label,id)=>{const b=document.createElement('button');b.className='fchip'+(flt===id?' on':'');b.textContent=label;b.onclick=()=>{flt=id;renderAll()};w.appendChild(b)};
+  mk('الكل',null);
+  for(const l of state.lists)mk(l.name+' ('+l.members.length+')',l.id);
+}
 function renderGroups(groups,slugs,photos,ch){
   const g=document.getElementById('groups');g.innerHTML='';
+  const fset=flt?new Set((state.lists.find(x=>x.id===flt)||{members:[]}).members.map(m=>m.name)):null;
   for(const gr of groups){
+    const names=fset?gr.names.filter(n=>fset.has(n)):gr.names;
+    if(fset&&!names.length)continue;
     const sec=document.createElement('section');
-    sec.innerHTML='<div class="gtitle tg"><span class="chev">‹</span>المجموعة '+gr.id+' <span class="cnt">('+gr.names.length+')</span></div>';
-    const grid=document.createElement('div');grid.className='grid hidden';
-    for(const name of gr.names){
+    if(fset)sec.classList.add('open');
+    sec.innerHTML='<div class="gtitle tg"><span class="chev">‹</span>المجموعة '+gr.id+' <span class="cnt">('+names.length+')</span></div>';
+    const grid=document.createElement('div');grid.className='grid'+(fset?'':' hidden');
+    for(const name of names){
       const p=photos[name]||photos[normalize(name)];
       const url=ch[name];
       const slug=slugs[name]||slugs[normalize(name)];
@@ -148,10 +164,10 @@ function renderGroups(groups,slugs,photos,ch){
   }
 }
 let _groups=[],_slugs={},_photos={},_ch={};
-function renderAll(){renderLists();renderGroups(_groups,_slugs,_photos,_ch)}
+function renderAll(){renderLists();renderFlt();renderGroups(_groups,_slugs,_photos,_ch)}
 function addList(nm){nm=(nm||'').trim();if(!nm)return;state.lists.push({id:mkid(),name:nm,members:[]});saveLS();renderAll();st('أُنشئت «'+nm+'» — محفوظة محلياً، اضغط «حفظ» لرفعها')}
 function dropM(lid,name){const l=state.lists.find(x=>x.id===lid);if(!l)return;l.members=l.members.filter(m=>m.name!==name);saveLS();renderAll()}
-function delList(lid){state.lists=state.lists.filter(x=>x.id!==lid);saveLS();renderAll()}
+function delList(lid){state.lists=state.lists.filter(x=>x.id!==lid);if(flt===lid)flt=null;saveLS();renderAll()}
 function pick(ev,name){if(ev)ev.stopPropagation();curSh=name;openModal()}
 function openModal(){
   document.getElementById('mt').textContent='إسناد «'+curSh+'» إلى:';
