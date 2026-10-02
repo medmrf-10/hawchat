@@ -56,7 +56,7 @@
 .lst .lx{position:absolute;top:5px;left:5px;width:20px;height:20px;border-radius:50%;background:rgba(11,15,26,.85);border:1px solid var(--border);color:var(--dim);display:none;align-items:center;justify-content:center;font-size:.6rem;z-index:2}
 .lst:hover .lx{display:flex}
 .lst .lx:hover{color:#e06565;border-color:#e06565}
-@media(max-width:640px){.lst{flex-basis:104px}}
+@media(max-width:640px){.lst{flex-basis:104px}.grid{grid-template-columns:repeat(auto-fill,minmax(108px,1fr));gap:9px}}
 /* ── list view ── */
 .lv{display:none;animation:cin .3s both}
 .lv.on{display:block}
@@ -71,12 +71,13 @@
 .lv-empty b{color:var(--acc2)}
 /* ── sheikh cards ── */
 /* ── sheikh cards ── */
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:10px;margin-top:14px}
-.sh{display:block;background:linear-gradient(145deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:var(--r-md);padding:8px 8px 10px;text-decoration:none;color:var(--txt);text-align:center;transition:border-color .18s,transform .18s;position:relative}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:12px;margin-top:14px}
+.sh{display:block;background:linear-gradient(145deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:var(--r-md);padding:12px 10px 13px;text-decoration:none;color:var(--txt);text-align:center;transition:border-color .18s,transform .18s,box-shadow .18s;position:relative}
+.sh:hover{box-shadow:0 6px 20px rgba(0,0,0,.35)}
 .sh:hover{border-color:var(--acc);transform:translateY(-2px)}
-.sh .ph{width:100%;aspect-ratio:1;height:auto;margin:0 0 7px;border-radius:50%;background:var(--skel);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;font-family:var(--font-ar);font-size:1.6rem;font-weight:700;color:var(--acc2)}
+.sh .ph{width:86%;aspect-ratio:1;height:auto;margin:0 auto 9px;border-radius:50%;background:var(--skel);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;font-family:var(--font-ar);font-size:1.9rem;font-weight:700;color:var(--acc2)}
 .sh .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.sh .nm{font-family:var(--font-ar);font-size:.8rem;font-weight:700;line-height:1.4}
+.sh .nm{font-family:var(--font-ar);font-size:.86rem;font-weight:700;line-height:1.5}
 .sh .plus{position:absolute;top:6px;left:6px;width:24px;height:24px;border-radius:50%;border:1px solid var(--acc);color:var(--acc2);background:var(--bgt);font-size:.85rem;display:none;align-items:center;justify-content:center;cursor:pointer;z-index:2}
 body.assign .sh .plus{display:flex}
 .sh .badge{position:absolute;top:6px;right:6px;min-width:20px;height:20px;font-size:.62rem;background:var(--acc);color:var(--bg);border-radius:99px;padding:0 7px;font-weight:800;display:flex;align-items:center;justify-content:center;z-index:2}
