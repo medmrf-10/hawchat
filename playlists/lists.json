@@ -1,16 +1,274 @@
 {
   "version": 1,
-  "updated_at": "2026-10-02T20:50:34.697Z",
+  "updated_at": "2026-10-02T20:53:36.644Z",
   "lists": [
     {
-      "id": "lmurfongqav0d",
-      "name": "قائمة اختبار المتصفح",
-      "members": []
+      "id": "lmurf8fk9yf1z",
+      "name": "فقه",
+      "members": [
+        {
+          "name": "مولود السريري",
+          "channel": "https://www.youtube.com/@assariry"
+        },
+        {
+          "name": "محمد البردوني الحسيمي",
+          "channel": "https://www.youtube.com/channel/UCZTyYgGeVgGASTQ3cLKVRxw"
+        },
+        {
+          "name": "سعيد الكملي",
+          "channel": "https://www.youtube.com/@elkamali"
+        },
+        {
+          "name": "الددو",
+          "channel": "https://www.youtube.com/@dedewiat"
+        },
+        {
+          "name": "حمزة بلقاسم",
+          "channel": "https://www.youtube.com/channel/UCbBPPsU0zQSZb_ZnePeuSgg"
+        },
+        {
+          "name": "بن سايب",
+          "channel": "https://www.youtube.com/channel/UCe0wzduVIzfg-hEqGvWoKAg"
+        }
+      ]
     },
     {
-      "id": "lmurfow9buqqe",
-      "name": "قائمة اختبار المتصفح",
-      "members": []
+      "id": "lmurf8jqk5435",
+      "name": "تزكية",
+      "members": [
+        {
+          "name": "سعيد رمضان البوطي",
+          "channel": "https://www.youtube.com/@naseemalsham1"
+        },
+        {
+          "name": "الحبيب علي الجفري",
+          "channel": "https://www.youtube.com/@Alhabibali"
+        },
+        {
+          "name": "الحبيب عمر بن حفيظ",
+          "channel": "https://www.youtube.com/@HabibOmarCom"
+        },
+        {
+          "name": "معاذ سعيد حوى",
+          "channel": "https://www.youtube.com/channel/UCY4XdkNxYeXbq6dqHbe0Lxg"
+        },
+        {
+          "name": "أحمد السيد",
+          "channel": "https://www.youtube.com/@alsayyed_ah"
+        },
+        {
+          "name": "أدهم العاسمي",
+          "channel": "https://www.youtube.com/channel/UCVD3hjykftErHKRXrQ8rozA"
+        },
+        {
+          "name": "علي جمعة",
+          "channel": "https://www.youtube.com/channel/UC_Ki0lMY7HUOSKVTAEd3WLA"
+        },
+        {
+          "name": "الددو",
+          "channel": "https://www.youtube.com/@dedewiat"
+        },
+        {
+          "name": "عون القدومي",
+          "channel": "https://www.youtube.com/@aounalkaddoumi"
+        },
+        {
+          "name": "علي محمود العمري",
+          "channel": "https://www.youtube.com/channel/UCBZ9mBjX_L5szWixhVrFMdg"
+        },
+        {
+          "name": "أبو بكر المشهور",
+          "channel": "https://www.youtube.com/@alhabibabobakr"
+        },
+        {
+          "name": "أسامة الأزهري",
+          "channel": "https://www.youtube.com/channel/UCefCJYVgTZjUo6feYGmtqyA"
+        },
+        {
+          "name": "عبد القادر الحسين",
+          "channel": "https://www.youtube.com/@dr.abdulkaderalhousien"
+        },
+        {
+          "name": "حمزة بلقاسم",
+          "channel": "https://www.youtube.com/channel/UCbBPPsU0zQSZb_ZnePeuSgg"
+        },
+        {
+          "name": "بن سايب",
+          "channel": "https://www.youtube.com/channel/UCe0wzduVIzfg-hEqGvWoKAg"
+        },
+        {
+          "name": "فتحي صافي",
+          "channel": "https://www.youtube.com/@Fathisafi594"
+        },
+        {
+          "name": "ذاكر الهاشمي",
+          "channel": "https://www.youtube.com/channel/UC2hgUdruvEzm4-sxTWrP2zg"
+        },
+        {
+          "name": "سيف العصري",
+          "channel": "https://www.youtube.com/channel/UCiOc7H2MVWR13jIbhUb0PQw"
+        },
+        {
+          "name": "الفحام",
+          "channel": "https://www.youtube.com/channel/UCI-V9-RviatMgZBRv3z3eCQ"
+        },
+        {
+          "name": "الشنقيطي",
+          "channel": "https://www.youtube.com/channel/UCUNFQ0Z8HAyEThg27lt6ccA"
+        }
+      ]
+    },
+    {
+      "id": "lmurf8mqrlrtq",
+      "name": "تفسير",
+      "members": [
+        {
+          "name": "سعيد رمضان البوطي",
+          "channel": "https://www.youtube.com/@naseemalsham1"
+        },
+        {
+          "name": "الحبيب عمر بن حفيظ",
+          "channel": "https://www.youtube.com/@HabibOmarCom"
+        },
+        {
+          "name": "الشعراوي",
+          "channel": "https://www.youtube.com/@alsharawiofficial"
+        },
+        {
+          "name": "أحمد السيد",
+          "channel": "https://www.youtube.com/@alsayyed_ah"
+        },
+        {
+          "name": "أدهم العاسمي",
+          "channel": "https://www.youtube.com/channel/UCVD3hjykftErHKRXrQ8rozA"
+        },
+        {
+          "name": "علي جمعة",
+          "channel": "https://www.youtube.com/channel/UC_Ki0lMY7HUOSKVTAEd3WLA"
+        },
+        {
+          "name": "فاضل السامرائي",
+          "channel": "https://www.youtube.com/@LamasatBayania"
+        },
+        {
+          "name": "الددو",
+          "channel": "https://www.youtube.com/@dedewiat"
+        },
+        {
+          "name": "أسامة الأزهري",
+          "channel": "https://www.youtube.com/channel/UCefCJYVgTZjUo6feYGmtqyA"
+        },
+        {
+          "name": "حمزة بلقاسم",
+          "channel": "https://www.youtube.com/channel/UCbBPPsU0zQSZb_ZnePeuSgg"
+        },
+        {
+          "name": "أحمد عبد المنعم",
+          "channel": "https://www.youtube.com/channel/UCCy0qwIz722Gi2MtjYlrQeg"
+        },
+        {
+          "name": "فاضل سليمان",
+          "channel": "https://www.youtube.com/@FadelSoliman212"
+        },
+        {
+          "name": "المغامسي",
+          "channel": "https://www.youtube.com/@Alrasekhoon"
+        },
+        {
+          "name": "الشنقيطي",
+          "channel": "https://www.youtube.com/channel/UCUNFQ0Z8HAyEThg27lt6ccA"
+        }
+      ]
+    },
+    {
+      "id": "lmurf8q26e6tx",
+      "name": "حديث",
+      "members": [
+        {
+          "name": "أحمد السيد",
+          "channel": "https://www.youtube.com/@alsayyed_ah"
+        },
+        {
+          "name": "أدهم العاسمي",
+          "channel": "https://www.youtube.com/channel/UCVD3hjykftErHKRXrQ8rozA"
+        },
+        {
+          "name": "علي جمعة",
+          "channel": "https://www.youtube.com/channel/UC_Ki0lMY7HUOSKVTAEd3WLA"
+        },
+        {
+          "name": "سعيد الكملي",
+          "channel": "https://www.youtube.com/@elkamali"
+        },
+        {
+          "name": "الددو",
+          "channel": "https://www.youtube.com/@dedewiat"
+        },
+        {
+          "name": "أسامة الأزهري",
+          "channel": "https://www.youtube.com/channel/UCefCJYVgTZjUo6feYGmtqyA"
+        }
+      ]
+    },
+    {
+      "id": "lmurfang0uxt0",
+      "name": "فكر",
+      "members": [
+        {
+          "name": "أيمن عبد الرحيم",
+          "channel": "https://www.youtube.com/@AymanComplete"
+        },
+        {
+          "name": "الددو",
+          "channel": "https://www.youtube.com/@dedewiat"
+        },
+        {
+          "name": "أسامة الأزهري",
+          "channel": "https://www.youtube.com/channel/UCefCJYVgTZjUo6feYGmtqyA"
+        },
+        {
+          "name": "محمد عبد الواحد الأزهري الحنبلي",
+          "channel": "https://www.youtube.com/channel/UC6C8t36dH9mDT_wGZKhhTrA"
+        },
+        {
+          "name": "فتحي صافي",
+          "channel": "https://www.youtube.com/@Fathisafi594"
+        },
+        {
+          "name": "سمير مصطفى",
+          "channel": "https://www.youtube.com/@samirmoustafa"
+        }
+      ]
+    },
+    {
+      "id": "lmurfbcdrb9oy",
+      "name": "عقيدة",
+      "members": [
+        {
+          "name": "سعيد رمضان البوطي",
+          "channel": "https://www.youtube.com/@naseemalsham1"
+        },
+        {
+          "name": "محمد البردوني الحسيمي",
+          "channel": "https://www.youtube.com/channel/UCZTyYgGeVgGASTQ3cLKVRxw"
+        },
+        {
+          "name": "علي محمود العمري",
+          "channel": "https://www.youtube.com/channel/UCBZ9mBjX_L5szWixhVrFMdg"
+        },
+        {
+          "name": "محمد عبد الواحد الأزهري الحنبلي",
+          "channel": "https://www.youtube.com/channel/UC6C8t36dH9mDT_wGZKhhTrA"
+        },
+        {
+          "name": "عبد القادر الحسين",
+          "channel": "https://www.youtube.com/@dr.abdulkaderalhousien"
+        },
+        {
+          "name": "سيف العصري",
+          "channel": "https://www.youtube.com/channel/UCiOc7H2MVWR13jIbhUb0PQw"
+        }
+      ]
     }
   ]
 }
