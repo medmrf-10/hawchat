@@ -266,7 +266,10 @@ function bindAll(){
   _all=((tr&&tr.sheikhs&&tr.sheikhs[_slug])||[]);
   // attach published-series slug for linking + align truth من track/align.json
   const alM=(alx&&alx.align)||{};
-  if(sidx&&sidx.series)_all.forEach(t=>{const s=sidx.series.find(x=>x.sheikh_slug===_slug&&(t.pub&&t.t.includes(x.title.slice(0,12))));if(s)t.pslug=s.slug});
+  if(sidx&&sidx.series)_all.forEach(t=>{
+    const nt=t.t.replace(/[ً-ْٰ]/g,'').replace(/[أإآ]/g,'ا').replace(/ة/g,'ه').replace(/\s+/g,'');
+    const s=sidx.series.find(x=>x.sheikh_slug===_slug&&(()=>{const nx=x.title.replace(/[ً-ْٰ]/g,'').replace(/[أإآ]/g,'ا').replace(/ة/g,'ه').replace(/\s+/g,'');return nt.includes(nx.slice(0,10))||nx.includes(nt.slice(0,10))})());
+    if(s){t.pslug=s.slug;t.pub=1}});
   _all.forEach(t=>{const a=t.pslug?alM[t.pslug]:null;t._aln=(t.al==='done')||!!(a&&a.a>=a.t&&a.t>0)});
   _wg=wgrp(_slug);
   _rows=_all.filter(t=>gf(t,_g));
