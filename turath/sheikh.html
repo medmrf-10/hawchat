@@ -117,11 +117,16 @@
 .cat-t{position:relative;overflow:hidden;border:1px solid var(--border);border-radius:var(--r-md);background:linear-gradient(145deg,var(--card),var(--card2));padding:16px 14px;text-decoration:none;color:var(--txt);transition:border-color .15s,transform .15s;display:flex;flex-direction:column;gap:6px;min-height:104px}
 .cat-t:hover{transform:translateY(-2px)}
 .cat-t::before{content:"";position:absolute;top:0;right:0;left:0;height:3px}
+.cat-t.aln::before{background:linear-gradient(90deg,transparent,#8fb8ff)}.cat-t.aln:hover{border-color:rgba(143,184,255,.5)}
 .cat-t.done::before{background:linear-gradient(90deg,transparent,#7bd88f)}.cat-t.done:hover{border-color:rgba(123,216,143,.5)}
 .cat-t.doing::before{background:linear-gradient(90deg,transparent,#e8c96a)}.cat-t.doing:hover{border-color:rgba(232,201,106,.5)}
+.cat-t.soon::before{background:linear-gradient(90deg,transparent,#6ad8e8)}.cat-t.soon:hover{border-color:rgba(106,216,232,.5)}
+.cat-t.books::before{background:linear-gradient(90deg,transparent,#b78fff)}.cat-t.books:hover{border-color:rgba(183,143,255,.5)}
+.cat-t.nowant::before{background:linear-gradient(90deg,transparent,#e88f8f)}.cat-t.nowant:hover{border-color:rgba(232,143,143,.5)}
 .cat-t.none::before{background:linear-gradient(90deg,transparent,var(--dim))}.cat-t.none:hover{border-color:var(--dim)}
 .cat-t .cv{font-family:var(--font-ar);font-weight:700;font-size:1.8rem;line-height:1.1}
-.cat-t.done .cv{color:#7bd88f}.cat-t.doing .cv{color:#e8c96a}.cat-t.none .cv{color:var(--txt)}
+.cat-t.aln .cv{color:#8fb8ff}.cat-t.done .cv{color:#7bd88f}.cat-t.doing .cv{color:#e8c96a}
+.cat-t.soon .cv{color:#6ad8e8}.cat-t.books .cv{color:#b78fff}.cat-t.nowant .cv{color:#e88f8f}.cat-t.none .cv{color:var(--txt)}
 .cat-t .cl{font-size:.72rem;font-weight:600;color:var(--dim)}
 .cat-t .cd{font-size:.6rem;color:var(--dim);opacity:.8}
 .cat-t .go{position:absolute;top:14px;left:14px;color:var(--dim);font-size:.9rem;transition:.15s}
@@ -196,13 +201,13 @@ function bindWants(slug){
 }
 (async()=>{
   const slug=new URLSearchParams(location.search).get('s')||'';
-  const [data,photos,chs,sidx,tr,wf]=await Promise.all([j('../playlists/data/sheikhs.json'),j('../playlists/photos.json'),j('../playlists/channels.json'),j('../playlists/series/index.json'),j('../track/data.json'),j('../track/wants.json')]);
+  const [data,photos,chs,sidx,tr,wf,alx]=await Promise.all([j('../playlists/data/sheikhs.json'),j('../playlists/photos.json'),j('../playlists/channels.json'),j('../playlists/series/index.json'),j('../track/data.json'),j('../track/wants.json'),j('../track/align.json')]);
   if(!wloadLS()&&wf&&wf.groups)wants=wf;else if(wf&&wf.groups&&(!wants.updated_at||(wf.updated_at&&wf.updated_at>wants.updated_at)))wants=wf;
   const sh=data&&data.sheikhs?data.sheikhs.find(x=>x.slug===slug):null;
   const B=document.getElementById('body');
   if(!sh){B.innerHTML='<div class="empty">لم يُعثر على الشيخ المطلوب. <a href="." style="color:var(--acc2)">عودة للقائمة</a></div>';return}
-  document.title=sh.name_display+' — السلاسل المختارة';
-  document.getElementById('hdr-sub').textContent='السلاسل المختارة — '+sh.name_display;
+  document.title=sh.name_display+' — السلاسل والكتب';
+  document.getElementById('hdr-sub').textContent='السلاسل والكتب — '+sh.name_display;
   // youtube channels from channels.json (flat across groups)
   const nset=new Set([sh.name_display,sh.name,...(sh.aliases||[])].flatMap(x=>[x,norm(x)]));
   const yts=[];if(chs&&chs.channels)for(const g of chs.channels)for(const c of (g.items||[]))if(nset.has(c.name)||nset.has(norm(c.name)))yts.push(c);
@@ -230,36 +235,36 @@ function bindWants(slug){
     h+='<a class="lnk" href="'+esc(c.url)+'" target="_blank" rel="noopener"><span class="yts">'+YT+'</span><span class="t">'+esc(c.label||domain(c.url))+'</span></a>'}
   if(!anyCh)h+='<div class="empty">يُضاف لاحقاً</div>';
   h+='</div>';
-  // series — من سجل السلاسل + تعريفات sheikhs.json
-  const sers=[...(sidx?sidx.series.filter(x=>x.sheikh_slug===sh.slug):[]),...(sh.series||[])];
-  h+='<div class="sec cin"><h2>السلاسل المختارة</h2>';
-  if(sers.length){for(const s of sers){
-    const href=s.slug?'series.html?s='+encodeURIComponent(s.slug):(s.url||'#');
-    h+='<a class="lnk" href="'+esc(href)+'" '+(s.url?'target="_blank" rel="noopener"':'')+'><span class="ic">≡</span><span class="t">'+esc(s.title)+'<span class="d">'+(s.count? s.count+' درساً':'')+(s.status?' — '+esc(s.status):'')+'</span></span><span class="arw">‹</span></a>'}}
-  else h+='<div class="empty">تُنتقى وتُضاف لاحقاً</div>';
-  h+='</div>';
-  // حالة التفريغات — صفوف مدمجة: سحب للترتيب + تعليم + حفظ wants.json
-  h+='<div class="sec cin"><h2>حالة التفريغات</h2>';
+  // السلاسل والكتب — الدخول من النوع مباشرة: محاذاته/تفريغه/يجري/قريباً/كتب/غيرمطلوب
+  h+='<div class="sec cin"><h2>السلاسل والكتب</h2>';
   const tlist=(tr&&tr.sheikhs&&tr.sheikhs[slug])||[];
-  if(tlist.length){
-    const GRP=[['done','تم تفريغه',x=>x.st==='complete'],['doing','يجري تفريغه',x=>x.st==='partial'],['none','لم يُفرَّغ',x=>x.st!=='complete'&&x.st!=='partial']];
+  const bks=sh.books||[];
+  const alM=(alx&&alx.align)||{};
+  const pS={};if(sidx&&sidx.series)for(const x of sidx.series)if(x.sheikh_slug===slug&&x.title)pS[x.title.slice(0,12)]=x.slug;
+  const isAln=t=>{if(t.al==='done')return true;const k=Object.keys(pS).find(k=>t.t.includes(k));const a=k?alM[pS[k]]:null;return !!(a&&a.a>=a.t&&a.t>0)};
+  const tgOf=t=>((wgrp(slug).tags)||{})[ridOf(t)]||'';
+  const untr=x=>x.st!=='complete'&&x.st!=='partial';
+  if(tlist.length||bks.length){
+    const GRP=[
+      ['aln','تمت محاذاته',x=>isAln(x)],
+      ['done','تم تفريغه',x=>x.st==='complete'&&!isAln(x)],
+      ['doing','يجري تفريغه',x=>x.st==='partial'],
+      ['soon','قادم قريباً',x=>untr(x)&&['want','strong'].includes(tgOf(x))],
+      ['books','الكتب',()=>false],
+      ['nowant','غير مطلوب',x=>untr(x)&&!['want','strong'].includes(tgOf(x))]];
     const dl=tlist.filter(x=>x.st==='complete').reduce((a,x)=>a+(x.n||0),0);
     const dt=tlist.reduce((a,x)=>a+(x.n||0),0);
     h+='<div class="cats">';
     for(const [gk,gl,gf] of GRP){
-      const rows=tlist.filter(gf),cnt=rows.length;
+      const rows=tlist.filter(gf);
+      const cnt=gk==='books'?bks.length:rows.length;
+      const sub=gk==='books'?(bks.length+' كتاب'):(rows.reduce((a,x)=>a+(x.n||0),0)+' درس');
       h+='<a class="cat-t '+gk+'" href="list.html?s='+encodeURIComponent(slug)+'&g='+gk+'">'
         +'<span class="go">‹</span><span class="cv">'+cnt+'</span><span class="cl">'+gl+'</span>'
-        +'<span class="cd">'+rows.reduce((a,x)=>a+(x.n||0),0)+' درس</span></a>'}
-    h+='</div><div class="wbar" style="margin-top:9px"><span class="n">'+tlist.length+' سلسلة · '+dt+' درس مفرّغ بالمجموع ('+dl+' من المكتملة)</span></div>';
+        +'<span class="cd">'+sub+'</span></a>'}
+    h+='</div><div class="wbar" style="margin-top:9px"><span class="n">'+tlist.length+' سلسلة · '+bks.length+' كتاب · '+dt+' درس مفرّغ بالمجموع ('+dl+' من المكتملة)</span></div>';
     h+='<div id="wtoast"></div>'
   }else h+='<div class="empty">لا بيانات تفريغ لهذا الشيخ بعد</div>';
-  h+='</div>';
-  // books
-  h+='<div class="sec cin"><h2>الكتب</h2>';
-  if(sh.books&&sh.books.length){for(const b of sh.books){
-    h+='<a class="lnk" href="'+esc(b.url||'#')+'" '+(b.url?'target="_blank" rel="noopener"':'')+'><span class="ic">✎</span><span class="t">'+esc(b.title)+'</span><span class="arw">↗</span></a>'}}
-  else h+='<div class="empty">تُضاف لاحقاً</div>';
   h+='</div>';
   // notes
   h+='<div class="sec cin"><h2>ملاحظات</h2>'

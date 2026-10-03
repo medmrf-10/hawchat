@@ -24,6 +24,10 @@
 .ghead .cat i{width:8px;height:8px;border-radius:50%}
 .ghead .cat.done{color:#7bd88f;border-color:rgba(123,216,143,.35)}.ghead .cat.done i{background:#7bd88f;box-shadow:0 0 8px rgba(123,216,143,.6)}
 .ghead .cat.doing{color:#e8c96a;border-color:rgba(232,201,106,.35)}.ghead .cat.doing i{background:#e8c96a;box-shadow:0 0 8px rgba(232,201,106,.6)}
+.ghead .cat.aln{color:#8fb8ff;border-color:rgba(143,184,255,.35)}.ghead .cat.aln i{background:#8fb8ff;box-shadow:0 0 8px rgba(143,184,255,.6)}
+.ghead .cat.soon{color:#6ad8e8;border-color:rgba(106,216,232,.35)}.ghead .cat.soon i{background:#6ad8e8;box-shadow:0 0 8px rgba(106,216,232,.6)}
+.ghead .cat.books{color:#b78fff;border-color:rgba(183,143,255,.35)}.ghead .cat.books i{background:#b78fff;box-shadow:0 0 8px rgba(183,143,255,.6)}
+.ghead .cat.nowant{color:#e88f8f;border-color:rgba(232,143,143,.35)}.ghead .cat.nowant i{background:#e88f8f;box-shadow:0 0 8px rgba(232,143,143,.6)}
 .ghead .cat.none{color:var(--dim)}.ghead .cat.none i{background:var(--dim)}
 .ghead .cnt{font-family:var(--font-ar);font-weight:700;font-size:2rem;color:var(--acc2);margin-inline-start:auto;line-height:1}
 .ghead .cnt small{display:block;font-family:var(--font-ui);font-weight:400;font-size:.62rem;color:var(--dim);text-align:center;margin-top:4px}
@@ -117,9 +121,18 @@ function wtoast(m,e){const t=document.getElementById('wtoast');t.textContent=m;t
 async function wgh(m,u,body){const t=localStorage.getItem(WLT);if(!t)throw new Error('no-token');
   const r=await fetch('https://api.github.com'+u,{method:m,headers:{Authorization:'Bearer '+t,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'},body:body?JSON.stringify(body):null});
   if(r.status===404)return null;if(!r.ok){const e=await r.text();throw new Error(r.status+' '+e.slice(0,120))}return r.json()}
-const GLBL={done:'تم تفريغه',doing:'يجري تفريغه',none:'لم يُفرَّغ'};
-const GORD=['done','doing','none'];
-function gf(t,g){return g==='done'?t.st==='complete':g==='doing'?t.st==='partial':(t.st!=='complete'&&t.st!=='partial')}
+const GLBL={aln:'تمت محاذاته',done:'تم تفريغه',doing:'يجري تفريغه',soon:'قادم قريباً',books:'الكتب',nowant:'غير مطلوب'};
+const GORD=['aln','done','doing','soon','books','nowant'];
+const tgOf=t=>((_wg&&_wg.tags)||{})[ridOf(t)]||'';
+const untr=t=>t.st!=='complete'&&t.st!=='partial';
+function gf(t,g){
+  if(g==='aln')return t._aln===true;
+  if(g==='done')return t.st==='complete'&&t._aln!==true;
+  if(g==='doing')return t.st==='partial';
+  if(g==='soon')return untr(t)&&['want','strong'].includes(tgOf(t));
+  if(g==='nowant')return untr(t)&&!['want','strong'].includes(tgOf(t));
+  return false;
+}
 let _slug='',_g='done',_rows=[],_all=[],_wg=null,_meta={},_im=null;
 function updSave(){const b=document.getElementById('wsav2');if(b){b.disabled=!dirty}}
 async function saveAll(btn){
@@ -159,12 +172,26 @@ function render(){
   let h='<div class="ghead cin"><div class="row">'
     +(_im?'<img src="'+esc(_im)+'" alt="">':'<div class="ph">'+esc((nm||'؟').replace(/^ال/,'').trim()[0]||'؟')+'</div>')
     +'<div><div class="nm">'+esc(nm)+'</div><span class="cat '+_g+'"><i></i>'+GLBL[_g]+'</span></div>'
-    +'<div class="cnt">'+_rows.length+'<small>سلسلة</small></div></div></div>';
+    +'<div class="cnt">'+(_g==='books'?(_meta.books||[]).length:_rows.length)+'<small>'+(_g==='books'?'كتاب':'سلسلة')+'</small></div></div></div>';
   h+='<div class="gnav cin">'+GORD.map(g=>{
-      const c=_all.filter(t=>gf(t,g)).length;
+      const c=g==='books'?(_meta.books||[]).length:_all.filter(t=>gf(t,g)).length;
       return '<a href="list.html?s='+encodeURIComponent(_slug)+'&g='+g+'" class="'+(g===_g?'on':'')+'"><b>'+c+'</b>'+GLBL[g]+'</a>'}).join('')+'</div>';
   h+='<div class="tbar cin"><span class="hint">اسحب البطاقة أو استعمل السهمين للترتيب · انقر العلامة لتعليمها (مرغوبة ← بشدة ← لا)</span>'
     +'<button class="sbtn" id="wsav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>حفظ</button></div>';
+  if(_g==='books'){
+    const bks=_meta.books||[];
+    if(!bks.length){B.innerHTML=h+'<div class="empty">لا كتب لهذا الشيخ بعد.</div>';return}
+    h+='<div id="wrows">';
+    bks.forEach((b,i)=>{
+      h+='<div class="trow cin" style="animation-delay:'+Math.min(i,25)*28+'ms">'
+        +'<span class="idx">'+(i+1)+'</span>'
+        +'<span class="main"><span class="t">'+(b.url?'<a href="'+esc(b.url)+'" target="_blank" rel="noopener">'+esc(b.title)+'</a>':esc(b.title))+'</span>'
+        +'<span class="meta"><span class="m">'+esc(b.fmt||'كتاب')+'</span></span></span>'
+        +(b.url?'<a class="yl" href="'+esc(b.url)+'" target="_blank" rel="noopener" title="فتح">↗</a>':'')
+        +'</div>'});
+    h+='</div>';
+    B.innerHTML=h;return;
+  }
   if(!_rows.length){B.innerHTML=h+'<div class="empty">لا سلاسل في هذه الفئة.</div>';bindSave();return}
   h+='<div id="wrows">';
   _rows.forEach((t,i)=>{
@@ -227,7 +254,7 @@ function bindAll(){
 (async()=>{
   const P=new URLSearchParams(location.search);
   _slug=P.get('s')||'';_g=GORD.includes(P.get('g'))?P.get('g'):'done';
-  const [tr,meta,ph,sidx,wf]=await Promise.all([j('../track/data.json'),j('../playlists/data/sheikhs.json'),j('../playlists/photos.json'),j('../playlists/series/index.json'),j('../track/wants.json')]);
+  const [tr,meta,ph,sidx,wf,alx]=await Promise.all([j('../track/data.json'),j('../playlists/data/sheikhs.json'),j('../playlists/photos.json'),j('../playlists/series/index.json'),j('../track/wants.json'),j('../track/align.json')]);
   if(!wloadLS()&&wf&&wf.groups)wants=wf;else if(wf&&wf.groups&&(!wants.updated_at||(wf.updated_at&&wf.updated_at>wants.updated_at)))wants=wf;
   _meta={};for(const x of (meta?meta.sheikhs:[]))if(x.slug===_slug){_meta=x;break}
   const nm=_meta.name_display||_meta.name||_slug;
@@ -237,10 +264,12 @@ function bindAll(){
   _im=(ph&&(ph[nm]||ph[_meta.name]))||_meta.photo||null;
   if(_im&&_im[0]!=='h'&&_im[0]!=='.')_im='../playlists/'+_im.replace(/^playlists\//,'');
   _all=((tr&&tr.sheikhs&&tr.sheikhs[_slug])||[]);
-  // attach published-series slug for linking
+  // attach published-series slug for linking + align truth من track/align.json
+  const alM=(alx&&alx.align)||{};
   if(sidx&&sidx.series)_all.forEach(t=>{const s=sidx.series.find(x=>x.sheikh_slug===_slug&&(t.pub&&t.t.includes(x.title.slice(0,12))));if(s)t.pslug=s.slug});
-  _rows=_all.filter(t=>gf(t,_g));
+  _all.forEach(t=>{const a=t.pslug?alM[t.pslug]:null;t._aln=(t.al==='done')||!!(a&&a.a>=a.t&&a.t>0)});
   _wg=wgrp(_slug);
+  _rows=_all.filter(t=>gf(t,_g));
   const ord=_wg.order||[];
   _rows.sort((a,b)=>{const ia=ord.indexOf(ridOf(a)),ib=ord.indexOf(ridOf(b));return (ia<0?1e9:ia)-(ib<0?1e9:ib)});
   render();
