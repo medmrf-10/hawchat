@@ -41,6 +41,34 @@
    "title": "الحب في القرآن",
    "count": 26,
    "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "bouti-yaqiniyyat",
+   "sheikh_slug": "said-bouti",
+   "title": "كبرى اليقينيات الكونية",
+   "count": 54,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "bouti-ulum-quran",
+   "sheikh_slug": "said-bouti",
+   "title": "علوم القرآن الكريم",
+   "count": 63,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "bouti-sira",
+   "sheikh_slug": "said-bouti",
+   "title": "فقه السيرة النبوية",
+   "count": 70,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "bouti-khutab-2012",
+   "sheikh_slug": "said-bouti",
+   "title": "خطب الجمعة 2012",
+   "count": 52,
+   "status": "مفرّغة — المحاذاة جارية"
   }
  ]
 }
