@@ -41,11 +41,6 @@
 .sbtn:hover{filter:brightness(1.12)}.sbtn:active{transform:scale(.97)}
 .sbtn:disabled{opacity:.55;cursor:default}
 .sbtn svg{width:16px;height:16px}
-.tok{display:flex;gap:8px;align-items:center;margin:0 0 12px;padding:10px 12px;border-radius:var(--r-md);border:1px dashed var(--acc);background:rgba(201,162,75,.06)}
-.tok input{flex:1;min-width:0;height:40px;background:var(--bg);border:1px solid var(--border);border-radius:var(--r-sm);color:var(--txt);padding:0 12px;font-family:var(--font-ui);font-size:.8rem;direction:ltr}
-.tok input:focus{outline:none;border-color:var(--acc)}
-.tok button{height:40px;padding:0 14px;border-radius:var(--r-sm);border:1px solid var(--acc);background:var(--card2);color:var(--acc2);font-family:inherit;font-size:.75rem;font-weight:700;cursor:pointer;white-space:nowrap}
-.tok .lbl{font-size:.68rem;color:var(--acc2);white-space:nowrap}
 /* ── rows ── */
 #wrows{display:flex;flex-direction:column;gap:8px}
 .trow{display:flex;align-items:center;gap:10px;padding:12px;border-radius:var(--r-md);border:1px solid var(--border);background:linear-gradient(145deg,var(--card),var(--card2));transition:border-color .15s}
@@ -111,6 +106,7 @@ async function j(u){try{const r=await fetch(u);return r.ok?await r.json():null}c
 function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 const WREPO={o:'medmrf-10',r:'hawchat',br:'main',path:'track/wants.json'};
 const WLS='hw_track_wants_v1',WLT='hw_ghtok';
+const WTOPIC='hawchat-wants-9f3kq7x';
 let wants={version:1,updated_at:null,groups:{}},dirty=false;
 function ridOf(t){return t.yt?t.yt.split('list=')[1]:'t:'+t.t}
 function wgrp(sl){return wants.groups[sl]||(wants.groups[sl]={order:[],tags:{}})}
@@ -129,16 +125,33 @@ function updSave(){const b=document.getElementById('wsav2');if(b){b.disabled=!di
 async function saveAll(btn){
   wtoast('يحفظ…');wsaveLS();
   const t=localStorage.getItem(WLT);
-  if(!t){document.getElementById('tokbox').style.display='flex';wtoast('أدخل رمز الحفظ مرة واحدة',1);return}
   if(btn)btn.disabled=true;
+  if(t){
+    try{
+      const cur=await wgh('GET','/repos/'+WREPO.o+'/'+WREPO.r+'/contents/'+WREPO.path+'?ref='+WREPO.br);
+      const b64=btoa(unescape(encodeURIComponent(JSON.stringify(wants,null,1))));
+      const body={message:'track: حفظ ترتيب وتعليم السلاسل',content:b64,branch:WREPO.br};
+      if(cur&&cur.sha)body.sha=cur.sha;
+      await wgh('PUT','/repos/'+WREPO.o+'/'+WREPO.r+'/contents/'+WREPO.path,body);
+      dirty=false;updSave();wtoast('حُفظ في الموقع ✓');
+      if(btn)btn.disabled=false;return;
+    }catch(e){/* fall through to bridge */}
+  }
+  // no token / api failed → bridge: POST to the topic my box listens to
   try{
-    const cur=await wgh('GET','/repos/'+WREPO.o+'/'+WREPO.r+'/contents/'+WREPO.path+'?ref='+WREPO.br);
-    const b64=btoa(unescape(encodeURIComponent(JSON.stringify(wants,null,1))));
-    const body={message:'track: حفظ ترتيب وتعليم السلاسل',content:b64,branch:WREPO.br};
-    if(cur&&cur.sha)body.sha=cur.sha;
-    await wgh('PUT','/repos/'+WREPO.o+'/'+WREPO.r+'/contents/'+WREPO.path,body);
-    dirty=false;updSave();wtoast('حُفظ في الموقع ✓');
-  }catch(e){wtoast('فشل: '+e.message,1);if(btn)btn.disabled=false}
+    const r=await fetch('https://ntfy.sh/'+WTOPIC,{method:'POST',body:JSON.stringify(wants)});
+    if(!r.ok)throw new Error('bridge '+r.status);
+    wtoast('أُرسل — يُحفظ في الموقع تلقائياً خلال لحظات…');
+    const want=wants.updated_at;
+    setTimeout(async()=>{
+      for(let i=0;i<5;i++){
+        const f=await j('../track/wants.json?_='+Date.now());
+        if(f&&f.updated_at&&f.updated_at>=want){dirty=false;updSave();wtoast('حُفظ في الموقع ✓');if(btn)btn.disabled=false;return}
+        await new Promise(z=>setTimeout(z,9000));
+      }
+      wtoast('وصل الطلب — سيُرفع للموقع عند أول فرصة');if(btn)btn.disabled=false;
+    },9000);
+  }catch(e){wtoast('تعذّر الإرسال: '+e.message,1);if(btn)btn.disabled=false}
 }
 function render(){
   const B=document.getElementById('body');
@@ -152,7 +165,6 @@ function render(){
       return '<a href="list.html?s='+encodeURIComponent(_slug)+'&g='+g+'" class="'+(g===_g?'on':'')+'"><b>'+c+'</b>'+GLBL[g]+'</a>'}).join('')+'</div>';
   h+='<div class="tbar cin"><span class="hint">اسحب البطاقة أو استعمل السهمين للترتيب · انقر العلامة لتعليمها (مرغوبة ← بشدة ← لا)</span>'
     +'<button class="sbtn" id="wsav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>حفظ</button></div>';
-  h+='<div class="tok" id="tokbox" style="display:none"><span class="lbl">رمز الحفظ:</span><input id="tokin" placeholder="github_pat_…" dir="ltr"><button id="tokgo">تثبيت</button></div>';
   if(!_rows.length){B.innerHTML=h+'<div class="empty">لا سلاسل في هذه الفئة.</div>';bindSave();return}
   h+='<div id="wrows">';
   _rows.forEach((t,i)=>{
@@ -182,7 +194,6 @@ function render(){
 }
 function bindSave(){
   const sv=document.getElementById('wsav');if(sv)sv.onclick=e=>saveAll(e.target.closest('button'));
-  const tg=document.getElementById('tokgo');if(tg)tg.onclick=()=>{const v=document.getElementById('tokin').value.trim();if(v){localStorage.setItem(WLT,v);document.getElementById('tokbox').style.display='none';wtoast('ثُبّت الرمز — يحفظ…');saveAll()}};
 }
 function bindAll(){
   bindSave();
