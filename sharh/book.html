@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>الكتاب — شروح الحديث</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<nav class="top"><div class="wrap"><a href="index.html">شروح الحديث</a><span id="crumb"></span></div></nav>
+<main class="wrap">
+  <div class="pt-head"><div class="book" id="bmeta"></div><h1 id="btitle"></h1></div>
+  <section class="parts" id="parts"></section>
+</main>
+<script>
+const b=new URLSearchParams(location.search).get('b');
+fetch(`data/${b}/book.json`).then(r=>r.json()).then(d=>{
+  document.title=d.title+' — شروح الحديث';
+  crumb.textContent=d.title; btitle.textContent=d.title;
+  bmeta.textContent=d.author+(d.desc?' — '+d.desc:'');
+  parts.innerHTML=d.parts.map(p=>`
+    <a class="card part-row" href="part.html?b=${b}&p=${p.part}">
+      <span class="num">${p.part===0?'◦':(''+p.part).padStart(2,'0')}</span>
+      <span class="t">${p.hadith_title||p.title}</span>
+      <span class="badge ${p.kind==='muqaddima'?'m':'h'}">${p.kind==='muqaddima'?'مقدمة':'حديث'}</span>
+    </a>`).join('');
+});
+</script>
+</body>
+</html>
