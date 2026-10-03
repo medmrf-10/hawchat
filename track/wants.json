@@ -1,19 +1,25 @@
 {
  "version": 1,
- "updated_at": "2026-10-03T08:29:35.204Z",
+ "updated_at": "2026-10-03T08:44:44.118Z",
  "groups": {
   "said-bouti": {
    "order": [
-    "PL01kYZIehH-plHw71V070lY5HmNLgoc3d",
-    "PL01kYZIehH-ptiDGKwazK6NsUaHeXxqVM",
-    "PL01kYZIehH-oKjO2OWM4xLJGHabp1L3j_",
-    "PL01kYZIehH-oLJCHyMSuaOypdiwaDQ9Pc",
-    "PL01kYZIehH-ryKc6OOXT3NdH52maB6fMI",
-    "PL01kYZIehH-pmqoV-XBIpt_wS0U1N_yH_",
-    "PL01kYZIehH-ps7QqYS0t0AFt5BWcRJwEP",
-    "PL01kYZIehH-poCA2uq_mT_2YFF6Dracse",
-    "PL01kYZIehH-qxUD5MiDAZUzOTsNKYE9zN",
-    "PL01kYZIehH-qIT8x92dEXZ2anTECAI5x-"
+    "PL01kYZIehH-rV0GLLuE-lPXCmGeaHJmrI",
+    "t:في رحاب القرآن",
+    "t:الكآبة .. أسباب وعلاج",
+    "t:اللغة العربية في القرآن الكريم",
+    "t:شكر الله تعالى في القرآن الكريم",
+    "t:الآداب الاجتماعية في القرآن الكريم",
+    "t:التوبة في القرآن الكريم",
+    "t:ضائعون هداهم القرآن",
+    "t:سيدنا محمد صلى الله عليه وسلم في القرآن الكريم",
+    "t:الصحابة في القرآن الكريم",
+    "t:التزكية في القرآن الكريم",
+    "t:العبادة والعبودية في القرآن الكريم",
+    "PL01kYZIehH-rlXyk7SjyQL1GG2AuwSIqy",
+    "PL01kYZIehH-qEAbKAJ9Lvmqj6HxDzO4ik",
+    "PL01kYZIehH-qIT8x92dEXZ2anTECAI5x-",
+    "PL01kYZIehH-poCA2uq_mT_2YFF6Dracse"
    ],
    "tags": {}
   }
