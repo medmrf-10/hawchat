@@ -1,14 +1,5 @@
 {
  "version": 1,
- "updated_at": "2099-01-01T00:00:00Z",
- "groups": {
-  "said-bouti": {
-   "order": [
-    "PL5uRCV-rNG1lITftmLPyMnPGejmffHVOL"
-   ],
-   "tags": {
-    "PL5uRCV-rNG1lITftmLPyMnPGejmffHVOL": "strong"
-   }
-  }
- }
+ "updated_at": "2026-10-03T03:48:26Z",
+ "groups": {}
 }
