@@ -1,5 +1,5 @@
 {
- "t": 1791135121,
+ "t": 1791135168,
  "series": [
   {
    "key": "628_السيرة النبوية للمصلحين",
@@ -186,12 +186,12 @@
    "sheikh": "أحمد السيد",
    "total": 7,
    "done": 6,
-   "pending": 1,
+   "pending": 0,
    "active": 0,
-   "bad": 0,
+   "bad": 1,
    "held": false,
    "paused": false,
-   "remaining": 1
+   "remaining": 0
   },
   {
    "key": "687_مقاصد السور",
@@ -210,7 +210,7 @@
    "sheikh": "أحمد السيد",
    "total": 2,
    "done": 0,
-   "pending": 2,
+   "pending": 0,
    "active": 0,
    "bad": 0,
    "held": false,
@@ -246,7 +246,7 @@
    "sheikh": "أدهم العاسمي",
    "total": 1,
    "done": 0,
-   "pending": 1,
+   "pending": 0,
    "active": 0,
    "bad": 0,
    "held": false,
@@ -258,7 +258,7 @@
    "sheikh": "أدهم العاسمي",
    "total": 1,
    "done": 0,
-   "pending": 1,
+   "pending": 0,
    "active": 0,
    "bad": 0,
    "held": false,
@@ -270,7 +270,7 @@
    "sheikh": "أدهم العاسمي",
    "total": 29,
    "done": 1,
-   "pending": 28,
+   "pending": 18,
    "active": 0,
    "bad": 0,
    "held": false,
@@ -1420,7 +1420,7 @@
   {
    "key": "408_الجديد في إعجاز القرآن الكريم",
    "sheikh": "محمد سعيد رمضان البوطي",
-   "total": 7,
+   "total": 10,
    "done": 30,
    "pending": 0,
    "active": 0,
@@ -1482,7 +1482,7 @@
    "sheikh": "معاذ سعيد حوى",
    "total": 1,
    "done": 0,
-   "pending": 1,
+   "pending": 0,
    "active": 0,
    "bad": 0,
    "held": false,
