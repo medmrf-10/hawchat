@@ -1,5 +1,5 @@
 {
- "t": 1791136697,
+ "t": 1791136760,
  "series": [
   {
    "key": "619_دورة في علم الحديث على منهج المتقدمين",
@@ -2580,8 +2580,8 @@
    "sheikh": "أدهم العاسمي",
    "total": 1,
    "done": 0,
-   "pending": 1,
-   "active": 1,
+   "pending": 2,
+   "active": 0,
    "bad": 0,
    "held": false,
    "paused": false,
@@ -4990,7 +4990,7 @@
   {
    "key": "92_آمنت بالله - الموسم 1",
    "sheikh": "الحبيب علي الجفري",
-   "total": 12,
+   "total": 15,
    "done": 35,
    "pending": 0,
    "active": 0,
@@ -5003,7 +5003,7 @@
    "feed": "downloading",
    "remaining": 0,
    "fqpos": "a1",
-   "dl": 12
+   "dl": 15
   },
   {
    "key": "93_مجالس البخاري",
