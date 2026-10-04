@@ -105,9 +105,13 @@ function tot(x){return Math.max(x.total,x.done+x.pending+x.bad)}
 function cat(x){
   if(skip.has(x.key)||x.held)return 'held';
   if(x.paused||paused.has(x.key))return 'paused';
-  if(x.pending||x.active||x.remaining)return 'queue';
-  if(x.bad&&!x.done)return 'bad';
-  return 'done';
+  if(x.active)return 'queue';
+  if(x.pending||x.remaining)return 'queue';
+  if(x.feed==='downloading'||x.feed==='queued')return 'feed';
+  if(x.exp&&x.done>=x.exp&&x.exp>0)return 'done';
+  if(x.bad||x.feed==='feederr')return 'bad';
+  if(x.done)return 'done';
+  return 'nodl';
 }
 const ICON={
  up:'<svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 3l5 6H3z"/></svg>',
@@ -161,18 +165,18 @@ function acts(x){
   if(!b&&x.id==null)b='<span style="font-size:.62rem;color:#555">لا يمكن إدارتها — مصدر الصوت مفقود</span>';
   return b;
 }
-const FILT={all:'الكل',listen:'يُسمع',read:'يُقرأ',queue:'الطابور',paused:'متوقفة',bad:'فاشل',held:'غير مرغوب',done:'مكتملة'};
+const FILT={all:'الكل',listen:'يُسمع',read:'يُقرأ',feed:'يُنزَّل',queue:'الطابور',paused:'متوقفة',nodl:'لم تُنزَّل',bad:'فاشل',held:'غير مرغوب',done:'مكتملة'};
 function rowMatch(r){
   if(fv==='all')return true;
   if(fv==='listen')return !!r.pub;
   if(fv==='read')return !!r.mut||r.x.done>0;
-  if(fv==='bad')return r.x.bad>0;
+  if(fv==='bad')return r.x.bad>0||r.x.feed==='feederr';
   return cat(r.x)===fv;
 }
 function renderSeries(){
   const w=document.getElementById('srows');if(!w)return;
   w.innerHTML='';
-  const wq={queue:0,bad:1,paused:2,held:3,done:4};
+  const wq={queue:0,feed:1,bad:2,paused:3,nodl:4,held:5,done:6};
   const rows=_rows.filter(rowMatch).sort((a,b)=>{
     const ca=wq[cat(a.x)]??5,cb=wq[cat(b.x)]??5;
     if(ca!==cb)return ca-cb;
