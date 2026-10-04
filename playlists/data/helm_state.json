@@ -1,5 +1,5 @@
 {
- "t": 1791135497,
+ "t": 1791135560,
  "series": [
   {
    "key": "619_دورة في علم الحديث على منهج المتقدمين",
@@ -2147,7 +2147,7 @@
    "key": "738_سيرة رسول الله ﷺ | أحمد السيد",
    "sheikh": "أحمد السيد",
    "total": 2,
-   "done": 1,
+   "done": 2,
    "pending": 2,
    "active": 2,
    "bad": 0,
@@ -2157,7 +2157,7 @@
    "name": "سيرة رسول الله ﷺ | أحمد السيد",
    "exp": 25,
    "feed": "queued",
-   "remaining": 1,
+   "remaining": 0,
    "fqpos": "a100",
    "dl": 2
   },
@@ -2597,9 +2597,9 @@
    "key": "761_سلسلة القصص القرآني",
    "sheikh": "أدهم العاسمي",
    "total": 29,
-   "done": 14,
+   "done": 15,
    "pending": 36,
-   "active": 8,
+   "active": 6,
    "bad": 0,
    "held": false,
    "paused": false,
@@ -2607,7 +2607,7 @@
    "name": "سلسلة القصص القرآني",
    "exp": 124,
    "feed": "queued",
-   "remaining": 15,
+   "remaining": 14,
    "fqpos": "a51",
    "dl": 29
   },
@@ -13000,7 +13000,7 @@
   {
    "key": "408_الجديد في إعجاز القرآن الكريم",
    "sheikh": "محمد سعيد رمضان البوطي",
-   "total": 28,
+   "total": 30,
    "done": 30,
    "pending": 0,
    "active": 0,
@@ -13013,7 +13013,7 @@
    "feed": "downloading",
    "remaining": 0,
    "fqpos": "a1",
-   "dl": 28
+   "dl": 30
   },
   {
    "key": "409_Imam AlBouti_Short videoes with Russian subtitles",
