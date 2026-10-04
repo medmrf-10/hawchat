@@ -33,8 +33,21 @@
 .sh .ph{width:100%;aspect-ratio:1;height:auto;margin:0 0 7px;border-radius:50%;background:var(--skel);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;font-family:var(--font-ar);font-size:1.6rem;font-weight:700;color:var(--acc2)}
 .sh .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .sh .nm{font-family:var(--font-ar);font-size:.8rem;font-weight:700;line-height:1.4}
+.sh .pb{height:5px;border-radius:99px;background:var(--skel);margin-top:7px;overflow:hidden;display:flex}
+.sh .pb i{display:block;height:100%}
+.sh .pb .pd{background:var(--gold,#d4a017)}
+.sh .pb .pa{background:var(--ok,#3fb27f)}
+.sh .pb .pp{background:var(--acc,#4f8cff)}
+.sh .pb .ph{background:#7ba4e8}
+.sh .pb .px{background:var(--err,#e05a5a)}
+.sh .pb .pw{background:#6b7280}
+.sh .cnt{font-size:.62rem;color:var(--dim);margin-top:4px;line-height:1.3}
 .sh.cin{animation:cin .35s both}
 .sub{color:var(--dim);font-size:.8rem}
+#kpis{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 4px}
+#kpis .k{background:var(--card);border:1px solid var(--border);border-radius:var(--r-md);padding:8px 14px;text-align:center}
+#kpis .k b{display:block;font-size:1.05rem;color:var(--acc2)}
+#kpis .k span{font-size:.62rem;color:var(--dim)}
 </style>
 </head>
 <body>
@@ -46,6 +59,7 @@
 </div></header>
 <main><div class="wrap">
   <div class="hero cin"><h1>الشيوخ</h1><span class="pill" id="count"></span><a href="helm.html" class="abtn">🎛 دفة القيادة</a></div>
+  <div id="kpis" class="cin"></div>
   <div class="bar cin"><input type="text" id="flt" placeholder="ابحث عن شيخ…"></div>
   <div id="groups" class="grid"></div>
 </div></main>
@@ -53,9 +67,15 @@
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 async function j(u){try{const r=await fetch(u);return r.ok?await r.json():null}catch(e){return null}}
 function normalize(s){return (s||'').replace(/[أإآ]/g,'ا').replace(/\s+/g,' ').trim()}
-let _groups=[],_slugs={},_photos={},flt='';
+let _groups=[],_slugs={},_photos={},flt='',_stats={},_disp2helm={};
 function photo(name){return _photos[name]||_photos[normalize(name)]}
 function slugOf(name){return _slugs[name]||_slugs[normalize(name)]||normalize(name)}
+function statOf(name){const h=_disp2helm[normalize(name)]||_disp2helm[name];return h?_stats[h]:null}
+function pbHtml(st){
+  const tot=st.total||0;if(!tot)return '';
+  const seg=(v,cls)=>v?'<i class="'+cls+'" style="width:'+(v*100/tot).toFixed(1)+'%"></i>':'';
+  return '<div class="pb">'+seg(st.done,'pd')+seg(st.active,'pa')+seg(st.pending,'pp')+seg(st.held+st.paused,'ph')+seg(st.bad,'px')+seg(st.want,'pw')+'</div>';
+}
 function render(){
   const g=document.getElementById('groups');g.innerHTML='';let i=0;
   for(const gr of _groups)for(const name of gr.names){
@@ -64,16 +84,40 @@ function render(){
     a.className='sh cin';a.style.animationDelay=(Math.min(i++,30)*25)+'ms';
     a.href='sheikh.html?s='+encodeURIComponent(slugOf(name));
     const p=photo(name),init=name.replace(/^ال/,'').trim()[0]||'؟';
-    a.innerHTML='<div class="ph">'+(p?'<img src="'+p+'" alt="" loading="lazy" onerror="this.remove()">':'')+'<span>'+init+'</span></div><div class="nm">'+esc(name)+'</div>';
+    const st=statOf(name);
+    a.innerHTML='<div class="ph">'+(p?'<img src="'+p+'" alt="" loading="lazy" onerror="this.remove()">':'')+'<span>'+init+'</span></div><div class="nm">'+esc(name)+'</div>'
+      +(st?pbHtml(st)+'<div class="cnt">'+st.nseries+' سلسلة · '+st.done+'/'+st.total+'</div>':'');
     g.appendChild(a);
   }
   if(!i)g.innerHTML='<p class="sub">لا نتائج.</p>';
 }
 document.getElementById('flt').addEventListener('input',e=>{flt=normalize(e.target.value);render()});
 (async()=>{
-  const [data,photos,meta]=await Promise.all([j('shuyukh.json'),j('photos.json'),j('data/sheikhs.json')]);
+  const [data,photos,meta,hs,hor]=await Promise.all([j('shuyukh.json'),j('photos.json'),j('data/sheikhs.json'),j('data/helm_state.json?v='+Date.now()),j('data/helm_order.json?v='+Date.now())]);
   _photos=photos||{};
   for(const s of ((meta&&meta.sheikhs)||[]))for(const n of [s.name_display,s.name,...(s.aliases||[])]){_slugs[n]=s.slug;_slugs[normalize(n)]=s.slug}
+  const skip=new Set(hor&&hor.skip||[]);
+  _stats={};
+  for(const x of ((hs&&hs.series)||[])){
+    const h=x.sheikh||'أخرى',st=_stats[h]||(_stats[h]={total:0,done:0,active:0,pending:0,bad:0,held:0,paused:0,want:0,nseries:0,exp:0});
+    st.nseries++;st.exp+=x.exp||0;
+    st.total+=x.total||0;st.done+=x.done||0;st.active+=x.active||0;st.pending+=x.pending||0;st.bad+=x.bad||0;
+    const rem=Math.max(0,(x.total||0)-(x.done||0)-(x.active||0)-(x.pending||0)-(x.bad||0));
+    if(skip.has(x.key)||x.held)st.held+=rem;
+    else if(x.paused)st.paused+=rem;
+    else st.want+=rem;
+  }
+  for(const s of ((meta&&meta.sheikhs)||[])){
+    const d=s.name_display||s.name;if(!d)continue;
+    if(s.name&&_stats[s.name])_disp2helm[d]=s.name,_disp2helm[normalize(d)]=s.name;
+    for(const a of (s.aliases||[]))if(_stats[a])_disp2helm[d]=a,_disp2helm[normalize(d)]=a;
+  }
+  const F=Object.values(_stats).reduce((a,s)=>({total:a.total+s.total,done:a.done+s.done,act:a.act+s.active+s.pending,n:a.n+s.nseries,exp:a.exp+s.exp}),{total:0,done:0,act:0,n:0,exp:0});
+  if(F.n)document.getElementById('kpis').innerHTML=
+    '<div class="k"><b>'+F.n+'</b><span>سلسلة</span></div>'
+    +'<div class="k"><b>'+F.done+'</b><span>ملف مُنجز</span></div>'
+    +'<div class="k"><b>'+F.act+'</b><span>نشط/منتظر</span></div>'
+    +'<div class="k"><b>'+(F.exp||F.total)+'</b><span>حلقة متوقَّعة</span></div>';
   if(!data||!data.groups){document.getElementById('groups').innerHTML='<p class="sub">تعذر تحميل القائمة.</p>';return}
   _groups=data.groups;
   let total=0;for(const g of _groups)total+=g.names.length;
