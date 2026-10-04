@@ -1,994 +1,124 @@
 {
- "t": 1791130090,
+ "t": 1791130138,
  "series": [
   {
-   "key": "1003_الشرح الثاني للرسالة",
-   "sheikh": "",
-   "total": 107,
-   "done": 107,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "1005_مقدمات_السنوسي",
-   "sheikh": "",
-   "total": 9,
-   "done": 9,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "1006_لامية_العرب",
-   "sheikh": "",
-   "total": 10,
-   "done": 10,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "1007_إقبار الانتصار",
-   "sheikh": "",
-   "total": 0,
-   "done": 0,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "1008_الشرح الثاني للرسالة",
-   "sheikh": "",
-   "total": 0,
-   "done": 0,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "101_برنامج أيها المريد 3 - الحبيب علي ",
-   "sheikh": "",
-   "total": 32,
-   "done": 32,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "101_برنامج أيها المريد 3 - الحبيب علي �",
-   "sheikh": "",
-   "total": 0,
-   "done": 0,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "102_آمنت بالله - الموسم 3",
-   "sheikh": "",
-   "total": 32,
-   "done": 32,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "10_الأجهوري",
-   "sheikh": "",
-   "total": 19,
-   "done": 19,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "10_شرح منظومة الأجهوري",
-   "sheikh": "",
-   "total": 0,
-   "done": 0,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "113_سبيل الادكار",
-   "sheikh": "",
-   "total": 30,
-   "done": 30,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "114_الإنسانية قبل التدين - الحبيب ",
-   "sheikh": "",
-   "total": 0,
-   "done": 0,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "114_الإنسانية قبل التدين - الحبيب علي الجفري English Subtitle",
-   "sheikh": "",
-   "total": 23,
-   "done": 23,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "114_الإنسانية قبل التدين‬⁩ - الحبيب ",
-   "sheikh": "",
-   "total": 0,
-   "done": 0,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "114_الإنسانية قبل التدين‬⁩ - الحبيب علي الجفري English Subtitle",
-   "sheikh": "",
-   "total": 23,
-   "done": 23,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "117_الإنسانية قبل التدين",
-   "sheikh": "",
-   "total": 30,
-   "done": 30,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "123_برنامج أيها المريد 2 - الحبيب علي ",
-   "sheikh": "",
-   "total": 17,
-   "done": 17,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "123_برنامج أيها المريد 2 - الحبيب علي ?",
-   "sheikh": "",
-   "total": 15,
-   "done": 15,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "123_برنامج أيها المريد 2 - الحبيب علي �",
-   "sheikh": "",
-   "total": 32,
-   "done": 15,
-   "pending": 0,
-   "active": 0,
-   "bad": 17,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "125_مجالس الحكم 2",
-   "sheikh": "",
-   "total": 30,
-   "done": 28,
-   "pending": 0,
-   "active": 0,
-   "bad": 2,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "128_رسائل الحكم",
-   "sheikh": "",
-   "total": 26,
-   "done": 26,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "134_لحظة سكون",
-   "sheikh": "",
-   "total": 32,
-   "done": 30,
-   "pending": 0,
-   "active": 0,
-   "bad": 2,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "169_شرح كتاب سلم التوفيق - الدورة الص",
-   "sheikh": "",
-   "total": 15,
-   "done": 15,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "169_شرح كتاب سلم التوفيق - الدورة الص?",
-   "sheikh": "",
-   "total": 15,
-   "done": 15,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "169_شرح كتاب سلم التوفيق - الدورة الص�",
-   "sheikh": "",
-   "total": 0,
-   "done": 0,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "195_لذاتي بذاتي",
-   "sheikh": "",
-   "total": 14,
-   "done": 14,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "220_الكبريت الأحمر",
-   "sheikh": "",
-   "total": 16,
-   "done": 16,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "223_جولان الروح في سيرة رسول الله باب الفتوح",
-   "sheikh": "",
-   "total": 41,
-   "done": 40,
-   "pending": 0,
-   "active": 0,
-   "bad": 1,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "236_درس في كتاب \"خلقنا\" (With English Translation)",
-   "sheikh": "",
-   "total": 11,
-   "done": 11,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "239_إيضاح أسرار علوم المقربين",
-   "sheikh": "",
-   "total": 59,
-   "done": 56,
-   "pending": 0,
-   "active": 0,
-   "bad": 3,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "241_إرشادات السلوك",
-   "sheikh": "",
-   "total": 76,
-   "done": 76,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "345_مشاهد وعبر من القرآن والسنة",
-   "sheikh": "",
-   "total": 30,
-   "done": 30,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "346_برنامج رحلة الخلود",
-   "sheikh": "",
-   "total": 23,
-   "done": 23,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "369_يغالطونك إذ يقولون",
-   "sheikh": "",
-   "total": 38,
-   "done": 38,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "370_دورة مختصرة في العقيدة الإسلامية",
-   "sheikh": "",
-   "total": 10,
-   "done": 10,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "371_علوم القرآن الكريم",
-   "sheikh": "",
-   "total": 63,
-   "done": 63,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "377_كبرى اليقينيات الكونية",
-   "sheikh": "",
-   "total": 54,
-   "done": 54,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "379_تاريخ التشريع الإسلامي",
-   "sheikh": "",
-   "total": 37,
-   "done": 37,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "389_خطب الجمعة للإمام الشهيد البوطي ",
-   "sheikh": "",
-   "total": 52,
-   "done": 52,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "403_فقه السيرة النبوية",
-   "sheikh": "",
-   "total": 70,
-   "done": 70,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "418_الحب في القرآن",
-   "sheikh": "",
-   "total": 26,
-   "done": 26,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "55_خطب منبرية _ الشيخ العلامة مولود ",
-   "sheikh": "",
-   "total": 87,
-   "done": 87,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "55_خطب منبرية _ الشيخ العلامة مولود �",
-   "sheikh": "",
-   "total": 0,
-   "done": 0,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
    "key": "628_السيرة النبوية للمصلحين",
-   "sheikh": "",
+   "sheikh": "أحمد السيد",
    "total": 32,
    "done": 32,
    "pending": 0,
    "active": 0,
    "bad": 0,
    "held": false,
+   "paused": false,
    "remaining": 0
   },
   {
    "key": "630_تاريخ الفكر الغربي الحديث (مكتمل)",
-   "sheikh": "",
+   "sheikh": "أحمد السيد",
    "total": 8,
    "done": 7,
    "pending": 0,
    "active": 0,
    "bad": 1,
    "held": false,
+   "paused": false,
    "remaining": 0
   },
   {
    "key": "636_الطريق إلى بيت المقدس | سيرة نور الدين وصلاح الدين",
-   "sheikh": "",
+   "sheikh": "أحمد السيد",
    "total": 23,
    "done": 23,
    "pending": 0,
    "active": 0,
    "bad": 0,
    "held": false,
+   "paused": false,
    "remaining": 0
   },
   {
    "key": "645_التجارب الإصلاحية في العصر الحديث",
-   "sheikh": "",
+   "sheikh": "أحمد السيد",
    "total": 12,
    "done": 12,
    "pending": 0,
    "active": 0,
    "bad": 0,
    "held": false,
+   "paused": false,
    "remaining": 0
   },
   {
    "key": "651_سير وعبر للمصلحين",
-   "sheikh": "",
+   "sheikh": "أحمد السيد",
    "total": 16,
    "done": 16,
    "pending": 0,
    "active": 0,
    "bad": 0,
    "held": false,
+   "paused": false,
    "remaining": 0
   },
   {
    "key": "652_السنن الإلهية وأثرها في الإصلاح",
-   "sheikh": "",
+   "sheikh": "أحمد السيد",
    "total": 7,
    "done": 7,
    "pending": 0,
    "active": 0,
    "bad": 0,
    "held": false,
+   "paused": false,
    "remaining": 0
   },
   {
    "key": "653_يوم الفرقان... يوم بدر العظيم",
-   "sheikh": "",
+   "sheikh": "أحمد السيد",
    "total": 12,
    "done": 12,
    "pending": 0,
    "active": 0,
    "bad": 0,
    "held": false,
+   "paused": false,
    "remaining": 0
   },
   {
    "key": "656_أنوار السنة المحمدية | رياض الصالحين",
-   "sheikh": "",
+   "sheikh": "أحمد السيد",
    "total": 63,
    "done": 63,
    "pending": 0,
    "active": 0,
    "bad": 0,
    "held": false,
+   "paused": false,
    "remaining": 0
   },
   {
    "key": "659_التزكية للمصلحين (مكتمل)",
-   "sheikh": "",
+   "sheikh": "أحمد السيد",
    "total": 5,
    "done": 5,
    "pending": 0,
    "active": 0,
    "bad": 0,
    "held": false,
+   "paused": false,
    "remaining": 0
   },
   {
    "key": "660_الأمة بين احتلالين",
-   "sheikh": "",
+   "sheikh": "أحمد السيد",
    "total": 19,
    "done": 19,
    "pending": 0,
    "active": 0,
    "bad": 0,
    "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "671_البناء التزكوي للجيل الصاعد",
-   "sheikh": "",
-   "total": 7,
-   "done": 7,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "765_جواهر البلاغة المستوى الثاني",
-   "sheikh": "",
-   "total": 23,
-   "done": 23,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "766_شرح متن السلم المنورق",
-   "sheikh": "",
-   "total": 9,
-   "done": 9,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "767_دورة النحو المستوى الأول",
-   "sheikh": "",
-   "total": 28,
-   "done": 28,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "768_عقيدة أهل السنة المستوى التمهيدي",
-   "sheikh": "",
-   "total": 21,
-   "done": 21,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "774_عنوان الظرف",
-   "sheikh": "",
-   "total": 9,
-   "done": 9,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "775_مصطلح الحديث المستوى الثاني",
-   "sheikh": "",
-   "total": 24,
-   "done": 24,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "776_مصطلح الحديث المستوى الأول",
-   "sheikh": "",
-   "total": 11,
-   "done": 11,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "777_كتاب مقاصد الرعاية لحقوق الله عز ",
-   "sheikh": "",
-   "total": 26,
-   "done": 26,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "779_علم البلاغة المستوى الأول",
-   "sheikh": "",
-   "total": 20,
-   "done": 20,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "781_السيرة النبوية",
-   "sheikh": "",
-   "total": 46,
-   "done": 46,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "782_دورة النحو المستوى الرابع (شرح اب",
-   "sheikh": "",
-   "total": 27,
-   "done": 27,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "783_عقيدة أهل السنة المستوى الأول",
-   "sheikh": "",
-   "total": 33,
-   "done": 33,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "786_خطب الجمعة 2025",
-   "sheikh": "",
-   "total": 31,
-   "done": 31,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "787_دورة النحو المستوى الثاني",
-   "sheikh": "",
-   "total": 28,
-   "done": 28,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "789_خطب الجمعة 2024",
-   "sheikh": "",
-   "total": 16,
-   "done": 16,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "790_منازل الآخرة",
-   "sheikh": "",
-   "total": 29,
-   "done": 29,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "793_شرح صغرى الصغرى",
-   "sheikh": "",
-   "total": 20,
-   "done": 20,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "796_دورة النحو المستوى الثالث (قطر ال",
-   "sheikh": "",
-   "total": 24,
-   "done": 24,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "797_دروس شرح كتاب شذور الذهب",
-   "sheikh": "",
-   "total": 3,
-   "done": 3,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "798_شرح متن البناء في علم التصريف",
-   "sheikh": "",
-   "total": 4,
-   "done": 4,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "798_شرح متن البناء في علم التصريف (ال�",
-   "sheikh": "",
-   "total": 0,
-   "done": 0,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "91_آمنت بالله - الموسم 2",
-   "sheikh": "",
-   "total": 30,
-   "done": 30,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "92_آمنت بالله - الموسم 1",
-   "sheikh": "",
-   "total": 35,
-   "done": 35,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "95_أيها المريد",
-   "sheikh": "",
-   "total": 31,
-   "done": 31,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "984_أم البراهين",
-   "sheikh": "",
-   "total": 14,
-   "done": 14,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "984_أم_البراهين",
-   "sheikh": "",
-   "total": 0,
-   "done": 0,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "985_المنهج_المنتخب",
-   "sheikh": "",
-   "total": 15,
-   "done": 15,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "988_شرح_الرسالة",
-   "sheikh": "",
-   "total": 12,
-   "done": 12,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "989_آداب_البحث_و_المناظرة",
-   "sheikh": "",
-   "total": 11,
-   "done": 11,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "990_نظم_الاستعارة",
-   "sheikh": "",
-   "total": 10,
-   "done": 10,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "992_شرح_الرسالة_العضدية",
-   "sheikh": "",
-   "total": 23,
-   "done": 23,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "993_حواشي_اليوسي",
-   "sheikh": "",
-   "total": 15,
-   "done": 15,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "994_إقبار الانتصار",
-   "sheikh": "",
-   "total": 5,
-   "done": 5,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "997_الحكم_العطائية",
-   "sheikh": "",
-   "total": 21,
-   "done": 21,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "999_شرح_السلم",
-   "sheikh": "",
-   "total": 9,
-   "done": 9,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
-   "remaining": 0
-  },
-  {
-   "key": "99_الشجرة الطيبة",
-   "sheikh": "",
-   "total": 18,
-   "done": 18,
-   "pending": 0,
-   "active": 0,
-   "bad": 0,
-   "held": false,
+   "paused": false,
    "remaining": 0
   },
   {
@@ -1000,6 +130,19 @@
    "active": 0,
    "bad": 0,
    "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "671_البناء التزكوي للجيل الصاعد",
+   "sheikh": "أحمد السيد",
+   "total": 7,
+   "done": 7,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
    "remaining": 0
   },
   {
@@ -1011,6 +154,7 @@
    "active": 0,
    "bad": 1,
    "held": false,
+   "paused": false,
    "remaining": 0
   },
   {
@@ -1022,6 +166,7 @@
    "active": 0,
    "bad": 0,
    "held": false,
+   "paused": false,
    "remaining": 0
   },
   {
@@ -1033,6 +178,7 @@
    "active": 0,
    "bad": 0,
    "held": false,
+   "paused": false,
    "remaining": 0
   },
   {
@@ -1044,6 +190,7 @@
    "active": 0,
    "bad": 0,
    "held": false,
+   "paused": false,
    "remaining": 1
   },
   {
@@ -1055,6 +202,7 @@
    "active": 0,
    "bad": 0,
    "held": false,
+   "paused": false,
    "remaining": 0
   },
   {
@@ -1066,7 +214,32 @@
    "active": 0,
    "bad": 0,
    "held": false,
+   "paused": false,
    "remaining": 2
+  },
+  {
+   "key": "1007_إقبار الانتصار",
+   "sheikh": "أخرى",
+   "total": 0,
+   "done": 0,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "1008_الشرح الثاني للرسالة",
+   "sheikh": "أخرى",
+   "total": 0,
+   "done": 0,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
   },
   {
    "key": "744_خطبة الجمعة 2026",
@@ -1077,6 +250,7 @@
    "active": 0,
    "bad": 0,
    "held": false,
+   "paused": false,
    "remaining": 1
   },
   {
@@ -1088,6 +262,7 @@
    "active": 0,
    "bad": 0,
    "held": false,
+   "paused": false,
    "remaining": 1
   },
   {
@@ -1099,7 +274,212 @@
    "active": 0,
    "bad": 0,
    "held": false,
+   "paused": false,
    "remaining": 28
+  },
+  {
+   "key": "765_جواهر البلاغة المستوى الثاني",
+   "sheikh": "أدهم العاسمي",
+   "total": 23,
+   "done": 23,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "766_شرح متن السلم المنورق",
+   "sheikh": "أدهم العاسمي",
+   "total": 9,
+   "done": 9,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "767_دورة النحو المستوى الأول",
+   "sheikh": "أدهم العاسمي",
+   "total": 28,
+   "done": 28,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "768_عقيدة أهل السنة المستوى التمهيدي",
+   "sheikh": "أدهم العاسمي",
+   "total": 21,
+   "done": 21,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "774_عنوان الظرف",
+   "sheikh": "أدهم العاسمي",
+   "total": 9,
+   "done": 9,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "775_مصطلح الحديث المستوى الثاني",
+   "sheikh": "أدهم العاسمي",
+   "total": 24,
+   "done": 24,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "776_مصطلح الحديث المستوى الأول",
+   "sheikh": "أدهم العاسمي",
+   "total": 11,
+   "done": 11,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "777_كتاب مقاصد الرعاية لحقوق الله عز ",
+   "sheikh": "أدهم العاسمي",
+   "total": 26,
+   "done": 26,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "779_علم البلاغة المستوى الأول",
+   "sheikh": "أدهم العاسمي",
+   "total": 20,
+   "done": 20,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "781_السيرة النبوية",
+   "sheikh": "أدهم العاسمي",
+   "total": 46,
+   "done": 46,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "782_دورة النحو المستوى الرابع (شرح اب",
+   "sheikh": "أدهم العاسمي",
+   "total": 27,
+   "done": 27,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "783_عقيدة أهل السنة المستوى الأول",
+   "sheikh": "أدهم العاسمي",
+   "total": 33,
+   "done": 33,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "786_خطب الجمعة 2025",
+   "sheikh": "أدهم العاسمي",
+   "total": 31,
+   "done": 31,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "787_دورة النحو المستوى الثاني",
+   "sheikh": "أدهم العاسمي",
+   "total": 28,
+   "done": 28,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "789_خطب الجمعة 2024",
+   "sheikh": "أدهم العاسمي",
+   "total": 16,
+   "done": 16,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "790_منازل الآخرة",
+   "sheikh": "أدهم العاسمي",
+   "total": 29,
+   "done": 29,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "793_شرح صغرى الصغرى",
+   "sheikh": "أدهم العاسمي",
+   "total": 20,
+   "done": 20,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
   },
   {
    "key": "795_أولئك الذين هدى الله",
@@ -1110,7 +490,248 @@
    "active": 0,
    "bad": 0,
    "held": false,
+   "paused": false,
    "remaining": 3
+  },
+  {
+   "key": "796_دورة النحو المستوى الثالث (قطر ال",
+   "sheikh": "أدهم العاسمي",
+   "total": 24,
+   "done": 24,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "797_دروس شرح كتاب شذور الذهب",
+   "sheikh": "أدهم العاسمي",
+   "total": 3,
+   "done": 3,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "798_شرح متن البناء في علم التصريف",
+   "sheikh": "أدهم العاسمي",
+   "total": 4,
+   "done": 4,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "798_شرح متن البناء في علم التصريف (ال�",
+   "sheikh": "أدهم العاسمي",
+   "total": 0,
+   "done": 0,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "1003_الشرح الثاني للرسالة",
+   "sheikh": "البردوني",
+   "total": 107,
+   "done": 107,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "1005_مقدمات_السنوسي",
+   "sheikh": "البردوني",
+   "total": 9,
+   "done": 9,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "1006_لامية_العرب",
+   "sheikh": "البردوني",
+   "total": 10,
+   "done": 10,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "10_الأجهوري",
+   "sheikh": "البردوني",
+   "total": 19,
+   "done": 19,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "10_شرح منظومة الأجهوري",
+   "sheikh": "البردوني",
+   "total": 0,
+   "done": 0,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "984_أم البراهين",
+   "sheikh": "البردوني",
+   "total": 14,
+   "done": 14,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "984_أم_البراهين",
+   "sheikh": "البردوني",
+   "total": 0,
+   "done": 0,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "988_شرح_الرسالة",
+   "sheikh": "البردوني",
+   "total": 12,
+   "done": 12,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "989_آداب_البحث_و_المناظرة",
+   "sheikh": "البردوني",
+   "total": 11,
+   "done": 11,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "990_نظم_الاستعارة",
+   "sheikh": "البردوني",
+   "total": 10,
+   "done": 10,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "992_شرح_الرسالة_العضدية",
+   "sheikh": "البردوني",
+   "total": 23,
+   "done": 23,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "993_حواشي_اليوسي",
+   "sheikh": "البردوني",
+   "total": 15,
+   "done": 15,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "994_إقبار الانتصار",
+   "sheikh": "البردوني",
+   "total": 5,
+   "done": 5,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "997_الحكم_العطائية",
+   "sheikh": "البردوني",
+   "total": 21,
+   "done": 21,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "999_شرح_السلم",
+   "sheikh": "البردوني",
+   "total": 9,
+   "done": 9,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "101_برنامج أيها المريد 3 - الحبيب علي ",
+   "sheikh": "الحبيب علي الجفري",
+   "total": 32,
+   "done": 32,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
   },
   {
    "key": "101_برنامج أيها المريد 3 - الحبيب علي الجفري English Subtitle",
@@ -1121,7 +742,104 @@
    "active": 0,
    "bad": 0,
    "held": false,
+   "paused": false,
    "remaining": 28
+  },
+  {
+   "key": "101_برنامج أيها المريد 3 - الحبيب علي �",
+   "sheikh": "الحبيب علي الجفري",
+   "total": 0,
+   "done": 0,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "102_آمنت بالله - الموسم 3",
+   "sheikh": "الحبيب علي الجفري",
+   "total": 32,
+   "done": 32,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "113_سبيل الادكار",
+   "sheikh": "الحبيب علي الجفري",
+   "total": 30,
+   "done": 30,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "114_الإنسانية قبل التدين - الحبيب ",
+   "sheikh": "الحبيب علي الجفري",
+   "total": 0,
+   "done": 0,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "114_الإنسانية قبل التدين - الحبيب علي الجفري English Subtitle",
+   "sheikh": "الحبيب علي الجفري",
+   "total": 23,
+   "done": 23,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "114_الإنسانية قبل التدين‬⁩ - الحبيب ",
+   "sheikh": "الحبيب علي الجفري",
+   "total": 0,
+   "done": 0,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "114_الإنسانية قبل التدين‬⁩ - الحبيب علي الجفري English Subtitle",
+   "sheikh": "الحبيب علي الجفري",
+   "total": 23,
+   "done": 23,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "117_الإنسانية قبل التدين",
+   "sheikh": "الحبيب علي الجفري",
+   "total": 30,
+   "done": 30,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
   },
   {
    "key": "122_دروس قبس النور المبين",
@@ -1132,6 +850,31 @@
    "active": 0,
    "bad": 13,
    "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "123_برنامج أيها المريد 2 - الحبيب علي ",
+   "sheikh": "الحبيب علي الجفري",
+   "total": 17,
+   "done": 17,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "123_برنامج أيها المريد 2 - الحبيب علي ?",
+   "sheikh": "الحبيب علي الجفري",
+   "total": 15,
+   "done": 15,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
    "remaining": 0
   },
   {
@@ -1143,7 +886,104 @@
    "active": 0,
    "bad": 0,
    "held": false,
+   "paused": false,
    "remaining": 12
+  },
+  {
+   "key": "123_برنامج أيها المريد 2 - الحبيب علي �",
+   "sheikh": "الحبيب علي الجفري",
+   "total": 32,
+   "done": 15,
+   "pending": 0,
+   "active": 0,
+   "bad": 17,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "125_مجالس الحكم 2",
+   "sheikh": "الحبيب علي الجفري",
+   "total": 30,
+   "done": 28,
+   "pending": 0,
+   "active": 0,
+   "bad": 2,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "128_رسائل الحكم",
+   "sheikh": "الحبيب علي الجفري",
+   "total": 26,
+   "done": 26,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "134_لحظة سكون",
+   "sheikh": "الحبيب علي الجفري",
+   "total": 32,
+   "done": 30,
+   "pending": 0,
+   "active": 0,
+   "bad": 2,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "91_آمنت بالله - الموسم 2",
+   "sheikh": "الحبيب علي الجفري",
+   "total": 30,
+   "done": 30,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "92_آمنت بالله - الموسم 1",
+   "sheikh": "الحبيب علي الجفري",
+   "total": 35,
+   "done": 35,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "95_أيها المريد",
+   "sheikh": "الحبيب علي الجفري",
+   "total": 31,
+   "done": 31,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "99_الشجرة الطيبة",
+   "sheikh": "الحبيب علي الجفري",
+   "total": 18,
+   "done": 18,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
   },
   {
    "key": "164_شرح الحكم العطائية - الحبيب عمر بن حفيظ - الدورة ال29 بدار ا",
@@ -1154,6 +994,31 @@
    "active": 0,
    "bad": 0,
    "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "169_شرح كتاب سلم التوفيق - الدورة الص",
+   "sheikh": "الحبيب عمر بن حفيظ",
+   "total": 15,
+   "done": 15,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "169_شرح كتاب سلم التوفيق - الدورة الص?",
+   "sheikh": "الحبيب عمر بن حفيظ",
+   "total": 15,
+   "done": 15,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
    "remaining": 0
   },
   {
@@ -1165,6 +1030,19 @@
    "active": 0,
    "bad": 0,
    "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "169_شرح كتاب سلم التوفيق - الدورة الص�",
+   "sheikh": "الحبيب عمر بن حفيظ",
+   "total": 0,
+   "done": 0,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
    "remaining": 0
   },
   {
@@ -1176,6 +1054,19 @@
    "active": 0,
    "bad": 0,
    "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "195_لذاتي بذاتي",
+   "sheikh": "الحبيب عمر بن حفيظ",
+   "total": 14,
+   "done": 14,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
    "remaining": 0
   },
   {
@@ -1187,6 +1078,31 @@
    "active": 0,
    "bad": 0,
    "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "220_الكبريت الأحمر",
+   "sheikh": "الحبيب عمر بن حفيظ",
+   "total": 16,
+   "done": 16,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "223_جولان الروح في سيرة رسول الله باب الفتوح",
+   "sheikh": "الحبيب عمر بن حفيظ",
+   "total": 41,
+   "done": 40,
+   "pending": 0,
+   "active": 0,
+   "bad": 1,
+   "held": false,
+   "paused": false,
    "remaining": 0
   },
   {
@@ -1198,6 +1114,55 @@
    "active": 0,
    "bad": 0,
    "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "236_درس في كتاب \"خلقنا\" (With English Translation)",
+   "sheikh": "الحبيب عمر بن حفيظ",
+   "total": 11,
+   "done": 11,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "239_إيضاح أسرار علوم المقربين",
+   "sheikh": "الحبيب عمر بن حفيظ",
+   "total": 59,
+   "done": 56,
+   "pending": 0,
+   "active": 0,
+   "bad": 3,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "241_إرشادات السلوك",
+   "sheikh": "الحبيب عمر بن حفيظ",
+   "total": 76,
+   "done": 76,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "985_المنهج_المنتخب",
+   "sheikh": "الحسيمي_تجربة",
+   "total": 15,
+   "done": 15,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
    "remaining": 0
   },
   {
@@ -1209,6 +1174,7 @@
    "active": 0,
    "bad": 2,
    "held": false,
+   "paused": false,
    "remaining": 0
   },
   {
@@ -1220,6 +1186,7 @@
    "active": 0,
    "bad": 0,
    "held": false,
+   "paused": false,
    "remaining": 0
   },
   {
@@ -1231,6 +1198,7 @@
    "active": 0,
    "bad": 0,
    "held": false,
+   "paused": false,
    "remaining": 0
   },
   {
@@ -1242,6 +1210,7 @@
    "active": 0,
    "bad": 0,
    "held": false,
+   "paused": false,
    "remaining": 0
   },
   {
@@ -1253,6 +1222,31 @@
    "active": 0,
    "bad": 0,
    "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "345_مشاهد وعبر من القرآن والسنة",
+   "sheikh": "محمد سعيد رمضان البوطي",
+   "total": 30,
+   "done": 30,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "346_برنامج رحلة الخلود",
+   "sheikh": "محمد سعيد رمضان البوطي",
+   "total": 23,
+   "done": 23,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
    "remaining": 0
   },
   {
@@ -1264,6 +1258,7 @@
    "active": 0,
    "bad": 0,
    "held": false,
+   "paused": false,
    "remaining": 0
   },
   {
@@ -1275,6 +1270,7 @@
    "active": 0,
    "bad": 1,
    "held": false,
+   "paused": false,
    "remaining": 0
   },
   {
@@ -1286,6 +1282,7 @@
    "active": 0,
    "bad": 0,
    "held": false,
+   "paused": false,
    "remaining": 0
   },
   {
@@ -1297,6 +1294,7 @@
    "active": 0,
    "bad": 1,
    "held": false,
+   "paused": false,
    "remaining": 0
   },
   {
@@ -1308,6 +1306,67 @@
    "active": 0,
    "bad": 2,
    "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "369_يغالطونك إذ يقولون",
+   "sheikh": "محمد سعيد رمضان البوطي",
+   "total": 38,
+   "done": 38,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "370_دورة مختصرة في العقيدة الإسلامية",
+   "sheikh": "محمد سعيد رمضان البوطي",
+   "total": 10,
+   "done": 10,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "371_علوم القرآن الكريم",
+   "sheikh": "محمد سعيد رمضان البوطي",
+   "total": 63,
+   "done": 63,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "377_كبرى اليقينيات الكونية",
+   "sheikh": "محمد سعيد رمضان البوطي",
+   "total": 54,
+   "done": 54,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "379_تاريخ التشريع الإسلامي",
+   "sheikh": "محمد سعيد رمضان البوطي",
+   "total": 37,
+   "done": 37,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
    "remaining": 0
   },
   {
@@ -1319,6 +1378,7 @@
    "active": 0,
    "bad": 1,
    "held": false,
+   "paused": false,
    "remaining": 0
   },
   {
@@ -1330,6 +1390,31 @@
    "active": 0,
    "bad": 7,
    "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "389_خطب الجمعة للإمام الشهيد البوطي ",
+   "sheikh": "محمد سعيد رمضان البوطي",
+   "total": 52,
+   "done": 52,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "403_فقه السيرة النبوية",
+   "sheikh": "محمد سعيد رمضان البوطي",
+   "total": 70,
+   "done": 70,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
    "remaining": 0
   },
   {
@@ -1341,6 +1426,7 @@
    "active": 0,
    "bad": 0,
    "held": false,
+   "paused": false,
    "remaining": 0
   },
   {
@@ -1352,6 +1438,7 @@
    "active": 0,
    "bad": 17,
    "held": false,
+   "paused": false,
    "remaining": 0
   },
   {
@@ -1363,6 +1450,7 @@
    "active": 0,
    "bad": 2,
    "held": false,
+   "paused": false,
    "remaining": 0
   },
   {
@@ -1374,6 +1462,19 @@
    "active": 0,
    "bad": 0,
    "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "418_الحب في القرآن",
+   "sheikh": "محمد سعيد رمضان البوطي",
+   "total": 26,
+   "done": 26,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
    "remaining": 0
   },
   {
@@ -1385,7 +1486,32 @@
    "active": 0,
    "bad": 0,
    "held": false,
+   "paused": false,
    "remaining": 1
+  },
+  {
+   "key": "55_خطب منبرية _ الشيخ العلامة مولود ",
+   "sheikh": "مولود السريري",
+   "total": 87,
+   "done": 87,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
+  },
+  {
+   "key": "55_خطب منبرية _ الشيخ العلامة مولود �",
+   "sheikh": "مولود السريري",
+   "total": 0,
+   "done": 0,
+   "pending": 0,
+   "active": 0,
+   "bad": 0,
+   "held": false,
+   "paused": false,
+   "remaining": 0
   }
  ]
 }
