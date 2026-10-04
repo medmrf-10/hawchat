@@ -112,7 +112,7 @@ function cnts(x){
   if(x.active)p.push(`<b class="act">${x.active}</b> نشط`);
   if(x.done)p.push(`<b class="don">${x.done}</b> مفرّغ`);
   if(x.bad)p.push(`<b class="bad">${x.bad}</b> فاشل`);
-  if(!x.pending&&!x.active&&!x.done&&!x.bad&&x.remaining)p.push(`<b>${x.remaining}</b> غير مجدول`);
+  if(x.remaining&&!x.pending&&!x.active)p.push(`<b>${x.remaining}</b> غير مجدول`);
   if(!p.length)p.push('<b>—</b>');
   return p.join(' · ');
 }
@@ -138,6 +138,7 @@ function rowMatch(r){
   if(fv==='all')return true;
   if(fv==='listen')return !!r.pub;
   if(fv==='read')return !!r.mut||r.x.done>0;
+  if(fv==='bad')return r.x.bad>0;
   return cat(r.x)===fv;
 }
 function renderSeries(){

@@ -146,9 +146,10 @@ document.addEventListener('click',e=>{
   if(!d){app.innerHTML='<p class="empty">الدرس غير موجود.</p>';return}
   const l=d.lessons.find(x=>x.n===ln);
   if(!l){app.innerHTML='<p class="empty">الدرس غير موجود.</p>';return}
-  let aln=await j('align/'+encodeURIComponent(slug)+'-'+String(ln).padStart(2,'0')+'.json');
-  if(!aln)aln=await j('lessons/'+encodeURIComponent(slug)+'/'+String(ln).padStart(2,'0')+'.align.json');
-  const txt=aln?null:await t('lessons/'+encodeURIComponent(slug)+'/'+String(ln).padStart(2,'0')+'.txt');
+  const ln3=String(ln).padStart(3,'0'), ln2=String(ln).padStart(2,'0');
+  let aln=await j('lessons/'+encodeURIComponent(slug)+'/'+ln3+'.align.json');
+  if(!aln&&ln3!==ln2)aln=await j('lessons/'+encodeURIComponent(slug)+'/'+ln2+'.align.json');
+  const txt=aln?null:(await t('lessons/'+encodeURIComponent(slug)+'/'+ln3+'.txt')||(ln3!==ln2?await t('lessons/'+encodeURIComponent(slug)+'/'+ln2+'.txt'):null));
   document.title=l.title+' — '+d.title;
   const prev=d.lessons.find(x=>x.n===ln-1), next=d.lessons.find(x=>x.n===ln+1);
   let h='<div class="crumb cin"><a href="sheikh.html?s='+esc(d.sheikh_slug)+'">'+esc(d.sheikh)+'</a> ← <a href="series.html?s='+encodeURIComponent(slug)+'">'+esc(d.title)+'</a></div>';

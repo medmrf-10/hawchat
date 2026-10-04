@@ -109,7 +109,7 @@ function pill(x){
   if(x.done)p.push(`<b class="don">${x.done}</b> منجز`);
   if(x.bad)p.push(`<b class="bad">${x.bad}</b> فاشل`);
   if(!x.pending&&!x.active&&!x.done&&!x.bad&&!x.remaining)p.push('<b>—</b>');
-  else if(x.remaining&&!x.pending)p.push(`<b>${x.remaining}</b> غير مجدول`);
+  else if(x.remaining&&!x.pending&&!x.active)p.push(`<b>${x.remaining}</b> غير مجدول`);
   return p.join(' · ');
 }
 /* actions strictly by row state */
@@ -191,7 +191,7 @@ function renderSheikh(){
   const M=document.getElementById('main');
   document.getElementById('title').textContent=sh;
   let rows=series.filter(x=>(x.sheikh||'أخرى')===sh);
-  if(view!=='all')rows=rows.filter(x=>cat(x)===view);
+  if(view!=='all')rows=rows.filter(x=>view==='bad'?x.bad>0:cat(x)===view);
   if(flt)rows=rows.filter(x=>x.key.includes(flt));
   const w={queue:0,done:1,bad:2,paused:3,held:4};
   rows.sort((a,b)=>{
