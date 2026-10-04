@@ -247,17 +247,28 @@ async function vSearch(q){
     acc=acc===null?set:new Set([...acc].filter(x=>set.has(x)));
     if(!acc.size)break;
   }
-  const res=[...(acc||[])].slice(0,60);
+  const res=[...(acc||[])].slice(0,300);
   app.innerHTML=`<span class="back" onclick="go('#/')">‹ الرئيسية</span>
   <div class="h-title cin">نتائج: «${esc(q)}»</div>
-  <div class="sub">${(acc||new Set()).size.toLocaleString('ar')} نتيجة — أول ${Math.min(res.length,30)}</div>
-  <div class="card" id="res"><div class="loading">جارٍ عرض النتائج…</div></div>`;
-  const rows=await Promise.all(res.slice(0,30).map(async k=>{
-    const[cat,id]=k.split(':');let t='';
-    try{const r=await gz(`hadith/${cat}/${id}.json.gz`);t=r.text}catch(e){}
-    return`<div class="row" onclick="go('#/h/${cat}/${id}')"><span class="no">${id}</span><span class="tx">${esc(t.slice(0,95))}…</span><span class="bb">${esc(CATS[cat]||'')}</span></div>`;
-  }));
-  $('#res').innerHTML=rows.join('')||'<div class="err">لا نتائج.</div>';
+  <div class="sub" id="rcount">${(acc||new Set()).size.toLocaleString('ar')} نتيجة</div>
+  <div class="card" id="res"><div class="loading">جارٍ عرض النتائج…</div></div>
+  <div class="pg" id="more" style="display:none"><button onclick="moreRes()">المزيد ›</button></div>`;
+  let shown=0;
+  window.moreRes=async()=>{
+    const batch=res.slice(shown,shown+30);shown+=batch.length;
+    const rows=await Promise.all(batch.map(async k=>{
+      const[cat,id]=k.split(':');let t='';
+      try{const r=await gz(`hadith/${cat}/${id}.json.gz`);t=r.text}catch(e){}
+      return`<div class="row" onclick="go('#/h/${cat}/${id}')"><span class="no">${id}</span><span class="tx">${esc(t.slice(0,95))}…</span><span class="bb">${esc(CATS[cat]||'')}</span></div>`;
+    }));
+    if(shown===batch.length)$('#res').innerHTML='';
+    $('#res').insertAdjacentHTML('beforeend',rows.join(''));
+    $('#more').style.display=shown<res.length?'':'none';
+    $('#rcount').textContent=`${(acc||new Set()).size.toLocaleString('ar')} نتيجة — معروض ${shown}`;
+    if(!rows.length&&!$('#res').innerHTML)$('#res').innerHTML='<div class="err">لا نتائج.</div>';
+  };
+  await moreRes();
+  if(!$('#res').innerHTML.trim())$('#res').innerHTML='<div class="err">لا نتائج.</div>';
 }
 
 /* ---------- sharh books ---------- */
