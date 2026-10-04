@@ -46,6 +46,8 @@ function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&l
   const app=document.getElementById('app');
   const d=await j('series/'+encodeURIComponent(slug)+'.json');
   if(!d){app.innerHTML='<p class="empty">السلسلة غير موجودة. <a href="./" style="color:var(--acc2)">عودة</a></p>';return}
+  const alidx=await j('lessons/'+encodeURIComponent(slug)+'/index.json');
+  const aln=new Set((alidx&&alidx.align)||[]);
   document.title=d.title+' — hawchat';
   let h='<div class="hero cin"><h1>'+esc(d.title)+'</h1><div class="meta"><span>'+esc(d.sheikh)+'</span><span>'+d.count+' درساً</span>'
     +(d.playlist?'<a href="'+esc(d.playlist)+'" target="_blank" rel="noopener">قائمة يوتيوب ↗</a>':'')
@@ -59,7 +61,7 @@ function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&l
       if(q&&!norm(l.title).includes(q)&&!String(l.n).includes(q))continue;n++;
       const a=document.createElement('a');a.className='ls cin';
       a.href='lesson.html?s='+encodeURIComponent(slug)+'&l='+l.n;
-      a.innerHTML='<span class="num">'+l.n+'</span><span class="t">'+esc(l.title)+(l.dur?'<span class="d" style="display:block;color:var(--dim);font-size:.72rem">'+esc(l.dur)+' د</span>':'')+'</span><span class="ply">▶</span>';
+      a.innerHTML='<span class="num">'+l.n+'</span><span class="t">'+esc(l.title)+(l.dur?'<span class="d" style="display:block;color:var(--dim);font-size:.72rem">'+esc(l.dur)+' د</span>':'')+'</span>'+(aln.has(l.n)?'<span style="color:var(--acc2);font-size:.72rem;border:1px solid var(--acc);border-radius:99px;padding:2px 8px;white-space:nowrap">كاروكي</span>':'<span class="ply">▶</span>');
       lst.appendChild(a);
     }
     if(!n)lst.innerHTML='<p class="empty">لا نتائج.</p>';
