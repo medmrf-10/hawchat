@@ -15,9 +15,50 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-.wrap{max-width:1100px;margin:0 auto;padding:16px}
+.wrap{max-width:960px;margin:0 auto;padding:16px}
 .h-title{font-family:var(--font-ar);font-size:1.8rem;font-weight:700;background:linear-gradient(135deg,var(--acc2),var(--acc));-webkit-background-clip:text;background-clip:text;color:transparent;margin:14px 0 4px}
-.empty{color:var(--dim);padding:20px}
+.sub{color:var(--dim);font-size:.82rem;margin-bottom:18px}
+.doors{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:10px}
+.door{background:var(--card);border:1px solid var(--border);border-radius:var(--r-md);padding:16px 14px;cursor:pointer;text-align:center;transition:.2s}
+.door:hover{border-color:var(--acc);transform:translateY(-2px)}
+.door b{font-family:var(--font-ar);font-size:1rem;display:block}
+.door span{color:var(--dim);font-size:.68rem;display:block;margin-top:4px}
+.srch{display:flex;gap:8px;margin:14px 0}
+.srch input{flex:1;background:var(--card);border:1px solid var(--border);border-radius:var(--r-md);color:var(--txt);font-family:var(--font-ui);font-size:1rem;padding:12px 14px;outline:none}
+.srch input:focus{border-color:var(--acc)}
+.srch button{background:var(--acc);border:none;border-radius:var(--r-md);color:var(--bg);font-family:var(--font-ui);font-weight:700;padding:0 22px;cursor:pointer;font-size:.9rem}
+.row{display:flex;gap:10px;padding:10px 12px;border-bottom:1px solid var(--border);cursor:pointer;align-items:baseline}
+.row:hover{background:var(--card2)}
+.row .no{color:var(--acc);font-weight:700;font-size:.8rem;min-width:44px}
+.row .tx{flex:1;font-family:var(--font-ar);font-size:.95rem;color:var(--txt)}
+.row .bb{color:var(--dim);font-size:.66rem;white-space:nowrap}
+.badge{display:inline-block;background:var(--card2);border:1px solid var(--border);border-radius:99px;color:var(--acc2);font-size:.62rem;padding:2px 10px;margin-inline-start:6px}
+.badge.sahih{color:var(--ok);border-color:var(--ok)}
+.badge.weak{color:#e06c75;border-color:#e06c75}
+.hcard{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:22px;margin:14px 0}
+.htext{font-family:var(--font-ar);font-size:1.18rem;line-height:2.2}
+.htext .isn{color:var(--acc3)}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.mit{background:var(--card2);border-radius:var(--r-sm);padding:8px 12px;font-size:.75rem;color:var(--dim)}
+.mit b{color:var(--acc2);font-weight:600}
+.loc{background:var(--card2);border-radius:var(--r-sm);padding:8px 12px;font-size:.72rem;margin:6px 0;color:var(--dim)}
+.loc b{color:var(--txt)}
+.seg{background:var(--card2);border-right:3px solid var(--acc);border-radius:var(--r-sm);padding:12px;margin:10px 0}
+.seg .sh{font-family:var(--font-ar);font-size:1rem;line-height:2}
+.seg .sm{color:var(--dim);font-size:.68rem;margin-top:6px}
+.seg.noverif{border-right-color:var(--dim)}
+.seg.noverif .sh{color:var(--dim)}
+.pg{display:flex;gap:8px;justify-content:center;margin:16px 0}
+.pg button{background:var(--card);border:1px solid var(--border);color:var(--txt);border-radius:var(--r-sm);padding:8px 18px;cursor:pointer;font-family:var(--font-ui)}
+.pg button:disabled{opacity:.4;cursor:default}
+.pg span{align-self:center;color:var(--dim);font-size:.8rem}
+.loading{color:var(--dim);text-align:center;padding:40px;font-size:.85rem}
+.err{color:#e06c75;text-align:center;padding:30px;font-size:.85rem}
+details{margin:8px 0}
+details summary{cursor:pointer;color:var(--acc2);font-size:.78rem;padding:6px 0}
+.secttl{font-family:var(--font-ar);font-size:1.05rem;color:var(--acc2);margin:18px 0 6px;border-bottom:1px solid var(--border);padding-bottom:6px}
+.back{color:var(--dim);font-size:.78rem;cursor:pointer;display:inline-block;margin-bottom:8px}
+.back:hover{color:var(--acc2)}
 </style>
 </head>
 <body>
@@ -25,9 +66,176 @@
   <a href="../" class="btn" aria-label="رجوع" style="text-decoration:none">→</a>
   <img src="../icons/icon-192.png" alt="" width="30" height="30" style="border-radius:8px">
   <span class="brand">hawchat</span>
+  <span class="sub" style="color:var(--dim);font-size:.8rem">الأحاديث</span>
 </div></header>
-<main><div class="wrap">
-  <div class="h-title">الأحاديث</div>
-</div></main>
+<main><div class="wrap" id="app"></div></main>
+<script>
+const API='https://medmrf-10.github.io/hdth/api/';
+const CATS={1:'جامع الأصول التسعة',2:'معالم السنة النبوية',3:'الوجيز في السنة النبوية',4:'الأحاديث الكلية'};
+const MATN_NAMES={abi_hanifa:'مختصر ابن أبي حنيفة',abudawud:'سنن أبي داود',ahmad:'مسند أحمد',arbain:'الأربعون النووية',bukhari:'صحيح البخاري',bulugh:'بلوغ المرام',ibnmajah:'سنن ابن ماجه',mishkat:'مشكاة المصابيح',muslim:'صحيح مسلم',muwatta:'الموطأ',nasai:'سنن النسائي',riyad:'رياض الصالحين',shafii:'مسند الشافعي',tirmidhi:'سنن الترمذي',umdat:'عمدة الأحكام'};
+const cache={};
+let INDEX=null;
+const $=s=>document.querySelector(s),app=$('#app');
+const esc=s=>String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+async function gz(u){
+  if(cache[u])return cache[u];
+  const r=await fetch(API+u);if(!r.ok)throw new Error(r.status);
+  const buf=await r.arrayBuffer();
+  const b=new Uint8Array(buf);
+  let txt;
+  if(b[0]===0x1f&&b[1]===0x8b){
+    const stream=new Blob([buf]).stream().pipeThrough(new DecompressionStream('gzip'));
+    txt=await new Response(stream).text();
+  }else txt=new TextDecoder().decode(buf);
+  const j=JSON.parse(txt);
+  cache[u]=j;return j;
+}
+async function loadIndex(){if(!INDEX)INDEX=await gz('index.json');return INDEX}
+function norm(w){
+  w=w.replace(/[ً-ٰٟ]/g,'');
+  w=w.replace(/[أإآٱ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي').replace(/ؤ/g,'ء').replace(/ئ/g,'ء');
+  return w;
+}
+function isnHtml(t){
+  t=esc(t);
+  return t.replace(/([()])/g,'$1').replace(/(¬\d+|[()])/g,m=>`<span class="isn">${m}</span>`);
+}
+function hukmBadge(h){if(!h)return'';const bad=/ضعيف|منكر|موضوع|واه|مردود/.test(h);return`<span class="badge ${bad?'weak':'sahih'}">${esc(h)}</span>`}
+
+/* ---------- home ---------- */
+async function vHome(){
+  app.innerHTML='<div class="loading">جارٍ تحميل الفهرس…</div>';
+  const ix=await loadIndex();
+  const mats=Object.entries(ix.matn_books);
+  const cats=Object.entries(ix.shami);
+  app.innerHTML=`
+  <div class="h-title cin">الأحاديث</div>
+  <div class="sub">${ix.totals.matn_hadiths.toLocaleString('ar')} حديثاً في ${mats.length} متناً · ${ix.totals.sharh_books_n} شرحاً · ${ix.totals.parts.toLocaleString('ar')} جزء شرح</div>
+  <div class="srch"><input id="q" placeholder="ابحث بكلمة في المتون والشروح… (مثال: الصلاة)" enterkeyhint="search"><button onclick="doSearch()">بحث</button></div>
+  <div class="secttl">كتب الشامي الأربعة</div>
+  <div class="doors">${cats.map(([c,v])=>`<div class="door" onclick="go('#/s/${c}')"><b>${esc(CATS[cnOf(c)]||c)}</b><span>${v.hadiths.toLocaleString('ar')} حديثاً</span></div>`).join('')}</div>
+  <div class="secttl">المتون (${mats.length})</div>
+  <div class="doors">${mats.map(([id,n])=>`<div class="door" onclick="go('#/m/${id}')"><b>${esc(MATN_NAMES[id]||id)}</b><span>${n.toLocaleString('ar')} حديثاً</span></div>`).join('')}</div>`;
+  $('#q').addEventListener('keydown',e=>{if(e.key==='Enter')doSearch()});
+}
+function cnOf(c){const map={usul:1,maalem:2,wajiz:3,kulliyya:4};return map[c]||c}
+function go(h){location.hash=h}
+
+/* ---------- matn list ---------- */
+async function vMatn(book,page=1){
+  app.innerHTML='<div class="loading">جارٍ تحميل المتن…</div>';
+  const d=await gz(`matn/${book}.json.gz`);
+  const nos=Object.keys(d).sort((a,b)=>+a-+b);
+  const per=80,pages=Math.ceil(nos.length/per);
+  page=Math.max(1,Math.min(page,pages));
+  const slice=nos.slice((page-1)*per,page*per);
+  app.innerHTML=`
+  <span class="back" onclick="go('#/')">‹ الرئيسية</span>
+  <div class="h-title cin">${esc(MATN_NAMES[book]||book)}</div>
+  <div class="sub">${nos.length.toLocaleString('ar')} حديثاً — صفحة ${page.toLocaleString('ar')}/${pages.toLocaleString('ar')}</div>
+  <div class="card">${slice.map(no=>{const t=String(d[no].text||d[no]);return`<div class="row" onclick="go('#/mt/${book}/${no}')"><span class="no">${no}</span><span class="tx">${esc(t.slice(0,110))}…</span></div>`}).join('')}</div>
+  <div class="pg"><button ${page<=1?'disabled':''} onclick="go('#/m/${book}/${page-1}')">السابق</button><span>${page} / ${pages}</span><button ${page>=pages?'disabled':''} onclick="go('#/m/${book}/${page+1}')">التالي</button></div>`;
+}
+async function vMatnHadith(book,no){
+  app.innerHTML='<div class="loading">…</div>';
+  const d=await gz(`matn/${book}.json.gz`);
+  const rec=d[no];const t=String(rec.text||rec);
+  app.innerHTML=`
+  <span class="back" onclick="history.back()">‹ رجوع للمتن</span>
+  <div class="hcard cin"><div class="htext">${isnHtml(t)}</div>
+  <div class="meta"><span class="mit"><b>${esc(MATN_NAMES[book]||book)}</b> · حديث ${no}</span></div></div>`;
+}
+
+/* ---------- shami cat list ---------- */
+async function vShami(cat,page=1){
+  app.innerHTML='<div class="loading">جارٍ تحميل كتالوج الشامي…</div>';
+  const d=await gz(`hadiths/${cat}.json.gz`);
+  const ids=Object.keys(d).sort((a,b)=>d[a].no-d[b].no);
+  const per=100,pages=Math.ceil(ids.length/per);
+  page=Math.max(1,Math.min(page,pages));
+  const slice=ids.slice((page-1)*per,page*per);
+  app.innerHTML=`
+  <span class="back" onclick="go('#/')">‹ الرئيسية</span>
+  <div class="h-title cin">${esc(CATS[cnOf(cat)]||cat)}</div>
+  <div class="sub">${ids.length.toLocaleString('ar')} حديثاً — صفحة ${page.toLocaleString('ar')}/${pages.toLocaleString('ar')}</div>
+  <div class="card">${slice.map(id=>{const r=d[id];return`<div class="row" onclick="go('#/h/${cnOf(cat)}/${id}')"><span class="no">${r.no}</span><span class="tx">${esc(r.text.slice(0,95))}…</span><span class="bb">${esc(r.bab.split(':')[0])}</span></div>`}).join('')}</div>
+  <div class="pg"><button ${page<=1?'disabled':''} onclick="go('#/s/${cat}/${page-1}')">السابق</button><span>${page} / ${pages}</span><button ${page>=pages?'disabled':''} onclick="go('#/s/${cat}/${page+1}')">التالي</button></div>`;
+}
+
+/* ---------- hadith detail ---------- */
+async function vHadith(cat,id){
+  app.innerHTML='<div class="loading">جارٍ تحميل الحديث…</div>';
+  let r;
+  try{r=await gz(`hadith/${cat}/${id}.json.gz`)}catch(e){app.innerHTML='<div class="err">تعذر تحميل الحديث.</div>';return}
+  const locs=Object.entries(r.locs||{});
+  const sh=(r.sharh||[]);
+  app.innerHTML=`
+  <span class="back" onclick="history.back()">‹ رجوع</span>
+  <div class="hcard cin">
+    <div class="htext">${isnHtml(r.text)}</div>
+    <div class="meta">
+      <span class="mit"><b>${esc(CATS[cat]||'الشامي')}</b> · رقم ${r.no}</span>
+      ${r.reference?`<span class="mit">المرجع: <b>${esc(r.reference)}</b></span>`:''}
+      ${r.bab?`<span class="mit">${esc(r.bab)}</span>`:''}
+      ${hukmBadge(r.hukm)}
+    </div>
+  </div>
+  ${locs.length?`<div class="secttl">مواضعه في الكتب التسعة (${locs.length})</div>${locs.map(([b,l])=>`<div class="loc"><b>${esc(b)}</b> — ${esc((l.babs||[]).join('، '))} <span style="color:var(--acc)">[${esc((l.nums||[]).join('، '))}]</span></div>`).join('')}`:''}
+  ${sh.length?`<div class="secttl">الشروح المستخرجة (${sh.length})</div>${sh.map((s,i)=>`<div class="seg ${s.ok?'':'noverif'}"><details ${i===0?'open':''}><summary>${esc(s.book)} — ${esc(s.author)} ${s.ok?'<span class="badge sahih">مؤكد</span>':'<span class="badge">غير مؤكد</span>'}</summary><div class="sh">${esc(s.text)}</div><div class="sm">${esc(s.book)} · جزء ${s.j} · مقطع ${s.s}</div></details></div>`).join('')}`:'<div class="sub">لا شروح مستخرجة لهذا الحديث بعد.</div>'}`;
+}
+
+/* ---------- search ---------- */
+async function doSearch(){
+  const q=($('#q').value||'').trim();if(!q)return;
+  go('#/q/'+encodeURIComponent(q));
+}
+async function vSearch(q){
+  app.innerHTML='<div class="loading">جارٍ البحث…</div>';
+  const words=q.split(/\s+/).map(norm).filter(Boolean);
+  if(!words.length){app.innerHTML='<div class="err">أدخل كلمة للبحث.</div>';return}
+  let acc=null;
+  for(const w of words){
+    const shard=norm(w).slice(0,2);
+    let d;
+    try{d=await gz(`idxm/${encodeURIComponent(shard)}.json.gz`)}catch(e){d={}}
+    // collect: exact key match or words containing query
+    let hits=[];
+    for(const[word,refs]of Object.entries(d)){if(word===w||word.includes(w))hits=hits.concat(refs)}
+    const set=new Set(hits.map(r=>r[0]+':'+r[1]));
+    acc=acc===null?set:new Set([...acc].filter(x=>set.has(x)));
+    if(!acc.size)break;
+  }
+  const res=[...(acc||[])].slice(0,60);
+  app.innerHTML=`<span class="back" onclick="go('#/')">‹ الرئيسية</span>
+  <div class="h-title cin">نتائج: «${esc(q)}»</div>
+  <div class="sub">${(acc||new Set()).size.toLocaleString('ar')} نتيجة — أول ${res.length}</div>
+  <div class="card" id="res"><div class="loading">جارٍ عرض النتائج…</div></div>`;
+  const rows=await Promise.all(res.slice(0,30).map(async k=>{
+    const[cat,id]=k.split(':');let t='';
+    try{const r=await gz(`hadith/${cat}/${id}.json.gz`);t=r.text}catch(e){}
+    return`<div class="row" onclick="go('#/h/${cat}/${id}')"><span class="no">${id}</span><span class="tx">${esc(t.slice(0,95))}…</span><span class="bb">${esc(CATS[cat]||'')}</span></div>`;
+  }));
+  $('#res').innerHTML=rows.join('')||'<div class="err">لا نتائج.</div>';
+}
+
+/* ---------- router ---------- */
+async function route(){
+  const h=location.hash.slice(1)||'/';
+  const p=h.split('/').filter(Boolean);
+  try{
+    if(p[0]==='m'&&p[2])return vMatn(p[1],+p[2]);
+    if(p[0]==='m'&&p[1])return vMatn(p[1]);
+    if(p[0]==='mt')return vMatnHadith(p[1],p[2]);
+    if(p[0]==='s'&&p[2])return vShami(p[1],+p[2]);
+    if(p[0]==='s')return vShami(p[1]||'wajiz');
+    if(p[0]==='h')return vHadith(+p[1],+p[2]);
+    if(p[0]==='q')return vSearch(decodeURIComponent(p[1]||''));
+    return vHome();
+  }catch(e){console.error(e);app.innerHTML='<div class="err">خطأ في التحميل — '+esc(e.message)+'</div>'}
+}
+addEventListener('hashchange',route);
+route();
+if('serviceWorker' in navigator)navigator.serviceWorker.register('../sw.js').catch(()=>{});
+</script>
 </body>
 </html>
