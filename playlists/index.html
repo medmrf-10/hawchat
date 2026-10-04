@@ -122,27 +122,50 @@ function sheikhs(){
   return Object.values(m).sort((a,b)=>b.total-a.total);
 }
 
+const SEG={queue:['p','منتظر+نشط'],done:['d','منجز'],paused:['z','متوقف'],bad:['b','فاشل'],held:['h','غير مرغوب']};
+function catCount(g,c){
+  if(c==='queue')return g.pending+g.active;
+  if(c==='done')return g.done;
+  if(c==='paused')return g.paused;
+  if(c==='bad')return g.bad;
+  if(c==='held')return g.held;
+  return g.total;
+}
 function renderSheikhs(){
   const M=document.getElementById('main');
   document.getElementById('title').textContent='دفة القيادة';
-  M.innerHTML=`<div class="lgnd"><span class="d">منجز</span><span class="a">نشط</span><span class="p">منتظر</span><span class="z">متوقف</span><span class="b">فاشل</span><span class="h">غير مرغوب</span></div>`;
   let hs=sheikhs();
   if(flt)hs=hs.filter(g=>g.name.includes(flt));
+  if(view==='all'){
+    M.innerHTML=`<div class="lgnd"><span class="d">منجز</span><span class="a">نشط</span><span class="p">منتظر</span><span class="z">متوقف</span><span class="b">فاشل</span><span class="h">غير مرغوب</span></div>`;
+    hs.forEach(g=>{
+      const T=Math.max(g.total,1);
+      const d=document.createElement('a');d.className='shc';d.href='#s/'+encodeURIComponent(g.name);
+      d.innerHTML=`<div class="top"><span class="nm">${esc(g.name)}</span><span class="ct">${g.n} سلسلة · ${g.total} ملف</span></div>
+        <div class="pb">
+          <i class="d" style="width:${g.done/T*100}%"></i>
+          <i class="a" style="width:${g.active/T*100}%"></i>
+          <i class="p" style="width:${g.pending/T*100}%"></i>
+          <i class="z" style="width:${g.paused/T*100}%"></i>
+          <i class="b" style="width:${g.bad/T*100}%"></i>
+          <i class="h" style="width:${g.held/T*100}%"></i>
+        </div>
+        <div class="ct" style="margin-top:6px">منجز ${g.done} · منتظر ${g.pending} · نشط ${g.active} · متوقف ${g.paused} · فاشل ${g.bad}${g.held?` · غير مرغوب ${g.held}`:''}</div>`;
+      M.appendChild(d);
+    });
+    return;
+  }
+  const [cls,lbl]=SEG[view];
+  M.innerHTML=`<div class="lgnd"><span class="${cls}">${lbl} — مفلتر</span></div>`;
   hs.forEach(g=>{
+    const n=catCount(g,view);if(!n)return;
     const T=Math.max(g.total,1);
     const d=document.createElement('a');d.className='shc';d.href='#s/'+encodeURIComponent(g.name);
-    d.innerHTML=`<div class="top"><span class="nm">${esc(g.name)}</span><span class="ct">${g.n} سلسلة · ${g.total} ملف</span></div>
-      <div class="pb">
-        <i class="d" style="width:${g.done/T*100}%"></i>
-        <i class="a" style="width:${g.active/T*100}%"></i>
-        <i class="p" style="width:${g.pending/T*100}%"></i>
-        <i class="z" style="width:${g.paused/T*100}%"></i>
-        <i class="b" style="width:${g.bad/T*100}%"></i>
-        <i class="h" style="width:${g.held/T*100}%"></i>
-      </div>
-      <div class="ct" style="margin-top:6px">منجز ${g.done} · منتظر ${g.pending} · نشط ${g.active} · متوقف ${g.paused} · فاشل ${g.bad}${g.held?` · غير مرغوب ${g.held}`:''}</div>`;
+    d.innerHTML=`<div class="top"><span class="nm">${esc(g.name)}</span><span class="ct"><b style="color:var(--acc)">${n}</b> ${lbl}</span></div>
+      <div class="pb"><i class="${cls}" style="width:${n/T*100}%"></i></div>`;
     M.appendChild(d);
   });
+  if(!M.querySelector('.shc'))M.innerHTML+='<p style="color:var(--dim);font-size:.8rem">لا شيء في هذا القسم.</p>';
 }
 
 function renderSheikh(){
