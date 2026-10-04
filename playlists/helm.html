@@ -10,99 +10,127 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-.wrap{max-width:760px;margin:0 auto;padding:16px}
+.wrap{max-width:780px;margin:0 auto;padding:16px}
 .hero{display:flex;align-items:end;gap:14px;margin:10px 0 16px}
 .hero h1{font-family:var(--font-ar);font-size:1.6rem;font-weight:700;background:linear-gradient(135deg,var(--acc2),var(--acc));-webkit-background-clip:text;background-clip:text;color:transparent;margin:0}
 .hero .pill{font-size:.68rem;color:var(--dim);border:1px solid var(--border);border-radius:99px;padding:4px 12px;margin-bottom:6px;white-space:nowrap}
-.row{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:var(--r-md);padding:10px 12px;margin-bottom:8px}
+.bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tab{height:34px;padding:0 14px;border-radius:99px;border:1px solid var(--border);background:var(--card);color:var(--txt);font-family:var(--font-ui);font-size:.75rem;font-weight:600;cursor:pointer;transition:.15s}
+.tab.on{background:var(--acc);color:var(--bg);border-color:var(--acc)}
+.row{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:var(--r-md);padding:9px 12px;margin-bottom:7px}
 .row.skipped{opacity:.45;border-style:dashed}
-.row .nm{flex:1;min-width:0;font-size:.85rem;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.row .cnt{font-size:.68rem;color:var(--dim);white-space:nowrap}
-.row .cnt b{color:var(--acc);font-size:.85rem}
-.btn{min-width:34px;height:34px;border-radius:var(--r-sm);border:1px solid var(--border);background:var(--card2);color:var(--txt);font-size:.9rem;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0 8px;transition:border-color .15s}
+.row .nm{flex:1;min-width:0;font-size:.82rem;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .sh{display:block;font-size:.62rem;color:var(--dim);font-weight:400}
+.row .cnt{font-size:.66rem;color:var(--dim);white-space:nowrap}
+.cnt b{font-size:.82rem;color:var(--txt)}
+.cnt .act{color:var(--acc3)}.cnt .bad{color:#c0392b}.cnt .don{color:var(--acc)}
+.btn{min-width:32px;height:32px;border-radius:var(--r-sm);border:1px solid var(--border);background:var(--card2);color:var(--txt);font-size:.85rem;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0 7px;transition:border-color .15s}
 .btn:hover{border-color:var(--acc)}
 .btn.off{border-color:#c0392b;color:#c0392b}
 .btn.on{border-color:var(--acc3);color:var(--acc3)}
-#save{position:fixed;bottom:16px;right:16px;left:16px;max-width:728px;margin:0 auto;height:48px;border-radius:var(--r-md);border:none;background:var(--acc);color:var(--bg);font-family:var(--font-ui);font-size:.95rem;font-weight:800;cursor:pointer;box-shadow:0 6px 24px rgba(0,0,0,.45);display:none;z-index:50}
+#save{position:fixed;bottom:16px;right:16px;left:16px;max-width:748px;margin:0 auto;height:48px;border-radius:var(--r-md);border:none;background:var(--acc);color:var(--bg);font-family:var(--font-ui);font-size:.95rem;font-weight:800;cursor:pointer;box-shadow:0 6px 24px rgba(0,0,0,.45);display:none;z-index:50}
 #save.show{display:block}
 #toast{position:fixed;top:18px;right:50%;transform:translateX(50%);background:var(--card2);border:1px solid var(--acc);color:var(--txt);font-size:.78rem;padding:10px 18px;border-radius:99px;opacity:0;transition:.3s;z-index:60;pointer-events:none}
 #toast.show{opacity:1}
-h2{font-size:.8rem;color:var(--dim);font-weight:600;margin:18px 0 8px;border-bottom:1px solid var(--border);padding-bottom:6px}
+h2{font-size:.78rem;color:var(--dim);font-weight:600;margin:16px 0 8px;border-bottom:1px solid var(--border);padding-bottom:6px}
 .bk{display:inline-block;margin-top:4px;font-size:.75rem;color:var(--acc);text-decoration:none}
+input#flt{flex:1;min-width:120px;height:34px;background:var(--card);border:1px solid var(--border);border-radius:99px;color:var(--txt);padding:0 14px;font-family:var(--font-ui);font-size:.8rem}
+input#flt:focus{outline:none;border-color:var(--acc)}
 </style>
 </head>
 <body>
 <div class="wrap">
 <div class="hero"><h1>دفة القيادة</h1><span class="pill" id="stat">…</span></div>
 <a class="bk" href="./">← السلاسل المختارة</a>
-<h2>الطابور — اسحب الترتيب بالأسهم</h2>
+<div class="bar" style="margin-top:12px">
+  <button class="tab on" data-v="all">الكل</button>
+  <button class="tab" data-v="queue">الطابور</button>
+  <button class="tab" data-v="done">المنجز</button>
+  <button class="tab" data-v="bad">فاشل</button>
+  <button class="tab" data-v="held">غير مرغوب</button>
+  <input id="flt" placeholder="بحث…">
+</div>
 <div id="list"></div>
-<h2 id="heldh" style="display:none">متجمدة (غير مرغوب)</h2>
-<div id="held"></div>
-<h2 id="doneh" style="display:none">أُنجزت مؤخراً</h2>
-<div id="done" style="font-size:.75rem;color:var(--dim);line-height:1.9"></div>
 <div style="height:80px"></div>
 </div>
 <button id="save">حفظ الترتيب — يُطبَّق على الطابور فوراً</button>
 <div id="toast"></div>
 <script>
 const NT='https://ntfy.sh/des_helm_q7';
-let state={queue:[],held:[],done_recent:[]},order=[],skip=new Set(),dirty=false;
+let series=[],order=[],skip=new Set(),dirty=false,view='all',flt='';
 
 async function boot(){
   const [s,o]=await Promise.all([
-    fetch('data/helm_state.json?v='+Date.now()).then(r=>r.json()).catch(()=>({queue:[],held:[],done_recent:[]})),
+    fetch('data/helm_state.json?v='+Date.now()).then(r=>r.json()).catch(()=>({series:[]})),
     fetch('data/helm_order.json?v='+Date.now()).then(r=>r.json()).catch(()=>({order:[],skip:[]})),
   ]);
-  state=s;
+  series=s.series||[];
   skip=new Set(o.skip||[]);
-  const known=s.queue.map(q=>q.key);
-  order=(o.order||[]).filter(k=>known.includes(k));
-  known.forEach(k=>{if(!order.includes(k))order.push(k)});
+  const qkeys=series.filter(x=>x.pending>0||x.active>0).map(x=>x.key);
+  order=(o.order||[]).filter(k=>qkeys.includes(k));
+  qkeys.forEach(k=>{if(!order.includes(k))order.push(k)});
   render();
 }
 
-function pretty(k){return k.replace(/^\d+_?/,'').replace(/\.txt$/,'')}
+function pretty(k){return k.replace(/^\d+_?/,'')}
+function pill(x){
+  const p=[];
+  if(x.pending)p.push(`<b>${x.pending}</b> منتظر`);
+  if(x.active)p.push(`<b class="act">${x.active}</b> نشط`);
+  if(x.done)p.push(`<b class="don">${x.done}</b> منجز`);
+  if(x.bad)p.push(`<b class="bad">${x.bad}</b> فاشل`);
+  if(!x.pending&&!x.active&&x.remaining)p.push(`<b>${x.remaining}</b> غير مجدول`);
+  return p.join(' · ')||'<b>—</b>';
+}
+function cat(x){
+  if(skip.has(x.key))return 'held';
+  if(x.pending||x.active)return 'queue';
+  if(x.bad&&!x.done)return 'bad';
+  if(x.done)return 'done';
+  return 'queue';
+}
+function rankSort(a,b){
+  const ia=order.indexOf(a.key),ib=order.indexOf(b.key);
+  if(ia>-1&&ib>-1)return ia-ib;
+  if(ia>-1)return -1;if(ib>-1)return 1;
+  return (b.remaining||b.pending)-(a.remaining||a.pending);
+}
 
 function render(){
-  const L=document.getElementById('list'),H=document.getElementById('held'),D=document.getElementById('done');
-  const byKey={};state.queue.forEach(q=>byKey[q.key]=q);
-  L.innerHTML='';
-  order.forEach((k,i)=>{
-    if(skip.has(k))return;
-    const q=byKey[k]||{pending:0,active:0};
-    const d=document.createElement('div');d.className='row';
-    d.innerHTML=`<span style="color:var(--dim);font-size:.72rem;width:22px;text-align:center">${i+1}</span>
-      <span class="nm">${pretty(k)}</span>
-      <span class="cnt"><b>${q.pending}</b> منتظر${q.active?' · '+q.active+' نشط':''}</span>
-      <button class="btn" data-a="up" data-i="${i}" title="أعلى">▲</button>
-      <button class="btn" data-a="dn" data-i="${i}" title="أسفل">▼</button>
-      <button class="btn off" data-a="sk" data-i="${i}" title="غير مرغوب">✕</button>`;
+  const L=document.getElementById('list');L.innerHTML='';
+  let rows=series.filter(x=>!skip.has(x.key)||view==='held');
+  if(view!=='all')rows=rows.filter(x=>cat(x)===view);
+  if(flt)rows=rows.filter(x=>x.key.includes(flt)||(x.sheikh||'').includes(flt));
+  rows.sort((a,b)=>{const ca=cat(a)==='held'?9:cat(a)==='queue'?0:cat(a)==='done'?2:3;const cb=cat(b)==='held'?9:cat(b)==='queue'?0:cat(b)==='done'?2:3;return ca-cb||rankSort(a,b)});
+  rows.forEach(x=>{
+    const held=skip.has(x.key),qi=order.indexOf(x.key);
+    const d=document.createElement('div');d.className='row'+(held?' skipped':'');
+    d.innerHTML=`${qi>-1?`<span style="color:var(--acc);font-size:.72rem;width:20px;text-align:center;font-weight:700">${qi+1}</span>`:'<span style="width:20px"></span>'}
+      <span class="nm">${pretty(x.key)}${x.sheikh?`<span class="sh">${x.sheikh}</span>`:''}</span>
+      <span class="cnt">${pill(x)}</span>
+      ${!held?`<button class="btn" data-a="up" data-k="${x.key}" title="أعلى">▲</button>
+      <button class="btn" data-a="dn" data-k="${x.key}" title="أسفل">▼</button>
+      <button class="btn off" data-a="sk" data-k="${x.key}" title="غير مرغوب">✕</button>`
+      :`<button class="btn on" data-a="un" data-k="${x.key}" title="أعد للطابور">↩</button>`}`;
     L.appendChild(d);
   });
-  const held=[...order.filter(k=>skip.has(k)),...state.held.filter(k=>!order.includes(k))];
-  document.getElementById('heldh').style.display=held.length?'':'none';
-  H.innerHTML='';held.forEach(k=>{
-    const d=document.createElement('div');d.className='row skipped';
-    d.innerHTML=`<span class="nm">${pretty(k)}</span><button class="btn on" data-a="un" data-k="${k.replace(/"/g,'')}" title="أعد للطابور">↩</button>`;
-    H.appendChild(d);
-  });
-  document.getElementById('doneh').style.display=state.done_recent.length?'':'none';
-  D.textContent=state.done_recent.map(pretty).join(' · ');
-  const pend=state.queue.reduce((a,q)=>a+q.pending,0),act=state.queue.reduce((a,q)=>a+(q.active||0),0);
-  document.getElementById('stat').textContent=`${pend} منتظر · ${act} نشط`;
+  const pend=series.reduce((a,x)=>a+x.pending,0),act=series.reduce((a,x)=>a+x.active,0),dn=series.reduce((a,x)=>a+x.done,0);
+  document.getElementById('stat').textContent=`${pend} منتظر · ${act} نشط · ${dn} منجز`;
   document.getElementById('save').classList.toggle('show',dirty);
 }
 
 document.addEventListener('click',e=>{
-  const b=e.target.closest('button[data-a]');if(!b)return;
-  const i=+b.dataset.i,a=b.dataset.a;
-  if(a==='up'&&i>0){[order[i-1],order[i]]=[order[i],order[i-1]]}
-  else if(a==='dn'&&i<order.length-1){[order[i+1],order[i]]=[order[i],order[i+1]]}
-  else if(a==='sk'){skip.add(order[i])}
-  else if(a==='un'){skip.delete(b.dataset.k)}
+  const t=e.target.closest('button');if(!t)return;
+  if(t.classList.contains('tab')){document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===t));view=t.dataset.v;render();return}
+  const k=t.dataset.k,a=t.dataset.a;if(!k)return;
+  if(a==='sk'){skip.add(k)}
+  else if(a==='un'){skip.delete(k)}
+  else{let i=order.indexOf(k);if(i<0){order.push(k);i=order.length-1}
+    if(a==='up'&&i>0){[order[i-1],order[i]]=[order[i],order[i-1]]}
+    if(a==='dn'&&i<order.length-1){[order[i+1],order[i]]=[order[i],order[i+1]]}}
   dirty=true;render();
 });
+document.getElementById('flt').addEventListener('input',e=>{flt=e.target.value.trim();render()});
 
 document.getElementById('save').onclick=async()=>{
   const body=JSON.stringify({kind:'helm',order,skip:[...skip],t:Date.now()});
