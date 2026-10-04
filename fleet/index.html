@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>أسطول العمل — تتبع المهام</title>
+<style>
+*{box-sizing:border-box;margin:0}
+body{font-family:system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;background:#0d1117;color:#e6edf3;min-height:100vh}
+.wrap{max-width:1200px;margin:0 auto;padding:20px}
+h1{font-size:22px;font-weight:800}
+.hero{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:18px 0 8px}
+.mut{color:#8b949e;font-size:13px}
+.kpis{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}
+.kpi{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:10px 16px;min-width:110px}
+.kpi b{font-size:20px;display:block}
+.kpi span{font-size:11px;color:#8b949e}
+.kpi.open b{color:#58a6ff}.kpi.claimed b{color:#d29922}.kpi.done b{color:#3fb950}.kpi.failed b{color:#f85149}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 6px}
+.tab{padding:6px 14px;border-radius:20px;border:1px solid #30363d;background:#161b22;color:#c9d1d9;cursor:pointer;font-size:12.5px}
+.tab.on{background:#1f6feb;border-color:#1f6feb;color:#fff}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0 14px}
+.bar select,.bar input{background:#0d1117;border:1px solid #30363d;border-radius:8px;color:#e6edf3;padding:7px 10px;font-size:13px}
+.bar input{min-width:200px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{position:sticky;top:0;background:#161b22;color:#8b949e;font-weight:600;text-align:right;padding:8px 10px;border-bottom:1px solid #30363d;font-size:11.5px}
+td{padding:8px 10px;border-bottom:1px solid #21262d;vertical-align:top}
+tr:hover td{background:#161b2288}
+.tag{display:inline-block;padding:1px 8px;border-radius:10px;font-size:11px}
+.t-open{background:#1f6feb33;color:#58a6ff}.t-claimed{background:#d2992233;color:#d29922}
+.t-done{background:#3fb95033;color:#3fb950}.t-failed{background:#f8514933;color:#f85149}
+.kind{color:#8b949e;font-size:11px;background:#21262d;padding:1px 7px;border-radius:8px}
+.own{font-weight:700;color:#bc8cff}
+.pr{color:#8b949e;font-size:11px}
+.det{color:#6e7681;font-size:11.5px;max-width:340px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.empty{text-align:center;color:#6e7681;padding:40px;font-size:14px}
+.help{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:14px;margin-top:20px;font-size:12.5px;line-height:1.9}
+.help code{background:#0d1117;padding:2px 6px;border-radius:5px;direction:ltr;display:inline-block;font-size:11px}
+details summary{cursor:pointer;color:#58a6ff;font-weight:600}
+.flash{position:fixed;bottom:20px;left:20px;background:#238636;color:#fff;padding:10px 18px;border-radius:8px;display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="hero"><h1>⚙️ أسطول العمل — لوحة المهام</h1><div class="mut" id="upd"></div></div>
+<div class="kpis" id="kpis"></div>
+<div class="tabs" id="tabs"></div>
+<div class="bar">
+<select id="fown"><option value="">كل المنفذين</option></select>
+<select id="fkind"><option value="">كل الأنواع</option></select>
+<input id="fq" placeholder="بحث في العنوان/التفاصيل…">
+</div>
+<div style="overflow-x:auto"><table><thead><tr>
+<th>#</th><th>المهمة</th><th>النوع</th><th>الحالة</th><th>المنفذ</th><th>الأولوية</th><th>النتيجة</th>
+</tr></thead><tbody id="tb"></tbody></table></div>
+<div class="empty" id="empty" style="display:none">لا مهام مطابقة</div>
+<details class="help"><summary>بروتوكول الوكلاء — الاستعلام والتعديل عن بعد</summary>
+<div style="margin-top:8px">
+قراءة مباشرة: <code>curl -s https://medmrf-10.github.io/fleet/tasks.json</code><br>
+طلب مهمة (أسند لي التالية): <code>curl -s -X POST https://ntfy.sh/des_fleet_q7 -d '{"kind":"fleet","op":"claim","owner":"اسمك","kind":"<align|verify|audit|probe|site>"}'</code><br>
+طلب مهمة محددة: <code>{"kind":"fleet","op":"claim","owner":"اسمك","id":"t-12"}</code><br>
+تسليم: <code>{"kind":"fleet","op":"done","owner":"اسمك","id":"t-12","result":"ملخص"}</code><br>
+تعذّر: <code>{"kind":"fleet","op":"fail","owner":"اسمك","id":"t-12","note":"السبب"}</code> — تحرير: <code>{"op":"release"}</code><br>
+إضافة مهمة: <code>{"kind":"fleet","op":"add","title":"…","kind":"…","detail":"…","prio":50}</code><br>
+التأكيد يصل على نفس قناة ntfy كـ fleet_reply ثم تظهر الحالة هنا خلال ~30 ثانية. المهمة المدّعاة تعود مفتوحة تلقائيًا بعد ساعتين دون تسليم.
+</div></details>
+</div>
+<div class="flash" id="fl"></div>
+<script>
+let DATA={tasks:[]}, fv='all', fq='', fown='', fkind='';
+const ST={open:'مفتوحة',claimed:'مُسنَدة',done:'منجزة',failed:'فاشلة'};
+const KL={align:'محاذاة',verify:'تدقيق محاذاة',audit:'تدقيق تفريغ',probe:'تحقق',site:'موقع',mutalaa:'مُطالع',misc:'أخرى'};
+async function load(){try{const r=await fetch('tasks.json?'+Date.now());DATA=await r.json();render()}catch(e){}}
+function esc(s){return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function render(){
+  const ts=DATA.tasks||[];
+  const c={open:0,claimed:0,done:0,failed:0};
+  ts.forEach(t=>c[t.status]=(c[t.status]||0)+1);
+  document.getElementById('kpis').innerHTML=
+    `<div class="kpi"><b>${ts.length}</b><span>الكل</span></div>`+
+    `<div class="kpi open"><b>${c.open||0}</b><span>مفتوحة</span></div>`+
+    `<div class="kpi claimed"><b>${c.claimed||0}</b><span>قيد التنفيذ</span></div>`+
+    `<div class="kpi done"><b>${c.done||0}</b><span>منجزة</span></div>`+
+    `<div class="kpi failed"><b>${c.failed||0}</b><span>فاشلة</span></div>`;
+  document.getElementById('upd').textContent=DATA.t?('آخر تحديث '+new Date(DATA.t*1000).toLocaleTimeString('ar')):'';
+  const tabs=[['all','الكل'],['open','مفتوحة'],['claimed','قيد التنفيذ'],['done','منجزة'],['failed','فاشلة'],['mine','مهامي']];
+  document.getElementById('tabs').innerHTML=tabs.map(([k,l])=>`<button class="tab ${fv===k?'on':''}" data-k="${k}">${l} ${k==='all'?ts.length:(c[k]||'')}</button>`).join('');
+  document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{fv=b.dataset.k;render()});
+  const owners=[...new Set(ts.map(t=>t.owner).filter(Boolean))].sort();
+  const fo=document.getElementById('fown');
+  fo.innerHTML='<option value="">كل المنفذين</option>'+owners.map(o=>`<option ${fown===o?'selected':''}>${esc(o)}</option>`).join('');
+  fo.onchange=()=>{fown=fo.value;render()};
+  const kinds=[...new Set(ts.map(t=>t.kind))].sort();
+  const fk=document.getElementById('fkind');
+  fk.innerHTML='<option value="">كل الأنواع</option>'+kinds.map(k=>`<option value="${k}" ${fkind===k?'selected':''}>${KL[k]||k}</option>`).join('');
+  fk.onchange=()=>{fkind=fk.value;render()};
+  document.getElementById('fq').oninput=e=>{fq=e.target.value;render()};
+  let rows=ts.filter(t=>{
+    if(fv==='mine'&&t.owner!==fown)return false;
+    if(fv!=='all'&&fv!=='mine'&&t.status!==fv)return false;
+    if(fv==='mine'&&!fown)return false;
+    if(fown&&fv!=='mine'&&t.owner!==fown)return false;
+    if(fkind&&t.kind!==fkind)return false;
+    if(fq&&!(t.title+t.detail).includes(fq))return false;
+    return true;
+  });
+  rows.sort((a,b)=>{const o={claimed:0,open:1,failed:2,done:3};return (o[a.status]-o[b.status])||(a.prio-b.prio)||(a.created-b.created)});
+  document.getElementById('tb').innerHTML=rows.map(t=>
+    `<tr><td class="pr">${t.id}</td><td>${esc(t.title)}<div class="det">${esc(t.detail)}</div></td>`+
+    `<td><span class="kind">${KL[t.kind]||t.kind}</span></td>`+
+    `<td><span class="tag t-${t.status}">${ST[t.status]||t.status}</span></td>`+
+    `<td class="own">${esc(t.owner)||'—'}</td><td class="pr">${t.prio}</td>`+
+    `<td class="det">${esc(t.result)||'—'}</td></tr>`).join('');
+  document.getElementById('empty').style.display=rows.length?'none':'block';
+}
+load();setInterval(load,30000);
+</script>
+</body>
+</html>
