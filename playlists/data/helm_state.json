@@ -1,5 +1,5 @@
 {
- "t": 1791138200,
+ "t": 1791138262,
  "series": [
   {
    "key": "619_دورة في علم الحديث على منهج المتقدمين",
@@ -3768,8 +3768,8 @@
    "sheikh": "الحبيب علي الجفري",
    "total": 29,
    "done": 3,
-   "pending": 50,
-   "active": 1,
+   "pending": 51,
+   "active": 0,
    "bad": 0,
    "held": false,
    "paused": false,
@@ -3784,7 +3784,7 @@
   {
    "key": "102_آمنت بالله - الموسم 3",
    "sheikh": "الحبيب علي الجفري",
-   "total": 14,
+   "total": 19,
    "done": 32,
    "pending": 0,
    "active": 0,
@@ -3797,7 +3797,7 @@
    "feed": "downloading",
    "remaining": 0,
    "fqpos": "a1",
-   "dl": 14
+   "dl": 19
   },
   {
    "key": "103_قوة الحب The Power of Love",
