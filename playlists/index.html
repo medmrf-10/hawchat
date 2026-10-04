@@ -67,7 +67,7 @@
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 async function j(u){try{const r=await fetch(u);return r.ok?await r.json():null}catch(e){return null}}
 function normalize(s){return (s||'').replace(/[أإآ]/g,'ا').replace(/\s+/g,' ').trim()}
-let _groups=[],_slugs={},_photos={},flt='',_stats={},_disp2helm={};
+let _groups=[],_slugs={},_photos={},flt='',_stats={},_disp2helm={},_pub={};
 function photo(name){return _photos[name]||_photos[normalize(name)]}
 function slugOf(name){return _slugs[name]||_slugs[normalize(name)]||normalize(name)}
 function statOf(name){const h=_disp2helm[normalize(name)]||_disp2helm[name];return h?_stats[h]:null}
@@ -84,19 +84,20 @@ function render(){
     a.className='sh cin';a.style.animationDelay=(Math.min(i++,30)*25)+'ms';
     a.href='sheikh.html?s='+encodeURIComponent(slugOf(name));
     const p=photo(name),init=name.replace(/^ال/,'').trim()[0]||'؟';
-    const st=statOf(name);
+    const st=statOf(name),np=_pub[slugOf(name)]||0;
     a.innerHTML='<div class="ph">'+(p?'<img src="'+p+'" alt="" loading="lazy" onerror="this.remove()">':'')+'<span>'+init+'</span></div><div class="nm">'+esc(name)+'</div>'
-      +(st?pbHtml(st)+'<div class="cnt">'+st.nseries+' سلسلة · '+st.done+'/'+st.total+'</div>':'');
+      +(st?pbHtml(st)+'<div class="cnt">'+st.nseries+' سلسلة · '+st.done+'/'+st.total+(np?' · '+np+' منشورة':'')+'</div>':(np?'<div class="cnt">'+np+' سلسلة منشورة</div>':''));
     g.appendChild(a);
   }
   if(!i)g.innerHTML='<p class="sub">لا نتائج.</p>';
 }
 document.getElementById('flt').addEventListener('input',e=>{flt=normalize(e.target.value);render()});
 (async()=>{
-  const [data,photos,meta,hs,hor]=await Promise.all([j('shuyukh.json'),j('photos.json'),j('data/sheikhs.json'),j('data/helm_state.json?v='+Date.now()),j('data/helm_order.json?v='+Date.now())]);
+  const [data,photos,meta,hs,hor,pub]=await Promise.all([j('shuyukh.json'),j('photos.json'),j('data/sheikhs.json'),j('data/helm_state.json?v='+Date.now()),j('data/helm_order.json?v='+Date.now()),j('series/index.json')]);
   _photos=photos||{};
   for(const s of ((meta&&meta.sheikhs)||[]))for(const n of [s.name_display,s.name,...(s.aliases||[])]){_slugs[n]=s.slug;_slugs[normalize(n)]=s.slug}
   const skip=new Set(hor&&hor.skip||[]);
+  for(const s of ((pub&&pub.series)||[]))if(s.sheikh_slug)_pub[s.sheikh_slug]=(_pub[s.sheikh_slug]||0)+1;
   _stats={};
   for(const x of ((hs&&hs.series)||[])){
     const h=x.sheikh||'أخرى',st=_stats[h]||(_stats[h]={total:0,done:0,active:0,pending:0,bad:0,held:0,paused:0,want:0,nseries:0,exp:0});
