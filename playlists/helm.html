@@ -178,7 +178,7 @@ function nums(x){
   if(x.pending)p.push(`<b class="p">${x.pending}</b> منتظر`);
   if(x.active)p.push(`<b class="a">${x.active}</b> نشط`);
   if(x.bad)p.push(`<b class="b">${x.bad}</b> فاشل`);
-  if(x.exp&&(x.done>x.exp||x.total>x.exp))p.push('<b class="b">⚠ زيادة عن الأصل</b>');
+  if(x.exp&&(x.done>x.exp||x.total>x.exp))p.push(`<b class="b">⚠ +${Math.max(x.done,x.total)-x.exp} عن الأصل</b>`);
   return p.join(' · ');
 }
 function acts(x){
