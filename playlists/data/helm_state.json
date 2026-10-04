@@ -1,5 +1,5 @@
 {
- "t": 1791136572,
+ "t": 1791136634,
  "series": [
   {
    "key": "619_دورة في علم الحديث على منهج المتقدمين",
@@ -4990,7 +4990,7 @@
   {
    "key": "92_آمنت بالله - الموسم 1",
    "sheikh": "الحبيب علي الجفري",
-   "total": 7,
+   "total": 9,
    "done": 35,
    "pending": 0,
    "active": 0,
@@ -5003,7 +5003,7 @@
    "feed": "downloading",
    "remaining": 0,
    "fqpos": "a1",
-   "dl": 7
+   "dl": 9
   },
   {
    "key": "93_مجالس البخاري",
@@ -12228,16 +12228,16 @@
    "sheikh": "محمد سعيد رمضان البوطي",
    "total": 7,
    "done": 6,
-   "pending": 0,
+   "pending": 1,
    "active": 0,
-   "bad": 1,
+   "bad": 0,
    "held": false,
    "paused": false,
    "id": "365",
    "name": "ضائعون هداهم القرآن",
    "exp": 7,
    "feed": "queued",
-   "remaining": 0,
+   "remaining": 1,
    "fqpos": "a16",
    "dl": 7
   },
