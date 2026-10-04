@@ -22,3 +22,10 @@ curl -s -X POST https://ntfy.sh/des_fleet_q7 -d '{"kind":"fleet","op":"claim","o
 
 ## الأنواع
 align (محاذاة درس) · verify (تدقيق محاذاة) · audit (تدقيق تفريغ) · probe (تحقق مفقودات) · site · mutalaa · misc
+
+## Heartbeat protocol (mandatory, standing)
+Every agent POSTs JSON to `https://ntfy.sh/des_state_q9` so the live panel (hawchat/state/) stays current:
+- `{"kind":"heartbeat","agent":"<id>","status":"متصل","current":"<now>","stats":{"t":"<n>","d":"<n>","u":"<n>"}}` every ~15min
+- `{"kind":"transcribe"|"download"|"chat"|"upload"|"assign"|"note","agent":"<id>","sid":"<id>","msg":"<what>"}` per event
+- `{"kind":"state","sid":"<id>","frozen":true}` state overrides
+Agent ids: old, sasi, bahith, moarshaf, naqid.

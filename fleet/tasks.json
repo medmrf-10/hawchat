@@ -1668,6 +1668,38 @@
    "result": "",
    "detail": "أداة تعليم على manifest: اقترح آلية tags/degrees لكل سلسلة (1006 سلسلة) — صمّم المخطط وابدأ الوسم الآلي.",
    "created": 1791134451
+  },
+  {
+   "id": "hb-sasi",
+   "title": "[sasi] نبضة حيّة كل ~15د — POST إلى ntfy des_state_q9 (بروتوكول README)",
+   "status": "open",
+   "assignee": "sasi",
+   "prio": 1,
+   "created": 1791144623
+  },
+  {
+   "id": "hb-bahith",
+   "title": "[bahith] نبضة حيّة كل ~15د — POST إلى ntfy des_state_q9 (بروتوكول README)",
+   "status": "open",
+   "assignee": "bahith",
+   "prio": 1,
+   "created": 1791144623
+  },
+  {
+   "id": "hb-moarshaf",
+   "title": "[moarshaf] نبضة حيّة كل ~15د — POST إلى ntfy des_state_q9 (بروتوكول README)",
+   "status": "open",
+   "assignee": "moarshaf",
+   "prio": 1,
+   "created": 1791144623
+  },
+  {
+   "id": "hb-naqid",
+   "title": "[naqid] نبضة حيّة كل ~15د — POST إلى ntfy des_state_q9 (بروتوكول README)",
+   "status": "open",
+   "assignee": "naqid",
+   "prio": 1,
+   "created": 1791144623
   }
  ]
 }
