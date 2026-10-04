@@ -1,0 +1,23 @@
+{
+ "series": {
+  "id": "876",
+  "key": "\u0645\u0627\u0644\u064a\u0632\u064a\u0627 2023 | \u0623.\u062f. \u0639\u0644\u064a \u062c\u0645\u0639\u0629",
+  "sheikh": "\u0639\u0644\u064a \u062c\u0645\u0639\u0629",
+  "url": "https://www.youtube.com/playlist?list=PLxQnfwkf6kshu1Hbqbv9Uqtf23pDaZ5oA",
+  "exp": 12,
+  "files_expected": 0,
+  "downloaded": 0,
+  "transcribed": 0,
+  "pending": 0,
+  "active": 0,
+  "bad": 0,
+  "frozen": false,
+  "skipped": false,
+  "paused": false,
+  "state": "untouched",
+  "resume_from": null,
+  "tr_dir": null,
+  "pipe_dir": null
+ },
+ "files": []
+}

@@ -1,0 +1,208 @@
+{
+ "series": {
+  "id": "346",
+  "key": "\u0628\u0631\u0646\u0627\u0645\u062c \u0631\u062d\u0644\u0629 \u0627\u0644\u062e\u0644\u0648\u062f",
+  "sheikh": "\u0645\u062d\u0645\u062f \u0633\u0639\u064a\u062f \u0631\u0645\u0636\u0627\u0646 \u0627\u0644\u0628\u0648\u0637\u064a",
+  "url": "https://www.youtube.com/playlist?list=PL01kYZIehH-oLJCHyMSuaOypdiwaDQ9Pc",
+  "exp": 23,
+  "files_expected": 23,
+  "downloaded": 23,
+  "transcribed": 23,
+  "pending": 0,
+  "active": 0,
+  "bad": 0,
+  "frozen": false,
+  "skipped": false,
+  "paused": false,
+  "state": "done",
+  "resume_from": null,
+  "tr_dir": "/home/ubuntu/durus/transcripts_agy/346_\u0628\u0631\u0646\u0627\u0645\u062c \u0631\u062d\u0644\u0629 \u0627\u0644\u062e\u0644\u0648\u062f",
+  "pipe_dir": "346_\u0628\u0631\u0646\u0627\u0645\u062c \u0631\u062d\u0644\u0629 \u0627\u0644\u062e\u0644\u0648\u062f"
+ },
+ "files": [
+  {
+   "n": "001",
+   "file": "001_\u0628\u0631\u0648\u0645\u0648 \u0628\u0631\u0646\u0627\u0645\u062c \u0631\u062d\u0644\u0629 \u0627\u0644\u062e\u0644\u0648\u062f.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:0.txt"
+  },
+  {
+   "n": "002",
+   "file": "002_1 - \u0631\u062d\u0644\u0629 \u0627\u0644\u062e\u0644\u0648\u062f \uff5c \u0627\u0644\u0639\u0644\u0627\u0645\u0629 \u0627\u0644\u0628\u0648\u0637\u064a \uff5c \u0627\u0644\u0645\u0648\u062a \u0648\u062d\u0642\u064a\u0642\u062a\u0647.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:1.txt"
+  },
+  {
+   "n": "003",
+   "file": "003_2 - \u0631\u062d\u0644\u0629 \u0627\u0644\u062e\u0644\u0648\u062f \uff5c \u0627\u0644\u0639\u0644\u0627\u0645\u0629 \u0627\u0644\u0628\u0648\u0637\u064a \uff5c \u0646\u0639\u064a\u0645 \u0627\u0644\u0642\u0628\u0631 \u0648\u0639\u0630\u0627\u0628\u0647.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:2.txt"
+  },
+  {
+   "n": "004",
+   "file": "004_3 - \u0631\u062d\u0644\u0629 \u0627\u0644\u062e\u0644\u0648\u062f \uff5c \u0627\u0644\u0639\u0644\u0627\u0645\u0629 \u0627\u0644\u0628\u0648\u0637\u064a \uff5c \u0627\u0644\u0625\u064a\u0645\u0627\u0646 \u0628\u064a\u0648\u0645 \u0627\u0644\u0642\u064a\u0627\u0645\u0629.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:3.txt"
+  },
+  {
+   "n": "005",
+   "file": "005_4 - \u0631\u062d\u0644\u0629 \u0627\u0644\u062e\u0644\u0648\u062f \uff5c \u0627\u0644\u0639\u0644\u0627\u0645\u0629 \u0627\u0644\u0628\u0648\u0637\u064a \uff5c \u0623\u0648\u0644 \u0623\u062d\u062f\u0627\u062b \u064a\u0648\u0645 \u0627\u0644\u0642\u064a\u0627\u0645\u0629 \uff1a \u0627\u0644\u0628\u0639\u062b.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:4.txt"
+  },
+  {
+   "n": "006",
+   "file": "006_5 - \u0631\u062d\u0644\u0629 \u0627\u0644\u062e\u0644\u0648\u062f \uff5c \u0627\u0644\u0639\u0644\u0627\u0645\u0629 \u0627\u0644\u0628\u0648\u0637\u064a \uff5c \u0627\u0644\u062d\u0634\u0631.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:5.txt"
+  },
+  {
+   "n": "007",
+   "file": "007_6 - \u0631\u062d\u0644\u0629 \u0627\u0644\u062e\u0644\u0648\u062f \uff5c \u0627\u0644\u0639\u0644\u0627\u0645\u0629 \u0627\u0644\u0628\u0648\u0637\u064a \uff5c \u0647\u0648\u0644 \u0627\u0644\u0645\u0648\u0642\u0641.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:6.txt"
+  },
+  {
+   "n": "008",
+   "file": "008_7 - \u0631\u062d\u0644\u0629 \u0627\u0644\u062e\u0644\u0648\u062f \uff5c \u0627\u0644\u0639\u0644\u0627\u0645\u0629 \u0627\u0644\u0628\u0648\u0637\u064a \uff5c \u0627\u0644\u0646\u0627\u062c\u0648\u0646 \u0645\u0646 \u0647\u0648\u0644 \u0627\u0644\u0645\u0648\u0642\u0641.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:7.txt"
+  },
+  {
+   "n": "009",
+   "file": "009_8 - \u0631\u062d\u0644\u0629 \u0627\u0644\u062e\u0644\u0648\u062f \uff5c \u0627\u0644\u0639\u0644\u0627\u0645\u0629 \u0627\u0644\u0628\u0648\u0637\u064a \uff5c \u0627\u0644\u062d\u0633\u0627\u0628.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:8.txt"
+  },
+  {
+   "n": "010",
+   "file": "010_9 - \u0631\u062d\u0644\u0629 \u0627\u0644\u062e\u0644\u0648\u062f \uff5c \u0627\u0644\u0639\u0644\u0627\u0645\u0629 \u0627\u0644\u0628\u0648\u0637\u064a \uff5c \u0627\u0644\u0645\u064a\u0632\u0627\u0646 \u0648 \u0627\u0644\u0635\u0631\u0627\u0637.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:9.txt"
+  },
+  {
+   "n": "011",
+   "file": "011_10 - \u0631\u062d\u0644\u0629 \u0627\u0644\u062e\u0644\u0648\u062f \uff5c \u0627\u0644\u0639\u0644\u0627\u0645\u0629 \u0627\u0644\u0628\u0648\u0637\u064a \uff5c \u0627\u0644\u0634\u0641\u0627\u0639\u0629 \u0648 \u0627\u0644\u062d\u0648\u0636.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:10.txt"
+  },
+  {
+   "n": "012",
+   "file": "012_11 - \u0631\u062d\u0644\u0629 \u0627\u0644\u062e\u0644\u0648\u062f \uff5c \u0627\u0644\u0639\u0644\u0627\u0645\u0629 \u0627\u0644\u0628\u0648\u0637\u064a \uff5c \u0627\u0644\u062d\u0648\u0636.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:11.txt"
+  },
+  {
+   "n": "013",
+   "file": "013_12 - \u0631\u062d\u0644\u0629 \u0627\u0644\u062e\u0644\u0648\u062f \uff5c \u0627\u0644\u0639\u0644\u0627\u0645\u0629 \u0627\u0644\u0628\u0648\u0637\u064a \uff5c \u0627\u0644\u0635\u0631\u0627\u0637.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:12.txt"
+  },
+  {
+   "n": "014",
+   "file": "014_13 - \u0631\u062d\u0644\u0629 \u0627\u0644\u062e\u0644\u0648\u062f \uff5c \u0627\u0644\u0639\u0644\u0627\u0645\u0629 \u0627\u0644\u0628\u0648\u0637\u064a \uff5c \u0627\u0644\u0646\u0627\u0631.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:13.txt"
+  },
+  {
+   "n": "015",
+   "file": "015_14 - \u0631\u062d\u0644\u0629 \u0627\u0644\u062e\u0644\u0648\u062f \uff5c \u0627\u0644\u0639\u0644\u0627\u0645\u0629 \u0627\u0644\u0628\u0648\u0637\u064a \uff5c \u0627\u0644\u0646\u0627\u0631.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:14.txt"
+  },
+  {
+   "n": "016",
+   "file": "016_15 - \u0631\u062d\u0644\u0629 \u0627\u0644\u062e\u0644\u0648\u062f \uff5c \u0627\u0644\u0639\u0644\u0627\u0645\u0629 \u0627\u0644\u0628\u0648\u0637\u064a \uff5c \u0627\u0644\u0646\u0627\u0631.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:15.txt"
+  },
+  {
+   "n": "017",
+   "file": "017_16 - \u0631\u062d\u0644\u0629 \u0627\u0644\u062e\u0644\u0648\u062f \uff5c \u0627\u0644\u0639\u0644\u0627\u0645\u0629 \u0627\u0644\u0628\u0648\u0637\u064a \uff5c \u0645\u0633\u0623\u0644\u0629 \u0627\u0644\u062e\u0644\u0648\u062f \u0641\u064a \u0627\u0644\u062c\u0646\u0629 \u0623\u0648 \u0641\u064a \u0627\u0644\u0646\u0627\u0631.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:16.txt"
+  },
+  {
+   "n": "018",
+   "file": "018_17 - \u0631\u062d\u0644\u0629 \u0627\u0644\u062e\u0644\u0648\u062f \uff5c \u0627\u0644\u0639\u0644\u0627\u0645\u0629 \u0627\u0644\u0628\u0648\u0637\u064a \uff5c \u0627\u0644\u062c\u0646\u0629.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:17.txt"
+  },
+  {
+   "n": "019",
+   "file": "019_18 - \u0631\u062d\u0644\u0629 \u0627\u0644\u062e\u0644\u0648\u062f \uff5c \u0627\u0644\u0639\u0644\u0627\u0645\u0629 \u0627\u0644\u0628\u0648\u0637\u064a \uff5c \u0627\u0644\u062c\u0646\u0629.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:18.txt"
+  },
+  {
+   "n": "020",
+   "file": "020_19 - \u0631\u062d\u0644\u0629 \u0627\u0644\u062e\u0644\u0648\u062f \uff5c \u0627\u0644\u0639\u0644\u0627\u0645\u0629 \u0627\u0644\u0628\u0648\u0637\u064a \uff5c \u0627\u0644\u062c\u0646\u0629 \u0648\u0646\u0639\u064a\u0645\u0647\u0627.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:19.txt"
+  },
+  {
+   "n": "021",
+   "file": "021_20 - \u0631\u062d\u0644\u0629 \u0627\u0644\u062e\u0644\u0648\u062f \uff5c \u0627\u0644\u0639\u0644\u0627\u0645\u0629 \u0627\u0644\u0628\u0648\u0637\u064a \uff5c \u0627\u0644\u062c\u0646\u0629 \u0648\u0646\u0639\u064a\u0645\u0647\u0627.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:20.txt"
+  },
+  {
+   "n": "022",
+   "file": "022_21 - \u0631\u062d\u0644\u0629 \u0627\u0644\u062e\u0644\u0648\u062f \uff5c \u0627\u0644\u0639\u0644\u0627\u0645\u0629 \u0627\u0644\u0628\u0648\u0637\u064a \uff5c \u0627\u0644\u062c\u0646\u0629 \u0648\u0646\u0639\u064a\u0645\u0647\u0627.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:21.txt"
+  },
+  {
+   "n": "023",
+   "file": "023_22 - \u0627\u0644\u0623\u062e\u064a\u0631\u0629 - \u0631\u062d\u0644\u0629 \u0627\u0644\u062e\u0644\u0648\u062f \uff5c \u0627\u0644\u0639\u0644\u0627\u0645\u0629 \u0627\u0644\u0628\u0648\u0637\u064a \uff5c \u0627\u0644\u062c\u0646\u0629 \u0648\u0646\u0639\u064a\u0645\u0647\u0627.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:22.txt"
+  }
+ ]
+}

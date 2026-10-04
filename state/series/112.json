@@ -1,0 +1,264 @@
+{
+ "series": {
+  "id": "112",
+  "key": "\u0645\u0642\u062a\u0637\u0641\u0627\u062a \u0628\u0631\u0646\u0627\u0645\u062c #\u0627\u0644\u0625\u0646\u0633\u0627\u0646\u064a\u0629_\u0642\u0628\u0644_\u0627\u0644\u062a\u062f\u064a\u0646",
+  "sheikh": "\u0627\u0644\u062d\u0628\u064a\u0628 \u0639\u0644\u064a \u0627\u0644\u062c\u0641\u0631\u064a",
+  "url": "https://www.youtube.com/playlist?list=PLoIHYx0vytqgw3J_I6Vcxkt-8pxZyrO0q",
+  "exp": 13,
+  "files_expected": 30,
+  "downloaded": 0,
+  "transcribed": 30,
+  "pending": 0,
+  "active": 0,
+  "bad": 0,
+  "frozen": false,
+  "skipped": false,
+  "paused": false,
+  "state": "done",
+  "resume_from": null,
+  "tr_dir": null,
+  "pipe_dir": null
+ },
+ "files": [
+  {
+   "n": "014",
+   "file": "014_13.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:13.txt"
+  },
+  {
+   "n": "015",
+   "file": "015_14.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:14.txt"
+  },
+  {
+   "n": "016",
+   "file": "016_15.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:15.txt"
+  },
+  {
+   "n": "017",
+   "file": "017_16.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:16.txt"
+  },
+  {
+   "n": "018",
+   "file": "018_17.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:17.txt"
+  },
+  {
+   "n": "019",
+   "file": "019_18.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:18.txt"
+  },
+  {
+   "n": "020",
+   "file": "020_19.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:19.txt"
+  },
+  {
+   "n": "021",
+   "file": "021_20.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:20.txt"
+  },
+  {
+   "n": "022",
+   "file": "022_21.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:21.txt"
+  },
+  {
+   "n": "023",
+   "file": "023_22.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:22.txt"
+  },
+  {
+   "n": "024",
+   "file": "024_23.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:23.txt"
+  },
+  {
+   "n": "025",
+   "file": "025_24.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:24.txt"
+  },
+  {
+   "n": "026",
+   "file": "026_25.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:25.txt"
+  },
+  {
+   "n": "027",
+   "file": "027_26.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:26.txt"
+  },
+  {
+   "n": "028",
+   "file": "028_27.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:27.txt"
+  },
+  {
+   "n": "029",
+   "file": "029_28.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:28.txt"
+  },
+  {
+   "n": "030",
+   "file": "030_29.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:29.txt"
+  },
+  {
+   "n": "031",
+   "file": "031_30.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:30.txt"
+  },
+  {
+   "n": "032",
+   "file": "032_31.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:31.txt"
+  },
+  {
+   "n": "033",
+   "file": "033_32.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:32.txt"
+  },
+  {
+   "n": "034",
+   "file": "034_33.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:33.txt"
+  },
+  {
+   "n": "035",
+   "file": "035_34.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:34.txt"
+  },
+  {
+   "n": "037",
+   "file": "037_36.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:36.txt"
+  },
+  {
+   "n": "038",
+   "file": "038_37.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:37.txt"
+  },
+  {
+   "n": "039",
+   "file": "039_38.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:38.txt"
+  },
+  {
+   "n": "040",
+   "file": "040_39.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:39.txt"
+  },
+  {
+   "n": "041",
+   "file": "041_40.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:40.txt"
+  },
+  {
+   "n": "042",
+   "file": "042_41.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:41.txt"
+  },
+  {
+   "n": "043",
+   "file": "043_42.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:42.txt"
+  },
+  {
+   "n": "044",
+   "file": "044_43.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:43.txt"
+  }
+ ]
+}

@@ -1,0 +1,23 @@
+{
+ "series": {
+  "id": "911",
+  "key": "\u0627\u0644\u0645\u0624\u062a\u0645\u0631\u0627\u062a \u0648\u0627\u0644\u0641\u0627\u0639\u0644\u064a\u0627\u062a \u0627\u0644\u0639\u0644\u0645\u064a\u0629 | \u0623.\u062f \u0639\u0644\u064a \u062c\u0645\u0639\u0629",
+  "sheikh": "\u0639\u0644\u064a \u062c\u0645\u0639\u0629",
+  "url": "https://www.youtube.com/playlist?list=PLxQnfwkf6ksimL0CCBhYcYZ1x2gUnoeP_",
+  "exp": 21,
+  "files_expected": 0,
+  "downloaded": 0,
+  "transcribed": 0,
+  "pending": 0,
+  "active": 0,
+  "bad": 0,
+  "frozen": false,
+  "skipped": false,
+  "paused": false,
+  "state": "untouched",
+  "resume_from": null,
+  "tr_dir": null,
+  "pipe_dir": null
+ },
+ "files": []
+}

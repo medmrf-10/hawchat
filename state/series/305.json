@@ -1,0 +1,23 @@
+{
+ "series": {
+  "id": "305",
+  "key": "\u0645\u0641\u0627\u0647\u064a\u0645 \u0635\u062d\u062d\u0647\u0627 \u0627\u0644\u0646\u0628\u064a",
+  "sheikh": "\u0627\u0644\u062d\u0628\u064a\u0628 \u0639\u0645\u0631 \u0628\u0646 \u062d\u0641\u064a\u0638",
+  "url": "https://www.youtube.com/playlist?list=PLW_g96PMCVLLSw-IO2Zyd7HaGq0n4nedf",
+  "exp": 30,
+  "files_expected": 0,
+  "downloaded": 0,
+  "transcribed": 0,
+  "pending": 0,
+  "active": 0,
+  "bad": 0,
+  "frozen": false,
+  "skipped": false,
+  "paused": false,
+  "state": "untouched",
+  "resume_from": null,
+  "tr_dir": "/home/ubuntu/durus/transcripts_agy/305_\u0645\u0641\u0627\u0647\u064a\u0645 \u0635\u062d\u062d\u0647\u0627 \u0627\u0644\u0646\u0628\u064a",
+  "pipe_dir": "305_\u0645\u0641\u0627\u0647\u064a\u0645 \u0635\u062d\u062d\u0647\u0627 \u0627\u0644\u0646\u0628\u064a"
+ },
+ "files": []
+}

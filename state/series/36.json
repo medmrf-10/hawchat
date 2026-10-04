@@ -1,0 +1,216 @@
+{
+ "series": {
+  "id": "36",
+  "key": "\u0634\u0631\u062d \u0627\u0644\u0631\u0633\u0627\u0644\u0629 \u0627\u0644\u0639\u0636\u062f\u064a\u0629",
+  "sheikh": "\u0645\u0648\u0644\u0648\u062f \u0627\u0644\u0633\u0631\u064a\u0631\u064a",
+  "url": "https://www.youtube.com/playlist?list=PLJdyh1foKTw0oHM1X8wWoatpL8d_xggBU",
+  "exp": 23,
+  "files_expected": 24,
+  "downloaded": 0,
+  "transcribed": 24,
+  "pending": 0,
+  "active": 0,
+  "bad": 0,
+  "frozen": false,
+  "skipped": false,
+  "paused": false,
+  "state": "done",
+  "resume_from": null,
+  "tr_dir": null,
+  "pipe_dir": null
+ },
+ "files": [
+  {
+   "n": "001",
+   "file": "001_0.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:0.txt"
+  },
+  {
+   "n": "002",
+   "file": "002_1.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:1.txt"
+  },
+  {
+   "n": "003",
+   "file": "003_2.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:2.txt"
+  },
+  {
+   "n": "005",
+   "file": "005_4.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:4.txt"
+  },
+  {
+   "n": "007",
+   "file": "007_6.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:6.txt"
+  },
+  {
+   "n": "009",
+   "file": "009_8.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:8.txt"
+  },
+  {
+   "n": "011",
+   "file": "011_10.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:10.txt"
+  },
+  {
+   "n": "013",
+   "file": "013_12.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:12.txt"
+  },
+  {
+   "n": "015",
+   "file": "015_14.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:14.txt"
+  },
+  {
+   "n": "017",
+   "file": "017_16.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:16.txt"
+  },
+  {
+   "n": "019",
+   "file": "019_18.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:18.txt"
+  },
+  {
+   "n": "021",
+   "file": "021_20.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:20.txt"
+  },
+  {
+   "n": "023",
+   "file": "023_22.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:22.txt"
+  },
+  {
+   "n": "025",
+   "file": "025_24.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:24.txt"
+  },
+  {
+   "n": "027",
+   "file": "027_26.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:26.txt"
+  },
+  {
+   "n": "029",
+   "file": "029_28.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:28.txt"
+  },
+  {
+   "n": "031",
+   "file": "031_30.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:30.txt"
+  },
+  {
+   "n": "033",
+   "file": "033_32.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:32.txt"
+  },
+  {
+   "n": "035",
+   "file": "035_34.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:34.txt"
+  },
+  {
+   "n": "037",
+   "file": "037_36.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:36.txt"
+  },
+  {
+   "n": "039",
+   "file": "039_38.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:38.txt"
+  },
+  {
+   "n": "041",
+   "file": "041_40.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:40.txt"
+  },
+  {
+   "n": "043",
+   "file": "043_42.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:42.txt"
+  },
+  {
+   "n": "045",
+   "file": "045_44.txt",
+   "downloaded": false,
+   "audio": null,
+   "transcribed": true,
+   "txt": "me:44.txt"
+  }
+ ]
+}

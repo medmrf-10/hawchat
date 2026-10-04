@@ -1,0 +1,23 @@
+{
+ "series": {
+  "id": "707",
+  "key": "\u062a\u0627\u0631\u064a\u062e \u0627\u0644\u0641\u0643\u0631 \u0627\u0644\u0639\u0631\u0628\u064a \u0648\u0627\u0644\u0625\u0633\u0644\u0627\u0645\u064a \u0627\u0644\u062d\u062f\u064a\u062b",
+  "sheikh": "\u0623\u062d\u0645\u062f \u0627\u0644\u0633\u064a\u062f",
+  "url": "https://www.youtube.com/playlist?list=PLZmiPrHYOIsT9cC68G_p2sumuZTyBCAQQ",
+  "exp": 4,
+  "files_expected": 0,
+  "downloaded": 0,
+  "transcribed": 0,
+  "pending": 0,
+  "active": 0,
+  "bad": 0,
+  "frozen": false,
+  "skipped": false,
+  "paused": false,
+  "state": "untouched",
+  "resume_from": null,
+  "tr_dir": "/home/ubuntu/durus/transcripts_agy/707_\u062a\u0627\u0631\u064a\u062e \u0627\u0644\u0641\u0643\u0631 \u0627\u0644\u0639\u0631\u0628\u064a \u0648\u0627\u0644\u0625\u0633\u0644\u0627\u0645\u064a \u0627\u0644\u062d\u062f\u064a\u062b",
+  "pipe_dir": "707_\u062a\u0627\u0631\u064a\u062e \u0627\u0644\u0641\u0643\u0631 \u0627\u0644\u0639\u0631\u0628\u064a \u0648\u0627\u0644\u0625\u0633\u0644\u0627\u0645\u064a \u0627\u0644\u062d\u062f\u064a\u062b"
+ },
+ "files": []
+}
