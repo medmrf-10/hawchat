@@ -56,6 +56,8 @@ details summary{cursor:pointer;color:var(--acc2);font-size:.78rem;padding:6px 0}
 .ed .eh{color:var(--acc2);font-size:.8rem;font-weight:600}
 .ed .et{font-family:var(--font-ar);font-size:1.02rem;line-height:2;margin-top:6px}
 .ayahbox{font-family:var(--font-ar);font-size:1.5rem;line-height:2.4;text-align:center;color:var(--acc2);background:var(--card);border:1px solid var(--acc);border-radius:var(--r-lg);padding:18px 22px;margin:14px 0}
+.snip{font-family:var(--font-ar);font-size:.85rem;color:var(--dim);line-height:1.9;margin-top:4px;min-height:1.2em}
+.snip .hl{color:var(--acc2);font-weight:700;background:var(--card2);border-radius:4px;padding:0 4px}
 </style>
 </head>
 <body>
@@ -175,13 +177,47 @@ async function vSearch(q){
   <div class="h-title cin">نتائج «${esc(q)}»</div>
   <div class="sub" id="rcount">${total.toLocaleString('ar')} موضعاً في ${Object.keys(sciRes).length} علوم${capped?' — بعض الكلمات الشائعة جداً قُصّت من الفهرس':''}</div>
   <div id="res"></div><div id="more"></div>`;
-  let shown=0;
+  let shown=0;let snId=0;
+  const nwords=words.map(norm);
+  async function fillSnip(id,sci,b,i){
+    try{
+      let text;
+      if(sci==='tfsr'){const q=await gz(`tfsr/api/quran/${String(b).padStart(3,'0')}.json.gz`);text=(q.ayahs&&q.ayahs[i]&&q.ayahs[i].t)||''}
+      else{const d=await gz(`${sci}/api/books/${b}/parts/${String(i).padStart(4,'0')}.json.gz`);text=d.text||''}
+      const el=document.getElementById(id);if(!el)return;
+      if(!text){el.textContent='—';return}
+      const map=[];let nt='';
+      for(let c=0;c<text.length;c++){const n=norm(text[c]);for(const ch of n){nt+=ch;map.push(c)}}
+      let pos=-1;
+      for(const w of nwords){const p=nt.indexOf(w);if(p>=0){pos=p;break}}
+      if(pos<0)pos=0;
+      const aN=Math.max(0,pos-70),zN=Math.min(nt.length,pos+200);
+      const a=map[aN],z=Math.min(text.length,map[zN-1]+1);
+      const ranges=[];
+      for(const w of nwords){
+        if(!w)continue;
+        let i=nt.indexOf(w,aN);
+        while(i>=0&&i<zN){ranges.push([i,i+w.length]);i=nt.indexOf(w,i+1)}
+      }
+      ranges.sort((x,y)=>x[0]-y[0]);
+      let html='',cur=aN;
+      for(const r of ranges){
+        if(r[0]<cur)continue;
+        html+=esc(text.slice(map[cur],map[r[0]]))+`<b class="hl">`+esc(text.slice(map[r[0]],map[r[1]-1]+1))+`</b>`;
+        cur=r[1];
+      }
+      if(cur<zN)html+=esc(text.slice(map[cur],z));
+      el.innerHTML=(a>0?'…':'')+html+(z<text.length?'…':'');
+    }catch(e){const el=document.getElementById(id);if(el)el.textContent=''}
+  }
   window.moreRes=async()=>{
     const batch=flat.slice(shown,shown+30);shown+=batch.length;
     const rows=[];
     for(const r of batch){
-      if(r.sci==='tfsr')rows.push(`<div class="row" onclick="go('#/t/${r.b}/${r.i}')"><span class="badge">التفسير</span><span class="tx">سورة ${esc(SURAHS[r.b-1])} : آية ${r.i}</span></div>`);
-      else rows.push(`<div class="row" onclick="go('#/p/${r.sci}/${r.b}/${r.i}')"><span class="badge">${esc(SCI[r.sci][0])}</span><span class="tx">${esc(await bookTitle(r.sci,r.b))}</span><span class="bb">جزء ${r.i}</span></div>`);
+      const id='sn'+(snId++);
+      if(r.sci==='tfsr')rows.push(`<div class="row" style="display:block" onclick="go('#/t/${r.b}/${r.i}')"><div style="display:flex;gap:10px;align-items:baseline"><span class="badge">التفسير</span><span class="tx">سورة ${esc(SURAHS[r.b-1])} : آية ${r.i}</span></div><div class="snip" id="${id}">…</div></div>`);
+      else rows.push(`<div class="row" style="display:block" onclick="go('#/p/${r.sci}/${r.b}/${r.i}')"><div style="display:flex;gap:10px;align-items:baseline"><span class="badge">${esc(SCI[r.sci][0])}</span><span class="tx">${esc(await bookTitle(r.sci,r.b))}</span><span class="bb">جزء ${r.i}</span></div><div class="snip" id="${id}">…</div></div>`);
+      fillSnip(id,r.sci,r.b,r.i);
     }
     $('#res').insertAdjacentHTML('beforeend',rows.join(''));
     $('#more').innerHTML=shown<flat.length?`<div class="pg"><button onclick="moreRes()">المزيد (${(flat.length-shown).toLocaleString('ar')})</button></div>`:'';

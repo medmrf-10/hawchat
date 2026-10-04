@@ -119,6 +119,8 @@ async function vHome(){
   <div class="doors">${cats.map(([c,v])=>`<div class="door" onclick="go('#/s/${c}')"><b>${esc(CATS[cnOf(c)]||c)}</b><span>${v.hadiths.toLocaleString('ar')} حديثاً</span></div>`).join('')}</div>
   <div class="secttl">المتون (${mats.length})</div>
   <div class="doors">${mats.map(([id,n])=>`<div class="door" onclick="go('#/m/${id}')"><b>${esc(MATN_NAMES[id]||id)}</b><span>${n.toLocaleString('ar')} حديثاً</span></div>`).join('')}</div>
+  <div class="secttl">أبواب كتب المصادر</div>
+  <div class="doors">${Object.keys(LOC2MATN).map(n=>`<div class="door" onclick="go('#/lb/${LOC2MATN[n]}')"><b>${esc(n)}</b><span>تصفّح بأبوابه</span></div>`).join('')}</div>
   <div class="secttl">كتب الشروح (${ix.sharh_books.length})</div>
   <div class="doors" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))">${ix.sharh_books.map(b=>`<div class="door" onclick="go('#/sh/${b.sid}')" style="text-align:right"><b>${esc(b.title)}</b><span>${esc(b.author)} · ${b.parts.toLocaleString('ar')} جزءاً</span></div>`).join('')}</div>`;
   $('#q').addEventListener('keydown',e=>{if(e.key==='Enter')doSearch()});
@@ -167,6 +169,57 @@ async function shamiForMatn(book,no){
   for(const h of (m[no]||[]))(byH[h.cf+':'+h.id]=byH[h.cf+':'+h.id]||{cf:h.cf,id:h.id,babs:[]}).babs.push(h.bab);
   return Object.values(byH);
 }
+/* ---------- bab browsing ---------- */
+const babix={};
+async function babIndex(book){
+  if(!babix[book]){
+    babix[book]=(async()=>{
+      const babs={};
+      for(const cf of Object.keys(CATFILES)){
+        try{
+          const d=await gz(`hadiths/${cf}.json.gz`);
+          for(const[id,r]of Object.entries(d)){
+            for(const[b,l]of Object.entries(r.locs||{})){
+              if(LOC2MATN[b]===book)for(const bb of (l.babs||[]))
+                (babs[bb]=babs[bb]||[]).push({cf,id,no:r.no,text:r.text,hukm:r.hukm});
+            }
+          }
+        }catch(e){}
+      }
+      return babs;
+    })();
+  }
+  return babix[book];
+}
+async function vBabs(book,page=1){
+  app.innerHTML='<div class="loading">جارٍ بناء فهرس الأبواب…</div>';
+  const babs=await babIndex(book);
+  const names=Object.keys(babs).sort();
+  const per=60,pages=Math.ceil(names.length/per)||1;
+  page=Math.max(1,Math.min(page,pages));
+  const slice=names.slice((page-1)*per,page*per);
+  const i0=(page-1)*per;
+  app.innerHTML=`
+  <span class="back" onclick="go('#/')">‹ الرئيسية</span>
+  <div class="h-title cin">${esc(MATN_NAMES[book]||book)} — الأبواب</div>
+  <div class="sub">${names.length.toLocaleString('ar')} باباً مستخرجاً من مواضع الشامي — صفحة ${page}/${pages}</div>
+  <div class="card">${slice.map((b,j)=>`<div class="row" onclick="go('#/lb/${book}/b${i0+j}')"><span class="tx">${esc(b)}</span><span class="bb">${babs[b].length} حديثاً</span></div>`).join('')}</div>
+  <div class="pg"><button ${page<=1?'disabled':''} onclick="go('#/lb/${book}/${page-1}')">السابق</button><span>${page} / ${pages}</span><button ${page>=pages?'disabled':''} onclick="go('#/lb/${book}/${page+1}')">التالي</button></div>`;
+}
+async function vBab(book,idx){
+  app.innerHTML='<div class="loading">…</div>';
+  const babs=await babIndex(book);
+  const names=Object.keys(babs).sort();
+  const bab=names[+idx];
+  if(!bab){app.innerHTML='<div class="err">باب غير موجود.</div>';return}
+  const items=babs[bab];
+  app.innerHTML=`
+  <span class="back" onclick="go('#/lb/${book}')">‹ ${esc(MATN_NAMES[book]||book)}</span>
+  <div class="h-title cin">${esc(bab)}</div>
+  <div class="sub">${items.length.toLocaleString('ar')} حديثاً في كتب الشامي</div>
+  <div class="card">${items.map(h=>`<div class="row" onclick="go('#/h/${CATFILES[h.cf]}/${h.id}')"><span class="no">${h.no}</span><span class="tx">${esc((h.text||'').slice(0,95))}…</span>${h.hukm?hukmBadge(h.hukm):''}</div>`).join('')}</div>`;
+}
+
 async function vMatnHadith(book,no){
   app.innerHTML='<div class="loading">…</div>';
   const d=await gz(`matn/${book}.json.gz`);
@@ -311,6 +364,9 @@ async function route(){
     if(p[0]==='s'&&p[2])return vShami(p[1],+p[2]);
     if(p[0]==='s')return vShami(p[1]||'wajiz');
     if(p[0]==='h')return vHadith(+p[1],+p[2]);
+    if(p[0]==='lb'&&p[2]&&p[2][0]==='b')return vBab(p[1],p[2].slice(1));
+    if(p[0]==='lb'&&p[2])return vBabs(p[1],+p[2]);
+    if(p[0]==='lb')return vBabs(p[1]||'bukhari');
     if(p[0]==='sh'&&p[2]){
       if(/^p\d+$/.test(p[2]))return vSharhToc(p[1],+p[2].slice(1));
       return vSharhPart(p[1],+p[2]);
