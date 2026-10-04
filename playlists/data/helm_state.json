@@ -1,5 +1,5 @@
 {
- "t": 1791135311,
+ "t": 1791135373,
  "series": [
   {
    "key": "619_دورة في علم الحديث على منهج المتقدمين",
@@ -2597,9 +2597,9 @@
    "key": "761_سلسلة القصص القرآني",
    "sheikh": "أدهم العاسمي",
    "total": 29,
-   "done": 9,
-   "pending": 41,
-   "active": 9,
+   "done": 10,
+   "pending": 39,
+   "active": 10,
    "bad": 0,
    "held": false,
    "paused": false,
@@ -2607,7 +2607,7 @@
    "name": "سلسلة القصص القرآني",
    "exp": 124,
    "feed": "queued",
-   "remaining": 20,
+   "remaining": 19,
    "fqpos": "a51",
    "dl": 29
   },
@@ -13000,7 +13000,7 @@
   {
    "key": "408_الجديد في إعجاز القرآن الكريم",
    "sheikh": "محمد سعيد رمضان البوطي",
-   "total": 17,
+   "total": 22,
    "done": 30,
    "pending": 0,
    "active": 0,
@@ -13013,7 +13013,7 @@
    "feed": "downloading",
    "remaining": 0,
    "fqpos": "a1",
-   "dl": 17
+   "dl": 22
   },
   {
    "key": "409_Imam AlBouti_Short videoes with Russian subtitles",
