@@ -98,11 +98,13 @@ details#cmdlog .l{font-size:.64rem;color:var(--dim);padding:3px 0;border-top:1px
 <div style="height:76px"></div>
 </div>
 <button id="save">حفظ الترتيب والتجميد — يُطبَّق خلال دقيقة</button>
+<button id="und" class="btn" style="position:fixed;bottom:74px;left:16px;display:none;z-index:50">↩ تراجع عن التعديلات</button>
+<style>#und.show{display:block}</style>
 <div id="toast"></div>
 <script>
 const NT='https://ntfy.sh/des_helm_q7';
 const MUT='https://medmrf-10.github.io/des/mutalaa/';
-let series=[],order=[],skip=new Set(),paused=new Set(),dirty=false;
+let series=[],order=[],skip=new Set(),paused=new Set(),dirty=false,edits=0;
 let view='all',flt='',fsh='',limit=300;
 const VIEWS=[['all','الكل'],['nodl','لم تُنزَّل'],['feed','التنزيل'],['queue','الطابور'],['active','نشط'],['done','مفرّغ'],['complete','مكتملة'],['bad','فاشل'],['paused','متوقفة'],['held','غير مرغوب']];
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -121,7 +123,8 @@ const ICON={
 function L(t,a){return `<button class="btn ${a.c||''}" data-a="${a.a}" data-k="${esc(t)}" title="${a.t}">${ICON[a.i]||a.i}</button>`}
 
 async function boot(){
-  if(dirty){document.getElementById('pendtag').classList.add('show');return}
+  if(dirty)return;
+  edits=0;
   document.getElementById('pendtag').classList.remove('show');
   const [s,o]=await Promise.all([
     fetch('data/helm_state.json?v='+Date.now()).then(r=>r.json()).catch(()=>({series:[]})),
@@ -175,6 +178,7 @@ function nums(x){
   if(x.pending)p.push(`<b class="p">${x.pending}</b> منتظر`);
   if(x.active)p.push(`<b class="a">${x.active}</b> نشط`);
   if(x.bad)p.push(`<b class="b">${x.bad}</b> فاشل`);
+  if(x.exp&&(x.done>x.exp||x.total>x.exp))p.push('<b class="b">⚠ زيادة عن الأصل</b>');
   return p.join(' · ');
 }
 function acts(x){
@@ -281,7 +285,9 @@ function render(){
   const mb=document.getElementById('more');
   if(mb)mb.onclick=()=>{limit+=500;render()};
   document.getElementById('save').classList.toggle('show',dirty);
-  if(dirty)document.getElementById('pendtag').classList.add('show');
+  document.getElementById('und').classList.toggle('show',dirty);
+  const pt=document.getElementById('pendtag');
+  if(dirty){pt.textContent=edits+' تعديل معلّق — التحديث التلقائي موقوف';pt.classList.add('show')}
 }
 document.addEventListener('click',e=>{
   const t=e.target.closest('button');if(!t)return;
@@ -299,13 +305,14 @@ document.addEventListener('click',e=>{
   else{let i=order.indexOf(k);if(i<0){order.push(k);i=order.length-1}
     if(a==='up'&&i>0){[order[i-1],order[i]]=[order[i],order[i-1]]}
     if(a==='dn'&&i<order.length-1){[order[i+1],order[i]]=[order[i],order[i+1]]}}
-  dirty=true;render();
+  dirty=true;edits++;render();
 });
+document.getElementById('und').onclick=()=>{dirty=false;edits=0;boot()};
 document.getElementById('flt').addEventListener('input',e=>{flt=e.target.value.trim();limit=300;render()});
 document.getElementById('save').onclick=async()=>{
   const body=JSON.stringify({kind:'helm',order,skip:[...skip],pause:[...paused],t:Date.now()});
   try{const r=await fetch(NT,{method:'POST',body});
-    if(r.ok){toast('حُفظ — يُطبَّق خلال دقيقة');clog('helm','ترتيب/تجميد '+skip.size+' مجمّد، '+paused.size+' متوقف');dirty=false;render();}
+    if(r.ok){toast('حُفظ — يُطبَّق خلال دقيقة');clog('helm','ترتيب/تجميد '+skip.size+' مجمّد، '+paused.size+' متوقف');dirty=false;edits=0;render();}
     else toast('تعذّر الحفظ — جرّب ثانية',1);}
   catch(e){toast('تعذّر الحفظ — جرّب ثانية',1)}
 };
