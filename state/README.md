@@ -38,3 +38,11 @@
 
 - سلاسل: 1006 · شيوخ: 11
 - مفرّغ: 3,419 ملفاً · متوقَّع إجمالاً: 52,251
+
+## Live fleet protocol (statectl daemon)
+Agents POST JSON to `https://ntfy.sh/des_state_q9`:
+- `{"kind":"heartbeat","agent":"<id>","status":"متصل","current":"<what now>","stats":{"t":"24","d":"0","u":"0"}}` — every ~15min
+- `{"kind":"transcribe","agent":"<id>","sid":"<seriesId>","msg":"002_..."}` — per event
+- `{"kind":"download"|"chat"|"upload"|"assign"|"note","agent":"...","sid":"...","msg":"..."}`
+- `{"kind":"state","sid":"<id>","frozen":true}` — state overrides
+Agent ids: old, sasi, bahith, moarshaf, naqid. Daemon merges → agents.json/events.json → pushes live.
