@@ -1,14 +1,14 @@
 {
- "t": 1791134962,
+ "t": 1791135000,
  "tasks": [
   {
    "id": "t-1",
    "title": "محاذاة 822 حلقة 124",
    "kind": "align",
    "prio": 20,
-   "status": "claimed",
-   "owner": "sassi",
-   "claimed_at": 1791134961,
+   "status": "open",
+   "owner": "",
+   "claimed_at": 0,
    "result": "",
    "detail": "build/822: النص txt/124*.txt والصوت audio/124*.mp3 — أخرج out/124.json بصيغة {cov,w:[[word,t0,t1,seg]]} ثم انسخه إلى hawchat/playlists/lessons/gomaa-khawarij/124.align.json",
    "created": 1791134451
