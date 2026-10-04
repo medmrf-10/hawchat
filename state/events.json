@@ -1,3 +1,11 @@
 {
- "events": []
+ "events": [
+  {
+   "agent": "old",
+   "kind": "heartbeat",
+   "sid": null,
+   "msg": "",
+   "ts": 1791144511
+  }
+ ]
 }
