@@ -3,51 +3,56 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>دفة القيادة — hawchat</title>
+<title>دفة القيادة — التفريغ والتنزيل</title>
 <meta name="theme-color" content="#0b0f1a">
 <link rel="icon" type="image/png" href="../icons/icon-192.png">
 <link rel="stylesheet" href="../theme.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-.wrap{max-width:820px;margin:0 auto;padding:16px}
-.hero{display:flex;align-items:end;gap:14px;margin:10px 0 16px}
-.hero h1{font-family:var(--font-ar);font-size:1.6rem;font-weight:700;background:linear-gradient(135deg,var(--acc2),var(--acc));-webkit-background-clip:text;background-clip:text;color:transparent;margin:0}
-.hero .pill{font-size:.68rem;color:var(--dim);border:1px solid var(--border);border-radius:99px;padding:4px 12px;margin-bottom:6px;white-space:nowrap}
-.bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
-.tab{height:34px;padding:0 13px;border-radius:99px;border:1px solid var(--border);background:var(--card);color:var(--txt);font-family:var(--font-ui);font-size:.73rem;font-weight:600;cursor:pointer;transition:.15s}
+.wrap{max-width:880px;margin:0 auto;padding:16px}
+.hero{display:flex;align-items:end;gap:12px;margin:6px 0 14px;flex-wrap:wrap}
+.hero h1{font-family:var(--font-ar);font-size:1.55rem;font-weight:700;background:linear-gradient(135deg,var(--acc2),var(--acc));-webkit-background-clip:text;background-clip:text;color:transparent;margin:0}
+.hero .mut{font-size:.66rem;color:var(--dim)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:8px;margin-bottom:14px}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:var(--r-md);padding:9px 12px}
+.kpi b{display:block;font-size:1.15rem}
+.kpi span{font-size:.62rem;color:var(--dim)}
+.kpi.d b{color:var(--acc)}.kpi.a b{color:var(--acc3)}.kpi.p b{color:#c9a227}.kpi.b b{color:#e74c3c}.kpi.f b{color:#5a8ad0}.kpi.u b{color:#95a3bb}
+.bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+.tab{height:32px;padding:0 12px;border-radius:99px;border:1px solid var(--border);background:var(--card);color:var(--txt);font-family:var(--font-ui);font-size:.7rem;font-weight:600;cursor:pointer;transition:.15s;white-space:nowrap}
 .tab.on{background:var(--acc);color:var(--bg);border-color:var(--acc)}
-input#flt{flex:1;min-width:110px;height:34px;background:var(--card);border:1px solid var(--border);border-radius:99px;color:var(--txt);padding:0 14px;font-family:var(--font-ui);font-size:.8rem}
-input#flt:focus{outline:none;border-color:var(--acc)}
-.shc{display:block;background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:14px 16px;margin-bottom:10px;text-decoration:none;color:var(--txt);transition:border-color .15s}
-.shc:hover{border-color:var(--acc)}
-.shc .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
-.shc .nm{font-family:var(--font-ar);font-size:1.05rem;font-weight:700}
-.shc .ct{font-size:.66rem;color:var(--dim);white-space:nowrap}
-.pb{display:flex;height:9px;border-radius:99px;overflow:hidden;background:var(--bg);margin-top:10px;border:1px solid var(--border)}
-.pb i{display:block;height:100%}
-.pb .d{background:var(--acc)}.pb .a{background:var(--acc3)}.pb .p{background:#8a6d1a}
-.pb .b{background:#c0392b}.pb .z{background:#3a4a8a}.pb .h{background:#444;opacity:.5}
-.lgnd{display:flex;gap:10px;flex-wrap:wrap;font-size:.62rem;color:var(--dim);margin-top:8px}
-.lgnd span::before{content:'●';margin-left:3px}
-.lgnd .d::before{color:var(--acc)}.lgnd .a::before{color:var(--acc3)}.lgnd .p::before{color:#8a6d1a}
-.lgnd .b::before{color:#c0392b}.lgnd .z::before{color:#3a4a8a}.lgnd .h::before{color:#666}
-.ser{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:var(--r-md);padding:9px 12px;margin-bottom:7px}
+select#fsh,input#flt{height:32px;background:var(--card);border:1px solid var(--border);border-radius:99px;color:var(--txt);padding:0 12px;font-family:var(--font-ui);font-size:.75rem}
+input#flt{flex:1;min-width:120px}
+input#flt:focus,select#fsh:focus{outline:none;border-color:var(--acc)}
+.ser{display:flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--border);border-radius:var(--r-md);padding:8px 11px;margin-bottom:6px}
 .ser.paused{opacity:.55;border-color:#3a4a8a}
 .ser.held{opacity:.45;border-style:dashed}
-.ser .nm{flex:1;min-width:0;font-size:.82rem;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.ser .cnt{font-size:.66rem;color:var(--dim);white-space:nowrap}
-.cnt b{font-size:.8rem;color:var(--txt)}
-.cnt .act{color:var(--acc3)}.cnt .bad{color:#c0392b}.cnt .don{color:var(--acc)}
-.btn{min-width:30px;height:30px;border-radius:var(--r-sm);border:1px solid var(--border);background:var(--card2);color:var(--txt);font-size:.8rem;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0 6px;transition:border-color .15s}
+.ser .ord{color:var(--acc);font-size:.68rem;width:22px;text-align:center;font-weight:700;flex:none}
+.ser .nm{flex:1;min-width:0}
+.ser .nm b{display:block;font-size:.8rem;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ser .nm i{font-style:normal;font-size:.62rem;color:var(--dim)}
+.ser .nums{font-size:.64rem;color:var(--dim);white-space:nowrap;text-align:left;min-width:120px}
+.ser .nums b{font-size:.72rem;color:var(--txt)}
+.nums .d{color:var(--acc)}.nums .a{color:var(--acc3)}.nums .p{color:#c9a227}.nums .b{color:#e74c3c}.nums .u{color:#95a3bb}
+.pb{display:flex;height:6px;border-radius:99px;overflow:hidden;background:var(--bg);margin-top:5px;border:1px solid var(--border)}
+.pb i{display:block;height:100%}
+.pb .d{background:var(--acc)}.pb .a{background:var(--acc3)}.pb .p{background:#8a6d1a}
+.pb .b{background:#c0392b}.pb .z{background:#3a4a8a}.pb .h{background:#444;opacity:.5}.pb .u{background:#5a8ad0}
+.btn{min-width:29px;height:29px;border-radius:var(--r-sm);border:1px solid var(--border);background:var(--card2);color:var(--txt);font-size:.78rem;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0 6px;transition:border-color .15s;flex:none}
 .btn:hover{border-color:var(--acc)}
-.btn.off{border-color:#c0392b;color:#c0392b}
+.btn.off{border-color:#c0392b;color:#e74c3c}
 .btn.on{border-color:var(--acc3);color:var(--acc3)}
 .btn.pause{border-color:#3a4a8a;color:#5a7ad0}
 .btn.retry{border-color:#8a6d1a;color:#c9a227}
 .btn.enq{border-color:var(--acc);color:var(--acc)}
-.bk{display:inline-block;margin:6px 0 12px;font-size:.75rem;color:var(--acc);text-decoration:none}
-#save{position:fixed;bottom:16px;right:16px;left:16px;max-width:788px;margin:0 auto;height:48px;border-radius:var(--r-md);border:none;background:var(--acc);color:var(--bg);font-family:var(--font-ui);font-size:.95rem;font-weight:800;cursor:pointer;box-shadow:0 6px 24px rgba(0,0,0,.45);display:none;z-index:50}
+.btn.dl{border-color:#5a8ad0;color:#7ea9ea}
+.more{background:none;border:none;color:var(--dim);cursor:pointer;font-size:.66rem;padding:10px}
+.shh{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:var(--r-md);padding:9px 13px;margin-bottom:6px;cursor:pointer;text-decoration:none;color:var(--txt)}
+.shh:hover{border-color:var(--acc)}
+.shh .nm{font-family:var(--font-ar);font-size:.98rem;font-weight:700;flex:1}
+.shh .ct{font-size:.64rem;color:var(--dim);white-space:nowrap}
+#save{position:fixed;bottom:16px;right:16px;left:16px;max-width:848px;margin:0 auto;height:46px;border-radius:var(--r-md);border:none;background:var(--acc);color:var(--bg);font-family:var(--font-ui);font-size:.92rem;font-weight:800;cursor:pointer;box-shadow:0 6px 24px rgba(0,0,0,.45);display:none;z-index:50}
 #save.show{display:block}
 #toast{position:fixed;top:18px;right:50%;transform:translateX(50%);background:var(--card2);border:1px solid var(--acc);color:var(--txt);font-size:.78rem;padding:10px 18px;border-radius:99px;opacity:0;transition:.3s;z-index:60;pointer-events:none}
 #toast.show{opacity:1}
@@ -55,26 +60,24 @@ input#flt:focus{outline:none;border-color:var(--acc)}
 </head>
 <body>
 <div class="wrap">
-<div class="hero"><h1 id="title">دفة القيادة</h1><span class="pill" id="stat">…</span></div>
+<div class="hero"><h1>دفة القيادة</h1><a href="./" style="font-size:.7rem;color:var(--acc);text-decoration:none">← موقع السلاسل</a><span class="mut" id="upd"></span></div>
+<div class="kpis" id="kpis"></div>
+<div class="bar" id="tabs"></div>
 <div class="bar">
-  <button class="tab on" data-v="all">الكل</button>
-  <button class="tab" data-v="queue">الطابور</button>
-  <button class="tab" data-v="done">المنجز</button>
-  <button class="tab" data-v="paused">متوقفة</button>
-  <button class="tab" data-v="bad">فاشل</button>
-  <button class="tab" data-v="held">غير مرغوب</button>
-  <input id="flt" placeholder="بحث…">
+  <select id="fsh"><option value="">كل المشايخ</option></select>
+  <input id="flt" placeholder="بحث باسم السلسلة…">
 </div>
 <div id="main"></div>
-<div style="height:84px"></div>
+<div style="height:80px"></div>
 </div>
-<button id="save">حفظ — يُطبَّق على الطابور خلال دقيقة</button>
+<button id="save">حفظ الترتيب والتجميد — يُطبَّق خلال دقيقة</button>
 <div id="toast"></div>
 <script>
 const NT='https://ntfy.sh/des_helm_q7';
 let series=[],order=[],skip=new Set(),paused=new Set(),dirty=false;
-let view='all',flt='',sh=null;
-const SEG={queue:['p','منتظر+نشط'],done:['d','منجز'],paused:['z','متوقف'],bad:['b','فاشل'],held:['h','غير مرغوب']};
+let view='all',flt='',fsh='',limit=200;
+const VIEWS=[['all','الكل'],['nodl','لم تُنزَّل'],['feed','التنزيل'],['queue','الطابور'],['active','نشط'],['done','مفرّغ'],['complete','مكتملة'],['bad','فاشل'],['paused','متوقفة'],['held','غير مرغوب']];
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
 async function boot(){
   const [s,o]=await Promise.all([
@@ -82,150 +85,146 @@ async function boot(){
     fetch('data/helm_order.json?v='+Date.now()).then(r=>r.json()).catch(()=>({order:[],skip:[],pause:[]})),
   ]);
   series=s.series||[];
-  skip=new Set(o.skip||[]);
-  paused=new Set(o.pause||[]);
+  skip=new Set(o.skip||[]);paused=new Set(o.pause||[]);
   const qk=series.filter(x=>(x.pending>0||x.active>0)&&!skip.has(x.key)&&!x.paused).map(x=>x.key);
   order=(o.order||[]).filter(k=>qk.includes(k));
   qk.forEach(k=>{if(!order.includes(k))order.push(k)});
+  document.getElementById('upd').textContent=s.t?('تحديث '+new Date(s.t*1000).toLocaleTimeString('ar')):'';
   render();
 }
-function pretty(k){return k.replace(/^\d+_?/,'')}
-function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
-function tot(x){return Math.max(x.total,x.done+x.pending+x.bad)}
-/* one category per row, precedence matters */
 function cat(x){
   if(skip.has(x.key)||x.held)return 'held';
   if(x.paused||paused.has(x.key))return 'paused';
-  if(x.pending||x.active)return 'queue';
-  if(x.bad&&!x.done)return 'bad';
+  if(x.active)return 'active';
+  if(x.pending)return 'queue';
+  if(x.feed==='downloading'||x.feed==='queued')return 'feed';
+  if(x.exp&&x.done>=x.exp&&x.exp>0)return 'complete';
+  if(x.bad&&!x.done&&!x.total)return 'bad';
   if(x.done)return 'done';
-  if(x.remaining)return 'queue';
-  return 'done';
+  if(!x.total)return 'nodl';
+  return 'queue';
 }
-function pill(x){
+function match(x){
+  if(fsh&&(x.sheikh||'أخرى')!==fsh)return false;
+  if(flt&&!(x.name||x.key).includes(flt))return false;
+  if(view==='all')return true;
+  if(view==='bad')return x.bad>0;
+  if(view==='queue')return cat(x)==='queue'||(x.remaining>0&&x.total>0);
+  return cat(x)===view;
+}
+function nums(x){
   const p=[];
-  if(x.pending&&!x.paused&&!x.held&&!skip.has(x.key))p.push(`<b>${x.pending}</b> منتظر`);
-  if(x.active)p.push(`<b class="act">${x.active}</b> نشط`);
-  if(x.done)p.push(`<b class="don">${x.done}</b> منجز`);
-  if(x.bad)p.push(`<b class="bad">${x.bad}</b> فاشل`);
-  if(!x.pending&&!x.active&&!x.done&&!x.bad&&!x.remaining)p.push('<b>—</b>');
-  else if(x.remaining&&!x.pending&&!x.active)p.push(`<b>${x.remaining}</b> غير مجدول`);
+  p.push(`أصل <b>${x.exp||'؟'}</b>`);
+  if(x.total)p.push(`منزّل <b>${x.total}</b>`);
+  if(x.done)p.push(`<b class="d">${x.done}</b> مفرّغ`);
+  if(x.pending)p.push(`<b class="p">${x.pending}</b> منتظر`);
+  if(x.active)p.push(`<b class="a">${x.active}</b> نشط`);
+  if(x.bad)p.push(`<b class="b">${x.bad}</b> فاشل`);
+  if(!x.total&&x.exp)p.push(`<b class="u">صوت غير موجود</b>`);
+  if(x.feed==='downloading')p.push('<b class="u">⬇ يُنزَّل</b>');
+  else if(x.feed==='queued')p.push(`<b class="u">⬇ بالطابور ${x.fqpos||''}</b>`);
   return p.join(' · ');
 }
-/* actions strictly by row state */
-function actions(x,qi){
+function acts(x,qi){
   const held=skip.has(x.key)||x.held, pz=x.paused||paused.has(x.key);
-  if(held)return `<button class="btn on" data-a="un" data-k="${esc(x.key)}" title="أعد للطابور">↩</button>`;
+  if(held)return `<button class="btn on" data-a="un" data-k="${esc(x.key)}" title="إرجاع">↩</button>`;
   if(pz)return `<button class="btn on" data-a="unp" data-k="${esc(x.key)}" title="استئناف">▶</button>
     <button class="btn off" data-a="sk" data-k="${esc(x.key)}" title="غير مرغوب">✕</button>`;
   let b='';
+  /* download control */
+  if(!x.total&&x.id){
+    if(x.feed==='queued')b+=`<button class="btn off" data-a="ufd" data-k="${esc(x.id)}" title="إلغاء التنزيل">✕⬇</button>`;
+    else if(x.feed==='downloading')b+=`<span class="btn" title="يُنزَّل الآن" style="cursor:default">⬇</span>`;
+    else b+=`<button class="btn dl" data-a="fd" data-k="${esc(x.id)}" title="أضِف لطابور التنزيل">＋⬇</button>`;
+  }
+  if(x.remaining>0&&x.total>0&&!x.pending)b+=`<button class="btn enq" data-a="eq" data-k="${esc(x.key)}" title="جدولة المتبقي">＋</button>`;
   if(x.pending||x.active||x.remaining){
     b+=`<button class="btn" data-a="up" data-k="${esc(x.key)}" title="أعلى">▲</button>
         <button class="btn" data-a="dn" data-k="${esc(x.key)}" title="أسفل">▼</button>
         <button class="btn pause" data-a="pz" data-k="${esc(x.key)}" title="إيقاف مؤقت">⏸</button>`;
   }
-  if(x.remaining&&!x.pending&&!x.active)b+=`<button class="btn enq" data-a="eq" data-k="${esc(x.key)}" title="جدولة الباقي">＋</button>`;
   if(x.bad)b+=`<button class="btn retry" data-a="rt" data-k="${esc(x.key)}" title="أعد الفاشل">↺</button>`;
   if(x.pending||x.active||x.remaining)b+=`<button class="btn off" data-a="sk" data-k="${esc(x.key)}" title="غير مرغوب">✕</button>`;
-  return b; /* pure done rows: no buttons */
+  return b;
 }
 function post(kind,keys){
   fetch(NT,{method:'POST',body:JSON.stringify({kind,keys,t:Date.now()})}).catch(()=>toast('تعذّر الإرسال'));
   toast('أُرسل الأمر — يُطبَّق خلال دقيقة');
 }
-
-function sheikhs(){
-  const m={};
-  series.forEach(x=>{
-    const s=x.sheikh||'أخرى';
-    const g=m[s]||(m[s]={name:s,total:0,done:0,pending:0,active:0,bad:0,paused:0,held:0,n:0});
-    g.n++;g.total+=tot(x);g.done+=x.done;g.bad+=x.bad;
-    if(skip.has(x.key)||x.held)g.held+=tot(x);
-    else if(x.paused||paused.has(x.key))g.paused+=tot(x);
-    else{g.pending+=x.pending;g.active+=x.active}
-  });
-  return Object.values(m).sort((a,b)=>b.total-a.total);
+function bar(x){
+  const T=Math.max(x.exp||0,x.total,x.done+x.pending+x.bad,1);
+  const seg=(n,cls)=>n?`<i class="${cls}" style="width:${n/T*100}%"></i>`:'';
+  return `<div class="pb">${seg(x.done,'d')}${seg(x.active,'a')}${seg(x.pending,'p')}${seg(x.paused?x.total:0,'z')}${seg(x.bad,'b')}${seg(x.held?x.total:0,'h')}</div>`;
 }
-function catCount(g,c){
-  if(c==='queue')return g.pending+g.active;
-  if(c==='done')return g.done;
-  if(c==='paused')return g.paused;
-  if(c==='bad')return g.bad;
-  if(c==='held')return g.held;
-  return g.total;
-}
-function renderSheikhs(){
-  const M=document.getElementById('main');
-  document.getElementById('title').textContent='دفة القيادة';
-  let hs=sheikhs();
-  if(flt)hs=hs.filter(g=>g.name.includes(flt));
-  if(view==='all'){
-    M.innerHTML=`<div class="lgnd"><span class="d">منجز</span><span class="a">نشط</span><span class="p">منتظر</span><span class="z">متوقف</span><span class="b">فاشل</span><span class="h">غير مرغوب</span></div>`;
-    hs.forEach(g=>{
-      const T=Math.max(g.total,1);
-      const d=document.createElement('a');d.className='shc';d.href='#s/'+encodeURIComponent(g.name);
-      d.innerHTML=`<div class="top"><span class="nm">${esc(g.name)}</span><span class="ct">${g.n} سلسلة · ${g.total} ملف</span></div>
-        <div class="pb">
-          <i class="d" style="width:${g.done/T*100}%"></i><i class="a" style="width:${g.active/T*100}%"></i>
-          <i class="p" style="width:${g.pending/T*100}%"></i><i class="z" style="width:${g.paused/T*100}%"></i>
-          <i class="b" style="width:${g.bad/T*100}%"></i><i class="h" style="width:${g.held/T*100}%"></i>
-        </div>
-        <div class="ct" style="margin-top:6px">منجز ${g.done} · منتظر ${g.pending} · نشط ${g.active} · متوقف ${g.paused} · فاشل ${g.bad}${g.held?` · غير مرغوب ${g.held}`:''}</div>`;
-      M.appendChild(d);
-    });
-    return;
+function render(){
+  /* kpis */
+  const k={nodl:0,feed:0,pend:0,act:0,done:0,bad:0,comp:0,exp:0,donef:0};
+  series.forEach(x=>{const c=cat(x);k.exp+=x.exp||0;k.donef+=x.done;
+    if(c==='nodl')k.nodl++;if(c==='feed')k.feed++;
+    k.pend+=x.pending;k.act+=x.active;k.done+=(c==='done'?1:0);k.bad+=x.bad;if(c==='complete')k.comp++;});
+  document.getElementById('kpis').innerHTML=
+    `<div class="kpi"><b>${series.length}</b><span>سلسلة</span></div>
+     <div class="kpi d"><b>${k.donef}</b><span>مفرّغ / ${k.exp}</span></div>
+     <div class="kpi p"><b>${k.pend}</b><span>في الطابور</span></div>
+     <div class="kpi a"><b>${k.act}</b><span>نشط الآن</span></div>
+     <div class="kpi f"><b>${k.feed}</b><span>يُنزَّل</span></div>
+     <div class="kpi u"><b>${k.nodl}</b><span>لم تُنزَّل</span></div>
+     <div class="kpi b"><b>${k.bad}</b><span>فاشل</span></div>
+     <div class="kpi"><b>${k.comp}</b><span>مكتملة</span></div>`;
+  /* tabs */
+  document.getElementById('tabs').innerHTML=VIEWS.map(([v,l])=>{
+    let n='';
+    if(v==='all')n=series.length;
+    else if(v==='bad')n=series.filter(x=>x.bad>0).length;
+    else if(v==='queue')n=series.filter(x=>cat(x)==='queue'||(x.remaining>0&&x.total>0)).length;
+    else n=series.filter(x=>cat(x)===v).length;
+    return `<button class="tab ${view===v?'on':''}" data-v="${v}">${l}${n?` ${n}`:''}</button>`;
+  }).join('');
+  document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{view=b.dataset.v;limit=200;render()});
+  /* sheikh filter */
+  const shs=[...new Set(series.map(x=>x.sheikh||'أخرى'))].sort();
+  const fs=document.getElementById('fsh');
+  if(fs.options.length!==shs.length+1){
+    fs.innerHTML='<option value="">كل المشايخ</option>'+shs.map(s=>`<option ${fsh===s?'selected':''}>${esc(s)}</option>`).join('');
   }
-  const [cls,lbl]=SEG[view];
-  M.innerHTML=`<div class="lgnd"><span class="${cls}">${lbl} — مفلتر</span></div>`;
-  hs.forEach(g=>{
-    const n=catCount(g,view);if(!n)return;
-    const T=Math.max(g.total,1);
-    const d=document.createElement('a');d.className='shc';d.href='#s/'+encodeURIComponent(g.name);
-    d.innerHTML=`<div class="top"><span class="nm">${esc(g.name)}</span><span class="ct"><b style="color:var(--acc)">${n}</b> ${lbl}</span></div>
-      <div class="pb"><i class="${cls}" style="width:${n/T*100}%"></i></div>`;
-    M.appendChild(d);
-  });
-  if(!M.querySelector('.shc'))M.innerHTML+='<p style="color:var(--dim);font-size:.8rem">لا شيء في هذا القسم.</p>';
-}
-function renderSheikh(){
-  const M=document.getElementById('main');
-  document.getElementById('title').textContent=sh;
-  let rows=series.filter(x=>(x.sheikh||'أخرى')===sh);
-  if(view!=='all')rows=rows.filter(x=>view==='bad'?x.bad>0:cat(x)===view);
-  if(flt)rows=rows.filter(x=>x.key.includes(flt));
-  const w={queue:0,done:1,bad:2,paused:3,held:4};
+  fs.onchange=()=>{fsh=fs.value;render()};
+  /* rows */
+  const w={active:0,queue:1,feed:2,bad:3,paused:4,done:5,complete:6,held:7,nodl:8};
+  let rows=series.filter(match);
   rows.sort((a,b)=>{
-    const ca=w[cat(a)],cb=w[cat(b)];
+    const ca=w[cat(a)]??9,cb=w[cat(b)]??9;
     if(ca!==cb)return ca-cb;
     const ia=order.indexOf(a.key),ib=order.indexOf(b.key);
     if(ia>-1&&ib>-1)return ia-ib;
     if(ia>-1)return -1;if(ib>-1)return 1;
-    return a.key.localeCompare(b.key);
+    if(cat(a)==='nodl'||cat(b)==='nodl')return (b.exp||0)-(a.exp||0)||a.key.localeCompare(b.key);
+    return (b.done||0)-(a.done||0)||a.key.localeCompare(b.key);
   });
-  M.innerHTML='<a class="bk" href="#">← كل المشايخ</a>';
-  rows.forEach(x=>{
-    const held=skip.has(x.key)||x.held,pz=x.paused||paused.has(x.key),qi=order.indexOf(x.key);
-    const d=document.createElement('div');d.className='ser'+(held?' held':pz?' paused':'');
-    d.innerHTML=`${qi>-1&&!held&&!pz?`<span style="color:var(--acc);font-size:.7rem;width:20px;text-align:center;font-weight:700">${qi+1}</span>`:'<span style="width:20px"></span>'}
-      <span class="nm">${esc(pretty(x.key))}</span>
-      <span class="cnt">${pill(x)}</span>${actions(x,qi)}`;
-    M.appendChild(d);
+  const M=document.getElementById('main');
+  const shown=rows.slice(0,limit);
+  let h='';
+  shown.forEach(x=>{
+    const c=cat(x),qi=order.indexOf(x.key);
+    const nm=x.name||x.key.replace(/^\d+_?/,'');
+    h+=`<div class="ser${c==='paused'?' paused':c==='held'?' held':''}">
+      ${qi>-1?`<span class="ord">${qi+1}</span>`:'<span class="ord"></span>'}
+      <span class="nm"><b>${esc(nm)}</b><i>${esc(x.sheikh||'')}${x.id?' · #'+x.id:''}</i>${bar(x)}</span>
+      <span class="nums">${nums(x)}</span>${acts(x,qi)}</div>`;
   });
-  if(!rows.length)M.innerHTML+='<p style="color:var(--dim);font-size:.8rem">لا نتائج.</p>';
-}
-function render(){
-  if(sh)renderSheikh();else renderSheikhs();
-  const pend=series.reduce((a,x)=>a+(x.held||x.paused||skip.has(x.key)||paused.has(x.key)?0:x.pending),0),
-        act=series.reduce((a,x)=>a+x.active,0),dn=series.reduce((a,x)=>a+x.done,0);
-  document.getElementById('stat').textContent=`${pend} منتظر · ${act} نشط · ${dn} منجز`;
+  if(rows.length>limit)h+=`<button class="more" id="more">+ ${rows.length-limit} سلسلة إضافية — أظهر المزيد</button>`;
+  if(!rows.length)h+='<p style="color:var(--dim);font-size:.8rem;padding:16px">لا نتائج.</p>';
+  M.innerHTML=h;
+  const mb=document.getElementById('more');
+  if(mb)mb.onclick=()=>{limit+=300;render()};
   document.getElementById('save').classList.toggle('show',dirty);
 }
 document.addEventListener('click',e=>{
   const t=e.target.closest('button');if(!t)return;
-  if(t.classList.contains('tab')){document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===t));view=t.dataset.v;render();return}
   const k=t.dataset.k,a=t.dataset.a;if(!k)return;
   if(a==='eq'){post('helm_enqueue',[k]);return}
   if(a==='rt'){post('helm_retry',[k]);return}
+  if(a==='fd'){post('helm_feed',[k]);return}
+  if(a==='ufd'){post('helm_unfeed',[k]);return}
   if(a==='sk'){skip.add(k);paused.delete(k)}
   else if(a==='un'){skip.delete(k)}
   else if(a==='pz'){paused.add(k)}
@@ -235,18 +234,13 @@ document.addEventListener('click',e=>{
     if(a==='dn'&&i<order.length-1){[order[i+1],order[i]]=[order[i],order[i+1]]}}
   dirty=true;render();
 });
-document.getElementById('flt').addEventListener('input',e=>{flt=e.target.value.trim();render()});
-window.addEventListener('hashchange',()=>{
-  const m=location.hash.match(/^#s\/(.+)$/);
-  sh=m?decodeURIComponent(m[1]):null;render();
-});
+document.getElementById('flt').addEventListener('input',e=>{flt=e.target.value.trim();limit=200;render()});
 document.getElementById('save').onclick=async()=>{
   const body=JSON.stringify({kind:'helm',order,skip:[...skip],pause:[...paused],t:Date.now()});
   try{await fetch(NT,{method:'POST',body});toast('حُفظ — يُطبَّق خلال دقيقة');dirty=false;render();}
   catch(e){toast('تعذّر الحفظ — جرّب ثانية')}
 };
 function toast(t){const el=document.getElementById('toast');el.textContent=t;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2500)}
-const hm=location.hash.match(/^#s\/(.+)$/);if(hm)sh=decodeURIComponent(hm[1]);
 boot();setInterval(boot,60000);
 </script>
 </body>
