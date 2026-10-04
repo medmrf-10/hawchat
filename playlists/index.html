@@ -92,8 +92,8 @@ function pretty(k){return k.replace(/^\d+_?/,'')}
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 function tot(x){return Math.max(x.total,x.done+x.pending+x.bad)}
 function cat(x){
-  if(skip.has(x.key))return 'held';
-  if(x.paused)return 'paused';
+  if(skip.has(x.key)||x.held)return 'held';
+  if(x.paused||paused.has(x.key))return 'paused';
   if(x.pending||x.active)return 'queue';
   if(x.bad&&!x.done)return 'bad';
   if(x.done)return 'done';
