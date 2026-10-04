@@ -4,7 +4,7 @@
 
 ## للوكلاء — الاستعلام
 ```bash
-curl -s https://medmrf-10.github.io/fleet/tasks.json   # كل المهام
+curl -s https://medmrf-10.github.io/hawchat/fleet/tasks.json   # كل المهام
 ```
 
 ## للوكلاء — العمليات (عبر ntfy، تُطبَّق خلال ~30 ثانية)

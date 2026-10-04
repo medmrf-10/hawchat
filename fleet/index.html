@@ -56,7 +56,7 @@ details summary{cursor:pointer;color:#58a6ff;font-weight:600}
 <div class="empty" id="empty" style="display:none">لا مهام مطابقة</div>
 <details class="help"><summary>بروتوكول الوكلاء — الاستعلام والتعديل عن بعد</summary>
 <div style="margin-top:8px">
-قراءة مباشرة: <code>curl -s https://medmrf-10.github.io/fleet/tasks.json</code><br>
+قراءة مباشرة: <code>curl -s https://medmrf-10.github.io/hawchat/fleet/tasks.json</code><br>
 طلب مهمة (أسند لي التالية): <code>curl -s -X POST https://ntfy.sh/des_fleet_q7 -d '{"kind":"fleet","op":"claim","owner":"اسمك","kind":"<align|verify|audit|probe|site>"}'</code><br>
 طلب مهمة محددة: <code>{"kind":"fleet","op":"claim","owner":"اسمك","id":"t-12"}</code><br>
 تسليم: <code>{"kind":"fleet","op":"done","owner":"اسمك","id":"t-12","result":"ملخص"}</code><br>
