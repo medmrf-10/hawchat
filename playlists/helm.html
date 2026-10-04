@@ -220,7 +220,7 @@ async function post(kind,key,label){
 function bar(x){
   const T=Math.max(x.exp||0,x.total,x.done+x.pending+x.bad,1);
   const seg=(n,cls)=>n?`<i class="${cls}" style="width:${n/T*100}%"></i>`:'';
-  return `<div class="pb">${seg(x.done,'d')}${seg(x.active,'a')}${seg(x.pending,'p')}${seg(x.paused?x.total:0,'z')}${seg(x.bad,'b')}${seg(x.held?x.total:0,'h')}${seg(x.feed==='downloading'||x.feed==='queued'?Math.max(0,(x.total||0)-(x.done+x.pending+x.bad))||1,'u'):''}</div>`;
+  return `<div class="pb">${seg(x.done,'d')}${seg(x.active,'a')}${seg(x.pending,'p')}${seg(x.paused?x.total:0,'z')}${seg(x.bad,'b')}${seg(x.held?x.total:0,'h')}${(x.feed==='downloading'||x.feed==='queued')?seg(Math.max(0,(x.total||0)-(x.done+x.pending+x.bad))||1,'u'):''}</div>`;
 }
 function render(){
   const k={nodl:0,feed:0,pend:0,act:0,donef:0,bad:0,comp:0,exp:0};
