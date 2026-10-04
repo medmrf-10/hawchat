@@ -26,6 +26,8 @@
 .ls .t{flex:1;font-size:.92rem;line-height:1.6}
 .ls .ply{color:var(--dim);font-size:.85rem}
 .empty{color:var(--dim);padding:20px}
+.sflt{width:100%;height:40px;background:var(--bg);border:1px solid var(--border);border-radius:var(--r-md);color:var(--txt);padding:0 14px;font-family:var(--font-ui);font-size:.85rem;margin-top:10px;box-sizing:border-box}
+.sflt:focus{outline:none;border-color:var(--acc)}
 </style>
 </head>
 <body>
@@ -47,11 +49,23 @@ function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&l
   document.title=d.title+' — hawchat';
   let h='<div class="hero cin"><h1>'+esc(d.title)+'</h1><div class="meta"><span>'+esc(d.sheikh)+'</span><span>'+d.count+' درساً</span>'
     +(d.playlist?'<a href="'+esc(d.playlist)+'" target="_blank" rel="noopener">قائمة يوتيوب ↗</a>':'')
-    +'</div></div>';
-  for(const l of d.lessons){
-    h+='<a class="ls cin" href="lesson.html?s='+encodeURIComponent(slug)+'&l='+l.n+'"><span class="num">'+l.n+'</span><span class="t">'+esc(l.title)+(l.dur?'<span class="d" style="display:block;color:var(--dim);font-size:.72rem">'+esc(l.dur)+' د</span>':'')+'</span><span class="ply">▶</span></a>';
-  }
+    +'</div><input class="sflt" id="sflt" placeholder="ابحث في دروس السلسلة…"></div><div id="lst"></div>';
   app.innerHTML=h;
+  const norm=s=>(s||'').replace(/[أإآ]/g,'ا').replace(/\s+/g,' ').trim();
+  const draw=q=>{
+    const lst=document.getElementById('lst');let n=0;
+    lst.innerHTML='';
+    for(const l of d.lessons){
+      if(q&&!norm(l.title).includes(q)&&!String(l.n).includes(q))continue;n++;
+      const a=document.createElement('a');a.className='ls cin';
+      a.href='lesson.html?s='+encodeURIComponent(slug)+'&l='+l.n;
+      a.innerHTML='<span class="num">'+l.n+'</span><span class="t">'+esc(l.title)+(l.dur?'<span class="d" style="display:block;color:var(--dim);font-size:.72rem">'+esc(l.dur)+' د</span>':'')+'</span><span class="ply">▶</span>';
+      lst.appendChild(a);
+    }
+    if(!n)lst.innerHTML='<p class="empty">لا نتائج.</p>';
+  };
+  draw('');
+  document.getElementById('sflt').addEventListener('input',e=>draw(norm(e.target.value)));
 })();
 if('serviceWorker' in navigator)navigator.serviceWorker.register('../sw.js').catch(()=>{});
 </script>

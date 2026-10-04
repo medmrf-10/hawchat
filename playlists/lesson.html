@@ -168,7 +168,7 @@ document.addEventListener('click',e=>{
     h+='<div class="pos" id="pos"></div>';
   }else{
     if(l.video)h+='<div class="player" id="pl"><div class="cover" onclick="this.parentElement.innerHTML=\'<iframe src=https://www.youtube.com/embed/'+esc(l.video)+'?autoplay=1 allowfullscreen></iframe>\'"><span class="big">▶</span><span>تشغيل الدرس من يوتيوب — '+esc(l.video)+'</span></div></div>';
-    h+='<div class="txt cin">'+(txt?esc(txt):'التفريغ غير متوفر بعد.')+'</div>';
+    h+='<div class="txt cin">'+(txt?esc(txt):'<div style="text-align:center;color:var(--dim);padding:30px;border:1px dashed var(--border);border-radius:12px">التفريغ غير متوفر بعد — هذا الدرس في طابور المعالجة</div>')+'</div>';
   }
   h+='<div class="nav">'+(prev?'<a href="lesson.html?s='+encodeURIComponent(slug)+'&l='+prev.n+'">→ الدرس السابق</a>':'<span></span>')
     +(next?'<a href="lesson.html?s='+encodeURIComponent(slug)+'&l='+next.n+'">الدرس التالي ←</a>':'<span></span>')+'</div>';

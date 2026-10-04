@@ -73,6 +73,9 @@
 #save.show{display:block}
 #toast{position:fixed;top:18px;right:50%;transform:translateX(50%);background:var(--card2);border:1px solid var(--acc);color:var(--txt);font-size:.78rem;padding:10px 18px;border-radius:99px;opacity:0;transition:.3s;z-index:60;pointer-events:none}
 #toast.show{opacity:1}
+#toast.err{border-color:#c0392b;color:#ffb0a0}
+.btn svg{width:13px;height:13px;display:block}
+@media(max-width:640px){.ser{flex-wrap:wrap}.ser .nm{flex:1 1 100%}}
 </style>
 </head>
 <body>
@@ -106,31 +109,56 @@ function cat(x){
   if(x.bad&&!x.done)return 'bad';
   return 'done';
 }
+const ICON={
+ up:'<svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 3l5 6H3z"/></svg>',
+ dn:'<svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 13L3 7h10z"/></svg>',
+ pz:'<svg viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="3" width="4" height="10" rx="1"/><rect x="9" y="3" width="4" height="10" rx="1"/></svg>',
+ play:'<svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 3l9 5-9 5z"/></svg>',
+ x:'<svg viewBox="0 0 16 16" fill="currentColor"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2.2" fill="none"/></svg>',
+ rt:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 8a5 5 0 1 1-1.5-3.6"/><path d="M13 2v3h-3" fill="none"/></svg>',
+ add:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 2v12M2 8h12"/></svg>',
+ dl:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 2v8M4.5 7 8 10.5 11.5 7"/><path d="M3 13.5h10"/></svg>',
+ undl:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 2v8M4.5 7 8 10.5 11.5 7"/><path d="M3 13.5h10"/><path d="M2 3l12 12" stroke="#e74c3c"/></svg>',
+ back:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3 2.5 7 6 11"/><path d="M3 7h7a4 4 0 0 1 0 8h-1"/></svg>',
+ book:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 2h7l3 3v9H3z"/><path d="M10 2v3h3"/></svg>'
+};
 function cnts(x){
   const p=[];
+  if(x.exp)p.push(`أصل <b>${x.exp}</b>`);
   if(x.pending&&!x.paused&&!x.held&&!skip.has(x.key))p.push(`<b>${x.pending}</b> منتظر`);
   if(x.active)p.push(`<b class="act">${x.active}</b> نشط`);
   if(x.done)p.push(`<b class="don">${x.done}</b> مفرّغ`);
   if(x.bad)p.push(`<b class="bad">${x.bad}</b> فاشل`);
   if(x.remaining&&!x.pending&&!x.active)p.push(`<b>${x.remaining}</b> غير مجدول`);
-  if(!p.length)p.push('<b>—</b>');
+  if(x.feed==='downloading')p.push('<b style="color:#7ea9ea">⬇ يُنزَّل</b>');
+  else if(x.feed==='queued')p.push('<b style="color:#7ea9ea">⬇ تنزيل بالطابور</b>');
+  else if(x.feed==='feederr')p.push('<b class="bad">خطأ تنزيل</b>');
+  if(!p.length)p.push('<b style="color:#555">لم تُدرج — صوتها غير موجود</b>');
   return p.join(' · ');
 }
-function post(kind,keys){fetch(NT,{method:'POST',body:JSON.stringify({kind,keys,t:Date.now()})}).catch(()=>{});toast('أُرسل الأمر — يُطبَّق خلال دقيقة')}
+function post(kind,key,label){
+  toast('يُرسَل الأمر…');
+  fetch(NT,{method:'POST',body:JSON.stringify({kind,keys:[key],t:Date.now()})})
+    .then(r=>{if(r.ok)toast('أُرسل الأمر — يُطبَّق خلال دقيقة');else toast('فشل الإرسال ('+r.status+')',1)})
+    .catch(()=>toast('تعذّر الإرسال — تحقق من الشبكة',1));
+}
+function LB(x,a,i,c,t,k){return `<button class="btn ${c}" data-a="${a}" data-k="${esc(k??x.key)}" title="${t}">${ICON[i]}</button>`}
 function acts(x){
   const held=skip.has(x.key)||x.held,pz=x.paused||paused.has(x.key);
   let b='';
-  if(held)return `<button class="btn on" data-a="un" data-k="${esc(x.key)}" title="أعد للطابور">↩</button>`;
-  if(pz)return `<button class="btn on" data-a="unp" data-k="${esc(x.key)}" title="استئناف">▶</button>
-    <button class="btn off" data-a="sk" data-k="${esc(x.key)}" title="غير مرغوب">✕</button>`;
-  if(x.pending||x.active){
-    b+=`<button class="btn" data-a="up" data-k="${esc(x.key)}" title="أعلى">▲</button>
-        <button class="btn" data-a="dn" data-k="${esc(x.key)}" title="أسفل">▼</button>
-        <button class="btn pause" data-a="pz" data-k="${esc(x.key)}" title="إيقاف مؤقت">⏸</button>`;
+  if(held)return LB(x,'un','back','on','أعد للطابور');
+  if(pz)return LB(x,'unp','play','on','استئناف')+LB(x,'sk','x','off','غير مرغوب');
+  if(x.id!=null){
+    if(x.feed==='queued')b+=LB(x,'ufd','undl','off','إلغاء التنزيل',x.id);
+    else if(!x.total||x.feed==='feederr'||x.total<x.exp)b+=LB(x,'fd','dl','read',x.total?'استكمال تنزيل الباقي':'تنزيل من يوتيوب',x.id);
   }
-  if(x.remaining&&!x.pending&&!x.active)b+=`<button class="btn enq" data-a="eq" data-k="${esc(x.key)}" title="جدولة الباقي">＋</button>`;
-  if(x.bad)b+=`<button class="btn retry" data-a="rt" data-k="${esc(x.key)}" title="أعد الفاشل">↺</button>`;
-  if(x.pending||x.active||x.remaining)b+=`<button class="btn off" data-a="sk" data-k="${esc(x.key)}" title="غير مرغوب">✕</button>`;
+  if(x.pending||x.active){
+    b+=LB(x,'up','up','','أعلى')+LB(x,'dn','dn','','أسفل')+LB(x,'pz','pz','pause','إيقاف مؤقت');
+  }
+  if(x.remaining&&!x.pending&&!x.active)b+=LB(x,'eq','add','enq','جدولة الباقي');
+  if(x.bad)b+=LB(x,'rt','rt','retry','أعد الفاشل');
+  if(x.pending||x.active||x.remaining)b+=LB(x,'sk','x','off','غير مرغوب');
+  if(!b&&x.id==null)b='<span style="font-size:.62rem;color:#555">لا يمكن إدارتها — مصدر الصوت مفقود</span>';
   return b;
 }
 const FILT={all:'الكل',listen:'يُسمع',read:'يُقرأ',queue:'الطابور',paused:'متوقفة',bad:'فاشل',held:'غير مرغوب',done:'مكتملة'};
@@ -156,10 +184,10 @@ function renderSeries(){
     const x=r.x,held=skip.has(x.key)||x.held,pz=x.paused||paused.has(x.key),qi=order.indexOf(x.key);
     const d=document.createElement('div');d.className='ser'+(held?' held':pz?' paused':'');
     let links='';
-    if(r.pub)links+=`<a class="btn play" href="series.html?s=${encodeURIComponent(r.pub.slug)}" title="استمع/تصفح الدروس">▶</a>`;
-    if(r.mut&&r.mut.files&&r.mut.files.length)links+=`<a class="btn read" href="${MUT}#/s/${esc(r.mut.id)}" target="_blank" rel="noopener" title="اقرأ التفريغ">📖</a>`;
+    if(r.pub)links+=`<a class="btn play" href="series.html?s=${encodeURIComponent(r.pub.slug)}" title="استمع/تصفح الدروس">${ICON.play}</a>`;
+    if(r.mut&&r.mut.files&&r.mut.files.length)links+=`<a class="btn read" href="${MUT}#/s/${esc(r.mut.id)}" target="_blank" rel="noopener" title="اقرأ التفريغ">${ICON.book}</a>`;
     d.innerHTML=`${qi>-1&&!held&&!pz?`<span style="color:var(--acc);font-size:.7rem;width:18px;text-align:center;font-weight:700">${qi+1}</span>`:'<span style="width:18px"></span>'}
-      <span class="nm">${esc(r.title||pretty(x.key))}<small>${esc(x.key)}</small></span>
+      <span class="nm">${esc(r.title||pretty(x.key))}</span>
       <span class="cnt">${cnts(x)}</span>${links}${acts(x)}`;
     w.appendChild(d);
   }
@@ -174,8 +202,11 @@ document.addEventListener('click',e=>{
   const t=e.target.closest('button');if(!t)return;
   if(t.classList.contains('chip')){document.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x===t));fv=t.dataset.f;renderSeries();return}
   const k=t.dataset.k,a=t.dataset.a;if(!k)return;
-  if(a==='eq'){post('helm_enqueue',[k]);return}
-  if(a==='rt'){post('helm_retry',[k]);return}
+  const row=helm.find(x=>x.key===k||String(x.id)===k),nm=row?pretty(row.key):k;
+  if(a==='eq'){if(confirm(`جدولة ملفات «${nm}» المتبقية؟`))post('helm_enqueue',k,nm);return}
+  if(a==='rt'){if(confirm(`إعادة الفاشل لـ«${nm}»؟`))post('helm_retry',k,nm);return}
+  if(a==='fd'){if(confirm(`بدء تنزيل «${nm}» من يوتيوب؟`))post('helm_feed',k,nm);return}
+  if(a==='ufd'){if(confirm(`إلغاء تنزيل «${nm}»؟`))post('helm_unfeed',k,nm);return}
   if(a==='sk'){skip.add(k);paused.delete(k)}
   else if(a==='un'){skip.delete(k)}
   else if(a==='pz'){paused.add(k)}
@@ -228,18 +259,21 @@ document.addEventListener('click',e=>{
     else if(x.paused||paused.has(x.key))g.paused+=tot(x);
     else{g.done+=x.done;g.pending+=x.pending;g.active+=x.active;g.bad+=x.bad}});
   const T=Math.max(g.total,1);
+  const expSum=mine.reduce((a,x)=>a+(x.exp||0),0);
   let h='<div class="hero cin"><div class="ph">'+(photo?'<img src="'+esc(photo)+'" alt="" onerror="this.remove()">':'')+'<span>'+esc(init)+'</span></div>'
     +'<div style="flex:1"><h1>'+esc(sh.name_display)+'</h1>'
     +(sh.name!==sh.name_display?'<div class="als">'+esc(sh.name)+'</div>':'')
     +((sh.aliases&&sh.aliases.length)?'<div class="als">'+sh.aliases.map(esc).join('، ')+'</div>':'')
-    +'<span class="grp">'+mine.length+' سلسلة · '+g.total+' ملفاً</span>'
+    +'<span class="grp">'+mine.length+' سلسلة · '+(expSum?expSum+' حلقة متوقَّعة · ':'')+g.total+' ملف منزّل</span>'
     +'<div class="pb"><i class="d" style="width:'+(g.done/T*100)+'%"></i><i class="a" style="width:'+(g.active/T*100)+'%"></i><i class="p" style="width:'+(g.pending/T*100)+'%"></i><i class="z" style="width:'+(g.paused/T*100)+'%"></i><i class="b" style="width:'+(g.bad/T*100)+'%"></i><i class="h" style="width:'+(g.held/T*100)+'%"></i></div>'
     +'<div class="lgnd"><span class="d">مفرّغ '+g.done+'</span><span class="a">نشط '+g.active+'</span><span class="p">منتظر '+g.pending+'</span><span class="z">متوقف '+g.paused+'</span><span class="b">فاشل '+g.bad+'</span>'+(g.held?'<span class="h">غير مرغوب '+g.held+'</span>':'')+'</div>'
     +'</div></div>';
   const YT='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.85-.46-5.58a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.15 1 12 1 12s0 3.85.46 5.58a2.78 2.78 0 0 0 1.94 2c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.85 23 12 23 12zM9.75 15.5v-7l6 3.5-6 3.5-6-3.5z"/></svg>';
   const VCHK='<span class="vbadge"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 9.2 4.6l-4.1-.2-.2 4.1L2.4 11.3l2.5 2.8.2 4.1 4.1-.2L12 20.6l2.8-2.5 4.1.2.2-4.1 4.1.2z"/><path d="M10.6 15.2 7.6 12.2l1.3-1.3 1.7 1.7 4.5-4.5 1.3 1.3z" fill="#0b0f1a"/></svg></span>';
   h+='<div class="sec cin"><h2>السلاسل — التفريغ والمحاذاة</h2>'
-    +'<div class="fbar">'+Object.entries(FILT).map(([k,v])=>'<button class="chip'+(k==='all'?' on':'')+'" data-f="'+k+'">'+v+'</button>').join('')+'</div>'
+    +'<div class="fbar">'+Object.entries(FILT).map(([k,v])=>{
+      const n=k==='all'?_rows.length:_rows.filter(r=>{const sv=fv;fv=k;const m=rowMatch(r);fv=sv;return m}).length;
+      return '<button class="chip'+(k==='all'?' on':'')+'" data-f="'+k+'">'+v+' <i style="font-style:normal;opacity:.7">'+n+'</i></button>'}).join('')+'</div>'
     +'<div id="srows"></div></div>';
   h+='<div class="sec cin"><h2>تواصل</h2>';
   let anyCh=false;
