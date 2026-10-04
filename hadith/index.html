@@ -141,6 +141,32 @@ async function vMatn(book,page=1){
   <div class="card">${slice.map(no=>{const t=String(d[no].text||d[no]);return`<div class="row" onclick="go('#/mt/${book}/${no}')"><span class="no">${no}</span><span class="tx">${esc(t.slice(0,110))}…</span></div>`}).join('')}</div>
   <div class="pg"><button ${page<=1?'disabled':''} onclick="go('#/m/${book}/${page-1}')">السابق</button><span>${page} / ${pages}</span><button ${page>=pages?'disabled':''} onclick="go('#/m/${book}/${page+1}')">التالي</button></div>`;
 }
+const LOC2MATN={'صحيح البخاري':'bukhari','صحيح مسلم':'muslim','الأربعون النووية':'arbain','سنن أبي داود':'abudawud','رياض الصالحين':'riyad','مشكاة المصابيح':'mishkat','سنن النسائي':'nasai','جامع الترمذي':'tirmidhi','سنن ابن ماجه':'ibnmajah','مسند أحمد':'ahmad','الموطأ':'muwatta','بلوغ المرام':'bulugh','عمدة الأحكام':'umdat','مسند الشافعي':'shafii','مختصر ابن أبي حنيفة':'abi_hanifa'};
+const CATFILES={usul:1,maalem:2,wajiz:3,kulliyya:4};
+const revmap={};
+async function shamiForMatn(book,no){
+  if(!revmap[book]){
+    revmap[book]=(async()=>{
+      const map={};
+      for(const cf of Object.keys(CATFILES)){
+        try{
+          const d=await gz(`hadiths/${cf}.json.gz`);
+          for(const[id,r]of Object.entries(d)){
+            for(const[b,l]of Object.entries(r.locs||{})){
+              if(LOC2MATN[b]===book)for(const n of (l.nums||[]))
+                (map[n]=map[n]||[]).push({cf,id,bab:b});
+            }
+          }
+        }catch(e){}
+      }
+      return map;
+    })();
+  }
+  const m=await revmap[book];
+  const byH={};
+  for(const h of (m[no]||[]))(byH[h.cf+':'+h.id]=byH[h.cf+':'+h.id]||{cf:h.cf,id:h.id,babs:[]}).babs.push(h.bab);
+  return Object.values(byH);
+}
 async function vMatnHadith(book,no){
   app.innerHTML='<div class="loading">…</div>';
   const d=await gz(`matn/${book}.json.gz`);
@@ -148,7 +174,13 @@ async function vMatnHadith(book,no){
   app.innerHTML=`
   <span class="back" onclick="history.back()">‹ رجوع للمتن</span>
   <div class="hcard cin"><div class="htext">${isnHtml(t)}</div>
-  <div class="meta"><span class="mit"><b>${esc(MATN_NAMES[book]||book)}</b> · حديث ${no}</span></div></div>`;
+  <div class="meta"><span class="mit"><b>${esc(MATN_NAMES[book]||book)}</b> · حديث ${no}</span></div></div>
+  <div id="shlinks"><div class="loading" style="padding:8px">جارٍ البحث في الشامي…</div></div>`;
+  const hits=await shamiForMatn(book,no);
+  const el2=$('#shlinks');
+  if(el2)el2.innerHTML=hits.length
+    ?`<div class="secttl">يوجد في كتب الشامي (${hits.length})</div>${hits.map(h=>`<div class="loc" style="cursor:pointer" onclick="go('#/h/${CATFILES[h.cf]}/${h.id}')"><b>${esc(CATS[CATFILES[h.cf]])}</b> · حديث ${h.id} — ${esc(h.babs.join('، '))}</div>`).join('')}`
+    :'<div class="sub">لم يُعثر له على موضع في كتب الشامي.</div>';
 }
 
 /* ---------- shami cat list ---------- */
