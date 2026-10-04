@@ -91,6 +91,14 @@ async function gz(u){
 }
 function go(h){location.hash=h}
 const BF={m:'علامة مصدرية',t:'مطابقة عنوان',a:'تقريبي',z:'عنوان ملتصق'};
+const TSCI=Object.keys(SCI).filter(s=>s!=='tfsr');
+function norm(w){
+  return String(w).replace(/[\u064B-\u065F\u0670\u0640]/g,'')
+    .replace(/[\u0623\u0625\u0622\u0671]/g,'\u0627')
+    .replace(/\u0629/g,'\u0647').replace(/\u0649/g,'\u064A')
+    .replace(/\u0626/g,'\u064A').replace(/\u0624/g,'\u0648');
+}
+function shard2(w){const n=norm(w);return /^[\u0621-\u064A]/.test(n)?n.slice(0,2):'_'}
 
 /* ---------- home ---------- */
 async function vHome(){
@@ -107,7 +115,79 @@ async function vHome(){
   app.innerHTML=`
   <div class="h-title cin">مكتبة التراث</div>
   <div class="sub">${Object.keys(SCI).length} علوم — بيانات ذاتية الاستضافة، بلا مفاتيح</div>
+  <div class="srch"><input id="q" placeholder="ابحث في الـ465 ألف جزء كلها (كلمات متعددة = تقاطع)…"><button onclick="go('#/q/'+encodeURIComponent($('#q').value))">بحث</button></div>
   <div class="doors">${out.join('')}</div>`;
+  $('#q').addEventListener('keydown',e=>{if(e.key==='Enter')go('#/q/'+encodeURIComponent($('#q').value))});
+}
+
+/* ---------- unified word search ---------- */
+async function vSearch(q){
+  const words=[...new Set(q.split(/\s+/).filter(Boolean))];
+  if(!words.length)return vHome();
+  app.innerHTML='<div class="loading">جارٍ البحث في العلوم العشرة…</div>';
+  const sciRes={};let capped=0;
+  await Promise.all(TSCI.map(async sci=>{
+    try{
+      const byKey={};
+      for(const w of words){
+        const sh=await gz(`${sci}/api/idx/${encodeURIComponent(shard2(w))}.json.gz`);
+        const nw=norm(w);
+        const posts={};
+        for(const[word,v]of Object.entries(sh)){
+          if(word===nw||word.includes(nw)){
+            if(v&&v['~']!==undefined){capped++;continue}
+            for(const[b,i]of v)(posts[b+':'+i]=posts[b+':'+i]||[b,i]);
+          }
+        }
+        byKey[w]=Object.values(posts);
+      }
+      let hits=byKey[words[0]]||[];
+      for(const w of words.slice(1)){
+        const s2=new Set((byKey[w]||[]).map(x=>x[0]+':'+x[1]));
+        hits=hits.filter(x=>s2.has(x[0]+':'+x[1]));
+      }
+      if(hits.length)sciRes[sci]=hits.slice(0,300);
+    }catch(e){}
+  }));
+  // tfsr: quran word index — word->[[s,a]]
+  try{
+    const byKey={};
+    for(const w of words){
+      const sh=await gz(`tfsr/api/idx/${encodeURIComponent(shard2(w))}.json.gz`);
+      const nw=norm(w);const posts={};
+      for(const[word,v]of Object.entries(sh))if(word===nw||word.includes(nw))for(const[s,a]of v)posts[s+':'+a]=[s,a];
+      byKey[w]=Object.values(posts);
+    }
+    let hits=byKey[words[0]]||[];
+    for(const w of words.slice(1)){const s2=new Set((byKey[w]||[]).map(x=>x.join(':')));hits=hits.filter(x=>s2.has(x.join(':')))}
+    if(hits.length)sciRes['tfsr']=hits.slice(0,300);
+  }catch(e){}
+  const total=Object.values(sciRes).reduce((a,x)=>a+x.length,0);
+  // titles lookup lazily per displayed batch
+  const ixCache={};
+  async function bookTitle(sci,id){
+    if(!ixCache[sci]){const ix=await gz(`${sci}/api/index.json`);ixCache[sci]={};(ix.books||[]).forEach(b=>ixCache[sci][b.id]=b.title)}
+    return ixCache[sci][id]||('#'+id)
+  }
+  const flat=[];for(const sci of[...TSCI,'tfsr'])for(const h of(sciRes[sci]||[]))flat.push({sci,b:h[0],i:h[1]});
+  app.innerHTML=`
+  <span class="back" onclick="go('#/')">‹ الرئيسية</span>
+  <div class="h-title cin">نتائج «${esc(q)}»</div>
+  <div class="sub" id="rcount">${total.toLocaleString('ar')} موضعاً في ${Object.keys(sciRes).length} علوم${capped?' — بعض الكلمات الشائعة جداً قُصّت من الفهرس':''}</div>
+  <div id="res"></div><div id="more"></div>`;
+  let shown=0;
+  window.moreRes=async()=>{
+    const batch=flat.slice(shown,shown+30);shown+=batch.length;
+    const rows=[];
+    for(const r of batch){
+      if(r.sci==='tfsr')rows.push(`<div class="row" onclick="go('#/t/${r.b}/${r.i}')"><span class="badge">التفسير</span><span class="tx">سورة ${esc(SURAHS[r.b-1])} : آية ${r.i}</span></div>`);
+      else rows.push(`<div class="row" onclick="go('#/p/${r.sci}/${r.b}/${r.i}')"><span class="badge">${esc(SCI[r.sci][0])}</span><span class="tx">${esc(await bookTitle(r.sci,r.b))}</span><span class="bb">جزء ${r.i}</span></div>`);
+    }
+    $('#res').insertAdjacentHTML('beforeend',rows.join(''));
+    $('#more').innerHTML=shown<flat.length?`<div class="pg"><button onclick="moreRes()">المزيد (${(flat.length-shown).toLocaleString('ar')})</button></div>`:'';
+    $('#rcount').textContent=`${total.toLocaleString('ar')} موضعاً — معروض ${Math.min(shown,flat.length).toLocaleString('ar')}`;
+  };
+  moreRes();
 }
 
 /* ---------- science → books ---------- */
@@ -208,6 +288,7 @@ async function route(){
     if(p[0]==='p')return vPart(p[1],p[2],+p[3]);
     if(p[0]==='t'&&p[1])return vTafsir(+p[1],+p[2]||1);
     if(p[0]==='t')return vTafsirPick();
+    if(p[0]==='q'&&p[1])return vSearch(decodeURIComponent(p[1]));
     return vHome();
   }catch(e){console.error(e);app.innerHTML='<div class="err">خطأ في التحميل — '+esc(e.message)+'</div>'}
 }
