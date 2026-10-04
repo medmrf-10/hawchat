@@ -1,5 +1,5 @@
 {
- "t": 1791137826,
+ "t": 1791137889,
  "series": [
   {
    "key": "619_دورة في علم الحديث على منهج المتقدمين",
@@ -2148,7 +2148,7 @@
    "sheikh": "أحمد السيد",
    "total": 2,
    "done": 2,
-   "pending": 2,
+   "pending": 0,
    "active": 0,
    "bad": 0,
    "held": false,
@@ -2598,8 +2598,8 @@
    "sheikh": "أدهم العاسمي",
    "total": 29,
    "done": 24,
-   "pending": 28,
-   "active": 1,
+   "pending": 13,
+   "active": 0,
    "bad": 0,
    "held": false,
    "paused": false,
@@ -4344,7 +4344,7 @@
    "sheikh": "الحبيب علي الجفري",
    "total": 32,
    "done": 32,
-   "pending": 1,
+   "pending": 0,
    "active": 0,
    "bad": 0,
    "held": false,
@@ -5116,7 +5116,7 @@
   {
    "key": "99_الشجرة الطيبة",
    "sheikh": "الحبيب علي الجفري",
-   "total": 9,
+   "total": 12,
    "done": 18,
    "pending": 0,
    "active": 0,
@@ -5129,7 +5129,7 @@
    "feed": "downloading",
    "remaining": 0,
    "fqpos": "a1",
-   "dl": 9
+   "dl": 12
   },
   {
    "key": "154_المجالس والمحاضرات ضمن الاحتفال بذكرى المولد النبوي الشريف بصلالة",
