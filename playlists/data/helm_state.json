@@ -1,5 +1,5 @@
 {
- "t": 1791142224,
+ "t": 1791142287,
  "series": [
   {
    "key": "619_دورة في علم الحديث على منهج المتقدمين",
@@ -4002,16 +4002,16 @@
    "sheikh": "الحبيب علي الجفري",
    "total": 30,
    "done": 23,
-   "pending": 7,
+   "pending": 0,
    "active": 0,
-   "bad": 0,
+   "bad": 7,
    "held": false,
    "paused": false,
    "id": "114",
    "name": "الإنسانية قبل التدين‬⁩ - الحبيب علي الجفري English Subtitle",
    "exp": 30,
    "feed": "fed",
-   "remaining": 7,
+   "remaining": 0,
    "fqpos": "",
    "dl": 30
   },
@@ -12858,9 +12858,9 @@
    "sheikh": "محمد سعيد رمضان البوطي",
    "total": 96,
    "done": 183,
-   "pending": 1,
+   "pending": 0,
    "active": 0,
-   "bad": 17,
+   "bad": 18,
    "held": false,
    "paused": false,
    "id": "414",
