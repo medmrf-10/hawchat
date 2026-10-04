@@ -57,6 +57,9 @@
 details{margin:8px 0}
 details summary{cursor:pointer;color:var(--acc2);font-size:.78rem;padding:6px 0}
 .secttl{font-family:var(--font-ar);font-size:1.05rem;color:var(--acc2);margin:18px 0 6px;border-bottom:1px solid var(--border);padding-bottom:6px}
+.sopen{color:var(--acc);font-size:.7rem;text-decoration:underline;cursor:pointer;margin-inline-start:8px}
+.parttext{font-family:var(--font-ar);font-size:1.15rem;line-height:2.4;white-space:pre-wrap;background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:22px;margin:14px 0}
+.parttext .isn{color:var(--acc3)}
 .back{color:var(--dim);font-size:.78rem;cursor:pointer;display:inline-block;margin-bottom:8px}
 .back:hover{color:var(--acc2)}
 </style>
@@ -115,7 +118,9 @@ async function vHome(){
   <div class="secttl">كتب الشامي الأربعة</div>
   <div class="doors">${cats.map(([c,v])=>`<div class="door" onclick="go('#/s/${c}')"><b>${esc(CATS[cnOf(c)]||c)}</b><span>${v.hadiths.toLocaleString('ar')} حديثاً</span></div>`).join('')}</div>
   <div class="secttl">المتون (${mats.length})</div>
-  <div class="doors">${mats.map(([id,n])=>`<div class="door" onclick="go('#/m/${id}')"><b>${esc(MATN_NAMES[id]||id)}</b><span>${n.toLocaleString('ar')} حديثاً</span></div>`).join('')}</div>`;
+  <div class="doors">${mats.map(([id,n])=>`<div class="door" onclick="go('#/m/${id}')"><b>${esc(MATN_NAMES[id]||id)}</b><span>${n.toLocaleString('ar')} حديثاً</span></div>`).join('')}</div>
+  <div class="secttl">كتب الشروح (${ix.sharh_books.length})</div>
+  <div class="doors" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))">${ix.sharh_books.map(b=>`<div class="door" onclick="go('#/sh/${b.sid}')" style="text-align:right"><b>${esc(b.title)}</b><span>${esc(b.author)} · ${b.parts.toLocaleString('ar')} جزءاً</span></div>`).join('')}</div>`;
   $('#q').addEventListener('keydown',e=>{if(e.key==='Enter')doSearch()});
 }
 function cnOf(c){const map={usul:1,maalem:2,wajiz:3,kulliyya:4};return map[c]||c}
@@ -169,6 +174,10 @@ async function vHadith(cat,id){
   try{r=await gz(`hadith/${cat}/${id}.json.gz`)}catch(e){app.innerHTML='<div class="err">تعذر تحميل الحديث.</div>';return}
   const locs=Object.entries(r.locs||{});
   const sh=(r.sharh||[]);
+  let prevNo=null,nextNo=null;
+  try{const d=await gz(`hadiths/${{1:'usul',2:'maalem',3:'wajiz',4:'kulliyya'}[cat]}.json.gz`);
+    const ids=Object.keys(d).sort((a,b)=>d[a].no-d[b].no);const i=ids.indexOf(String(id));
+    if(i>0)prevNo=ids[i-1];if(i>=0&&i<ids.length-1)nextNo=ids[i+1];}catch(e){}
   app.innerHTML=`
   <span class="back" onclick="history.back()">‹ رجوع</span>
   <div class="hcard cin">
@@ -180,8 +189,9 @@ async function vHadith(cat,id){
       ${hukmBadge(r.hukm)}
     </div>
   </div>
+  <div class="pg"><button ${prevNo?'':'disabled'} onclick="go('#/h/${cat}/${prevNo}')">‹ السابق</button><button ${nextNo?'':'disabled'} onclick="go('#/h/${cat}/${nextNo}')">التالي ›</button></div>
   ${locs.length?`<div class="secttl">مواضعه في الكتب التسعة (${locs.length})</div>${locs.map(([b,l])=>`<div class="loc"><b>${esc(b)}</b> — ${esc((l.babs||[]).join('، '))} <span style="color:var(--acc)">[${esc((l.nums||[]).join('، '))}]</span></div>`).join('')}`:''}
-  ${sh.length?`<div class="secttl">الشروح المستخرجة (${sh.length})</div>${sh.map((s,i)=>`<div class="seg ${s.ok?'':'noverif'}"><details ${i===0?'open':''}><summary>${esc(s.book)} — ${esc(s.author)} ${s.ok?'<span class="badge sahih">مؤكد</span>':'<span class="badge">غير مؤكد</span>'}</summary><div class="sh">${esc(s.text)}</div><div class="sm">${esc(s.book)} · جزء ${s.j} · مقطع ${s.s}</div></details></div>`).join('')}`:'<div class="sub">لا شروح مستخرجة لهذا الحديث بعد.</div>'}`;
+  ${sh.length?`<div class="secttl">الشروح المستخرجة (${sh.length})</div>${sh.map((s,i)=>`<div class="seg ${s.ok?'':'noverif'}"><details ${i===0?'open':''}><summary>${esc(s.book)} — ${esc(s.author)} ${s.ok?'<span class="badge sahih">مؤكد</span>':'<span class="badge">غير مؤكد</span>'}</summary><div class="sh">${esc(s.text)}</div><div class="sm">${esc(s.book)} · جزء ${s.j} · مقطع ${s.s}${s.sid?`<span class="sopen" onclick="go('#/sh/${s.sid}/${s.j}')">افتح في كتاب الشرح ›</span>`:''}</div></details></div>`).join('')}`:'<div class="sub">لا شروح مستخرجة لهذا الحديث بعد.</div>'}`;
 }
 
 /* ---------- search ---------- */
@@ -208,7 +218,7 @@ async function vSearch(q){
   const res=[...(acc||[])].slice(0,60);
   app.innerHTML=`<span class="back" onclick="go('#/')">‹ الرئيسية</span>
   <div class="h-title cin">نتائج: «${esc(q)}»</div>
-  <div class="sub">${(acc||new Set()).size.toLocaleString('ar')} نتيجة — أول ${res.length}</div>
+  <div class="sub">${(acc||new Set()).size.toLocaleString('ar')} نتيجة — أول ${Math.min(res.length,30)}</div>
   <div class="card" id="res"><div class="loading">جارٍ عرض النتائج…</div></div>`;
   const rows=await Promise.all(res.slice(0,30).map(async k=>{
     const[cat,id]=k.split(':');let t='';
@@ -216,6 +226,35 @@ async function vSearch(q){
     return`<div class="row" onclick="go('#/h/${cat}/${id}')"><span class="no">${id}</span><span class="tx">${esc(t.slice(0,95))}…</span><span class="bb">${esc(CATS[cat]||'')}</span></div>`;
   }));
   $('#res').innerHTML=rows.join('')||'<div class="err">لا نتائج.</div>';
+}
+
+/* ---------- sharh books ---------- */
+async function vSharhToc(sid,page=1){
+  app.innerHTML='<div class="loading">جارٍ تحميل فهرس الشرح…</div>';
+  const ix=await loadIndex();
+  const bk=ix.sharh_books.find(b=>String(b.sid)===String(sid));
+  const toc=await gz(`sharh/${sid}/toc.json`);
+  const per=60,pages=Math.ceil(toc.length/per);
+  page=Math.max(1,Math.min(page,pages||1));
+  const slice=toc.slice((page-1)*per,page*per);
+  app.innerHTML=`
+  <span class="back" onclick="go('#/')">‹ الرئيسية</span>
+  <div class="h-title cin">${esc(bk?bk.title:'شرح '+sid)}</div>
+  <div class="sub">${esc(bk?bk.author:'')} — ${toc.length.toLocaleString('ar')} جزءاً · ${(bk?bk.matns:[]).map(m=>esc(MATN_NAMES[m]||m)).join('، ')}</div>
+  <div class="card">${slice.map(t=>`<div class="row" onclick="go('#/sh/${sid}/${t.part}')"><span class="no">${t.part}</span><span class="tx">${esc(t.title)}</span><span class="bb">${(t.chars/1000).toFixed(1)}k</span></div>`).join('')}</div>
+  <div class="pg"><button ${page<=1?'disabled':''} onclick="go('#/sh/${sid}/p${page-1}')">السابق</button><span>${page} / ${pages}</span><button ${page>=pages?'disabled':''} onclick="go('#/sh/${sid}/p${page+1}')">التالي</button></div>`;
+}
+async function vSharhPart(sid,part){
+  app.innerHTML='<div class="loading">جارٍ تحميل الجزء…</div>';
+  let d;
+  try{d=await gz(`sharh/${sid}/parts/${String(part).padStart(4,'0')}.json.gz`)}catch(e){app.innerHTML='<span class="back" onclick="history.back()">‹ رجوع</span><div class="err">تعذر تحميل الجزء.</div>';return}
+  const ix=await loadIndex();
+  const bk=ix.sharh_books.find(b=>String(b.sid)===String(sid));
+  app.innerHTML=`
+  <span class="back" onclick="go('#/sh/${sid}')">‹ ${esc(bk?bk.title:'الشرح')}</span>
+  <div class="sub">${esc(bk?bk.title+' — '+bk.author:'')} · جزء ${d.part} · ${esc(d.title||'')}</div>
+  <div class="parttext cin">${isnHtml(d.text)}</div>
+  <div class="pg"><button ${d.part<=0?'disabled':''} onclick="go('#/sh/${sid}/${d.part-1}')">‹ السابق</button><button onclick="go('#/sh/${sid}/${d.part+1}')">التالي ›</button></div>`;
 }
 
 /* ---------- router ---------- */
@@ -229,6 +268,11 @@ async function route(){
     if(p[0]==='s'&&p[2])return vShami(p[1],+p[2]);
     if(p[0]==='s')return vShami(p[1]||'wajiz');
     if(p[0]==='h')return vHadith(+p[1],+p[2]);
+    if(p[0]==='sh'&&p[2]){
+      if(/^p\d+$/.test(p[2]))return vSharhToc(p[1],+p[2].slice(1));
+      return vSharhPart(p[1],+p[2]);
+    }
+    if(p[0]==='sh')return vSharhToc(p[1]);
     if(p[0]==='q')return vSearch(decodeURIComponent(p[1]||''));
     return vHome();
   }catch(e){console.error(e);app.innerHTML='<div class="err">خطأ في التحميل — '+esc(e.message)+'</div>'}
