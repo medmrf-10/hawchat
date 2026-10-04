@@ -1,5 +1,5 @@
 {
- "t": 1791141291,
+ "t": 1791141353,
  "series": [
   {
    "key": "619_دورة في علم الحديث على منهج المتقدمين",
@@ -4146,7 +4146,7 @@
    "sheikh": "الحبيب علي الجفري",
    "total": 20,
    "done": 65,
-   "pending": 2,
+   "pending": 0,
    "active": 0,
    "bad": 19,
    "held": false,
@@ -8610,9 +8610,9 @@
    "sheikh": "علي جمعة",
    "total": 103,
    "done": 181,
-   "pending": 3,
+   "pending": 0,
    "active": 0,
-   "bad": 13,
+   "bad": 16,
    "held": false,
    "paused": false,
    "id": "822",
