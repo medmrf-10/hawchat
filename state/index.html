@@ -2,243 +2,298 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>حالة التفريغ — محرّر السرب</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>السرب — حالة التفريغ والتكليفات</title>
 <style>
-:root{--bg:#0c0f14;--card:#141925;--card2:#1a2132;--line:#232c42;--tx:#e8ecf4;--mut:#8b96ad;--acc:#d4a94e;--acc2:#5b8dd9;--ok:#4caf7d;--warn:#e0a63f;--bad:#d96a6a;--frz:#6fa3d8;--dim:#5a6478}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--tx);font-family:'Segoe UI',Tahoma,sans-serif;min-height:100vh}
-main{max-width:1200px;margin:0 auto;padding:22px 16px 110px}
-h1{font-size:1.35rem;font-weight:700;margin-bottom:4px}
-.sub{color:var(--mut);font-size:.8rem;margin-bottom:18px}
-#kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:18px}
-.k{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;text-align:center}
-.k b{display:block;font-size:1.35rem;color:var(--acc)}
-.k span{color:var(--mut);font-size:.72rem}
-#tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-.tb{background:var(--card);border:1px solid var(--line);color:var(--mut);padding:7px 16px;border-radius:20px;cursor:pointer;font-size:.82rem;transition:.15s}
-.tb:hover{border-color:var(--acc2);color:var(--tx)}
+:root{--bg:#0a0d13;--card:#141925;--card2:#1b2334;--line:#26304a;--tx:#eef1f7;--mut:#94a0b8;--acc:#d4a94e;--acc2:#5b8dd9;--ok:#4caf7d;--warn:#e0a63f;--bad:#e07070;--frz:#6fa3d8;--dim:#59627a}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--tx);font-family:'Segoe UI',Tahoma,sans-serif;min-height:100vh;padding-bottom:70px}
+header{position:sticky;top:0;background:#0a0d13ee;backdrop-filter:blur(8px);z-index:40;padding:12px 14px 8px;border-bottom:1px solid var(--line)}
+header h1{font-size:1.05rem;font-weight:800}
+header .sub{color:var(--mut);font-size:.68rem;margin-top:2px}
+main{max-width:900px;margin:0 auto;padding:12px 12px 0}
+#kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+.k{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:9px 6px;text-align:center}
+.k b{display:block;font-size:1.05rem;color:var(--acc)}
+.k span{color:var(--mut);font-size:.62rem}
+.sect{font-size:.85rem;font-weight:800;color:var(--acc);margin:16px 0 8px;display:flex;align-items:center;gap:8px}
+.sect::after{content:'';flex:1;height:1px;background:var(--line)}
+.pcard{background:linear-gradient(160deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:10px}
+.pcard .hd{display:flex;align-items:center;gap:10px}
+.pcard .av{width:42px;height:42px;border-radius:50%;background:var(--card);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.pcard .who{flex:1;min-width:0}
+.pcard .who b{font-size:.95rem;display:block}
+.pcard .who .role{color:var(--mut);font-size:.68rem}
+.pcard .who .cur{color:var(--acc2);font-size:.68rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pcard .live{font-size:.62rem;color:var(--mut);text-align:left}
+.pcard .live .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--dim);margin-left:4px}
+.pcard .live .dot.on{background:var(--ok);box-shadow:0 0 6px var(--ok)}
+.pchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.chip{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:5px 9px;font-size:.68rem;display:flex;align-items:center;gap:6px;max-width:100%}
+.chip .cn{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:180px}
+.chip .pct{color:var(--ok);font-size:.62rem}
+.chip .lnk{color:var(--acc2);font-size:.62rem;cursor:pointer}
+.chip .mv{color:var(--mut);font-size:.62rem;cursor:pointer;padding:0 2px}
+#tabs{display:flex;gap:6px;overflow-x:auto;padding:6px 0 10px;scrollbar-width:none}
+#tabs::-webkit-scrollbar{display:none}
+.tb{background:var(--card);border:1px solid var(--line);color:var(--mut);padding:7px 14px;border-radius:18px;cursor:pointer;font-size:.76rem;white-space:nowrap;flex-shrink:0}
 .tb.on{background:var(--acc);border-color:var(--acc);color:#111;font-weight:700}
-.tb.on .cnt{color:#111}
-.tb .cnt{font-size:.72rem;opacity:.75}
-#tools{display:flex;gap:10px;align-items:center;margin-bottom:16px;flex-wrap:wrap}
-#q{flex:1;min-width:180px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:9px 14px;color:var(--tx);font-size:.9rem;outline:none}
-#q:focus{border-color:var(--acc2)}
-.btn{background:var(--acc);color:#111;border:none;border-radius:10px;padding:9px 18px;font-weight:700;cursor:pointer;font-size:.85rem}
-.btn.sec{background:var(--card2);color:var(--tx);border:1px solid var(--line)}
-.btn:hover{filter:brightness(1.1)}
-.shk{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:14px;overflow:hidden}
-.shk-h{display:flex;align-items:center;gap:14px;padding:14px 18px;cursor:pointer;user-select:none}
-.shk-h:hover{background:var(--card2)}
-.shk-h .nm{font-weight:700;font-size:1.05rem;flex:0 0 auto}
-.shk-h .meta{color:var(--mut);font-size:.75rem;flex:0 0 auto}
-.shk-h .arr{margin-right:auto;color:var(--mut);transition:.2s}
+.tb .cnt{font-size:.64rem;opacity:.7}
+#tools{display:flex;gap:8px;margin-bottom:12px}
+#q{flex:1;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:9px 14px;color:var(--tx);font-size:.85rem;outline:none;min-width:0}
+.shk{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:8px;overflow:hidden}
+.shk-h{display:flex;align-items:center;gap:10px;padding:11px 13px;cursor:pointer;user-select:none}
+.shk-h .nm{font-weight:700;font-size:.88rem}
+.shk-h .meta{color:var(--mut);font-size:.66rem}
+.shk-h .arr{margin-right:auto;color:var(--mut);font-size:.7rem;transition:.2s}
 .shk.open .arr{transform:rotate(90deg)}
-.pb{display:flex;height:8px;border-radius:4px;overflow:hidden;background:#0e1420;flex:1;min-width:120px}
+.pb{display:flex;height:6px;border-radius:3px;overflow:hidden;background:#0e1420;width:100%;margin-top:7px}
 .pb i{display:block;height:100%}
-.pd{background:var(--acc)}.pa{background:var(--ok)}.pp{background:var(--acc2)}.ph{background:#4a6a8f}.px{background:var(--bad)}.pw{background:#3a4358}
+.pd{background:var(--acc)}.pp{background:var(--acc2)}.ph{background:#4a6a8f}.px{background:var(--bad)}.pw{background:#3a4358}
 .rows{display:none;border-top:1px solid var(--line)}
 .shk.open .rows{display:block}
-.rw{display:flex;align-items:center;gap:10px;padding:9px 18px;border-bottom:1px solid #1a2132;font-size:.83rem;flex-wrap:wrap}
+.rw{padding:9px 12px;border-bottom:1px solid #1a2132;font-size:.78rem}
 .rw:last-child{border-bottom:none}
-.rw:hover{background:#161c2b}
-.rw .id{color:var(--dim);font-size:.7rem;width:36px;flex-shrink:0}
-.rw .nm{flex:1;min-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.rw .nums{color:var(--mut);font-size:.72rem;white-space:nowrap}
+.rw .top{display:flex;align-items:center;gap:8px}
+.rw .id{color:var(--dim);font-size:.62rem;width:30px;flex-shrink:0}
+.rw .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rw .nums{color:var(--mut);font-size:.66rem;margin-top:5px;display:flex;flex-wrap:wrap;gap:4px 10px}
 .rw .nums b{font-weight:400}
-.st{font-size:.68rem;padding:2px 9px;border-radius:10px;white-space:nowrap}
+.st{font-size:.6rem;padding:2px 8px;border-radius:9px;white-space:nowrap;flex-shrink:0}
 .st.done{background:#1d3d2c;color:var(--ok)}.st.partial{background:#3d3520;color:var(--warn)}
 .st.frozen{background:#1e3245;color:var(--frz)}.st.untouched{background:#2a2f3d;color:var(--mut)}
-.st.skipped{background:#3a2630;color:#c98a9a}
-.mini{background:none;border:1px solid var(--line);color:var(--mut);border-radius:7px;padding:3px 9px;font-size:.72rem;cursor:pointer;white-space:nowrap}
-.mini:hover{border-color:var(--acc);color:var(--acc)}
-.mini.on{border-color:var(--acc);color:var(--acc);background:#2a2513}
-.mini.bad:hover,.mini.bad{border-color:var(--bad);color:var(--bad)}
-.ord{display:flex;flex-direction:column;gap:1px}
-.ord button{background:none;border:none;color:var(--dim);cursor:pointer;font-size:.62rem;line-height:1;padding:1px 4px}
-.ord button:hover{color:var(--acc)}
-.files{display:none;padding:6px 18px 12px;background:#0f1420;max-height:300px;overflow-y:auto}
-.fr{display:flex;gap:10px;padding:4px 8px;font-size:.74rem;border-bottom:1px solid #182032;align-items:center}
-.fr .n{color:var(--dim);width:32px;flex-shrink:0}
+.st.skipped{background:#3a2630;color:#c98a9a}.st.paused{background:#2c2f4a;color:#9aa5d8}
+.ctl{display:flex;gap:5px;margin-top:7px;flex-wrap:wrap}
+.mini{background:var(--card2);border:1px solid var(--line);color:var(--mut);border-radius:8px;padding:5px 10px;font-size:.68rem;cursor:pointer;min-height:30px}
+.mini:active{transform:scale(.95)}
+.mini.on{border-color:var(--acc);color:var(--acc)}
+.mini.bad{border-color:#5a3038;color:var(--bad)}
+.files{display:none;margin-top:7px;background:#0f1420;border-radius:8px;padding:6px;max-height:260px;overflow-y:auto}
+.fr{display:flex;gap:8px;padding:4px 6px;font-size:.68rem;border-bottom:1px solid #182032;align-items:center}
+.fr .n{color:var(--dim);width:28px;flex-shrink:0}
 .fr .f{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--mut)}
-.fr .t{color:var(--ok);font-size:.68rem}.fr .nt{color:var(--bad);font-size:.68rem}
-.fr .dl{color:var(--acc2);font-size:.68rem}
-.rw.open + .files{display:block}
-#dirty{position:fixed;bottom:18px;left:18px;background:var(--acc);color:#111;border-radius:12px;padding:12px 20px;font-weight:700;display:none;box-shadow:0 4px 24px #0008;z-index:60}
-#toast{position:fixed;bottom:18px;right:18px;background:var(--ok);color:#fff;border-radius:10px;padding:10px 18px;display:none;z-index:60}
-.dim{color:var(--dim)}a{color:var(--acc2)}
+.fr .t{color:var(--ok)}.fr .nt{color:var(--bad)}.fr .dl{color:var(--acc2)}
+#ev{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px 12px;margin-bottom:10px}
+.ev{display:flex;gap:8px;padding:5px 0;border-bottom:1px solid #182032;font-size:.7rem;color:var(--mut);align-items:center}
+.ev:last-child{border:none}
+.ev .ea{flex-shrink:0}.ev .em{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.ev .et{color:var(--dim);font-size:.6rem;flex-shrink:0}
+#bar{position:fixed;bottom:0;left:0;right:0;background:#0e1420f5;backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:9px 14px calc(9px + env(safe-area-inset-bottom));display:flex;gap:8px;z-index:50;align-items:center}
+#bar .cnt{flex:1;color:var(--mut);font-size:.68rem}
+.btn{background:var(--acc);color:#111;border:none;border-radius:10px;padding:10px 16px;font-weight:800;cursor:pointer;font-size:.8rem;min-height:40px}
+.btn.sec{background:var(--card2);color:var(--tx);border:1px solid var(--line)}
+.btn:active{transform:scale(.97)}
+#modal{position:fixed;inset:0;background:#000a;display:none;z-index:70;align-items:flex-end}
+#modal.on{display:flex}
+.msheet{background:var(--card);border-radius:16px 16px 0 0;width:100%;max-height:80vh;overflow-y:auto;padding:16px;padding-bottom:calc(16px + env(safe-area-inset-bottom))}
+.msheet h3{font-size:.9rem;margin-bottom:10px}
+.msheet .opt{display:block;width:100%;text-align:right;background:var(--card2);border:1px solid var(--line);border-radius:10px;color:var(--tx);padding:12px;margin-bottom:7px;font-size:.82rem;cursor:pointer}
+.msheet .opt:active{background:var(--line)}
+#toast{position:fixed;bottom:70px;right:14px;left:14px;background:var(--ok);color:#fff;border-radius:10px;padding:11px 16px;display:none;z-index:80;font-size:.82rem;text-align:center}
+a{color:var(--acc2)}
+@media(min-width:700px){#kpis{grid-template-columns:repeat(8,1fr)}.k b{font-size:1.2rem}}
 </style>
 </head>
 <body>
+<header><h1>السرب — حالة التفريغ والتكليفات</h1><p class="sub">كل التنزيلات موقوفة · الوكلاء يحدّثون حالتهم عبر القناة · صدّر JSON للنشر النهائي</p></header>
 <main>
-<h1>حالة التفريغ — محرّر السرب</h1>
-<p class="sub">كل التنزيلات موقوفة بأمر المالك · عدّل الحالات والترتيب ثم صدّر JSON</p>
 <div id="kpis"></div>
+<div class="sect">الوكلاء — التكليفات (منجزة/قريبة من الانتهاء فقط)</div>
+<div id="agents"></div>
+<div class="sect">آخر التحديثات الحية</div>
+<div id="ev"><div class="ev"><span class="em dim">بانتظار أحداث الوكلاء…</span></div></div>
+<div class="sect">كل السلاسل</div>
 <div id="tabs"></div>
-<div id="tools">
-  <input id="q" placeholder="ابحث في السلاسل والشيوخ…">
-  <button class="btn" id="exportBtn">⬇ تصدير JSON</button>
+<div id="tools"><input id="q" placeholder="ابحث…"><button class="btn sec" id="flBtn" style="min-height:38px">⚲</button></div>
+<div id="list"></div>
+</main>
+<div id="bar"><span class="cnt"><b id="dn">0</b> تعديلاً غير مُصدَّر</span>
   <button class="btn sec" id="importBtn">⬆ استيراد</button>
-  <button class="btn sec" id="resetBtn">↺ مسح التعديلات</button>
+  <button class="btn" id="exportBtn">⬇ تصدير JSON</button>
   <input type="file" id="impFile" accept=".json" style="display:none">
 </div>
-<div id="list"></div>
-<div id="dirty">تعديلات غير مُصدَّرة — <b id="dn">0</b></div>
+<div id="modal"><div class="msheet" id="msh"></div></div>
 <div id="toast"></div>
-</main>
 <script>
-const S={data:null,sheikhs:null,edits:{},view:'all',q:'',openShk:null,filesCache:{}};
-const FILTERS={all:'الكل',done:'مكتملة',partial:'جزئية',untouched:'لم تُمسّ',frozen:'مجمّدة',skipped:'غير مرغوبة',paused:'متوقفة',ready:'منزّلة غير مفرّغة',want:'مطلوبة ▲'};
+const NTFY='https://ntfy.sh/des_state_q9';
+const S={data:null,agents:{},events:[],assign:{},edits:{},view:'all',q:'',openShk:null,filesCache:{},onlyLinks:false};
 const esc=s=>String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 const norm=s=>(s||'').replace(/[أإآ]/g,'ا').replace(/\s+/g,' ').trim();
-const save=()=>localStorage.setItem('st_edits',JSON.stringify(S.edits));
-const load=()=>{try{S.edits=JSON.parse(localStorage.getItem('st_edits')||'{}')}catch(e){S.edits={}}};
-function E(sid){return S.edits[sid]||{}}
+const save=()=>localStorage.setItem('st_edits2',JSON.stringify(S.edits));
+const E=sid=>S.edits[sid]||{};
+const byId={};
 function stateOf(x){const e=E(x.id);
   if(e.skip)return 'skipped';if(e.frozen)return 'frozen';if(e.paused)return 'paused';
   if(x.skipped)return 'skipped';if(x.frozen)return 'frozen';if(x.paused)return 'paused';
   return x.state}
-function match(x){
-  const st=stateOf(x);
+function match(x){const st=stateOf(x);
   if(S.view==='all')return true;
-  if(S.view==='ready')return (x.downloaded-(x.transcribed||0))>0&&st!=='skipped'&&st!=='frozen'&&st!=='paused';
+  if(S.view==='ready')return (x.downloaded-(x.transcribed||0))>0&&!['skipped','frozen','paused'].includes(st);
   if(S.view==='want')return (E(x.id).want||x.want||0)>0;
   return st===S.view}
-function dirty(n){document.getElementById('dirty').style.display=n>0?'block':'none';document.getElementById('dn').textContent=n}
-function toast(t,ok=true){const el=document.getElementById('toast');el.textContent=t;el.style.background=ok?'var(--ok)':'var(--bad)';el.style.display='block';setTimeout(()=>el.style.display='none',2600)}
-function edit(sid,k,v){const e=S.edits[sid]||(S.edits[sid]={});if(v===null||v===undefined||v===false)delete e[k];else e[k]=v;if(!Object.keys(e).length)delete S.edits[sid];save();dirty(Object.keys(S.edits).length);render()}
-function moveUp(sid,dir,list){const ord=list.map(x=>x.id);const i=ord.indexOf(sid),j=i+dir;if(j<0||j>=ord.length)return;
-  // store explicit order array per sheikh
-  const sh=list[0].sheikh;const key='ord:'+sh;
-  const cur=S.edits[key]||ord.slice();
-  const a=cur.indexOf(sid),b=a+dir;if(b<0||b>=cur.length)return;
-  [cur[a],cur[b]]=[cur[b],cur[a]];
-  S.edits[key]=cur;save();dirty(Object.keys(S.edits).length);render()}
-async function j(u){const r=await fetch(u);return r.ok?r.json():null}
-function pbFor(list){const t={d:0,a:0,p:0,h:0,b:0,w:0,tot:0};
-  for(const x of list){const e=x.exp||0;t.tot+=e;
-    const st=stateOf(x);const done=x.transcribed||0;
-    t.d+=Math.min(done,e);
-    if(st==='frozen'||st==='paused')t.h+=e-done;
-    else if(st==='skipped')t.w+=e-done;
-    else if(done>=e&&e)t.a+=0;
-    else t.p+=Math.max(0,e-done);
-    t.b+=x.bad||0}
-  const seg=(v,c)=>v?`<i class="${c}" style="width:${(v*100/t.tot).toFixed(1)}%"></i>`:'';
-  return `<div class="pb">${seg(t.d,'pd')}${seg(t.a,'pa')}${seg(t.p,'pp')}${seg(t.h,'ph')}${seg(t.b,'px')}${seg(t.w,'pw')}</div>`}
-function badge(st,x){const m={done:'مكتملة',partial:'جزئية',untouched:'لم تُمسّ',frozen:'مجمّدة',skipped:'غير مرغوبة',paused:'متوقفة'};
-  const extra=[];if(x){const e=E(x.id);if(e.frozen&&st!=='frozen')extra.push('مجمّد');if(e.paused&&st!=='paused')extra.push('موقوف');if(e.skip&&st!=='skipped')extra.push('مرفوض');if((e.want||x.want))extra.push('♥'+(e.want||x.want))}
-  return `<span class="st ${st}">${m[st]||st}</span>`+extra.map(t=>`<span class="st partial">${t}</span>`).join('')}
-function ctrl(x){
-  const e=E(x.id),st=stateOf(x);const b=[];
-  b.push(`<div class="ord"><button onclick="mv('${x.id}',-1)">▲</button><button onclick="mv('${x.id}',1)">▼</button></div>`);
-  if(st!=='frozen')b.push(`<button class="mini" onclick="ed('${x.id}','frozen',true)" title="تجميد">⏸</button>`);
-  else b.push(`<button class="mini on" onclick="ed('${x.id}','frozen',false)" title="فك التجميد">▶</button>`);
-  if(st!=='skipped')b.push(`<button class="mini bad" onclick="ed('${x.id}','skip',true)" title="غير مرغوبة">✕</button>`);
-  else b.push(`<button class="mini on" onclick="ed('${x.id}','skip',false)" title="إرجاع">↩</button>`);
-  if(!e.paused&&st!=='frozen'&&st!=='skipped')b.push(`<button class="mini" onclick="ed('${x.id}','paused',true)" title="إيقاف مؤقت (يخرج من الطابور)">⏯</button>`);
-  if(e.paused)b.push(`<button class="mini on" onclick="ed('${x.id}','paused',false)" title="استئناف">▶</button>`);
-  const w=e.want||x.want||0;
-  b.push(`<button class="mini ${w?'on':''}" onclick="ed('${x.id}','want',${(w+1)%4})" title="أولوية">♥${w||''}</button>`);
-  b.push(`<button class="mini" onclick="tg('${x.id}')" title="تفاصيل الملفات">▾</button>`);
-  return b.join('')}
-function rowHtml(x){
-  const st=stateOf(x);
-  const dl=x.downloaded||0,tr=x.transcribed||0,ex=x.exp||0;
-  const miss=Math.max(0,ex-dl);
-  return `<div class="rw" id="rw${x.id}">
-    <span class="id">${x.id}</span>
-    ${ctrl(x)}
-    <span class="nm" title="${esc(x.key||'')}">${esc(x.key||'—')}</span>
-    ${badge(st,x)}
-    <span class="nums">أصل <b>${ex}</b> · منزّل <b>${dl}</b> · مفرّغ <b class="${tr?'':''}" style="color:var(--ok)">${tr}</b>${miss?` · ناقص <b style="color:var(--bad)">${miss}</b>`:''}${x.resume_from?` · يبدأ <b style="color:var(--acc2)">${x.resume_from}</b>`:''}</span>
-  </div><div class="files" id="f${x.id}"></div>`}
-async function tg(sid){const el=document.getElementById('f'+sid),rw=document.getElementById('rw'+sid);
-  rw.classList.toggle('open');
-  if(el.dataset.ld)return;
+function toast(t,bad){const el=document.getElementById('toast');el.textContent=t;el.style.background=bad?'var(--bad)':'var(--ok)';el.style.display='block';setTimeout(()=>el.style.display='none',2400)}
+function dirty(){document.getElementById('dn').textContent=Object.keys(S.edits).filter(k=>!k.startsWith('ord:')&&!k.startsWith('lnk:')).length+Object.keys(S.edits).filter(k=>k.startsWith('ord:')||k.startsWith('lnk:')).length}
+function edit(k,v){if(v===null||v===undefined||v===false||v==='')delete S.edits[k];else S.edits[k]=v;save();dirty();render()}
+async function j(u){try{const r=await fetch(u);return r.ok?r.json():null}catch(e){return null}}
+async function post(body){try{await fetch(NTFY,{method:'POST',body:JSON.stringify(body)})}catch(e){}}
+const FILTERS={all:'الكل',done:'مكتملة',partial:'جزئية',untouched:'لم تُمسّ',frozen:'مجمّدة',skipped:'مرفوضة',paused:'متوقفة',ready:'منزّلة غير مفرّغة',want:'مطلوبة ♥'};
+function badge(st){const m={done:'مكتملة',partial:'جزئية',untouched:'لم تُمسّ',frozen:'مجمّدة',skipped:'مرفوضة',paused:'متوقفة'};return `<span class="st ${st}">${m[st]||st}</span>`}
+function ago(ts){if(!ts)return '—';const d=(Date.now()/1000)-ts;if(d<60)return'الآن';if(d<3600)return Math.floor(d/60)+'د';if(d<86400)return Math.floor(d/3600)+'س';return Math.floor(d/86400)+'ي'}
+function chip(x){const pct=x.exp?Math.round(100*(x.transcribed||0)/x.exp):0;
+  const lnk=E('lnk:'+x.id)||x.url||'';
+  return `<span class="chip" title="${esc(x.key)}">
+    <span class="cn">${esc(x.key||x.id)}</span><span class="pct">${x.transcribed||0}/${x.exp||0}</span>
+    <span class="lnk" onclick="event.stopPropagation();setLink('${x.id}')">${lnk?'🔗':'＋رابط'}</span>
+    <span class="mv" onclick="event.stopPropagation();moveChip('${x.id}')">⇄</span></span>`}
+function setLink(sid){const cur=E('lnk:'+sid)||byId[sid]?.url||'';
+  const v=prompt('رابط السلسلة (يوتيوب/قناة):',cur);
+  if(v===null)return;edit('lnk:'+sid,v.trim());renderAgents();toast('حُفظ الرابط')}
+function moveChip(sid){sheet('انقل السلسلة إلى…',Object.keys(S.agents).map(a=>({t:S.agents[a].name+' — '+S.agents[a].role,f:()=>{assignSeries(sid,a)}})))}
+function assignSeries(sid,a){const cur=(S.agents[a].series||[]).slice();
+  if(!cur.includes(sid))cur.push(sid);
+  for(const k of Object.keys(S.agents))S.agents[k].series=(S.agents[k].series||[]).filter(s=>s!==sid);
+  S.agents[a].series=cur;
+  S.edits['asg:'+sid]=a;save();dirty();
+  post({kind:'assign',agent:a,sid,ts:Math.floor(Date.now()/1000)});
+  renderAgents();toast('كُلّفت '+S.agents[a].name+' بسلسلة '+sid)}
+function renderAgents(){
+  const host=document.getElementById('agents');host.innerHTML='';
+  for(const[id,a]of Object.entries(S.agents)){
+    const cards=(a.series||[]).map(sid=>byId[sid]).filter(Boolean);
+    const online=a.last_seen&&(Date.now()/1000-a.last_seen<600);
+    const div=document.createElement('div');div.className='pcard';
+    div.innerHTML=`<div class="hd"><div class="av">${a.avatar||'👤'}</div>
+      <div class="who"><b>${esc(a.name)}</b><span class="role">${esc(a.role||'')}</span><div class="cur">${esc(a.current||'—')}</div></div>
+      <div class="live"><span class="dot ${online?'on':''}"></span>${online?'متصل':'آخر ظهور '+ago(a.last_seen)}<br>${esc(a.status||'')}</div></div>
+      <div class="pchips">${cards.map(chip).join('')||'<span class="dim" style="font-size:.68rem">لا سلاسل — اضغط «＋» لتكليفه</span>'}
+      <span class="chip" style="border-style:dashed;cursor:pointer" onclick="pickSeries('${id}')">＋ كَلّف بسلسلة</span></div>`;
+    host.appendChild(div)}}
+function pickSeries(agentId){
+  // series not assigned anywhere, or any series (choose)
+  const taken=new Set();for(const a of Object.values(S.agents))for(const s of a.series||[])taken.add(s);
+  const cands=S.data.series.filter(x=>!taken.has(x.id)&&x.transcribed>0)
+    .sort((a,b)=>b.transcribed-b.transcribed).slice(0,40);
+  sheet('كَلّف '+S.agents[agentId].name+' بـ… (مفرّغة/قريبة فقط)',
+    cands.map(x=>({t:`${x.id} · ${esc(x.key||'')} — ${x.transcribed}/${x.exp}`,f:()=>assignSeries(x.id,agentId)})))}
+function sheet(title,opts){
+  const m=document.getElementById('modal'),sh=document.getElementById('msh');
+  sh.innerHTML=`<h3>${esc(title)}</h3>`+opts.map((o,i)=>`<button class="opt" data-i="${i}">${o.t}</button>`).join('')
+    +`<button class="opt" style="text-align:center;color:var(--mut)">إلغاء</button>`;
+  sh.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{m.classList.remove('on');const i=+b.dataset.i;if(opts[i])opts[i].f()});
+  m.onclick=e=>{if(e.target===m)m.classList.remove('on')};
+  m.classList.add('on')}
+function evIcon(k){return{download:'⬇',transcribe:'✍',chat:'💬',upload:'⬆',heartbeat:'♥',assign:'📌'}[k]||'·'}
+function renderEvents(){const host=document.getElementById('ev');
+  const evs=(S.events||[]).slice(-12).reverse();
+  if(!evs.length){host.innerHTML='<div class="ev"><span class="em dim">بانتظار أحداث الوكلاء…</span></div>';return}
+  host.innerHTML=evs.map(e=>`<div class="ev"><span class="ea">${evIcon(e.kind)}</span>
+    <span class="em"><b>${esc(e.agent||'')}</b> ${esc(e.msg||e.kind)}</span>
+    <span class="et">${ago(e.ts)}</span></div>`).join('')}
+function rowHtml(x){const st=stateOf(x);const dl=x.downloaded||0,tr=x.transcribed||0,ex=x.exp||0,miss=Math.max(0,ex-dl);
+  const own=Object.entries(S.agents).find(([k,a])=>(a.series||[]).includes(x.id));
+  return `<div class="rw"><div class="top">
+    <span class="id">${x.id}</span><span class="nm" title="${esc(x.key||'')}">${esc(x.key||'—')}</span>
+    ${badge(st)}${own?`<span class="st paused">${esc(S.agents[own[0]].name)}</span>`:''}</div>
+    <div class="nums">أصل <b>${ex}</b> · منزّل <b>${dl}</b> · مفرّغ <b style="color:var(--ok)">${tr}</b>${miss?` · ناقص <b style="color:var(--bad)">${miss}</b>`:''}${x.resume_from?` · يبدأ <b style="color:var(--acc2)">${x.resume_from}</b>`:''}</div>
+    <div class="ctl">
+      <button class="mini" onclick="assignSheet('${x.id}')">📌 كلف</button>
+      <button class="mini ${stateOf(x)==='frozen'?'on':''}" onclick="tgl('${x.id}','frozen')">${stateOf(x)==='frozen'?'▶ فك':'⏸ جمّد'}</button>
+      <button class="mini" onclick="tgl('${x.id}','paused')">${stateOf(x)==='paused'?'▶ استأنف':'⏯ أوقف'}</button>
+      <button class="mini bad" onclick="tgl('${x.id}','skip')">${stateOf(x)==='skipped'?'↩ أرجع':'✕ ارفض'}</button>
+      <button class="mini ${(E(x.id).want||x.want)?'on':''}" onclick="cyc('${x.id}')">♥${E(x.id).want||x.want||''}</button>
+      <button class="mini" onclick="tg('${x.id}')">▾ ملفات</button>
+      <button class="mini" onclick="setLink('${x.id}')">🔗 رابط</button>
+    </div>
+    <div class="files" id="f${x.id}"></div></div>`}
+function assignSheet(sid){sheet(sid+' — كَلّف…',Object.keys(S.agents).map(a=>({t:S.agents[a].name+' — '+S.agents[a].role,f:()=>assignSeries(sid,a)})))}
+function tgl(sid,k){const cur=E(sid)[k]??(k==='skip'?byId[sid].skipped:k==='frozen'?byId[sid].frozen:k==='paused'?byId[sid].paused:false);
+  const e=S.edits[sid]||(S.edits[sid]={});
+  if(cur)delete e[k];else e[k]=true;
+  if(!Object.keys(e).length)delete S.edits[sid];save();dirty();render();
+  post({kind:'state',sid,[k]:!cur,ts:Math.floor(Date.now()/1000)})}
+function cyc(sid){const w=E(sid).want||0;const e=S.edits[sid]||(S.edits[sid]={});
+  if(w>=3)delete e.want;else e.want=w+1;
+  if(!Object.keys(e).length)delete S.edits[sid];save();dirty();render()}
+async function tg(sid){const el=document.getElementById('f'+sid);
+  if(el.dataset.ld){el.style.display=el.style.display==='block'?'none':'block';return}
   const d=S.filesCache[sid]||(S.filesCache[sid]=await j('series/'+sid+'.json'));
-  if(!d){el.innerHTML='<div class="fr"><span class="f dim">لا يوجد تفصيل ملفات</span></div>';el.dataset.ld=1;return}
-  el.innerHTML=d.files.map(f=>`<div class="fr"><span class="n">${f.n}</span><span class="f" title="${esc(f.file||'')}">${esc(f.file||'—')}</span>
-    <span class="dl">${f.downloaded?'⬇ منزّل':'— لا صوت'}</span>
-    <span class="${f.transcribed?'t':'nt'}">${f.transcribed?'✓ مفرّغ':'✗ لم يُفرَّغ'}</span></div>`).join('')||'<div class="fr"><span class="f dim">لا ملفات</span></div>';
-  el.dataset.ld=1}
+  el.innerHTML=d?d.files.map(f=>`<div class="fr"><span class="n">${f.n}</span><span class="f" title="${esc(f.file||'')}">${esc(f.file||'—')}</span>
+    <span class="dl">${f.downloaded?'⬇':'—'}</span><span class="${f.transcribed?'t':'nt'}">${f.transcribed?'✓':'✗'}</span></div>`).join(''):'<div class="fr"><span class="f dim">لا تفصيل</span></div>';
+  el.dataset.ld=1;el.style.display='block'}
 function render(){
   const L=S.data.series.filter(x=>{
     if(!match(x))return false;
+    if(S.onlyLinks&&!(E('lnk:'+x.id)||x.url))return false;
     if(S.q){const q=norm(S.q);return norm(x.key).includes(q)||norm(x.sheikh).includes(q)||x.id.includes(q)}
     return true});
   const bySh={};for(const x of L){(bySh[x.sheikh||'أخرى']=bySh[x.sheikh||'أخرى']||[]).push(x)}
   const host=document.getElementById('list');host.innerHTML='';
-  const names=Object.keys(bySh).sort((a,b)=>a.localeCompare(b,'ar'));
-  for(const sh of names){
-    let arr=bySh[sh];
-    const eo=S.edits['ord:'+sh];
+  for(const sh of Object.keys(bySh).sort((a,b)=>a.localeCompare(b,'ar'))){
+    let arr=bySh[sh];const eo=S.edits['ord:'+sh];
     if(eo)arr=arr.slice().sort((a,b)=>(eo.indexOf(a.id)+1||9e9)-(eo.indexOf(b.id)+1||9e9));
     const div=document.createElement('div');div.className='shk'+(S.openShk===sh?' open':'');
-    const done=arr.filter(x=>x.state==='done').length;
-    div.innerHTML=`<div class="shk-h" onclick="opn('${esc(sh)}')">
-      <span class="nm">${esc(sh)}</span><span class="meta">${arr.length} سلسلة · ${arr.reduce((a,x)=>a+(x.transcribed||0),0)}/${arr.reduce((a,x)=>a+(x.exp||0),0)} مفرّغ · ${done} مكتملة</span>
-      ${pbFor(arr)}<span class="arr">▸</span></div>
+    const tr=arr.reduce((a,x)=>a+(x.transcribed||0),0),ex=arr.reduce((a,x)=>a+(x.exp||0),0);
+    const pb=(v,c)=>v?`<i class="${c}" style="width:${(v*100/(ex||1)).toFixed(1)}%"></i>`:'';
+    const dn=arr.reduce((a,x)=>a+(x.downloaded||0),0),bad=arr.reduce((a,x)=>a+(x.bad||0),0);
+    div.innerHTML=`<div class="shk-h" onclick="S.openShk=S.openShk==='${esc(sh)}'?null:'${esc(sh)}';render()">
+      <div style="flex:1;min-width:0"><span class="nm">${esc(sh)}</span>
+      <span class="meta"> ${arr.length} سلسلة · ${tr}/${ex} مفرّغ</span>
+      <div class="pb">${pb(tr,'pd')}${pb(Math.max(0,Math.min(dn,ex)-tr),'pp')}${pb(Math.max(0,ex-Math.min(dn,ex)),'pw')}${pb(bad,'px')}</div></div>
+      <span class="arr">▾</span></div>
       <div class="rows">${arr.map(rowHtml).join('')}</div>`;
     host.appendChild(div)}
-  if(!names.length)host.innerHTML='<p class="sub" style="text-align:center;padding:40px">لا نتائج.</p>';
-  // tab counts
-  document.querySelectorAll('.tb .cnt').forEach(el=>{
-    const v=el.dataset.v;let n=0;
+  if(!Object.keys(bySh).length)host.innerHTML='<p class="sub" style="text-align:center;padding:30px">لا نتائج.</p>';
+  document.querySelectorAll('.tb .cnt').forEach(el=>{const v=el.dataset.v;let n=0;
     for(const x of S.data.series){const st=stateOf(x);
       if(v==='all')n++;
-      else if(v==='ready'){if((x.downloaded-(x.transcribed||0))>0&&st!=='skipped'&&st!=='frozen'&&st!=='paused')n++}
+      else if(v==='ready'){if((x.downloaded-(x.transcribed||0))>0&&!['skipped','frozen','paused'].includes(st))n++}
       else if(v==='want'){if((E(x.id).want||x.want||0)>0)n++}
       else if(st===v)n++}
     el.textContent=n})}
-function opn(sh){S.openShk=S.openShk===sh?null:sh;document.querySelectorAll('.shk').forEach(el=>{
-  const nm=el.querySelector('.nm').textContent;el.classList.toggle('open',nm===sh||nm===S.openShk)})}
-function ed(sid,k,v){edit(sid,k,v)}
-function mv(sid,dir){const sh=S.data.series.find(x=>x.id===sid).sheikh;
-  const arr=S.data.series.filter(x=>(x.sheikh||'أخرى')===sh&&match(x));
-  const eo=S.edits['ord:'+sh];
-  const order=(eo||arr.map(x=>x.id)).slice();
-  const i=order.indexOf(sid),j=i+dir;
-  if(j<0||j>=order.length)return;
-  [order[i],order[j]]=[order[j],order[i]];
-  S.edits['ord:'+sh]=order;save();dirty(Object.keys(S.edits).length);render()}
-function doExport(){
-  const out={generated:new Date().toISOString(),note:'edited state — overrides merged',series:S.data.series.map(x=>({...x,state:stateOf(x),edit:E(x.id),ord_pos:(S.edits['ord:'+(x.sheikh||'أخرى')]||[]).indexOf(x.id)})),
+async function poll(){const[a2,ev]=await Promise.all([j('agents.json?v='+Date.now()),j('events.json?v='+Date.now())]);
+  if(a2&&a2.agents){for(const[k,a]of Object.entries(a2.agents)){
+    if(!(S.agents[k]&&S.agents[k].series&&a.series&&S.agents[k].series.length>a.series.length))
+      S.agents[k]={...a,series:(S.agents[k]&&S.agents[k].series)||a.series||[]}}
+    renderAgents()}
+  if(ev&&ev.events){S.events=ev.events;renderEvents()}}
+document.getElementById('exportBtn').onclick=()=>{
+  const out={generated:new Date().toISOString(),
+    agents:S.agents,
+    series:S.data.series.map(x=>({...x,state:stateOf(x),link:E('lnk:'+x.id)||x.url,edit:E(x.id)})),
     orders:Object.fromEntries(Object.entries(S.edits).filter(([k])=>k.startsWith('ord:')))};
   const b=new Blob([JSON.stringify(out,null,1)],{type:'application/json'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='state-edited.json';a.click();
-  toast('صُدّرت الحالة المعدّلة — '+Object.keys(S.edits).length+' تعديلاً')}
-document.getElementById('exportBtn').onclick=doExport;
-document.getElementById('resetBtn').onclick=()=>{S.edits={};save();dirty(0);render();toast('مُسحت التعديلات')};
+  const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='fleet-state.json';a.click();
+  toast('صُدّرت الحالة — '+Object.keys(S.edits).length+' تعديلاً')};
 document.getElementById('importBtn').onclick=()=>document.getElementById('impFile').click();
 document.getElementById('impFile').onchange=e=>{const f=e.target.files[0];if(!f)return;
-  const rd=new FileReader();rd.onload=()=>{try{
-    const d=JSON.parse(rd.result);
-    if(d.edits)S.edits=d.edits;
-    else if(d.series)for(const x of d.series){if(x.edit&&Object.keys(x.edit).length)S.edits[x.id]=x.edit}
-    save();dirty(Object.keys(S.edits).length);render();toast('استُوردت التعديلات')}catch(err){toast('ملف غير صالح',false)}};rd.readAsText(f)};
+  const rd=new FileReader();rd.onload=()=>{try{const d=JSON.parse(rd.result);
+    if(d.edits)S.edits={...S.edits,...d.edits};
+    if(d.agents)for(const[k,a]of Object.entries(d.agents)){if(a.series)S.agents[k].series=a.series}
+    save();dirty();renderAgents();render();toast('استُورد')}catch(err){toast('ملف غير صالح',1)}};rd.readAsText(f)};
 document.getElementById('q').oninput=e=>{S.q=e.target.value;render()};
+document.getElementById('flBtn').onclick=()=>{S.onlyLinks=!S.onlyLinks;document.getElementById('flBtn').style.color=S.onlyLinks?'var(--acc)':'';render()};
 (async()=>{
-  load();
-  const [data,sh]=await Promise.all([j('index.json?v='+Date.now()),j('sheikhs.json')]);
-  S.data=data;S.sheikhs=sh;
+  try{S.edits=JSON.parse(localStorage.getItem('st_edits2')||'{}')}catch(e){S.edits={}}
+  const[data,ag,ev,asg]=await Promise.all([j('index.json?v='+Date.now()),j('agents.json?v='+Date.now()),j('events.json?v='+Date.now()),j('assignments.json?v='+Date.now())]);
+  S.data=data;for(const s of data.series)byId[s.id]=s;
+  S.agents=(ag&&ag.agents)||{};S.assign=(asg&&asg.assignments)||{};
+  S.events=(ev&&ev.events)||[];
   const tot=data.series.reduce((a,x)=>({e:a.e+(x.exp||0),t:a.t+(x.transcribed||0),d:a.d+(x.downloaded||0),b:a.b+(x.bad||0)}),{e:0,t:0,d:0,b:0});
   const stc={};for(const x of data.series){const s=stateOf(x);stc[s]=(stc[s]||0)+1}
   document.getElementById('kpis').innerHTML=
     `<div class="k"><b>${data.series.length}</b><span>سلسلة</span></div>
-     <div class="k"><b>${(sh&&Object.keys(sh.sheikhs||{}).length)||'—'}</b><span>شيخاً</span></div>
-     <div class="k"><b>${tot.t}</b><span>ملف مفرّغ</span></div>
-     <div class="k"><b>${tot.d}</b><span>صوت منزّل</span></div>
-     <div class="k"><b>${tot.e}</b><span>حلقة متوقَّعة</span></div>
+     <div class="k"><b>${tot.t}</b><span>مفرّغ</span></div>
+     <div class="k"><b>${tot.d}</b><span>منزّل</span></div>
+     <div class="k"><b>${tot.e}</b><span>متوقَّع</span></div>
      <div class="k"><b>${stc.done||0}</b><span>مكتملة</span></div>
+     <div class="k"><b>${stc.partial||0}</b><span>جزئية</span></div>
      <div class="k"><b>${stc.frozen||0}</b><span>مجمّدة</span></div>
-     <div class="k"><b>${tot.b}</b><span>فاشل</span></div>`;
+     <div class="k"><b>${stc.untouched||0}</b><span>بكراً</span></div>`;
   const tb=document.getElementById('tabs');
   tb.innerHTML=Object.entries(FILTERS).map(([k,v])=>`<button class="tb" data-v="${k}">${v} <span class="cnt" data-v="${k}"></span></button>`).join('');
   tb.querySelectorAll('.tb').forEach(b=>b.onclick=()=>{S.view=b.dataset.v;tb.querySelectorAll('.tb').forEach(x=>x.classList.toggle('on',x===b));render()});
   tb.querySelector('.tb').classList.add('on');
-  dirty(Object.keys(S.edits).length);
-  render()})();
+  renderAgents();renderEvents();dirty();render();
+  setInterval(poll,30000)})();
 </script>
 </body>
 </html>
