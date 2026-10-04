@@ -1,5 +1,5 @@
 {
- "t": 1791134877,
+ "t": 1791134915,
  "tasks": [
   {
    "id": "t-1",
@@ -738,9 +738,9 @@
    "title": "تحقق تفريغ 822 حلقة 127",
    "kind": "probe",
    "prio": 30,
-   "status": "claimed",
-   "owner": "selftest",
-   "claimed_at": 1791134876,
+   "status": "open",
+   "owner": "",
+   "claimed_at": 0,
    "result": "",
    "detail": "حلقة 127: الصوت موجود في build/822/audio لكن لا نص في txt/ — افحص agy_bad.txt وtranscripts_agy/822_*/ وقرر: إعادة إدراج أم خطأ حقيقي. النتيجة في القناة.",
    "created": 1791134451
