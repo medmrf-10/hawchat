@@ -3,9 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>تراث — hawchat</title>
+<title>التراث — hawchat</title>
 <meta name="theme-color" content="#0b0f1a">
-<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="hawchat">
@@ -16,294 +15,204 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-.wrap{max-width:1100px;margin:0 auto;padding:16px}
-/* ── hero ── */
-.hero{display:flex;align-items:end;gap:14px;margin:10px 0 18px}
-.hero h1{font-family:var(--font-ar);font-size:1.7rem;font-weight:700;background:linear-gradient(135deg,var(--acc2),var(--acc));-webkit-background-clip:text;background-clip:text;color:transparent;margin:0}
-.hero .pill{font-size:.68rem;color:var(--dim);border:1px solid var(--border);border-radius:99px;padding:4px 12px;margin-bottom:6px;white-space:nowrap}
-/* ── unified action bar ── */
-.bar{display:flex;gap:8px;align-items:stretch;background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:8px}
-.bar input{flex:1;min-width:0;height:38px;background:var(--bg);border:1px solid var(--border);border-radius:var(--r-md);color:var(--txt);padding:0 14px;font-family:var(--font-ui);font-size:.85rem}
-.bar input:focus{outline:none;border-color:var(--acc)}
-.abtn{height:38px;padding:0 16px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--card2);color:var(--txt);font-family:var(--font-ui);font-size:.8rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:border-color .15s,color .15s,background .15s;display:inline-flex;align-items:center;gap:6px}
-.abtn:hover{border-color:var(--acc)}
-.abtn.gold{background:var(--acc);color:var(--bg);border-color:var(--acc);font-weight:800}
-.abtn.on{border-color:var(--acc3);color:var(--acc3)}
-@media(max-width:640px){
-  .bar{flex-wrap:wrap}
-  .bar input{width:100%;flex:none;height:46px;font-size:.95rem}
-  .bar .abtn{flex:1;height:44px;justify-content:center;font-size:.82rem}
-  .wrap{padding:12px}
-  .hero h1{font-size:1.45rem}
-}
-/* ── toast ── */
-#toast{position:fixed;bottom:18px;right:50%;transform:translateX(50%) translateY(80px);background:var(--card2);border:1px solid var(--acc);color:var(--txt);font-size:.78rem;padding:10px 18px;border-radius:99px;opacity:0;transition:.3s;z-index:60;pointer-events:none}
-#toast.on{opacity:1;transform:translateX(50%) translateY(0)}
-#toast.err{border-color:#e06565}
-/* ── list strip ── */
-.lstrip{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x proximity;padding:4px 2px 10px;margin:2px 0 4px;scrollbar-width:thin;scrollbar-color:var(--border) transparent}
-.lstrip::-webkit-scrollbar{height:5px}
-.lstrip::-webkit-scrollbar-thumb{background:var(--border);border-radius:99px}
-.lst{position:relative;flex:0 0 118px;scroll-snap-align:start;background:linear-gradient(145deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:var(--r-md);padding:8px;cursor:pointer;transition:border-color .18s,transform .18s,box-shadow .18s}
-.lst:hover{border-color:var(--acc);transform:translateY(-2px)}
-.lst.on{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc)}
-.lst .cov{width:100%;aspect-ratio:16/10;border-radius:8px;overflow:hidden;background:var(--skel);display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:2px}
-.lst .cov img{width:100%;height:100%;object-fit:cover;display:block}
-.lst .cov .ph-f{display:flex;align-items:center;justify-content:center;font-family:var(--font-ar);color:var(--acc2);font-size:1.4rem;grid-column:1/-1;grid-row:1/-1}
-.lst .cov .ph-f.g{color:var(--acc);font-size:1.15rem}
-.lst .lnm{font-family:var(--font-ar);font-weight:700;font-size:.8rem;margin-top:7px;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.lst .lct{font-size:.62rem;color:var(--dim);margin-top:1px}
-.lst .lx{position:absolute;top:5px;left:5px;width:20px;height:20px;border-radius:50%;background:rgba(11,15,26,.85);border:1px solid var(--border);color:var(--dim);display:none;align-items:center;justify-content:center;font-size:.6rem;z-index:2}
-.lst:hover .lx{display:flex}
-.lst .lx:hover{color:#e06565;border-color:#e06565}
-@media(max-width:640px){.lst{flex-basis:104px}.grid{grid-template-columns:repeat(auto-fill,minmax(108px,1fr));gap:9px}}
-/* ── list view ── */
-.lv{display:none;animation:cin .3s both}
-.lv.on{display:block}
-.lv-hd{display:flex;align-items:center;gap:12px;margin:8px 0 14px}
-.lv-bk{width:42px;height:42px;flex:none;border-radius:50%;border:1px solid var(--border);background:var(--card);color:var(--txt);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .15s;text-decoration:none}
-.lv-bk:hover{border-color:var(--acc);color:var(--acc2)}
-.lv-t{font-family:var(--font-ar);font-size:1.3rem;font-weight:700;flex:1;min-width:0}
-.lv-c{font-size:.68rem;color:var(--dim);border:1px solid var(--border);border-radius:99px;padding:4px 12px;white-space:nowrap}
-.lv-dl{height:42px;padding:0 14px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--card);color:var(--dim);font-size:.72rem;cursor:pointer}
-.lv-dl:hover{color:#e06565;border-color:#e06565}
-.lv-empty{border:1px dashed var(--border);border-radius:var(--r-lg);padding:34px 18px;text-align:center;color:var(--dim);font-size:.85rem;line-height:2}
-.lv-empty b{color:var(--acc2)}
-/* ── sheikh cards ── */
-/* ── sheikh cards ── */
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:12px;margin-top:14px}
-.sh{display:block;background:linear-gradient(145deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:var(--r-md);padding:12px 10px 13px;text-decoration:none;color:var(--txt);text-align:center;transition:border-color .18s,transform .18s,box-shadow .18s;position:relative}
-.sh:hover{box-shadow:0 6px 20px rgba(0,0,0,.35)}
-.sh:hover{border-color:var(--acc);transform:translateY(-2px)}
-.sh .ph{width:86%;aspect-ratio:1;height:auto;margin:0 auto 9px;border-radius:50%;background:var(--skel);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;font-family:var(--font-ar);font-size:1.9rem;font-weight:700;color:var(--acc2)}
-.sh .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.sh .nm{font-family:var(--font-ar);font-size:.86rem;font-weight:700;line-height:1.5}
-.sh .plus{position:absolute;top:6px;left:6px;width:24px;height:24px;border-radius:50%;border:1px solid var(--acc);color:var(--acc2);background:var(--bgt);font-size:.85rem;display:none;align-items:center;justify-content:center;cursor:pointer;z-index:2}
-body.assign .sh .plus{display:flex}
-.sh .badge{position:absolute;top:6px;right:6px;min-width:20px;height:20px;font-size:.62rem;background:var(--acc);color:var(--bg);border-radius:99px;padding:0 7px;font-weight:800;display:flex;align-items:center;justify-content:center;z-index:2}
-.sh .mrm{position:absolute;top:6px;right:6px;width:22px;height:22px;border-radius:50%;background:var(--bgt);border:1px solid var(--border);color:var(--dim);display:flex;align-items:center;justify-content:center;font-size:.62rem;z-index:2;cursor:pointer}
-.sh .mrm:hover{color:#e06565;border-color:#e06565}
-.sub{color:var(--dim);font-size:.8rem}
-/* ── assign modal ── */
-.mov{position:fixed;inset:0;background:rgba(4,7,14,.66);display:none;align-items:center;justify-content:center;z-index:50;backdrop-filter:blur(6px)}
-.mov.on{display:flex}
-.mbox{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:18px;width:min(400px,92vw);max-height:80vh;overflow:auto;animation:cin .25s both}
-.mbox h3{font-family:var(--font-ar);font-size:1.05rem;color:var(--acc2);margin:0 0 12px}
-.lrow{display:flex;align-items:center;gap:8px;padding:11px 13px;border:1px solid var(--border);border-radius:var(--r-md);margin-bottom:8px;cursor:pointer;transition:border-color .15s;font-size:.85rem}
-.lrow:hover{border-color:var(--acc)}
-.lrow.in{border-color:var(--acc);background:var(--card2)}
-.lrow .inmark{margin-right:auto;font-size:.7rem;color:var(--acc2)}
-.newl{display:flex;gap:8px;margin-top:12px}
-.newl input{flex:1;height:38px;background:var(--bg);border:1px solid var(--border);border-radius:var(--r-md);color:var(--txt);padding:0 12px;font-family:var(--font-ui);font-size:.8rem}
-.newl button{height:38px;padding:0 16px;border-radius:var(--r-md);border:1px solid var(--acc);background:var(--card2);color:var(--acc2);cursor:pointer;font-size:.8rem;font-weight:600}
-.mclose{margin-top:14px;width:100%;height:40px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--card2);color:var(--txt);cursor:pointer;font-family:var(--font-ui)}
-.sh.cin{animation:cin .35s both}
+.wrap{max-width:960px;margin:0 auto;padding:16px}
+.h-title{font-family:var(--font-ar);font-size:1.8rem;font-weight:700;background:linear-gradient(135deg,var(--acc2),var(--acc));-webkit-background-clip:text;background-clip:text;color:transparent;margin:14px 0 4px}
+.sub{color:var(--dim);font-size:.82rem;margin-bottom:18px}
+.doors{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-top:10px}
+.door{background:var(--card);border:1px solid var(--border);border-radius:var(--r-md);padding:16px 14px;cursor:pointer;text-align:center;transition:.2s}
+.door:hover{border-color:var(--acc);transform:translateY(-2px)}
+.door b{font-family:var(--font-ar);font-size:1rem;display:block}
+.door span{color:var(--dim);font-size:.68rem;display:block;margin-top:4px}
+.srch{display:flex;gap:8px;margin:14px 0}
+.srch input{flex:1;background:var(--card);border:1px solid var(--border);border-radius:var(--r-md);color:var(--txt);font-family:var(--font-ui);font-size:1rem;padding:12px 14px;outline:none}
+.srch input:focus{border-color:var(--acc)}
+.row{display:flex;gap:10px;padding:10px 12px;border-bottom:1px solid var(--border);cursor:pointer;align-items:baseline}
+.row:hover{background:var(--card2)}
+.row .no{color:var(--acc);font-weight:700;font-size:.8rem;min-width:44px}
+.row .tx{flex:1;font-family:var(--font-ar);font-size:.95rem;color:var(--txt)}
+.row .bb{color:var(--dim);font-size:.66rem;white-space:nowrap}
+.badge{display:inline-block;background:var(--card2);border:1px solid var(--border);border-radius:99px;color:var(--acc2);font-size:.62rem;padding:2px 10px;margin-inline-start:6px}
+.badge.m{color:var(--ok);border-color:var(--ok)}
+.badge.a{color:#d19a66;border-color:#d19a66}
+.badge.z{color:var(--dim)}
+.hcard{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:22px;margin:14px 0}
+.parttext{font-family:var(--font-ar);font-size:1.15rem;line-height:2.4;white-space:pre-wrap;background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:22px;margin:14px 0}
+.fn{background:var(--card2);border-radius:var(--r-sm);padding:10px 12px;font-size:.72rem;margin:6px 0;color:var(--dim);font-family:var(--font-ar)}
+.fn b{color:var(--acc2)}
+.pg{display:flex;gap:8px;justify-content:center;margin:16px 0}
+.pg button{background:var(--card);border:1px solid var(--border);color:var(--txt);border-radius:var(--r-sm);padding:8px 18px;cursor:pointer;font-family:var(--font-ui)}
+.pg button:disabled{opacity:.4;cursor:default}
+.pg span{align-self:center;color:var(--dim);font-size:.8rem}
+.loading{color:var(--dim);text-align:center;padding:40px;font-size:.85rem}
+.err{color:#e06c75;text-align:center;padding:30px;font-size:.85rem}
+details{margin:8px 0}
+details summary{cursor:pointer;color:var(--acc2);font-size:.78rem;padding:6px 0}
+.secttl{font-family:var(--font-ar);font-size:1.05rem;color:var(--acc2);margin:18px 0 6px;border-bottom:1px solid var(--border);padding-bottom:6px}
+.back{color:var(--dim);font-size:.78rem;cursor:pointer;display:inline-block;margin-bottom:8px}
+.back:hover{color:var(--acc2)}
+.pick{display:flex;gap:8px;margin:10px 0;flex-wrap:wrap}
+.pick select{background:var(--card);border:1px solid var(--border);border-radius:var(--r-sm);color:var(--txt);font-family:var(--font-ui);padding:8px 12px;font-size:.9rem}
+.ed{background:var(--card2);border-right:3px solid var(--acc);border-radius:var(--r-sm);padding:12px;margin:10px 0}
+.ed .eh{color:var(--acc2);font-size:.8rem;font-weight:600}
+.ed .et{font-family:var(--font-ar);font-size:1.02rem;line-height:2;margin-top:6px}
+.ayahbox{font-family:var(--font-ar);font-size:1.5rem;line-height:2.4;text-align:center;color:var(--acc2);background:var(--card);border:1px solid var(--acc);border-radius:var(--r-lg);padding:18px 22px;margin:14px 0}
 </style>
 </head>
 <body>
 <header class="hd"><div class="hd-in">
   <a href="../" class="btn" aria-label="رجوع" style="text-decoration:none">→</a>
   <img src="../icons/icon-192.png" alt="" width="30" height="30" style="border-radius:8px">
-  <span class="brand">تراث</span>
-  <span class="sub">السلاسل المختارة</span>
+  <span class="brand">hawchat</span>
+  <span class="sub" style="color:var(--dim);font-size:.8rem">التراث</span>
 </div></header>
-<main><div class="wrap">
-  <div class="hero cin"><h1>تراث</h1><span class="pill">السلاسل المختارة + متابعة التفريغات</span><span class="pill" id="count"></span></div>
-  <div class="bar cin">
-    <input type="text" id="nl" placeholder="اسم قائمة جديدة…">
-    <button class="abtn gold" id="mk">＋ قائمة</button>
-    <button class="abtn" id="asg">تخصيص</button>
-    <button class="abtn" id="sav">حفظ</button>
-  </div>
-  <div class="lstrip" id="lists"></div>
-  <div class="lv" id="lview">
-    <div class="lv-hd">
-      <a class="lv-bk" href="#" id="lvbk">→</a>
-      <div class="lv-t" id="lvt"></div>
-      <span class="lv-c" id="lvc"></span>
-      <button class="lv-dl" id="lvdl">حذف القائمة</button>
-    </div>
-    <div class="grid" id="lgrid"></div>
-    <div class="lv-empty" id="lvempty" style="display:none">القائمة فارغة — فعّل <b>تخصيص</b> وانقر أي بطاقة شيخ لإسناده هنا</div>
-  </div>
-  <div id="groups" class="grid"></div>
-</div></main>
-<div id="toast"></div>
-<div class="mov" id="mov"><div class="mbox">
-  <h3 id="mt">إسناد إلى قائمة</h3>
-  <div id="mlists"></div>
-  <div class="newl"><input id="mnl" placeholder="أو قائمة جديدة…"><button id="mmk">إضافة</button></div>
-  <button class="mclose" onclick="closeModal()">تم</button>
-</div></div>
+<main><div class="wrap" id="app"></div></main>
 <script>
-const REPO={o:'medmrf-10',r:'hawchat',br:'main',path:'playlists/lists.json'};
-const LS='hw_lists_v1',LT='hw_ghtok';
-let state={version:1,updated_at:null,lists:[]},assign=false,curSh=null,flt=null;
-let _groups=[],_slugs={},_photos={},_ch={},_total=0;
-function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
-function toast(msg,err){const e=document.getElementById('toast');e.textContent=msg;e.className='on'+(err?' err':'');clearTimeout(e._t);e._t=setTimeout(()=>e.className='',2600)}
-function loadLS(){try{const s=JSON.parse(localStorage.getItem(LS));if(s&&s.lists){state=s;return true}}catch(e){}return false}
-function saveLS(){state.updated_at=new Date().toISOString();localStorage.setItem(LS,JSON.stringify(state))}
-if(location.hash.startsWith('#t=')){try{localStorage.setItem(LT,location.hash.slice(3));history.replaceState(null,'',location.pathname)}catch(e){}}
-async function j(u){try{const r=await fetch(u);return r.ok?await r.json():null}catch(e){return null}}
-function mkid(){return 'l'+Date.now().toString(36)+Math.random().toString(36).slice(2,6)}
-function normalize(s){return (s||'').replace(/[أإآ]/g,'ا').replace(/\s+/g,' ').trim()}
-function inLists(name){return state.lists.filter(l=>l.members.some(m=>m.name===name))}
-function photo(name){const p=_photos[name]||_photos[normalize(name)];return p&&(p[0]!=='h'&&p[0]!=='.')?'../playlists/'+p:p}
-function slugOf(name){return _slugs[name]||_slugs[normalize(name)]||normalize(name)}
-function cardHTML(name,lid){
-  const p=photo(name);
-  const init=name.replace(/^ال/,'').trim()[0]||'؟';
-  return (lid?'<span class="mrm" data-l="'+lid+'">✕</span>':'')
-    +'<div class="ph">'+(p?'<img src="'+p+'" alt="" loading="lazy" onerror="this.remove()">':'')+'<span>'+init+'</span></div>'
-    +'<div class="nm">'+name+'</div>';
+const BASE='https://medmrf-10.github.io/';
+const SCI={
+  sirah:['السيرة النبوية'],maliki:['الفقه المالكي'],tarajim:['التراجم والأنساب'],tari5:['التاريخ'],
+  ossoul:['أصول الفقه'],'3olomQuran':['علوم القرآن'],'9awa3idFi9h':['القواعد الفقهية'],
+  tazkiaV1:['التزكية والآداب'],akidaV1:['العقيدة'],tfsr:['التفسير']};
+const SURAHS=['الفاتحة','البقرة','آل عمران','النساء','المائدة','الأنعام','الأعراف','الأنفال','التوبة','يونس','هود','يوسف','الرعد','إبراهيم','الحجر','النحل','الإسراء','الكهف','مريم','طه','الأنبياء','الحج','المؤمنون','النور','الفرقان','الشعراء','النمل','القصص','العنكبوت','الروم','لقمان','السجدة','الأحزاب','سبأ','فاطر','يس','الصافات','ص','الزمر','غافر','فصلت','الشورى','الزخرف','الدخان','الجاثية','الأحقاف','محمد','الفتح','الحجرات','ق','الذاريات','الطور','النجم','القمر','الرحمن','الواقعة','الحديد','المجادلة','الحشر','الممتحنة','الصف','الجمعة','المنافقون','التغابن','الطلاق','التحريم','الملك','القلم','الحاقة','المعارج','نوح','الجن','المزمل','المدثر','القيامة','الإنسان','المرسلات','النبأ','النازعات','عبس','التكوير','الانفطار','المطففين','الانشقاق','البروج','الطارق','الأعلى','الغاشية','الفجر','البلد','الشمس','الليل','الضحى','الشرح','التين','العلق','القدر','البينة','الزلزلة','العاديات','القارعة','التكاثر','العصر','الهمزة','الفيل','قريش','الماعون','الكوثر','الكافرون','النصر','المسد','الإخلاص','الفلق','الناس'];
+const cache={};
+const $=s=>document.querySelector(s),app=$('#app');
+const esc=s=>String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+async function gz(u){
+  if(cache[u])return cache[u];
+  const r=await fetch(BASE+u);if(!r.ok)throw new Error(r.status);
+  const buf=await r.arrayBuffer();
+  const b=new Uint8Array(buf);
+  let txt;
+  if(b[0]===0x1f&&b[1]===0x8b){
+    const stream=new Blob([buf]).stream().pipeThrough(new DecompressionStream('gzip'));
+    txt=await new Response(stream).text();
+  }else txt=new TextDecoder().decode(buf);
+  const j=JSON.parse(txt);
+  cache[u]=j;return j;
 }
-/* ── routing: main view vs list view ── */
-function curList(){return state.lists.find(x=>x.id===flt)}
-function setFlt(id){flt=id;if(id)location.hash='l/'+id;else if(location.hash.startsWith('#l/'))history.replaceState(null,'',location.pathname);applyView()}
-function applyView(){
-  const lv=document.getElementById('lview'),g=document.getElementById('groups'),ls=document.getElementById('lists');
-  const inList=flt&&curList();
-  lv.classList.toggle('on',!!inList);
-  g.style.display=inList?'none':'';
-  ls.style.display=inList?'none':'';
-  if(inList)renderLView();else renderGroups();
-}
-window.addEventListener('hashchange',()=>{
-  const m=location.hash.match(/^#l\/(.+)$/);
-  const id=m?decodeURIComponent(m[1]):null;
-  if(id===flt)return;
-  flt=id&&state.lists.some(l=>l.id===id)?id:null;
-  applyView();
-});
-/* lists → horizontal cover strip */
-function renderLists(){
-  const w=document.getElementById('lists');w.innerHTML='';
-  const all=document.createElement('div');all.className='lst'+(flt?'':' on');
-  const imgs=[];
-  for(const gr of _groups)for(const n of gr.names){const u=photo(n);if(u)imgs.push(u);if(imgs.length>=4)break}
-  all.innerHTML='<div class="cov">'+(imgs.length?imgs.slice(0,4).map(u=>'<img src="'+u+'" alt="" loading="lazy" onerror="this.remove()">').join(''):'<div class="ph-f g">✦</div>')+'</div><div class="lnm">الكل</div><div class="lct">'+_total+' مشايخ</div>';
-  all.onclick=()=>setFlt(null);
-  w.appendChild(all);
-  for(const l of state.lists){
-    const c=document.createElement('div');c.className='lst'+(flt===l.id?' on':'');
-    const mimgs=l.members.slice(0,4).map(m=>photo(m.name)).filter(Boolean);
-    c.innerHTML='<span class="lx">✕</span><div class="cov">'
-      +(mimgs.length?mimgs.map(u=>'<img src="'+u+'" alt="" loading="lazy" onerror="this.remove()">').join(''):'<div class="ph-f">'+esc(l.name.trim()[0]||'؟')+'</div>')
-      +'</div><div class="lnm">'+esc(l.name)+'</div><div class="lct">'+l.members.length+' مشايخ</div>';
-    c.onclick=()=>setFlt(l.id);
-    c.querySelector('.lx').onclick=e=>{e.stopPropagation();delList(l.id)};
-    w.appendChild(c);
-  }
-}
-/* list view page */
-function memberCard(name,lid,i){
-  const a=document.createElement('a');
-  a.className='sh cin';a.style.animationDelay=(Math.min(i,30)*25)+'ms';
-  if(!assign)a.href='sheikh.html?s='+encodeURIComponent(slugOf(name));
-  a.innerHTML=cardHTML(name,lid);
-  const rm=a.querySelector('.mrm');
-  if(rm)rm.onclick=ev=>{ev.preventDefault();ev.stopPropagation();dropM(lid,name)};
-  if(assign)a.addEventListener('click',e=>{e.preventDefault();pick(null,name)});
-  return a;
-}
-function renderLView(){
-  const l=curList();if(!l)return;
-  document.getElementById('lvt').textContent=l.name;
-  document.getElementById('lvc').textContent=l.members.length+' مشايخ';
-  const g=document.getElementById('lgrid');g.innerHTML='';
-  document.getElementById('lvempty').style.display=l.members.length?'none':'';
-  l.members.forEach((m,i)=>g.appendChild(memberCard(m.name,l.id,i)));
-}
-document.getElementById('lvdl').onclick=()=>{if(flt)delList(flt)};
-document.getElementById('lvbk').onclick=e=>{e.preventDefault();if(location.hash.startsWith('#l/'))history.back();else setFlt(null)};
-/* main grid (all sheikhs, unfiltered) */
-function renderGroups(){
-  const g=document.getElementById('groups');g.innerHTML='';
-  let i=0;
-  for(const gr of _groups)for(const name of gr.names){
-    const a=document.createElement('a');
-    a.className='sh cin';a.style.animationDelay=(Math.min(i++,30)*25)+'ms';
-    if(!assign)a.href='sheikh.html?s='+encodeURIComponent(slugOf(name));
-    const n=inLists(name).length;
-    a.innerHTML='<span class="plus" data-n="'+esc(name)+'">＋</span>'
-      +(n?'<span class="badge">'+n+'</span>':'')+cardHTML(name,null);
-    a.querySelector('.plus').onclick=ev=>{ev.preventDefault();ev.stopPropagation();pick(null,name)};
-    if(assign)a.addEventListener('click',e=>{e.preventDefault();pick(null,name)});
-    g.appendChild(a);
-  }
-}
-function renderAll(){renderLists();applyView()}
-function addList(nm){nm=(nm||'').trim();if(!nm)return;state.lists.push({id:mkid(),name:nm,members:[]});saveLS();renderAll();toast('أُنشئت «'+nm+'» — اضغط «حفظ» لرفعها')}
-function dropM(lid,name){const l=state.lists.find(x=>x.id===lid);if(!l)return;l.members=l.members.filter(m=>m.name!==name);saveLS();renderAll()}
-function delList(lid){state.lists=state.lists.filter(x=>x.id!==lid);if(flt===lid){flt=null;if(location.hash.startsWith('#l/'))history.replaceState(null,'',location.pathname)}saveLS();renderAll()}
-function pick(ev,name){if(ev)ev.stopPropagation();curSh=name;openModal()}
-function openModal(){
-  document.getElementById('mt').textContent='إسناد «'+curSh+'» إلى:';
-  const w=document.getElementById('mlists');w.innerHTML='';
-  if(!state.lists.length)w.innerHTML='<p class="sub">لا قوائم بعد — أنشئ واحدة أدناه</p>';
-  for(const l of state.lists){
-    const inn=l.members.some(m=>m.name===curSh);
-    const r=document.createElement('div');r.className='lrow'+(inn?' in':'');
-    r.innerHTML=esc(l.name)+'<span class="inmark">'+(inn?'✓ منسوب':'إضافة')+'</span>';
-    r.onclick=()=>{
-      if(inn)l.members=l.members.filter(m=>m.name!==curSh);
-      else l.members.push({name:curSh,channel:_ch[curSh]||null});
-      saveLS();renderAll();openModal();
-    };
-    w.appendChild(r);
-  }
-  document.getElementById('mov').classList.add('on');
-}
-function closeModal(){document.getElementById('mov').classList.remove('on');curSh=null}
-document.getElementById('mk').onclick=()=>{const i=document.getElementById('nl');addList(i.value);i.value=''};
-document.getElementById('mmk').onclick=()=>{const i=document.getElementById('mnl');addList(i.value);i.value=''};
-document.getElementById('asg').onclick=e=>{assign=!assign;e.target.classList.toggle('on',assign);e.target.textContent=assign?'إنهاء التخصيص':'تخصيص';document.body.classList.toggle('assign',assign);renderAll();if(assign)toast('انقر بطاقة شيخ لإسناده لقائمة')};
-document.getElementById('mov').addEventListener('click',e=>{if(e.target.id==='mov')closeModal()});
-async function ghReq(m,u,body){
-  const t=localStorage.getItem(LT);
-  if(!t)throw new Error('no-token');
-  const r=await fetch('https://api.github.com'+u,{method:m,headers:{Authorization:'Bearer '+t,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'},body:body?JSON.stringify(body):null});
-  if(r.status===404)return null;
-  if(!r.ok){const e=await r.text();throw new Error(r.status+' '+e.slice(0,120))}
-  return r.json();
-}
-async function saveRepo(){
-  toast('يحفظ…');
-  const payload={version:1,updated_at:new Date().toISOString(),lists:state.lists.map(l=>({id:l.id,name:l.name,members:l.members.map(m=>({name:m.name,channel:_ch[m.name]||m.channel||null}))}))};
-  const t=localStorage.getItem(LT);
-  if(t){
+function go(h){location.hash=h}
+const BF={m:'علامة مصدرية',t:'مطابقة عنوان',a:'تقريبي',z:'عنوان ملتصق'};
+
+/* ---------- home ---------- */
+async function vHome(){
+  app.innerHTML='<div class="loading">جارٍ تحميل فهارس العلوم…</div>';
+  const out=[];
+  for(const s of Object.keys(SCI)){
     try{
-      const cur=await ghReq('GET','/repos/'+REPO.o+'/'+REPO.r+'/contents/'+REPO.path+'?ref='+REPO.br);
-      const b64=btoa(unescape(encodeURIComponent(JSON.stringify(payload,null,1))));
-      const body={message:'playlists: save lists ('+payload.lists.length+' قوائم)',content:b64,branch:REPO.br};
-      if(cur&&cur.sha)body.sha=cur.sha;
-      await ghReq('PUT','/repos/'+REPO.o+'/'+REPO.r+'/contents/'+REPO.path,body);
-      toast('حُفظت '+payload.lists.length+' قائمة ✓');return;
-    }catch(e){/* fall through to bridge */}
+      const ix=await gz(`${s}/api/index.json`);
+      const nb=ix.n_books||(ix.books?ix.books.length:0)||(ix.editions?ix.editions.length:0);
+      const np=ix.books?ix.books.reduce((a,b)=>a+(b.nparts||0),0):(ix.total_ayahs||0);
+      out.push(`<div class="door" onclick="go('#/${s==='tfsr'?'t':`c/${s}`}')"><b>${esc(SCI[s][0])}</b><span>${nb.toLocaleString('ar')} ${s==='tfsr'?'طبعة':'كتاباً'} · ${np.toLocaleString('ar')} ${s==='tfsr'?'آية':'جزءاً'}</span></div>`);
+    }catch(e){out.push(`<div class="door"><b>${esc(SCI[s][0])}</b><span>تعذر التحميل</span></div>`)}
   }
-  try{
-    const r=await fetch('https://ntfy.sh/hawchat-wants-9f3kq7x',{method:'POST',body:JSON.stringify(payload)});
-    if(!r.ok)throw new Error('bridge '+r.status);
-    toast('أُرسل — تُحفظ القوائم في الموقع تلقائياً خلال لحظات…');
-  }catch(e){toast('تعذّر الإرسال: '+e.message,1)}
+  app.innerHTML=`
+  <div class="h-title cin">مكتبة التراث</div>
+  <div class="sub">${Object.keys(SCI).length} علوم — بيانات ذاتية الاستضافة، بلا مفاتيح</div>
+  <div class="doors">${out.join('')}</div>`;
 }
-document.getElementById('sav').onclick=saveRepo;
-(async()=>{
-  const [data,photos,chd,meta,file]=await Promise.all([j('../playlists/shuyukh.json'),j('../playlists/photos.json'),j('../playlists/channels.json'),j('../playlists/data/sheikhs.json'),j('../playlists/lists.json')]);
-  _photos=photos||{};
-  for(const c of ((chd&&chd.channels)||[]))for(const it of (c.items||[]))if(it.verified&&it.url)_ch[it.name]=it.url;
-  for(const s of ((meta&&meta.sheikhs)||[]))for(const n of [s.name_display,s.name,...(s.aliases||[])]){_slugs[n]=s.slug;_slugs[normalize(n)]=s.slug}
-  if(!loadLS()&&file&&file.lists)state=file; else if(file&&file.lists&&(!state.updated_at||(file.updated_at&&file.updated_at>state.updated_at)))state=file;
-  if(!data||!data.groups){document.getElementById('groups').innerHTML='<p class="sub">تعذر تحميل القائمة.</p>';return}
-  _groups=data.groups;
-  let total=0;for(const g of _groups)total+=g.names.length;
-  _total=total;
-  document.getElementById('count').textContent=total+' شيخاً';
-  const hm=location.hash.match(/^#l\/(.+)$/);
-  if(hm){const hid=decodeURIComponent(hm[1]);if(state.lists.some(l=>l.id===hid))flt=hid}
-  renderAll();
-})();
+
+/* ---------- science → books ---------- */
+async function vSci(sci,page=1,q=''){
+  const ix=await gz(`${sci}/api/index.json`);
+  let books=ix.books;
+  if(q){
+    const n=s=>String(s).replace(/[ً-ٰٟ]/g,'').replace(/[أإآٱ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي');
+    const qq=n(q);
+    books=books.filter(b=>n(b.title).includes(qq)||n(b.author).includes(qq));
+  }
+  const per=60,pages=Math.ceil(books.length/per)||1;
+  page=Math.max(1,Math.min(page,pages));
+  const slice=books.slice((page-1)*per,page*per);
+  app.innerHTML=`
+  <span class="back" onclick="go('#/')">‹ الرئيسية</span>
+  <div class="h-title cin">${esc(SCI[sci][0])}</div>
+  <div class="sub">${books.length.toLocaleString('ar')} كتاباً${q?` — تصفية: «${esc(q)}»`:''} — صفحة ${page}/${pages}</div>
+  <div class="srch"><input id="bq" placeholder="صفِّ باسم الكتاب أو المؤلف…" value="${esc(q)}"><button onclick="go('#/c/${sci}/1/'+encodeURIComponent($('#bq').value))">تصفية</button></div>
+  <div class="card">${slice.map(b=>`<div class="row" onclick="go('#/b/${sci}/${b.id}')"><span class="tx">${esc(b.title)}</span><span class="bb">${esc(b.author||'')} · ${b.nparts} جزء</span></div>`).join('')}</div>
+  <div class="pg"><button ${page<=1?'disabled':''} onclick="go('#/c/${sci}/${page-1}/${q?encodeURIComponent(q):''}')">السابق</button><span>${page} / ${pages}</span><button ${page>=pages?'disabled':''} onclick="go('#/c/${sci}/${page+1}/${q?encodeURIComponent(q):''}')">التالي</button></div>`;
+  $('#bq').addEventListener('keydown',e=>{if(e.key==='Enter')go(`#/c/${sci}/1/`+encodeURIComponent($('#bq').value))});
+}
+
+/* ---------- book → toc ---------- */
+async function vBook(sci,id,page=1){
+  app.innerHTML='<div class="loading">جارٍ تحميل فهرس الكتاب…</div>';
+  const d=await gz(`${sci}/api/books/${id}/toc.json`);
+  const toc=d.toc||d;
+  const per=60,pages=Math.ceil(toc.length/per)||1;
+  page=Math.max(1,Math.min(page,pages));
+  const slice=toc.slice((page-1)*per,page*per);
+  app.innerHTML=`
+  <span class="back" onclick="go('#/c/${sci}')">‹ ${esc(SCI[sci][0])}</span>
+  <div class="h-title cin">${esc(d.title||'')}</div>
+  <div class="sub">${esc(d.author||'')}${d.death?' — ت '+esc(d.death):''} · ${toc.length.toLocaleString('ar')} عنواناً</div>
+  ${d.betaka?`<details><summary>بطاقة الكتاب</summary><div class="fn">${esc(d.betaka)}</div></details>`:''}
+  <div class="card">${slice.map(t=>`<div class="row" onclick="go('#/p/${sci}/${id}/${t.i}')" style="${t.d>0?`padding-inline-start:${12+t.d*16}px`:''}"><span class="no">${t.i}</span><span class="tx">${esc(t.t)}</span><span class="bb">${t.j?'ج'+t.j+' ':''}ص${t.pg||''}</span></div>`).join('')}</div>
+  <div class="pg"><button ${page<=1?'disabled':''} onclick="go('#/b/${sci}/${id}/${page-1}')">السابق</button><span>${page} / ${pages}</span><button ${page>=pages?'disabled':''} onclick="go('#/b/${sci}/${id}/${page+1}')">التالي</button></div>`;
+}
+
+/* ---------- part reader ---------- */
+async function vPart(sci,id,i){
+  app.innerHTML='<div class="loading">جارٍ تحميل الجزء…</div>';
+  let d;
+  try{d=await gz(`${sci}/api/books/${id}/parts/${String(i).padStart(4,'0')}.json.gz`)}catch(e){
+    app.innerHTML=`<span class="back" onclick="go('#/b/${sci}/${id}')">‹ الفهرس</span><div class="err">تعذر تحميل الجزء ${i}.</div>`;return}
+  const fns=Object.entries(d.fn||{});
+  app.innerHTML=`
+  <span class="back" onclick="go('#/b/${sci}/${id}')">‹ الفهرس</span>
+  <div class="sub">${esc(d.t||'')} — ${d.j?'جزء '+d.j+' · ':''}ص ${d.pg||'؟'} <span class="badge ${d.b}">${esc(BF[d.b]||d.b||'')}</span></div>
+  <div class="parttext cin">${esc(d.text)}</div>
+  ${fns.length?`<details><summary>الحواشي (${fns.length})</summary>${fns.map(([p,t])=>`<div class="fn"><b>ص${p}:</b> ${esc(t)}</div>`).join('')}</details>`:''}
+  <div class="pg"><button ${d.i<=0?'disabled':''} onclick="go('#/p/${sci}/${id}/${d.i-1}')">‹ السابق</button><button onclick="go('#/p/${sci}/${id}/${d.i+1}')">التالي ›</button></div>`;
+}
+
+/* ---------- tafsir ---------- */
+async function vTafsir(s,a){
+  app.innerHTML='<div class="loading">جارٍ تحميل التفسير…</div>';
+  const[ix,q]=await Promise.all([gz('tfsr/api/index.json'),gz(`tfsr/api/quran/${String(s).padStart(3,'0')}.json.gz`)]);
+  const d=await gz(`tfsr/api/ayah/${s}/${a}.json.gz`);
+  const eds=ix.editions;
+  const names={};eds.forEach(e=>names[e.slug]=e.name);
+  const ay=q.ayahs&&q.ayahs[a]?q.ayahs[a].t:'';
+  const nAya=Object.keys(q.ayahs||{}).length;
+  const ents=Object.entries(d.tafsir||{});
+  app.innerHTML=`
+  <span class="back" onclick="go('#/t')">‹ التفسير</span>
+  <div class="sub">سورة ${esc(SURAHS[s-1])} · آية ${a} · ${ents.length} طبعة</div>
+  <div class="ayahbox cin">${esc(ay)} ﴿${a}﴾</div>
+  <div class="pick"><select onchange="go('#/t/'+this.value+'/${a}')">${SURAHS.map((n,i)=>`<option value="${i+1}" ${i+1===+s?'selected':''}>${n}</option>`).join('')}</select>
+  <select onchange="go('#/t/${s}/'+this.value)">${Array.from({length:nAya},(_,i)=>`<option ${i+1===+a?'selected':''}>${i+1}</option>`).join('')}</select></div>
+  ${ents.map(([sl,v])=>`<div class="ed"><div class="eh">${esc(names[sl]||sl)}${v.g!==v.f||v.f!==`${s}:${a}`?` <span class="bb">${esc(v.f)}–${esc(v.t)}</span>`:''}</div><div class="et">${esc(v.p)}</div></div>`).join('')}
+  <div class="pg"><button ${a<=1?'disabled':''} onclick="go('#/t/${s}/${+a-1}')">‹ السابقة</button><button ${a>=nAya?'disabled':''} onclick="go('#/t/${s}/${+a+1}')">التالية ›</button></div>`;
+}
+async function vTafsirPick(){
+  const q=await gz('tfsr/api/quran/001.json.gz');
+  app.innerHTML=`
+  <span class="back" onclick="go('#/')">‹ الرئيسية</span>
+  <div class="h-title cin">التفسير</div>
+  <div class="sub">41 طبعة عربية دفعةً واحدة لكل آية</div>
+  <div class="pick">
+    <select id="ss">${SURAHS.map((n,i)=>`<option value="${i+1}">${i+1}. ${n}</option>`).join('')}</select>
+    <select id="aa">${Array.from({length:Object.keys(q.ayahs).length},(_,i)=>`<option>${i+1}</option>`).join('')}</select>
+    <button class="btn" onclick="go('#/t/'+$('#ss').value+'/'+$('#aa').value)">اعرض</button>
+  </div>
+  <div class="sub">أو اكتب الآية مباشرة: #/t/سورة/آية</div>`;
+  $('#ss').addEventListener('change',async()=>{const qq=await gz(`tfsr/api/quran/${String($('#ss').value).padStart(3,'0')}.json.gz`);$('#aa').innerHTML=Array.from({length:Object.keys(qq.ayahs).length},(_,i)=>`<option>${i+1}</option>`).join('')});
+}
+
+/* ---------- router ---------- */
+async function route(){
+  const h=location.hash.slice(1)||'/';
+  const p=h.split('/').filter(Boolean);
+  try{
+    if(p[0]==='c'&&p[1])return vSci(p[1],+p[2]||1,p[3]?decodeURIComponent(p[3]):'');
+    if(p[0]==='b')return vBook(p[1],p[2],+p[3]||1);
+    if(p[0]==='p')return vPart(p[1],p[2],+p[3]);
+    if(p[0]==='t'&&p[1])return vTafsir(+p[1],+p[2]||1);
+    if(p[0]==='t')return vTafsirPick();
+    return vHome();
+  }catch(e){console.error(e);app.innerHTML='<div class="err">خطأ في التحميل — '+esc(e.message)+'</div>'}
+}
+addEventListener('hashchange',route);
+route();
 if('serviceWorker' in navigator)navigator.serviceWorker.register('../sw.js').catch(()=>{});
 </script>
 </body>
