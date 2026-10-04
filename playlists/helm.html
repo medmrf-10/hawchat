@@ -172,7 +172,7 @@ function match(x){
 }
 function nums(x){
   const p=[];
-  p.push(`أصل <b>${x.exp||'—'}</b>`);
+  if(x.exp)p.push(`أصل <b>${x.exp}</b>`);
   if(x.total)p.push(`منزّل <b>${x.total}</b>`);
   if(x.done)p.push(`<b class="d">${x.done}</b> مفرّغ`);
   if(x.pending)p.push(`<b class="p">${x.pending}</b> منتظر`);
