@@ -35,7 +35,7 @@
   <a href="./" class="btn" aria-label="رجوع" style="text-decoration:none">→</a>
   <img src="../icons/icon-192.png" alt="" width="30" height="30" style="border-radius:8px">
   <span class="brand">hawchat</span>
-  <span class="sub" style="color:var(--dim);font-size:.8rem">السلاسل المختارة</span>
+  <span class="sub" id="hdr-sub" style="color:var(--dim);font-size:.8rem">سلسلة دروس</span>
 </div></header>
 <main><div class="wrap" id="app"><p class="empty">يحمّل…</p></div></main>
 <script>
@@ -49,6 +49,7 @@ function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&l
   const alidx=await j('lessons/'+encodeURIComponent(slug)+'/index.json');
   const aln=new Set((alidx&&alidx.align)||[]);
   document.title=d.title+' — hawchat';
+  document.getElementById('hdr-sub').textContent=d.sheikh||'سلسلة دروس';
   let h='<div class="hero cin"><h1>'+esc(d.title)+'</h1><div class="meta"><span>'+esc(d.sheikh)+'</span><span>'+d.count+' درساً</span>'
     +(d.playlist?'<a href="'+esc(d.playlist)+'" target="_blank" rel="noopener">قائمة يوتيوب ↗</a>':'')
     +'</div><input class="sflt" id="sflt" placeholder="ابحث في دروس السلسلة…"></div><div id="lst"></div>';
