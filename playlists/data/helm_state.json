@@ -1,5 +1,5 @@
 {
- "t": 1791135106,
+ "t": 1791135121,
  "series": [
   {
    "key": "628_السيرة النبوية للمصلحين",
@@ -883,7 +883,7 @@
    "total": 32,
    "done": 32,
    "pending": 1,
-   "active": 1,
+   "active": 0,
    "bad": 0,
    "held": false,
    "paused": false,
