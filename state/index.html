@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>حالة التفريغ — محرّر السرب</title>
+<style>
+:root{--bg:#0c0f14;--card:#141925;--card2:#1a2132;--line:#232c42;--tx:#e8ecf4;--mut:#8b96ad;--acc:#d4a94e;--acc2:#5b8dd9;--ok:#4caf7d;--warn:#e0a63f;--bad:#d96a6a;--frz:#6fa3d8;--dim:#5a6478}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Segoe UI',Tahoma,sans-serif;min-height:100vh}
+main{max-width:1200px;margin:0 auto;padding:22px 16px 90px}
+h1{font-size:1.35rem;font-weight:700;margin-bottom:4px}
+.sub{color:var(--mut);font-size:.8rem;margin-bottom:18px}
+#kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:18px}
+.k{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;text-align:center}
+.k b{display:block;font-size:1.35rem;color:var(--acc)}
+.k span{color:var(--mut);font-size:.72rem}
+#tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.tb{background:var(--card);border:1px solid var(--line);color:var(--mut);padding:7px 16px;border-radius:20px;cursor:pointer;font-size:.82rem;transition:.15s}
+.tb:hover{border-color:var(--acc2);color:var(--tx)}
+.tb.on{background:var(--acc);border-color:var(--acc);color:#111;font-weight:700}
+.tb.on .cnt{color:#111}
+.tb .cnt{font-size:.72rem;opacity:.75}
+#tools{display:flex;gap:10px;align-items:center;margin-bottom:16px;flex-wrap:wrap}
+#q{flex:1;min-width:180px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:9px 14px;color:var(--tx);font-size:.9rem;outline:none}
+#q:focus{border-color:var(--acc2)}
+.btn{background:var(--acc);color:#111;border:none;border-radius:10px;padding:9px 18px;font-weight:700;cursor:pointer;font-size:.85rem}
+.btn.sec{background:var(--card2);color:var(--tx);border:1px solid var(--line)}
+.btn:hover{filter:brightness(1.1)}
+.shk{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:14px;overflow:hidden}
+.shk-h{display:flex;align-items:center;gap:14px;padding:14px 18px;cursor:pointer;user-select:none}
+.shk-h:hover{background:var(--card2)}
+.shk-h .nm{font-weight:700;font-size:1.05rem;flex:0 0 auto}
+.shk-h .meta{color:var(--mut);font-size:.75rem;flex:0 0 auto}
+.shk-h .arr{margin-right:auto;color:var(--mut);transition:.2s}
+.shk.open .arr{transform:rotate(90deg)}
+.pb{display:flex;height:8px;border-radius:4px;overflow:hidden;background:#0e1420;flex:1;min-width:120px}
+.pb i{display:block;height:100%}
+.pd{background:var(--acc)}.pa{background:var(--ok)}.pp{background:var(--acc2)}.ph{background:#4a6a8f}.px{background:var(--bad)}.pw{background:#3a4358}
+.rows{display:none;border-top:1px solid var(--line)}
+.shk.open .rows{display:block}
+.rw{display:flex;align-items:center;gap:10px;padding:9px 18px;border-bottom:1px solid #1a2132;font-size:.83rem;flex-wrap:wrap}
+.rw:last-child{border-bottom:none}
+.rw:hover{background:#161c2b}
+.rw .id{color:var(--dim);font-size:.7rem;width:36px;flex-shrink:0}
+.rw .nm{flex:1;min-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rw .nums{color:var(--mut);font-size:.72rem;white-space:nowrap}
+.rw .nums b{font-weight:400}
+.st{font-size:.68rem;padding:2px 9px;border-radius:10px;white-space:nowrap}
+.st.done{background:#1d3d2c;color:var(--ok)}.st.partial{background:#3d3520;color:var(--warn)}
+.st.frozen{background:#1e3245;color:var(--frz)}.st.untouched{background:#2a2f3d;color:var(--mut)}
+.st.skipped{background:#3a2630;color:#c98a9a}
+.mini{background:none;border:1px solid var(--line);color:var(--mut);border-radius:7px;padding:3px 9px;font-size:.72rem;cursor:pointer;white-space:nowrap}
+.mini:hover{border-color:var(--acc);color:var(--acc)}
+.mini.on{border-color:var(--acc);color:var(--acc);background:#2a2513}
+.mini.bad:hover,.mini.bad{border-color:var(--bad);color:var(--bad)}
+.ord{display:flex;flex-direction:column;gap:1px}
+.ord button{background:none;border:none;color:var(--dim);cursor:pointer;font-size:.62rem;line-height:1;padding:1px 4px}
+.ord button:hover{color:var(--acc)}
+.files{display:none;padding:6px 18px 12px;background:#0f1420;max-height:300px;overflow-y:auto}
+.fr{display:flex;gap:10px;padding:4px 8px;font-size:.74rem;border-bottom:1px solid #182032;align-items:center}
+.fr .n{color:var(--dim);width:32px;flex-shrink:0}
+.fr .f{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--mut)}
+.fr .t{color:var(--ok);font-size:.68rem}.fr .nt{color:var(--bad);font-size:.68rem}
+.fr .dl{color:var(--acc2);font-size:.68rem}
+.rw.open + .files{display:block}
+#dirty{position:fixed;bottom:18px;left:18px;background:var(--acc);color:#111;border-radius:12px;padding:12px 20px;font-weight:700;display:none;box-shadow:0 4px 24px #0008;z-index:60}
+#toast{position:fixed;bottom:18px;right:18px;background:var(--ok);color:#fff;border-radius:10px;padding:10px 18px;display:none;z-index:60}
+.dim{color:var(--dim)}a{color:var(--acc2)}
+</style>
+</head>
+<body>
+<main>
+<h1>حالة التفريغ — محرّر السرب</h1>
+<p class="sub">كل التنزيلات موقوفة بأمر المالك · عدّل الحالات والترتيب ثم صدّر JSON</p>
+<div id="kpis"></div>
+<div id="tabs"></div>
+<div id="tools">
+  <input id="q" placeholder="ابحث في السلاسل والشيوخ…">
+  <button class="btn" id="exportBtn">⬇ تصدير JSON</button>
+  <button class="btn sec" id="importBtn">⬆ استيراد</button>
+  <button class="btn sec" id="resetBtn">↺ مسح التعديلات</button>
+  <input type="file" id="impFile" accept=".json" style="display:none">
+</div>
+<div id="list"></div>
+<div id="dirty">تعديلات غير مُصدَّرة — <b id="dn">0</b></div>
+<div id="toast"></div>
+</main>
+<script>
+const S={data:null,sheikhs:null,edits:{},view:'all',q:'',openShk:null,filesCache:{}};
+const FILTERS={all:'الكل',done:'مكتملة',partial:'جزئية',untouched:'لم تُمسّ',frozen:'مجمّدة',skipped:'غير مرغوبة',paused:'متوقفة',ready:'منزّلة غير مفرّغة',want:'مطلوبة ▲'};
+const esc=s=>String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const norm=s=>(s||'').replace(/[أإآ]/g,'ا').replace(/\s+/g,' ').trim();
+const save=()=>localStorage.setItem('st_edits',JSON.stringify(S.edits));
+const load=()=>{try{S.edits=JSON.parse(localStorage.getItem('st_edits')||'{}')}catch(e){S.edits={}}};
+function E(sid){return S.edits[sid]||{}}
+function stateOf(x){const e=E(x.id);
+  if(e.skip)return 'skipped';if(e.frozen)return 'frozen';if(e.paused)return 'paused';
+  if(x.skipped)return 'skipped';if(x.frozen)return 'frozen';if(x.paused)return 'paused';
+  return x.state}
+function match(x){
+  const st=stateOf(x);
+  if(S.view==='all')return true;
+  if(S.view==='ready')return (x.downloaded-(x.transcribed||0))>0&&st!=='skipped'&&st!=='frozen'&&st!=='paused';
+  if(S.view==='want')return (E(x.id).want||x.want||0)>0;
+  return st===S.view}
+function dirty(n){document.getElementById('dirty').style.display=n>0?'block':'none';document.getElementById('dn').textContent=n}
+function toast(t,ok=true){const el=document.getElementById('toast');el.textContent=t;el.style.background=ok?'var(--ok)':'var(--bad)';el.style.display='block';setTimeout(()=>el.style.display='none',2600)}
+function edit(sid,k,v){const e=S.edits[sid]||(S.edits[sid]={});if(v===null||v===undefined||v===false)delete e[k];else e[k]=v;if(!Object.keys(e).length)delete S.edits[sid];save();dirty(Object.keys(S.edits).length);render()}
+function moveUp(sid,dir,list){const ord=list.map(x=>x.id);const i=ord.indexOf(sid),j=i+dir;if(j<0||j>=ord.length)return;
+  // store explicit order array per sheikh
+  const sh=list[0].sheikh;const key='ord:'+sh;
+  const cur=S.edits[key]||ord.slice();
+  const a=cur.indexOf(sid),b=a+dir;if(b<0||b>=cur.length)return;
+  [cur[a],cur[b]]=[cur[b],cur[a]];
+  S.edits[key]=cur;save();dirty(Object.keys(S.edits).length);render()}
+async function j(u){const r=await fetch(u);return r.ok?r.json():null}
+function pbFor(list){const t={d:0,a:0,p:0,h:0,b:0,w:0,tot:0};
+  for(const x of list){const e=x.exp||0;t.tot+=e;
+    const st=stateOf(x);const done=x.transcribed||0;
+    t.d+=Math.min(done,e);
+    if(st==='frozen'||st==='paused')t.h+=e-done;
+    else if(st==='skipped')t.w+=e-done;
+    else if(done>=e&&e)t.a+=0;
+    else t.p+=Math.max(0,e-done);
+    t.b+=x.bad||0}
+  const seg=(v,c)=>v?`<i class="${c}" style="width:${(v*100/t.tot).toFixed(1)}%"></i>`:'';
+  return `<div class="pb">${seg(t.d,'pd')}${seg(t.a,'pa')}${seg(t.p,'pp')}${seg(t.h,'ph')}${seg(t.b,'px')}${seg(t.w,'pw')}</div>`}
+function badge(st){const m={done:'مكتملة',partial:'جزئية',untouched:'لم تُمسّ',frozen:'مجمّدة',skipped:'غير مرغوبة',paused:'متوقفة'};return `<span class="st ${st}">${m[st]||st}</span>`}
+function ctrl(x){
+  const e=E(x.id),st=stateOf(x);const b=[];
+  b.push(`<div class="ord"><button onclick="mv('${x.id}',-1)">▲</button><button onclick="mv('${x.id}',1)">▼</button></div>`);
+  if(st!=='frozen')b.push(`<button class="mini" onclick="ed('${x.id}','frozen',true)" title="تجميد">⏸</button>`);
+  else b.push(`<button class="mini on" onclick="ed('${x.id}','frozen',false)" title="فك التجميد">▶</button>`);
+  if(st!=='skipped')b.push(`<button class="mini bad" onclick="ed('${x.id}','skip',true)" title="غير مرغوبة">✕</button>`);
+  else b.push(`<button class="mini on" onclick="ed('${x.id}','skip',false)" title="إرجاع">↩</button>`);
+  if(!e.paused&&st!=='frozen'&&st!=='skipped')b.push(`<button class="mini" onclick="ed('${x.id}','paused',true)" title="إيقاف مؤقت">⏸؟</button>`);
+  if(e.paused)b.push(`<button class="mini on" onclick="ed('${x.id}','paused',false)">▶</button>`);
+  const w=e.want||x.want||0;
+  b.push(`<button class="mini ${w?'on':''}" onclick="ed('${x.id}','want',${(w+1)%4})" title="أولوية">♥${w||''}</button>`);
+  b.push(`<button class="mini" onclick="tg('${x.id}')" title="تفاصيل الملفات">▾</button>`);
+  return b.join('')}
+function rowHtml(x){
+  const st=stateOf(x);
+  const dl=x.downloaded||0,tr=x.transcribed||0,ex=x.exp||0;
+  const miss=Math.max(0,ex-dl);
+  return `<div class="rw" id="rw${x.id}">
+    <span class="id">${x.id}</span>
+    ${ctrl(x)}
+    <span class="nm" title="${esc(x.key||'')}">${esc(x.key||'—')}</span>
+    ${badge(st)}
+    <span class="nums">أصل <b>${ex}</b> · منزّل <b>${dl}</b> · مفرّغ <b class="${tr?'':''}" style="color:var(--ok)">${tr}</b>${miss?` · ناقص <b style="color:var(--bad)">${miss}</b>`:''}${x.resume_from?` · يبدأ <b style="color:var(--acc2)">${x.resume_from}</b>`:''}</span>
+  </div><div class="files" id="f${x.id}"></div>`}
+async function tg(sid){const el=document.getElementById('f'+sid),rw=document.getElementById('rw'+sid);
+  rw.classList.toggle('open');
+  if(el.dataset.ld)return;
+  const d=S.filesCache[sid]||(S.filesCache[sid]=await j('series/'+sid+'.json'));
+  if(!d){el.innerHTML='<div class="fr"><span class="f dim">لا يوجد تفصيل ملفات</span></div>';el.dataset.ld=1;return}
+  el.innerHTML=d.files.map(f=>`<div class="fr"><span class="n">${f.n}</span><span class="f" title="${esc(f.file||'')}">${esc(f.file||'—')}</span>
+    <span class="dl">${f.downloaded?'⬇ منزّل':'— لا صوت'}</span>
+    <span class="${f.transcribed?'t':'nt'}">${f.transcribed?'✓ مفرّغ':'✗ لم يُفرَّغ'}</span></div>`).join('')||'<div class="fr"><span class="f dim">لا ملفات</span></div>';
+  el.dataset.ld=1}
+function render(){
+  const L=S.data.series.filter(x=>{
+    if(!match(x))return false;
+    if(S.q){const q=norm(S.q);return norm(x.key).includes(q)||norm(x.sheikh).includes(q)||x.id.includes(q)}
+    return true});
+  const bySh={};for(const x of L){(bySh[x.sheikh||'أخرى']=bySh[x.sheikh||'أخرى']||[]).push(x)}
+  const host=document.getElementById('list');host.innerHTML='';
+  const names=Object.keys(bySh).sort((a,b)=>a.localeCompare(b,'ar'));
+  for(const sh of names){
+    let arr=bySh[sh];
+    const eo=S.edits['ord:'+sh];
+    if(eo)arr=arr.slice().sort((a,b)=>(eo.indexOf(a.id)+1||9e9)-(eo.indexOf(b.id)+1||9e9));
+    const div=document.createElement('div');div.className='shk'+(S.openShk===sh?' open':'');
+    const done=arr.filter(x=>x.state==='done').length;
+    div.innerHTML=`<div class="shk-h" onclick="opn('${esc(sh)}')">
+      <span class="nm">${esc(sh)}</span><span class="meta">${arr.length} سلسلة · ${arr.reduce((a,x)=>a+(x.transcribed||0),0)}/${arr.reduce((a,x)=>a+(x.exp||0),0)} مفرّغ · ${done} مكتملة</span>
+      ${pbFor(arr)}<span class="arr">▸</span></div>
+      <div class="rows">${arr.map(rowHtml).join('')}</div>`;
+    host.appendChild(div)}
+  if(!names.length)host.innerHTML='<p class="sub" style="text-align:center;padding:40px">لا نتائج.</p>';
+  // tab counts
+  document.querySelectorAll('.tb .cnt').forEach(el=>{
+    const v=el.dataset.v;let n=0;
+    for(const x of S.data.series){const st=stateOf(x);
+      if(v==='all')n++;
+      else if(v==='ready'){if((x.downloaded-(x.transcribed||0))>0&&st!=='skipped'&&st!=='frozen'&&st!=='paused')n++}
+      else if(v==='want'){if((E(x.id).want||x.want||0)>0)n++}
+      else if(st===v)n++}
+    el.textContent=n})}
+function opn(sh){S.openShk=S.openShk===sh?null:sh;document.querySelectorAll('.shk').forEach(el=>{
+  const nm=el.querySelector('.nm').textContent;el.classList.toggle('open',nm===sh||nm===S.openShk)})}
+function ed(sid,k,v){edit(sid,k,v)}
+function mv(sid,dir){const sh=S.data.series.find(x=>x.id===sid).sheikh;
+  const arr=S.data.series.filter(x=>(x.sheikh||'أخرى')===sh&&match(x));
+  const eo=S.edits['ord:'+sh];
+  const order=(eo||arr.map(x=>x.id)).slice();
+  const i=order.indexOf(sid),j=i+dir;
+  if(j<0||j>=order.length)return;
+  [order[i],order[j]]=[order[j],order[i]];
+  S.edits['ord:'+sh]=order;save();dirty(Object.keys(S.edits).length);render()}
+function doExport(){
+  const out={generated:new Date().toISOString(),note:'edited state — overrides merged',series:S.data.series.map(x=>({...x,state:stateOf(x),edit:E(x.id),ord_pos:(S.edits['ord:'+(x.sheikh||'أخرى')]||[]).indexOf(x.id)})),
+    orders:Object.fromEntries(Object.entries(S.edits).filter(([k])=>k.startsWith('ord:')))};
+  const b=new Blob([JSON.stringify(out,null,1)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='state-edited.json';a.click();
+  toast('صُدّرت الحالة المعدّلة — '+Object.keys(S.edits).length+' تعديلاً')}
+document.getElementById('exportBtn').onclick=doExport;
+document.getElementById('resetBtn').onclick=()=>{S.edits={};save();dirty(0);render();toast('مُسحت التعديلات')};
+document.getElementById('importBtn').onclick=()=>document.getElementById('impFile').click();
+document.getElementById('impFile').onchange=e=>{const f=e.target.files[0];if(!f)return;
+  const rd=new FileReader();rd.onload=()=>{try{
+    const d=JSON.parse(rd.result);
+    if(d.edits)S.edits=d.edits;
+    else if(d.series)for(const x of d.series){if(x.edit&&Object.keys(x.edit).length)S.edits[x.id]=x.edit}
+    save();dirty(Object.keys(S.edits).length);render();toast('استُوردت التعديلات')}catch(err){toast('ملف غير صالح',false)}};rd.readAsText(f)};
+document.getElementById('q').oninput=e=>{S.q=e.target.value;render()};
+(async()=>{
+  load();
+  const [data,sh]=await Promise.all([j('index.json?v='+Date.now()),j('sheikhs.json')]);
+  S.data=data;S.sheikhs=sh;
+  const tot=data.series.reduce((a,x)=>({e:a.e+(x.exp||0),t:a.t+(x.transcribed||0),d:a.d+(x.downloaded||0),b:a.b+(x.bad||0)}),{e:0,t:0,d:0,b:0});
+  const stc={};for(const x of data.series){const s=stateOf(x);stc[s]=(stc[s]||0)+1}
+  document.getElementById('kpis').innerHTML=
+    `<div class="k"><b>${data.series.length}</b><span>سلسلة</span></div>
+     <div class="k"><b>${(sh&&Object.keys(sh.sheikhs||{}).length)||'—'}</b><span>شيخاً</span></div>
+     <div class="k"><b>${tot.t}</b><span>ملف مفرّغ</span></div>
+     <div class="k"><b>${tot.d}</b><span>صوت منزّل</span></div>
+     <div class="k"><b>${tot.e}</b><span>حلقة متوقَّعة</span></div>
+     <div class="k"><b>${stc.done||0}</b><span>مكتملة</span></div>
+     <div class="k"><b>${stc.frozen||0}</b><span>مجمّدة</span></div>
+     <div class="k"><b>${tot.b}</b><span>فاشل</span></div>`;
+  const tb=document.getElementById('tabs');
+  tb.innerHTML=Object.entries(FILTERS).map(([k,v])=>`<button class="tb" data-v="${k}">${v} <span class="cnt" data-v="${k}"></span></button>`).join('');
+  tb.querySelectorAll('.tb').forEach(b=>b.onclick=()=>{S.view=b.dataset.v;tb.querySelectorAll('.tb').forEach(x=>x.classList.toggle('on',x===b));render()});
+  tb.querySelector('.tb').classList.add('on');
+  dirty(Object.keys(S.edits).length);
+  render()})();
+</script>
+</body>
+</html>
