@@ -207,7 +207,7 @@ async function vSearch(q){
   for(const w of words){
     const shard=norm(w).slice(0,2);
     let d;
-    try{d=await gz(`idxm/${encodeURIComponent(shard)}.json.gz`)}catch(e){d={}}
+    try{d=await gz(`idx/${encodeURIComponent(shard)}.json.gz`)}catch(e){d={}}
     // collect: exact key match or words containing query
     let hits=[];
     for(const[word,refs]of Object.entries(d)){if(word===w||word.includes(w))hits=hits.concat(refs)}
