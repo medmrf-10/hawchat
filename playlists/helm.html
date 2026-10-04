@@ -118,7 +118,7 @@ const ICON={
  undl:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 2v8M4.5 7 8 10.5 11.5 7"/><path d="M3 13.5h10"/><path d="M2 3l12 12" stroke="#e74c3c"/></svg>',
  back:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3 2.5 7 6 11"/><path d="M3 7h7a4 4 0 0 1 0 8h-1"/></svg>'
 };
-function L(t,a){return `<button class="btn ${a.c||''}" data-a="${a.a}" data-k="${esc(a.k)}" title="${a.t}">${ICON[a.i]||a.i}</button>`}
+function L(t,a){return `<button class="btn ${a.c||''}" data-a="${a.a}" data-k="${esc(t)}" title="${a.t}">${ICON[a.i]||a.i}</button>`}
 
 async function boot(){
   if(dirty){document.getElementById('pendtag').classList.add('show');return}
@@ -138,13 +138,13 @@ async function boot(){
 function dedupe(ss){
   const seen=new Map();
   for(const x of ss){
-    if(x.id==null){continue}
+    if(!x.id){continue}
     const k='id'+x.id;
     const ex=seen.get(k);
     if(!ex||(x.total>ex.total||x.done>ex.done)){seen.set(k,x)}
     else{ex._dup=(ex._dup||0)+1}
   }
-  const out=ss.filter(x=>x.id==null?true:seen.get('id'+x.id)===x);
+  const out=ss.filter(x=>!x.id?true:seen.get('id'+x.id)===x);
   return out;
 }
 function cat(x){
@@ -169,7 +169,7 @@ function match(x){
 }
 function nums(x){
   const p=[];
-  p.push(`أصل <b>${x.exp||'؟'}</b>`);
+  p.push(`أصل <b>${x.exp||'—'}</b>`);
   if(x.total)p.push(`منزّل <b>${x.total}</b>`);
   if(x.done)p.push(`<b class="d">${x.done}</b> مفرّغ`);
   if(x.pending)p.push(`<b class="p">${x.pending}</b> منتظر`);
@@ -182,7 +182,7 @@ function acts(x){
   if(held)return L(x.key,{a:'un',i:'back',c:'on',t:'إرجاع للطابور'});
   if(pz)return L(x.key,{a:'unp',i:'play',c:'on',t:'استئناف'})+L(x.key,{a:'sk',i:'x',c:'off',t:'غير مرغوب'});
   let b='';
-  if(x.id!=null){
+  if(x.id){
     if(x.feed==='queued')b+=L(x.id,{a:'ufd',i:'undl',c:'off',t:'إلغاء التنزيل'});
     else if(x.feed==='downloading')b+=`<span class="btn" title="يُنزَّل الآن" style="cursor:default">${ICON.dl}</span>`;
     else if(!x.total||x.feed==='feederr'||x.total<x.exp)b+=L(x.id,{a:'fd',i:'dl',c:'dl',t:x.total?'استكمال تنزيل الباقي':'تنزيل'});
@@ -267,11 +267,12 @@ function render(){
   shown.forEach(x=>{
     const c=cat(x),qi=order.indexOf(x.key);
     const nm=x.name||x.key.replace(/^\d+_?/,'');
-    const shtm=x.id!=null?`${MUT}#/s/${x.id}`:`sheikh.html?s=${encodeURIComponent(x.sheikh||'')}`;
+    const shQ=x.sheikh&&x.sheikh!=='أخرى';
+    const shtm=x.id?`${MUT}#/s/${x.id}`:(shQ?`sheikh.html?s=${encodeURIComponent(x.sheikh)}`:'#');
     const fb=c==='feed'?`<span class="badge fe">${x.feed==='downloading'?'⬇ يُنزَّل':'⬇ بالطابور '+(x.fqpos||'')}</span>`:x.feed==='feederr'?'<span class="badge err">خطأ تنزيل</span>':'';
     h+=`<div class="ser${c==='paused'?' paused':c==='held'?' held':x.feed==='feederr'?' feederr':''}">
       ${qi>-1?`<span class="ord">${qi+1}</span>`:'<span class="ord"></span>'}
-      <span class="nm"><b><a href="${shtm}" target="_blank" rel="noopener">${esc(nm)}</a></b><i><a href="sheikh.html?s=${encodeURIComponent(x.sheikh||'')}">${esc(x.sheikh||'')}</a>${x.id!=null?' · #'+x.id:''}</i>${fb}${bar(x)}</span>
+      <span class="nm"><b>${shtm==='#'?esc(nm):`<a href="${shtm}" target="_blank" rel="noopener">${esc(nm)}</a>`}</b><i>${shQ?`<a href="sheikh.html?s=${encodeURIComponent(x.sheikh)}">${esc(x.sheikh)}</a>`:esc(x.sheikh||'أخرى')}${x.id?' · #'+x.id:''}</i>${fb}${bar(x)}</span>
       <span class="nums">${nums(x)}</span>${acts(x)}</div>`;
   });
   if(rows.length>limit)h+=`<button class="more" id="more">+ ${rows.length-limit} سلسلة إضافية — أظهر المزيد</button>`;
@@ -280,6 +281,7 @@ function render(){
   const mb=document.getElementById('more');
   if(mb)mb.onclick=()=>{limit+=500;render()};
   document.getElementById('save').classList.toggle('show',dirty);
+  if(dirty)document.getElementById('pendtag').classList.add('show');
 }
 document.addEventListener('click',e=>{
   const t=e.target.closest('button');if(!t)return;
