@@ -169,7 +169,7 @@ const FILT={all:'الكل',listen:'يُسمع',read:'يُقرأ',feed:'يُنز�
 function rowMatch(r){
   if(fv==='all')return true;
   if(fv==='listen')return !!r.pub;
-  if(fv==='read')return !!r.mut||r.x.done>0;
+  if(fv==='read')return r.x.done>0;
   if(fv==='bad')return r.x.bad>0||r.x.feed==='feederr';
   return cat(r.x)===fv;
 }
