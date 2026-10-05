@@ -29,6 +29,10 @@ MUT_PIN = os.path.join(BASE, 'mut_manifest.json')
 # tr series that merge several YouTube playlists — excluded; mutalaa rows
 # cover the same playlists cleanly. Files stay on disk, untouched.
 TR_EXCLUDE = {('bouti', 'tawba'), ('bouti', 'rihab'), ('bouti', 'hikam'), ('bouti', 'tafsir')}
+# tr series verified to be the same recorded series as a mutalaa row
+# (different upload/playlist, same lessons) — fold into that mut row
+# instead of creating a duplicate row. Files stay on disk, untouched.
+TR_FOLD = {('bardouni', 'ajhuri'): '10', ('jifri', 'insaniyya'): '117'}
 REDIRECTS = {  # old row id → new row id (best single match)
     'said-bouti--bouti-tawba': 'said-bouti--356',
     'said-bouti--bouti-rihab': 'said-bouti--337',
@@ -496,7 +500,10 @@ for sh in sheikhs:
                 continue
             files = sr.get('files') or []
             pl = (sr.get('playlist') or '').split('list=')[-1].split('&')[0] or series_plid(files)
-            r = trrow(k, sr.get('slug')) or (plrow(pl) if pl else None) or newrow(sr.get('title'))
+            r = (trrow(k, sr.get('slug'))
+                 or (mutrow(TR_FOLD[(k, sr.get('slug'))]) if (k, sr.get('slug')) in TR_FOLD else None)
+                 or (plrow(pl) if pl else None)
+                 or newrow(sr.get('title')))
             # disk truth: actual txt files in transcripts dir
             dd = os.path.join(ROOT, 'transcripts', k, sr.get('slug') or '')
             disk_n = len([f for f in os.listdir(dd) if f.endswith('.txt')]) if os.path.isdir(dd) else 0

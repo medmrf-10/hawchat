@@ -430,6 +430,16 @@
    "status": "pending",
    "notes": null,
    "website": "https://fadelsoliman.com"
+  },
+  {
+   "id": 30,
+   "slug": "maktaba",
+   "name": "مكتبة المتون والشروح المفرغة",
+   "name_display": "المكتبة",
+   "aliases": [],
+   "group": 3,
+   "photo": "",
+   "channels": []
   }
  ]
 }
