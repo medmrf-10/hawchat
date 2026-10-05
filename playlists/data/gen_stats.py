@@ -381,6 +381,33 @@ for sh in sheikhs:
                 r['kind'] = 's'
             r['sSlug'] = s['slug']
 
+    # ── disk truth: lessons/<slug> + series/<slug>.json survive an index wipe ──
+    lsdir = os.path.join(PL, 'lessons')
+    if os.path.isdir(lsdir):
+        for dsl in sorted(os.listdir(lsdir)):
+            dd = os.path.join(lsdir, dsl)
+            if not os.path.isdir(dd):
+                continue
+            real = count_aligned(dsl)
+            if real <= 0 or srow(dsl):
+                continue
+            sd = J(os.path.join(PL, 'series', dsl + '.json')) or {}
+            if sd.get('sheikh_slug') != slug:
+                continue
+            r = newrow(sd.get('title') or dsl)
+            r['sSlug'] = dsl
+            r['kind'] = r['kind'] or 's'
+            r['wan'] = real
+            _pl = (sd.get('playlist') or '').split('list=')[-1].split('&')[0]
+            if _pl:
+                r['plid'] = _pl
+                if YTP.get(_pl):
+                    r['title'] = yt_title(YTP[_pl])
+                _tot = pl_len(_pl)
+                if _tot:
+                    r['rtt'] = max(r['rtt'], _tot)
+            r['wtt'] = max(r['wtt'], r['rtt'] or sd.get('count') or 0, real)
+
     # ── transcripts/index.json (push-first transcripts) ──
     for k, v in tr.items():
         if (v.get('slug') or k) != slug:
@@ -487,6 +514,28 @@ for sh in sheikhs:
     }
 
 out['_meta'] = {'updated': __import__('datetime').datetime.utcnow().isoformat() + 'Z'}
+
+# degenerate-output guard: never publish stats that contradict the disk.
+tot_read = sum(v['read'] for k, v in out.items() if k != '_meta')
+tot_watch = sum(v['watch'] for k, v in out.items() if k != '_meta')
+disk_align = 0
+_ld = os.path.join(PL, 'lessons')
+if os.path.isdir(_ld):
+    for _s in os.listdir(_ld):
+        _d = os.path.join(_ld, _s)
+        if os.path.isdir(_d):
+            disk_align += sum(1 for f in os.listdir(_d) if f.endswith('.align.json'))
+disk_txt = 0
+_td = os.path.join(ROOT, 'transcripts')
+if os.path.isdir(_td):
+    for _r, _, _fs in os.walk(_td):
+        disk_txt += sum(1 for f in _fs if f.endswith('.txt'))
+if (disk_align > 0 and tot_watch == 0) or (disk_txt > 0 and tot_read == 0):
+    print('DEGENERATE OUTPUT REFUSED: disk align=%d watch=%d | disk txt=%d read=%d'
+          % (disk_align, tot_watch, disk_txt, tot_read))
+    print('a source index is clobbered — keeping previous sheikh_stats.json')
+    import sys; sys.exit(2)
+
 dst = os.path.join(BASE, 'sheikh_stats.json')
 tmp = dst + '.tmp'
 json.dump(out, open(tmp, 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))

@@ -4,16 +4,8 @@
  "sheikh_slug": "ali-mahmoud-alomari",
  "title": "مغني الطلاب شرح إيساغوجي",
  "playlist": "https://www.youtube.com/playlist?list=PLa3XSU7qw_Yl_Tf3EZgcVxliTmb7PGcIF",
- "count": 19,
+ "count": 14,
  "lessons": [
-  {
-   "n": 1,
-   "title": "( 1 ) مغني الطلاب/ شرح متن إيساغوجي",
-   "video": "oCgd4t8oXds",
-   "align": false,
-   "chars": 17720,
-   "dur": "32:23"
-  },
   {
    "n": 2,
    "title": "( 2 )  مغني الطلاب / شرح متن إيساغوجي",
@@ -125,38 +117,6 @@
    "align": false,
    "chars": 27159,
    "dur": "52:33"
-  },
-  {
-   "n": 18,
-   "title": "(17) مغني الطُّلاب على متن إيساغوجي",
-   "video": "xerRRLAoXy0",
-   "align": false,
-   "chars": 26025,
-   "dur": "47:37"
-  },
-  {
-   "n": 19,
-   "title": "(18) مغني الطُّلاب على متن إيساغوجي",
-   "video": "TEtF3YMFTUg",
-   "align": false,
-   "chars": 24019,
-   "dur": "43:56"
-  },
-  {
-   "n": 20,
-   "title": "(19) مغني الطُّلاب شرح إيساغوجي",
-   "video": "TtWUw1ZLzp4",
-   "align": false,
-   "chars": 19192,
-   "dur": "37:47"
-  },
-  {
-   "n": 21,
-   "title": "(20) مغني الطُّلاب شرح متن إيساغوجي",
-   "video": "OK2qY2zXfkc",
-   "align": false,
-   "chars": 17088,
-   "dur": "34:55"
   }
  ]
 }
