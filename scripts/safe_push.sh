@@ -13,7 +13,7 @@ if git diff --cached --quiet; then echo "لا جديد للدفع."; exit 0; fi
 git commit -q -m "$MSG"
 
 for i in 1 2 3 4 5; do
-  git pull --rebase -q origin main 2>/dev/null || true
+  git pull --rebase -q origin main 2>/dev/null || true; bash /home/ubuntu/align_pkgs/rebase_fix.sh
   # regenerate generated files AFTER rebase — they see everyone's files
   [ -f playlists/series/regen_index.py ] && python3 playlists/series/regen_index.py >/dev/null 2>&1 || true
   [ -f playlists/data/gen_stats.py ] && python3 playlists/data/gen_stats.py >/dev/null 2>&1 || {
