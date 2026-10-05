@@ -400,7 +400,10 @@ for sh in sheikhs:
             if not os.path.isdir(dd):
                 continue
             real = count_aligned(dsl)
-            if real <= 0 or srow(dsl):
+            li = J(os.path.join(dd, 'index.json')) or {}
+            ntxt = len(li.get('txt') or []) or sum(
+                1 for f in os.listdir(dd) if re.match(r'^\d+\.txt$', f))
+            if (real <= 0 and ntxt <= 0) or srow(dsl):
                 continue
             sd = J(os.path.join(PL, 'series', dsl + '.json')) or {}
             if sd.get('sheikh_slug') != slug:
@@ -418,6 +421,9 @@ for sh in sheikhs:
                 if _tot:
                     r['rtt'] = max(r['rtt'], _tot)
             r['wtt'] = max(r['wtt'], r['rtt'] or sd.get('count') or 0, real)
+            if ntxt > 0:
+                r['rdn'] = max(r['rdn'], ntxt)
+                r['rtt'] = max(r['rtt'], sd.get('count') or 0, ntxt)
 
     # ── transcripts/index.json (push-first transcripts) ──
     for k, v in tr.items():
@@ -497,7 +503,8 @@ for sh in sheikhs:
         r['wtt'] = r['rtt']
         key = r.get('mutId') or r.get('sSlug') or ((r.get('trSh') or '') + '-' + (r.get('trSr') or ''))
         keys = {k for k in (('m', r.get('mutId')), ('s', r.get('sSlug')),
-                            ('p', r.get('plid')), ('t', (r.get('trSh') or '') + '-' + (r.get('trSr') or '')))
+                            ('p', r.get('plid')),
+                            ('t', (r.get('trSh') + '-' + r['trSr']) if r.get('trSh') and r.get('trSr') else None))
                 if k[1]} | {('k', str(key))}
         rid = None
         for tag, kv in sorted(keys):
