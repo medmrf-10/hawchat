@@ -32,7 +32,7 @@ h1{font-family:var(--font-ui);font-size:var(--fs-lg);font-weight:700;color:var(-
 .navb a.off,.navb button.off{opacity:.35;pointer-events:none}
 .navb .pos{color:var(--acc2);font-size:var(--fs-sm);font-variant-numeric:tabular-nums}
 .tools{display:flex;gap:8px;margin-top:10px}
-.tools button{width:40px;height:40px;border-radius:var(--r-sm);border:1px solid var(--border);background:var(--card);color:var(--txt);font-size:1rem;cursor:pointer}
+.tools button{width:44px;height:44px;border-radius:var(--r-sm);border:1px solid var(--border);background:var(--card);color:var(--txt);font-size:1rem;cursor:pointer}
 </style>
 </head>
 <body>
@@ -89,8 +89,8 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
     document.title=x.title+' — '+row.title;
     let h='<h1><bdi>'+esc(x.title)+'</bdi></h1><div class="sub">الدرس '+x.n+' من '+ROWS.length+' · '+esc(META.name)+'</div>';
     h+='<div class="tools"><button id="fmi" aria-label="تصغير الخط">A−</button><button id="fpl" aria-label="تكبير الخط">A+</button>'
-      +(aligned.has(x.n)?'<a class="abtn" style="height:40px;padding:0 14px;border:1px solid var(--listen);color:var(--listen);border-radius:8px;display:inline-flex;align-items:center;gap:6px;text-decoration:none" href="lesson.html?s='+encodeURIComponent(row.sSlug)+'&l='+x.n+'">'+I.listen+' استمع لهذا الدرس</a>':'')
-      +'<a class="abtn" style="height:40px;padding:0 14px;border:1px solid var(--border);color:var(--dim);border-radius:8px;display:inline-flex;align-items:center;gap:6px;text-decoration:none" href="?r='+encodeURIComponent(row.id)+'">كل الدروس</a></div>';
+      +(aligned.has(x.n)?'<a class="abtn" style="height:44px;padding:0 14px;border:1px solid var(--listen);color:var(--listen);border-radius:8px;display:inline-flex;align-items:center;gap:6px;text-decoration:none" href="lesson.html?s='+encodeURIComponent(row.sSlug)+'&l='+x.n+'">'+I.listen+' استمع لهذا الدرس</a>':'')
+      +'<a class="abtn" style="height:44px;padding:0 14px;border:1px solid var(--border);color:var(--dim);border-radius:8px;display:inline-flex;align-items:center;gap:6px;text-decoration:none" href="?r='+encodeURIComponent(row.id)+'">كل الدروس</a></div>';
     h+='<div class="txt skel" id="tx" style="min-height:200px"></div>';
     app.innerHTML=h;
     const nav=document.getElementById('navb');nav.hidden=false;
