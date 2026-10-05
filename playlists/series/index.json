@@ -202,8 +202,8 @@
    "slug": "alasri-arbaa",
    "title": "لقاء الأربعاء",
    "sheikh_slug": "saif-alasri",
-   "count": 16,
-   "aligned": 16,
+   "count": 13,
+   "aligned": 15,
    "transcribed": 56,
    "status": "مكتملة التفريغ"
   },
@@ -236,7 +236,7 @@
   },
   {
    "slug": "aouni-jabir",
-   "title": "قصة سيدنا جابر",
+   "title": "ثمانية دروس بحديث جابر",
    "sheikh_slug": "hatem-alaouni",
    "count": 8,
    "aligned": 8,
@@ -244,13 +244,51 @@
    "status": "مكتملة التفريغ"
   },
   {
+   "slug": "alamri-bath",
+   "title": "لقاء البث المباشر",
+   "sheikh_slug": "ali-mahmoud-alomari",
+   "count": 1,
+   "aligned": 0,
+   "transcribed": 1,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alamri-durus-amma",
+   "title": "دروس عامة",
+   "sheikh_slug": "ali-mahmoud-alomari",
+   "count": 4,
+   "aligned": 0,
+   "transcribed": 4,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alamri-falsafa-din",
+   "title": "فلسفة الدين",
+   "sheikh_slug": "ali-mahmoud-alomari",
+   "count": 2,
+   "aligned": 0,
+   "transcribed": 2,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
    "slug": "hashimi-zawaj",
    "sheikh_slug": "dhaker-alhashimi",
    "title": "ألف باء الزواج",
    "count": 75,
    "status": "المحاذاة جارية — 20/75",
+<<<<<<< HEAD
    "transcribed": 73,
    "aligned": 20
+||||||| parent of eb48227 (rebuild generated data)
+   "aligned": 20,
+   "transcribed": 73
+=======
+   "status": "المحاذاة جارية — 20/75"
+>>>>>>> 807157d (hashimi: دروس أول بأول)
+=======
+   "aligned": 20,
+   "transcribed": 73
+>>>>>>> eb48227 (rebuild generated data)
   },
   {
    "slug": "hashimi-tarbiya",
@@ -258,14 +296,30 @@
    "title": "ألف باء التربية",
    "count": 108,
    "status": "المحاذاة جارية — 3/108",
+<<<<<<< HEAD
    "transcribed": 48,
    "aligned": 3
+||||||| parent of eb48227 (rebuild generated data)
+   "aligned": 3,
+   "transcribed": 41
+||||||| parent of 807157d (hashimi: دروس أول بأول)
+   "status": "المحاذاة جارية — 3/108",
+   "aligned": 3,
+   "transcribed": 47
+=======
+   "status": "المحاذاة جارية — 3/108"
+>>>>>>> 807157d (hashimi: دروس أول بأول)
+=======
+   "aligned": 3,
+   "transcribed": 48
+>>>>>>> eb48227 (rebuild generated data)
   },
   {
    "slug": "hashimi-fiqh-nafs",
    "sheikh_slug": "dhaker-alhashimi",
    "title": "مجالس فقه النفس",
    "count": 181,
+<<<<<<< HEAD
    "status": "المحاذاة جارية — 0/181",
    "transcribed": 0,
    "aligned": 0
@@ -314,6 +368,13 @@
    "aligned": 0,
    "transcribed": 2,
    "status": "مفرّغة — المحاذاة جارية"
+||||||| parent of eb48227 (rebuild generated data)
+   "status": "المحاذاة جارية — 0/181"
+=======
+   "status": "المحاذاة جارية — 0/181",
+   "aligned": 0,
+   "transcribed": 0
+>>>>>>> eb48227 (rebuild generated data)
   }
  ]
 }
