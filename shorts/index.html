@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>shorts — مقاطع قصيرة</title>
+<link rel="icon" href="../icons/favicon-180.png">
+<link rel="stylesheet" href="../theme.css">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+html,body{height:100%;margin:0;overflow:hidden;background:#000}
+.feed{height:100%;overflow-y:scroll;scroll-snap-type:y mandatory;scrollbar-width:none}
+.feed::-webkit-scrollbar{display:none}
+.card{height:100%;scroll-snap-align:start;position:relative;display:flex;align-items:center;justify-content:center;background:#000}
+.frame{position:relative;width:min(430px,100vw);height:100%;display:flex;flex-direction:column;justify-content:center}
+.vwrap{position:relative;width:100%;aspect-ratio:16/9;background:#111;border-radius:14px;overflow:hidden}
+.vwrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.meta{position:absolute;bottom:0;right:0;left:0;padding:14px 14px 18px;background:linear-gradient(transparent,rgba(0,0,0,.85));color:#fff}
+.meta h2{font-family:var(--font-ui);font-size:.95rem;font-weight:600;margin:0 0 4px;line-height:1.5}
+.meta .sh{font-size:.75rem;color:#cfcfcf}
+.meta .txt{font-family:var(--font-ar);font-size:.95rem;line-height:1.9;margin-top:8px;max-height:5.7em;overflow:hidden;color:#e8e8e8}
+.badge{position:absolute;top:14px;right:14px;background:rgba(0,0,0,.55);color:#fff;font-size:.72rem;padding:4px 10px;border-radius:20px;font-family:var(--font-ui)}
+.back{position:fixed;top:12px;left:12px;z-index:50;background:rgba(0,0,0,.55);color:#fff;text-decoration:none;font-size:.8rem;padding:6px 12px;border-radius:20px;font-family:var(--font-ui)}
+.logo{position:fixed;top:12px;right:50%;transform:translateX(50%);z-index:50;color:#fff;font-family:var(--font-ui);font-weight:700;font-size:.9rem;opacity:.9}
+.snd{position:absolute;top:14px;left:14px;background:rgba(0,0,0,.55);color:#fff;border:0;font-size:.72rem;padding:4px 10px;border-radius:20px;font-family:var(--font-ui);cursor:pointer}
+</style></head><body>
+<a class="back" href="../">→ البوابة</a><div class="logo">shorts</div>
+<div class="feed" id="feed"></div>
+<script>
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+const F=document.getElementById('feed');let CL=[],players={};
+fetch('clips.json?v='+Date.now()).then(r=>r.json()).then(cs=>{CL=cs;build()});
+function build(){
+ CL.forEach((c,i)=>{
+  const card=document.createElement('div');card.className='card';
+  card.innerHTML=`<div class="frame"><div class="vwrap" id="v${i}"></div>
+   <div class="meta"><span class="badge">${c.sh||''}</span>
+   <button class="snd" data-i="${i}">🔊 صوت</button>
+   <h2>${esc(c.t)}</h2><div class="sh">الدرس ${c.n} · ${esc(c.s)}</div>
+   <div class="txt">${esc(c.x)}</div></div></div>`;
+  F.appendChild(card);
+ });
+ const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+   const i=[...F.children].indexOf(e.target);
+   if(e.isIntersecting)play(i);else pause(i);
+  });
+ },{threshold:.6});
+ [...F.children].forEach(c=>io.observe(c));
+ document.querySelectorAll('.snd').forEach(b=>b.onclick=ev=>{ev.stopPropagation();
+  const p=players[b.dataset.i];if(p){p.unMute();p.playVideo();b.textContent='🔊 يعمل'}});
+}
+function mk(i){
+ const c=CL[i];
+ players[i]=new YT.Player('v'+i,{videoId:c.v,
+  playerVars:{start:Math.floor(c.a),end:Math.ceil(c.b),rel:0,modestbranding:1,playsinline:1,autoplay:1,mute:1,controls:1,loop:1,playlist:c.v},
+  events:{onReady:e=>e.target.playVideo()}});
+}
+const pending=[];
+function play(i){if(!window.YT||!YT.Player){pending.push(i);return}if(!players[i])mk(i);else players[i].playVideo()}
+function pause(i){const p=players[i];if(p&&p.pauseVideo)p.pauseVideo()}
+window.onYouTubeIframeAPIReady=()=>{pending.splice(0).forEach(play)};
+const tg=document.createElement('script');tg.src='https://www.youtube.com/iframe_api';document.head.appendChild(tg);
+</script></body></html>
