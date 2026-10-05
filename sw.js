@@ -4,11 +4,11 @@
    text:  transcripts/alignments/images — cache-first, LRU-bounded, version-stable.
    No auto skipWaiting: pages show an update toast; users opt in. */
 <<<<<<< HEAD
-const REV = 'v7-86805b5d';
+const REV = 'v7-a0207881';
 ||||||| parent of c7dd27b8 (rebuild generated data)
-const REV = 'v7-86805b5d';
+const REV = 'v7-a0207881';
 =======
-const REV = 'v7-86805b5d';
+const REV = 'v7-a0207881';
 >>>>>>> c7dd27b8 (rebuild generated data)
 const SHELL = 'hawchat-shell-' + REV;
 const DATA  = 'hawchat-data-v1';
