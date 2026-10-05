@@ -3,7 +3,13 @@
    data:  JSON (stats, read rows, series) — stale-while-revalidate.
    text:  transcripts/alignments/images — cache-first, LRU-bounded, version-stable.
    No auto skipWaiting: pages show an update toast; users opt in. */
-const REV = 'v7-942102b6';
+<<<<<<< HEAD
+const REV = 'v7-e39108ce';
+||||||| parent of c7dd27b8 (rebuild generated data)
+const REV = 'v7-e39108ce';
+=======
+const REV = 'v7-e39108ce';
+>>>>>>> c7dd27b8 (rebuild generated data)
 const SHELL = 'hawchat-shell-' + REV;
 const DATA  = 'hawchat-data-v1';
 const TEXT  = 'hawchat-text-v1';
