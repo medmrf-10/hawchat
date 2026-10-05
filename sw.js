@@ -3,12 +3,11 @@
    data:  JSON (stats, read rows, series) — stale-while-revalidate.
    text:  transcripts/alignments/images — cache-first, LRU-bounded, version-stable.
    No auto skipWaiting: pages show an update toast; users opt in. */
-const REV = 'v8-38x';
+const REV = 'v8-37x';
 const SHELL = 'hawchat-shell-' + REV;
 const DATA  = 'hawchat-data-v1';
 const TEXT  = 'hawchat-text-v1';
-const PIN   = 'hawchat-pinned-v1';   // user-saved rows — never LRU-trimmed
-const KEEP  = [SHELL, DATA, TEXT, PIN];
+const KEEP  = [SHELL, DATA, TEXT];
 const MAXE  = 250;                              // LRU bound for text/data caches
 
 const SHELL_ASSETS = [
@@ -105,10 +104,7 @@ self.addEventListener('fetch', e => {
 
   // transcripts / alignments / images: cache-first, LRU-bounded
   if (/\.(txt|jpg|jpeg|png|webp|svg|mp4)$/.test(p) || p.includes('.align.')) {
-    e.respondWith((async () => {
-      const ph = await (await caches.open(PIN)).match(req);
-      if (ph) return ph;
-      const c = await caches.open(TEXT);
+    e.respondWith(caches.open(TEXT).then(async c => {
       const hit = await c.match(req);
       if (hit) return hit;
       const r = await fetch(req);
