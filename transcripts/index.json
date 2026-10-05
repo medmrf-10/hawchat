@@ -15,8 +15,7 @@
       "NA_vRhNirjptm0.txt"
      ],
      "n": 5,
-     "total": 38,
-     "playlist": "https://www.youtube.com/playlist?list=PLt3bvX419qyCxYMrnmhG3Dx67QZ1DRQDn"
+     "total": 38
     }
    ]
   },
@@ -38,8 +37,7 @@
       "NA_rFSkLmkzZ10.txt"
      ],
      "n": 8,
-     "total": 96,
-     "playlist": "https://www.youtube.com/playlist?list=PLkX3YqrI9_TUZwfepN0sxerEmb1LkFUTV"
+     "total": 96
     }
    ]
   },
@@ -61,8 +59,7 @@
       "NA_vDXo4D0Ms8Y.txt"
      ],
      "n": 8,
-     "total": 30,
-     "playlist": "https://www.youtube.com/playlist?list=PLEyInll7oEPtSN25qwX3bsacn9xc9lbVc"
+     "total": 30
     },
     {
      "slug": "irtibat1",
@@ -76,8 +73,7 @@
       "NA_mysX5mXeSwE.txt"
      ],
      "n": 6,
-     "total": 49,
-     "playlist": "https://www.youtube.com/playlist?list=PLEyInll7oEPvJWayGbQ89U3Ww8H9W2i__"
+     "total": 49
     },
     {
      "slug": "kahf3",
@@ -93,8 +89,7 @@
       "NA_c1JS7zxnwaQ.txt"
      ],
      "n": 8,
-     "total": 30,
-     "playlist": "https://www.youtube.com/playlist?list=PLEyInll7oEPuqDbUo7mhzQQDcqfMIj1cV"
+     "total": 30
     },
     {
      "slug": "khawatir",
@@ -110,8 +105,7 @@
       "NA_ttQ3RjAztCo.txt"
      ],
      "n": 8,
-     "total": 29,
-     "playlist": "https://www.youtube.com/playlist?list=PLEyInll7oEPuN40lSnbe7KKtPP10K949b"
+     "total": 29
     },
     {
      "slug": "ni3ma",
@@ -125,8 +119,7 @@
       "NA_sQzN-FOT0vY.txt"
      ],
      "n": 6,
-     "total": 27,
-     "playlist": "https://www.youtube.com/playlist?list=PLEyInll7oEPtxnWlJdclkIpoCGg98ck8J"
+     "total": 27
     },
     {
      "slug": "usus",
@@ -137,8 +130,7 @@
       "NA_e0zi4PGcZP4.txt"
      ],
      "n": 3,
-     "total": 39,
-     "playlist": "https://www.youtube.com/playlist?list=PLEyInll7oEPsRMPtGS0N-eJJh9Kbhb8vh"
+     "total": 39
     }
    ]
   },
@@ -814,5 +806,5 @@
    "slug": "ali-mahmoud-alomari"
   }
  },
- "updated": "2026-10-05T09:56:15Z"
+ "updated": "2026-10-05T08:35:54Z"
 }
