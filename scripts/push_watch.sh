@@ -28,6 +28,21 @@ while true; do
       if [ -n "$bad" ]; then
         echo "$(date -u +%FT%TZ) $sha $msg →$bad" | tee -a "$LOG" > /home/ubuntu/align_pkgs/LAST_VIOLATION
       fi
+      # ── auto-heal: core-file deletions by a stale clone get restored instantly ──
+      del=$(git show --diff-filter=D --name-only --format= "$sha" \
+            | grep -E "^(theme\.css|sw\.js|index\.html|manifest\.webmanifest|offline\.html|\.gitignore|fonts/|scripts/|playlists/.*\.(html|css|js|svg|md)$|playlists/data/(gen_stats\.py|yt_titles\.json|sheikhs\.json|mut_manifest\.json|redirects\.json))$" || true)
+      if [ -n "$del" ]; then
+        echo "$(date -u +%FT%TZ) WIPE $sha $msg → restoring ${#del[@]} files" | tee -a "$LOG"
+        git rev-parse --verify -q rebase-merge >/dev/null || {
+          git checkout -q "$sha"~1 -- $del 2>/dev/null && \
+          git commit -qm "ترميم آلي: استرداد ملفات النظام التي حذفتها دفعة قديمة ($sha)" && \
+          git pull --rebase -q 2>/dev/null; \
+          GIT_EDITOR=true git rebase --continue 2>/dev/null; \
+          python3 playlists/data/gen_stats.py >/dev/null 2>&1; \
+          git add -A 2>/dev/null; \
+          git commit -qm "إعادة توليد بعد الترميم الآلي" 2>/dev/null; \
+          git push -q 2>/dev/null && echo "$(date -u +%FT%TZ) HEALED $sha" | tee -a "$LOG"; }
+      fi
     done <<< "$new"
     git rev-parse origin/main > "$SEEN"
   fi

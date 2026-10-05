@@ -119,6 +119,33 @@ for pl, rids in pl_claims.items():
     if len(set(rids)) > 1:
         fails.append('playlist %s shared by rows %s' % (pl, rids))
 
+# ── data hygiene: conflict markers / corrupt JSON anywhere in site data ──
+scan_roots = [os.path.join(PL, 'lessons'), os.path.join(PL, 'series'),
+              os.path.join(PL, 'data'), os.path.join(ROOT, 'transcripts')]
+for sr_ in scan_roots:
+    if not os.path.isdir(sr_):
+        continue
+    for dirp, _dirs, fns in os.walk(sr_):
+        for fn in fns:
+            if not (fn.endswith('.json') or fn == 'index.json'):
+                continue
+            fp = os.path.join(dirp, fn)
+            try:
+                head = open(fp, encoding='utf-8', errors='replace').read(2000)
+            except Exception as e:
+                fails.append('unreadable %s: %s' % (fp, e)); continue
+            if head.lstrip().startswith('<<<<<<<') or '\n=======' in head or '\n>>>>>>>' in head:
+                fails.append('conflict markers in %s' % fp)
+            elif fn == 'index.json' or fn.endswith('.json'):
+                rel = os.path.relpath(fp, ROOT)
+                try:
+                    json.load(open(fp, encoding='utf-8'))
+                except Exception as e:
+                    if rel.startswith('playlists/lessons') or rel in (
+                            'transcripts/index.json', 'playlists/series/index.json',
+                            'playlists/data/sheikh_stats.json', 'playlists/data/yt_titles.json'):
+                        fails.append('invalid json %s: %s' % (rel, e))
+
 for w in warns: print('WARN', w)
 for f in fails: print('FAIL', f)
 print('audit_site: %d fails %d warns' % (len(fails), len(warns)))
