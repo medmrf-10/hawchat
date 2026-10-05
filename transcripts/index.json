@@ -1,0 +1,87 @@
+{
+ "sheikhs": {
+  "abdelwahid": {
+   "name": "الشيخ محمد عبد الواحد",
+   "series": [
+    {
+     "slug": "tawassul",
+     "title": "التوسل والاستغاثة عند الحنابلة",
+     "files": [
+      "NA_G34cWaxDHWw.txt",
+      "NA_WFLgTeRtEIo.txt"
+     ],
+     "n": 2
+    }
+   ]
+  },
+  "binsayib": {
+   "name": "الشيخ عبد العزيز بن سايب",
+   "series": [
+    {
+     "slug": "akhadari",
+     "title": "شرح الأخضري",
+     "files": [
+      "NA_EqM2m15wjqE.txt",
+      "NA_mY4yQSX4gN0.txt",
+      "NA_rFSkLmkzZ10.txt"
+     ],
+     "n": 3
+    }
+   ]
+  },
+  "mashhour": {
+   "name": "الشيخ عبد الرحمن المشهور",
+   "series": [
+    {
+     "slug": "azma",
+     "title": "أزمة عصر",
+     "files": [
+      "NA_09JdHvjTxN4.txt",
+      "NA_9E8Ji-SRZrM.txt",
+      "NA_Vd7Au-oA5zc.txt",
+      "NA_bCQjL1GVcdo.txt",
+      "NA_g3PTMYwyzNI.txt",
+      "NA_vDXo4D0Ms8Y.txt"
+     ],
+     "n": 6
+    },
+    {
+     "slug": "irtibat1",
+     "title": "الارتباط بالله ج1",
+     "files": [
+      "NA_-M3iK9EubAU.txt",
+      "NA_BhFLn5wkeh4.txt",
+      "NA_Lmmp6lKWwq8.txt",
+      "NA_TTQdASw5tfE.txt",
+      "NA_f8JENBakqj0.txt",
+      "NA_mysX5mXeSwE.txt"
+     ],
+     "n": 6
+    },
+    {
+     "slug": "kahf3",
+     "title": "الكهف ج3",
+     "files": [
+      "NA_9_TRHlOp9Rw.txt",
+      "NA_CBlhtDVGOmQ.txt",
+      "NA_IlA-MUn4TKw.txt",
+      "NA_Pb7TS0Q3aFc.txt",
+      "NA_ZzJd3pqVv_w.txt",
+      "NA__JeYwveOjUg.txt",
+      "NA_c1JS7zxnwaQ.txt"
+     ],
+     "n": 7
+    },
+    {
+     "slug": "khawatir",
+     "title": "خواطر رمضان",
+     "files": [
+      "NA_0amGiMR5tpo.txt"
+     ],
+     "n": 1
+    }
+   ]
+  }
+ },
+ "updated": "2026-10-05T06:53:41Z"
+}
