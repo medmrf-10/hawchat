@@ -612,6 +612,157 @@
      "total": 42
     }
    ]
+  },
+  "alamri": {
+   "name": "الشيخ علي محمود العمري",
+   "series": [
+    {
+     "slug": "adab-murid",
+     "title": "آداب سلوك المريد",
+     "files": [
+      "adab-murid-01_AlAmri.txt",
+      "adab-murid-02_AlAmri.txt",
+      "adab-murid-03_AlAmri.txt",
+      "adab-murid-04_AlAmri.txt",
+      "adab-murid-05_AlAmri.txt",
+      "adab-murid-06_AlAmri.txt",
+      "adab-murid-07_AlAmri.txt",
+      "adab-murid-08_AlAmri.txt",
+      "adab-murid-09_AlAmri.txt",
+      "adab-murid-10_AlAmri.txt",
+      "adab-murid-11_AlAmri.txt",
+      "adab-murid-12_AlAmri.txt"
+     ],
+     "n": 12
+    },
+    {
+     "slug": "barahin-kitab",
+     "title": "كتاب أم البراهين",
+     "files": [
+      "barahin-kitab-01_AlAmri.txt",
+      "barahin-kitab-02_AlAmri.txt",
+      "barahin-kitab-03_AlAmri.txt",
+      "barahin-kitab-04_AlAmri.txt",
+      "barahin-kitab-05_AlAmri.txt",
+      "barahin-kitab-06_AlAmri.txt",
+      "barahin-kitab-07_AlAmri.txt",
+      "barahin-kitab-09_AlAmri.txt"
+     ],
+     "n": 8
+    },
+    {
+     "slug": "barahin-sharh",
+     "title": "شرح كتاب شرح أم البراهين للإمام السنوسي",
+     "files": [
+      "barahin-sharh-01_AlAmri.txt",
+      "barahin-sharh-03_AlAmri.txt",
+      "barahin-sharh-04_AlAmri.txt"
+     ],
+     "n": 3
+    },
+    {
+     "slug": "hisam",
+     "title": "شرح الحسام الكاتي على إيساغوجي",
+     "files": [
+      "hisam-01_AlAmri.txt",
+      "hisam-02_AlAmri.txt",
+      "hisam-03_AlAmri.txt",
+      "hisam-04_AlAmri.txt",
+      "hisam-05_AlAmri.txt",
+      "hisam-06_AlAmri.txt",
+      "hisam-07_AlAmri.txt",
+      "hisam-08_AlAmri.txt",
+      "hisam-09_AlAmri.txt",
+      "hisam-10_AlAmri.txt",
+      "hisam-11_AlAmri.txt",
+      "hisam-12_AlAmri.txt",
+      "hisam-13_AlAmri.txt",
+      "hisam-14_AlAmri.txt",
+      "hisam-15_AlAmri.txt",
+      "hisam-16_AlAmri.txt",
+      "hisam-17_AlAmri.txt",
+      "hisam-18_AlAmri.txt",
+      "hisam-19_AlAmri.txt",
+      "hisam-20_AlAmri.txt",
+      "hisam-21_AlAmri.txt",
+      "hisam-22_AlAmri.txt",
+      "hisam-23_AlAmri.txt",
+      "hisam-24_AlAmri.txt",
+      "hisam-25_AlAmri.txt",
+      "hisam-26_AlAmri.txt",
+      "hisam-27_AlAmri.txt",
+      "hisam-29_AlAmri.txt",
+      "hisam-30_AlAmri.txt",
+      "hisam-31_AlAmri.txt"
+     ],
+     "n": 30
+    },
+    {
+     "slug": "iqtisad",
+     "title": "الاقتصاد في الاعتقاد",
+     "files": [
+      "iqtisad-01_AlAmri.txt",
+      "iqtisad-02_AlAmri.txt",
+      "iqtisad-03_AlAmri.txt",
+      "iqtisad-04_AlAmri.txt",
+      "iqtisad-05_AlAmri.txt",
+      "iqtisad-06_AlAmri.txt",
+      "iqtisad-07_AlAmri.txt",
+      "iqtisad-08_AlAmri.txt",
+      "iqtisad-09_AlAmri.txt",
+      "iqtisad-10_AlAmri.txt",
+      "iqtisad-11_AlAmri.txt",
+      "iqtisad-12_AlAmri.txt",
+      "iqtisad-13_AlAmri.txt",
+      "iqtisad-14_AlAmri.txt",
+      "iqtisad-15_AlAmri.txt",
+      "iqtisad-16_AlAmri.txt",
+      "iqtisad-17_AlAmri.txt",
+      "iqtisad-18_AlAmri.txt",
+      "iqtisad-19_AlAmri.txt",
+      "iqtisad-20_AlAmri.txt",
+      "iqtisad-21_AlAmri.txt",
+      "iqtisad-22_AlAmri.txt",
+      "iqtisad-23_AlAmri.txt",
+      "iqtisad-24_AlAmri.txt",
+      "iqtisad-25_AlAmri.txt",
+      "iqtisad-26_AlAmri.txt",
+      "iqtisad-27_AlAmri.txt",
+      "iqtisad-28_AlAmri.txt",
+      "iqtisad-29_AlAmri.txt",
+      "iqtisad-30_AlAmri.txt",
+      "iqtisad-31_AlAmri.txt",
+      "iqtisad-32_AlAmri.txt",
+      "iqtisad-33_AlAmri.txt",
+      "iqtisad-34_AlAmri.txt",
+      "iqtisad-35_AlAmri.txt",
+      "iqtisad-36_AlAmri.txt",
+      "iqtisad-37_AlAmri.txt",
+      "iqtisad-38_AlAmri.txt",
+      "iqtisad-39_AlAmri.txt",
+      "iqtisad-40_AlAmri.txt",
+      "iqtisad-41_AlAmri.txt",
+      "iqtisad-42_AlAmri.txt",
+      "iqtisad-43_AlAmri.txt",
+      "iqtisad-44_AlAmri.txt",
+      "iqtisad-45_AlAmri.txt",
+      "iqtisad-46_AlAmri.txt"
+     ],
+     "n": 46
+    },
+    {
+     "slug": "mughni",
+     "title": "مغني الطلاب شرح إيساغوجي",
+     "files": [
+      "mughni-02_AlAmri.txt",
+      "mughni-03_AlAmri.txt",
+      "mughni-04_AlAmri.txt",
+      "mughni-05_AlAmri.txt",
+      "mughni-06_AlAmri.txt"
+     ],
+     "n": 5
+    }
+   ]
   }
  },
  "updated": "2026-10-05T07:46:40Z"

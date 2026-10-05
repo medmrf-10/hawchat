@@ -1,0 +1,34 @@
+{
+ "slug": "alamri-barahin-sharh",
+ "sheikh": "علي محمود العمري",
+ "sheikh_slug": "ali-mahmoud-alomari",
+ "title": "شرح كتاب شرح أم البراهين للإمام السنوسي",
+ "playlist": "https://www.youtube.com/playlist?list=PLa3XSU7qw_YkCjDauyIudB0LbP_F8xHkB",
+ "count": 3,
+ "lessons": [
+  {
+   "n": 1,
+   "title": "شرح كتاب شرح أم البراهين للإمام السنوسي",
+   "video": "y7msC4NbzVU",
+   "align": false,
+   "chars": 44811,
+   "dur": "82:47"
+  },
+  {
+   "n": 3,
+   "title": "شرح كتاب شرح أم البراهين للإمام السنوسي",
+   "video": "9g9HsW7mi00",
+   "align": false,
+   "chars": 52824,
+   "dur": "101:29"
+  },
+  {
+   "n": 4,
+   "title": "شرح كتاب شرح أم البراهين للإمام السنوسي",
+   "video": "mX217N8b7Wc",
+   "align": false,
+   "chars": 48624,
+   "dur": "95:41"
+  }
+ ]
+}
