@@ -159,7 +159,7 @@ function mountPlayer(vid){
         const sp=store.get('speed');if(sp&&sp!==1&&YTP.setPlaybackRate){YTP.setPlaybackRate(sp);const sel=document.getElementById('spd');if(sel)sel.value=String(sp)}
         const rp=T0||resumePos();if(rp>5)YTP.seekTo(rp,true);
         if(pendPlay){YTP.playVideo();pendPlay=false}},
-      onStateChange:(e)=>{const b=document.querySelector('.btn.main');if(b)b.textContent='تشغيل';
+      onStateChange:(e)=>{const b=document.querySelector('.btn.main');if(b)b.textContent=(e.data===1||e.data===3)?'إيقاف':'تشغيل';
         if(e.data===1){wakeLock(true);if(!timer)timer=setInterval(tick,150)}
         else{wakeLock(false);if(e.data!==3&&timer){clearInterval(timer);timer=null}}
         if(e.data===0&&AUTO_NEXT){const nx=document.getElementById('go-next');if(nx)nx.click()}
@@ -233,6 +233,14 @@ document.addEventListener('keydown',e=>{
   }
   document.title=l.title+' — '+d.title;
   document.getElementById('hdr-sub').textContent=d.sheikh||d.title||'درس';
+  if('mediaSession' in navigator){
+    try{navigator.mediaSession.metadata=new MediaMetadata({title:l.title||('الدرس '+ln),artist:d.sheikh||'',album:d.title||''});
+      navigator.mediaSession.setActionHandler('play',()=>YTP&&YTP.playVideo());
+      navigator.mediaSession.setActionHandler('pause',()=>YTP&&YTP.pauseVideo());
+      navigator.mediaSession.setActionHandler('seekbackward',()=>YTP&&YTP.seekTo(Math.max(0,YTP.getCurrentTime()-10),true));
+      navigator.mediaSession.setActionHandler('seekforward',()=>YTP&&YTP.seekTo(YTP.getCurrentTime()+10,true));
+    }catch(e){}
+  }
   const _ls=d.lessons.map(x=>x.n).sort((a,b)=>a-b);
   const prev=d.lessons.find(x=>x.n===_ls.filter(n=>n<ln).pop()),
         next=d.lessons.find(x=>x.n===_ls.find(n=>n>ln));
@@ -246,8 +254,7 @@ document.addEventListener('keydown',e=>{
   if(aln){
     h+='<div class="player"><iframe id="yfp" src="https://www.youtube-nocookie.com/embed/'+esc(l.video)+'?enablejsapi=1&rel=0&playsinline=1&iv_load_policy=3&hl=ar&origin='+encodeURIComponent(location.origin)+'" allowfullscreen></iframe></div>';
     h+='<div class="ctrl">'
-      +'<button class="btn main" onclick="if(YTP){YTP.playVideo()}else{pendPlay=true;this.textContent=\'جارٍ التحميل…\'}">تشغيل</button>'
-      +'<button class="btn" onclick="YTP&&YTP.pauseVideo()">إيقاف</button>'
+      +'<button class="btn main" onclick="if(YTP){const s=YTP.getPlayerState&&YTP.getPlayerState();(s===1||s===3)?YTP.pauseVideo():YTP.playVideo()}else{pendPlay=true;this.textContent=\'جارٍ التحميل…\'}">تشغيل</button>'
       +'<button class="btn" onclick="seekPhrase(curPh-1)">الجملة السابقة</button>'
       +'<button class="btn" onclick="seekPhrase(curPh+1)">الجملة التالية</button>'
       +'<button class="btn" onclick="YTP&&YTP.seekTo(Math.max(0,YTP.getCurrentTime()-10),true)" title="رجوع 10ث">↺10</button>'

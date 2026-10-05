@@ -97,11 +97,12 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
     if(res&&res.n)document.querySelector('.lsres').style.cssText='display:flex;align-items:center;gap:10px;background:rgba(201,162,75,.08);border:1px solid var(--acc);border-radius:var(--r-md);padding:12px 14px;margin-bottom:12px;color:var(--acc2);text-decoration:none;font-size:var(--fs-sm);min-height:44px';
   }
   let REQ=0;
-  async function showLesson(i){
+  async function showLesson(i,push){
     CUR=i;const x=ROWS[i];const my=++REQ;
     store.setResume(row.id,x.n);store.markSeen(row.id+':'+x.n);
     window.scrollTo(0,0);
-    history.replaceState(null,'','?r='+encodeURIComponent(row.id)+'&l='+x.n);
+    const u='?r='+encodeURIComponent(row.id)+'&l='+x.n;
+    if(push===false)history.replaceState(null,'',u);else history.pushState(null,'',u);
     document.title=x.title+' — '+row.title;
     let h='<h1><bdi>'+esc(x.title)+'</bdi></h1><div class="lsub">الدرس '+x.n+' من '+ROWS.length+' · '+esc(META.name)+'</div>';
     if(row.unv)h+='<div class="unv">ترجمة آلية مأخوذة من يوتيوب — غير مدققة بعد</div>';
@@ -119,6 +120,11 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
     const p=document.getElementById('pv'),n=document.getElementById('nx');
     if(p)p.onclick=e=>{e.preventDefault();showLesson(i-1)};
     if(n)n.onclick=e=>{e.preventDefault();showLesson(i+1)};
+    addEventListener('popstate',()=>{
+      const l2=new URLSearchParams(location.search).get('l');
+      const i2=l2?ROWS.findIndex(y=>y.n===parseInt(l2,10)):-1;
+      if(i2>=0)showLesson(i2,false);else showList();
+    },{once:true});
     const tx=await jtxt(x.base+encodeURIComponent(x.file));
     if(my!==REQ)return;  // a newer lesson was opened while loading
     const el=document.getElementById('tx');
