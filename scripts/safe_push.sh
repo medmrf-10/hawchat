@@ -18,8 +18,11 @@ for i in 1 2 3 4 5; do
   [ -f playlists/series/regen_index.py ] && python3 playlists/series/regen_index.py >/dev/null 2>&1 || true
   [ -f playlists/data/gen_stats.py ] && python3 playlists/data/gen_stats.py >/dev/null 2>&1 || {
     echo "تعذّر توليد الإحصائيات — تأكد من وجود playlists/data/mut_manifest.json"; }
-  # stamp service-worker revision with the new commit hash → shell cache busts
-  sed -i "s|^const REV = .*|const REV = 'v7-$(git rev-parse --short HEAD)';|" sw.js 2>/dev/null || true
+  # stamp SW revision from shell-asset content — only changes when UI actually
+  # changes, so concurrent pushes never collide on this line and the SW doesn't
+  # reinstall on every visit (HEAD-stamping did both)
+  REV=$(git hash-object sw.js index.html manifest.webmanifest playlists/common.js playlists/common.css playlists/ui.css playlists/index.html playlists/sheikh.html playlists/row.html playlists/tr.html playlists/lesson.html playlists/series.html 2>/dev/null | git hash-object --stdin | cut -c1-8)
+  sed -i "s|^const REV = .*|const REV = 'v7-$REV';|" sw.js 2>/dev/null || true
   git add sw.js playlists/series/index.json playlists/data/sheikh_stats.json playlists/data/read/ playlists/data/redirects.json playlists/data/search.json playlists/data/yt_titles.json 'playlists/lessons/*/index.json' 2>/dev/null || true
   git diff --cached --quiet || git commit -q -m "rebuild generated data" || true
   # audit gate: refuse to push a broken site
