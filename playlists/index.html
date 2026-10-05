@@ -78,7 +78,7 @@ function render(){
     a.className='sh cin';a.style.animationDelay=(Math.min(i++,30)*25)+'ms';
     a.href='sheikh.html?s='+encodeURIComponent(slugOf(name));
     const p=photo(name),init=name.replace(/^ال/,'').trim()[0]||'؟';
-    const slug=slugOf(name),nw=_watch[slug]||0,nr=(_read[name]||0)+nw;
+    const slug=slugOf(name),nw=_watch[slug]||0,nr=(_read[name]||0)+(_readPub[slug]||0);
     a.innerHTML='<div class="ph">'+(p?'<img src="'+p+'" alt="" loading="lazy" onerror="this.remove()">':'')+'<span>'+init+'</span></div><div class="nm">'+esc(name)+'</div>'
       +((nr||nw)?'<div class="cnt">'+(nr?'📖 '+nr:'')+(nr&&nw?' · ':'')+(nw?'🎬 '+nw:'')+'</div>':'');
     g.appendChild(a);
@@ -95,7 +95,12 @@ document.getElementById('flt').addEventListener('input',e=>{flt=normalize(e.targ
     const d=s.name_display||s.name;
     for(const n of [s.name_display,s.name,...(s.aliases||[])]){_slugs[n]=s.slug;_slugs[normalize(n)]=s.slug;name2disp[normalize(n)]=d}
   }
-  for(const s of ((pub&&pub.series)||[]))if(s.sheikh_slug&&(s.aligned||0)>0)_watch[s.sheikh_slug]=(_watch[s.sheikh_slug]||0)+1;
+  const _readPub={};
+  for(const s of ((pub&&pub.series)||[])){
+    if(!s.sheikh_slug)continue;
+    if((s.aligned||0)>0)_watch[s.sheikh_slug]=(_watch[s.sheikh_slug]||0)+1;
+    if((s.transcribed||0)>0)_readPub[s.sheikh_slug]=(_readPub[s.sheikh_slug]||0)+1;
+  }
   for(const m of (Array.isArray(mut)?mut:(mut&&mut.series)||[])){
     if(!(m.files||[]).length)continue;
     const d=name2disp[normalize(m.sheikh||'')];

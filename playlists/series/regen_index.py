@@ -14,11 +14,14 @@ for f in sorted(glob.glob('*.json')):
     s['title'] = d.get('title', s.get('title', slug))
     s['sheikh_slug'] = d.get('sheikh_slug', s.get('sheikh_slug', ''))
     s['count'] = len(les)
-    # alignment truth lives in lessons/<slug>/index.json ('align' list of lesson numbers)
+    # alignment + transcript truth lives in lessons/<slug>/index.json ('align'/'txt' lists of lesson numbers)
     try:
-        s['aligned'] = len(json.load(open('../lessons/%s/index.json' % slug)).get('align', []))
+        li = json.load(open('../lessons/%s/index.json' % slug))
+        s['aligned'] = len(li.get('align', []))
+        s['transcribed'] = len(li.get('txt', []))
     except Exception:
         s['aligned'] = sum(1 for l in les if l.get('align'))
+        s['transcribed'] = s.get('transcribed', 0)
     if not s.get('status'):
         s['status'] = 'مكتملة التفريغ' if s['aligned'] >= s['count'] > 0 else 'مفرّغة — المحاذاة جارية'
 idx['series'] = list(by_slug.values())

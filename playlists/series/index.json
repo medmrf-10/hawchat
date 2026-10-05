@@ -6,7 +6,8 @@
    "title": "دورة مختصرة في العقيدة الإسلامية",
    "count": 10,
    "status": "مكتملة التفريغ",
-   "aligned": 10
+   "aligned": 10,
+   "transcribed": 10
   },
   {
    "slug": "bouti-yaghalitun",
@@ -14,7 +15,8 @@
    "title": "يغالطونك إذ يقولون",
    "count": 38,
    "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 38
+   "aligned": 38,
+   "transcribed": 38
   },
   {
    "slug": "bouti-tarikh",
@@ -22,7 +24,8 @@
    "title": "تاريخ التشريع الإسلامي",
    "count": 38,
    "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 38
+   "aligned": 38,
+   "transcribed": 38
   },
   {
    "slug": "bouti-mashahid",
@@ -30,7 +33,8 @@
    "title": "مشاهد وعبر من القرآن والسنة",
    "count": 30,
    "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 30
+   "aligned": 30,
+   "transcribed": 30
   },
   {
    "slug": "bouti-rihla",
@@ -38,7 +42,8 @@
    "title": "رحلة الخلود",
    "count": 23,
    "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 23
+   "aligned": 23,
+   "transcribed": 23
   },
   {
    "slug": "bouti-hubb",
@@ -46,7 +51,8 @@
    "title": "الحب في القرآن",
    "count": 26,
    "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 26
+   "aligned": 26,
+   "transcribed": 26
   },
   {
    "slug": "bouti-yaqiniyyat",
@@ -54,7 +60,8 @@
    "title": "كبرى اليقينيات الكونية",
    "count": 54,
    "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 54
+   "aligned": 54,
+   "transcribed": 54
   },
   {
    "slug": "bouti-ulum-quran",
@@ -62,7 +69,8 @@
    "title": "علوم القرآن الكريم",
    "count": 63,
    "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 63
+   "aligned": 63,
+   "transcribed": 63
   },
   {
    "slug": "bouti-sira",
@@ -70,7 +78,8 @@
    "title": "فقه السيرة النبوية",
    "count": 70,
    "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 70
+   "aligned": 70,
+   "transcribed": 70
   },
   {
    "slug": "bouti-khutab-2012",
@@ -78,7 +87,8 @@
    "title": "خطب الجمعة 2012",
    "count": 52,
    "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 52
+   "aligned": 52,
+   "transcribed": 52
   },
   {
    "slug": "gomaa-khawarij",
@@ -86,7 +96,8 @@
    "title": "الرد على خوارج العصر",
    "count": 172,
    "status": "المحاذاة جارية",
-   "aligned": 146
+   "aligned": 146,
+   "transcribed": 172
   },
   {
    "slug": "hashimi-zawaj",
@@ -94,7 +105,8 @@
    "title": "ألف باء الزواج",
    "count": 75,
    "status": "المحاذاة جارية — 0/75",
-   "aligned": 0
+   "aligned": 0,
+   "transcribed": 0
   },
   {
    "slug": "hashimi-tarbiya",
@@ -102,7 +114,8 @@
    "title": "ألف باء التربية",
    "count": 108,
    "status": "المحاذاة جارية — 0/108",
-   "aligned": 0
+   "aligned": 0,
+   "transcribed": 0
   },
   {
    "slug": "hashimi-fiqh-nafs",
@@ -110,7 +123,8 @@
    "title": "مجالس فقه النفس",
    "count": 181,
    "status": "المحاذاة جارية — 0/181",
-   "aligned": 0
+   "aligned": 0,
+   "transcribed": 0
   },
   {
    "slug": "fadel-dawra",
@@ -118,7 +132,8 @@
    "sheikh_slug": "fadhel-sulaiman",
    "count": 14,
    "aligned": 14,
-   "status": "مكتملة التفريغ"
+   "status": "مكتملة التفريغ",
+   "transcribed": 14
   },
   {
    "slug": "fadel-farsh",
@@ -126,7 +141,8 @@
    "sheikh_slug": "fadhel-sulaiman",
    "count": 28,
    "aligned": 12,
-   "status": "مفرّغة — المحاذاة جارية"
+   "status": "مفرّغة — المحاذاة جارية",
+   "transcribed": 28
   },
   {
    "slug": "fadel-juz30",
@@ -134,7 +150,8 @@
    "sheikh_slug": "fadhel-sulaiman",
    "count": 47,
    "aligned": 0,
-   "status": "مفرّغة — المحاذاة جارية"
+   "status": "مفرّغة — المحاذاة جارية",
+   "transcribed": 47
   }
  ]
 }

@@ -135,9 +135,16 @@ function renderSeries(){
     const d=document.createElement('div');d.className='ser';
     let links='';
     if(r.watch)links+=`<a class="btn play" href="series.html?s=${encodeURIComponent(r.watch.slug)}" title="استمع/تصفح الدروس">${ICON.play}</a>`;
-    if(r.read&&r.read.files&&r.read.files.length)links+=`<a class="btn read" href="${MUT}#/s/${esc(r.read.id)}" target="_blank" rel="noopener" title="اقرأ التفريغ">${ICON.book}</a>`;
+    if(r.read){
+      if(r.read.id)links+=`<a class="btn read" href="${MUT}#/s/${esc(r.read.id)}" target="_blank" rel="noopener" title="اقرأ التفريغ">${ICON.book}</a>`;
+      else if(r.read.slug)links+=`<a class="btn read" href="series.html?s=${encodeURIComponent(r.read.slug)}" title="اقرأ التفريغ">${ICON.book}</a>`;
+    }
     const cc=[];
-    if(r.read)cc.push(`<b class="don">${r.read.done||r.read.files.length}</b>/${r.read.total||r.read.files.length} مفرّغ`);
+    if(r.read){
+      const dn=r.read.done||(r.read.files?r.read.files.length:0)||r.read.transcribed||0;
+      const tt=r.read.total||(r.read.files?r.read.files.length:0)||r.read.count||dn;
+      cc.push(`<b class="don">${dn}</b>/${tt} مفرّغ`);
+    }
     if(r.watch)cc.push(`<b class="act">${r.watch.aligned}</b>/${r.watch.count||r.watch.aligned} مشاهد`);
     d.innerHTML=`<span class="nm">${esc(r.title)}</span>
       <span class="cnt">${cc.join(' · ')}</span>${links}`;
@@ -164,16 +171,18 @@ document.addEventListener('click',e=>{
   const yts=[];if(chs&&chs.channels)for(const g of chs.channels)for(const c of (g.items||[]))if(nset.has(c.name)||nset.has(norm(c.name)))yts.push(c);
   const photo=(photos&&(photos[sh.name_display]||photos[sh.name]||photos[norm(sh.name_display)]))||sh.photo;
   const init=(sh.name_display||sh.name).replace(/^ال/,'').trim()[0]||'؟';
-  // two states only: readable (mutalaa manifest with files) or watchable (published with aligned lessons)
-  const pub=(sidx?sidx.series.filter(x=>x.sheikh_slug===sh.slug&&(x.aligned||0)>0):[]);
+  // two states only: readable = published transcript (mutalaa files or lessons/<slug>/txt)
+  // watchable = aligned>0 (a subset of readable)
+  const pub=(sidx?sidx.series.filter(x=>x.sheikh_slug===sh.slug&&((x.aligned||0)>0||(x.transcribed||0)>0)):[]);
   const muts=(mut&&Array.isArray(mut)?mut:(mut&&mut.series)||[])
     .filter(m=>(nset.has(m.sheikh)||nset.has(norm(m.sheikh||'')))&&((m.done||0)>0||(m.files||[]).length>0));
   _rows=muts.map(m=>({title:m.name||m.title||('#'+m.id),read:m,watch:null}));
-  // attach watchable pubs to rows by title; unmatched pubs become their own rows
   for(const s of pub){
     const st=norm(s.title);let hit=null;
     for(const r of _rows){const rt=norm(r.title);if(rt&&(rt.includes(st)||st.includes(rt))){hit=r;break}}
-    if(hit)hit.watch=s;else _rows.push({title:s.title,read:null,watch:s});
+    if(!hit){hit={title:s.title,read:null,watch:null};_rows.push(hit)}
+    if((s.aligned||0)>0)hit.watch=s;
+    if((s.transcribed||0)>0&&!hit.read)hit.read=s;
   }
   _rows.sort((a,b)=>a.title.localeCompare(b.title,'ar'));
   const nRead=_rows.filter(r=>r.read).length,nWatch=_rows.filter(r=>r.watch).length;
