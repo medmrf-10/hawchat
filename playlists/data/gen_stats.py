@@ -77,6 +77,10 @@ def rows_from_lessons(slug):
     + titles from series/<slug>.json."""
     li = J(os.path.join(PL, 'lessons', slug, 'index.json')) or {}
     nums = li.get('txt') or []
+    d = os.path.join(PL, 'lessons', slug)
+    if not nums and os.path.isdir(d):
+        nums = sorted(int(m.group(1)) for fn in os.listdir(d)
+                      for m in [re.match(r'^(\d+)\.txt$', fn)] if m)
     sd = J(os.path.join(PL, 'series', slug + '.json')) or {}
     titles = {l.get('n'): l.get('title') for l in sd.get('lessons', [])}
     vids = {l.get('n'): l.get('video') for l in sd.get('lessons', [])}
