@@ -194,12 +194,19 @@ def count_aligned(slug):
         nums = sorted(int(m.group(1)) for fn in os.listdir(d)
                       for m in [re.match(r'^(\d+)\.align\.json$', fn)] if m)
     pad = li.get('pad') or 3
+    af = li.get('af') or {}
     good = 0
     for n in nums:
-        ap = os.path.join(d, '%0*d.align.json' % (pad, n))
+        if af.get(str(n)) or af.get(n):
+            ap = os.path.join(d, af.get(str(n)) or af.get(n))
+        else:
+            ap = os.path.join(d, '%0*d.align.json' % (pad, n))
         if not os.path.exists(ap):
-            ap = os.path.join(d, '%03d.align.json' % n)
-            if not os.path.exists(ap):
+            for p2 in (3, 2, 4):
+                ap = os.path.join(d, '%0*d.align.json' % (p2, n))
+                if os.path.exists(ap):
+                    break
+            else:
                 continue
         ad = J(ap)
         if not ad:
@@ -226,8 +233,8 @@ def rebuild_lessons_indexes():
         if not os.path.exists(idx_path):
             continue
         idx = J(idx_path)
-        if idx is None:
-            continue
+        if not isinstance(idx, dict):
+            idx = {}   # corrupt/conflicted index → rebuild from disk
         af, tf = {}, {}
         for fn in os.listdir(d):
             m = re.match(r'^(\d+)\.align\.json$', fn)
@@ -361,10 +368,10 @@ for sh in sheikhs:
             _tot = pl_len(_pl)
             if _tot:
                 r['rtt'] = max(r['rtt'], _tot)
-        if (s.get('aligned') or 0) > 0:
-            real = count_aligned(s['slug'])
+        real = count_aligned(s['slug'])
+        if (s.get('aligned') or 0) > 0 or real > 0:
             r['wan'] = real
-            r['wtt'] = max(r['wtt'], r['rtt'] or s.get('count') or 0, s['aligned'])
+            r['wtt'] = max(r['wtt'], r['rtt'] or s.get('count') or 0, s.get('aligned') or 0, real)
             r['sSlug'] = s['slug']
         if (s.get('transcribed') or 0) > 0:
             r['rdn'] = max(r['rdn'], s['transcribed'])
