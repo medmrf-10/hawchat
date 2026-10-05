@@ -63,19 +63,12 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
   let hit=null,SROWS=null,VIDF={};
   // ?s=<slug>&l=<n> — series-native deep link (player's «النص كاملاً»): number by
   // series n, resolve transcript file by video id or normalized lessons copy
-  if(ssl){
+  if(ssl&&!q.get('sh')){
     hit=find(r=>r.sSlug===ssl);
     const sd=await j('series/'+encodeURIComponent(ssl)+'.json');
     if(sd){
       const lidx=await j('lessons/'+encodeURIComponent(ssl)+'/index.json');
-      const sh=(hit&&hit.r.trSh),sr=(hit&&hit.r.trSr);
-      if(sh&&sr){
-        const ti=await j('../transcripts/index.json');
-        const se=ti&&ti[sh]?(ti[sh].series||[]).find(x=>x.slug===sr):null;
-        for(const f of (se&&se.files)||[]){const m=f.match(/(?:^|_)([A-Za-z0-9_-]{11})\.txt$/);if(m)VIDF[m[1]]=f}
-      }
-      SROWS=(sd.lessons||[]).map(l=>({n:l.n,title:l.title,vid:l.video,trfile:(lidx&&lidx.tf&&lidx.tf[l.n])||null,
-        title2:l.title}));
+      SROWS=(sd.lessons||[]).map(l=>({n:l.n,title:l.title,vid:l.video,trfile:(lidx&&lidx.tf&&lidx.tf[l.n])||null}));
       if(!hit){hit={slug:'',r:{id:'tr:'+ssl,title:sd.title||ssl,sSlug:ssl,rdn:SROWS.length},st:{name:sd.sheikh||'سلسلة'}}}
     }
   }
@@ -88,17 +81,26 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
   if(!hit&&q.get('sh'))hit=find(r=>r.trSh===q.get('sh')&&r.trSr===q.get('s'));
   if(!hit){app.innerHTML='<div class="errbox">تعذر العثور على هذه السلسلة — <a href=".">عودة</a></div>';return}
   slug=hit.slug;row=hit.r;META=hit.st;
-  document.getElementById('back').href='sheikh.html?s='+encodeURIComponent(slug);
+  const synthetic=!slug;
+  document.getElementById('back').href=SROWS?('row.html?s='+encodeURIComponent(ssl)):('sheikh.html?s='+encodeURIComponent(slug));
   document.getElementById('hdr-sub').textContent=META.name;
-  document.getElementById('crumb').innerHTML=hdr(null,[{h:'.',t:'سلاسل المشايخ'},{h:'sheikh.html?s='+encodeURIComponent(slug),t:META.name},{t:row.title}]);
+  document.getElementById('crumb').innerHTML=synthetic
+    ?hdr(null,[{h:'.',t:'سلاسل المشايخ'},{h:'row.html?s='+encodeURIComponent(ssl),t:row.title}])
+    :hdr(null,[{h:'.',t:'سلاسل المشايخ'},{h:'sheikh.html?s='+encodeURIComponent(slug),t:META.name},{h:'row.html?s='+encodeURIComponent(ssl||row.sSlug),t:row.title}]);
   const rows=SROWS||(await j('data/read/'+encodeURIComponent(row.id)+'.json'));
   if(!rows||!rows.length){app.innerHTML='<div class="errbox">تعذر تحميل نصوص هذه السلسلة — <a href="sheikh.html?s='+encodeURIComponent(slug)+'">عودة</a></div>';return}
+  // text-by-n fallback for ?s= rows lacking a lessons copy — the generator
+  // already renumbers data/read to series numbering (renumber_to_series)
+  let byN={};
+  if(SROWS){const rr=await j('data/read/'+encodeURIComponent(row.id)+'.json');(rr||[]).forEach(x=>byN[x.n]=x)}
   ROWS=rows;
   const SELF=SROWS?('?s='+encodeURIComponent(ssl)):('?r='+encodeURIComponent(row.id));
+  const ALLR=(!synthetic&&row.id)?('?r='+encodeURIComponent(row.id)):SELF;
   document.title=row.title+' — '+META.name;
-  // aligned lessons for "استمع لهذا الدرس"
+  // aligned lessons for "استمع لهذا الدرس" — the same listenable threshold
+  // (cov>=0.3) the cards count with, not just any alignment file
   let aligned=new Set();
-  if(row.listen){const li=await j('lessons/'+encodeURIComponent(row.sSlug)+'/index.json');aligned=new Set((li&&li.align)||[])}
+  if(row.listen){const li=await j('lessons/'+encodeURIComponent(row.sSlug||ssl)+'/index.json');aligned=new Set((li&&(li.alignOk||li.align))||[])}
   // REQ must exist before the first showLesson(): a `let` declared below the call
   // sits in its TDZ and threw on every ?l= deep link (blank page, no text)
   let REQ=0;
@@ -118,7 +120,9 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
     if(row.unv)h+='<div class="unv">ترجمة آلية مأخوذة من يوتيوب — غير مدققة بعد</div>';
     if(res&&res.n)h+='<a class="lsres" href="'+SELF+'&l='+res.n+'">تابع من حيث توقفت — الدرس '+res.n+'</a>';
     h+='<div class="ls">';
-    ROWS.forEach((x,i)=>{h+='<a href="'+SELF+'&l='+x.n+'"><span class="num">'+x.n+'</span><span><bdi>'+esc(x.title)+'</bdi></span></a>'});
+    ROWS.forEach((x,i)=>{const hasT=!SROWS||x.trfile||byN[x.n];
+      if(hasT)h+='<a href="'+SELF+'&l='+x.n+'"><span class="num">'+x.n+'</span><span><bdi>'+esc(x.title)+'</bdi></span></a>';
+      else h+='<a class="off" aria-disabled="true" style="opacity:.45;pointer-events:none"><span class="num" style="opacity:.6">'+x.n+'</span><span><bdi>'+esc(x.title)+'</bdi><small style="display:block;color:var(--dim)">لا نص بعد</small></span></a>'});
     h+='</div>';
     app.innerHTML=h;
     if(res&&res.n)document.querySelector('.lsres').style.cssText='display:flex;align-items:center;gap:10px;background:rgba(201,162,75,.08);border:1px solid var(--acc);border-radius:var(--r-md);padding:12px 14px;margin-bottom:12px;color:var(--acc2);text-decoration:none;font-size:var(--fs-sm);min-height:44px';
@@ -129,7 +133,8 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
     if(SROWS){
       const base='lessons/'+encodeURIComponent(ssl)+'/';
       if(x.trfile){const r=await jtxt(base+encodeURIComponent(x.trfile));if(r)return r}
-      if(x.vid&&VIDF[x.vid]&&row.trSh&&row.trSr){const r=await jtxt('../transcripts/'+encodeURIComponent(row.trSh)+'/'+encodeURIComponent(row.trSr)+'/'+encodeURIComponent(VIDF[x.vid]));if(r)return r}
+      const rb=byN[x.n];
+      if(rb&&rb.file){const r=await jtxt(rb.base+encodeURIComponent(rb.file));if(r)return r}
       const p3=String(x.n).padStart(3,'0'),p2=String(x.n).padStart(2,'0');
       return (await jtxt(base+p3+'.txt'))||(p2!==p3?await jtxt(base+p2+'.txt'):null)||'';
     }
@@ -145,8 +150,8 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
     let h='<h1><bdi>'+esc(x.title)+'</bdi></h1><div class="lsub">الدرس '+x.n+' من '+ROWS.length+' · '+esc(META.name)+'</div>';
     if(row.unv)h+='<div class="unv">ترجمة آلية مأخوذة من يوتيوب — غير مدققة بعد</div>';
     h+='<div class="tools"><button id="fmi" aria-label="تصغير الخط">A−</button><button id="fpl" aria-label="تكبير الخط">A+</button>'
-      +(aligned.has(x.n)?'<a class="abtn" style="height:44px;padding:0 14px;border:1px solid var(--listen);color:var(--listen);border-radius:8px;display:inline-flex;align-items:center;gap:6px;text-decoration:none" href="lesson.html?s='+encodeURIComponent(row.sSlug)+'&l='+x.n+'">'+I.listen+' استمع لهذا الدرس</a>':'')
-      +'<a class="abtn" style="height:44px;padding:0 14px;border:1px solid var(--border);color:var(--dim);border-radius:8px;display:inline-flex;align-items:center;gap:6px;text-decoration:none" href="'+SELF+'">كل الدروس</a></div>';
+      +(aligned.has(x.n)?'<a class="abtn" href="lesson.html?s='+encodeURIComponent(row.sSlug||ssl)+'&l='+x.n+'">'+I.listen+' استمع لهذا الدرس</a>':'')
+      +'<a class="abtn" href="'+ALLR+'">كل الدروس</a></div>';
     h+='<div class="txt skel" id="tx" style="min-height:200px"></div>';
     app.innerHTML=h;
     const nav=document.getElementById('navb');nav.hidden=false;
