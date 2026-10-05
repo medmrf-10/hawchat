@@ -13,9 +13,9 @@
 <link rel="apple-touch-icon" href="../icons/favicon-180.png">
 <link rel="preload" href="../fonts/IBMPlexSansArabic-400-arabic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../fonts/Amiri-400-arabic.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../theme.css?v=8">
-<link rel="stylesheet" href="common.css?v=8">
-<link rel="stylesheet" href="ui.css?v=8">
+<link rel="stylesheet" href="../theme.css?v=9">
+<link rel="stylesheet" href="common.css?v=9">
+<link rel="stylesheet" href="ui.css?v=9">
 <style>
 .wrap{max-width:820px;margin:0 auto;padding:12px 14px 24px}
 .u-hero .meta a{color:var(--gold-3);text-decoration:none;font-size:var(--fs-xs);display:inline-flex;align-items:center;min-height:44px}
@@ -32,6 +32,7 @@
 .lrow .bd .i{width:1.15em;height:1.15em}
 .lrow .bd .ic-read{color:var(--gold-3)} .lrow .bd .ic-listen{color:var(--violet)} .lrow .bd .ic-play{color:var(--muted);opacity:.7}
 .lrow.seen{opacity:.62}
+.lrow.cur{border-color:var(--gold-2)}
 .u-hero h1{padding-inline-end:56px}
 .resline{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 .resline a{min-height:44px;display:inline-flex;align-items:center;gap:8px;padding:0 16px;border-radius:var(--r-md);
@@ -49,7 +50,7 @@
   <span class="sub" id="hdr-sub" style="color:var(--ink-3);font-size:var(--fs-xs)">سلاسل المشايخ</span>
 </div></header>
 <main><div class="wrap" id="app"><div class="skel" style="height:130px;margin-top:10px;border-radius:18px"></div><div class="skel" style="height:300px;margin-top:12px;border-radius:18px"></div></div></main>
-<script src="common.js?v=8"></script>
+<script src="common.js?v=9"></script>
 <script>
 const ic=id=>'<svg class="i"><use href="icons.svg#'+id+'"/></svg>';
 (async()=>{
@@ -94,6 +95,7 @@ const ic=id=>'<svg class="i"><use href="icons.svg#'+id+'"/></svg>';
   const sorted=[...ns].sort((a,b)=>a-b);
   const L=n=>lessons.find(x=>x.n===n)||{};
   const favs=store.favList();
+  const rs=store.resume(row.id);
   store.markSeen(row.id);
   let h='<nav class="crumb cin"><a href=".">سلاسل المشايخ</a> ‹ <a href="sheikh.html?s='+encodeURIComponent(slug)+'">'+esc(st.name)+'</a> ‹ <bdi>'+esc(row.title)+'</bdi></nav>';
   h+='<div class="u-hero cin">'
@@ -104,7 +106,7 @@ const ic=id=>'<svg class="i"><use href="icons.svg#'+id+'"/></svg>';
     +(row.wan?'<span class="u-num lsn">'+ic('i-listen')+'<b>'+row.wan+'</b>'+(row.wan<row.rtt?'<small>/'+row.rtt+'</small>':'')+(row.wOk?'<b class="ok">'+ic('i-check')+'</b>':'')+'<small>مسموع</small></span>':'')
     +(sd&&sd.playlist?'<a href="'+esc(sd.playlist)+'" target="_blank" rel="noopener">قائمة يوتيوب ↗</a>':'')
     +'</div>'
-    +(function(){const rs=store.resume(row.id);const rn=rs&&rs.n;
+    +(function(){const rn=rs&&rs.n;
       return (rn||row.rdn||row.wan)?'<div class="resline">'
         +(rn?'<a href="lesson.html?s='+encodeURIComponent(row.sSlug)+'&l='+rn+'">'+ic('i-play')+' تابع من الدرس '+rn+'</a>':'')
         +'<a href="lesson.html?s='+encodeURIComponent(row.sSlug)+'&l=1">ابدأ من الدرس 1</a></div>':''})()
@@ -114,13 +116,18 @@ const ic=id=>'<svg class="i"><use href="icons.svg#'+id+'"/></svg>';
     store.favToggle(row.id);e.currentTarget.classList.toggle('on',store.fav(row.id));
   });
   const dlb=document.getElementById('dlb');
-  if(dlb)dlb.addEventListener('click',async e=>{
-    e.currentTarget.style.opacity=.4;
-    const r=await offlineRow(row.id);
-    e.currentTarget.style.opacity=1;
-    e.currentTarget.classList.toggle('on',!!r.ok);
-    e.currentTarget.title=r.ok?('محفوظة بلا اتصال ('+r.total+' نصاً)'):(r.partial?('محفوظ جزئياً '+r.n+'/'+r.total):'تعذر الحفظ بلا اتصال');
-  });
+  if(dlb){
+    if(typeof isPinned==='function')isPinned(row.id).then(p=>{if(p)dlb.classList.add('on')});
+    dlb.addEventListener('click',async e=>{
+      e.currentTarget.style.opacity=.4;
+      if(typeof toast==='function')toast('يُحفظ بلا اتصال…');
+      const r=await offlineRow(row.id,row.sSlug);
+      e.currentTarget.style.opacity=1;
+      e.currentTarget.classList.toggle('on',!!r.ok);
+      if(typeof toast==='function')toast(r.ok?('حُفظت السلسلة بلا اتصال ('+r.n+' ملفاً)'):'تعذر الحفظ بلا اتصال',2800);
+      else e.currentTarget.title=r.ok?('محفوظة بلا اتصال'):'تعذر الحفظ';
+    });
+  }
   const draw=fq=>{
     const lst=document.getElementById('lst');lst.innerHTML='';let n=0;
     for(const nn of sorted){
@@ -131,10 +138,12 @@ const ic=id=>'<svg class="i"><use href="icons.svg#'+id+'"/></svg>';
       const href=canL
         ? 'lesson.html?s='+encodeURIComponent(row.sSlug)+'&l='+nn
         : 'tr.html?r='+encodeURIComponent(row.id)+'&l='+nn;
+      const seen=store.seen(row.id+':'+nn),isCur=rs&&rs.n===nn;
       lst.insertAdjacentHTML('beforeend',
-        '<a class="lrow cin" href="'+href+'"><span class="num">'+nn+'</span>'
+        '<a class="lrow cin'+(seen?' seen':'')+(isCur?' cur':'')+'" href="'+href+'"><span class="num">'+nn+'</span>'
         +'<span class="t"><bdi>'+esc(title)+'</bdi>'+(l.dur?'<small>'+esc(fmtDur(l.dur))+'</small>':'')+'</span>'
-        +'<span class="bd">'+(rtxt.has(nn)?'<span class="ic-read" title="نص">'+ic('i-read')+'</span>':'')
+        +'<span class="bd">'+(seen?'<span class="ic-seen" title="شوهد" style="color:var(--green)">'+ic('i-check')+'</span>':'')
+        +(rtxt.has(nn)?'<span class="ic-read" title="نص">'+ic('i-read')+'</span>':'')
         +(aln.has(nn)?'<span class="ic-listen" title="محاذاة نصية">'+ic('i-listen')+'</span>':(canL?'<span class="ic-play" title="فيديو فقط">'+ic('i-play')+'</span>':''))+'</span></a>');
     }
     if(!n)lst.innerHTML='<p class="empty">لا نتائج.</p>';

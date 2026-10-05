@@ -47,19 +47,20 @@
 [hidden]{display:none!important}
 html,body{overflow-x:hidden}
 body{background:var(--bg);color:var(--txt);font-family:var(--font-ui);min-height:100dvh;line-height:1.7;
-  padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+  padding-bottom:env(safe-area-inset-bottom)}
 
 /* عناصر الثيم المعيارية */
-.hd{position:sticky;top:0;z-index:40;background:var(--bgt);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.hd{position:sticky;top:0;z-index:40;background:var(--bgt);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding-top:env(safe-area-inset-top)}
 .hd-in{max-width:1100px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px}
 .brand{font-family:var(--font-ar);font-weight:700;font-size:1.35rem;background:linear-gradient(135deg,var(--acc2),var(--acc));-webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap}
 .card{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg)}
-.chip{flex:0 0 auto;background:var(--card);border:1px solid var(--border);border-radius:99px;color:var(--dim);font-family:inherit;font-size:.72rem;padding:8px 14px;cursor:pointer;min-height:44px}
+.chip{flex:0 0 auto;background:var(--card);border:1px solid var(--border);border-radius:99px;color:var(--dim);font-family:inherit;font-size:.8rem;padding:8px 14px;cursor:pointer;min-height:44px}
 .chip.on{background:var(--acc);border-color:var(--acc2);color:var(--bg);font-weight:800}
 .btn{width:44px;height:44px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--card);color:var(--acc2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem}
 .flab{font-size:.62rem;color:var(--dim);letter-spacing:.06em;white-space:nowrap}
 @keyframes cin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .cin{animation:cin .4s both}
+.cin:nth-child(n+13){animation:none}
 ::selection{background:var(--acc);color:var(--bg)}
 ::-webkit-scrollbar{width:10px;height:10px}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:99px}

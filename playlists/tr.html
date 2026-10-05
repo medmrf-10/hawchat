@@ -14,9 +14,9 @@
 <link rel="apple-touch-icon" href="../icons/favicon-180.png">
 <link rel="preload" href="../fonts/IBMPlexSansArabic-400-arabic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../fonts/Amiri-400-arabic.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../theme.css?v=8">
-<link rel="stylesheet" href="common.css?v=8">
-<link rel="stylesheet" href="ui.css?v=8">
+<link rel="stylesheet" href="../theme.css?v=9">
+<link rel="stylesheet" href="common.css?v=9">
+<link rel="stylesheet" href="ui.css?v=9">
 <style>
 .wrap{max-width:820px;margin:0 auto;padding:16px 16px 90px}
 h1{font-family:var(--font-ui);font-size:var(--fs-lg);font-weight:700;color:var(--txt);margin:10px 0 4px}
@@ -28,6 +28,7 @@ h1{font-family:var(--font-ui);font-size:var(--fs-lg);font-weight:700;color:var(-
 .ls a.on{border-color:var(--acc);color:var(--acc2)}
 .ls .num{min-width:34px;height:34px;border-radius:50%;background:rgba(201,162,75,.1);border:1px solid var(--border);color:var(--acc2);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:var(--fs-sm);flex:none}
 .txt{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:26px;margin-top:14px;font-family:var(--font-ar);font-size:1.15rem;line-height:2.2;white-space:pre-wrap}
+@media(max-width:480px){.txt{padding:18px 16px}}
 .navb{position:fixed;bottom:0;left:0;right:0;background:var(--bgt);backdrop-filter:blur(14px);border-top:1px solid var(--border);padding:10px 14px calc(10px + env(safe-area-inset-bottom));display:flex;align-items:center;justify-content:center;gap:10px;z-index:50}
 .navb a,.navb button{min-height:44px;padding:0 18px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--card);color:var(--txt);font-family:var(--font-ui);font-size:var(--fs-sm);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
 .navb a.off,.navb button.off{opacity:.35;pointer-events:none}
@@ -51,7 +52,7 @@ h1{font-family:var(--font-ui);font-size:var(--fs-lg);font-weight:700;color:var(-
   <div id="app"><div class="skel" style="height:60px;margin-top:12px"></div><div class="skel" style="height:220px;margin-top:12px"></div></div>
 </div></main>
 <div class="navb" id="navb" hidden></div>
-<script src="common.js?v=8"></script>
+<script src="common.js?v=9"></script>
 <script>
 let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
 (async()=>{
@@ -123,7 +124,8 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
     if(res&&res.n)h+='<a class="lsres" href="'+SELF+'&l='+res.n+'">تابع من حيث توقفت — الدرس '+res.n+'</a>';
     h+='<div class="ls">';
     ROWS.forEach((x,i)=>{const hasT=!SROWS||x.trfile||byN[x.n];
-      if(hasT)h+='<a href="'+SELF+'&l='+x.n+'"><span class="num">'+x.n+'</span><span><bdi>'+esc(x.title)+'</bdi></span></a>';
+      const seen=store.seen(row.id+':'+x.n),cur=res&&res.n===x.n;
+      if(hasT)h+='<a'+(cur?' class="on"':'')+' href="'+SELF+'&l='+x.n+'"><span class="num">'+x.n+'</span><span style="flex:1"><bdi>'+esc(x.title)+'</bdi></span>'+(seen?'<span style="color:var(--ok,#5fbf7f);flex:none">'+I.check+'</span>':'')+'</a>';
       else h+='<a class="off" aria-disabled="true" style="opacity:.45;pointer-events:none"><span class="num" style="opacity:.6">'+x.n+'</span><span><bdi>'+esc(x.title)+'</bdi><small style="display:block;color:var(--dim)">لا نص بعد</small></span></a>'});
     h+='</div>';
     app.innerHTML=h;
@@ -154,7 +156,8 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
     h+='<div class="tools"><button id="fmi" aria-label="تصغير الخط">A−</button><button id="fpl" aria-label="تكبير الخط">A+</button>'
       +(aligned.has(x.n)?'<a class="abtn" href="lesson.html?s='+encodeURIComponent(row.sSlug||ssl)+'&l='+x.n+'">'+I.listen+' استمع لهذا الدرس</a>':'')
       +'<a class="abtn" href="'+ALLR+'">كل الدروس</a>'
-      +'<button id="shr" aria-label="مشاركة الدرس" title="مشاركة الدرس" style="width:auto;padding:0 12px;gap:5px;display:inline-flex;align-items:center">↗ مشاركة</button></div>';
+      +'<button id="shr" aria-label="مشاركة الدرس" title="مشاركة الدرس" style="width:auto;padding:0 12px;gap:5px;display:inline-flex;align-items:center">↗ مشاركة</button>'
+      +'<button id="cpy" aria-label="نسخ نص الدرس" title="نسخ نص الدرس كاملاً" style="width:auto;padding:0 12px">⧉ نسخ</button></div>';
     h+='<div class="txt skel" id="tx" style="min-height:200px"></div>';
     app.innerHTML=h;
     const nav=document.getElementById('navb');nav.hidden=false;
@@ -175,16 +178,32 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
     const el=document.getElementById('tx');
     if(!el)return;
     el.classList.remove('skel');el.style.fontSize=FS+'rem';
-    el.textContent=tx||'تعذر تحميل النص';
+    if(tx){el.textContent=tx;
+      // E6: restore reading position inside this lesson
+      const pk='trp:'+row.id+':'+x.n,sp=store.get(pk);
+      if(sp&&sp.f>0.02)setTimeout(()=>{const h=document.documentElement;window.scrollTo(0,Math.max(0,(h.scrollHeight-h.clientHeight)*sp.f))},60);
+    }else{
+      el.innerHTML=(typeof errState==='function')?errState('تعذر تحميل النص','location.reload()'):'تعذر تحميل النص — <a href="">إعادة المحاولة</a>';
+    }
+    // E2: copy the whole text with attribution
+    const cb=document.getElementById('cpy');
+    if(cb)cb.onclick=async()=>{if(!tx)return;
+      try{await navigator.clipboard.writeText(tx+'\n\n— '+row.title+'، الدرس '+x.n+'، '+META.name+'\n'+location.origin+location.pathname+SELF+'&l='+x.n);
+        if(typeof toast==='function')toast('نُسخ النص كاملاً');else{cb.textContent='✓ نُسخ';setTimeout(()=>cb.innerHTML='⧉ نسخ',1600)}
+      }catch(e){}};
     // prefetch next
     if(i<ROWS.length-1)loadText(ROWS[i+1]);
     updProg();
   }
+  let _spT=0;
   function updProg(){
     const p=document.getElementById('pbar');if(!p)return;
     const h=document.documentElement;
     const f=h.scrollTop/Math.max(1,h.scrollHeight-h.clientHeight);
     p.style.width=Math.min(100,Math.max(0,f*100))+'%';
+    // E6: save reading position (throttled)
+    const now=Date.now();
+    if(CUR>=0&&now-_spT>800){_spT=now;const x=ROWS[CUR];if(x)store.set('trp:'+row.id+':'+x.n,{f:Math.round(f*1000)/1000})}
   }
   addEventListener('scroll',updProg,{passive:true});
 })();

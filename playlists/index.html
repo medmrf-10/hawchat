@@ -14,9 +14,9 @@
 <link rel="apple-touch-icon" href="../icons/favicon-180.png">
 <link rel="preload" href="../fonts/IBMPlexSansArabic-400-arabic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../fonts/Amiri-400-arabic.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../theme.css?v=8">
-<link rel="stylesheet" href="common.css?v=8">
-<link rel="stylesheet" href="ui.css?v=8">
+<link rel="stylesheet" href="../theme.css?v=9">
+<link rel="stylesheet" href="common.css?v=9">
+<link rel="stylesheet" href="ui.css?v=9">
 <style>
 .wrap{max-width:1100px;margin:0 auto;padding:12px 14px 24px}
 .sh.soon,.u-sh.soon{opacity:.42;pointer-events:none;filter:grayscale(.6)}
@@ -61,7 +61,7 @@ a.mini{color:var(--ink-3);display:inline-flex;align-items:center;justify-content
     <input type="file" id="impf" accept="application/json" hidden>
   </div>
 </div></main>
-<script src="common.js?v=8"></script>
+<script src="common.js?v=9"></script>
 <script>
 let _stats={},flt='',showSoon=false;
 const ic=id=>'<svg class="i"><use href="icons.svg#'+id+'"/></svg>';
@@ -151,17 +151,27 @@ function drawCont(){
 }
 document.getElementById('flt').addEventListener('input',e=>{flt=normalize(e.target.value);draw()});
 document.getElementById('soonh').addEventListener('click',()=>{showSoon=!showSoon;draw()});
-document.getElementById('exp').addEventListener('click',e=>{
+document.getElementById('exp').addEventListener('click',async e=>{
   e.preventDefault();
+  const file=new File([store.export()],'salasil-backup.json',{type:'application/json'});
+  if(navigator.canShare&&navigator.canShare({files:[file]})){
+    try{await navigator.share({files:[file]});return}catch(err){if(err&&err.name==='AbortError')return}
+  }
   const a=document.createElement('a');
-  a.href=URL.createObjectURL(new Blob([store.export()],{type:'application/json'}));
-  a.download='salasil-backup.json';a.click();
+  a.href=URL.createObjectURL(file);a.download='salasil-backup.json';a.click();
+  if(typeof toast==='function')toast('نُزّلت نسخة بياناتك');
 });
 document.getElementById('imp').addEventListener('click',e=>{e.preventDefault();document.getElementById('impf').click()});
 document.getElementById('impf').addEventListener('change',e=>{
   const f=e.target.files[0];if(!f)return;
   const r=new FileReader();
-  r.onload=()=>{if(store.import_(r.result)){drawCont();drawFavs()}};
+  r.onload=()=>{
+    if(store.import_(r.result)){
+      const d=store._d(),nf=Object.keys(d.fav||{}).length,nr=Object.keys(d.resume||{}).length;
+      drawCont();drawFavs();
+      if(typeof toast==='function')toast('استُعيدت بياناتك ('+nf+' مفضلة، '+nr+' موضع استئناف)');
+    }else if(typeof toast==='function')toast('ملف غير صالح');
+  };
   r.readAsText(f);
 });
 (async()=>{

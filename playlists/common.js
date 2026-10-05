@@ -46,6 +46,7 @@ function showUpdToast(reg){
  const t=document.createElement('div');t.id='updtoast';
  t.style.cssText='position:fixed;bottom:16px;left:16px;right:16px;z-index:99;background:var(--card2,#1a2238);border:1px solid var(--acc,#c9a24b);border-radius:14px;padding:12px 16px;display:flex;align-items:center;gap:12px;font-size:.85rem;box-shadow:0 8px 30px rgba(0,0,0,.4)';
  t.innerHTML='<span style="flex:1">نسخة جديدة من الموقع جاهزة</span><button id="upd-btn" style="min-height:40px;padding:0 16px;border:0;border-radius:10px;background:var(--acc,#c9a24b);color:var(--bg,#0b0f1a);font-weight:700;cursor:pointer">تحديث</button>';
+ t.style.bottom='calc(16px + env(safe-area-inset-bottom,0px))';
  document.body.appendChild(t);
  t.querySelector('#upd-btn').onclick=()=>{
   const w=reg&&reg.waiting;
@@ -75,23 +76,58 @@ const store={
  export(){return JSON.stringify(this._d())},
  import_(s){try{const d=JSON.parse(s);if(typeof d==='object'){this._w(d);return true}}catch(e){}return false},
 };
-/* offline-save a row's texts into the pinned cache (hawchat-pinned-v1 — never LRU-trimmed) */
-async function offlineRow(rowId){
+/* offline-save a row's texts + JSON into the pinned cache (hawchat-pinned-v1 — never LRU-trimmed) */
+async function offlineRow(rowId,sSlug){
   if(!('caches' in window))return{ok:false,why:'caches'};
   try{
-    const rows=await(await fetch('data/read/'+encodeURIComponent(rowId)+'.json')).json();
     if(navigator.storage&&navigator.storage.persist)navigator.storage.persist().catch(()=>{});
     const c=await caches.open('hawchat-pinned-v1');let n=0;
-    for(const x of rows){
-      const u=x.base+encodeURIComponent(x.file);
-      if(await c.match(u)){n++;continue}
-      const r=await fetch(u);if(r.ok){await c.put(u,r);n++}
+    const put=async u=>{try{
+      if(await c.match(u))return 1;
+      const r=await fetch(u);if(r.ok){await c.put(u,r);return 1}return 0
+    }catch(e){return 0}};
+    const rows=await(await fetch('data/read/'+encodeURIComponent(rowId)+'.json')).json();
+    n+=await put('data/read/'+encodeURIComponent(rowId)+'.json');
+    if(sSlug){
+      n+=await put('series/'+encodeURIComponent(sSlug)+'.json');
+      let li=null;
+      try{const lr=await fetch('lessons/'+encodeURIComponent(sSlug)+'/index.json');if(lr.ok)li=await lr.json()}catch(e){}
+      n+=await put('lessons/'+encodeURIComponent(sSlug)+'/index.json');
+      const tf=(li&&li.tf)||{},af=(li&&li.af)||{};
+      for(const k in tf)n+=await put('lessons/'+encodeURIComponent(sSlug)+'/'+tf[k]);
+      for(const k in af)n+=await put('lessons/'+encodeURIComponent(sSlug)+'/'+af[k]);
     }
-    return{ok:n===rows.length,n:n,total:rows.length,partial:n>0&&n<rows.length}
+    for(const x of rows||[]){
+      const u=x.base+encodeURIComponent(x.file);
+      n+=await put(u);
+    }
+    const total=(rows||[]).length;
+    return{ok:true,n:n,total:total,partial:false}
   }catch(e){return{ok:false,why:String(e)}}
 }
+async function isPinned(rowId){
+  if(!('caches' in window))return false;
+  try{return!!(await(await caches.open('hawchat-pinned-v1')).match('data/read/'+encodeURIComponent(rowId)+'.json'))}catch(e){return false}
+}
+/* toast / errState / emptyState — shared status components (D4) */
+function toast(msg,ms){
+  let t=document.getElementById('hctoast');
+  if(!t){t=document.createElement('div');t.id='hctoast';document.body.appendChild(t)}
+  t.textContent=msg;t.className='show';
+  clearTimeout(t._h);t._h=setTimeout(()=>t.className='',ms||2200);
+}
+function errState(msg,retry){
+  const off=navigator.onLine===false;
+  return '<div class="errbox">'+esc(off?'لا اتصال — تفقد الشبكة ثم أعد المحاولة':msg)
+    +(retry?' <button class="retry" onclick="'+retry+'">إعادة المحاولة</button>':'')+'</div>';
+}
+function emptyState(msg){return '<div class="empty">'+esc(msg)+'</div>'}
 function fmtDur(s){
- s=Math.round(+s||0);if(!s)return'';
+ if(typeof s==='string'&&/^\d{1,2}:\d{2}(:\d{2})?$/.test(s.trim())){
+  const p=s.trim().split(':').map(Number);
+  s=p.length===3?p[0]*3600+p[1]*60+p[2]:p[0]*60+p[1];
+ }else s=Math.round(+s||0);
+ if(!s)return'';
  const h=Math.floor(s/3600),m=Math.floor(s%3600/60),ss=s%60;
  return h?h+':'+String(m).padStart(2,'0')+':'+String(ss).padStart(2,'0'):m+':'+String(ss).padStart(2,'0');
 }
