@@ -95,7 +95,7 @@ document.addEventListener('click',e=>{
   document.getElementById('hdr-sub').textContent=st.name;
   document.getElementById('crumb').innerHTML=hdr(null,[{h:'.',t:'سلاسل المشايخ'},{t:st.name}]);
   const init=(st.name||'؟').replace(/^ال/,'').trim()[0]||'؟';
-  const photo=st.photo?('../'+String(st.photo).replace(/^\/+/,'')):null;
+  const photo=st.photo?String(st.photo).replace(/^\/+/,''):null;
   let h='<div class="hero cin"><div class="ph">'+(photo?'<img src="'+esc(photo)+'" alt="" onerror="this.remove()">':'')+'<span>'+esc(init)+'</span></div>'
     +'<div style="flex:1"><h1>'+esc(st.name)+'</h1>'
     +'<div class="icrow">'+(st.read?statChip('read',st.read,Math.max(st.read,maxR(_rows)),_rows.every(r=>r.rOk)):'')+(st.watch?statChip('listen',st.watch,st.watch,_rows.every(r=>!r.wtt||r.wOk)):'')

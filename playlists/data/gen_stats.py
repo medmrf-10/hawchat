@@ -215,9 +215,11 @@ for sh in sheikhs:
     watch = sum(r['wan'] for r in rows)
     nm = sh.get('name_display') or sh.get('name') or slug
     photo = sh.get('photo') or photos.get(nm) or photos.get(sh.get('name')) or photos.get(norm(nm))
+    if photo:
+        photo = re.sub(r'^(\./)?playlists/', '', str(photo))
     out[slug] = {
         'name': nm,
-        'photo': photo,
+        'photo': photo,  # playlists/-relative (img/…)
         'order': ordmap.get(nm) or ordmap.get(norm(nm)) or 999,
         'aliases': sh.get('aliases') or [],
         'nSeries': len(rows),
