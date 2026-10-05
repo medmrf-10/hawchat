@@ -648,9 +648,12 @@
       "barahin-kitab-06_AlAmri.txt",
       "barahin-kitab-07_AlAmri.txt",
       "barahin-kitab-09_AlAmri.txt",
-      "barahin-kitab-10_AlAmri.txt"
+      "barahin-kitab-10_AlAmri.txt",
+      "barahin-kitab-11_AlAmri.txt",
+      "barahin-kitab-12_AlAmri.txt",
+      "barahin-kitab-13_AlAmri.txt"
      ],
-     "n": 9
+     "n": 12
     },
     {
      "slug": "barahin-sharh",
@@ -760,9 +763,10 @@
       "mughni-03_AlAmri.txt",
       "mughni-04_AlAmri.txt",
       "mughni-05_AlAmri.txt",
-      "mughni-06_AlAmri.txt"
+      "mughni-06_AlAmri.txt",
+      "mughni-07_AlAmri.txt"
      ],
-     "n": 5
+     "n": 6
     }
    ],
    "slug": "ali-mahmoud-alomari"
