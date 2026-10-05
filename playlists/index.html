@@ -69,7 +69,7 @@ let _sl=null,_slP=null;
 // the index (~500KB) isn't worth fetching for users who never search.
 function loadSL(){if(!_slP)_slP=j('data/search_lessons.json').then(d=>{_sl=d||{}});return _slP}
 const ic=id=>'<svg class="i"><use href="icons.svg#'+id+'"/></svg>';
-const num=(kind,n,label,ok)=>'<span class="u-num '+kind+'">'+ic(kind==='rd'?'i-read':'i-listen')+'<b>'+n+'</b>'+(ok?'<b class="ok">'+ic('i-check')+'</b>':'')+'<small>'+label+'</small></span>';
+const num=(kind,n,label,ok,icn)=>'<span class="u-num '+kind+'">'+ic(icn||(kind==='rd'?'i-read':'i-listen'))+'<b>'+n+'</b>'+(ok?'<b class="ok">'+ic('i-check')+'</b>':'')+'<small>'+label+'</small></span>';
 function shCard(st,slug,fav){
   const init=(st.name||'؟').replace(/^ال/,'').trim()[0]||'؟';
   return '<a class="u-sh cin" href="sheikh.html?s='+encodeURIComponent(slug)+'">'
@@ -78,6 +78,7 @@ function shCard(st,slug,fav){
     +'<span class="stats">'
     +(st.read?num('rd',st.read,'مقروء',allR(st)):'')
     +(st.watch?num('ls',st.watch,'مسموع',allW(st)):'')
+    +(st.uwatch?num('unv',st.uwatch,'آلي غير مدقق',0,'i-auto'):'')
     +'</span></a>';
 }
 function slugOf(st){for(const s in _stats)if(_stats[s]===st)return s;return''}
@@ -140,7 +141,7 @@ function drawFavs(){
     +''
     +'<span class="ph"><span>'+esc((x.st.name||'؟').replace(/^ال/,'').trim()[0]||'؟')+'</span></span>'
     +'<span class="nm">'+esc(x.r.title)+'</span>'
-    +'<span class="stats">'+(x.r.rdn?num('rd',x.r.rdn,'مقروء',x.r.rOk):'')+(x.r.wan?num('ls',x.r.wan,'مسموع',x.r.wOk):'')+'</span></a>').join('');
+    +'<span class="stats">'+(x.r.rdn?num('rd',x.r.rdn,'مقروء',x.r.rOk):'')+(x.r.wan?num('ls',x.r.wan,'مسموع',x.r.wOk):'')+(x.r.unv?num('unv',x.r.wan,'آلي غير مدقق',0,'i-auto'):'')+'</span></a>').join('');
 }
 function resumeItems(){
   const rs=store.resumeList();if(!rs.length)return[];
@@ -159,14 +160,14 @@ function resumeItems(){
         if(r){found={r,st:_stats[slug]};break}}
     }
     if(found)items.push({h:sl?'lesson.html?s='+encodeURIComponent(sl)+'&l='+ln+(it.n?'&t='+it.n:''):'tr.html?r='+encodeURIComponent(it.k)+'&l='+ln,
-      t:found.r.title,sub:found.st.name+' — الدرس '+ln,rd:!sl});
+      t:found.r.title,sub:found.st.name+' — الدرس '+ln,rd:!sl,unv:found.r.unv});
   }
   return items;
 }
 function drawCont(){
   const el=document.getElementById('cont');el.innerHTML='';
   const items=resumeItems();if(!items.length)return;
-  el.innerHTML=items.map(x=>'<a class="u-cont cin" href="'+esc(x.h)+'">'+ic(x.rd?'i-read':'i-listen')
+  el.innerHTML=items.map(x=>'<a class="u-cont cin" href="'+esc(x.h)+'">'+ic(x.rd?'i-read':(x.unv?'i-auto':'i-listen'))
     +'<span class="tt">'+esc(x.t)+'<small>'+esc(x.sub)+'</small></span><span class="go">تابِع ←</span></a>').join('');
 }
 document.getElementById('flt').addEventListener('input',e=>{flt=normalize(e.target.value);

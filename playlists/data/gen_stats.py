@@ -736,6 +736,7 @@ for sh in sheikhs:
         'nSeries': len(rows),
         'rows': rows,
         'read': read, 'watch': watch,
+        'uwatch': sum(r['wan'] for r in rows if r.get('unv')),
         'nRead': sum(1 for r in rows if r['rdn']),
         'nWatch': sum(1 for r in rows if r['wan']),
     }
