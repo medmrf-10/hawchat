@@ -97,22 +97,12 @@ async function j(u){try{const r=await fetch(u);return r.ok?await r.json():null}c
 function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function domain(u){try{return new URL(u).hostname.replace(/^www\./,'')}catch(e){return u}}
 function norm(s){return (s||'').replace(/[أإآ]/g,'ا').replace(/\s+/g,' ').trim()}
-let helm=[],order=[],skip=new Set(),paused=new Set(),dirty=false,fv='all';
-let _rows=[],_pub={},_mut={};
+let fv='all';
+let _rows=[];
 function toast(t,err){const e=document.getElementById('toast');e.textContent=t;e.className='show'+(err?' err':'');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('show'),2600)}
 function pretty(k){return k.replace(/^\d+_?/,'')}
 function tot(x){return Math.max(x.total,x.done+x.pending+x.bad)}
-function cat(x){
-  if(skip.has(x.key)||x.held)return 'held';
-  if(x.paused||paused.has(x.key))return 'paused';
-  if(x.active)return 'queue';
-  if(x.pending||x.remaining)return 'queue';
-  if(x.feed==='downloading'||x.feed==='queued')return 'feed';
-  if(x.exp&&x.done>=x.exp&&x.exp>0)return 'done';
-  if(x.bad||x.feed==='feederr')return 'bad';
-  if(x.done)return 'done';
-  return 'nodl';
-}
+
 const ICON={
  up:'<svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 3l5 6H3z"/></svg>',
  dn:'<svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 13L3 7h10z"/></svg>',
@@ -126,73 +116,34 @@ const ICON={
  back:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3 2.5 7 6 11"/><path d="M3 7h7a4 4 0 0 1 0 8h-1"/></svg>',
  book:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 2h7l3 3v9H3z"/><path d="M10 2v3h3"/></svg>'
 };
-function cnts(x){
-  const p=[];
-  if(x.exp)p.push(`أصل <b>${x.exp}</b>`);
-  if(x.pending&&!x.paused&&!x.held&&!skip.has(x.key))p.push(`<b>${x.pending}</b> منتظر`);
-  if(x.active)p.push(`<b class="act">${x.active}</b> نشط`);
-  if(x.done)p.push(`<b class="don">${x.done}</b> مفرّغ`);
-  if(x.bad)p.push(`<b class="bad">${x.bad}</b> فاشل`);
-  if(x.remaining&&!x.pending&&!x.active)p.push(`<b>${x.remaining}</b> غير مجدول`);
-  if(x.feed==='downloading')p.push('<b style="color:#7ea9ea">⬇ يُنزَّل</b>');
-  else if(x.feed==='queued')p.push('<b style="color:#7ea9ea">⬇ تنزيل بالطابور</b>');
-  else if(x.feed==='feederr')p.push('<b class="bad">خطأ تنزيل</b>');
-  if(!p.length)p.push('<b style="color:#555">لم تُدرج — صوتها غير موجود</b>');
-  return p.join(' · ');
-}
-function post(kind,key,label){
-  toast('يُرسَل الأمر…');
-  fetch(NT,{method:'POST',body:JSON.stringify({kind,keys:[key],t:Date.now()})})
-    .then(r=>{if(r.ok)toast('أُرسل الأمر — يُطبَّق خلال دقيقة');else toast('فشل الإرسال ('+r.status+')',1)})
-    .catch(()=>toast('تعذّر الإرسال — تحقق من الشبكة',1));
-}
-function LB(x,a,i,c,t,k){return `<button class="btn ${c}" data-a="${a}" data-k="${esc(k??x.key)}" title="${t}">${ICON[i]}</button>`}
-function acts(x){
-  const held=skip.has(x.key)||x.held,pz=x.paused||paused.has(x.key);
-  let b='';
-  if(held)return LB(x,'un','back','on','أعد للطابور');
-  if(pz)return LB(x,'unp','play','on','استئناف')+LB(x,'sk','x','off','غير مرغوب');
-  if(x.id!=null){
-    if(x.feed==='queued')b+=LB(x,'ufd','undl','off','إلغاء التنزيل',x.id);
-    else if(!x.total||x.feed==='feederr'||x.total<x.exp)b+=LB(x,'fd','dl','read',x.total?'استكمال تنزيل الباقي':'تنزيل من يوتيوب',x.id);
-  }
-  if(x.pending||x.active){
-    b+=LB(x,'up','up','','أعلى')+LB(x,'dn','dn','','أسفل')+LB(x,'pz','pz','pause','إيقاف مؤقت');
-  }
-  if(x.remaining&&!x.pending&&!x.active)b+=LB(x,'eq','add','enq','جدولة الباقي');
-  if(x.bad)b+=LB(x,'rt','rt','retry','أعد الفاشل');
-  if(x.pending||x.active||x.remaining)b+=LB(x,'sk','x','off','غير مرغوب');
-  if(!b&&x.id==null)b='<span style="font-size:.62rem;color:#555">لا يمكن إدارتها — مصدر الصوت مفقود</span>';
-  return b;
-}
+
 const FILT={all:'الكل',listen:'يُسمع',read:'يُقرأ'};
 function rowMatch(r){
-  if(fv==='listen')return !!r.pub;
-  if(fv==='read')return (r.x.done||0)>0;
+  if(fv==='listen')return !!r.watch;
+  if(fv==='read')return !!r.read;
   return true;
 }
 function renderSeries(){
   const w=document.getElementById('srows');if(!w)return;
   w.innerHTML='';
-  const wq={queue:0,feed:1,bad:2,paused:3,nodl:4,held:5,done:6};
   const rows=_rows.filter(rowMatch).sort((a,b)=>{
-    const ca=wq[cat(a.x)]??5,cb=wq[cat(b.x)]??5;
-    if(ca!==cb)return ca-cb;
-    const ia=order.indexOf(a.x.key),ib=order.indexOf(b.x.key);
-    if(ia>-1&&ib>-1)return ia-ib;if(ia>-1)return -1;if(ib>-1)return 1;
-    return a.x.key.localeCompare(b.x.key);
+    const wa=a.watch?0:1,wb=b.watch?0:1;
+    if(wa!==wb)return wa-wb;
+    return a.title.localeCompare(b.title,'ar');
   });
   for(const r of rows){
-    const x=r.x,held=skip.has(x.key)||x.held,pz=x.paused||paused.has(x.key),qi=order.indexOf(x.key);
-    const d=document.createElement('div');d.className='ser'+(held?' held':pz?' paused':'');
+    const d=document.createElement('div');d.className='ser';
     let links='';
-    if(r.pub)links+=`<a class="btn play" href="series.html?s=${encodeURIComponent(r.pub.slug)}" title="استمع/تصفح الدروس">${ICON.play}</a>`;
-    if(r.mut&&r.mut.files&&r.mut.files.length)links+=`<a class="btn read" href="${MUT}#/s/${esc(r.mut.id)}" target="_blank" rel="noopener" title="اقرأ التفريغ">${ICON.book}</a>`;
-    d.innerHTML=`<span class="nm">${esc(r.title||pretty(x.key))}</span>
-      <span class="cnt">${cnts(x)}</span>${links}`;
+    if(r.watch)links+=`<a class="btn play" href="series.html?s=${encodeURIComponent(r.watch.slug)}" title="استمع/تصفح الدروس">${ICON.play}</a>`;
+    if(r.read)links+=`<a class="btn read" href="${MUT}#/s/${esc(r.read.id)}" target="_blank" rel="noopener" title="اقرأ التفريغ">${ICON.book}</a>`;
+    const cc=[];
+    if(r.read)cc.push(`<b class="don">${r.read.files.length}</b> مفرّغ`);
+    if(r.watch)cc.push(`<b class="act">${r.watch.aligned}</b> مشاهد`);
+    d.innerHTML=`<span class="nm">${esc(r.title)}</span>
+      <span class="cnt">${cc.join(' · ')}</span>${links}`;
     w.appendChild(d);
   }
-  if(!rows.length)w.innerHTML='<div class="empty">لا نتائج في هذا القسم.</div>';
+  if(!rows.length)w.innerHTML='<div class="empty">لا سلاسل في هذا القسم.</div>';
 }
 document.addEventListener('click',e=>{
   const t=e.target.closest('button');if(!t)return;
@@ -200,9 +151,8 @@ document.addEventListener('click',e=>{
 });
 (async()=>{
   const slug=new URLSearchParams(location.search).get('s')||'';
-  const [data,photos,chs,sidx,hst,hor,mut]=await Promise.all([
+  const [data,photos,chs,sidx,mut]=await Promise.all([
     j('data/sheikhs.json'),j('photos.json'),j('channels.json'),j('series/index.json'),
-    j('data/helm_state.json?v='+Date.now()),j('data/helm_order.json?v='+Date.now()),
     j(MUT+'data/manifest.json')]);
   const sh=data&&data.sheikhs?data.sheikhs.find(x=>x.slug===slug):null;
   const B=document.getElementById('body');
@@ -213,44 +163,24 @@ document.addEventListener('click',e=>{
   const yts=[];if(chs&&chs.channels)for(const g of chs.channels)for(const c of (g.items||[]))if(nset.has(c.name)||nset.has(norm(c.name)))yts.push(c);
   const photo=(photos&&(photos[sh.name_display]||photos[sh.name]||photos[norm(sh.name_display)]))||sh.photo;
   const init=(sh.name_display||sh.name).replace(/^ال/,'').trim()[0]||'؟';
-  // helm series for this sheikh
-  helm=(hst&&hst.series)||[];order=(hor&&hor.order)||[];
-  skip=new Set(hor&&hor.skip||[]);paused=new Set(hor&&hor.pause||[]);
-  const mine=helm.filter(x=>nset.has(x.sheikh)||nset.has(norm(x.sheikh)));
-  // published series + mutalaa series for this sheikh
-  const pub=(sidx?sidx.series.filter(x=>x.sheikh_slug===sh.slug):[]);
-  const pubByKey={};pub.forEach(s=>pubByKey[s.slug]=s);
+  // two states only: readable (mutalaa manifest with files) or watchable (published with aligned lessons)
+  const pub=(sidx?sidx.series.filter(x=>x.sheikh_slug===sh.slug&&(x.aligned||0)>0):[]);
   const muts=(mut&&Array.isArray(mut)?mut:(mut&&mut.series)||[])
-    .filter(m=>nset.has(m.sheikh)||nset.has(norm(m.sheikh||'')));
-  const mutById={};muts.forEach(m=>mutById[String(m.id)]=m);
-  _rows=mine.map(x=>{
-    const p=x.key.match(/^(\d+)/);const mid=p?String(parseInt(p[1])):null;
-    return {x,title:pretty(x.key),pub:null,mut:mid?mutById[mid]:null};
-  });
-  // attach published slug: match mutalaa/helm series name to pub titles loosely
-  for(const r of _rows){
-    const rt=norm(r.title);
-    for(const s of pub){const st=norm(s.title);if(rt.includes(st)||st.includes(rt)||rt.includes(norm(s.title).split(' ')[0]||'')) {r.pub=s;break}}
+    .filter(m=>(nset.has(m.sheikh)||nset.has(norm(m.sheikh||'')))&&(m.files||[]).length>0);
+  _rows=muts.map(m=>({title:m.name||m.title||('#'+m.id),read:m,watch:null}));
+  // attach watchable pubs to rows by title; unmatched pubs become their own rows
+  for(const s of pub){
+    const st=norm(s.title);let hit=null;
+    for(const r of _rows){const rt=norm(r.title);if(rt&&(rt.includes(st)||st.includes(rt))){hit=r;break}}
+    if(hit)hit.watch=s;else _rows.push({title:s.title,read:null,watch:s});
   }
-  // hard-match known published slugs by sheikh key words
-  for(const r of _rows){if(!r.pub&&r.x.key.startsWith('822'))r.pub=pubByKey['gomaa-khawarij']}
-  // clean view: only transcribed (readable) or published (watchable) series exist
-  _rows=_rows.filter(r=>(r.x.done||0)>0||r.pub);
-  // stats for hero bar
-  const g={total:0,done:0,pending:0,active:0,bad:0,paused:0,held:0};
-  _rows.forEach(r=>{const x=r.x;g.total+=tot(x);
-    if(skip.has(x.key)||x.held)g.held+=tot(x);
-    else if(x.paused||paused.has(x.key))g.paused+=tot(x);
-    else{g.done+=x.done;g.pending+=x.pending;g.active+=x.active;g.bad+=x.bad}});
-  const T=Math.max(g.total,1);
-  const expSum=_rows.reduce((a,r)=>a+(r.x.exp||0),0);
+  _rows.sort((a,b)=>a.title.localeCompare(b.title,'ar'));
+  const nRead=_rows.filter(r=>r.read).length,nWatch=_rows.filter(r=>r.watch).length;
   let h='<div class="hero cin"><div class="ph">'+(photo?'<img src="'+esc(photo)+'" alt="" onerror="this.remove()">':'')+'<span>'+esc(init)+'</span></div>'
     +'<div style="flex:1"><h1>'+esc(sh.name_display)+'</h1>'
     +(sh.name!==sh.name_display?'<div class="als">'+esc(sh.name)+'</div>':'')
     +((sh.aliases&&sh.aliases.length)?'<div class="als">'+sh.aliases.map(esc).join('، ')+'</div>':'')
-    +'<span class="grp">'+_rows.length+' سلسلة · '+(expSum?expSum+' حلقة متوقَّعة · ':'')+g.total+' ملف منزّل</span>'
-    +'<div class="pb"><i class="d" style="width:'+(g.done/T*100)+'%"></i><i class="a" style="width:'+(g.active/T*100)+'%"></i><i class="p" style="width:'+(g.pending/T*100)+'%"></i><i class="z" style="width:'+(g.paused/T*100)+'%"></i><i class="b" style="width:'+(g.bad/T*100)+'%"></i><i class="h" style="width:'+(g.held/T*100)+'%"></i></div>'
-    +'<div class="lgnd"><span class="d">مفرّغ '+g.done+'</span><span class="a">نشط '+g.active+'</span><span class="p">منتظر '+g.pending+'</span><span class="z">متوقف '+g.paused+'</span><span class="b">فاشل '+g.bad+'</span>'+(g.held?'<span class="h">غير مرغوب '+g.held+'</span>':'')+'</div>'
+    +'<span class="grp">'+_rows.length+' سلسلة · '+nRead+' يُقرأ · '+nWatch+' يُسمع</span>'
     +'</div></div>';
   const YT='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.85-.46-5.58a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.15 1 12 1 12s0 3.85.46 5.58a2.78 2.78 0 0 0 1.94 2c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.85 23 12 23 12zM9.75 15.5v-7l6 3.5-6 3.5-6-3.5z"/></svg>';
   const VCHK='<span class="vbadge"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 9.2 4.6l-4.1-.2-.2 4.1L2.4 11.3l2.5 2.8.2 4.1 4.1-.2L12 20.6l2.8-2.5 4.1.2.2-4.1 4.1.2z"/><path d="M10.6 15.2 7.6 12.2l1.3-1.3 1.7 1.7 4.5-4.5 1.3 1.3z" fill="#0b0f1a"/></svg></span>';
