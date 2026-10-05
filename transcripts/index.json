@@ -1325,17 +1325,6 @@
      "n": 4
     },
     {
-     "slug": "falsafa-din",
-     "title": "فلسفة الدين",
-     "files": [
-      "falsafa-din-01_AlAmri.txt",
-      "falsafa-din-02_AlAmri.txt",
-      "falsafa-din-03_AlAmri.txt",
-      "falsafa-din-04_AlAmri.txt"
-     ],
-     "n": 4
-    },
-    {
      "slug": "falsafa-haditha",
      "title": "دروس في الفلسفة الحديثة",
      "files": [
@@ -1361,17 +1350,6 @@
       "liqaat-03_AlAmri.txt"
      ],
      "n": 3
-    },
-    {
-     "slug": "manhaj-iman",
-     "title": "المنهاج في شعب الإيمان",
-     "files": [
-      "manhaj-iman-01_AlAmri.txt",
-      "manhaj-iman-02_AlAmri.txt",
-      "manhaj-iman-03_AlAmri.txt",
-      "manhaj-iman-04_AlAmri.txt"
-     ],
-     "n": 4
     },
     {
      "slug": "mayar-ilm",
