@@ -404,6 +404,22 @@
    "website": "https://dr-alawni.com"
   },
   {
+   "id": 27,
+   "slug": "alfahham",
+   "name": "محمد الفحام",
+   "name_display": "الفحام",
+   "aliases": [
+    "فحام"
+   ],
+   "group": 2,
+   "photo": "playlists/img/alfahham.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null
+  },
+  {
    "id": 28,
    "slug": "ahmed-abdelmonem",
    "name": "أحمد عبد المنعم",
@@ -430,6 +446,66 @@
    "status": "pending",
    "notes": null,
    "website": "https://fadelsoliman.com"
+  },
+  {
+   "id": 30,
+   "slug": "samir-mustafa",
+   "name": "سمير مصطفى",
+   "name_display": "سمير مصطفى",
+   "aliases": [],
+   "group": 3,
+   "photo": "playlists/img/samir-mustafa.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null
+  },
+  {
+   "id": 31,
+   "slug": "muhammad-almaghrimi",
+   "name": "محمد المقرمي",
+   "name_display": "محمد المقرمي",
+   "aliases": [
+    "المقرمي"
+   ],
+   "group": 3,
+   "photo": "playlists/img/muhammad-almaghrimi.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": "https://m-almagrami.net"
+  },
+  {
+   "id": 32,
+   "slug": "almughamisi",
+   "name": "صالح المغامسي",
+   "name_display": "المغامسي",
+   "aliases": [
+    "صالح المغامسي"
+   ],
+   "group": 3,
+   "photo": "playlists/img/almughamisi.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": "https://alrasekhoon.com"
+  },
+  {
+   "id": 33,
+   "slug": "alshanqiti",
+   "name": "الشنقيطي",
+   "name_display": "الشنقيطي",
+   "aliases": [],
+   "group": 3,
+   "photo": "playlists/img/alshanqiti.jpg",
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null,
+   "website": null
   }
  ]
 }
