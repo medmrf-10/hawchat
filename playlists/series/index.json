@@ -131,7 +131,7 @@
    "title": "تفسير جزء عمّ",
    "sheikh_slug": "ahmed-abdelmonem",
    "count": 20,
-   "aligned": 2,
+   "aligned": 3,
    "transcribed": 20,
    "status": "مفرّغة — المحاذاة جارية"
   },
@@ -158,7 +158,7 @@
    "title": "كتاب أم البراهين",
    "sheikh_slug": "ali-mahmoud-alomari",
    "count": 14,
-   "aligned": 1,
+   "aligned": 2,
    "transcribed": 14,
    "status": "مفرّغة — المحاذاة جارية"
   },
@@ -166,9 +166,9 @@
    "slug": "alamri-barahin-sharh",
    "title": "شرح كتاب شرح أم البراهين للإمام السنوسي",
    "sheikh_slug": "ali-mahmoud-alomari",
-   "count": 15,
+   "count": 24,
    "aligned": 0,
-   "transcribed": 15,
+   "transcribed": 24,
    "status": "مفرّغة — المحاذاة جارية"
   },
   {
@@ -202,16 +202,8 @@
    "slug": "alasri-arbaa",
    "title": "لقاء الأربعاء",
    "sheikh_slug": "saif-alasri",
-<<<<<<< HEAD
-   "count": 13,
-   "aligned": 13,
-||||||| parent of e9042f5 (hashimi: دروس أول بأول)
-   "count": 14,
-   "aligned": 0,
-=======
    "count": 14,
    "aligned": 14,
->>>>>>> e9042f5 (hashimi: دروس أول بأول)
    "transcribed": 56,
    "status": "مكتملة التفريغ"
   },
@@ -244,7 +236,7 @@
   },
   {
    "slug": "aouni-jabir",
-   "title": "ثمانية دروس بحديث جابر",
+   "title": "قصة سيدنا جابر",
    "sheikh_slug": "hatem-alaouni",
    "count": 8,
    "aligned": 8,
@@ -252,38 +244,38 @@
    "status": "مكتملة التفريغ"
   },
   {
-<<<<<<< HEAD
-   "slug": "hashimi-zawaj",
-   "sheikh_slug": "dhaker-alhashimi",
-   "title": "ألف باء الزواج",
-   "count": 75,
-   "status": "المحاذاة جارية — 9/75",
-   "aligned": 9,
-   "transcribed": 44
-  },
-  {
-   "slug": "hashimi-tarbiya",
-   "sheikh_slug": "dhaker-alhashimi",
-   "title": "ألف باء التربية",
-   "count": 108,
-   "status": "المحاذاة جارية — 3/108",
-   "aligned": 3,
-   "transcribed": 41
-  },
-  {
-   "slug": "hashimi-fiqh-nafs",
-   "sheikh_slug": "dhaker-alhashimi",
-   "title": "مجالس فقه النفس",
-   "count": 181,
-   "status": "المحاذاة جارية — 0/181",
+   "slug": "alamri-bath",
+   "title": "لقاء البث المباشر",
+   "sheikh_slug": "ali-mahmoud-alomari",
+   "count": 1,
    "aligned": 0,
-   "transcribed": 0
-||||||| parent of e9042f5 (hashimi: دروس أول بأول)
+   "transcribed": 1,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alamri-durus-amma",
+   "title": "دروس عامة",
+   "sheikh_slug": "ali-mahmoud-alomari",
+   "count": 4,
+   "aligned": 0,
+   "transcribed": 4,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alamri-falsafa-din",
+   "title": "فلسفة الدين",
+   "sheikh_slug": "ali-mahmoud-alomari",
+   "count": 2,
+   "aligned": 0,
+   "transcribed": 2,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
    "slug": "hashimi-zawaj",
    "sheikh_slug": "dhaker-alhashimi",
    "title": "ألف باء الزواج",
    "count": 75,
-   "status": "المحاذاة جارية — 18/75",
+   "status": "المحاذاة جارية — 20/75",
    "aligned": 20,
    "transcribed": 73
   },
@@ -294,7 +286,7 @@
    "count": 108,
    "status": "المحاذاة جارية — 3/108",
    "aligned": 3,
-   "transcribed": 44
+   "transcribed": 47
   },
   {
    "slug": "hashimi-fiqh-nafs",
@@ -304,81 +296,6 @@
    "status": "المحاذاة جارية — 0/181",
    "aligned": 0,
    "transcribed": 0
-  },
-  {
-   "slug": "alamri-bath",
-   "title": "لقاء البث المباشر",
-   "sheikh_slug": "ali-mahmoud-alomari",
-   "count": 1,
-   "aligned": 0,
-   "transcribed": 1,
-   "status": "مفرّغة — المحاذاة جارية"
-  },
-  {
-   "slug": "alamri-durus-amma",
-   "title": "دروس عامة",
-   "sheikh_slug": "ali-mahmoud-alomari",
-   "count": 4,
-   "aligned": 0,
-   "transcribed": 4,
-   "status": "مفرّغة — المحاذاة جارية"
-  },
-  {
-   "slug": "alamri-falsafa-din",
-   "title": "فلسفة الدين",
-   "sheikh_slug": "ali-mahmoud-alomari",
-   "count": 2,
-   "aligned": 0,
-   "transcribed": 2,
-   "status": "مفرّغة — المحاذاة جارية"
-=======
-   "slug": "alamri-bath",
-   "title": "لقاء البث المباشر",
-   "sheikh_slug": "ali-mahmoud-alomari",
-   "count": 1,
-   "aligned": 0,
-   "transcribed": 1,
-   "status": "مفرّغة — المحاذاة جارية"
-  },
-  {
-   "slug": "alamri-durus-amma",
-   "title": "دروس عامة",
-   "sheikh_slug": "ali-mahmoud-alomari",
-   "count": 4,
-   "aligned": 0,
-   "transcribed": 4,
-   "status": "مفرّغة — المحاذاة جارية"
-  },
-  {
-   "slug": "alamri-falsafa-din",
-   "title": "فلسفة الدين",
-   "sheikh_slug": "ali-mahmoud-alomari",
-   "count": 2,
-   "aligned": 0,
-   "transcribed": 2,
-   "status": "مفرّغة — المحاذاة جارية"
-  },
-  {
-   "slug": "hashimi-zawaj",
-   "sheikh_slug": "dhaker-alhashimi",
-   "title": "ألف باء الزواج",
-   "count": 75,
-   "status": "المحاذاة جارية — 20/75"
-  },
-  {
-   "slug": "hashimi-tarbiya",
-   "sheikh_slug": "dhaker-alhashimi",
-   "title": "ألف باء التربية",
-   "count": 108,
-   "status": "المحاذاة جارية — 3/108"
-  },
-  {
-   "slug": "hashimi-fiqh-nafs",
-   "sheikh_slug": "dhaker-alhashimi",
-   "title": "مجالس فقه النفس",
-   "count": 181,
-   "status": "المحاذاة جارية — 0/181"
->>>>>>> e9042f5 (hashimi: دروس أول بأول)
   }
  ]
 }
