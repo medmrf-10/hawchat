@@ -31,7 +31,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--font-ui);min-height
 .card{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg)}
 .chip{flex:0 0 auto;background:var(--card);border:1px solid var(--border);border-radius:99px;color:var(--dim);font-family:inherit;font-size:.72rem;padding:8px 14px;cursor:pointer;min-height:36px}
 .chip.on{background:var(--acc);border-color:var(--acc2);color:var(--bg);font-weight:800}
-.btn{width:42px;height:42px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--card);color:var(--acc2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem}
+.btn{width:44px;height:44px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--card);color:var(--acc2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem}
 .flab{font-size:.62rem;color:var(--dim);letter-spacing:.06em;white-space:nowrap}
 @keyframes cin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .cin{animation:cin .4s both}
