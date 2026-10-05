@@ -450,8 +450,6 @@ for sh in sheikhs:
                     r['title'] = yt_title(YTP[pl])
             if not r['kind']:
                 r['kind'] = 'tr'
-            if sr.get('unv'):
-                r['unv'] = 1
             r['trSh'] = k; r['trSr'] = sr.get('slug')
 
     # ── fold duplicates: same playlist = same series ──
