@@ -672,9 +672,31 @@
      "files": [
       "barahin-sharh-01_AlAmri.txt",
       "barahin-sharh-03_AlAmri.txt",
+<<<<<<< HEAD
       "barahin-sharh-04_AlAmri.txt"
+||||||| parent of 8f593ef (ناقد: تحديث أول بأول)
+      "barahin-sharh-04_AlAmri.txt",
+      "barahin-sharh-05_AlAmri.txt",
+      "barahin-sharh-06_AlAmri.txt",
+      "barahin-sharh-07_AlAmri.txt",
+      "barahin-sharh-08_AlAmri.txt"
+=======
+      "barahin-sharh-04_AlAmri.txt",
+      "barahin-sharh-05_AlAmri.txt",
+      "barahin-sharh-06_AlAmri.txt",
+      "barahin-sharh-07_AlAmri.txt",
+      "barahin-sharh-08_AlAmri.txt",
+      "barahin-sharh-09_AlAmri.txt",
+      "barahin-sharh-10_AlAmri.txt"
+>>>>>>> 8f593ef (ناقد: تحديث أول بأول)
      ],
+<<<<<<< HEAD
      "n": 3
+||||||| parent of 8f593ef (ناقد: تحديث أول بأول)
+     "n": 8
+=======
+     "n": 10
+>>>>>>> 8f593ef (ناقد: تحديث أول بأول)
     },
     {
      "slug": "hisam",
@@ -798,9 +820,28 @@
       "barahin-muqtatafat-10_AlAmri.txt",
       "barahin-muqtatafat-11_AlAmri.txt",
       "barahin-muqtatafat-12_AlAmri.txt",
+<<<<<<< HEAD
       "barahin-muqtatafat-13_AlAmri.txt"
+||||||| parent of 8f593ef (ناقد: تحديث أول بأول)
+      "barahin-muqtatafat-13_AlAmri.txt",
+      "barahin-muqtatafat-14_AlAmri.txt",
+      "barahin-muqtatafat-16_AlAmri.txt",
+      "barahin-muqtatafat-17_AlAmri.txt"
+=======
+      "barahin-muqtatafat-13_AlAmri.txt",
+      "barahin-muqtatafat-14_AlAmri.txt",
+      "barahin-muqtatafat-15_AlAmri.txt",
+      "barahin-muqtatafat-16_AlAmri.txt",
+      "barahin-muqtatafat-17_AlAmri.txt"
+>>>>>>> 8f593ef (ناقد: تحديث أول بأول)
      ],
+<<<<<<< HEAD
      "n": 10
+||||||| parent of 8f593ef (ناقد: تحديث أول بأول)
+     "n": 16
+=======
+     "n": 17
+>>>>>>> 8f593ef (ناقد: تحديث أول بأول)
     }
    ],
    "slug": "ali-mahmoud-alomari"
