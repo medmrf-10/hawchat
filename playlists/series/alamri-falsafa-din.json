@@ -1,0 +1,26 @@
+{
+ "slug": "alamri-falsafa-din",
+ "sheikh": "علي محمود العمري",
+ "sheikh_slug": "ali-mahmoud-alomari",
+ "title": "فلسفة الدين",
+ "playlist": "https://www.youtube.com/playlist?list=PLa3XSU7qw_YmIItYa41x3o4FHSdtonDf3",
+ "count": 2,
+ "lessons": [
+  {
+   "n": 2,
+   "title": "محاضرات في فلسفة الدين/ المحاضرة الثالثة",
+   "video": "bcFvpAy2uz4",
+   "align": false,
+   "chars": 44166,
+   "dur": "84:56"
+  },
+  {
+   "n": 4,
+   "title": "محاضرات في فلسفة الدين/ المحاضرة الأولى: مدخل.",
+   "video": "C_FeuCG-ZgM",
+   "align": false,
+   "chars": 42149,
+   "dur": "79:49"
+  }
+ ]
+}
