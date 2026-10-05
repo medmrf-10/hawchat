@@ -86,7 +86,7 @@ function render(){
     const p=photo(name),init=name.replace(/^ال/,'').trim()[0]||'؟';
     const st=statOf(name),np=_pub[slugOf(name)]||0;
     a.innerHTML='<div class="ph">'+(p?'<img src="'+p+'" alt="" loading="lazy" onerror="this.remove()">':'')+'<span>'+init+'</span></div><div class="nm">'+esc(name)+'</div>'
-      +(st?pbHtml(st)+'<div class="cnt">'+st.nseries+' سلسلة · '+st.done+'/'+st.total+(np?' · '+np+' منشورة':'')+'</div>':(np?'<div class="cnt">'+np+' سلسلة منشورة</div>':''));
+      +(st?pbHtml(st)+'<div class="cnt">'+(np?np+' جاهزة للمشاهدة · ':'')+st.ntrans+' مفريغة · '+st.done+'/'+st.total+'</div>':(np?'<div class="cnt">'+np+' سلسلة جاهزة للمشاهدة</div>':''));
     g.appendChild(a);
   }
   if(!i)g.innerHTML='<p class="sub">لا نتائج.</p>';
@@ -100,8 +100,8 @@ document.getElementById('flt').addEventListener('input',e=>{flt=normalize(e.targ
   for(const s of ((pub&&pub.series)||[]))if(s.sheikh_slug)_pub[s.sheikh_slug]=(_pub[s.sheikh_slug]||0)+1;
   _stats={};
   for(const x of ((hs&&hs.series)||[])){
-    const h=x.sheikh||'أخرى',st=_stats[h]||(_stats[h]={total:0,done:0,active:0,pending:0,bad:0,held:0,paused:0,want:0,nseries:0,exp:0});
-    st.nseries++;st.exp+=x.exp||0;
+    const h=x.sheikh||'أخرى',st=_stats[h]||(_stats[h]={total:0,done:0,active:0,pending:0,bad:0,held:0,paused:0,want:0,nseries:0,ntrans:0,exp:0});
+    st.nseries++;if((x.done||0)>0)st.ntrans++;st.exp+=x.exp||0;
     st.total+=x.total||0;st.done+=x.done||0;st.active+=x.active||0;st.pending+=x.pending||0;st.bad+=x.bad||0;
     const rem=Math.max(0,(x.total||0)-(x.done||0)-(x.active||0)-(x.pending||0)-(x.bad||0));
     if(skip.has(x.key)||x.held)st.held+=rem;

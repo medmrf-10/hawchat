@@ -256,19 +256,21 @@ document.addEventListener('click',e=>{
   }
   // hard-match known published slugs by sheikh key words
   for(const r of _rows){if(!r.pub&&r.x.key.startsWith('822'))r.pub=pubByKey['gomaa-khawarij']}
+  // clean view: hide series with no real transcription (<=2 done) unless published
+  _rows=_rows.filter(r=>(r.x.done||0)>2||r.pub||((r.x.done||0)>0&&r.x.exp&&r.x.done>=r.x.exp));
   // stats for hero bar
   const g={total:0,done:0,pending:0,active:0,bad:0,paused:0,held:0};
-  mine.forEach(x=>{g.total+=tot(x);
+  _rows.forEach(r=>{const x=r.x;g.total+=tot(x);
     if(skip.has(x.key)||x.held)g.held+=tot(x);
     else if(x.paused||paused.has(x.key))g.paused+=tot(x);
     else{g.done+=x.done;g.pending+=x.pending;g.active+=x.active;g.bad+=x.bad}});
   const T=Math.max(g.total,1);
-  const expSum=mine.reduce((a,x)=>a+(x.exp||0),0);
+  const expSum=_rows.reduce((a,r)=>a+(r.x.exp||0),0);
   let h='<div class="hero cin"><div class="ph">'+(photo?'<img src="'+esc(photo)+'" alt="" onerror="this.remove()">':'')+'<span>'+esc(init)+'</span></div>'
     +'<div style="flex:1"><h1>'+esc(sh.name_display)+'</h1>'
     +(sh.name!==sh.name_display?'<div class="als">'+esc(sh.name)+'</div>':'')
     +((sh.aliases&&sh.aliases.length)?'<div class="als">'+sh.aliases.map(esc).join('، ')+'</div>':'')
-    +'<span class="grp">'+mine.length+' سلسلة · '+(expSum?expSum+' حلقة متوقَّعة · ':'')+g.total+' ملف منزّل</span>'
+    +'<span class="grp">'+_rows.length+' سلسلة · '+(expSum?expSum+' حلقة متوقَّعة · ':'')+g.total+' ملف منزّل</span>'
     +'<div class="pb"><i class="d" style="width:'+(g.done/T*100)+'%"></i><i class="a" style="width:'+(g.active/T*100)+'%"></i><i class="p" style="width:'+(g.pending/T*100)+'%"></i><i class="z" style="width:'+(g.paused/T*100)+'%"></i><i class="b" style="width:'+(g.bad/T*100)+'%"></i><i class="h" style="width:'+(g.held/T*100)+'%"></i></div>'
     +'<div class="lgnd"><span class="d">مفرّغ '+g.done+'</span><span class="a">نشط '+g.active+'</span><span class="p">منتظر '+g.pending+'</span><span class="z">متوقف '+g.paused+'</span><span class="b">فاشل '+g.bad+'</span>'+(g.held?'<span class="h">غير مرغوب '+g.held+'</span>':'')+'</div>'
     +'</div></div>';
