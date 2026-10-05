@@ -120,7 +120,7 @@ const ICON={
 const FILT={all:'الكل',listen:'يُسمع',read:'يُقرأ'};
 function rowMatch(r){
   if(fv==='listen')return !!r.watch;
-  if(fv==='read')return !!r.read;
+  if(fv==='read')return !!(r.read||r.watch);
   return true;
 }
 function renderSeries(){
@@ -151,9 +151,10 @@ document.addEventListener('click',e=>{
 });
 (async()=>{
   const slug=new URLSearchParams(location.search).get('s')||'';
+  const bust='?v='+Date.now();
   const [data,photos,chs,sidx,mut]=await Promise.all([
-    j('data/sheikhs.json'),j('photos.json'),j('channels.json'),j('series/index.json'),
-    j(MUT+'data/manifest.json')]);
+    j('data/sheikhs.json'),j('photos.json'),j('channels.json'),j('series/index.json'+bust),
+    j(MUT+'data/manifest.json'+bust)]);
   const sh=data&&data.sheikhs?data.sheikhs.find(x=>x.slug===slug):null;
   const B=document.getElementById('body');
   if(!sh){B.innerHTML='<div class="empty">لم يُعثر على الشيخ المطلوب. <a href="." style="color:var(--acc2)">عودة للقائمة</a></div>';return}

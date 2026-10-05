@@ -78,17 +78,17 @@ function render(){
     a.className='sh cin';a.style.animationDelay=(Math.min(i++,30)*25)+'ms';
     a.href='sheikh.html?s='+encodeURIComponent(slugOf(name));
     const p=photo(name),init=name.replace(/^ال/,'').trim()[0]||'؟';
-    const slug=slugOf(name),nr=_read[name]||0,nw=_watch[slug]||0;
-    const cc=[];if(nr)cc.push(nr+' يُقرأ');if(nw)cc.push(nw+' يُسمع');
+    const slug=slugOf(name),nw=_watch[slug]||0,nr=(_read[name]||0)+nw;
     a.innerHTML='<div class="ph">'+(p?'<img src="'+p+'" alt="" loading="lazy" onerror="this.remove()">':'')+'<span>'+init+'</span></div><div class="nm">'+esc(name)+'</div>'
-      +(cc.length?'<div class="cnt">'+cc.join(' · ')+'</div>':'');
+      +((nr||nw)?'<div class="cnt">'+(nr?'📖 '+nr:'')+(nr&&nw?' · ':'')+(nw?'🎬 '+nw:'')+'</div>':'');
     g.appendChild(a);
   }
   if(!i)g.innerHTML='<p class="sub">لا نتائج.</p>';
 }
 document.getElementById('flt').addEventListener('input',e=>{flt=normalize(e.target.value);render()});
 (async()=>{
-  const [data,photos,meta,pub,mut]=await Promise.all([j('shuyukh.json'),j('photos.json'),j('data/sheikhs.json'),j('series/index.json'),j('https://medmrf-10.github.io/des/mutalaa/data/manifest.json')]);
+  const bust='?v='+Date.now();
+  const [data,photos,meta,pub,mut]=await Promise.all([j('shuyukh.json'),j('photos.json'),j('data/sheikhs.json'),j('series/index.json'+bust),j('https://medmrf-10.github.io/des/mutalaa/data/manifest.json'+bust)]);
   _photos=photos||{};
   const name2disp={};
   for(const s of ((meta&&meta.sheikhs)||[])){
