@@ -175,9 +175,9 @@
    "slug": "alamri-hisam",
    "title": "شرح الحسام الكاتي على إيساغوجي",
    "sheikh_slug": "ali-mahmoud-alomari",
-   "count": 31,
+   "count": 30,
    "aligned": 0,
-   "transcribed": 31,
+   "transcribed": 30,
    "status": "مفرّغة — المحاذاة جارية"
   },
   {
@@ -202,8 +202,8 @@
    "slug": "alasri-arbaa",
    "title": "لقاء الأربعاء",
    "sheikh_slug": "saif-alasri",
-   "count": 16,
-   "aligned": 16,
+   "count": 14,
+   "aligned": 14,
    "transcribed": 56,
    "status": "مكتملة التفريغ"
   },
@@ -265,9 +265,9 @@
    "slug": "alamri-falsafa-din",
    "title": "فلسفة الدين",
    "sheikh_slug": "ali-mahmoud-alomari",
-   "count": 4,
+   "count": 2,
    "aligned": 0,
-   "transcribed": 4,
+   "transcribed": 2,
    "status": "مفرّغة — المحاذاة جارية"
   },
   {
@@ -286,7 +286,7 @@
    "count": 108,
    "status": "المحاذاة جارية — 3/108",
    "aligned": 3,
-   "transcribed": 52
+   "transcribed": 47
   },
   {
    "slug": "hashimi-fiqh-nafs",
@@ -296,24 +296,6 @@
    "status": "المحاذاة جارية — 0/181",
    "aligned": 0,
    "transcribed": 0
-  },
-  {
-   "slug": "alamri-falsafa-haditha",
-   "title": "دروس في الفلسفة الحديثة",
-   "sheikh_slug": "ali-mahmoud-alomari",
-   "count": 10,
-   "aligned": 0,
-   "transcribed": 10,
-   "status": "مفرّغة — المحاذاة جارية"
-  },
-  {
-   "slug": "alamri-liqaat",
-   "title": "لقاءات علمية",
-   "sheikh_slug": "ali-mahmoud-alomari",
-   "count": 2,
-   "aligned": 0,
-   "transcribed": 2,
-   "status": "مفرّغة — المحاذاة جارية"
   }
  ]
 }
