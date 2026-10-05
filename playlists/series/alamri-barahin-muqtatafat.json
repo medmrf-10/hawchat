@@ -4,8 +4,16 @@
  "sheikh_slug": "ali-mahmoud-alomari",
  "title": "مقتطفات من دروس أم البراهين",
  "playlist": "https://www.youtube.com/playlist?list=PLa3XSU7qw_YlBZIplsv2MSTfwOO-Qa82r",
- "count": 11,
+ "count": 13,
  "lessons": [
+  {
+   "n": 1,
+   "title": "فهم العالم",
+   "video": "1SJb3wcgEL4",
+   "align": false,
+   "chars": 4283,
+   "dur": "8:52"
+  },
   {
    "n": 2,
    "title": "إدراك حقائق الصفات السلبية",
@@ -93,6 +101,14 @@
    "align": false,
    "chars": 408,
    "dur": "0:43"
+  },
+  {
+   "n": 14,
+   "title": "أساس الشبه التي تثار حول الدين",
+   "video": "kY6Uu3wxoYA",
+   "align": false,
+   "chars": 2213,
+   "dur": "4:10"
   }
  ]
 }
