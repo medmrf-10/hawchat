@@ -156,7 +156,7 @@
    "video": "Z54Zqt-xd9Q",
    "chars": 54186,
    "dur": "89:03",
-   "align": false
+   "align": true
   },
   {
    "n": 20,
@@ -559,12 +559,18 @@
    "title": "ألف باء الزواج 65 | بين الرجولة والأنوثة | فقه الأنوثة 02 إجابات الجمهور ومشاركاتهم.",
    "video": "4KfWhRi2L4w",
 <<<<<<< HEAD
+<<<<<<< HEAD
    "chars": 0,
 ||||||| parent of 2fb6563 (rebuild generated data)
    "chars": 20044,
 =======
    "chars": 52634,
 >>>>>>> 2fb6563 (rebuild generated data)
+||||||| parent of 1fae3c2 (hashimi: دروس أول بأول)
+   "chars": 52634,
+=======
+   "chars": 56593,
+>>>>>>> 1fae3c2 (hashimi: دروس أول بأول)
    "dur": "94:07",
    "align": false
   },
@@ -572,7 +578,7 @@
    "n": 69,
    "title": "ألف باء الزواج 66 | بين الرجولة والأنوثة | فقه الأنوثة 03 تعريف الأنوثة وما يتعلق بها",
    "video": "gK1dIPHxnw8",
-   "chars": 31213,
+   "chars": 43395,
    "dur": "69:32",
    "align": false
   },
@@ -580,7 +586,7 @@
    "n": 70,
    "title": "ألف باء الزواج 67 | بين الرجولة والأنوثة | فقه الأنوثة 04 أمثلة ونماذج عبر التاريخ",
    "video": "AeSlvRLAv08",
-   "chars": 25739,
+   "chars": 36117,
    "dur": "60:55",
    "align": false
   },
@@ -588,7 +594,7 @@
    "n": 71,
    "title": "ألف باء الزواج 68 | أسئلة الخِطبة 01.",
    "video": "FEb0ECb16sw",
-   "chars": 26621,
+   "chars": 44712,
    "dur": "66:54",
    "align": false
   },
@@ -596,7 +602,7 @@
    "n": 72,
    "title": "ألف باء الزواج 69 | أسئلة الخِطبة 02",
    "video": "wO7RMVDQMHQ",
-   "chars": 11430,
+   "chars": 28099,
    "dur": "44:03",
    "align": false
   },
@@ -604,7 +610,7 @@
    "n": 73,
    "title": "ألف باء الزواج 70 | أسئلة الخِطبة 03",
    "video": "Jd1iEYvOGTA",
-   "chars": 0,
+   "chars": 2990,
    "dur": "55:41",
    "align": false
   },
