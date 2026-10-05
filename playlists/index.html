@@ -81,7 +81,7 @@ function draw(){
   g.innerHTML='';sg.innerHTML='';sr.innerHTML='';
   let withC=[],without=[],sres=[];
   for(const slug in _stats){if(slug==='_meta')continue;const st=_stats[slug];st._slug=slug;
-    ((st.read||0)+(st.watch||0)>0?withC:without).push(st)}
+    withC.push(st)}
   withC.sort((a,b)=>(a.order||999)-(b.order||999));
   without.sort((a,b)=>(a.order||999)-(b.order||999));
   for(const st of withC){

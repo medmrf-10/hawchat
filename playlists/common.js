@@ -1,7 +1,7 @@
 /* common.js — shared helpers for سلاسل المشايخ */
 function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 async function j(u){try{const r=await fetch(u,{cache:'no-cache'});return r.ok?await r.json():null}catch(e){return null}}
-async function jtxt(u){try{const r=await fetch(u);return r.ok?await r.text():null}catch(e){return null}}
+async function jtxt(u){try{const c=new AbortController();const t=setTimeout(()=>c.abort(),20000);const r=await fetch(u,{signal:c.signal});clearTimeout(t);return r.ok?await r.text():null}catch(e){return null}}
 function normalize(s){return (s||'').replace(/[أإآ]/g,'ا').replace(/[ً-ْٰ]/g,'').replace(/ـ/g,'').replace(/ى/g,'ي').replace(/ة/g,'ه').replace(/\s+/g,' ').trim()}
 const _PR=new Intl.PluralRules('ar');
 function plural(n,one,two,few,many){const c=_PR.select(n);return c==='one'?one:c==='two'?two:c==='few'?few:many}
