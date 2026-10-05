@@ -131,39 +131,24 @@
    "sheikh_slug": "thakir-hashimi",
    "title": "ألف باء الزواج",
    "count": 75,
-<<<<<<< HEAD
    "status": "المحاذاة جارية — 1/75",
    "aligned": 5,
    "transcribed": 44
-||||||| parent of 0c40591 (hashimi: دروس أول بأول)
-   "status": "المحاذاة جارية — 1/75",
-   "aligned": 1
-=======
-   "status": "المحاذاة جارية — 5/75"
->>>>>>> 0c40591 (hashimi: دروس أول بأول)
   },
   {
    "slug": "hashimi-tarbiya",
    "sheikh_slug": "thakir-hashimi",
    "title": "ألف باء التربية",
    "count": 108,
-<<<<<<< HEAD
    "status": "المحاذاة جارية — 0/108",
    "aligned": 0,
-   "transcribed": 24
-||||||| parent of 0c40591 (hashimi: دروس أول بأول)
-   "status": "المحاذاة جارية — 0/108",
-   "aligned": 0
-=======
-   "status": "المحاذاة جارية — 0/108"
->>>>>>> 0c40591 (hashimi: دروس أول بأول)
+   "transcribed": 28
   },
   {
    "slug": "hashimi-fiqh-nafs",
    "sheikh_slug": "thakir-hashimi",
    "title": "مجالس فقه النفس",
    "count": 181,
-<<<<<<< HEAD
    "status": "المحاذاة جارية — 0/181",
    "aligned": 0,
    "transcribed": 0
@@ -235,9 +220,9 @@
    "slug": "alamri-mughni",
    "title": "مغني الطلاب شرح إيساغوجي",
    "sheikh_slug": "ali-mahmoud-alomari",
-   "count": 6,
+   "count": 7,
    "aligned": 0,
-   "transcribed": 6,
+   "transcribed": 7,
    "status": "مفرّغة — المحاذاة جارية"
   },
   {
@@ -266,12 +251,15 @@
    "aligned": 5,
    "transcribed": 5,
    "status": "مكتملة التفريغ"
-||||||| parent of 0c40591 (hashimi: دروس أول بأول)
-   "status": "المحاذاة جارية — 0/181",
-   "aligned": 0
-=======
-   "status": "المحاذاة جارية — 0/181"
->>>>>>> 0c40591 (hashimi: دروس أول بأول)
+  },
+  {
+   "slug": "alamri-barahin-muqtatafat",
+   "title": "مقتطفات من دروس أم البراهين",
+   "sheikh_slug": "ali-mahmoud-alomari",
+   "count": 3,
+   "aligned": 0,
+   "transcribed": 3,
+   "status": "مفرّغة — المحاذاة جارية"
   }
  ]
 }
