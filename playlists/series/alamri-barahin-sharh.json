@@ -4,7 +4,7 @@
  "sheikh_slug": "ali-mahmoud-alomari",
  "title": "شرح كتاب شرح أم البراهين للإمام السنوسي",
  "playlist": "https://www.youtube.com/playlist?list=PLa3XSU7qw_YkCjDauyIudB0LbP_F8xHkB",
- "count": 5,
+ "count": 8,
  "lessons": [
   {
    "n": 1,
@@ -45,6 +45,30 @@
    "align": false,
    "chars": 50027,
    "dur": "91:53"
+  },
+  {
+   "n": 6,
+   "title": "الدَّرس السَّادس شرح  أم البراهين للشَّيخ أبي عبد الله السَّنوسي رضي الله عنه",
+   "video": "k39HfcrD3Ek",
+   "align": false,
+   "chars": 41205,
+   "dur": "82:14"
+  },
+  {
+   "n": 7,
+   "title": "الدَّرس السَّابع شرح أمِّ البراهين للشَّيخ أبي عبد الله السَّنوسي رضي الله عنه",
+   "video": "TwCavoo-2Ds",
+   "align": false,
+   "chars": 45577,
+   "dur": "90:04"
+  },
+  {
+   "n": 8,
+   "title": "الدَّرس الثَّامن شرح أمِّ البراهين للشَّيخ أبي عبد الله السَّنوسي رضي الله عنه",
+   "video": "rvblzbudkmg",
+   "align": false,
+   "chars": 33497,
+   "dur": "66:09"
   }
  ]
 }
