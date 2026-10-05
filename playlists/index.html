@@ -64,6 +64,10 @@ a.mini{color:var(--ink-3);display:inline-flex;align-items:center;justify-content
 <script src="common.js?v=9"></script>
 <script>
 let _stats={},flt='',showSoon=false;
+let _sl=null,_slP=null;
+// E7: lesson-level titles load lazily on the first search keystroke —
+// the index (~500KB) isn't worth fetching for users who never search.
+function loadSL(){if(!_slP)_slP=j('data/search_lessons.json').then(d=>{_sl=d||{}});return _slP}
 const ic=id=>'<svg class="i"><use href="icons.svg#'+id+'"/></svg>';
 const num=(kind,n,label,ok)=>'<span class="u-num '+kind+'">'+ic(kind==='rd'?'i-read':'i-listen')+'<b>'+n+'</b>'+(ok?'<b class="ok">'+ic('i-check')+'</b>':'')+'<small>'+label+'</small></span>';
 function shCard(st,slug,fav){
@@ -102,12 +106,24 @@ function draw(){
   for(const x of sres){
     sr.insertAdjacentHTML('beforeend','<a href="'+esc(x.r.read)+'"><span>'+esc(x.r.title)+'</span><small>'+esc(x.st.name)+'</small></a>');
   }
+  let lmatch=0;
+  if(flt&&_sl){
+    let n=0;
+    for(const slug in _stats){if(slug==='_meta')continue;const st=_stats[slug];
+      for(const r of (st.rows||[])){const e=_sl[r.id];if(!e)continue;
+        for(const pair of (e.L||[])){const ln=pair[0],lt=pair[1]||('الدرس '+ln);
+          if(!normalize(lt).includes(flt))continue;if(++n>24)break;
+          const href=e.ss?('lesson.html?s='+encodeURIComponent(e.ss)+'&l='+ln):('tr.html?r='+encodeURIComponent(r.id)+'&l='+ln);
+          sr.insertAdjacentHTML('beforeend','<a href="'+esc(href)+'"><span>'+esc(lt)+'</span><small>'+esc(r.title+' — '+st.name)+'</small></a>');
+        }if(n>24)break}if(n>24)break}
+    lmatch=n;
+  }
   const sh=document.getElementById('soonh');
   sh.hidden=!without.length;sg.hidden=!showSoon;
   sh.innerHTML=showSoon?'إخفاء':'قريباً ('+without.length+')';
   document.getElementById('count').textContent=withC.length+' شيخاً';
   document.getElementById('shcnt').textContent=withC.length+' شيخاً';
-  document.getElementById('nres').textContent=flt?(withC.some(st=>normalize(st.name+' '+(st.aliases||[]).join(' ')).includes(flt))||sres.length?'':'لا نتائج.'):'';
+  document.getElementById('nres').textContent=flt?(withC.some(st=>normalize(st.name+' '+(st.aliases||[]).join(' ')).includes(flt))||sres.length||lmatch?'':'لا نتائج.'):'';
   drawFavs();
 }
 function drawFavs(){
@@ -149,7 +165,8 @@ function drawCont(){
   el.innerHTML=items.map(x=>'<a class="u-cont cin" href="'+esc(x.h)+'">'+ic(x.rd?'i-read':'i-listen')
     +'<span class="tt">'+esc(x.t)+'<small>'+esc(x.sub)+'</small></span><span class="go">تابِع ←</span></a>').join('');
 }
-document.getElementById('flt').addEventListener('input',e=>{flt=normalize(e.target.value);draw()});
+document.getElementById('flt').addEventListener('input',e=>{flt=normalize(e.target.value);
+  if(flt&&!_sl)loadSL().then(draw);else draw()});
 document.getElementById('soonh').addEventListener('click',()=>{showSoon=!showSoon;draw()});
 document.getElementById('exp').addEventListener('click',async e=>{
   e.preventDefault();

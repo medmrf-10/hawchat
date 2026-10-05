@@ -87,33 +87,75 @@ for slug, s in st.items():
                     pl_claims[pl].append(rid)
                 elif r.get('wan', 0) > 0:
                     warns.append('%s/%s: series with align but no playlist link' % (slug, rid))
-                # align quality: no empty align, cov>=0.3 (same bar as wan/alignOk)
-                if r.get('wan', 0) > 0:
-                    lp = os.path.join(PL, 'lessons', r['sSlug'], 'index.json')
-                    li = J(lp) if os.path.exists(lp) else None
-                    if li is None:
-                        fails.append('%s/%s: listen but no lessons index' % (slug, rid))
-                    else:
-                        good = 0
-                        for n in (li or {}).get('align') or []:
-                            ap = os.path.join(PL, 'lessons', r['sSlug'], '%0*d.align.json' % (li.get('pad') or 3, n))
-                            for cand in ('%03d.align.json' % n, '%02d.align.json' % n):
-                                if not os.path.exists(ap) and os.path.exists(os.path.join(PL, 'lessons', r['sSlug'], cand)):
-                                    ap = os.path.join(PL, 'lessons', r['sSlug'], cand)
-                            if not os.path.exists(ap):
-                                continue
-                            ad = J(ap)
-                            if isinstance(ad, list):
-                                w, cov = ad, None
-                            else:
-                                w = (ad or {}).get('w') or []
-                                cov = (ad or {}).get('cov')
-                            if w and (cov is None or cov >= 0.3):
-                                good += 1
-                            elif cov is not None and cov < 0.3:
-                                warns.append('%s/%s: align %s cov=%.2f<0.3' % (slug, rid, n, cov))
+                # align + text integrity (F7/A10): af/tf are the authoritative
+                # n→filename maps written by the builder — audit what the pages
+                # actually resolve, never pad-guess filenames.
+                lp = os.path.join(PL, 'lessons', r['sSlug'], 'index.json')
+                li = J(lp) if os.path.exists(lp) else None
+                if r.get('wan', 0) > 0 and li is None:
+                    fails.append('%s/%s: listen but no lessons index' % (slug, rid))
+                if li is not None:
+                    ldir = os.path.join(PL, 'lessons', r['sSlug'])
+                    af = li.get('af') or {}
+                    tf = li.get('tf') or {}
+                    align_ok = set(li.get('alignOk') or [])
+                    for n, fn in list(af.items()) + list(tf.items()):
+                        if not os.path.exists(os.path.join(ldir, fn)):
+                            fails.append('%s/%s: index lists %s but file missing' % (slug, rid, fn))
+                    # A10: every alignOk lesson's text must resolve the same way
+                    # tr.html resolves it — tf name → read row same n → probe
+                    # 3- then 2-digit pad. No resolution = the reader 404s.
+                    read_ns = set()
+                    rp2 = os.path.join(PL, 'data/read', rid + '.json')
+                    if os.path.exists(rp2):
+                        rd2 = J(rp2)
+                        if isinstance(rd2, list):
+                            read_ns = {x.get('n') for x in rd2}
+                    def text_resolves(n):
+                        if str(n) in tf:
+                            return True
+                        if n in read_ns:
+                            return True
+                        for cand in ('%03d.txt' % n, '%02d.txt' % n):
+                            if os.path.exists(os.path.join(ldir, cand)):
+                                return True
+                        return False
+                    for n in align_ok:
+                        if not text_resolves(n):
+                            fails.append('%s/%s: alignOk lesson %s has no resolvable text' % (slug, rid, n))
+                    good = 0
+                    for nk, fn in af.items():
+                        ap = os.path.join(ldir, fn)
+                        if not os.path.exists(ap):
+                            continue
+                        ad = J(ap)
+                        if isinstance(ad, list):
+                            w, cov = ad, None
+                        else:
+                            w = (ad or {}).get('w') or []
+                            cov = (ad or {}).get('cov')
+                        if w and (cov is None or cov >= 0.3):
+                            good += 1
+                        elif cov is not None and cov < 0.3 and w:
+                            warns.append('%s/%s: align %s cov=%.2f<0.3 with %d words' % (slug, rid, nk, cov, len(w)))
+                    if r.get('wan', 0) > 0:
                         if good != r['wan']:
                             fails.append('%s/%s: good align %d vs wan %d' % (slug, rid, good, r['wan']))
+                        if len(align_ok) != r['wan']:
+                            fails.append('%s/%s: alignOk %d vs wan %d' % (slug, rid, len(align_ok), r['wan']))
+                    # series lessons hygiene: dur mm:ss, Arabic title, textless count
+                    textless = 0
+                    for l in (sd.get('lessons') or []):
+                        d = l.get('dur')
+                        if d is not None and not re.match(r'^\d+:\d{2}$', str(d)):
+                            warns.append('%s/%s: lesson %s bad dur %r' % (slug, rid, l.get('n'), d))
+                        t = (l.get('title') or '').strip()
+                        if t and not re.search(r'[؀-ۿ]', t):
+                            warns.append('%s/%s: lesson %s non-Arabic title %r' % (slug, rid, l.get('n'), t[:40]))
+                        if l.get('video') and not text_resolves(l.get('n')):
+                            textless += 1
+                    if textless:
+                        warns.append('%s/%s: %d series lessons with no text' % (slug, rid, textless))
 
 for pl, rids in pl_claims.items():
     if len(set(rids)) > 1:

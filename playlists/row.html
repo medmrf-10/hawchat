@@ -92,7 +92,12 @@ const ic=id=>'<svg class="i"><use href="icons.svg#'+id+'"/></svg>';
   const ns=new Set([...aln,...txn,...rtxt.keys()]);
   const lessons=(sd&&sd.lessons)||[];
   for(const l of lessons)if((l.video||aln.has(l.n)||txn.has(l.n)))ns.add(l.n);
-  const sorted=[...ns].sort((a,b)=>a-b);
+  let sorted=[...ns].sort((a,b)=>a-b);
+  // B2: ?m=listen (from «استمع» on sheikh page) filters to aligned lessons;
+  // ?m=read to lessons with text. Unfiltered default shows everything.
+  const mode=q.get('m');
+  if(mode==='listen')sorted=sorted.filter(n=>aln.has(n));
+  else if(mode==='read')sorted=sorted.filter(n=>txn.has(n)||rtxt.has(n));
   const L=n=>lessons.find(x=>x.n===n)||{};
   const favs=store.favList();
   const rs=store.resume(row.id);
@@ -107,6 +112,9 @@ const ic=id=>'<svg class="i"><use href="icons.svg#'+id+'"/></svg>';
     +(sd&&sd.playlist?'<a href="'+esc(sd.playlist)+'" target="_blank" rel="noopener">قائمة يوتيوب ↗</a>':'')
     +'</div>'
     +(function(){const rn=rs&&rs.n;
+      if(mode==='listen'){
+        const first=[...aln].sort((a,b)=>a-b).find(n=>!store.seen(row.id+':'+n))||[...aln].sort((a,b)=>a-b)[0];
+        return '<div class="resline"><a href="lesson.html?s='+encodeURIComponent(row.sSlug)+'&l='+(first||1)+'">'+ic('i-play')+' ابدأ الاستماع'+(first?' — الدرس '+first:'')+'</a></div>'}
       return (rn||row.rdn||row.wan)?'<div class="resline">'
         +(rn?'<a href="lesson.html?s='+encodeURIComponent(row.sSlug)+'&l='+rn+'">'+ic('i-play')+' تابع من الدرس '+rn+'</a>':'')
         +'<a href="lesson.html?s='+encodeURIComponent(row.sSlug)+'&l=1">ابدأ من الدرس 1</a></div>':''})()

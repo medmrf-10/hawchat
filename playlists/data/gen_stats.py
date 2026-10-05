@@ -64,6 +64,7 @@ REDIRECTS = {  # old row id → new row id (best single match)
 }
 
 WARN = []
+SEARCH_L = {}   # row id → {ss, L:[[n,title]]} — lazy lesson-search index (E7)
 def warn(m): WARN.append(m); print('WARN:', m, file=sys.stderr)
 
 def dump_atomic(obj, path, sort_keys=False):
@@ -133,10 +134,24 @@ def pl_len(plid):
         PL_LEN[plid] = tot
     return PL_LEN[plid]
 
+_VID_WARN = set()
 def vid_of(fname):
     b = os.path.basename(fname)
-    m = re.match(r'^NA_([\w\-]{6,})', b) or re.search(r'[\-_]([A-Za-z0-9_\-]{11})\.txt$', b)
-    return m.group(1) if m else None
+    m = re.match(r'^NA_([\w\-]{6,})', b)
+    if m:
+        return m.group(1)
+    m = re.search(r'[\-_]([A-Za-z0-9_\-]{11})\.txt$', b)
+    if not m:
+        return None
+    v = m.group(1)
+    # F8: an 11-char tail is only a video id if YouTube ground truth knows it —
+    # otherwise it's an ordinary filename segment (e.g. '…_part-two.txt')
+    if v not in V2P and v not in YTV:
+        if v not in _VID_WARN:
+            _VID_WARN.add(v)
+            warn('vid_of: %r tail not in yt data → treated as plain filename' % v)
+        return None
+    return v
 
 def series_plid(files):
     """Dominant playlist shared by these transcript files.
@@ -226,6 +241,7 @@ def renumber_to_series(slug, rrows):
         if v and v in vmap:
             n = vmap[v]
             if n in taken:
+                warn('renumber %s: dup vid %s → dropped row %r' % (slug, v, row.get('file')))
                 continue
             taken.add(n)
             out.append(dict(row, n=n, title=tmap.get(n) or row['title']))
@@ -321,20 +337,29 @@ def rebuild_lessons_indexes():
         if not os.path.isdir(d):
             continue
         idx_path = os.path.join(d, 'index.json')
-        if not os.path.exists(idx_path):
-            continue
         idx = J(idx_path)
         if not isinstance(idx, dict):
-            idx = {}   # corrupt/conflicted index → rebuild from disk
-        af, tf = {}, {}
+            idx = {}   # missing or corrupt index → rebuild from disk
+        # F8: a file class is authoritative; same-n collisions are warned and
+        # resolved deterministically (longest padding wins: 001.txt > 01.txt)
+        afc, tfc = {}, {}
         for fn in os.listdir(d):
             m = re.match(r'^(\d+)\.align\.json$', fn)
             if m:
-                af[int(m.group(1))] = fn
+                afc.setdefault(int(m.group(1)), []).append(fn)
                 continue
             m = re.match(r'^(\d+)\.txt$', fn)
             if m:
-                tf[int(m.group(1))] = fn
+                tfc.setdefault(int(m.group(1)), []).append(fn)
+        af, tf = {}, {}
+        for n, fns in afc.items():
+            if len(fns) > 1:
+                warn('%s: %d align files for n=%d %s → using %s' % (slug, len(fns), n, fns, sorted(fns)[-1]))
+            af[n] = sorted(fns)[-1]
+        for n, fns in tfc.items():
+            if len(fns) > 1:
+                warn('%s: %d txt files for n=%d %s → using %s' % (slug, len(fns), n, fns, sorted(fns)[-1]))
+            tf[n] = sorted(fns)[-1]
         ok_nums = []
         for n in sorted(af):
             ad = J(os.path.join(d, af[n]))
@@ -636,13 +661,40 @@ for sh in sheikhs:
             rrows = rows_from_files(fl, '../transcripts/%s/%s/' % (r['trSh'], r['trSr']), r.get('plid'), r['title'])
             if r.get('sSlug'):
                 # «النص كاملاً» links carry series n — read rows must share it.
-                # lessons/NNN.txt are normalized copies of these same transcripts
+                # lessons/NNN.txt are normalized copies of these same transcripts.
+                # Merge per-n (lessons copy wins where present), never by count —
+                # a count comparison silently swaps the row's whole numbering.
+                # A transcript keeps its own n unless its vid maps it onto the
+                # series — pushing every unmatched file past the series end
+                # re-numbers real lessons.
                 lrows = rows_from_lessons(r['sSlug'])
-                rrows = lrows if len(lrows) >= len(rrows) else renumber_to_series(r['sSlug'], rrows)
+                sd_ = J(os.path.join(PL, 'series', r['sSlug'] + '.json')) or {}
+                vmap_ = {l.get('video'): l.get('n') for l in sd_.get('lessons', []) if l.get('video')}
+                tmap_ = {l.get('n'): l.get('title') for l in sd_.get('lessons', [])}
+                used = {x['n'] for x in lrows}
+                merged = list(lrows)
+                lim_ = max([sd_.get('count') or 0] + [x['n'] for x in lrows] + [0])
+                dropped_ = 0
+                for x in rrows:
+                    v = x.get('vid')
+                    tgt = vmap_[v] if (v and v in vmap_) else x['n']
+                    if tgt in used or tgt > lim_:
+                        dropped_ += tgt > lim_   # playlist-position numbering, not series n
+                        continue   # lessons copy already serves this lesson number
+                    if v and v in vmap_:
+                        x = dict(x, title=tmap_.get(vmap_[v]) or x['title'])
+                    used.add(tgt)
+                    merged.append(dict(x, n=tgt))
+                if len(lrows) != len(rrows):
+                    warn('merge %s: lessons=%d vs transcripts=%d — merged per-n' % (r['sSlug'], len(lrows), len(rrows)))
+                if dropped_:
+                    warn('merge %s: %d transcript rows beyond series n>%d — dropped' % (r['sSlug'], dropped_, lim_))
+                rrows = sorted(merged, key=lambda x: x['n'])
         elif r.get('sSlug'):
             rrows = rows_from_lessons(r['sSlug'])
         write_read(r['id'], rrows)
-        if rrows and len(rrows) < r['rdn']:
+        if rrows and len(rrows) != r['rdn']:
+            # card counter must equal the actual list — Mohamed's mismatch report
             r['rdn'] = len(rrows)
         if not rrows and r['rdn'] > 0:
             warn('row %s: rdn=%d but empty read list → zeroed' % (r['id'], r['rdn']))
@@ -653,7 +705,10 @@ for sh in sheikhs:
         r['rtt'] = max(r['rtt'], r['rdn'])
         r['wtt'] = r['rtt']
         r['read'] = 'row.html?r=' + r['id']
-        r['listen'] = ('row.html?r=' + r['id']) if r['wan'] > 0 and r.get('sSlug') else None
+        r['listen'] = ('row.html?r=' + r['id'] + '&m=listen') if r['wan'] > 0 and r.get('sSlug') else None
+        # E7: lesson titles for the lazy search index
+        if rrows:
+            SEARCH_L[r['id']] = {'ss': r.get('sSlug'), 'L': [[x['n'], x['title']] for x in rrows]}
         r['rOk'] = bool(r['rtt'] and r['rdn'] >= r['rtt'])
         r['wOk'] = bool(r['rtt'] and r['wan'] >= r['rtt'])
 
@@ -723,6 +778,8 @@ for slug, v in out.items():
         search.append({'id': r['id'], 'title': r['title'], 'sh': slug, 'sname': v['name'],
                        'rd': r['rdn'], 'ls': r['wan']})
 dump_atomic(search, os.path.join(BASE, 'search.json'))
+# E7: per-row lesson titles — lazy-loaded by the index's #flt on first keystroke
+dump_atomic(SEARCH_L, os.path.join(BASE, 'search_lessons.json'), sort_keys=True)
 
 print('sheikhs', len(out) - 1, 'read', sum(v['read'] for k, v in out.items() if k != '_meta'),
       'watch', sum(v['watch'] for k, v in out.items() if k != '_meta'),
