@@ -1,35 +1,29 @@
 #!/usr/bin/env bash
-# safe_push.sh — the ONLY way fleet members should push to hawchat.
-# Rebase on remote, regenerate ALL generated files AFTER the rebase
-# (single writer: whoever pushes last owns the generated content),
-# then run the audit gate before pushing.
+# safe_push.sh v3 — fleet push protocol (single-writer):
+#   agents NEVER push to main. They commit locally, then push their commit to
+#   refs/inbox/<agent>-<ts>. The hub merger applies queued refs serially on a
+#   clean tree, runs the gates, and is the ONLY writer to main.
 # Usage:  bash scripts/safe_push.sh "رسالة الالتزام"   (run from repo root)
 set -e
 cd "$(git rev-parse --show-toplevel 2>/dev/null)" || { echo "لست داخل مستودع hawchat"; exit 1; }
 MSG="${1:-تحديث}"
 
+# shared-tree wipe guard: deletions never travel through this script.
+# generated files never travel either — hub rebuilds them after every merge.
 git add -A
-if git diff --cached --quiet; then echo "لا جديد للدفع."; exit 0; fi
+git diff --cached --diff-filter=D --name-only -z | xargs -0 -r git reset -q -- 2>/dev/null || true
+git reset -q -- playlists/data/sheikh_stats.json playlists/data/search.json \
+  playlists/data/redirects.json playlists/data/yt_titles.json playlists/data/read \
+  playlists/series/index.json 'playlists/lessons/*/index.json' 2>/dev/null || true
+if git diff --cached --quiet; then echo "لا جديد للدفع (الحذف والمولّدات لا تمر عبر safe_push)."; exit 0; fi
 git commit -q -m "$MSG"
 
-for i in 1 2 3 4 5; do
-  git pull --rebase -q origin main 2>/dev/null || true
-  # regenerate generated files AFTER rebase — they see everyone's files
-  [ -f playlists/series/regen_index.py ] && python3 playlists/series/regen_index.py >/dev/null 2>&1 || true
-  [ -f playlists/data/gen_stats.py ] && python3 playlists/data/gen_stats.py >/dev/null 2>&1 || {
-    echo "تعذّر توليد الإحصائيات — تأكد من وجود playlists/data/mut_manifest.json"; }
-  # stamp SW revision from shell-asset content — only changes when UI actually
-  # changes, so concurrent pushes never collide on this line and the SW doesn't
-  # reinstall on every visit (HEAD-stamping did both)
-  REV=$(git hash-object sw.js index.html manifest.webmanifest playlists/common.js playlists/common.css playlists/ui.css playlists/index.html playlists/sheikh.html playlists/row.html playlists/tr.html playlists/lesson.html playlists/series.html 2>/dev/null | git hash-object --stdin | cut -c1-8)
-  sed -i "s|^const REV = .*|const REV = 'v7-$REV';|" sw.js 2>/dev/null || true
-  git add sw.js playlists/series/index.json playlists/data/sheikh_stats.json playlists/data/read/ playlists/data/redirects.json playlists/data/search.json playlists/data/yt_titles.json 'playlists/lessons/*/index.json' 2>/dev/null || true
-  git diff --cached --quiet || git commit -q -m "rebuild generated data" || true
-  # audit gate: refuse to push a broken site
-  if [ -f scripts/audit_site.py ]; then
-    python3 scripts/audit_site.py || { echo "❌ التدقيق رفض الدفع — أصلح الأخطاء أعلاه"; exit 1; }
-  fi
-  if git push -q origin HEAD:main 2>/dev/null; then echo "دُفع بنجاح."; exit 0; fi
-  sleep 2
-done
-echo "تعذّر الدفع بعد 5 محاولات — أعد المحاولة."; exit 1
+AGENT="${SAFE_PUSH_AGENT:-$(hostname -s 2>/dev/null || echo agent)}"
+REF="refs/inbox/${AGENT}-$(date +%s)"
+# sync base with origin/main first so the hub applies cleanly
+git fetch origin -q main 2>/dev/null || true
+if ! git merge-base --is-ancestor origin/main HEAD 2>/dev/null; then
+  git rebase -q origin/main 2>/dev/null || { git rebase --abort 2>/dev/null;
+    echo "تعارض مع main — نفّذ: git fetch origin && git reset --hard origin/main وأعد تطبيق تغييرك"; exit 1; }
+fi
+git push -q origin "HEAD:$REF" && echo "في الطابور: $REF — الدمج على الهب خلال دقيقة."
