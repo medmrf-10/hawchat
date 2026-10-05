@@ -194,17 +194,22 @@ for sh in sheikhs:
             warn('%s/%s: rdn>rtt anomaly' % (slug, r['title']))
         key = r.get('mutId') or r.get('sSlug') or ((r.get('trSh') or '') + '-' + (r.get('trSr') or ''))
         r['id'] = '%s--%s' % (slug, re.sub(r'[^\w\-]', '', str(key)))
-        # read rows → data/read/<id>.json
+        # read rows → data/read/<id>.json; rdn = actual files present (never more)
+        rrows = []
         if r.get('kind') == 'mut' and r.get('mutId') is not None:
             m = next((x for x in muts if str(x.get('id')) == str(r['mutId'])), None)
             fl = (m or {}).get('files') or []
-            write_read(r['id'], rows_from_files(fl, MUT_TXT + str(r['mutId']) + '/'))
+            rrows = rows_from_files(fl, MUT_TXT + str(r['mutId']) + '/')
         elif r.get('trSh') and r.get('trSr'):
             se = next((x for x in (tr[r['trSh']].get('series') or []) if x.get('slug') == r['trSr']), {})
             fl = se.get('files') or []
-            write_read(r['id'], rows_from_files(fl, '../transcripts/%s/%s/' % (r['trSh'], r['trSr'])))
+            rrows = rows_from_files(fl, '../transcripts/%s/%s/' % (r['trSh'], r['trSr']))
         elif r.get('sSlug'):
-            write_read(r['id'], rows_from_lessons(r['sSlug']))
+            rrows = rows_from_lessons(r['sSlug'])
+        write_read(r['id'], rrows)
+        if rrows and len(rrows) < r['rdn']:
+            warn('%s/%s: rdn %d → %d (files on disk)' % (slug, r['title'], r['rdn'], len(rrows)))
+            r['rdn'] = len(rrows)
         r['read'] = 'tr.html?r=' + r['id']
         r['listen'] = ('series.html?s=' + r['sSlug']) if r['wan'] > 0 and r.get('sSlug') else None
         r['rOk'] = bool(r['rtt'] and r['rdn'] >= r['rtt'])

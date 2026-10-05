@@ -14,6 +14,11 @@ self.addEventListener('fetch',e=>{
       new Promise((_,rj)=>setTimeout(()=>rj(new Error('t/o')),3000))]).catch(()=>caches.match(key(e.request))));
     return;
   }
+  if(p.endsWith('/sheikh_stats.json')){                              // stats: network-first, falls back to cache
+    e.respondWith(fetch(e.request).then(r=>{if(r.ok)caches.open(CACHE).then(c=>c.put(key(e.request),r.clone()));return r})
+      .catch(()=>caches.match(key(e.request))));
+    return;
+  }
   if(/\.json$/.test(p)){                                             // JSON: stale-while-revalidate
     e.respondWith(caches.open(CACHE).then(async c=>{
       const k=key(e.request),hit=await c.match(k);
