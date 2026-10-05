@@ -202,8 +202,16 @@
    "slug": "alasri-arbaa",
    "title": "لقاء الأربعاء",
    "sheikh_slug": "saif-alasri",
+<<<<<<< HEAD
    "count": 13,
    "aligned": 13,
+||||||| parent of e9042f5 (hashimi: دروس أول بأول)
+   "count": 14,
+   "aligned": 0,
+=======
+   "count": 14,
+   "aligned": 14,
+>>>>>>> e9042f5 (hashimi: دروس أول بأول)
    "transcribed": 56,
    "status": "مكتملة التفريغ"
   },
@@ -244,6 +252,7 @@
    "status": "مكتملة التفريغ"
   },
   {
+<<<<<<< HEAD
    "slug": "hashimi-zawaj",
    "sheikh_slug": "dhaker-alhashimi",
    "title": "ألف باء الزواج",
@@ -269,6 +278,107 @@
    "status": "المحاذاة جارية — 0/181",
    "aligned": 0,
    "transcribed": 0
+||||||| parent of e9042f5 (hashimi: دروس أول بأول)
+   "slug": "hashimi-zawaj",
+   "sheikh_slug": "dhaker-alhashimi",
+   "title": "ألف باء الزواج",
+   "count": 75,
+   "status": "المحاذاة جارية — 18/75",
+   "aligned": 20,
+   "transcribed": 73
+  },
+  {
+   "slug": "hashimi-tarbiya",
+   "sheikh_slug": "dhaker-alhashimi",
+   "title": "ألف باء التربية",
+   "count": 108,
+   "status": "المحاذاة جارية — 3/108",
+   "aligned": 3,
+   "transcribed": 44
+  },
+  {
+   "slug": "hashimi-fiqh-nafs",
+   "sheikh_slug": "dhaker-alhashimi",
+   "title": "مجالس فقه النفس",
+   "count": 181,
+   "status": "المحاذاة جارية — 0/181",
+   "aligned": 0,
+   "transcribed": 0
+  },
+  {
+   "slug": "alamri-bath",
+   "title": "لقاء البث المباشر",
+   "sheikh_slug": "ali-mahmoud-alomari",
+   "count": 1,
+   "aligned": 0,
+   "transcribed": 1,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alamri-durus-amma",
+   "title": "دروس عامة",
+   "sheikh_slug": "ali-mahmoud-alomari",
+   "count": 4,
+   "aligned": 0,
+   "transcribed": 4,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alamri-falsafa-din",
+   "title": "فلسفة الدين",
+   "sheikh_slug": "ali-mahmoud-alomari",
+   "count": 2,
+   "aligned": 0,
+   "transcribed": 2,
+   "status": "مفرّغة — المحاذاة جارية"
+=======
+   "slug": "alamri-bath",
+   "title": "لقاء البث المباشر",
+   "sheikh_slug": "ali-mahmoud-alomari",
+   "count": 1,
+   "aligned": 0,
+   "transcribed": 1,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alamri-durus-amma",
+   "title": "دروس عامة",
+   "sheikh_slug": "ali-mahmoud-alomari",
+   "count": 4,
+   "aligned": 0,
+   "transcribed": 4,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alamri-falsafa-din",
+   "title": "فلسفة الدين",
+   "sheikh_slug": "ali-mahmoud-alomari",
+   "count": 2,
+   "aligned": 0,
+   "transcribed": 2,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "hashimi-zawaj",
+   "sheikh_slug": "dhaker-alhashimi",
+   "title": "ألف باء الزواج",
+   "count": 75,
+   "status": "المحاذاة جارية — 20/75"
+  },
+  {
+   "slug": "hashimi-tarbiya",
+   "sheikh_slug": "dhaker-alhashimi",
+   "title": "ألف باء التربية",
+   "count": 108,
+   "status": "المحاذاة جارية — 3/108"
+  },
+  {
+   "slug": "hashimi-fiqh-nafs",
+   "sheikh_slug": "dhaker-alhashimi",
+   "title": "مجالس فقه النفس",
+   "count": 181,
+   "status": "المحاذاة جارية — 0/181"
+>>>>>>> e9042f5 (hashimi: دروس أول بأول)
   }
  ]
 }
