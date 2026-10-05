@@ -16,7 +16,7 @@ Also generates playlists/data/read/<rowId>.json: [{n,title,file,base}].
 Manifest is pinned to data/mut_manifest.json; a fetched manifest that
 shrinks >5% vs the pin is rejected (exit 2, nothing written).
 """
-import json, os, re, sys, urllib.request, collections
+import json, os, re, sys, subprocess, urllib.request, collections
 
 BASE = os.path.dirname(os.path.abspath(__file__))          # playlists/data
 PL   = os.path.dirname(BASE)                                # playlists
@@ -111,14 +111,16 @@ YTV = YTT.get('v') or {}
 YTP = YTT.get('p') or {}
 V2P = J(os.path.join(BASE, 'vid_plists.json')) or {}   # vid → [[plid,pos,tot]]
 ROW_IDS = J(os.path.join(BASE, 'row_ids.json')) or {}  # frozen: identity key -> row id
+PL_LEN_SNAP = J(os.path.join(BASE, 'pl_len.json')) or {}   # repo-pinned playlist sizes
 PL_LEN = {}
 def pl_len(plid):
     if plid not in PL_LEN:
-        tot = None
-        cp = os.path.join(CAT, plid + '.json')
-        if os.path.exists(cp):
-            d = J(cp) or {}
-            tot = len(d.get('videos') or [])
+        tot = PL_LEN_SNAP.get(plid)
+        if tot is None:
+            cp = os.path.join(CAT, plid + '.json')
+            if os.path.exists(cp):
+                d = J(cp) or {}
+                tot = len(d.get('videos') or [])
         if tot is None:
             for v, lst in V2P.items():
                 for p, pos, t in lst:
@@ -133,13 +135,25 @@ def vid_of(fname):
     return m.group(1) if m else None
 
 def series_plid(files):
-    """Dominant playlist shared by these transcript files."""
+    """Dominant playlist shared by these transcript files.
+    Requires ≥50% of identifiable files AND ≥2 votes — a jumbo playlist
+    containing everything loses to nothing rather than merge wrong rows."""
     pls = collections.Counter()
+    nv = 0
     for f in files or []:
         v = vid_of(f)
-        for pl, pos, tot in V2P.get(v, []) if v else []:
+        if not v or v not in V2P:
+            continue
+        nv += 1
+        for pl, pos, tot in V2P.get(v, []):
             pls[pl] += 1
-    return pls.most_common(1)[0][0] if pls else None
+    if not pls:
+        return None
+    top, cnt = pls.most_common(1)[0]
+    if cnt < 2 or (nv and cnt < 0.5 * nv):
+        warn('series_plid: weak dominance %s %d/%d — no auto plid' % (top, cnt, nv))
+        return None
+    return top
 
 def pl_pos(plid, vid):
     for p, pos, tot in V2P.get(vid, []):
@@ -223,6 +237,10 @@ def count_aligned(slug):
         return _ALIGN_CACHE[slug]
     d = os.path.join(PL, 'lessons', slug)
     li = J(os.path.join(d, 'index.json')) or {}
+    nums = li.get('alignOk')   # precomputed accepted set written by rebuild
+    if nums is not None:
+        _ALIGN_CACHE[slug] = len(nums)
+        return len(nums)
     nums = li.get('align') or []
     if not nums and os.path.isdir(d):
         nums = sorted(int(m.group(1)) for fn in os.listdir(d)
@@ -279,10 +297,22 @@ def rebuild_lessons_indexes():
             m = re.match(r'^(\d+)\.txt$', fn)
             if m:
                 tf[int(m.group(1))] = fn
+        ok_nums = []
+        for n in sorted(af):
+            ad = J(os.path.join(d, af[n]))
+            if not ad:
+                continue
+            if isinstance(ad, list):
+                w, cov = ad, None
+            else:
+                w, cov = ad.get('w') or [], ad.get('cov')
+            if w and (cov is None or cov >= 0.5):
+                ok_nums.append(n)
         new_idx = dict(idx)
         new_idx['af'] = af
         new_idx['tf'] = tf
         new_idx['align'] = sorted(af)   # disk is authoritative — stale lists get rebuilt
+        new_idx['alignOk'] = ok_nums    # playable set (w non-empty, cov>=0.5) — matches wan
         new_idx['txt'] = sorted(tf)
         if new_idx != idx:            # write only on real change — keep worktree clean
             dump_atomic(new_idx, idx_path)
@@ -359,8 +389,14 @@ for sh in sheikhs:
                 return r
         for r in rows:
             sl = r.get('sSlug')
-            if sl and (sl == sr_slug or sl.endswith('-' + sr_slug)):
+            if sl and (sl == sr_slug or sl == k + '-' + sr_slug):
                 return r
+        for r in rows:   # looser suffix match would be fragile → warn, never auto-merge
+            sl = r.get('sSlug')
+            if sl and sl.endswith('-' + sr_slug):
+                warn('trrow: sSlug %s suffix-matches tr %s/%s for sheikh %s — verify'
+                     % (sl, k, sr_slug, slug))
+                break
         return None
 
     def mutrow(m_id):
@@ -515,9 +551,12 @@ for sh in sheikhs:
                     same_files = ov > 0 and ov >= 0.5 * min(len(mfiles) or 10**9, len(tfiles))
                     same_name = bool(mfiles) and len(mfiles) == len(tfiles) and (
                         t in norm(r2['title']) or norm(r2['title']) in t)
-                    if same_files or same_name:
+                    if same_files:
                         tgt = r2
                         break
+                    if same_name:
+                        warn('mut fold: title-only match %s ~ %s — NOT merged, verify'
+                             % (r['title'], r2['title']))
             if tgt:
                 tgt['rdn'] = max(tgt['rdn'], r['rdn'])
                 tgt['rtt'] = max(tgt['rtt'], r['rtt'])
@@ -592,7 +631,17 @@ for sh in sheikhs:
         'nWatch': sum(1 for r in rows if r['wan']),
     }
 
-out['_meta'] = {'updated': __import__('datetime').datetime.utcnow().isoformat() + 'Z'}
+def _last_commit_ts():
+    try:
+        s = subprocess.run(['git', '-C', ROOT, 'log', '-1', '--format=%cI'],
+                           capture_output=True, text=True, timeout=10).stdout.strip()
+        if s:
+            return s
+    except Exception:
+        pass
+    return __import__('datetime').datetime.now(__import__('datetime').timezone.utc).isoformat()
+
+out['_meta'] = {'updated': _last_commit_ts()}
 
 # degenerate-output guard: never publish stats that contradict the disk.
 tot_read = sum(v['read'] for k, v in out.items() if k != '_meta')
@@ -616,7 +665,7 @@ if (disk_align > 0 and tot_watch == 0) or (disk_txt > 0 and tot_read == 0):
     import sys; sys.exit(2)
 
 dst = os.path.join(BASE, 'sheikh_stats.json')
-dump_atomic(out, dst)
+dump_atomic(out, dst, sort_keys=True)
 dump_atomic(REDIRECTS, os.path.join(BASE, 'redirects.json'), sort_keys=True)
 dump_atomic(ROW_IDS, os.path.join(BASE, 'row_ids.json'), sort_keys=True)
 # flat search index (P7): [{id,title,sh,sname}]
