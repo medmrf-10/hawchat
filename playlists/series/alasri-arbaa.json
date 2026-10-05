@@ -1,0 +1,29 @@
+{
+ "slug": "alasri-arbaa",
+ "sheikh": "الشيخ سيف العصري",
+ "sheikh_slug": "saif-alasri",
+ "title": "لقاء الأربعاء",
+ "count": 4,
+ "lessons": [
+  {
+   "n": 1,
+   "title": "001__KHu7y4YLM4",
+   "video": "_KHu7y4YLM4"
+  },
+  {
+   "n": 2,
+   "title": "002_tXMvgnJWwUQ",
+   "video": "tXMvgnJWwUQ"
+  },
+  {
+   "n": 3,
+   "title": "003_yS5osLsPHKg",
+   "video": "yS5osLsPHKg"
+  },
+  {
+   "n": 55,
+   "title": "055_91QOssB3Gzo",
+   "video": "91QOssB3Gzo"
+  }
+ ]
+}
