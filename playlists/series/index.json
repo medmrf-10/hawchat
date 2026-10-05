@@ -149,7 +149,13 @@
    "title": "آداب سلوك المريد",
    "sheikh_slug": "ali-mahmoud-alomari",
    "count": 12,
+<<<<<<< HEAD
    "aligned": 0,
+||||||| parent of 47ba60e (ناقد: تحديث أول بأول)
+   "aligned": 2,
+=======
+   "aligned": 3,
+>>>>>>> 47ba60e (ناقد: تحديث أول بأول)
    "transcribed": 12,
    "status": "مفرّغة — المحاذاة جارية"
   },
