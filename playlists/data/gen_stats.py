@@ -11,7 +11,7 @@ never its title. Titles come literally from YouTube (yt_titles.json).
 n = playlist position when the video is resolvable; rtt = playlist length.
 
 Invariants enforced: wan <= rdn <= rtt and wan <= wtt.
-wan counts only align files with non-empty w and cov>=0.5.
+wan counts align files with non-empty w and cov>=0.3 (playable floor; below ~0.3 the alignment is unusable).
 Also generates playlists/data/read/<rowId>.json: [{n,title,file,base}].
 Manifest is pinned to data/mut_manifest.json; a fetched manifest that
 shrinks >5% vs the pin is rejected (exit 2, nothing written).
@@ -236,7 +236,8 @@ def rows_from_lessons(slug):
 
 _ALIGN_CACHE = {}
 def count_aligned(slug):
-    """Aligned lessons that actually work: w non-empty AND cov>=0.5 (cov absent ok)."""
+    """Aligned lessons that actually play: w non-empty AND cov>=0.3 (cov absent ok).
+    Same set the row page offers as listenable — card count must match it."""
     if slug in _ALIGN_CACHE:
         return _ALIGN_CACHE[slug]
     d = os.path.join(PL, 'lessons', slug)
@@ -271,7 +272,7 @@ def count_aligned(slug):
             w, cov = ad, None
         else:
             w, cov = ad.get('w') or [], ad.get('cov')
-        if w and (cov is None or cov >= 0.5):
+        if w and (cov is None or cov >= 0.3):
             good += 1
     _ALIGN_CACHE[slug] = good
     return good
@@ -310,13 +311,13 @@ def rebuild_lessons_indexes():
                 w, cov = ad, None
             else:
                 w, cov = ad.get('w') or [], ad.get('cov')
-            if w and (cov is None or cov >= 0.5):
+            if w and (cov is None or cov >= 0.3):
                 ok_nums.append(n)
         new_idx = dict(idx)
         new_idx['af'] = af
         new_idx['tf'] = tf
         new_idx['align'] = sorted(af)   # disk is authoritative — stale lists get rebuilt
-        new_idx['alignOk'] = ok_nums    # playable set (w non-empty, cov>=0.5) — matches wan
+        new_idx['alignOk'] = ok_nums    # playable set (w non-empty, cov>=0.3) — matches wan
         new_idx['txt'] = sorted(tf)
         if new_idx != idx:            # write only on real change — keep worktree clean
             dump_atomic(new_idx, idx_path)

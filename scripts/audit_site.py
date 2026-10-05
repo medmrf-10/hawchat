@@ -2,7 +2,7 @@
 """Full-site consistency audit for playlists/ — FAIL on any inconsistency.
 Per sheikh/row: identity key, invariants, read file exists+nonempty+count,
 titles aren't filenames, no dup n, listen → series+lessons align==wan,
-playlist-identity uniqueness, cov>=0.5 for aligned lessons, photos exist,
+playlist-identity uniqueness, cov>=0.3 for aligned lessons, photos exist,
 no order==999 sheikhs. Usage: python3 scripts/audit_site.py [root]"""
 import json, os, re, sys, collections
 
@@ -87,7 +87,7 @@ for slug, s in st.items():
                     pl_claims[pl].append(rid)
                 elif r.get('wan', 0) > 0:
                     warns.append('%s/%s: series with align but no playlist link' % (slug, rid))
-                # align quality: no empty align, cov>=0.5
+                # align quality: no empty align, cov>=0.3 (same bar as wan/alignOk)
                 if r.get('wan', 0) > 0:
                     lp = os.path.join(PL, 'lessons', r['sSlug'], 'index.json')
                     li = J(lp) if os.path.exists(lp) else None
@@ -108,10 +108,10 @@ for slug, s in st.items():
                             else:
                                 w = (ad or {}).get('w') or []
                                 cov = (ad or {}).get('cov')
-                            if w and (cov is None or cov >= 0.5):
+                            if w and (cov is None or cov >= 0.3):
                                 good += 1
-                            elif cov is not None and cov < 0.5:
-                                warns.append('%s/%s: align %s cov=%.2f<0.5' % (slug, rid, n, cov))
+                            elif cov is not None and cov < 0.3:
+                                warns.append('%s/%s: align %s cov=%.2f<0.3' % (slug, rid, n, cov))
                         if good != r['wan']:
                             fails.append('%s/%s: good align %d vs wan %d' % (slug, rid, good, r['wan']))
 
