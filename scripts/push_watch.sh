@@ -41,7 +41,10 @@ heal() {
   local mf; mf=$(fix_markers)
   [ -n "$mf" ] && echo "$(date -u +%FT%TZ) HEAL markers-resolved: $mf" >> "$LOG"
   python3 playlists/data/gen_stats.py >/dev/null 2>&1
-  git add -A && git commit -qm "ترميم آلي: $msg" >/dev/null 2>&1
+  # targeted add: healed paths + known generated outputs only — never -A
+  # (a blanket add commits other agents' half-finished work in this shared tree)
+  git add -- $paths $mf playlists/data transcripts playlists/lessons lessons 2>/dev/null
+  git commit -qm "ترميم آلي: $msg" >/dev/null 2>&1
   bash /home/ubuntu/align_pkgs/rebase_fix.sh
   git pull --rebase -q 2>/dev/null; bash /home/ubuntu/align_pkgs/rebase_fix.sh
   if git push -q origin HEAD:main 2>/dev/null; then
@@ -63,6 +66,8 @@ while true; do
       for f in $files; do
         git show "$sha:$f" 2>/dev/null | grep -q "^<<<<<<<" && bad="$bad marker:$f"
       done
+      # phantom-guard: skip comment words, paths not in tag, nonexistent files
+      true
       echo "$files" | grep -qE "playlists/(series/index\.json|data/sheikh_stats\.json)" && bad="$bad generated"
       for f in $(echo "$files" | grep "\.json$"); do
         git show "$sha:$f" 2>/dev/null | python3 -c "import json,sys;json.load(sys.stdin)" 2>/dev/null || bad="$bad badjson:$f"
@@ -73,9 +78,10 @@ while true; do
       [ -n "$dels" ] && need_heal="$need_heal $dels"
       # core file content reverts vs blessed tag (generated files regen anyway — skip)
       while read -r cf; do
-        [ -z "$cf" ] && continue
+        case "$cf" in ''|\#*|*\ * ) continue;; esac
         echo "$cf" | grep -qE "playlists/(data/(sheikh_stats|search|redirects|yt_titles)\.json|data/read/|series/index\.json|lessons/.+/index\.json)" && continue
         echo "$files" | grep -qx "$cf" || continue
+        git cat-file -e "site-core-v2:$cf" 2>/dev/null || continue
         a=$(git rev-parse "site-core-v2:$cf" 2>/dev/null); b=$(git rev-parse "$sha:$cf" 2>/dev/null)
         [ -n "$a" ] && [ "$a" != "$b" ] && need_heal="$need_heal $cf"
       done < "$CORE"
@@ -91,8 +97,9 @@ while true; do
   # working-tree vs tag drift sweep (non-generated core files only)
   drift=""
   while read -r cf; do
-    [ -z "$cf" ] && continue
+    case "$cf" in ''|\#*|*\ * ) continue;; esac
     echo "$cf" | grep -qE "playlists/(data/(sheikh_stats|search|redirects|yt_titles)\.json|data/read/|series/index\.json|lessons/.+/index\.json)" && continue
+    git cat-file -e "site-core-v2:$cf" 2>/dev/null || continue
     a=$(git rev-parse "site-core-v2:$cf" 2>/dev/null); b=$(git hash-object "$cf" 2>/dev/null)
     [ -n "$a" ] && [ "$a" != "$b" ] && drift="$drift $cf"
   done < "$CORE"
