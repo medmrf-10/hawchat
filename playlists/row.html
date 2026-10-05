@@ -52,6 +52,16 @@ const ic=id=>'<svg class="i"><use href="icons.svg#'+id+'"/></svg>';
   const stats=await j('data/sheikh_stats.json');
   let rid=q.get('r'),slug=q.get('s'),ln0=parseInt(q.get('l'),10)||0;
   let hit=null;
+  if(stats&&rid){
+    // row id not found → follow a redirect (rows get re-keyed when merged)
+    let found=false;
+    for(const s in stats){if(s==='_meta')continue;
+      if((stats[s].rows||[]).some(r=>r.id===rid)){found=true;break}}
+    if(!found){
+      const red=await j('data/redirects.json');
+      if(red&&red[rid])rid=red[rid];
+    }
+  }
   if(stats){
     for(const s in stats){if(s==='_meta')continue;
       const r=(stats[s].rows||[]).find(r=>(rid&&r.id===rid)||(!rid&&slug&&r.sSlug===slug));
