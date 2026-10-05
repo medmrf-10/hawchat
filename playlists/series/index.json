@@ -131,7 +131,7 @@
    "title": "تفسير جزء عمّ",
    "sheikh_slug": "ahmed-abdelmonem",
    "count": 20,
-   "aligned": 2,
+   "aligned": 3,
    "transcribed": 20,
    "status": "مفرّغة — المحاذاة جارية"
   },
@@ -158,7 +158,7 @@
    "title": "كتاب أم البراهين",
    "sheikh_slug": "ali-mahmoud-alomari",
    "count": 14,
-   "aligned": 1,
+   "aligned": 2,
    "transcribed": 14,
    "status": "مفرّغة — المحاذاة جارية"
   },
@@ -166,18 +166,18 @@
    "slug": "alamri-barahin-sharh",
    "title": "شرح كتاب شرح أم البراهين للإمام السنوسي",
    "sheikh_slug": "ali-mahmoud-alomari",
-   "count": 15,
+   "count": 24,
    "aligned": 0,
-   "transcribed": 16,
+   "transcribed": 24,
    "status": "مفرّغة — المحاذاة جارية"
   },
   {
    "slug": "alamri-hisam",
    "title": "شرح الحسام الكاتي على إيساغوجي",
    "sheikh_slug": "ali-mahmoud-alomari",
-   "count": 30,
+   "count": 31,
    "aligned": 0,
-   "transcribed": 30,
+   "transcribed": 31,
    "status": "مفرّغة — المحاذاة جارية"
   },
   {
@@ -202,8 +202,8 @@
    "slug": "alasri-arbaa",
    "title": "لقاء الأربعاء",
    "sheikh_slug": "saif-alasri",
-   "count": 13,
-   "aligned": 15,
+   "count": 16,
+   "aligned": 16,
    "transcribed": 56,
    "status": "مكتملة التفريغ"
   },
@@ -236,7 +236,7 @@
   },
   {
    "slug": "aouni-jabir",
-   "title": "ثمانية دروس بحديث جابر",
+   "title": "قصة سيدنا جابر",
    "sheikh_slug": "hatem-alaouni",
    "count": 8,
    "aligned": 8,
@@ -265,9 +265,9 @@
    "slug": "alamri-falsafa-din",
    "title": "فلسفة الدين",
    "sheikh_slug": "ali-mahmoud-alomari",
-   "count": 2,
+   "count": 4,
    "aligned": 0,
-   "transcribed": 2,
+   "transcribed": 4,
    "status": "مفرّغة — المحاذاة جارية"
   },
   {
@@ -275,21 +275,45 @@
    "sheikh_slug": "dhaker-alhashimi",
    "title": "ألف باء الزواج",
    "count": 75,
-   "status": "المحاذاة جارية — 20/75"
+   "status": "المحاذاة جارية — 20/75",
+   "aligned": 20,
+   "transcribed": 73
   },
   {
    "slug": "hashimi-tarbiya",
    "sheikh_slug": "dhaker-alhashimi",
    "title": "ألف باء التربية",
    "count": 108,
-   "status": "المحاذاة جارية — 3/108"
+   "status": "المحاذاة جارية — 3/108",
+   "aligned": 3,
+   "transcribed": 52
   },
   {
    "slug": "hashimi-fiqh-nafs",
    "sheikh_slug": "dhaker-alhashimi",
    "title": "مجالس فقه النفس",
    "count": 181,
-   "status": "المحاذاة جارية — 0/181"
+   "status": "المحاذاة جارية — 0/181",
+   "aligned": 0,
+   "transcribed": 0
+  },
+  {
+   "slug": "alamri-falsafa-haditha",
+   "title": "دروس في الفلسفة الحديثة",
+   "sheikh_slug": "ali-mahmoud-alomari",
+   "count": 10,
+   "aligned": 0,
+   "transcribed": 10,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alamri-liqaat",
+   "title": "لقاءات علمية",
+   "sheikh_slug": "ali-mahmoud-alomari",
+   "count": 2,
+   "aligned": 0,
+   "transcribed": 2,
+   "status": "مفرّغة — المحاذاة جارية"
   }
  ]
 }
