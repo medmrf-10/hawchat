@@ -49,6 +49,11 @@ def clean_title(t):
     t = re.sub(r'\s+', ' ', t).strip(' -–—|/\\')
     return OVR.get(t, t)
 
+# ── YouTube ground truth titles (video id / playlist id → title) ──
+YTT = J(os.path.join(BASE, 'yt_titles.json')) or {}
+YTV = YTT.get('v') or {}
+YTP = YTT.get('p') or {}
+
 # ── lesson-list extraction from a filename list ───────────────
 def rows_from_files(files, base):
     """[{n,title,file,base}] — n from NNN[_-] prefix else position."""
@@ -57,9 +62,13 @@ def rows_from_files(files, base):
         m = re.match(r'^(\d+)[_\- ]', os.path.basename(f))
         n = int(m.group(1)) if m else i + 1
         t = os.path.basename(f)
-        t = re.sub(r'\.txt$', '', t)
-        t = re.sub(r'^\d+[_\- ]*\d*[_\- ]*', '', t)
-        t = re.split(r'[⧸｜]', t)[0]
+        mv = re.match(r'^NA_([\w\-]{6,})\.txt$', t)
+        if mv and mv.group(1) in YTV:
+            t = YTV[mv.group(1)]
+        else:
+            t = re.sub(r'\.txt$', '', t)
+            t = re.sub(r'^\d+[_\- ]*\d*[_\- ]*', '', t)
+            t = re.split(r'[⧸｜]', t)[0]
         out.append({'n': n, 'title': clean_title(t) or f'الدرس {n}', 'file': f, 'base': base})
     return out
 
@@ -70,6 +79,7 @@ def rows_from_lessons(slug):
     nums = li.get('txt') or []
     sd = J(os.path.join(PL, 'series', slug + '.json')) or {}
     titles = {l.get('n'): l.get('title') for l in sd.get('lessons', [])}
+    vids = {l.get('n'): l.get('video') for l in sd.get('lessons', [])}
     d = os.path.join(PL, 'lessons', slug)
     out = []
     for n in nums:
@@ -80,7 +90,7 @@ def rows_from_lessons(slug):
                 fn = cand; break
         if not fn:
             fn = '%03d.txt' % n
-        ttl = titles.get(n) or f'الدرس {n}'
+        ttl = YTV.get(vids.get(n) or '') or titles.get(n) or f'الدرس {n}'
         out.append({'n': n, 'title': clean_title(re.sub(r'^.*?\|\s*', '', ttl)),
                     'file': fn, 'base': 'lessons/%s/' % slug})
     return out
@@ -174,6 +184,12 @@ for sh in sheikhs:
         if (s.get('aligned') or 0) <= 0 and (s.get('transcribed') or 0) <= 0:
             continue
         r = srow(s['slug']) or newrow(s.get('title'))
+        if s['slug'] not in r.setdefault('_plchk', []):
+            r['_plchk'].append(s['slug'])
+            _sd = J(os.path.join(PL, 'series', s['slug'] + '.json')) or {}
+            _pl = (_sd.get('playlist') or '').split('list=')[-1].split('&')[0]
+            if _pl and YTP.get(_pl):
+                r['title'] = clean_title(YTP[_pl])
         if (s.get('aligned') or 0) > 0:
             r['wan'] = max(r['wan'], s['aligned'])
             r['wtt'] = max(r['wtt'], s.get('count') or 0, s['aligned'])

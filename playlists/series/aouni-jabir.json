@@ -3,12 +3,17 @@
  "sheikh": "الشيخ حاتم العوني",
  "sheikh_slug": "hatem-alaouni",
  "title": "قصة سيدنا جابر",
- "count": 4,
+ "count": 7,
  "lessons": [
   {
    "n": 1,
    "title": "001_uYqJpWKfZPk",
    "video": "uYqJpWKfZPk"
+  },
+  {
+   "n": 2,
+   "title": "002_zL2JVAGsooM",
+   "video": "zL2JVAGsooM"
   },
   {
    "n": 3,
@@ -24,6 +29,16 @@
    "n": 5,
    "title": "005_X2kn9G5G7H0",
    "video": "X2kn9G5G7H0"
+  },
+  {
+   "n": 6,
+   "title": "006_05YZI4BevOE",
+   "video": "05YZI4BevOE"
+  },
+  {
+   "n": 7,
+   "title": "007_M0a7k4Mgu9w",
+   "video": "M0a7k4Mgu9w"
   }
  ]
 }

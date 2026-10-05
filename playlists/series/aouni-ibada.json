@@ -3,7 +3,7 @@
  "sheikh": "الشيخ حاتم العوني",
  "sheikh_slug": "hatem-alaouni",
  "title": "العبادة في القرآن",
- "count": 5,
+ "count": 6,
  "lessons": [
   {
    "n": 1,
@@ -19,6 +19,11 @@
    "n": 3,
    "title": "003_TnipALRhjjk",
    "video": "TnipALRhjjk"
+  },
+  {
+   "n": 4,
+   "title": "004_GilH8_gUVOc",
+   "video": "GilH8_gUVOc"
   },
   {
    "n": 5,
