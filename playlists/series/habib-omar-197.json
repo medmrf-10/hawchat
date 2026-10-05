@@ -1,7 +1,7 @@
 {
  "slug": "habib-omar-197",
  "sheikh": "الحبيب عمر بن حفيظ",
- "sheikh_slug": "habib",
+ "sheikh_slug": "habib-omar-ibn-hafiz",
  "title": "ملتقى الدعاة العشرين بدار المصطفى",
  "count": 8,
  "lessons": [
@@ -69,5 +69,6 @@
    "dur": "",
    "align": true
   }
- ]
+ ],
+ "unv": 1
 }

@@ -1,7 +1,7 @@
 {
  "slug": "habib-omar-201",
  "sheikh": "الحبيب عمر بن حفيظ",
- "sheikh_slug": "habib",
+ "sheikh_slug": "habib-omar-ibn-hafiz",
  "title": "محاضرات توجيهية تربوية",
  "count": 116,
  "lessons": [
@@ -933,5 +933,6 @@
    "dur": "",
    "align": true
   }
- ]
+ ],
+ "unv": 1
 }

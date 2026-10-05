@@ -1,7 +1,7 @@
 {
  "slug": "habib-omar-196",
  "sheikh": "الحبيب عمر بن حفيظ",
- "sheikh_slug": "habib",
+ "sheikh_slug": "habib-omar-ibn-hafiz",
  "title": "فعاليات الدورة التعليمية ال32 بدار المصطفى بتريم",
  "count": 123,
  "lessons": [
@@ -989,5 +989,6 @@
    "dur": "",
    "align": true
   }
- ]
+ ],
+ "unv": 1
 }

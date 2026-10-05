@@ -498,6 +498,8 @@ for sh in sheikhs:
             continue
         r = srow(s['slug']) or newrow(s.get('title'))
         _sd = J(os.path.join(PL, 'series', s['slug'] + '.json')) or {}
+        if s.get('unv') or _sd.get('unv'):
+            r['unv'] = 1
         _pl = (_sd.get('playlist') or '').split('list=')[-1].split('&')[0]
         if _pl:
             r['plid'] = _pl
@@ -536,6 +538,8 @@ for sh in sheikhs:
                 continue
             r = newrow(sd.get('title') or dsl)
             r['sSlug'] = dsl
+            if sd.get('unv'):
+                r['unv'] = 1
             r['kind'] = r['kind'] or 's'
             r['wan'] = real
             _pl = (sd.get('playlist') or '').split('list=')[-1].split('&')[0]

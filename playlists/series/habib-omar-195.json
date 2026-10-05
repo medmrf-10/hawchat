@@ -1,7 +1,7 @@
 {
  "slug": "habib-omar-195",
  "sheikh": "الحبيب عمر بن حفيظ",
- "sheikh_slug": "habib",
+ "sheikh_slug": "habib-omar-ibn-hafiz",
  "title": "لذاتي بذاتي",
  "count": 28,
  "lessons": [
@@ -229,5 +229,6 @@
    "dur": "",
    "align": true
   }
- ]
+ ],
+ "unv": 1
 }

@@ -1,7 +1,7 @@
 {
  "slug": "habib-omar-200",
  "sheikh": "الحبيب عمر بن حفيظ",
- "sheikh_slug": "habib",
+ "sheikh_slug": "habib-omar-ibn-hafiz",
  "title": "رحلة كيرلا ، الهند - ذو القعدة 1444 - India Dawah Trip 2023",
  "count": 28,
  "lessons": [
@@ -229,5 +229,6 @@
    "dur": "",
    "align": true
   }
- ]
+ ],
+ "unv": 1
 }
