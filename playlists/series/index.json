@@ -100,6 +100,7 @@
    "transcribed": 172
   },
   {
+<<<<<<< HEAD
    "slug": "hashimi-zawaj",
    "sheikh_slug": "thakir-hashimi",
    "title": "ألف باء الزواج",
@@ -127,6 +128,33 @@
    "transcribed": 0
   },
   {
+||||||| parent of 689234c (hashimi: دروس أول بأول)
+   "slug": "hashimi-zawaj",
+   "sheikh_slug": "thakir-hashimi",
+   "title": "ألف باء الزواج",
+   "count": 75,
+   "status": "المحاذاة جارية — 0/75",
+   "aligned": 0
+  },
+  {
+   "slug": "hashimi-tarbiya",
+   "sheikh_slug": "thakir-hashimi",
+   "title": "ألف باء التربية",
+   "count": 108,
+   "status": "المحاذاة جارية — 0/108",
+   "aligned": 0
+  },
+  {
+   "slug": "hashimi-fiqh-nafs",
+   "sheikh_slug": "thakir-hashimi",
+   "title": "مجالس فقه النفس",
+   "count": 181,
+   "status": "المحاذاة جارية — 0/181",
+   "aligned": 0
+  },
+  {
+=======
+>>>>>>> 689234c (hashimi: دروس أول بأول)
    "slug": "fadel-dawra",
    "title": "دورة مفاتح التدبر",
    "sheikh_slug": "fadhel-sulaiman",
@@ -150,8 +178,35 @@
    "sheikh_slug": "fadhel-sulaiman",
    "count": 47,
    "aligned": 0,
+<<<<<<< HEAD
    "status": "مفرّغة — المحاذاة جارية",
    "transcribed": 47
+||||||| parent of 689234c (hashimi: دروس أول بأول)
+   "status": "مفرّغة — المحاذاة جارية"
+=======
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "hashimi-zawaj",
+   "sheikh_slug": "thakir-hashimi",
+   "title": "ألف باء الزواج",
+   "count": 75,
+   "status": "المحاذاة جارية — 1/75"
+  },
+  {
+   "slug": "hashimi-tarbiya",
+   "sheikh_slug": "thakir-hashimi",
+   "title": "ألف باء التربية",
+   "count": 108,
+   "status": "المحاذاة جارية — 0/108"
+  },
+  {
+   "slug": "hashimi-fiqh-nafs",
+   "sheikh_slug": "thakir-hashimi",
+   "title": "مجالس فقه النفس",
+   "count": 181,
+   "status": "المحاذاة جارية — 0/181"
+>>>>>>> 689234c (hashimi: دروس أول بأول)
   }
  ]
 }
