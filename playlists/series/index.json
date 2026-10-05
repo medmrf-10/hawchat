@@ -202,8 +202,8 @@
    "slug": "alasri-arbaa",
    "title": "لقاء الأربعاء",
    "sheikh_slug": "saif-alasri",
-   "count": 17,
-   "aligned": 17,
+   "count": 20,
+   "aligned": 20,
    "transcribed": 56,
    "status": "مكتملة التفريغ"
   },
@@ -311,21 +311,27 @@
    "sheikh_slug": "dhaker-alhashimi",
    "title": "ألف باء الزواج",
    "count": 75,
-   "status": "المحاذاة جارية — 25/75"
+   "status": "المحاذاة جارية — 25/75",
+   "aligned": 26,
+   "transcribed": 73
   },
   {
    "slug": "hashimi-tarbiya",
    "sheikh_slug": "dhaker-alhashimi",
    "title": "ألف باء التربية",
    "count": 108,
-   "status": "المحاذاة جارية — 3/108"
+   "status": "المحاذاة جارية — 3/108",
+   "aligned": 3,
+   "transcribed": 72
   },
   {
    "slug": "hashimi-fiqh-nafs",
    "sheikh_slug": "dhaker-alhashimi",
    "title": "مجالس فقه النفس",
    "count": 181,
-   "status": "المحاذاة جارية — 0/181"
+   "status": "المحاذاة جارية — 0/181",
+   "aligned": 0,
+   "transcribed": 10
   }
  ]
 }
