@@ -5,112 +5,98 @@
    "sheikh_slug": "said-bouti",
    "title": "دورة مختصرة في العقيدة الإسلامية",
    "count": 10,
-   "status": "مكتملة التفريغ",
-   "aligned": 10
+   "status": "مكتملة التفريغ"
   },
   {
    "slug": "bouti-yaghalitun",
    "sheikh_slug": "said-bouti",
    "title": "يغالطونك إذ يقولون",
    "count": 38,
-   "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 38
+   "status": "مفرّغة — المحاذاة جارية"
   },
   {
    "slug": "bouti-tarikh",
    "sheikh_slug": "said-bouti",
    "title": "تاريخ التشريع الإسلامي",
    "count": 38,
-   "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 38
+   "status": "مفرّغة — المحاذاة جارية"
   },
   {
    "slug": "bouti-mashahid",
    "sheikh_slug": "said-bouti",
    "title": "مشاهد وعبر من القرآن والسنة",
    "count": 30,
-   "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 30
+   "status": "مفرّغة — المحاذاة جارية"
   },
   {
    "slug": "bouti-rihla",
    "sheikh_slug": "said-bouti",
    "title": "رحلة الخلود",
    "count": 23,
-   "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 23
+   "status": "مفرّغة — المحاذاة جارية"
   },
   {
    "slug": "bouti-hubb",
    "sheikh_slug": "said-bouti",
    "title": "الحب في القرآن",
    "count": 26,
-   "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 26
+   "status": "مفرّغة — المحاذاة جارية"
   },
   {
    "slug": "bouti-yaqiniyyat",
    "sheikh_slug": "said-bouti",
    "title": "كبرى اليقينيات الكونية",
    "count": 54,
-   "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 54
+   "status": "مفرّغة — المحاذاة جارية"
   },
   {
    "slug": "bouti-ulum-quran",
    "sheikh_slug": "said-bouti",
    "title": "علوم القرآن الكريم",
    "count": 63,
-   "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 63
+   "status": "مفرّغة — المحاذاة جارية"
   },
   {
    "slug": "bouti-sira",
    "sheikh_slug": "said-bouti",
    "title": "فقه السيرة النبوية",
    "count": 70,
-   "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 70
+   "status": "مفرّغة — المحاذاة جارية"
   },
   {
    "slug": "bouti-khutab-2012",
    "sheikh_slug": "said-bouti",
    "title": "خطب الجمعة 2012",
    "count": 52,
-   "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 52
+   "status": "مفرّغة — المحاذاة جارية"
   },
   {
    "slug": "gomaa-khawarij",
    "sheikh_slug": "ali-gomaa",
    "title": "الرد على خوارج العصر",
    "count": 172,
-   "status": "المحاذاة جارية",
-   "aligned": 146
+   "status": "المحاذاة جارية"
   },
   {
-   "slug": "fadel-dawra",
-   "sheikh_slug": "fadhel-sulaiman",
-   "title": "دورة مفاتح التدبر",
-   "count": 14,
-   "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 14
+   "slug": "hashimi-zawaj",
+   "sheikh_slug": "thakir-hashimi",
+   "title": "ألف باء الزواج",
+   "count": 75,
+   "status": "المحاذاة جارية — 0/75"
   },
   {
-   "slug": "fadel-juz30",
-   "sheikh_slug": "fadhel-sulaiman",
-   "title": "تدبر سور الجزء الثلاثين",
-   "count": 47,
-   "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 0
+   "slug": "hashimi-tarbiya",
+   "sheikh_slug": "thakir-hashimi",
+   "title": "ألف باء التربية",
+   "count": 108,
+   "status": "المحاذاة جارية — 0/108"
   },
   {
-   "slug": "fadel-farsh",
-   "sheikh_slug": "fadhel-sulaiman",
-   "title": "تدبر فرش القراءات",
-   "count": 28,
-   "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 12
+   "slug": "hashimi-fiqh-nafs",
+   "sheikh_slug": "thakir-hashimi",
+   "title": "مجالس فقه النفس",
+   "count": 181,
+   "status": "المحاذاة جارية — 0/181"
   }
  ]
 }
