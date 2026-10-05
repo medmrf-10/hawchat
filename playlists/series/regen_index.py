@@ -18,6 +18,18 @@ for f in sorted(glob.glob('*.json')):
     ldir = os.path.join('..', 'lessons', slug)
     try:
         li = json.load(open(os.path.join(ldir, 'index.json')))
+        # disk is truth: sync align/txt lists to actual files (agents push partial indexes)
+        if os.path.isdir(ldir):
+            import re
+            al = sorted(int(m.group(1)) for fn in os.listdir(ldir)
+                        for m in [re.match(r'^(\d+)\.align\.json$', fn)] if m)
+            tx = sorted(int(m.group(1)) for fn in os.listdir(ldir)
+                        for m in [re.match(r'^(\d+)\.txt$', fn)] if m)
+            if (li.get('align') or []) != al or (li.get('txt') or []) != tx:
+                li['align'] = al
+                li['txt'] = tx or li.get('txt', [])
+                json.dump(li, open(os.path.join(ldir, 'index.json'), 'w'),
+                          ensure_ascii=False, indent=1)
         s['aligned'] = len(li.get('align', []))
         s['transcribed'] = len(li.get('txt', []))
         # persist filename padding so lesson.html stops probing
