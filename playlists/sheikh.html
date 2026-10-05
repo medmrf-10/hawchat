@@ -136,7 +136,7 @@ function renderSeries(){
     let links='';
     if(r.watch)links+=`<a class="btn play" href="series.html?s=${encodeURIComponent(r.watch.slug)}" title="استمع/تصفح الدروس">${ICON.play}</a>`;
     if(r.read){
-      if(r.read.id)links+=`<a class="btn read" href="${MUT}#/s/${esc(r.read.id)}" target="_blank" rel="noopener" title="اقرأ التفريغ">${ICON.book}</a>`;
+      if(r.read.id)links+=`<a class="btn read" href="tr.html?id=${encodeURIComponent(r.read.id)}" title="اقرأ التفريغ">${ICON.book}</a>`;
       else if(r.read.tr)links+=`<a class="btn read" href="tr.html?sh=${encodeURIComponent(r.read.sh)}&s=${encodeURIComponent(r.read.sr)}" title="اقرأ التفريغ">${ICON.book}</a>`;
       else if(r.read.slug)links+=`<a class="btn read" href="series.html?s=${encodeURIComponent(r.read.slug)}" title="اقرأ التفريغ">${ICON.book}</a>`;
     }

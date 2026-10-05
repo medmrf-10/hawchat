@@ -30,20 +30,30 @@ function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').repl
 async function j(u){try{const r=await fetch(u);return r.ok?await r.json():null}catch(e){return null}}
 async function t(u){try{const r=await fetch(u);return r.ok?await r.text():null}catch(e){return null}}
 (async()=>{
- const q=new URLSearchParams(location.search),sh=q.get('sh')||'',sr=q.get('s')||'';
- const idx=await j('../transcripts/index.json?v='+Date.now());
- const sheikh=idx&&idx.sheikhs?idx.sheikhs[sh]:null;
- const ser=sheikh?sheikh.series.find(x=>x.slug===sr):null;
+ const q=new URLSearchParams(location.search),sh=q.get('sh')||'',sr=q.get('s')||'',mid=q.get('id')||'';
  const T=document.getElementById('ttl'),M=document.getElementById('meta'),L=document.getElementById('ls'),X=document.getElementById('txt');
- if(!ser){T.textContent='غير موجود';M.textContent='';L.innerHTML='<div class="sub">تعذر العثور على هذه السلسلة.</div>';return}
- T.textContent=(sheikh.name||'')+' — '+ser.title;
- M.textContent=ser.n+' مفرّغ'+(ser.total?' من '+ser.total:'');
- ser.files.forEach((f,i)=>{
+ let name='',title='',files=[],n=0,total=0,base='';
+ if(mid){ // mutalaa source — same reader, unified
+  const man=await j('https://medmrf-10.github.io/des/mutalaa/data/manifest.json?v='+Date.now());
+  const ser=((man&&Array.isArray(man)?man:(man&&man.series)||[])).find(x=>String(x.id)===String(mid));
+  if(ser){name=ser.sheikh||'';title=ser.name||ser.title||'';files=ser.files||[];n=ser.done||files.length;total=ser.total||n;
+   base='https://medmrf-10.github.io/des/mutalaa/data/txt/'+encodeURIComponent(mid)+'/';}
+ }else{
+  const idx=await j('../transcripts/index.json?v='+Date.now());
+  const sheikh=idx&&idx.sheikhs?idx.sheikhs[sh]:null;
+  const ser=sheikh?sheikh.series.find(x=>x.slug===sr):null;
+  if(ser){name=sheikh.name||'';title=ser.title;files=ser.files||[];n=ser.n||files.length;total=ser.total||n;
+   base='../transcripts/'+encodeURIComponent(sh)+'/'+encodeURIComponent(sr)+'/';}
+ }
+ if(!files.length){T.textContent='غير موجود';M.textContent='';L.innerHTML='<div class="sub">تعذر العثور على هذه السلسلة.</div>';return}
+ T.textContent=name+' — '+title;
+ M.textContent=n+' مفرّغ'+(total?' من '+total:'');
+ files.forEach((f,i)=>{
   const b=document.createElement('button');
   b.innerHTML='<span>الحلقة '+(i+1)+'</span><i>'+esc(f)+'</i>';
   b.onclick=async()=>{L.querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
    X.style.display='block';X.textContent='يُحمَّل…';
-   const tx=await t('../transcripts/'+encodeURIComponent(sh)+'/'+encodeURIComponent(sr)+'/'+encodeURIComponent(f));
+   const tx=await t(base+encodeURIComponent(f));
    X.textContent=tx||'تعذر تحميل النص';X.scrollIntoView({behavior:'smooth'})};
   L.appendChild(b);
  });
