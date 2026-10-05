@@ -236,43 +236,39 @@
   },
   {
    "slug": "hashimi-zawaj",
-   "sheikh_slug": "thakir-hashimi",
+   "sheikh_slug": "dhaker-alhashimi",
    "title": "ألف باء الزواج",
    "count": 75,
-   "status": "المحاذاة جارية — 6/75"
+   "status": "المحاذاة جارية — 5/75",
+   "aligned": 5,
+   "transcribed": 44
   },
   {
    "slug": "hashimi-tarbiya",
-   "sheikh_slug": "thakir-hashimi",
+   "sheikh_slug": "dhaker-alhashimi",
    "title": "ألف باء التربية",
    "count": 108,
-   "status": "المحاذاة جارية — 0/108"
+   "status": "المحاذاة جارية — 0/108",
+   "aligned": 0,
+   "transcribed": 41
   },
   {
    "slug": "hashimi-fiqh-nafs",
-   "sheikh_slug": "thakir-hashimi",
+   "sheikh_slug": "dhaker-alhashimi",
    "title": "مجالس فقه النفس",
    "count": 181,
-<<<<<<< HEAD
    "status": "المحاذاة جارية — 0/181",
    "aligned": 0,
    "transcribed": 0
   },
   {
    "slug": "aouni-jabir",
-   "title": "ثمانية دروس بحديث جابر",
+   "title": "قصة سيدنا جابر",
    "sheikh_slug": "hatem-alaouni",
    "count": 2,
    "aligned": 2,
    "transcribed": 8,
    "status": "مكتملة التفريغ"
-||||||| parent of 212d4d9 (hashimi: دروس أول بأول)
-   "status": "المحاذاة جارية — 0/181",
-   "aligned": 0,
-   "transcribed": 0
-=======
-   "status": "المحاذاة جارية — 0/181"
->>>>>>> 212d4d9 (hashimi: دروس أول بأول)
   }
  ]
 }
