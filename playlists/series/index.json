@@ -104,7 +104,7 @@
    "title": "دورة مفاتح التدبر",
    "sheikh_slug": "fadhel-sulaiman",
    "count": 14,
-   "aligned": 0,
+   "aligned": 14,
    "status": "مكتملة التفريغ",
    "transcribed": 14
   },
@@ -113,7 +113,7 @@
    "title": "تدبر فرش القراءات",
    "sheikh_slug": "fadhel-sulaiman",
    "count": 28,
-   "aligned": 0,
+   "aligned": 27,
    "status": "مفرّغة — المحاذاة جارية",
    "transcribed": 28
   },
@@ -202,8 +202,8 @@
    "slug": "alasri-arbaa",
    "title": "لقاء الأربعاء",
    "sheikh_slug": "saif-alasri",
-   "count": 5,
-   "aligned": 5,
+   "count": 6,
+   "aligned": 6,
    "transcribed": 56,
    "status": "مكتملة التفريغ"
   },
@@ -236,7 +236,7 @@
   },
   {
    "slug": "aouni-jabir",
-   "title": "ثمانية دروس بحديث جابر",
+   "title": "قصة سيدنا جابر",
    "sheikh_slug": "hatem-alaouni",
    "count": 8,
    "aligned": 8,
@@ -249,7 +249,7 @@
    "title": "ألف باء الزواج",
    "count": 75,
    "status": "المحاذاة جارية — 9/75",
-   "aligned": 9,
+   "aligned": 7,
    "transcribed": 44
   },
   {
@@ -258,7 +258,7 @@
    "title": "ألف باء التربية",
    "count": 108,
    "status": "المحاذاة جارية — 3/108",
-   "aligned": 3,
+   "aligned": 1,
    "transcribed": 41
   },
   {
