@@ -131,7 +131,7 @@
    "title": "تفسير جزء عمّ",
    "sheikh_slug": "ahmed-abdelmonem",
    "count": 20,
-   "aligned": 2,
+   "aligned": 3,
    "transcribed": 20,
    "status": "مفرّغة — المحاذاة جارية"
   },
@@ -158,7 +158,7 @@
    "title": "كتاب أم البراهين",
    "sheikh_slug": "ali-mahmoud-alomari",
    "count": 14,
-   "aligned": 1,
+   "aligned": 2,
    "transcribed": 14,
    "status": "مفرّغة — المحاذاة جارية"
   },
@@ -168,7 +168,7 @@
    "sheikh_slug": "ali-mahmoud-alomari",
    "count": 15,
    "aligned": 0,
-   "transcribed": 16,
+   "transcribed": 24,
    "status": "مفرّغة — المحاذاة جارية"
   },
   {
@@ -248,41 +248,27 @@
    "sheikh_slug": "dhaker-alhashimi",
    "title": "ألف باء الزواج",
    "count": 75,
-<<<<<<< HEAD
-   "status": "المحاذاة جارية — 9/75",
-   "aligned": 9,
-   "transcribed": 44
-||||||| parent of 807157d (hashimi: دروس أول بأول)
    "status": "المحاذاة جارية — 20/75",
-   "aligned": 20,
-   "transcribed": 73
-=======
-   "status": "المحاذاة جارية — 20/75"
->>>>>>> 807157d (hashimi: دروس أول بأول)
+   "transcribed": 73,
+   "aligned": 20
   },
   {
    "slug": "hashimi-tarbiya",
    "sheikh_slug": "dhaker-alhashimi",
    "title": "ألف باء التربية",
    "count": 108,
-<<<<<<< HEAD
    "status": "المحاذاة جارية — 3/108",
-   "aligned": 3,
-   "transcribed": 41
-||||||| parent of 807157d (hashimi: دروس أول بأول)
-   "status": "المحاذاة جارية — 3/108",
-   "aligned": 3,
-   "transcribed": 47
-=======
-   "status": "المحاذاة جارية — 3/108"
->>>>>>> 807157d (hashimi: دروس أول بأول)
+   "transcribed": 48,
+   "aligned": 3
   },
   {
    "slug": "hashimi-fiqh-nafs",
    "sheikh_slug": "dhaker-alhashimi",
    "title": "مجالس فقه النفس",
    "count": 181,
-   "status": "المحاذاة جارية — 0/181"
+   "status": "المحاذاة جارية — 0/181",
+   "transcribed": 0,
+   "aligned": 0
   }
  ]
 }
