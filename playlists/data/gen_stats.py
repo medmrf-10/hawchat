@@ -463,6 +463,22 @@ for sh in sheikhs:
         if r.get('mutId') and not r.get('sSlug') and not r.get('plid'):
             t = norm(r['title'])
             tgt = next((r2 for r2 in rows if (r2.get('sSlug') or r2.get('trSr')) and norm(r2['title']) == t), None)
+            if not tgt:
+                mfiles = {os.path.basename(str(x)) for x in ((r.get('_mut') or {}).get('files') or [])}
+                for r2 in rows:
+                    if not (r2.get('trSh') and r2.get('trSr')):
+                        continue
+                    se2 = next((x for x in (tr.get(r2['trSh'], {}).get('series') or []) if x.get('slug') == r2['trSr']), None)
+                    if not se2:
+                        continue
+                    tfiles = {os.path.basename(str(x)) for x in (se2.get('files') or [])}
+                    ov = len(mfiles & tfiles)
+                    same_files = ov > 0 and ov >= 0.5 * min(len(mfiles) or 10**9, len(tfiles))
+                    same_name = bool(mfiles) and len(mfiles) == len(tfiles) and (
+                        t in norm(r2['title']) or norm(r2['title']) in t)
+                    if same_files or same_name:
+                        tgt = r2
+                        break
             if tgt:
                 tgt['rdn'] = max(tgt['rdn'], r['rdn'])
                 tgt['rtt'] = max(tgt['rtt'], r['rtt'])
