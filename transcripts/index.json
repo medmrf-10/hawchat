@@ -981,8 +981,7 @@
       "006_6 - العبادة والعبودية في القرآن الكريم  مكان الحب من العبودية.txt",
       "007_7 - العبادة والعبودية في القرآن الكريم  كيف نوفق بين العبودية وشعار الحرية المرفوع في هذا العصر ؟.txt",
       "008_8 - العبادة والعبودية في القرآن الكريم  آثار تحقق الإنسان بالعبودية.txt"
-     ],
-     "n": 8
+     ]
     },
     {
      "slug": "tazkiya",
@@ -997,8 +996,7 @@
       "009_8 - التزكية في القرآن الكريم  من آثار التزكية - الأخوة الإنسانية.txt",
       "010_9 - التزكية في القرآن الكريم  التمييز بين متطلبات الروح والنفس.txt",
       "011_10 - التزكية في القرآن الكريم  طرب الأرواح.txt"
-     ],
-     "n": 9
+     ]
     },
     {
      "slug": "muhammad",
@@ -1011,8 +1009,7 @@
       "005_4 - محمد ﷺ في القرآن الكريم  العلامة البوطي  رسالة النبي محمد ﷺ.txt",
       "006_5 - محمد ﷺ في القرآن الكريم  العلامة البوطي  مكانة النبي محمد ﷺ عند الله.txt",
       "007_6 - محمد ﷺ في القرآن الكريم  العلامة البوطي  أخلاق النبي محمد ﷺ.txt"
-     ],
-     "n": 7
+     ]
     },
     {
      "slug": "tawba",
@@ -1074,8 +1071,7 @@
       "005_4 - ضائعون هداهم القرآن  ابراهيم بن الأدهم.txt",
       "006_5 - ضائعون هداهم القرآن  عبد الله بن مسلمة القعنبي - ابن دقيق العيد.txt",
       "007_6 - ضائعون هداهم القرآن  عبد الرحمن القس.txt"
-     ],
-     "n": 6
+     ]
     },
     {
      "slug": "sahaba",
@@ -1084,8 +1080,7 @@
       "007_6 - الصحابة في القرآن الكريم  شهادة القرآن لأصحاب غزوة الأحزاب.txt",
       "008_7 - الصحابة في القرآن الكريم  أليس هناك انتقاد لأصحاب رسول الله ﷺ في القرآن الكريم ؟.txt",
       "009_8 - الصحابة في القرآن الكريم  أليس هناك انتقاد لأصحاب رسول الله ﷺ في القرآن الكريم ؟.txt"
-     ],
-     "n": 3
+     ]
     }
    ]
   },
@@ -1150,18 +1145,9 @@
       "barahin-sharh-12_AlAmri.txt",
       "barahin-sharh-13_AlAmri.txt",
       "barahin-sharh-14_AlAmri.txt",
-      "barahin-sharh-15_AlAmri.txt",
-      "barahin-sharh-16_AlAmri.txt",
-      "barahin-sharh-17_AlAmri.txt",
-      "barahin-sharh-18_AlAmri.txt",
-      "barahin-sharh-19_AlAmri.txt",
-      "barahin-sharh-20_AlAmri.txt",
-      "barahin-sharh-21_AlAmri.txt",
-      "barahin-sharh-22_AlAmri.txt",
-      "barahin-sharh-23_AlAmri.txt",
-      "barahin-sharh-24_AlAmri.txt"
+      "barahin-sharh-15_AlAmri.txt"
      ],
-     "n": 24
+     "n": 3
     },
     {
      "slug": "hisam",
@@ -1194,13 +1180,11 @@
       "hisam-25_AlAmri.txt",
       "hisam-26_AlAmri.txt",
       "hisam-27_AlAmri.txt",
-      "hisam-28_AlAmri.txt",
       "hisam-29_AlAmri.txt",
       "hisam-30_AlAmri.txt",
-      "hisam-31_AlAmri.txt",
-      "hisam-32_AlAmri.txt"
+      "hisam-31_AlAmri.txt"
      ],
-     "n": 32
+     "n": 30
     },
     {
      "slug": "iqtisad",
@@ -1296,83 +1280,7 @@
       "barahin-muqtatafat-16_AlAmri.txt",
       "barahin-muqtatafat-17_AlAmri.txt"
      ],
-     "n": 17
-    },
-    {
-     "slug": "bath",
-     "title": "لقاء البث المباشر",
-     "files": [
-      "bath-01_AlAmri.txt"
-     ],
-     "n": 1
-    },
-    {
-     "slug": "durus-amma",
-     "title": "دروس عامة",
-     "files": [
-      "durus-amma-01_AlAmri.txt",
-      "durus-amma-02_AlAmri.txt",
-      "durus-amma-03_AlAmri.txt",
-      "durus-amma-04_AlAmri.txt"
-     ],
-     "n": 4
-    },
-    {
-     "slug": "falsafa-din",
-     "title": "فلسفة الدين",
-     "files": [
-      "falsafa-din-01_AlAmri.txt",
-      "falsafa-din-02_AlAmri.txt",
-      "falsafa-din-03_AlAmri.txt",
-      "falsafa-din-04_AlAmri.txt"
-     ],
-     "n": 4
-    },
-    {
-     "slug": "falsafa-haditha",
-     "title": "دروس في الفلسفة الحديثة",
-     "files": [
-      "falsafa-haditha-01_AlAmri.txt",
-      "falsafa-haditha-02_AlAmri.txt",
-      "falsafa-haditha-03_AlAmri.txt",
-      "falsafa-haditha-04_AlAmri.txt",
-      "falsafa-haditha-05_AlAmri.txt",
-      "falsafa-haditha-06_AlAmri.txt",
-      "falsafa-haditha-07_AlAmri.txt",
-      "falsafa-haditha-08_AlAmri.txt",
-      "falsafa-haditha-09_AlAmri.txt",
-      "falsafa-haditha-10_AlAmri.txt"
-     ],
      "n": 10
-    },
-    {
-     "slug": "liqaat",
-     "title": "لقاءات علمية",
-     "files": [
-      "liqaat-02_AlAmri.txt",
-      "liqaat-03_AlAmri.txt"
-     ],
-     "n": 2
-    },
-    {
-     "slug": "manhaj-iman",
-     "title": "المنهاج في شعب الإيمان",
-     "files": [
-      "manhaj-iman-01_AlAmri.txt",
-      "manhaj-iman-02_AlAmri.txt",
-      "manhaj-iman-03_AlAmri.txt",
-      "manhaj-iman-04_AlAmri.txt"
-     ],
-     "n": 4
-    },
-    {
-     "slug": "mayar-ilm",
-     "title": "معيار العلم مباحث الوجود",
-     "files": [
-      "mayar-ilm-01_AlAmri.txt",
-      "mayar-ilm-02_AlAmri.txt"
-     ],
-     "n": 2
     }
    ],
    "slug": "ali-mahmoud-alomari"
