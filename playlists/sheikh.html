@@ -11,9 +11,8 @@
 <link rel="manifest" href="../manifest.webmanifest">
 <link rel="icon" type="image/png" href="../icons/icon-192.png">
 <link rel="apple-touch-icon" href="../icons/favicon-180.png">
-<link rel="stylesheet" href="../theme.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../theme.css?v=7">
+<link rel="stylesheet" href="common.css?v=7">
 <style>
 .wrap{max-width:1100px;margin:0 auto;padding:16px}
 .hero{display:flex;align-items:center;gap:16px;background:linear-gradient(145deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:var(--r-lg);padding:20px;margin-top:8px}
@@ -94,8 +93,7 @@
 <main><div class="wrap">
   <div id="body"><div class="empty">جارٍ التحميل…</div></div>
 </div></main>
-<button id="save" style="display:none">حفظ — يُطبَّق على الطابور خلال دقيقة</button>
-<div id="toast"></div>
+<script src="common.js?v=7"></script>
 <script>
 const NT='https://ntfy.sh/des_helm_q7';
 const MUT='https://medmrf-10.github.io/des/mutalaa/';
@@ -199,7 +197,8 @@ document.addEventListener('click',e=>{
   B.innerHTML=h;
   renderSeries();
 })();
-if('serviceWorker' in navigator)navigator.serviceWorker.register('../sw.js').catch(()=>{});
+function maxR(rows){let m=0;for(const r of rows)m=Math.max(m,r.rtt||0);return m}
+if('serviceWorker' in navigator)swRegister('../sw.js');
 </script>
 </body>
 </html>
