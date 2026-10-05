@@ -1,1 +1,4 @@
 __pycache__/
+playlists/data/helm_*.json
+__pycache__/
+*.pyc
