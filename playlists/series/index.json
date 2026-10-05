@@ -239,24 +239,21 @@
    "sheikh_slug": "thakir-hashimi",
    "title": "ألف باء الزواج",
    "count": 75,
-   "status": "المحاذاة جارية — 5/75",
-   "aligned": 5,
-   "transcribed": 44
+   "status": "المحاذاة جارية — 6/75"
   },
   {
    "slug": "hashimi-tarbiya",
    "sheikh_slug": "thakir-hashimi",
    "title": "ألف باء التربية",
    "count": 108,
-   "status": "المحاذاة جارية — 0/108",
-   "aligned": 0,
-   "transcribed": 41
+   "status": "المحاذاة جارية — 0/108"
   },
   {
    "slug": "hashimi-fiqh-nafs",
    "sheikh_slug": "thakir-hashimi",
    "title": "مجالس فقه النفس",
    "count": 181,
+<<<<<<< HEAD
    "status": "المحاذاة جارية — 0/181",
    "aligned": 0,
    "transcribed": 0
@@ -269,6 +266,13 @@
    "aligned": 2,
    "transcribed": 8,
    "status": "مكتملة التفريغ"
+||||||| parent of 212d4d9 (hashimi: دروس أول بأول)
+   "status": "المحاذاة جارية — 0/181",
+   "aligned": 0,
+   "transcribed": 0
+=======
+   "status": "المحاذاة جارية — 0/181"
+>>>>>>> 212d4d9 (hashimi: دروس أول بأول)
   }
  ]
 }
