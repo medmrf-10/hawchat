@@ -2,8 +2,9 @@
 """align_to_transcript.py <audio> <transcript.txt> <out.json>
 Forced-align a KNOWN transcript to audio via faster-whisper word timestamps
 + difflib mapping. Output: {"w":[[word,start,end,seg],...]}
-Also caches raw whisper output at <out>.wwords.json for reuse."""
-import sys, json, re, os, difflib
+Caches raw whisper output under ~/.cache/hawchat/wwords/ (outside the repo)
+keyed by the output path's sha1, so caches never land in the published tree."""
+import sys, json, re, os, difflib, hashlib
 from faster_whisper import WhisperModel
 
 DIAC = re.compile(r'[ً-ْٰـ]')
@@ -31,8 +32,13 @@ def whisper_words(audio, cache):
     json.dump(ww, open(cache,'w',encoding='utf8'), ensure_ascii=False)
     return ww
 
+def wwords_cache(out_path):
+    d = os.path.join(os.path.expanduser('~'), '.cache', 'hawchat', 'wwords')
+    os.makedirs(d, exist_ok=True)
+    return os.path.join(d, hashlib.sha1(os.path.abspath(out_path).encode()).hexdigest() + '.json')
+
 def main(audio, txt_path, out_path):
-    cache = out_path + '.wwords.json'
+    cache = wwords_cache(out_path)
     disp_words = open(txt_path, encoding='utf8').read().split()
     wwords = whisper_words(audio, cache)
     a = [norm(w) for w in disp_words]

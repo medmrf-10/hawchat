@@ -23,7 +23,7 @@
 
 - **عناوين وهوية**: `Amiri` (var `--font-ar`) — خط نسخي أصيل
 - **واجهة ونصوص**: `IBM Plex Sans Arabic` (var `--font-ui`) أوزان 300–700
-- الاستدعاء: `<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">`
+- الاستدعاء محلي فقط (لا CDN — شرط العمل دون اتصال): `<link rel="stylesheet" href="fonts/fonts.css">` مع `<link rel="preload" href="fonts/Amiri-400-arabic.woff2" as="font" type="font/woff2" crossorigin>` و`<link rel="preload" href="fonts/IBMPlexSansArabic-400-arabic.woff2" as="font" type="font/woff2" crossorigin>` للملفين العربيين
 - اتجاه الصفحة دائماً `dir="rtl"` و`lang="ar"`.
 
 ## القياسات

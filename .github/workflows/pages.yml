@@ -22,6 +22,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Inline-script syntax check (node --check)
+        run: python3 scripts/check_inline_js.py
       - name: Regenerate derived data
         run: python3 playlists/data/gen_stats.py
       - name: Structural audit (fail on inconsistency)
@@ -33,9 +35,20 @@ jobs:
           if git grep -nE '^(<{7}|={7}|>{7})' -- ':!*.md' | head -20 | grep .; then
             echo "conflict markers in tree"; exit 1
           fi
+      - name: Stage publishable tree into _site/
+        run: |
+          mkdir -p _site
+          rsync -a --delete \
+            --exclude '.git/' --exclude '.github/' --exclude '_site/' \
+            --exclude 'scripts/' --exclude 'tools/' --exclude 'inbox/' \
+            --exclude 'track/' --exclude 'site_pub.log' \
+            --exclude '*.wwords.json' --exclude '__pycache__/' --exclude '*.pyc' \
+            --exclude 'shots/' --exclude '.agents/' \
+            ./ _site/
+          du -sh _site
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
 
   deploy:
     needs: build
