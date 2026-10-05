@@ -11,7 +11,9 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/favicon-180.png">
-<link rel="stylesheet" href="theme.css?v=7">
+<link rel="stylesheet" href="theme.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 <header class="hd"><div class="hd-in">
@@ -29,7 +31,7 @@
   </a>
 </div></main>
 <script>
-if('serviceWorker' in navigator)swRegister('sw.js');
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
 </script>
 </body>
 </html>
