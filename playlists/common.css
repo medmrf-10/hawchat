@@ -23,9 +23,9 @@
 .stat .bar i{display:block;height:100%;background:var(--read)}
 .stat.lst .bar i{background:var(--listen)}
 /* breadcrumb */
-nav.crumb{font-size:var(--fs-xs);color:var(--dim);margin-top:6px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
-nav.crumb a{color:var(--acc2);text-decoration:none}
-nav.crumb a:hover{text-decoration:underline}
+.crumb{font-size:var(--fs-xs);color:var(--dim);margin-top:6px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.crumb a{color:var(--acc2);text-decoration:none;display:inline-flex;align-items:center;min-height:44px;min-width:44px}
+.crumb a:hover{text-decoration:underline}
 /* skeleton */
 .skel{border-radius:var(--r-md);background:linear-gradient(90deg,var(--skel) 25%,#1b2440 50%,var(--skel) 75%);background-size:400% 100%;animation:sk 1.4s infinite}
 @keyframes sk{0%{background-position:100% 0}100%{background-position:0 0}}
