@@ -4,7 +4,7 @@
  "sheikh_slug": "ali-mahmoud-alomari",
  "title": "كتاب أم البراهين",
  "playlist": "https://www.youtube.com/playlist?list=PLa3XSU7qw_Yl2_uOOiwj6G3d-dmdy3TUA",
- "count": 8,
+ "count": 9,
  "lessons": [
   {
    "n": 1,
@@ -69,6 +69,14 @@
    "align": false,
    "chars": 34118,
    "dur": "69:40"
+  },
+  {
+   "n": 10,
+   "title": "كتاب أم البراهين",
+   "video": "fUzzlyXg9_Y",
+   "align": false,
+   "chars": 36791,
+   "dur": "77:20"
   }
  ]
 }
