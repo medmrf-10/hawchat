@@ -70,7 +70,7 @@ function fmtT(s){s=Math.max(0,Math.floor(s));return Math.floor(s/60)+':'+String(
 const icS='<svg class="i" style="width:1em;height:1em;vertical-align:-.12em"><use href="icons.svg#i-clock"/></svg>';
 
 let YTP=null,AL=null,PH=[],curPh=-1,curW=-1,timer=null,pendPlay=false;
-let WLOCK=null,SLEEP=null;
+let WLOCK=null,SLEEP=null,SPANS=[],lastSave=0;
 
 /* normalize alignment shapes to [[word,s,e,seg],...] then group into
    display phrases by punctuation / seg id / max length */
@@ -106,6 +106,7 @@ function renderPhrase(i){
   }
   st.innerHTML=h;
   pos.textContent='جملة '+(i+1)+' / '+PH.length;
+  SPANS=st.querySelectorAll('.w');   // cached — tick() never re-queries the DOM
 }
 function tick(){
   if(!YTP||!YTP.getCurrentTime||!PH.length)return;
@@ -123,7 +124,7 @@ function tick(){
   let wi=-1;
   for(let k=0;k<ph.length;k++){if(tm>=ph[k][1]&&tm<ph[k][2]+0.25){wi=k;break}}
   if(wi<0){for(let k=ph.length-1;k>=0;k--){if(ph[k][1]<=tm){wi=k;break}}}
-  const spans=document.querySelectorAll('#stage .w');
+  const spans=SPANS;
   if(wi!==curW){
     for(let k=0;k<spans.length;k++){
       spans[k].classList.toggle('on',k===wi);
@@ -138,7 +139,7 @@ function tick(){
     sp.style.background='linear-gradient(to left,var(--acc) '+p+'%,#9aa3b5 '+p+'%)';
     sp.style.webkitBackgroundClip='text';sp.style.backgroundClip='text';sp.style.color='transparent';
   }
-  savePos();
+  if(tm-lastSave>5){lastSave=tm;savePos()}
 }
 function seekPhrase(i){
   if(!YTP||i<0||i>=PH.length)return;
@@ -185,7 +186,7 @@ function wakeLock(on){
 }
 document.addEventListener('visibilitychange',()=>{
   if(document.visibilityState==='visible'&&YTP&&YTP.getPlayerState&&YTP.getPlayerState()===1){wakeLock(true);if(!timer)timer=setInterval(tick,150)}
-  else if(document.visibilityState!=='visible'&&timer){clearInterval(timer);timer=null}
+  else if(document.visibilityState!=='visible'){if(timer){clearInterval(timer);timer=null}savePos()}
 });
 document.addEventListener('click',e=>{
   const sp=e.target.closest('.w');

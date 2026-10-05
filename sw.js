@@ -3,9 +3,9 @@
    data:  JSON (stats, read rows, series) — stale-while-revalidate.
    text:  transcripts/alignments/images — cache-first, LRU-bounded, version-stable.
    No auto skipWaiting: pages show an update toast; users opt in. */
-const REV = 'v8-38x';
+const REV = 'v8-39x';
 const SHELL = 'hawchat-shell-' + REV;
-const DATA  = 'hawchat-data-v1';
+const DATA  = 'hawchat-data-' + REV;   // versioned with the build — no stale mixes
 const TEXT  = 'hawchat-text-v1';
 const PIN   = 'hawchat-pinned-v1';   // user-saved rows — never LRU-trimmed
 const KEEP  = [SHELL, DATA, TEXT, PIN];
@@ -46,6 +46,11 @@ async function trim(c) {
   if (ks.length > MAXE) await c.delete(ks[0]);
 }
 
+// true LRU: a hit re-queues the entry so hot rows are never evicted
+async function touch(c, req, hit) {
+  try { await c.put(req, hit.clone()); } catch (e) {}
+}
+
 async function netFirst(req, cacheName, timeoutMs) {
   try {
     const r = await Promise.race([
@@ -79,9 +84,9 @@ self.addEventListener('fetch', e => {
   }
 
   // shell assets (css/js/fonts/icons): cache-first, refreshed per REV
-  if (/\.(css|js|woff2?)$/.test(p) || p.includes('/icons/') || p === '/manifest.webmanifest') {
+  if (/\.(css|js|woff2?)$/.test(p) || p.includes('/icons/') || p.endsWith('/manifest.webmanifest')) {
     e.respondWith(caches.open(SHELL).then(async c => {
-      const hit = await c.match(req);
+      const hit = await c.match(req, {ignoreSearch: true});
       if (hit) return hit;
       const r = await fetch(req);
       if (r.ok) c.put(req, r.clone());
@@ -103,17 +108,20 @@ self.addEventListener('fetch', e => {
     return;
   }
 
-  // transcripts / alignments / images: cache-first, LRU-bounded
+  // transcripts / alignments / images: stale-while-revalidate + LRU.
+  // SWR matters: a corrected transcription reaches prior visitors on next read.
   if (/\.(txt|jpg|jpeg|png|webp|svg|mp4)$/.test(p) || p.includes('.align.')) {
     e.respondWith((async () => {
       const ph = await (await caches.open(PIN)).match(req);
-      if (ph) return ph;
+      if (ph) return ph;                        // user-saved copy always wins
       const c = await caches.open(TEXT);
       const hit = await c.match(req);
-      if (hit) return hit;
-      const r = await fetch(req);
-      if (r.ok) { c.put(req, r.clone()); trim(c); }
-      return r;
-    }));
+      const up = fetch(req).then(r => {
+        if (r.ok) { c.put(req, r.clone()); trim(c); }
+        return r;
+      }).catch(() => hit);
+      if (hit) { touch(c, req, hit); return hit; }
+      return up;
+    })());
   }
 });
