@@ -14,7 +14,7 @@
    "title": "يغالطونك إذ يقولون",
    "count": 38,
    "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 0
+   "aligned": 38
   },
   {
    "slug": "bouti-tarikh",
@@ -22,7 +22,7 @@
    "title": "تاريخ التشريع الإسلامي",
    "count": 38,
    "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 0
+   "aligned": 38
   },
   {
    "slug": "bouti-mashahid",
@@ -30,7 +30,7 @@
    "title": "مشاهد وعبر من القرآن والسنة",
    "count": 30,
    "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 0
+   "aligned": 30
   },
   {
    "slug": "bouti-rihla",
@@ -38,7 +38,7 @@
    "title": "رحلة الخلود",
    "count": 23,
    "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 0
+   "aligned": 23
   },
   {
    "slug": "bouti-hubb",
@@ -46,7 +46,7 @@
    "title": "الحب في القرآن",
    "count": 26,
    "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 0
+   "aligned": 26
   },
   {
    "slug": "bouti-yaqiniyyat",
@@ -54,7 +54,7 @@
    "title": "كبرى اليقينيات الكونية",
    "count": 54,
    "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 0
+   "aligned": 54
   },
   {
    "slug": "bouti-ulum-quran",
@@ -62,7 +62,7 @@
    "title": "علوم القرآن الكريم",
    "count": 63,
    "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 0
+   "aligned": 63
   },
   {
    "slug": "bouti-sira",
@@ -70,7 +70,7 @@
    "title": "فقه السيرة النبوية",
    "count": 70,
    "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 0
+   "aligned": 70
   },
   {
    "slug": "bouti-khutab-2012",
@@ -78,7 +78,7 @@
    "title": "خطب الجمعة 2012",
    "count": 52,
    "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 0
+   "aligned": 52
   },
   {
    "slug": "gomaa-khawarij",
@@ -86,7 +86,7 @@
    "title": "الرد على خوارج العصر",
    "count": 172,
    "status": "المحاذاة جارية",
-   "aligned": 0
+   "aligned": 146
   },
   {
    "slug": "fadel-dawra",
