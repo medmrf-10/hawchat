@@ -1132,10 +1132,31 @@
      "title": "شرح كتاب شرح أم البراهين للإمام السنوسي",
      "files": [
       "barahin-sharh-01_AlAmri.txt",
+      "barahin-sharh-02_AlAmri.txt",
       "barahin-sharh-03_AlAmri.txt",
-      "barahin-sharh-04_AlAmri.txt"
+      "barahin-sharh-04_AlAmri.txt",
+      "barahin-sharh-05_AlAmri.txt",
+      "barahin-sharh-06_AlAmri.txt",
+      "barahin-sharh-07_AlAmri.txt",
+      "barahin-sharh-08_AlAmri.txt",
+      "barahin-sharh-09_AlAmri.txt",
+      "barahin-sharh-10_AlAmri.txt",
+      "barahin-sharh-11_AlAmri.txt",
+      "barahin-sharh-12_AlAmri.txt",
+      "barahin-sharh-13_AlAmri.txt",
+      "barahin-sharh-14_AlAmri.txt",
+      "barahin-sharh-15_AlAmri.txt",
+      "barahin-sharh-16_AlAmri.txt",
+      "barahin-sharh-17_AlAmri.txt",
+      "barahin-sharh-18_AlAmri.txt",
+      "barahin-sharh-19_AlAmri.txt",
+      "barahin-sharh-20_AlAmri.txt",
+      "barahin-sharh-21_AlAmri.txt",
+      "barahin-sharh-22_AlAmri.txt",
+      "barahin-sharh-23_AlAmri.txt",
+      "barahin-sharh-24_AlAmri.txt"
      ],
-     "n": 3
+     "n": 24
     },
     {
      "slug": "hisam",
@@ -1250,18 +1271,67 @@
      "slug": "barahin-muqtatafat",
      "title": "مقتطفات من دروس أم البراهين",
      "files": [
+      "barahin-muqtatafat-01_AlAmri.txt",
+      "barahin-muqtatafat-02_AlAmri.txt",
       "barahin-muqtatafat-03_AlAmri.txt",
       "barahin-muqtatafat-04_AlAmri.txt",
       "barahin-muqtatafat-05_AlAmri.txt",
+      "barahin-muqtatafat-06_AlAmri.txt",
       "barahin-muqtatafat-07_AlAmri.txt",
       "barahin-muqtatafat-08_AlAmri.txt",
       "barahin-muqtatafat-09_AlAmri.txt",
       "barahin-muqtatafat-10_AlAmri.txt",
       "barahin-muqtatafat-11_AlAmri.txt",
       "barahin-muqtatafat-12_AlAmri.txt",
-      "barahin-muqtatafat-13_AlAmri.txt"
+      "barahin-muqtatafat-13_AlAmri.txt",
+      "barahin-muqtatafat-14_AlAmri.txt",
+      "barahin-muqtatafat-15_AlAmri.txt",
+      "barahin-muqtatafat-16_AlAmri.txt",
+      "barahin-muqtatafat-17_AlAmri.txt"
      ],
-     "n": 10
+     "n": 17
+    },
+    {
+     "slug": "bath",
+     "title": "لقاء البث المباشر",
+     "files": [
+      "bath-01_AlAmri.txt"
+     ],
+     "n": 1
+    },
+    {
+     "slug": "durus-amma",
+     "title": "دروس عامة",
+     "files": [
+      "durus-amma-01_AlAmri.txt",
+      "durus-amma-02_AlAmri.txt",
+      "durus-amma-03_AlAmri.txt",
+      "durus-amma-04_AlAmri.txt"
+     ],
+     "n": 4
+    },
+    {
+     "slug": "falsafa-din",
+     "title": "فلسفة الدين",
+     "files": [
+      "falsafa-din-01_AlAmri.txt",
+      "falsafa-din-02_AlAmri.txt",
+      "falsafa-din-03_AlAmri.txt",
+      "falsafa-din-04_AlAmri.txt"
+     ],
+     "n": 4
+    },
+    {
+     "slug": "falsafa-haditha",
+     "title": "دروس في الفلسفة الحديثة",
+     "files": [
+      "falsafa-haditha-01_AlAmri.txt",
+      "falsafa-haditha-02_AlAmri.txt",
+      "falsafa-haditha-03_AlAmri.txt",
+      "falsafa-haditha-04_AlAmri.txt",
+      "falsafa-haditha-06_AlAmri.txt"
+     ],
+     "n": 5
     }
    ],
    "slug": "ali-mahmoud-alomari"
