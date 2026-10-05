@@ -506,6 +506,21 @@
    "status": "pending",
    "notes": null,
    "website": null
+  },
+  {
+   "id": 34,
+   "slug": "maktaba",
+   "name": "مكتبة المتون والشروح المفرغة",
+   "name_display": "مكتبة المتون والشروح",
+   "aliases": [
+    "مكتبة"
+   ],
+   "group": 3,
+   "photo": null,
+   "channels": [],
+   "series": [],
+   "status": "pending",
+   "notes": null
   }
  ]
 }
