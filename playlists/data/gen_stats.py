@@ -622,7 +622,7 @@ for sh in sheikhs:
     out[slug] = {
         'name': nm,
         'photo': photo,
-        'order': ordmap.get(nm) or ordmap.get(norm(nm)) or sh.get('id') or 999,
+        'order': ordmap.get(nm) or ordmap.get(norm(nm)) or 999,
         'aliases': sh.get('aliases') or [],
         'nSeries': len(rows),
         'rows': rows,
