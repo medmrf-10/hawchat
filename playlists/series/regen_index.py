@@ -15,10 +15,21 @@ for f in sorted(glob.glob('*.json')):
     s['sheikh_slug'] = d.get('sheikh_slug', s.get('sheikh_slug', ''))
     s['count'] = len(les)
     # alignment + transcript truth lives in lessons/<slug>/index.json ('align'/'txt' lists of lesson numbers)
+    ldir = os.path.join('..', 'lessons', slug)
     try:
-        li = json.load(open('../lessons/%s/index.json' % slug))
+        li = json.load(open(os.path.join(ldir, 'index.json')))
         s['aligned'] = len(li.get('align', []))
         s['transcribed'] = len(li.get('txt', []))
+        # persist filename padding so lesson.html stops probing
+        if 'pad' not in li and os.path.isdir(ldir):
+            for fn in os.listdir(ldir):
+                if fn.endswith(('.txt', '.align.json')):
+                    stem = fn.split('.')[0]
+                    if stem.isdigit():
+                        li['pad'] = len(stem)
+                        json.dump(li, open(os.path.join(ldir, 'index.json'), 'w'),
+                                  ensure_ascii=False, indent=1)
+                        break
     except Exception:
         s['aligned'] = sum(1 for l in les if l.get('align'))
         s['transcribed'] = s.get('transcribed', 0)

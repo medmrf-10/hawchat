@@ -203,7 +203,7 @@
    "title": "لقاء الأربعاء",
    "sheikh_slug": "saif-alasri",
    "count": 4,
-   "aligned": 4,
+   "aligned": 0,
    "transcribed": 56,
    "status": "مكتملة التفريغ"
   },
@@ -212,7 +212,7 @@
    "title": "العبادة في القرآن",
    "sheikh_slug": "hatem-alaouni",
    "count": 5,
-   "aligned": 5,
+   "aligned": 0,
    "transcribed": 6,
    "status": "مكتملة التفريغ"
   },
@@ -221,7 +221,7 @@
    "title": "الموسيقى والغناء في القرآن",
    "sheikh_slug": "hatem-alaouni",
    "count": 5,
-   "aligned": 5,
+   "aligned": 0,
    "transcribed": 5,
    "status": "مكتملة التفريغ"
   },
@@ -240,7 +240,7 @@
    "title": "ألف باء الزواج",
    "count": 75,
    "status": "المحاذاة جارية — 5/75",
-   "aligned": 5,
+   "aligned": 6,
    "transcribed": 44
   },
   {

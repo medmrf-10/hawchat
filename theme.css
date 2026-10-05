@@ -39,3 +39,5 @@ body{background:var(--bg);color:var(--txt);font-family:var(--font-ui);min-height
 ::-webkit-scrollbar{width:10px;height:10px}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:99px}
 ::-webkit-scrollbar-track{background:transparent}
+:focus-visible{outline:2px solid var(--acc2);outline-offset:2px;border-radius:6px}
+@media (prefers-reduced-motion: reduce){.cin{animation:none}*{scroll-behavior:auto!important}}
