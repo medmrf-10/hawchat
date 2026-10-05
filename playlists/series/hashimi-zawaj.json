@@ -76,7 +76,7 @@
    "video": "F0fHbpkn0iI",
    "chars": 74556,
    "dur": "113:29",
-   "align": false
+   "align": true
   },
   {
    "n": 10,
@@ -84,7 +84,7 @@
    "video": "E6Gn0fAheyg",
    "chars": 70227,
    "dur": "113:22",
-   "align": false
+   "align": true
   },
   {
    "n": 11,
@@ -92,7 +92,7 @@
    "video": "u8B0Wvkoo18",
    "chars": 65643,
    "dur": "109:56",
-   "align": false
+   "align": true
   },
   {
    "n": 12,
@@ -100,7 +100,7 @@
    "video": "ZalpC-wAu1w",
    "chars": 78612,
    "dur": "120:41",
-   "align": false
+   "align": true
   },
   {
    "n": 13,
@@ -116,7 +116,7 @@
    "video": "2n0gsghTD0c",
    "chars": 77275,
    "dur": "121:36",
-   "align": false
+   "align": true
   },
   {
    "n": 15,
@@ -124,7 +124,7 @@
    "video": "ERDrj0muecM",
    "chars": 58447,
    "dur": "93:05",
-   "align": false
+   "align": true
   },
   {
    "n": 16,
@@ -132,7 +132,7 @@
    "video": "0txx1I6G8DA",
    "chars": 57745,
    "dur": "97:08",
-   "align": false
+   "align": true
   },
   {
    "n": 17,
@@ -140,7 +140,7 @@
    "video": "TVWYJYAFyoA",
    "chars": 55676,
    "dur": "92:27",
-   "align": false
+   "align": true
   },
   {
    "n": 18,
@@ -148,7 +148,7 @@
    "video": "7-9qBagz8jg",
    "chars": 57370,
    "dur": "92:29",
-   "align": false
+   "align": true
   },
   {
    "n": 19,
@@ -164,7 +164,7 @@
    "video": "Hd-2pPZXIAc",
    "chars": 21005,
    "dur": "35:32",
-   "align": false
+   "align": true
   },
   {
    "n": 21,
@@ -362,7 +362,7 @@
    "n": 45,
    "title": "ألف باء الزواج 42 | مراجعات ما سبق عبر مشاركات الجمهور 07",
    "video": "qS2Ys0vF74Y",
-   "chars": 0,
+   "chars": 68357,
    "dur": "106:01",
    "align": false
   },
@@ -370,7 +370,7 @@
    "n": 46,
    "title": "ألف باء الزواج 43 | خُلاصات ما بعد المجلس 12 | مدخل إلى خُلاصات حاجات الجنسين من واقع الجمهور",
    "video": "KhG2AisZAnc",
-   "chars": 0,
+   "chars": 48545,
    "dur": "78:53",
    "align": false
   },
@@ -378,7 +378,7 @@
    "n": 47,
    "title": "ألف باء الزواج 44 | حاجات الجنسين من واقع مشاركات الجمهور 01",
    "video": "5G1_Q7bHmmo",
-   "chars": 0,
+   "chars": 55487,
    "dur": "93:36",
    "align": false
   },
@@ -386,7 +386,7 @@
    "n": 48,
    "title": "ألف باء الزواج 45 | حاجات الرجل من واقع مشاركات الجمهور 02",
    "video": "AHza39ckpF4",
-   "chars": 0,
+   "chars": 54955,
    "dur": "90:36",
    "align": false
   },
@@ -394,7 +394,7 @@
    "n": 49,
    "title": "ألف باء الزواج 46 | حاجات الأنثى أو المرأة من واقع مشاركات الجمهور 01",
    "video": "5IBSysp7pWE",
-   "chars": 0,
+   "chars": 52115,
    "dur": "87:20",
    "align": false
   },
@@ -402,7 +402,7 @@
    "n": 50,
    "title": "ألف باء الزواج 47 | حاجات الأنثى أو المرأة من واقع مشاركات الجمهور 02",
    "video": "nUyDliKq0RM",
-   "chars": 0,
+   "chars": 57374,
    "dur": "93:30",
    "align": false
   },
@@ -410,7 +410,7 @@
    "n": 51,
    "title": "ألف باء الزواج 48 | حاجات الأنثى أو المرأة من واقع مشاركات الجمهور 03",
    "video": "vlk76QErPPc",
-   "chars": 0,
+   "chars": 62328,
    "dur": "101:58",
    "align": false
   },
@@ -418,7 +418,7 @@
    "n": 52,
    "title": "ألف باء الزواج 49 | حاجات الأنثى أو المرأة من واقع مشاركات الجمهور 04",
    "video": "OjZE8PzzPHk",
-   "chars": 0,
+   "chars": 36080,
    "dur": "89:30",
    "align": false
   },
@@ -426,7 +426,7 @@
    "n": 53,
    "title": "ألف باء الزواج 50 | حاجات الأنثى أو المرأة من واقع مشاركات الجمهور 05 والأخير",
    "video": "CMYgwWtV8Bw",
-   "chars": 0,
+   "chars": 46568,
    "dur": "78:03",
    "align": false
   },
@@ -434,7 +434,7 @@
    "n": 54,
    "title": "Marriage 101: 51 | Between Masculinity and Femininity",
    "video": "nUABPA_2nyk",
-   "chars": 0,
+   "chars": 33740,
    "dur": "54:35",
    "align": false
   },
@@ -442,7 +442,7 @@
    "n": 55,
    "title": "The ABCs of Marriage 52 | Between Masculinity and Femininity | Definitions and Misconceptions | M...",
    "video": "q3eWgPemfk8",
-   "chars": 0,
+   "chars": 38628,
    "dur": "60:51",
    "align": false
   },
@@ -450,7 +450,7 @@
    "n": 56,
    "title": "ألف باء الزواج 53 | بين الرجولة والأنوثة | تعريفات ومغالطات | مشاركات جمهور النساء",
    "video": "B7bejcMQkOk",
-   "chars": 0,
+   "chars": 44227,
    "dur": "71:49",
    "align": false
   },
@@ -458,7 +458,7 @@
    "n": 57,
    "title": "ألف باء الزواج 54 | بين الرجولة والأنوثة | فقه الرجولة 01",
    "video": "AR7fhJJ1834",
-   "chars": 0,
+   "chars": 46701,
    "dur": "75:34",
    "align": false
   },
@@ -466,7 +466,7 @@
    "n": 58,
    "title": "ألف باء الزواج 55 | بين الرجولة والأنوثة | فقه الرجولة 02",
    "video": "T5xYAMmcM_E",
-   "chars": 0,
+   "chars": 38596,
    "dur": "60:07",
    "align": false
   },
@@ -474,7 +474,7 @@
    "n": 59,
    "title": "ألف باء الزواج 56 | بين الرجولة والأنوثة | فقه الرجولة 03 صفات الرجولة",
    "video": "L9xyvbp_Bu8",
-   "chars": 0,
+   "chars": 39537,
    "dur": "62:26",
    "align": false
   },
@@ -482,7 +482,7 @@
    "n": 60,
    "title": "ألف باء الزواج 57 | بين الرجولة والأنوثة | فقه الرجولة 04 آيات وأحاديث وآثار",
    "video": "sIAvfj8_Ap0",
-   "chars": 0,
+   "chars": 36119,
    "dur": "60:29",
    "align": false
   },
@@ -490,7 +490,7 @@
    "n": 61,
    "title": "ألف باء الزواج 58 | بين الرجولة والأنوثة | فقه الرجولة 05 آيات قرآنية",
    "video": "6ZEygOPeM5w",
-   "chars": 0,
+   "chars": 40025,
    "dur": "63:59",
    "align": false
   },
@@ -498,7 +498,7 @@
    "n": 62,
    "title": "ألف باء الزواج 59 | بين الرجولة والأنوثة | فقه الرجولة 06 أنبياء",
    "video": "8xh_ZyJpPGg",
-   "chars": 0,
+   "chars": 39512,
    "dur": "64:43",
    "align": false
   },
@@ -506,7 +506,7 @@
    "n": 63,
    "title": "ألف باء الزواج 60 | بين الرجولة والأنوثة | فقه الرجولة 07 أنبياء وقدوات من خير القرون",
    "video": "rhdFQ6s05uc",
-   "chars": 0,
+   "chars": 38472,
    "dur": "65:19",
    "align": false
   },
@@ -514,7 +514,7 @@
    "n": 64,
    "title": "ألف باء الزواج 61 | بين الرجولة والأنوثة | فقه الرجولة 08 أنبياء",
    "video": "PLncnBOCK00",
-   "chars": 0,
+   "chars": 43955,
    "dur": "73:28",
    "align": false
   },
@@ -522,7 +522,7 @@
    "n": 65,
    "title": "ألف باء الزواج 62 | بين الرجولة والأنوثة | فقه الرجولة 09 الجاهلية + قدوات من خير القرون",
    "video": "_2rVUZpBdjo",
-   "chars": 0,
+   "chars": 44108,
    "dur": "69:43",
    "align": false
   },
@@ -530,13 +530,7 @@
    "n": 66,
    "title": "ألف باء الزواج 63 | بين الرجولة والأنوثة | فقه الرجولة 10 قدوات من خير القرون",
    "video": "Cpqtmnt1G1Y",
-<<<<<<< HEAD
-   "chars": 0,
-||||||| parent of 2fb6563 (rebuild generated data)
-   "chars": 39223,
-=======
    "chars": 43551,
->>>>>>> 2fb6563 (rebuild generated data)
    "dur": "69:22",
    "align": false
   },
@@ -544,13 +538,7 @@
    "n": 67,
    "title": "ألف باء الزواج 64 | بين الرجولة والأنوثة | فقه الأنوثة 01 تنبيهات ومغالطات",
    "video": "yPLXgx8pFA4",
-<<<<<<< HEAD
-   "chars": 0,
-||||||| parent of 2fb6563 (rebuild generated data)
-   "chars": 17781,
-=======
    "chars": 19786,
->>>>>>> 2fb6563 (rebuild generated data)
    "dur": "30:09",
    "align": false
   },
@@ -558,19 +546,7 @@
    "n": 68,
    "title": "ألف باء الزواج 65 | بين الرجولة والأنوثة | فقه الأنوثة 02 إجابات الجمهور ومشاركاتهم.",
    "video": "4KfWhRi2L4w",
-<<<<<<< HEAD
-<<<<<<< HEAD
-   "chars": 0,
-||||||| parent of 2fb6563 (rebuild generated data)
-   "chars": 20044,
-=======
-   "chars": 52634,
->>>>>>> 2fb6563 (rebuild generated data)
-||||||| parent of 1fae3c2 (hashimi: دروس أول بأول)
-   "chars": 52634,
-=======
    "chars": 56593,
->>>>>>> 1fae3c2 (hashimi: دروس أول بأول)
    "dur": "94:07",
    "align": false
   },
@@ -610,7 +586,7 @@
    "n": 73,
    "title": "ألف باء الزواج 70 | أسئلة الخِطبة 03",
    "video": "Jd1iEYvOGTA",
-   "chars": 2990,
+   "chars": 27656,
    "dur": "55:41",
    "align": false
   },
