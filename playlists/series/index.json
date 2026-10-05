@@ -2,166 +2,102 @@
  "series": [
   {
    "slug": "bouti-aqeeda",
-   "sheikh_slug": "said-bouti",
    "title": "دورة مختصرة في العقيدة الإسلامية",
+   "sheikh_slug": "said-bouti",
    "count": 10,
-   "status": "مكتملة التفريغ",
    "aligned": 10,
-   "transcribed": 10
-  },
-  {
-   "slug": "bouti-yaghalitun",
-   "sheikh_slug": "said-bouti",
-   "title": "يغالطونك إذ يقولون",
-   "count": 38,
-   "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 38,
-   "transcribed": 38
-  },
-  {
-   "slug": "bouti-tarikh",
-   "sheikh_slug": "said-bouti",
-   "title": "تاريخ التشريع الإسلامي",
-   "count": 38,
-   "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 38,
-   "transcribed": 38
-  },
-  {
-   "slug": "bouti-mashahid",
-   "sheikh_slug": "said-bouti",
-   "title": "مشاهد وعبر من القرآن والسنة",
-   "count": 30,
-   "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 30,
-   "transcribed": 30
-  },
-  {
-   "slug": "bouti-rihla",
-   "sheikh_slug": "said-bouti",
-   "title": "رحلة الخلود",
-   "count": 23,
-   "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 23,
-   "transcribed": 23
+   "transcribed": 10,
+   "status": "مكتملة التفريغ"
   },
   {
    "slug": "bouti-hubb",
-   "sheikh_slug": "said-bouti",
    "title": "الحب في القرآن",
+   "sheikh_slug": "said-bouti",
    "count": 26,
-   "status": "مفرّغة — المحاذاة جارية",
    "aligned": 26,
-   "transcribed": 26
-  },
-  {
-   "slug": "bouti-yaqiniyyat",
-   "sheikh_slug": "said-bouti",
-   "title": "كبرى اليقينيات الكونية",
-   "count": 54,
-   "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 54,
-   "transcribed": 54
-  },
-  {
-   "slug": "bouti-ulum-quran",
-   "sheikh_slug": "said-bouti",
-   "title": "علوم القرآن الكريم",
-   "count": 63,
-   "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 63,
-   "transcribed": 63
-  },
-  {
-   "slug": "bouti-sira",
-   "sheikh_slug": "said-bouti",
-   "title": "فقه السيرة النبوية",
-   "count": 70,
-   "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 70,
-   "transcribed": 70
+   "transcribed": 26,
+   "status": "مكتملة التفريغ"
   },
   {
    "slug": "bouti-khutab-2012",
-   "sheikh_slug": "said-bouti",
    "title": "خطب الجمعة 2012",
+   "sheikh_slug": "said-bouti",
    "count": 52,
-   "status": "مفرّغة — المحاذاة جارية",
    "aligned": 52,
-   "transcribed": 52
+   "transcribed": 52,
+   "status": "مكتملة التفريغ"
   },
   {
-   "slug": "gomaa-khawarij",
-   "sheikh_slug": "ali-gomaa",
-   "title": "الرد على خوارج العصر",
-   "count": 172,
-   "status": "المحاذاة جارية",
-   "aligned": 146,
-   "transcribed": 172
+   "slug": "bouti-mashahid",
+   "title": "مشاهد وعبر من القرآن والسنة",
+   "sheikh_slug": "said-bouti",
+   "count": 30,
+   "aligned": 30,
+   "transcribed": 30,
+   "status": "مكتملة التفريغ"
   },
   {
-<<<<<<< HEAD
-   "slug": "hashimi-zawaj",
-   "sheikh_slug": "thakir-hashimi",
-   "title": "ألف باء الزواج",
-   "count": 75,
-   "status": "المحاذاة جارية — 0/75",
-   "aligned": 0,
-   "transcribed": 0
+   "slug": "bouti-rihla",
+   "title": "رحلة الخلود",
+   "sheikh_slug": "said-bouti",
+   "count": 23,
+   "aligned": 23,
+   "transcribed": 23,
+   "status": "مكتملة التفريغ"
   },
   {
-   "slug": "hashimi-tarbiya",
-   "sheikh_slug": "thakir-hashimi",
-   "title": "ألف باء التربية",
-   "count": 108,
-   "status": "المحاذاة جارية — 0/108",
-   "aligned": 0,
-   "transcribed": 0
+   "slug": "bouti-sira",
+   "title": "فقه السيرة النبوية",
+   "sheikh_slug": "said-bouti",
+   "count": 70,
+   "aligned": 70,
+   "transcribed": 70,
+   "status": "مكتملة التفريغ"
   },
   {
-   "slug": "hashimi-fiqh-nafs",
-   "sheikh_slug": "thakir-hashimi",
-   "title": "مجالس فقه النفس",
-   "count": 181,
-   "status": "المحاذاة جارية — 0/181",
-   "aligned": 0,
-   "transcribed": 0
+   "slug": "bouti-tarikh",
+   "title": "تاريخ التشريع الإسلامي",
+   "sheikh_slug": "said-bouti",
+   "count": 38,
+   "aligned": 38,
+   "transcribed": 38,
+   "status": "مكتملة التفريغ"
   },
   {
-||||||| parent of 689234c (hashimi: دروس أول بأول)
-   "slug": "hashimi-zawaj",
-   "sheikh_slug": "thakir-hashimi",
-   "title": "ألف باء الزواج",
-   "count": 75,
-   "status": "المحاذاة جارية — 0/75",
-   "aligned": 0
+   "slug": "bouti-ulum-quran",
+   "title": "علوم القرآن الكريم",
+   "sheikh_slug": "said-bouti",
+   "count": 63,
+   "aligned": 63,
+   "transcribed": 63,
+   "status": "مكتملة التفريغ"
   },
   {
-   "slug": "hashimi-tarbiya",
-   "sheikh_slug": "thakir-hashimi",
-   "title": "ألف باء التربية",
-   "count": 108,
-   "status": "المحاذاة جارية — 0/108",
-   "aligned": 0
+   "slug": "bouti-yaghalitun",
+   "title": "يغالطونك إذ يقولون",
+   "sheikh_slug": "said-bouti",
+   "count": 38,
+   "aligned": 38,
+   "transcribed": 38,
+   "status": "مكتملة التفريغ"
   },
   {
-   "slug": "hashimi-fiqh-nafs",
-   "sheikh_slug": "thakir-hashimi",
-   "title": "مجالس فقه النفس",
-   "count": 181,
-   "status": "المحاذاة جارية — 0/181",
-   "aligned": 0
+   "slug": "bouti-yaqiniyyat",
+   "title": "كبرى اليقينيات الكونية",
+   "sheikh_slug": "said-bouti",
+   "count": 54,
+   "aligned": 54,
+   "transcribed": 54,
+   "status": "مكتملة التفريغ"
   },
   {
-=======
->>>>>>> 689234c (hashimi: دروس أول بأول)
    "slug": "fadel-dawra",
    "title": "دورة مفاتح التدبر",
    "sheikh_slug": "fadhel-sulaiman",
    "count": 14,
    "aligned": 14,
-   "status": "مكتملة التفريغ",
-   "transcribed": 14
+   "transcribed": 14,
+   "status": "مكتملة التفريغ"
   },
   {
    "slug": "fadel-farsh",
@@ -169,8 +105,8 @@
    "sheikh_slug": "fadhel-sulaiman",
    "count": 28,
    "aligned": 12,
-   "status": "مفرّغة — المحاذاة جارية",
-   "transcribed": 28
+   "transcribed": 28,
+   "status": "مفرّغة — المحاذاة جارية"
   },
   {
    "slug": "fadel-juz30",
@@ -178,35 +114,44 @@
    "sheikh_slug": "fadhel-sulaiman",
    "count": 47,
    "aligned": 0,
-<<<<<<< HEAD
-   "status": "مفرّغة — المحاذاة جارية",
-   "transcribed": 47
-||||||| parent of 689234c (hashimi: دروس أول بأول)
+   "transcribed": 47,
    "status": "مفرّغة — المحاذاة جارية"
-=======
+  },
+  {
+   "slug": "gomaa-khawarij",
+   "title": "الرد على خوارج العصر",
+   "sheikh_slug": "ali-gomaa",
+   "count": 172,
+   "aligned": 146,
+   "transcribed": 172,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "hashimi-fiqh-nafs",
+   "title": "مجالس فقه النفس",
+   "sheikh_slug": "thakir-hashimi",
+   "count": 181,
+   "aligned": 0,
+   "transcribed": 0,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "hashimi-tarbiya",
+   "title": "ألف باء التربية",
+   "sheikh_slug": "thakir-hashimi",
+   "count": 108,
+   "aligned": 0,
+   "transcribed": 11,
    "status": "مفرّغة — المحاذاة جارية"
   },
   {
    "slug": "hashimi-zawaj",
-   "sheikh_slug": "thakir-hashimi",
    "title": "ألف باء الزواج",
+   "sheikh_slug": "thakir-hashimi",
    "count": 75,
-   "status": "المحاذاة جارية — 1/75"
-  },
-  {
-   "slug": "hashimi-tarbiya",
-   "sheikh_slug": "thakir-hashimi",
-   "title": "ألف باء التربية",
-   "count": 108,
-   "status": "المحاذاة جارية — 0/108"
-  },
-  {
-   "slug": "hashimi-fiqh-nafs",
-   "sheikh_slug": "thakir-hashimi",
-   "title": "مجالس فقه النفس",
-   "count": 181,
-   "status": "المحاذاة جارية — 0/181"
->>>>>>> 689234c (hashimi: دروس أول بأول)
+   "aligned": 2,
+   "transcribed": 44,
+   "status": "مفرّغة — المحاذاة جارية"
   }
  ]
 }
