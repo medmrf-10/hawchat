@@ -3,117 +3,165 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>الشيوخ — hawchat</title>
+<title>سلاسل المشايخ — سلاسل</title>
 <meta name="theme-color" content="#0b0f1a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="hawchat">
+<meta name="apple-mobile-web-app-title" content="سلاسل المشايخ">
 <link rel="manifest" href="../manifest.webmanifest">
 <link rel="icon" type="image/png" href="../icons/icon-192.png">
 <link rel="apple-touch-icon" href="../icons/favicon-180.png">
-<link rel="stylesheet" href="../theme.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../theme.css?v=8">
+<link rel="stylesheet" href="common.css?v=8">
+<link rel="stylesheet" href="ui.css?v=8">
 <style>
-.wrap{max-width:1100px;margin:0 auto;padding:16px}
-.hero{display:flex;align-items:end;gap:14px;margin:10px 0 18px}
-.hero h1{font-family:var(--font-ar);font-size:1.7rem;font-weight:700;background:linear-gradient(135deg,var(--acc2),var(--acc));-webkit-background-clip:text;background-clip:text;color:transparent;margin:0}
-.hero .pill{font-size:.68rem;color:var(--dim);border:1px solid var(--border);border-radius:99px;padding:4px 12px;margin-bottom:6px;white-space:nowrap}
-.hero .abtn{margin-bottom:6px}
-.bar{display:flex;gap:8px;align-items:stretch;background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:8px;margin-bottom:6px}
-.bar input{flex:1;min-width:0;height:38px;background:var(--bg);border:1px solid var(--border);border-radius:var(--r-md);color:var(--txt);padding:0 14px;font-family:var(--font-ui);font-size:.85rem}
-.bar input:focus{outline:none;border-color:var(--acc)}
-.abtn{height:38px;padding:0 16px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--card2);color:var(--txt);font-family:var(--font-ui);font-size:.8rem;font-weight:600;cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;text-decoration:none}
-.abtn:hover{border-color:var(--acc)}
-@media(max-width:640px){.wrap{padding:12px}.hero h1{font-size:1.45rem}.bar input{height:44px;font-size:.95rem}}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:10px;margin-top:14px}
-.sh{display:block;background:linear-gradient(145deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:var(--r-md);padding:8px 8px 10px;text-decoration:none;color:var(--txt);text-align:center;transition:border-color .18s,transform .18s;position:relative}
-.sh:hover{border-color:var(--acc);transform:translateY(-2px)}
-.sh .ph{width:100%;aspect-ratio:1;height:auto;margin:0 0 7px;border-radius:50%;background:var(--skel);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;font-family:var(--font-ar);font-size:1.6rem;font-weight:700;color:var(--acc2)}
-.sh .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.sh .nm{font-family:var(--font-ar);font-size:.8rem;font-weight:700;line-height:1.4}
-.sh .pb{height:5px;border-radius:99px;background:var(--skel);margin-top:7px;overflow:hidden;display:flex}
-.sh .pb i{display:block;height:100%}
-.sh .pb .pd{background:var(--gold,#d4a017)}
-.sh .pb .pa{background:var(--ok,#3fb27f)}
-.sh .pb .pp{background:var(--acc,#4f8cff)}
-.sh .pb .ph{background:#7ba4e8}
-.sh .pb .px{background:var(--err,#e05a5a)}
-.sh .pb .pw{background:#6b7280}
-.sh .cnt{font-size:.62rem;color:var(--dim);margin-top:4px;line-height:1.3}
-.sh .icrow{display:flex;justify-content:center;gap:16px;margin-top:7px}
-.sh .ic{display:flex;flex-direction:column;align-items:center;line-height:1}
-.sh .ic i{font-style:normal;font-size:1.35rem}
-.sh .ic b{font-size:.95rem;font-weight:700;color:var(--txt);margin-top:2px}
-.sh.cin{animation:cin .35s both}
-.sub{color:var(--dim);font-size:.8rem}
-#kpis{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 4px}
-#kpis .k{background:var(--card);border:1px solid var(--border);border-radius:var(--r-md);padding:8px 14px;text-align:center}
-#kpis .k b{display:block;font-size:1.05rem;color:var(--acc2)}
-#kpis .k span{font-size:.62rem;color:var(--dim)}
+.wrap{max-width:1100px;margin:0 auto;padding:12px 14px 24px}
+.sh.soon{opacity:.42;pointer-events:none}
+.soonh{width:100%;height:48px;margin-top:16px;background:var(--bg-2);border:1px solid var(--line-2);
+  border-radius:var(--r-md);color:var(--ink-3);font-family:var(--font-ui);font-size:var(--fs-sm);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
+.sres a{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line-1);
+  border-radius:var(--r-md);padding:12px 14px;margin-bottom:8px;text-decoration:none;color:var(--txt);font-size:var(--fs-sm);min-height:52px}
+.sres a small{color:var(--ink-3);margin-inline-start:auto;white-space:nowrap}
+#nres{font-size:var(--fs-xs);color:var(--ink-3);margin:8px 2px;min-height:1.2em}
+a.mini{color:var(--ink-3);display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;padding:0 4px}
+.kpis{display:flex;gap:24px;align-items:center;margin-top:4px}
+.favgrid .u-sh .ph{border-color:var(--gold-2)}
 </style>
 </head>
 <body>
 <header class="hd"><div class="hd-in">
-  <a href="../" class="btn" aria-label="رجوع" style="text-decoration:none">→</a>
+  <a href="../" class="btn" aria-label="الرئيسية" style="text-decoration:none">→</a>
   <img src="../icons/icon-192.png" alt="" width="30" height="30" style="border-radius:8px">
-  <span class="brand">hawchat</span>
-  <span class="sub">الشيوخ والسلاسل</span>
+  <span class="brand">سلاسل</span>
+  <span class="sub" style="color:var(--ink-3);font-size:var(--fs-xs)">سلاسل المشايخ</span>
 </div></header>
 <main><div class="wrap">
-  <div class="hero cin"><h1>الشيوخ</h1><span class="pill" id="count"></span></div>
-  <div id="kpis" class="cin"></div>
-  <div class="bar cin"><input type="text" id="flt" placeholder="ابحث عن شيخ…"><button id="contF" class="chip" style="margin-inline-start:8px;border:1px solid var(--border);background:var(--card);color:var(--txt);padding:8px 14px;border-radius:999px;cursor:pointer;font-family:var(--font-ui)">المحتوى فقط</button></div>
-  <div id="groups" class="grid"></div>
+  <div class="u-hero cin"><h1>سلاسل المشايخ</h1>
+    <div class="meta"><span id="count"></span><span class="kpis" id="kpis"></span></div>
+  </div>
+  <div class="u-search cin"><input type="search" id="flt" aria-label="ابحث عن شيخ أو سلسلة" enterkeyhint="search" placeholder="ابحث عن شيخ أو سلسلة…"><svg class="i"><use href="icons.svg#i-search"/></svg></div>
+  <div id="cont"></div>
+  <div id="favwrap" hidden>
+    <div class="u-sech"><h2>المفضلة</h2><span class="cnt" id="favcnt"></span></div>
+    <div id="favs" class="u-grid favgrid"></div>
+  </div>
+  <div class="u-sech"><h2>المشايخ</h2><span class="cnt" id="shcnt"></span></div>
+  <div id="nres" aria-live="polite"></div>
+  <div id="groups" class="u-grid"></div>
+  <div id="sres" class="sres"></div>
+  <button id="soonh" class="soonh" hidden></button>
+  <div id="soong" class="u-grid" hidden style="margin-top:12px"></div>
+  <div style="text-align:center;margin-top:32px;font-size:var(--fs-xs);color:var(--ink-3)">
+    <a href="#" id="exp" class="mini">تصدير بياناتي</a> · <a href="#" id="imp" class="mini">استيراد</a>
+    <input type="file" id="impf" accept="application/json" hidden>
+  </div>
 </div></main>
+<script src="common.js?v=8"></script>
 <script>
-function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
-async function j(u){try{const r=await fetch(u);return r.ok?await r.json():null}catch(e){return null}}
-function normalize(s){return (s||'').replace(/[أإآ]/g,'ا').replace(/\s+/g,' ').trim()}
-let _groups=[],_slugs={},_photos={},flt='',_stats={},onlyContent=false;
-function photo(name){return _photos[name]||_photos[normalize(name)]}
-function slugOf(name){return _slugs[name]||_slugs[normalize(name)]||normalize(name)}
-function render(){
-  const g=document.getElementById('groups');g.innerHTML='';let i=0;
-  let names=[];
-  for(const gr of _groups)for(const name of gr.names)names.push(name);
-  if(onlyContent)names=names.filter(n=>{const st=_stats[slugOf(n)];return st&&((st.read||0)+(st.watch||0))>0})
-    .sort((a,b)=>{const sa=_stats[slugOf(a)]||{},sb=_stats[slugOf(b)]||{};
-      return ((sb.read||0)+(sb.watch||0))-((sa.read||0)+(sa.watch||0))});
-  for(const name of names){
-    if(flt&&!normalize(name).includes(flt))continue;
-    const a=document.createElement('a');
-    a.className='sh cin';a.style.animationDelay=(Math.min(i++,30)*25)+'ms';
-    a.href='sheikh.html?s='+encodeURIComponent(slugOf(name));
-    const p=photo(name),init=name.replace(/^ال/,'').trim()[0]||'؟';
-    const st=_stats[slugOf(name)]||{},nr=st.read||0,nw=st.watch||0;
-    a.innerHTML='<div class="ph">'+(p?'<img src="'+p+'" alt="" loading="lazy" onerror="this.remove()">':'')+'<span>'+init+'</span></div><div class="nm">'+esc(name)+'</div>'
-      +((nr||nw)?'<div class="icrow">'+(nr?'<span class="ic"><i>📖</i><b>'+nr+'</b></span>':'')+(nw?'<span class="ic"><i>🎬</i><b>'+nw+'</b></span>':'')+'</div>':'');
-    g.appendChild(a);
-  }
-  if(!i)g.innerHTML='<p class="sub">لا نتائج.</p>';
+let _stats={},flt='',showSoon=false;
+const ic=id=>'<svg class="i"><use href="icons.svg#'+id+'"/></svg>';
+const num=(kind,n,label,ok)=>'<span class="u-num '+kind+'">'+ic(kind==='rd'?'i-read':'i-listen')+'<b>'+n+'</b>'+(ok?'<b class="ok">'+ic('i-check')+'</b>':'')+'<small>'+label+'</small></span>';
+function shCard(st,slug,fav){
+  const init=(st.name||'؟').replace(/^ال/,'').trim()[0]||'؟';
+  return '<a class="u-sh cin" href="sheikh.html?s='+encodeURIComponent(slug)+'">'
+    +'<span class="ph">'+(st.photo?'<img src="'+esc(st.photo)+'" alt="" loading="lazy" onerror="this.remove()">':'')+'<span>'+init+'</span></span>'
+    +'<span class="nm">'+esc(st.name)+'</span>'
+    +'<span class="stats">'
+    +(st.read?num('rd',st.read,'مقروء',allR(st)):'')
+    +(st.watch?num('ls',st.watch,'مسموع',allW(st)):'')
+    +'</span></a>';
 }
-document.getElementById('flt').addEventListener('input',e=>{flt=normalize(e.target.value);render()});
-document.getElementById('contF').addEventListener('click',e=>{onlyContent=!onlyContent;e.target.style.background=onlyContent?'var(--acc)':'var(--card)';e.target.style.color=onlyContent?'#0b0f1a':'var(--txt)';render()});
-(async()=>{
-  const bust='?v='+Date.now();
-  const [data,photos,meta,stats]=await Promise.all([j('shuyukh.json'),j('photos.json'),j('data/sheikhs.json'),j('data/sheikh_stats.json'+bust)]);
-  _photos=photos||{};_stats=stats||{};
-  for(const s of ((meta&&meta.sheikhs)||[])){
-    for(const n of [s.name_display,s.name,...(s.aliases||[])]){_slugs[n]=s.slug;_slugs[normalize(n)]=s.slug}
+function slugOf(st){for(const s in _stats)if(_stats[s]===st)return s;return''}
+function allR(st){return st.rows.length&&st.rows.every(r=>r.rOk)}
+function allW(st){const w=st.rows.filter(r=>r.wtt);return w.length&&w.every(r=>r.wOk)}
+function draw(){
+  const g=document.getElementById('groups'),sg=document.getElementById('soong'),sr=document.getElementById('sres');
+  g.innerHTML='';sg.innerHTML='';sr.innerHTML='';
+  let withC=[],without=[],sres=[];
+  for(const slug in _stats){if(slug==='_meta')continue;const st=_stats[slug];st._slug=slug;
+    ((st.read||0)+(st.watch||0)>0?withC:without).push(st)}
+  withC.sort((a,b)=>(a.order||999)-(b.order||999));
+  without.sort((a,b)=>(a.order||999)-(b.order||999));
+  for(const st of withC){
+    const hay=normalize(st.name+' '+(st.aliases||[]).join(' '));
+    if(flt&&!hay.includes(flt)){
+      for(const r of (st.rows||[]))if(normalize(r.title).includes(flt))sres.push({st,r});
+      continue}
+    g.insertAdjacentHTML('beforeend',shCard(st,st._slug));
   }
-  let tR=0,tW=0;for(const v of Object.values(_stats)){tR+=v.read||0;tW+=v.watch||0}
-  document.getElementById('kpis').innerHTML=
-    '<div class="k"><b>'+tR+'</b><span>درساً يُقرأ</span></div>'
-    +'<div class="k"><b>'+tW+'</b><span>درساً يُسمع</span></div>';
-  if(!data||!data.groups){document.getElementById('groups').innerHTML='<p class="sub">تعذر تحميل القائمة.</p>';return}
-  _groups=data.groups;
-  let total=0;for(const g of _groups)total+=g.names.length;
-  document.getElementById('count').textContent=total+' شيخاً';
-  render();
+  for(const st of without){
+    if(flt&&!normalize(st.name+' '+(st.aliases||[]).join(' ')).includes(flt))continue;
+    const init=(st.name||'؟').replace(/^ال/,'').trim()[0]||'؟';
+    sg.insertAdjacentHTML('beforeend','<a class="u-sh soon" aria-disabled="true"><span class="ph"><span>'+init+'</span></span><span class="nm">'+esc(st.name)+'</span></a>');
+  }
+  for(const x of sres){
+    sr.insertAdjacentHTML('beforeend','<a href="'+esc(x.r.read)+'"><span>'+esc(x.r.title)+'</span><small>'+esc(x.st.name)+'</small></a>');
+  }
+  const sh=document.getElementById('soonh');
+  sh.hidden=!without.length;sg.hidden=!showSoon;
+  sh.innerHTML=showSoon?'إخفاء':'قريباً ('+without.length+')';
+  document.getElementById('count').textContent=withC.length+' شيخاً';
+  document.getElementById('shcnt').textContent=withC.length+' شيخاً';
+  document.getElementById('nres').textContent=flt?(withC.some(st=>normalize(st.name+' '+(st.aliases||[]).join(' ')).includes(flt))||sres.length?'':'لا نتائج.'):'';
+  drawFavs();
+}
+function drawFavs(){
+  const f=store.favList(),wrap=document.getElementById('favwrap'),el=document.getElementById('favs');
+  const cards=[];
+  for(const slug in _stats){if(slug==='_meta')continue;const st=_stats[slug];
+    if(!st.rows)continue;
+    for(const r of st.rows)if(f.includes(r.id))cards.push({st,r,slug});
+  }
+  wrap.hidden=!cards.length;
+  document.getElementById('favcnt').textContent=cards.length?cards.length+' سلسلة':'';
+  const seenL=store.seenList();
+  el.innerHTML=cards.map(x=>'<a class="u-sh" href="'+esc(x.r.read)+'">'
+    +(seenL.includes(x.r.id)?'':'<span class="u-badge">جديد</span>')
+    +'<span class="ph"><span>'+esc((x.st.name||'؟').replace(/^ال/,'').trim()[0]||'؟')+'</span></span>'
+    +'<span class="nm">'+esc(x.r.title)+'</span>'
+    +'<span class="stats">'+(x.r.rdn?num('rd',x.r.rdn,'مقروء',x.r.rOk):'')+(x.r.wan?num('ls',x.r.wan,'مسموع',x.r.wOk):'')+'</span></a>').join('');
+}
+function drawCont(){
+  const el=document.getElementById('cont');el.innerHTML='';
+  const rs=store.resumeList();if(!rs.length)return;
+  const items=[];
+  for(const it of rs.slice(0,4)){
+    const rid=it.k;let found=null;
+    for(const slug in _stats){if(slug==='_meta')continue;
+      const r=(_stats[slug].rows||[]).find(r=>r.id===rid);
+      if(r)found={r,st:_stats[slug]}}
+    if(found)items.push({h:'tr.html?r='+encodeURIComponent(rid)+'&l='+it.n,t:found.r.title,sub:found.st.name+' — الدرس '+it.n,rd:true});
+  }
+  el.innerHTML=items.map(x=>'<a class="u-cont cin" href="'+esc(x.h)+'">'+ic(x.rd?'i-read':'i-listen')
+    +'<span class="tt">'+esc(x.t)+'<small>'+esc(x.sub)+'</small></span><span class="go">تابِع ←</span></a>').join('');
+}
+document.getElementById('flt').addEventListener('input',e=>{flt=normalize(e.target.value);draw()});
+document.getElementById('soonh').addEventListener('click',()=>{showSoon=!showSoon;draw()});
+document.getElementById('exp').addEventListener('click',e=>{
+  e.preventDefault();
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([store.export()],{type:'application/json'}));
+  a.download='salasil-backup.json';a.click();
+});
+document.getElementById('imp').addEventListener('click',e=>{e.preventDefault();document.getElementById('impf').click()});
+document.getElementById('impf').addEventListener('change',e=>{
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=()=>{if(store.import_(r.result)){drawCont();drawFavs()}};
+  r.readAsText(f);
+});
+(async()=>{
+  document.getElementById('groups').innerHTML='<div class="skel" style="height:200px;border-radius:18px"></div><div class="skel" style="height:200px;border-radius:18px"></div>';
+  const stats=await j('data/sheikh_stats.json');
+  if(!stats){document.getElementById('groups').innerHTML='';document.getElementById('kpis').innerHTML='<div class="errbox">تعذر تحميل بيانات السلاسل — <a href=".">أعد المحاولة</a></div>';return}
+  _stats=stats;
+  let tR=0,tW=0;for(const k in stats){if(k==='_meta')continue;tR+=stats[k].read||0;tW+=stats[k].watch||0}
+  document.getElementById('kpis').innerHTML=num('rd',tR,'مقروء',false)+num('ls',tW,'مسموع',false);
+  drawCont();draw();
 })();
-if('serviceWorker' in navigator)navigator.serviceWorker.register('../sw.js').catch(()=>{});
+if('serviceWorker' in navigator)swRegister('../sw.js');
 </script>
 </body>
 </html>
