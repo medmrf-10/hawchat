@@ -462,11 +462,11 @@ for sh in sheikhs:
         # legacy title-fold for mut rows without plid
         if r.get('mutId') and not r.get('sSlug') and not r.get('plid'):
             t = norm(r['title'])
-            tgt = next((r2 for r2 in rows if r2 is not r and (r2.get('sSlug') or r2.get('trSr')) and norm(r2['title']) == t), None)
+            tgt = next((r2 for r2 in rows if (r2.get('sSlug') or r2.get('trSr')) and norm(r2['title']) == t), None)
             if not tgt:
                 mfiles = {os.path.basename(str(x)) for x in ((r.get('_mut') or {}).get('files') or [])}
                 for r2 in rows:
-                    if r2 is r or not (r2.get('trSh') and r2.get('trSr')):
+                    if not (r2.get('trSh') and r2.get('trSr')):
                         continue
                     se2 = next((x for x in (tr.get(r2['trSh'], {}).get('series') or []) if x.get('slug') == r2['trSr']), None)
                     if not se2:
