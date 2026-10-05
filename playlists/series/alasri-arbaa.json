@@ -3,41 +3,46 @@
  "sheikh": "الشيخ سيف العصري",
  "sheikh_slug": "saif-alasri",
  "title": "لقاء الأربعاء",
- "count": 7,
+ "count": 8,
  "lessons": [
   {
    "n": 1,
-   "title": "001__KHu7y4YLM4",
+   "title": "حديث الإفتراق -  رواية ودراية/ د. سيف العصري",
    "video": "_KHu7y4YLM4"
   },
   {
    "n": 2,
-   "title": "002_tXMvgnJWwUQ",
+   "title": "هل خالف العلماء رسول الله ﷺ حين قسموا البدعة الى حسنة وسيئة/ د.سيف العصري",
    "video": "tXMvgnJWwUQ"
   },
   {
    "n": 3,
-   "title": "003_yS5osLsPHKg",
+   "title": "ميراث المرأة في الإسلام/د. سيف العصري",
    "video": "yS5osLsPHKg"
   },
   {
    "n": 5,
-   "title": "005_rzDCNAh6w0E",
+   "title": "الوقفة الأولى مع شحرور/ د. سيف العصري",
    "video": "rzDCNAh6w0E"
   },
   {
    "n": 6,
-   "title": "006_usjmuY49z_s",
+   "title": "تعريف العبادة بين التحقيق والمجازفة / د. سيف العصري",
    "video": "usjmuY49z_s"
   },
   {
    "n": 7,
-   "title": "007_N5BSFt0jVgA",
+   "title": "الإلحاد قناعة ام مرض؟ د. سيف العصري",
    "video": "N5BSFt0jVgA"
   },
   {
+   "n": 8,
+   "title": "الكلام عن نسبة كتاب الرد على الجهمية والزنادقة للإمام أحمد/ د. سيف العصري",
+   "video": "8KxNh_XGxOM"
+  },
+  {
    "n": 55,
-   "title": "055_91QOssB3Gzo",
+   "title": "لقاء الأربعاء / أهل السنة والجماعة / الدكتور سيف العصري",
    "video": "91QOssB3Gzo"
   }
  ]
