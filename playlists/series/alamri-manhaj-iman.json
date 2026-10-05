@@ -1,0 +1,42 @@
+{
+ "slug": "alamri-manhaj-iman",
+ "sheikh": "علي محمود العمري",
+ "sheikh_slug": "ali-mahmoud-alomari",
+ "title": "المنهاج في شعب الإيمان",
+ "playlist": "https://www.youtube.com/playlist?list=PLa3XSU7qw_Ymxru2Q5gP8WfdMovgl18ie",
+ "count": 4,
+ "lessons": [
+  {
+   "n": 1,
+   "title": "شرح المنهاج في شعب الإيمان/ المجلس الرابع",
+   "video": "N3aD3QWzlfI",
+   "align": false,
+   "chars": 36793,
+   "dur": "67:14"
+  },
+  {
+   "n": 2,
+   "title": "شرح المنهاج في شعب الإيمان/ المجلس الثالث",
+   "video": "rYttQ0hdUis",
+   "align": false,
+   "chars": 39664,
+   "dur": "67:33"
+  },
+  {
+   "n": 3,
+   "title": "شرح المنهاج في شعب الإيمان/ المجلس الثاني",
+   "video": "ELL39P9A15I",
+   "align": false,
+   "chars": 33719,
+   "dur": "60:56"
+  },
+  {
+   "n": 4,
+   "title": "شرح المنهاج في شعب الإيمان د  علي محمود العمري  1",
+   "video": "noUZ_sw7YVI",
+   "align": false,
+   "chars": 40090,
+   "dur": "71:52"
+  }
+ ]
+}

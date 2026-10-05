@@ -1,0 +1,26 @@
+{
+ "slug": "alamri-liqaat",
+ "sheikh": "علي محمود العمري",
+ "sheikh_slug": "ali-mahmoud-alomari",
+ "title": "لقاءات علمية",
+ "playlist": "https://www.youtube.com/playlist?list=PLa3XSU7qw_YmVEw3TH38ZSH458lszrz3E",
+ "count": 2,
+ "lessons": [
+  {
+   "n": 2,
+   "title": "منهج التعامل مع مشاكل الشباب من لقاء مناقشة رواية الدكتور: في ستَّة أيَّامٍ.",
+   "video": "sbTAc8fJp2M",
+   "align": false,
+   "chars": 3705,
+   "dur": "5:49"
+  },
+  {
+   "n": 3,
+   "title": "من لقاء مناقشة كتاب الدكتور علي محمود العمري: في ستَّة أيَّام",
+   "video": "67oWqXf8ZZQ",
+   "align": false,
+   "chars": 6467,
+   "dur": "10:28"
+  }
+ ]
+}

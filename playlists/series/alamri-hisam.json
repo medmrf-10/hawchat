@@ -4,7 +4,7 @@
  "sheikh_slug": "ali-mahmoud-alomari",
  "title": "شرح الحسام الكاتي على إيساغوجي",
  "playlist": "https://www.youtube.com/playlist?list=PLa3XSU7qw_Yk3FV5anlV3ddqxQ3khGb8h",
- "count": 30,
+ "count": 32,
  "lessons": [
   {
    "n": 1,
@@ -223,6 +223,14 @@
    "dur": "15:50"
   },
   {
+   "n": 28,
+   "title": "( 3 ) ج٢ شرح الحسام الكاتي",
+   "video": "CEENLfVOm50",
+   "align": false,
+   "chars": 8763,
+   "dur": "14:30"
+  },
+  {
    "n": 29,
    "title": "( 3 )تتمة ج١ شرح الحسام الكاتي",
    "video": "NubpQpGJBYM",
@@ -245,6 +253,14 @@
    "align": false,
    "chars": 14580,
    "dur": "11:47"
+  },
+  {
+   "n": 32,
+   "title": "(2)ج٢ شرح الحسام الكاتي على إيساغوجي",
+   "video": "DXkDJWJNlr4",
+   "align": false,
+   "chars": 12305,
+   "dur": "24:38"
   }
  ]
 }
