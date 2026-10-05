@@ -1,0 +1,48 @@
+name: hawchat-build
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Regenerate derived data
+        run: python3 playlists/data/gen_stats.py
+      - name: Structural audit (fail on inconsistency)
+        run: python3 scripts/audit_site.py
+      - name: Non-regression gate vs live stats
+        run: python3 scripts/non_regression.py
+      - name: Guard — no conflict markers
+        run: |
+          if git grep -nE '^(<{7}|={7}|>{7})' -- ':!*.md' | head -20 | grep .; then
+            echo "conflict markers in tree"; exit 1
+          fi
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
