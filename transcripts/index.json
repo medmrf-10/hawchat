@@ -771,9 +771,10 @@
       "mughni-05_AlAmri.txt",
       "mughni-06_AlAmri.txt",
       "mughni-07_AlAmri.txt",
-      "mughni-08_AlAmri.txt"
+      "mughni-08_AlAmri.txt",
+      "mughni-09_AlAmri.txt"
      ],
-     "n": 7
+     "n": 8
     },
     {
      "slug": "barahin-muqtatafat",
@@ -783,9 +784,10 @@
       "barahin-muqtatafat-05_AlAmri.txt",
       "barahin-muqtatafat-07_AlAmri.txt",
       "barahin-muqtatafat-09_AlAmri.txt",
-      "barahin-muqtatafat-10_AlAmri.txt"
+      "barahin-muqtatafat-10_AlAmri.txt",
+      "barahin-muqtatafat-11_AlAmri.txt"
      ],
-     "n": 5
+     "n": 6
     }
    ],
    "slug": "ali-mahmoud-alomari"
