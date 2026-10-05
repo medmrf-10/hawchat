@@ -10,9 +10,11 @@
       "NA_G34cWaxDHWw.txt",
       "NA_WFLgTeRtEIo.txt"
      ],
-     "n": 2
+     "n": 2,
+     "total": 38
     }
-   ]
+   ],
+   "slug": "muhammad-abdelwahid-hanbali"
   },
   "binsayib": {
    "name": "الشيخ عبد العزيز بن سايب",
@@ -25,9 +27,11 @@
       "NA_mY4yQSX4gN0.txt",
       "NA_rFSkLmkzZ10.txt"
      ],
-     "n": 3
+     "n": 3,
+     "total": 96
     }
-   ]
+   ],
+   "slug": "bensaib"
   },
   "mashhour": {
    "name": "الشيخ عبد الرحمن المشهور",
@@ -43,7 +47,8 @@
       "NA_g3PTMYwyzNI.txt",
       "NA_vDXo4D0Ms8Y.txt"
      ],
-     "n": 6
+     "n": 6,
+     "total": 30
     },
     {
      "slug": "irtibat1",
@@ -56,7 +61,8 @@
       "NA_f8JENBakqj0.txt",
       "NA_mysX5mXeSwE.txt"
      ],
-     "n": 6
+     "n": 6,
+     "total": 49
     },
     {
      "slug": "kahf3",
@@ -71,7 +77,8 @@
       "NA__JeYwveOjUg.txt",
       "NA_c1JS7zxnwaQ.txt"
      ],
-     "n": 8
+     "n": 8,
+     "total": 30
     },
     {
      "slug": "khawatir",
@@ -86,7 +93,8 @@
       "NA_ryc9RzbfyNc.txt",
       "NA_ttQ3RjAztCo.txt"
      ],
-     "n": 8
+     "n": 8,
+     "total": 29
     },
     {
      "slug": "ni3ma",
@@ -98,9 +106,11 @@
       "NA_nYZnoXebdFU.txt",
       "NA_qucbE_qXk-c.txt"
      ],
-     "n": 5
+     "n": 5,
+     "total": 27
     }
-   ]
+   ],
+   "slug": "aboubakr-almashhour"
   }
  },
  "updated": "2026-10-05T07:34:33Z"
