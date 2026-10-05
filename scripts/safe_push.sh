@@ -14,6 +14,7 @@ git commit -q -m "$MSG"
 
 for i in 1 2 3 4 5; do
   git pull --rebase -q origin main 2>/dev/null || true
+  bash /home/ubuntu/align_pkgs/rebase_fix.sh 2>/dev/null || true
   # regenerate generated files AFTER rebase — they see everyone's files
   [ -f playlists/series/regen_index.py ] && python3 playlists/series/regen_index.py >/dev/null 2>&1 || true
   [ -f playlists/data/gen_stats.py ] && python3 playlists/data/gen_stats.py >/dev/null 2>&1 || {
@@ -26,7 +27,7 @@ for i in 1 2 3 4 5; do
   if [ -f scripts/audit_site.py ]; then
     python3 scripts/audit_site.py || { echo "❌ التدقيق رفض الدفع — أصلح الأخطاء أعلاه"; exit 1; }
   fi
-  if git push -q origin HEAD:main 2>/dev/null; then echo "دُفع بنجاح."; exit 0; fi
+  if git push -q origin HEAD:main 2>/dev/null; then git tag -f site-core-v2 HEAD >/dev/null 2>&1 || true; echo "دُفع بنجاح."; exit 0; fi
   sleep 2
 done
 echo "تعذّر الدفع بعد 5 محاولات — أعد المحاولة."; exit 1
