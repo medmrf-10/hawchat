@@ -88,7 +88,7 @@ function render(){
 document.getElementById('flt').addEventListener('input',e=>{flt=normalize(e.target.value);render()});
 (async()=>{
   const bust='?v='+Date.now();
-  const [data,photos,meta,pub,mut]=await Promise.all([j('shuyukh.json'),j('photos.json'),j('data/sheikhs.json'),j('series/index.json'+bust),j('https://medmrf-10.github.io/des/mutalaa/data/manifest.json'+bust)]);
+  const [data,photos,meta,pub,mut,tr]=await Promise.all([j('shuyukh.json'),j('photos.json'),j('data/sheikhs.json'),j('series/index.json'+bust),j('https://medmrf-10.github.io/des/mutalaa/data/manifest.json'+bust),j('../transcripts/index.json'+bust)]);
   _photos=photos||{};
   const name2disp={};
   for(const s of ((meta&&meta.sheikhs)||[])){
@@ -106,7 +106,11 @@ document.getElementById('flt').addEventListener('input',e=>{flt=normalize(e.targ
     const d=name2disp[normalize(m.sheikh||'')];
     if(d)_read[d]=(_read[d]||0)+1;
   }
-  const tR=Object.values(_read).reduce((a,b)=>a+b,0),tW=Object.values(_watch).reduce((a,b)=>a+b,0);
+  for(const [k,v] of Object.entries((tr&&tr.sheikhs)||{})){
+    const sl=v.slug||k;
+    _readPub[sl]=(_readPub[sl]||0)+(v.series||[]).length;
+  }
+  const tR=Object.values(_read).reduce((a,b)=>a+b,0)+Object.values(_readPub).reduce((a,b)=>a+b,0),tW=Object.values(_watch).reduce((a,b)=>a+b,0);
   document.getElementById('kpis').innerHTML=
     '<div class="k"><b>'+tR+'</b><span>سلسلة يُقرأ</span></div>'
     +'<div class="k"><b>'+tW+'</b><span>سلسلة يُسمع</span></div>';

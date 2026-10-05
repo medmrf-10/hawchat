@@ -137,11 +137,12 @@ function renderSeries(){
     if(r.watch)links+=`<a class="btn play" href="series.html?s=${encodeURIComponent(r.watch.slug)}" title="استمع/تصفح الدروس">${ICON.play}</a>`;
     if(r.read){
       if(r.read.id)links+=`<a class="btn read" href="${MUT}#/s/${esc(r.read.id)}" target="_blank" rel="noopener" title="اقرأ التفريغ">${ICON.book}</a>`;
+      else if(r.read.tr)links+=`<a class="btn read" href="tr.html?sh=${encodeURIComponent(r.read.sh)}&s=${encodeURIComponent(r.read.sr)}" title="اقرأ التفريغ">${ICON.book}</a>`;
       else if(r.read.slug)links+=`<a class="btn read" href="series.html?s=${encodeURIComponent(r.read.slug)}" title="اقرأ التفريغ">${ICON.book}</a>`;
     }
     const cc=[];
     if(r.read){
-      const dn=r.read.done||(r.read.files?r.read.files.length:0)||r.read.transcribed||0;
+      const dn=r.read.done||(r.read.files?r.read.files.length:0)||r.read.transcribed||r.read.n||0;
       const tt=r.read.total||(r.read.files?r.read.files.length:0)||r.read.count||dn;
       cc.push(`<b class="don">${dn}</b>/${tt} مفرّغ`);
     }
@@ -159,9 +160,9 @@ document.addEventListener('click',e=>{
 (async()=>{
   const slug=new URLSearchParams(location.search).get('s')||'';
   const bust='?v='+Date.now();
-  const [data,photos,chs,sidx,mut]=await Promise.all([
+  const [data,photos,chs,sidx,mut,tr]=await Promise.all([
     j('data/sheikhs.json'),j('photos.json'),j('channels.json'),j('series/index.json'+bust),
-    j(MUT+'data/manifest.json'+bust)]);
+    j(MUT+'data/manifest.json'+bust),j('../transcripts/index.json'+bust)]);
   const sh=data&&data.sheikhs?data.sheikhs.find(x=>x.slug===slug):null;
   const B=document.getElementById('body');
   if(!sh){B.innerHTML='<div class="empty">لم يُعثر على الشيخ المطلوب. <a href="." style="color:var(--acc2)">عودة للقائمة</a></div>';return}
@@ -183,6 +184,16 @@ document.addEventListener('click',e=>{
     if(!hit){hit={title:s.title,read:null,watch:null};_rows.push(hit)}
     if((s.aligned||0)>0)hit.watch=s;
     if((s.transcribed||0)>0&&!hit.read)hit.read=s;
+  }
+  // raw transcript pushes (task pipelines uploading txt continuously)
+  for(const [k,v] of Object.entries((tr&&tr.sheikhs)||{})){
+    if((v.slug||k)!==sh.slug)continue;
+    for(const sr of (v.series||[])){
+      const st=norm(sr.title);let hit=null;
+      for(const r of _rows){const rt=norm(r.title);if(rt&&(rt.includes(st)||st.includes(rt))){hit=r;break}}
+      if(!hit){hit={title:sr.title,read:null,watch:null};_rows.push(hit)}
+      if(!hit.read)hit.read={tr:true,sh:k,sr:sr.slug,n:sr.n,total:sr.total};
+    }
   }
   _rows.sort((a,b)=>a.title.localeCompare(b.title,'ar'));
   const nRead=_rows.filter(r=>r.read).length,nWatch=_rows.filter(r=>r.watch).length;
