@@ -122,19 +122,35 @@ for sh in sheikhs:
             nset.add(x); nset.add(norm(x))
     rows = []
 
-    def hit(title):
-        st = norm(title)
-        for r in rows:
-            rt = norm(r['title'])
-            if rt and (rt in st or st in rt):
-                return r
-        return None
-
+    # identity: a series is its KEY (mutId / sSlug / trSh+trSr), never its title.
     def newrow(title):
         r = {'title': clean_title(title), 'rdn': 0, 'rtt': 0, 'wan': 0, 'wtt': 0,
              'kind': None}
         rows.append(r)
         return r
+
+    def srow(s_slug):
+        for r in rows:
+            if r.get('sSlug') == s_slug:
+                return r
+        return None
+
+    def trrow(k, sr_slug):
+        for r in rows:
+            if r.get('trSh') == k and r.get('trSr') == sr_slug:
+                return r
+        # same series known under lessons slug? (tr 'tawba' == s 'bouti-tawba')
+        for r in rows:
+            sl = r.get('sSlug')
+            if sl and (sl == sr_slug or sl.endswith('-' + sr_slug)):
+                return r
+        return None
+
+    def mutrow(m_id):
+        for r in rows:
+            if r.get('mutId') == m_id:
+                return r
+        return None
 
     # ── mutalaa manifest (readable) ──
     for m in muts:
@@ -142,13 +158,13 @@ for sh in sheikhs:
             continue
         if (m.get('done') or 0) <= 0 and not m.get('files'):
             continue
-        r = hit(m.get('name') or m.get('title') or '') or newrow(m.get('name') or m.get('title') or ('#' + str(m.get('id'))))
+        r = mutrow(m.get('id')) or newrow(m.get('name') or m.get('title') or ('#' + str(m.get('id'))))
         n = m.get('done') or len(m.get('files') or [])
         r['rdn'] = max(r['rdn'], n)
         r['rtt'] = max(r['rtt'], m.get('total') or 0, n)
         if not r['kind']:
-            r['kind'] = 'mut'; r['mutId'] = m.get('id')
-        r['trSh'] = r.get('trSh'); r.setdefault('mutId', m.get('id'))
+            r['kind'] = 'mut'
+        r['mutId'] = m.get('id')
         r['_mut'] = m  # stash for read-rows
 
     # ── series/index.json (aligned + transcribed) ──
@@ -157,7 +173,7 @@ for sh in sheikhs:
             continue
         if (s.get('aligned') or 0) <= 0 and (s.get('transcribed') or 0) <= 0:
             continue
-        r = hit(s.get('title') or '') or newrow(s.get('title'))
+        r = srow(s['slug']) or newrow(s.get('title'))
         if (s.get('aligned') or 0) > 0:
             r['wan'] = max(r['wan'], s['aligned'])
             r['wtt'] = max(r['wtt'], s.get('count') or 0, s['aligned'])
@@ -174,13 +190,31 @@ for sh in sheikhs:
         if (v.get('slug') or k) != slug:
             continue
         for sr in (v.get('series') or []):
-            r = hit(sr.get('title') or '') or newrow(sr.get('title'))
+            r = trrow(k, sr.get('slug')) or newrow(sr.get('title'))
             n = sr.get('n') or len(sr.get('files') or [])
             r['rdn'] = max(r['rdn'], n)
             r['rtt'] = max(r['rtt'], sr.get('total') or 0, n)
             if not r['kind']:
                 r['kind'] = 'tr'
             r['trSh'] = k; r['trSr'] = sr.get('slug')
+
+    # ── fold exact-title duplicates: mut row == s row (same series, two sources) ──
+    seen = {}
+    keep = []
+    for r in rows:
+        if r.get('mutId') and not r.get('sSlug'):
+            t = norm(r['title'])
+            tgt = None
+            for r2 in rows:
+                if r2.get('sSlug') and norm(r2['title']) == t:
+                    tgt = r2; break
+            if tgt:
+                tgt['rdn'] = max(tgt['rdn'], r['rdn'])
+                tgt['rtt'] = max(tgt['rtt'], r['rtt'])
+                tgt['mutId'] = r['mutId']; tgt['_mut'] = r.get('_mut')
+                continue
+        keep.append(r)
+    rows[:] = keep
 
     # ── enforce invariants + links + read-rows ──
     for r in rows:
