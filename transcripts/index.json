@@ -1259,6 +1259,7 @@
      "slug": "mughni",
      "title": "مغني الطلاب شرح إيساغوجي",
      "files": [
+      "mughni-01_AlAmri.txt",
       "mughni-02_AlAmri.txt",
       "mughni-03_AlAmri.txt",
       "mughni-04_AlAmri.txt",
@@ -1272,9 +1273,13 @@
       "mughni-12_AlAmri.txt",
       "mughni-13_AlAmri.txt",
       "mughni-15_AlAmri.txt",
-      "mughni-16_AlAmri.txt"
+      "mughni-16_AlAmri.txt",
+      "mughni-18_AlAmri.txt",
+      "mughni-19_AlAmri.txt",
+      "mughni-20_AlAmri.txt",
+      "mughni-21_AlAmri.txt"
      ],
-     "n": 14
+     "n": 19
     },
     {
      "slug": "barahin-muqtatafat",
@@ -2271,5 +2276,5 @@
    ]
   }
  },
- "updated": "2026-10-05T11:51:53Z"
+ "updated": "2026-10-05T12:02:03Z"
 }
