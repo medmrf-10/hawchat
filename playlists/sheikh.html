@@ -165,13 +165,11 @@ function acts(x){
   if(!b&&x.id==null)b='<span style="font-size:.62rem;color:#555">لا يمكن إدارتها — مصدر الصوت مفقود</span>';
   return b;
 }
-const FILT={all:'الكل',listen:'يُسمع',read:'يُقرأ',feed:'يُنزَّل',queue:'الطابور',paused:'متوقفة',nodl:'لم تُنزَّل',bad:'فاشل',held:'غير مرغوب',done:'مكتملة'};
+const FILT={all:'الكل',listen:'يُسمع',read:'يُقرأ'};
 function rowMatch(r){
-  if(fv==='all')return true;
   if(fv==='listen')return !!r.pub;
-  if(fv==='read')return r.x.done>0;
-  if(fv==='bad')return r.x.bad>0||r.x.feed==='feederr';
-  return cat(r.x)===fv;
+  if(fv==='read')return (r.x.done||0)>0;
+  return true;
 }
 function renderSeries(){
   const w=document.getElementById('srows');if(!w)return;
@@ -256,8 +254,8 @@ document.addEventListener('click',e=>{
   }
   // hard-match known published slugs by sheikh key words
   for(const r of _rows){if(!r.pub&&r.x.key.startsWith('822'))r.pub=pubByKey['gomaa-khawarij']}
-  // clean view: hide series with no real transcription (<=2 done) unless published
-  _rows=_rows.filter(r=>(r.x.done||0)>2||r.pub||((r.x.done||0)>0&&r.x.exp&&r.x.done>=r.x.exp));
+  // clean view: only transcribed (readable) or published (watchable) series exist
+  _rows=_rows.filter(r=>(r.x.done||0)>0||r.pub);
   // stats for hero bar
   const g={total:0,done:0,pending:0,active:0,bad:0,paused:0,held:0};
   _rows.forEach(r=>{const x=r.x;g.total+=tot(x);
