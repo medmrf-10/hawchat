@@ -91,6 +91,7 @@ YTT = J(os.path.join(BASE, 'yt_titles.json')) or {}
 YTV = YTT.get('v') or {}
 YTP = YTT.get('p') or {}
 V2P = J(os.path.join(BASE, 'vid_plists.json')) or {}   # vid → [[plid,pos,tot]]
+ROW_IDS = J(os.path.join(BASE, 'row_ids.json')) or {}  # frozen: identity key -> row id
 PL_LEN = {}
 def pl_len(plid):
     if plid not in PL_LEN:
@@ -495,7 +496,15 @@ for sh in sheikhs:
         r['rtt'] = max(r['rtt'], r['rdn'])
         r['wtt'] = r['rtt']
         key = r.get('mutId') or r.get('sSlug') or ((r.get('trSh') or '') + '-' + (r.get('trSr') or ''))
-        r['id'] = '%s--%s' % (slug, re.sub(r'[^\w\-]', '', str(key)))
+        keys = {k for k in (('m', r.get('mutId')), ('s', r.get('sSlug')),
+                            ('p', r.get('plid')), ('t', (r.get('trSh') or '') + '-' + (r.get('trSr') or '')))
+                if k[1]} | {('k', str(key))}
+        rid = None
+        for tag, kv in sorted(keys):
+            rid = rid or ROW_IDS.get(slug, {}).get('%s:%s' % (tag, kv))
+        r['id'] = rid or '%s--%s' % (slug, re.sub(r'[^\w\-]', '', str(key)))
+        for tag, kv in keys:
+            ROW_IDS.setdefault(slug, {})['%s:%s' % (tag, kv)] = r['id']
         rrows = []
         if r.get('kind') == 'mut' and r.get('mutId') is not None:
             m = next((x for x in muts if str(x.get('id')) == str(r['mutId'])), None)
@@ -567,6 +576,7 @@ tmp = dst + '.tmp'
 json.dump(out, open(tmp, 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
 os.replace(tmp, dst)
 json.dump(REDIRECTS, open(os.path.join(BASE, 'redirects.json'), 'w'), ensure_ascii=False)
+json.dump(ROW_IDS, open(os.path.join(BASE, 'row_ids.json'), 'w'), ensure_ascii=False)
 # flat search index (P7): [{id,title,sh,sname}]
 search = []
 for slug, v in out.items():
