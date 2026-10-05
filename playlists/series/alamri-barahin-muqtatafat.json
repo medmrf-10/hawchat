@@ -4,8 +4,16 @@
  "sheikh_slug": "ali-mahmoud-alomari",
  "title": "مقتطفات من دروس أم البراهين",
  "playlist": "https://www.youtube.com/playlist?list=PLa3XSU7qw_YlBZIplsv2MSTfwOO-Qa82r",
- "count": 3,
+ "count": 5,
  "lessons": [
+  {
+   "n": 4,
+   "title": "مقتطفات من دروس أم البراهين",
+   "video": "TalS9A9zZAk",
+   "align": false,
+   "chars": 1534,
+   "dur": "2:45"
+  },
   {
    "n": 5,
    "title": "مقتطفات من دروس أم البراهين",
@@ -29,6 +37,14 @@
    "align": false,
    "chars": 2825,
    "dur": "5:27"
+  },
+  {
+   "n": 10,
+   "title": "مقتطفات من دروس أم البراهين",
+   "video": "XG1qXIm5lLo",
+   "align": false,
+   "chars": 1857,
+   "dur": "3:35"
   }
  ]
 }
