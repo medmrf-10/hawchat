@@ -8,15 +8,15 @@
  "lessons": [
   {
    "n": 1,
-   "title": "تفسير جزء عمّ",
+   "title": "Interpretation of Surah An-Naba (1) ",
    "video": "mDP084pOle8",
-   "align": false,
+   "align": true,
    "chars": 9177,
    "dur": "11:18"
   },
   {
    "n": 2,
-   "title": "تفسير جزء عمّ",
+   "title": "تفسير سورة النبأ (2) ",
    "video": "ZOFNIUa6sJE",
    "align": false,
    "chars": 38584,
@@ -24,7 +24,7 @@
   },
   {
    "n": 3,
-   "title": "تفسير جزء عمّ",
+   "title": "Interpretation of Surah An-Nazi'at (1) ",
    "video": "Vsa57i2HO5s",
    "align": false,
    "chars": 33184,
@@ -32,7 +32,7 @@
   },
   {
    "n": 4,
-   "title": "تفسير جزء عمّ",
+   "title": "تفسير سورة النازعات (2) ",
    "video": "5gdpWyaiiZc",
    "align": false,
    "chars": 26836,
@@ -40,7 +40,7 @@
   },
   {
    "n": 5,
-   "title": "تفسير جزء عمّ",
+   "title": "Tafsir of Surah Abasa ",
    "video": "jr34XNRKDV8",
    "align": false,
    "chars": 47315,
@@ -48,7 +48,7 @@
   },
   {
    "n": 8,
-   "title": "تفسير جزء عمّ",
+   "title": "تفسير سورة المطففين (1) ",
    "video": "bAxJMiZaURk",
    "align": false,
    "chars": 31440,
@@ -56,7 +56,7 @@
   },
   {
    "n": 9,
-   "title": "تفسير جزء عمّ",
+   "title": "تفسير سورة المطففين (2) ",
    "video": "rnJEni3-WGY",
    "align": false,
    "chars": 28243,
@@ -64,7 +64,7 @@
   },
   {
    "n": 11,
-   "title": "تفسير جزء عمّ",
+   "title": "تفسير سورة البروج ",
    "video": "5azJt4b5zfg",
    "align": false,
    "chars": 42844,
@@ -72,7 +72,7 @@
   },
   {
    "n": 13,
-   "title": "تفسير جزء عمّ",
+   "title": "تفسير سورة الأعلى ",
    "video": "jMipa0Ij50c",
    "align": false,
    "chars": 38376,
@@ -80,7 +80,7 @@
   },
   {
    "n": 14,
-   "title": "تفسير جزء عمّ",
+   "title": "تفسير سورة الأعلى (1) ",
    "video": "-sSzRIJL1Bs",
    "align": false,
    "chars": 12468,
@@ -88,7 +88,7 @@
   },
   {
    "n": 15,
-   "title": "تفسير جزء عمّ",
+   "title": "تفسير سورة الأعلى (2) ",
    "video": "K2GnvQQ5HfY",
    "align": false,
    "chars": 15148,
@@ -96,7 +96,7 @@
   },
   {
    "n": 17,
-   "title": "تفسير جزء عمّ",
+   "title": "تفسير سورة الفجر ",
    "video": "Gk_IMJkq1wo",
    "align": false,
    "chars": 43705,
@@ -104,7 +104,7 @@
   },
   {
    "n": 18,
-   "title": "تفسير جزء عمّ",
+   "title": "تفسير سورة البلد ",
    "video": "-ySI48S-vuM",
    "align": false,
    "chars": 40194,
@@ -112,7 +112,7 @@
   },
   {
    "n": 20,
-   "title": "تفسير جزء عمّ",
+   "title": "تفسير سورة الليل ",
    "video": "YwtVNEVAKTM",
    "align": false,
    "chars": 38236,
@@ -120,7 +120,7 @@
   },
   {
    "n": 22,
-   "title": "تفسير جزء عمّ",
+   "title": "Tafsir of Surah Ash-Sharh ",
    "video": "p6AbdXaZJWw",
    "align": false,
    "chars": 39266,
@@ -128,7 +128,7 @@
   },
   {
    "n": 23,
-   "title": "تفسير جزء عمّ",
+   "title": "تفسير سورة التين ",
    "video": "Veh3WrQ1WDo",
    "align": false,
    "chars": 37473,
@@ -136,7 +136,7 @@
   },
   {
    "n": 25,
-   "title": "تفسير جزء عمّ",
+   "title": "تفسير سورة البينة ",
    "video": "mJj20ZmoVzw",
    "align": false,
    "chars": 58596,
@@ -144,7 +144,7 @@
   },
   {
    "n": 27,
-   "title": "تفسير جزء عمّ",
+   "title": "تفسير سورة العاديات ",
    "video": "k_ZPZtytwms",
    "align": false,
    "chars": 41895,
@@ -152,7 +152,7 @@
   },
   {
    "n": 36,
-   "title": "تفسير جزء عمّ",
+   "title": "تفسير سورة الفلق ",
    "video": "NBji0mF3BeU",
    "align": false,
    "chars": 37466,
@@ -160,7 +160,7 @@
   },
   {
    "n": 38,
-   "title": "تفسير جزء عمّ",
+   "title": "Tafsir of Surah Al-Alaq ",
    "video": "6vRPauReajM",
    "align": false,
    "chars": 38999,
