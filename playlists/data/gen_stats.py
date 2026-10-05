@@ -162,7 +162,7 @@ def rows_from_files(files, base, plid=None, row_title=None):
         # still a raw filename (no arabic)? → series title + lesson number
         if not t or (FILENAMEISH.match(t) and not re.search(r'[؀-ۿ]', t)):
             t = ((row_title or '') + ' — ' if row_title else '') + 'الدرس %d' % n
-        out.append({'n': n, 'title': t, 'file': f, 'base': base})
+        out.append({'n': n, 'vid': v, 'title': t, 'file': f, 'base': base})
     # never two lessons with the same n. Two passes: real numbers are fixed
     # first, then duplicates take max+1, max+2, … — a dup can never steal a
     # real lesson's position and cascade-shift the rest
