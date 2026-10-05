@@ -86,7 +86,7 @@ function draw(){
     a.href='sheikh.html?s='+encodeURIComponent(slugOf(st));
     const init=(st.name||'؟').replace(/^ال/,'').trim()[0]||'؟';
     a.innerHTML='<div class="ph">'+(st.photo?'<img src="'+esc(st.photo)+'" alt="" loading="lazy" onerror="this.remove()">':'')+'<span>'+init+'</span></div><div class="nm">'+esc(st.name)+'</div>'
-      +'<div class="icrow">'+(st.read?statChip('read',st.read,totalR(st),allR(st)):'')+(st.watch?statChip('listen',st.watch,totalW(st),allW(st)):'')+'</div>';
+      +'<div class="icrow">'+(st.read?statChip('read',st.read,totalR(st),allR(st)):'')+(st.watch?statChip('listen',st.watch,totalR(st),allW(st)):'')+'</div>';
     g.appendChild(a);
   }
   for(const st of without){
@@ -112,7 +112,7 @@ function slugOf(st){for(const s in _stats)if(_stats[s]===st)return s;return''}
 function totalR(st){let m=0;for(const r of st.rows)m=Math.max(m,r.rtt||0);return Math.max(m,st.read)}
 function totalW(st){let m=0;for(const r of st.rows)m=Math.max(m,r.wtt||0);return Math.max(m,st.watch)}
 function allR(st){return st.rows.every(r=>r.rOk)}
-function allW(st){return st.rows.every(r=>!r.wtt||r.wOk)}
+function allW(st){return st.rows.every(r=>r.wOk)}
 document.getElementById('flt').addEventListener('input',e=>{flt=normalize(e.target.value);draw()});
 document.getElementById('soonh').addEventListener('click',()=>{showSoon=!showSoon;draw()});
 (async()=>{

@@ -247,7 +247,7 @@ for sh in sheikhs:
         r['read'] = 'tr.html?r=' + r['id']
         r['listen'] = ('series.html?s=' + r['sSlug']) if r['wan'] > 0 and r.get('sSlug') else None
         r['rOk'] = bool(r['rtt'] and r['rdn'] >= r['rtt'])
-        r['wOk'] = bool(r['wtt'] and r['wan'] >= r['wtt'])
+        r['wOk'] = bool(r['rtt'] and r['wan'] >= r['rtt'])
 
     rows.sort(key=lambda r: (-r['wan'], r['title'] or ''))
     read  = sum(r['rdn'] for r in rows)

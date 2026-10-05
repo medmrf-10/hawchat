@@ -67,7 +67,7 @@
   let h='<nav class="crumb" aria-label="مسار التنقل"><a href=".">سلاسل المشايخ</a> ‹ <a href="sheikh.html?s='+encodeURIComponent(shSlug)+'">'+esc(d.sheikh)+'</a> ‹ '+esc(d.title)+'</nav>';
   h+='<div class="hero cin"><h1><bdi>'+esc(d.title)+'</bdi></h1><div class="meta">'
     +(row?statChip('read',row.rdn,row.rtt,row.rOk):'')
-    +(row&&row.wan?statChip('listen',row.wan,row.wtt,row.wOk):'')
+    +(row&&row.wan?statChip('listen',row.wan,row.rtt,row.wOk):'')
     +(d.playlist?'<a href="'+esc(d.playlist)+'" target="_blank" rel="noopener">قائمة يوتيوب ↗</a>':'')
     +'</div><div class="acts">'
     +(row?'<a class="rd" href="'+esc(row.read)+'">'+I.read+' اقرأ التفريغ</a>':'')

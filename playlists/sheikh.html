@@ -68,7 +68,7 @@ function renderSeries(){
     const a=document.createElement('a');a.className='ser';a.href=r.read;
     a.setAttribute('aria-label',r.title+' — يُقرأ');
     let st=statChip('read',r.rdn,r.rtt,r.rOk);
-    if(r.wan>0)st+=statChip('listen',r.wan,r.wtt,r.wOk);
+    if(r.wan>0)st+=statChip('listen',r.wan,r.rtt,r.wOk);
     a.innerHTML='<span class="nm"><bdi>'+esc(r.title)+'</bdi></span><span class="icrow">'+st+(r.listen?'<span class="lbtn" data-l="'+r.listen+'">'+I.listen+' استمع</span>':'')+'</span>';
     w.appendChild(a);
   }
@@ -98,7 +98,7 @@ document.addEventListener('click',e=>{
   const photo=st.photo?String(st.photo).replace(/^\/+/,''):null;
   let h='<div class="hero cin"><div class="ph">'+(photo?'<img src="'+esc(photo)+'" alt="" onerror="this.remove()">':'')+'<span>'+esc(init)+'</span></div>'
     +'<div style="flex:1"><h1>'+esc(st.name)+'</h1>'
-    +'<div class="icrow">'+(st.read?statChip('read',st.read,Math.max(st.read,maxR(_rows)),_rows.every(r=>r.rOk)):'')+(st.watch?statChip('listen',st.watch,st.watch,_rows.every(r=>!r.wtt||r.wOk)):'')
+    +'<div class="icrow">'+(st.read?statChip('read',st.read,Math.max(st.read,maxR(_rows)),_rows.every(r=>r.rOk)):'')+(st.watch?statChip('listen',st.watch,Math.max(st.read,maxR(_rows)),_rows.every(r=>r.wOk)):'')
     +'<span style="font-size:var(--fs-xs);color:var(--dim);align-self:end">'+pluralSeries(st.nSeries)+'</span></div>'
     +'</div></div>';
   h+='<div class="sec cin"><h2>السلاسل</h2><div class="fbar" role="radiogroup">'
