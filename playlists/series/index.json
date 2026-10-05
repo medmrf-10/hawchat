@@ -289,33 +289,6 @@
    "status": "مفرّغة — المحاذاة جارية"
   },
   {
-   "slug": "hashimi-zawaj",
-   "sheikh_slug": "dhaker-alhashimi",
-   "title": "ألف باء الزواج",
-   "count": 75,
-   "status": "المحاذاة جارية — 20/75",
-   "aligned": 22,
-   "transcribed": 73
-  },
-  {
-   "slug": "hashimi-tarbiya",
-   "sheikh_slug": "dhaker-alhashimi",
-   "title": "ألف باء التربية",
-   "count": 108,
-   "status": "المحاذاة جارية — 3/108",
-   "aligned": 3,
-   "transcribed": 59
-  },
-  {
-   "slug": "hashimi-fiqh-nafs",
-   "sheikh_slug": "dhaker-alhashimi",
-   "title": "مجالس فقه النفس",
-   "count": 181,
-   "status": "المحاذاة جارية — 0/181",
-   "aligned": 0,
-   "transcribed": 0
-  },
-  {
    "slug": "alamri-manhaj-iman",
    "title": "المنهاج في شعب الإيمان",
    "sheikh_slug": "ali-mahmoud-alomari",
@@ -332,6 +305,27 @@
    "aligned": 0,
    "transcribed": 2,
    "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "hashimi-zawaj",
+   "sheikh_slug": "dhaker-alhashimi",
+   "title": "ألف باء الزواج",
+   "count": 75,
+   "status": "المحاذاة جارية — 22/75"
+  },
+  {
+   "slug": "hashimi-tarbiya",
+   "sheikh_slug": "dhaker-alhashimi",
+   "title": "ألف باء التربية",
+   "count": 108,
+   "status": "المحاذاة جارية — 3/108"
+  },
+  {
+   "slug": "hashimi-fiqh-nafs",
+   "sheikh_slug": "dhaker-alhashimi",
+   "title": "مجالس فقه النفس",
+   "count": 181,
+   "status": "المحاذاة جارية — 0/181"
   }
  ]
 }
