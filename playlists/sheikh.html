@@ -88,7 +88,7 @@
 <main><div class="wrap">
   <div id="body"><div class="empty">جارٍ التحميل…</div></div>
 </div></main>
-<button id="save">حفظ — يُطبَّق على الطابور خلال دقيقة</button>
+<button id="save" style="display:none">حفظ — يُطبَّق على الطابور خلال دقيقة</button>
 <div id="toast"></div>
 <script>
 const NT='https://ntfy.sh/des_helm_q7';
@@ -188,35 +188,15 @@ function renderSeries(){
     let links='';
     if(r.pub)links+=`<a class="btn play" href="series.html?s=${encodeURIComponent(r.pub.slug)}" title="استمع/تصفح الدروس">${ICON.play}</a>`;
     if(r.mut&&r.mut.files&&r.mut.files.length)links+=`<a class="btn read" href="${MUT}#/s/${esc(r.mut.id)}" target="_blank" rel="noopener" title="اقرأ التفريغ">${ICON.book}</a>`;
-    d.innerHTML=`${qi>-1&&!held&&!pz?`<span style="color:var(--acc);font-size:.7rem;width:18px;text-align:center;font-weight:700">${qi+1}</span>`:'<span style="width:18px"></span>'}
-      <span class="nm">${esc(r.title||pretty(x.key))}</span>
-      <span class="cnt">${cnts(x)}</span>${links}${acts(x)}`;
+    d.innerHTML=`<span class="nm">${esc(r.title||pretty(x.key))}</span>
+      <span class="cnt">${cnts(x)}</span>${links}`;
     w.appendChild(d);
   }
   if(!rows.length)w.innerHTML='<div class="empty">لا نتائج في هذا القسم.</div>';
 }
-document.getElementById('save').onclick=async()=>{
-  const body=JSON.stringify({kind:'helm',order,skip:[...skip],pause:[...paused],t:Date.now()});
-  try{await fetch(NT,{method:'POST',body});toast('حُفظ — يُطبَّق خلال دقيقة');dirty=false;document.getElementById('save').classList.remove('show');}
-  catch(e){toast('تعذّر الحفظ — جرّب ثانية',1)}
-};
 document.addEventListener('click',e=>{
   const t=e.target.closest('button');if(!t)return;
   if(t.classList.contains('chip')){document.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x===t));fv=t.dataset.f;renderSeries();return}
-  const k=t.dataset.k,a=t.dataset.a;if(!k)return;
-  const row=helm.find(x=>x.key===k||String(x.id)===k),nm=row?pretty(row.key):k;
-  if(a==='eq'){if(confirm(`جدولة ملفات «${nm}» المتبقية؟`))post('helm_enqueue',k,nm);return}
-  if(a==='rt'){if(confirm(`إعادة الفاشل لـ«${nm}»؟`))post('helm_retry',k,nm);return}
-  if(a==='fd'){if(confirm(`بدء تنزيل «${nm}» من يوتيوب؟`))post('helm_feed',k,nm);return}
-  if(a==='ufd'){if(confirm(`إلغاء تنزيل «${nm}»؟`))post('helm_unfeed',k,nm);return}
-  if(a==='sk'){skip.add(k);paused.delete(k)}
-  else if(a==='un'){skip.delete(k)}
-  else if(a==='pz'){paused.add(k)}
-  else if(a==='unp'){paused.delete(k)}
-  else{let i=order.indexOf(k);if(i<0){order.push(k);i=order.length-1}
-    if(a==='up'&&i>0){[order[i-1],order[i]]=[order[i],order[i-1]]}
-    if(a==='dn'&&i<order.length-1){[order[i+1],order[i]]=[order[i],order[i+1]]}}
-  dirty=true;document.getElementById('save').classList.add('show');renderSeries();
 });
 (async()=>{
   const slug=new URLSearchParams(location.search).get('s')||'';
