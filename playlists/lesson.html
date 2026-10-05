@@ -70,7 +70,7 @@ function fmtT(s){s=Math.max(0,Math.floor(s));return Math.floor(s/60)+':'+String(
 const icS='<svg class="i" style="width:1em;height:1em;vertical-align:-.12em"><use href="icons.svg#i-clock"/></svg>';
 
 let YTP=null,AL=null,PH=[],curPh=-1,curW=-1,timer=null,pendPlay=false;
-let WLOCK=null,SLEEP=null;
+let WLOCK=null,SLEEP=0;
 
 /* normalize alignment shapes to [[word,s,e,seg],...] then group into
    display phrases by punctuation / seg id / max length */
@@ -156,7 +156,7 @@ function mountPlayer(vid){
         const sp=store.get('speed');if(sp&&sp!==1&&YTP.setPlaybackRate){YTP.setPlaybackRate(sp);const sel=document.getElementById('spd');if(sel)sel.value=String(sp)}
         const rp=T0||resumePos();if(rp>5)YTP.seekTo(rp,true);
         if(pendPlay){YTP.playVideo();pendPlay=false}},
-      onStateChange:(e)=>{const b=document.querySelector('.btn.main');if(b)b.textContent='تشغيل';
+      onStateChange:(e)=>{const b=document.querySelector('.btn.main');if(b)b.textContent=(e.data===1||e.data===3)?'إيقاف':'تشغيل';
         if(e.data===1){wakeLock(true);if(!timer)timer=setInterval(tick,150)}
         else{wakeLock(false);if(e.data!==3&&timer){clearInterval(timer);timer=null}}
         if(e.data===0&&AUTO_NEXT){const nx=document.getElementById('go-next');if(nx)nx.click()}
@@ -230,10 +230,18 @@ document.addEventListener('keydown',e=>{
   }
   document.title=l.title+' — '+d.title;
   document.getElementById('hdr-sub').textContent=d.sheikh||d.title||'درس';
+  if('mediaSession' in navigator){
+    try{navigator.mediaSession.metadata=new MediaMetadata({title:l.title||('الدرس '+ln),artist:d.sheikh||'',album:d.title||''});
+      navigator.mediaSession.setActionHandler('play',()=>YTP&&YTP.playVideo());
+      navigator.mediaSession.setActionHandler('pause',()=>YTP&&YTP.pauseVideo());
+      navigator.mediaSession.setActionHandler('seekbackward',()=>YTP&&YTP.seekTo(Math.max(0,YTP.getCurrentTime()-10),true));
+      navigator.mediaSession.setActionHandler('seekforward',()=>YTP&&YTP.seekTo(YTP.getCurrentTime()+10,true));
+    }catch(e){}
+  }
   const _ls=d.lessons.map(x=>x.n).sort((a,b)=>a-b);
   const prev=d.lessons.find(x=>x.n===_ls.filter(n=>n<ln).pop()),
         next=d.lessons.find(x=>x.n===_ls.find(n=>n>ln));
-  let h='<div class="crumb cin"><a href="sheikh.html?s='+esc(d.sheikh_slug)+'">'+esc(d.sheikh)+'</a> ← <a href="series.html?s='+encodeURIComponent(slug)+'">'+esc(d.title)+'</a></div>';
+  let h='<div class="crumb cin"><a href="sheikh.html?s='+encodeURIComponent(d.sheikh_slug)+'">'+esc(d.sheikh)+'</a> ← <a href="series.html?s='+encodeURIComponent(slug)+'">'+esc(d.title)+'</a></div>';
   h+='<div class="hero cin"><h1>الدرس '+l.n+': '+esc(l.title)+'</h1><div class="meta">'+d.count+' درساً في السلسلة'+(l.dur?' · '+fmtDur(l.dur):'')+'</div></div>';
   if(aln){
     AL=aln;PH=RAWPH?normAlign(aln).map(w=>[w]):buildPhrases(normAlign(aln));
@@ -241,23 +249,22 @@ document.addEventListener('keydown',e=>{
   }
   const alcov=aln&&!Array.isArray(aln)?(aln.cov||0):1;
   if(aln){
-    h+='<div class="player"><iframe id="yfp" src="https://www.youtube.com/embed/'+esc(l.video)+'?enablejsapi=1&rel=0&playsinline=1&iv_load_policy=3&hl=ar&origin='+encodeURIComponent(location.origin)+'" allowfullscreen></iframe></div>';
+    h+='<div class="player"><iframe id="yfp" src="https://www.youtube-nocookie.com/embed/'+esc(l.video)+'?enablejsapi=1&rel=0&playsinline=1&iv_load_policy=3&hl=ar&origin='+encodeURIComponent(location.origin)+'" allowfullscreen></iframe></div>';
     h+='<div class="ctrl">'
-      +'<button class="btn main" onclick="if(YTP){YTP.playVideo()}else{pendPlay=true;this.textContent=\'جارٍ التحميل…\'}">تشغيل</button>'
-      +'<button class="btn" onclick="YTP&&YTP.pauseVideo()">إيقاف</button>'
+      +'<button class="btn main" onclick="if(YTP){const s=YTP.getPlayerState&&YTP.getPlayerState();(s===1||s===3)?YTP.pauseVideo():YTP.playVideo()}else{pendPlay=true;this.textContent=\'جارٍ التحميل…\'}">تشغيل</button>'
       +'<button class="btn" onclick="seekPhrase(curPh-1)">الجملة السابقة</button>'
       +'<button class="btn" onclick="seekPhrase(curPh+1)">الجملة التالية</button>'
       +'<button class="btn" onclick="YTP&&YTP.seekTo(Math.max(0,YTP.getCurrentTime()-10),true)" title="رجوع 10ث">↺10</button>'
       +'<button class="btn" onclick="YTP&&YTP.seekTo(YTP.getCurrentTime()+10,true)" title="تقدم 10ث">10↻</button>'
       +'<select id="spd" onchange="const v=parseFloat(this.value);YTP&&YTP.setPlaybackRate(v);store.set(\'speed\',v)"><option value="0.75">×0.75</option><option value="1" selected>×1</option><option value="1.25">×1.25</option><option value="1.5">×1.5</option><option value="2">×2</option></select>'
-      +'<select id="slp" title="مؤقت النوم" onchange="SLEEP=parseInt(this.value)?setTimeout(()=>{YTP&&YTP.pauseVideo()},parseInt(this.value)*60000):null;this.title=SLEEP?\'يتوقف خلال \'+this.value+\' د\':\'مؤقت النوم\'"><option value="0">نوم —</option><option value="15">15د</option><option value="30">30د</option><option value="45">45د</option><option value="60">60د</option></select>'
+      +'<select id="slp" title="مؤقت النوم" onchange="clearTimeout(SLEEP);SLEEP=parseInt(this.value)?setTimeout(()=>{YTP&&YTP.pauseVideo()},parseInt(this.value)*60000):null;this.title=SLEEP?\'يتوقف خلال \'+this.value+\' د\':\'مؤقت النوم\'"><option value="0">نوم —</option><option value="15">15د</option><option value="30">30د</option><option value="45">45د</option><option value="60">60د</option></select>'
       +'<span class="tm" id="tm">0:00</span></div>';
     h+='<div class="stage" id="stage"><span class="wait">اضغط تشغيل — تظهر الجملة وتضيء الكلمة في وقتها</span></div>';
     h+='<div class="pos" id="pos"></div>';
     if(alcov<1)h+='<div style="text-align:center;margin-top:8px"><span class="covtag'+(alcov<0.7?' warn':'')+'">'+icS+' تغطية النص في هذه المحاذاة '+Math.round(alcov*100)+'%'+(alcov<0.7?' — قد تتقطع الإضاءة':'')+'</span></div>';
     if(rowL)h+='<a class="tlink" href="tr.html?r='+encodeURIComponent(rowL.id)+'&l='+l.n+'">'+I.read+' النص كاملاً</a>';
   }else{
-    if(l.video)h+='<div class="player" id="pl"><div class="cover" onclick="this.parentElement.innerHTML=\'<iframe src=https://www.youtube.com/embed/'+esc(l.video)+'?autoplay=1 allowfullscreen></iframe>\'"><span class="big">▶</span><span>تشغيل الدرس من يوتيوب — '+esc(l.video)+'</span></div></div>';
+    if(l.video)h+='<div class="player" id="pl"><div class="cover" onclick="this.parentElement.innerHTML=\'<iframe src=https://www.youtube-nocookie.com/embed/'+esc(l.video)+'?autoplay=1 allowfullscreen></iframe>\'"><span class="big">▶</span><span>تشغيل الدرس من يوتيوب — '+esc(l.video)+'</span></div></div>';
     h+='<div class="txt cin">'+(txt?esc(txt):'<div style="text-align:center;color:var(--dim);padding:30px;border:1px dashed var(--border);border-radius:12px">التفريغ غير متوفر لهذا الدرس بعد</div>')+'</div>';
   }
   h+='<div class="nav">'+(prev?'<a href="lesson.html?s='+encodeURIComponent(slug)+'&l='+prev.n+'">→ الدرس السابق</a>':'<span></span>')
