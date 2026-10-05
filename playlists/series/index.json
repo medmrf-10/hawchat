@@ -271,77 +271,7 @@
    "status": ""
   },
   {
-<<<<<<< HEAD
-   "slug": "hashimi-zawaj",
-   "sheikh_slug": "dhaker-alhashimi",
-   "title": "ألف باء الزواج",
-   "count": 75,
-   "status": "المحاذاة جارية — 20/75",
-   "aligned": 20,
-   "transcribed": 73
-  },
-  {
-   "slug": "hashimi-tarbiya",
-   "sheikh_slug": "dhaker-alhashimi",
-   "title": "ألف باء التربية",
-   "count": 108,
-   "status": "المحاذاة جارية — 3/108",
-   "aligned": 3,
-   "transcribed": 47
-  },
-  {
-   "slug": "hashimi-fiqh-nafs",
-   "sheikh_slug": "dhaker-alhashimi",
-   "title": "مجالس فقه النفس",
-   "count": 181,
-   "status": "المحاذاة جارية — 0/181",
-   "aligned": 0,
-   "transcribed": 0
-||||||| parent of 83d40fb (hashimi: دروس أول بأول)
-   "slug": "hashimi-zawaj",
-   "sheikh_slug": "dhaker-alhashimi",
-   "title": "ألف باء الزواج",
-   "count": 75,
-   "status": "المحاذاة جارية — 20/75",
-   "aligned": 20,
-   "transcribed": 73
-  },
-  {
-   "slug": "hashimi-tarbiya",
-   "sheikh_slug": "dhaker-alhashimi",
-   "title": "ألف باء التربية",
-   "count": 108,
-   "status": "المحاذاة جارية — 3/108",
-   "aligned": 3,
-   "transcribed": 52
-  },
-  {
-   "slug": "hashimi-fiqh-nafs",
-   "sheikh_slug": "dhaker-alhashimi",
-   "title": "مجالس فقه النفس",
-   "count": 181,
-   "status": "المحاذاة جارية — 0/181",
-   "aligned": 0,
-   "transcribed": 0
-  },
-  {
-   "slug": "alamri-falsafa-haditha",
-   "title": "دروس في الفلسفة الحديثة",
-   "sheikh_slug": "ali-mahmoud-alomari",
-   "count": 10,
-   "aligned": 0,
-   "transcribed": 10,
-   "status": "مفرّغة — المحاذاة جارية"
-  },
-  {
-   "slug": "alamri-liqaat",
-   "title": "لقاءات علمية",
-   "sheikh_slug": "ali-mahmoud-alomari",
-   "count": 2,
-   "aligned": 0,
-   "transcribed": 2,
-   "status": "مفرّغة — المحاذاة جارية"
-=======
+
    "slug": "alamri-falsafa-haditha",
    "title": "دروس في الفلسفة الحديثة",
    "sheikh_slug": "ali-mahmoud-alomari",
@@ -379,7 +309,6 @@
    "title": "مجالس فقه النفس",
    "count": 181,
    "status": "المحاذاة جارية — 0/181"
->>>>>>> 83d40fb (hashimi: دروس أول بأول)
   }
  ]
 }
