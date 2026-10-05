@@ -166,7 +166,7 @@
    "slug": "alamri-barahin-sharh",
    "title": "شرح كتاب شرح أم البراهين للإمام السنوسي",
    "sheikh_slug": "ali-mahmoud-alomari",
-   "count": 15,
+   "count": 24,
    "aligned": 0,
    "transcribed": 24,
    "status": "مفرّغة — المحاذاة جارية"
@@ -175,9 +175,9 @@
    "slug": "alamri-hisam",
    "title": "شرح الحسام الكاتي على إيساغوجي",
    "sheikh_slug": "ali-mahmoud-alomari",
-   "count": 30,
+   "count": 31,
    "aligned": 0,
-   "transcribed": 30,
+   "transcribed": 31,
    "status": "مفرّغة — المحاذاة جارية"
   },
   {
@@ -269,6 +269,51 @@
    "status": "المحاذاة جارية — 0/181",
    "transcribed": 0,
    "aligned": 0
+  },
+  {
+   "slug": "alamri-bath",
+   "title": "لقاء البث المباشر",
+   "sheikh_slug": "ali-mahmoud-alomari",
+   "count": 1,
+   "aligned": 0,
+   "transcribed": 1,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alamri-durus-amma",
+   "title": "دروس عامة",
+   "sheikh_slug": "ali-mahmoud-alomari",
+   "count": 4,
+   "aligned": 0,
+   "transcribed": 4,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alamri-falsafa-din",
+   "title": "فلسفة الدين",
+   "sheikh_slug": "ali-mahmoud-alomari",
+   "count": 4,
+   "aligned": 0,
+   "transcribed": 4,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alamri-falsafa-haditha",
+   "title": "دروس في الفلسفة الحديثة",
+   "sheikh_slug": "ali-mahmoud-alomari",
+   "count": 10,
+   "aligned": 0,
+   "transcribed": 10,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alamri-liqaat",
+   "title": "لقاءات علمية",
+   "sheikh_slug": "ali-mahmoud-alomari",
+   "count": 2,
+   "aligned": 0,
+   "transcribed": 2,
+   "status": "مفرّغة — المحاذاة جارية"
   }
  ]
 }
