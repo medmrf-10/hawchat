@@ -75,17 +75,19 @@ const store={
  export(){return JSON.stringify(this._d())},
  import_(s){try{const d=JSON.parse(s);if(typeof d==='object'){this._w(d);return true}}catch(e){}return false},
 };
-/* offline-save a row's texts into the text cache (hawchat-text-v1) */
+/* offline-save a row's texts into the pinned cache (hawchat-pinned-v1 — never LRU-trimmed) */
 async function offlineRow(rowId){
   if(!('caches' in window))return{ok:false,why:'caches'};
   try{
     const rows=await(await fetch('data/read/'+encodeURIComponent(rowId)+'.json')).json();
-    const c=await caches.open('hawchat-text-v1');let n=0;
+    if(navigator.storage&&navigator.storage.persist)navigator.storage.persist().catch(()=>{});
+    const c=await caches.open('hawchat-pinned-v1');let n=0;
     for(const x of rows){
       const u=x.base+encodeURIComponent(x.file);
-      if(!(await c.match(u))){const r=await fetch(u);if(r.ok){await c.put(u,r);n++}}
+      if(await c.match(u)){n++;continue}
+      const r=await fetch(u);if(r.ok){await c.put(u,r);n++}
     }
-    return{ok:true,n:n,total:rows.length}
+    return{ok:n===rows.length,n:n,total:rows.length,partial:n>0&&n<rows.length}
   }catch(e){return{ok:false,why:String(e)}}
 }
 function fmtDur(s){

@@ -77,7 +77,7 @@ const ic=id=>'<svg class="i"><use href="icons.svg#'+id+'"/></svg>';
     row.sSlug?j('series/'+encodeURIComponent(row.sSlug)+'.json'):null,
     row.sSlug?j('lessons/'+encodeURIComponent(row.sSlug)+'/index.json'):null,
     j('data/read/'+encodeURIComponent(row.id)+'.json')]);
-  const aln=new Set((alidx&&alidx.align)||[]);
+  const aln=new Set((alidx&&(alidx.alignOk||alidx.align))||[]);
   const txn=new Set((alidx&&alidx.txt)||[]);
   const rtxt=new Map((rows||[]).map(x=>[x.n,x]));
   // unified lesson list: every n that has text OR align
@@ -108,7 +108,7 @@ const ic=id=>'<svg class="i"><use href="icons.svg#'+id+'"/></svg>';
     const r=await offlineRow(row.id);
     e.currentTarget.style.opacity=1;
     e.currentTarget.classList.toggle('on',!!r.ok);
-    e.currentTarget.title=r.ok?('محفوظة بلا اتصال ('+r.total+' نصاً)'):'تعذر الحفظ بلا اتصال';
+    e.currentTarget.title=r.ok?('محفوظة بلا اتصال ('+r.total+' نصاً)'):(r.partial?('محفوظ جزئياً '+r.n+'/'+r.total):'تعذر الحفظ بلا اتصال');
   });
   const draw=fq=>{
     const lst=document.getElementById('lst');lst.innerHTML='';let n=0;
