@@ -767,9 +767,20 @@
       "mughni-04_AlAmri.txt",
       "mughni-05_AlAmri.txt",
       "mughni-06_AlAmri.txt",
-      "mughni-07_AlAmri.txt"
+      "mughni-07_AlAmri.txt",
+      "mughni-08_AlAmri.txt"
      ],
-     "n": 6
+     "n": 7
+    },
+    {
+     "slug": "barahin-muqtatafat",
+     "title": "مقتطفات من دروس أم البراهين",
+     "files": [
+      "barahin-muqtatafat-05_AlAmri.txt",
+      "barahin-muqtatafat-07_AlAmri.txt",
+      "barahin-muqtatafat-09_AlAmri.txt"
+     ],
+     "n": 3
     }
    ],
    "slug": "ali-mahmoud-alomari"
