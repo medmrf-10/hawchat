@@ -118,7 +118,7 @@ function drawFavs(){
   document.getElementById('favcnt').textContent=cards.length?cards.length+' سلسلة':'';
   const seenL=store.seenList();
   el.innerHTML=cards.map(x=>'<a class="u-sh" href="'+esc(x.r.read)+'">'
-    +(seenL.includes(x.r.id)?'':'<span class="u-badge">جديد</span>')
+    +''
     +'<span class="ph"><span>'+esc((x.st.name||'؟').replace(/^ال/,'').trim()[0]||'؟')+'</span></span>'
     +'<span class="nm">'+esc(x.r.title)+'</span>'
     +'<span class="stats">'+(x.r.rdn?num('rd',x.r.rdn,'مقروء',x.r.rOk):'')+(x.r.wan?num('ls',x.r.wan,'مسموع',x.r.wOk):'')+'</span></a>').join('');

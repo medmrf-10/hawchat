@@ -57,7 +57,7 @@ function renderSeries(){
     const done=r.rOk&&(r.wtt?r.wOk:true);
     w.insertAdjacentHTML('beforeend',
       '<div class="u-sr cin">'
-      +(seen.includes(r.id)?'':'<span class="u-badge">جديد</span>')
+      +''
       +'<button class="u-fav'+(favs.includes(r.id)?' on':'')+'" data-fav="'+esc(r.id)+'" aria-label="مفضلة" style="position:absolute;top:10px;inset-inline-end:10px">'+ic('i-star')+'</button>'
       +'<div class="t"><bdi>'+esc(r.title)+'</bdi>'+(done?'<span class="done" title="مكتمل">'+ic('i-check')+'</span>':'')+'</div>'
       +'<div class="acts">'

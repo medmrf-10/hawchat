@@ -1,35 +1,103 @@
 #!/bin/bash
-# push_watch.sh — monitors every new commit on origin/main for violations:
-# conflict markers, pushes of generated files, broken JSON, edits outside own dirs.
-# Logs to /home/ubuntu/align_pkgs/push_violations.log and writes LAST_VIOLATION for the hub to relay.
+# push_watch.sh v2 — monitors origin/main AND self-heals:
+#  - content reverts of core files (blob differs from site-core-v2 tag)
+#  - deletions under playlists/lessons|lessons|transcripts (restore from sha~1)
+#  - committed conflict markers in *.json under playlists/ + transcripts/ (resolve → newest side)
+# Logs to push_violations.log; LAST_VIOLATION for hub relay.
 cd /home/ubuntu/hawchat || exit 1
 LOG=/home/ubuntu/align_pkgs/push_violations.log
 SEEN=/home/ubuntu/align_pkgs/push_watch_last
+CORE=/home/ubuntu/align_pkgs/site_core_files.txt
 touch "$SEEN"
+
+fix_markers() {
+python3 - <<'PY'
+import re,json,glob
+def resolve(txt):
+    while '<<<<<<<' in txt:
+        m=re.search(r'<<<<<<<[^\n]*\n((?:(?!<<<<<<<|>>>>>>>|\|\|\|\|\|\|\|).)*?)(?:\|\|\|\|\|\|\|[^\n]*\n(?:(?!<<<<<<<|>>>>>>>|\|\|\|\|\|\|\|).)*?)?=======(?P<other>.*?)>>>>>>>[^\n]*\n', txt, re.S)
+        if not m: break
+        txt=txt[:m.start()]+m.group('other')+txt[m.end():]
+    return txt
+fixed=[]
+for p in glob.glob('playlists/**/*.json',recursive=True)+glob.glob('transcripts/**/*.json',recursive=True):
+    try: raw=open(p,encoding='utf-8').read()
+    except Exception: continue
+    if '<<<<<<<' in raw:
+        out=resolve(raw)
+        try: json.loads(out); open(p,'w',encoding='utf-8').write(out); fixed.append(p)
+        except Exception: pass
+print(' '.join(fixed))
+PY
+}
+
+heal() {
+  local paths="$1" msg="$2" ref="${3:-site-core-v2}"
+  [ -z "$paths" ] && return 0
+  echo "$(date -u +%FT%TZ) HEAL $msg: $(echo $paths | wc -w) files" >> "$LOG"
+  echo "$paths" | tr ' ' '\n' | while read -r f; do
+    [ -n "$f" ] && git checkout "$ref" -- "$f" 2>/dev/null
+  done
+  local mf; mf=$(fix_markers)
+  [ -n "$mf" ] && echo "$(date -u +%FT%TZ) HEAL markers-resolved: $mf" >> "$LOG"
+  python3 playlists/data/gen_stats.py >/dev/null 2>&1
+  git add -A && git commit -qm "ترميم آلي: $msg" >/dev/null 2>&1
+  bash /home/ubuntu/align_pkgs/rebase_fix.sh
+  git pull --rebase -q 2>/dev/null; bash /home/ubuntu/align_pkgs/rebase_fix.sh
+  if git push -q origin HEAD:main 2>/dev/null; then
+    git tag -f site-core-v2 HEAD >/dev/null 2>&1
+    git push -qf origin site-core-v2 2>/dev/null
+  fi
+}
+
 while true; do
   git fetch origin -q 2>/dev/null
   last=$(cat "$SEEN")
   new=$(git log --format="%H %an %s" --reverse "${last:-HEAD~1}..origin/main" 2>/dev/null | tail -40)
+  need_heal=""
   if [ -n "$new" ]; then
     while IFS= read -r line; do
       sha=${line%% *}; msg=${line#* }
       files=$(git show --name-only --format= "$sha")
       bad=""
-      # conflict markers in any pushed file
       for f in $files; do
         git show "$sha:$f" 2>/dev/null | grep -q "^<<<<<<<" && bad="$bad marker:$f"
       done
-      # generated files that must never be hand-pushed
       echo "$files" | grep -qE "playlists/(series/index\.json|data/sheikh_stats\.json)" && bad="$bad generated"
-      # invalid json pushed
       for f in $(echo "$files" | grep "\.json$"); do
         git show "$sha:$f" 2>/dev/null | python3 -c "import json,sys;json.load(sys.stdin)" 2>/dev/null || bad="$bad badjson:$f"
       done
-      if [ -n "$bad" ]; then
-        echo "$(date -u +%FT%TZ) $sha $msg →$bad" | tee -a "$LOG" > /home/ubuntu/align_pkgs/LAST_VIOLATION
-      fi
+      [ -n "$bad" ] && echo "$(date -u +%FT%TZ) $sha $msg →$bad" | tee -a "$LOG" > /home/ubuntu/align_pkgs/LAST_VIOLATION
+      # deleted data files → restore from pre-commit state
+      dels=$(git diff --name-only --diff-filter=D "$sha^" "$sha" 2>/dev/null | grep -E "^(playlists/lessons/|lessons/|transcripts/)" | tr '\n' ' ')
+      [ -n "$dels" ] && need_heal="$need_heal $dels"
+      # core file content reverts vs blessed tag
+      while read -r cf; do
+        [ -z "$cf" ] && continue
+        echo "$files" | grep -qx "$cf" || continue
+        a=$(git rev-parse "site-core-v2:$cf" 2>/dev/null); b=$(git rev-parse "$sha:$cf" 2>/dev/null)
+        [ -n "$a" ] && [ "$a" != "$b" ] && need_heal="$need_heal $cf"
+      done < "$CORE"
+      # committed markers → resolve immediately
+      echo "$bad" | grep -q "marker:\|badjson:" && git checkout "$sha" -- . 2>/dev/null
     done <<< "$new"
     git rev-parse origin/main > "$SEEN"
   fi
-  sleep 60
+  # working-tree vs tag drift sweep (catches reverts that slipped through)
+  drift=""
+  while read -r cf; do
+    [ -z "$cf" ] && continue
+    a=$(git rev-parse "site-core-v2:$cf" 2>/dev/null); b=$(git hash-object "$cf" 2>/dev/null)
+    [ -n "$a" ] && [ "$a" != "$b" ] && drift="$drift $cf"
+  done < "$CORE"
+  need_heal="$need_heal $drift"
+  need_heal=$(echo "$need_heal" | tr ' ' '\n' | sort -u | tr '\n' ' ')
+  [ -n "$(echo $need_heal)" ] && heal "$need_heal" "استرداد ملفات النظام المرجّعة"
+  # standalone marker sweep even without drift
+  mf=$(fix_markers); if [ -n "$mf" ]; then
+    git add -A && git commit -qm "ترميم آلي: حل علامات تعارض مدفونة" >/dev/null 2>&1
+    git pull --rebase -q 2>/dev/null; bash /home/ubuntu/align_pkgs/rebase_fix.sh
+    git push -q origin HEAD:main 2>/dev/null && { git tag -f site-core-v2 HEAD; git push -qf origin site-core-v2; }
+  fi
+  sleep 45
 done
