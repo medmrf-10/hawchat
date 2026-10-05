@@ -4,11 +4,11 @@
    text:  transcripts/alignments/images — cache-first, LRU-bounded, version-stable.
    No auto skipWaiting: pages show an update toast; users opt in. */
 <<<<<<< HEAD
-const REV = 'v7-'3453de5'8453d0d'9a24c08'3b57513'52dc463'be28758'c6d261e'2b8a458'9efdb74'4e6225d'7590101'97bdbc6'912aa3a'8fea15b'cca5bb7'a7cda2d'63b311b'2b4ebeb'e9042f5';                               // stamped by safe_push
+const REV = 'v7-8c8ade6d';
 ||||||| parent of 63ba669 (rebuild generated data)
-const REV = 'v7-'3453de5'8453d0d'9a24c08'3b57513'52dc463'be28758'c6d261e'2b8a458'9160d9b'4e6225d'7590101'97bdbc6'912aa3a'8fea15b'cca5bb7'a7cda2d'63b311b'2b4ebeb'e9042f5';                               // stamped by safe_push
+const REV = 'v7-8c8ade6d';
 =======
-const REV = 'v7-'3453de5'8453d0d'9a24c08'3b57513'52dc463'be28758'c6d261e'2b8a458'd0d8051'9160d9b'4e6225d'7590101'97bdbc6'912aa3a'8fea15b'cca5bb7'a7cda2d'63b311b'2b4ebeb'e9042f5';                               // stamped by safe_push
+const REV = 'v7-8c8ade6d';
 >>>>>>> 63ba669 (rebuild generated data)
 const SHELL = 'hawchat-shell-' + REV;
 const DATA  = 'hawchat-data-v1';
