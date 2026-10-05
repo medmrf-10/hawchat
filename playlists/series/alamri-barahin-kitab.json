@@ -4,7 +4,7 @@
  "sheikh_slug": "ali-mahmoud-alomari",
  "title": "كتاب أم البراهين",
  "playlist": "https://www.youtube.com/playlist?list=PLa3XSU7qw_Yl2_uOOiwj6G3d-dmdy3TUA",
- "count": 12,
+ "count": 14,
  "lessons": [
   {
    "n": 1,
@@ -63,6 +63,14 @@
    "dur": "59:58"
   },
   {
+   "n": 8,
+   "title": "كتاب أم البراهين",
+   "video": "UofQQtKEghE",
+   "align": false,
+   "chars": 40095,
+   "dur": "81:47"
+  },
+  {
    "n": 9,
    "title": "كتاب أم البراهين",
    "video": "bGZ1FlNQdZA",
@@ -101,6 +109,14 @@
    "align": false,
    "chars": 40183,
    "dur": "82:29"
+  },
+  {
+   "n": 14,
+   "title": "كتاب أم البراهين",
+   "video": "AvUqdAhClNQ",
+   "align": false,
+   "chars": 46187,
+   "dur": "90:21"
   }
  ]
 }
