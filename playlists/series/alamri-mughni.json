@@ -4,7 +4,7 @@
  "sheikh_slug": "ali-mahmoud-alomari",
  "title": "مغني الطلاب شرح إيساغوجي",
  "playlist": "https://www.youtube.com/playlist?list=PLa3XSU7qw_Yl_Tf3EZgcVxliTmb7PGcIF",
- "count": 12,
+ "count": 13,
  "lessons": [
   {
    "n": 2,
@@ -101,6 +101,14 @@
    "align": false,
    "chars": 37077,
    "dur": "72:08"
+  },
+  {
+   "n": 15,
+   "title": "(14) مغني الطُّلاب شرح متن إيساغوجي",
+   "video": "IImbOScLUv8",
+   "align": false,
+   "chars": 27770,
+   "dur": "56:03"
   }
  ]
 }

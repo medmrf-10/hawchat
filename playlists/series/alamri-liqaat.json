@@ -4,8 +4,16 @@
  "sheikh_slug": "ali-mahmoud-alomari",
  "title": "لقاءات علمية",
  "playlist": "https://www.youtube.com/playlist?list=PLa3XSU7qw_YmVEw3TH38ZSH458lszrz3E",
- "count": 2,
+ "count": 3,
  "lessons": [
+  {
+   "n": 1,
+   "title": "صناعة المتكلمين",
+   "video": "I_VgNwF0MHk",
+   "align": false,
+   "chars": 54758,
+   "dur": "86:33"
+  },
   {
    "n": 2,
    "title": "منهج التعامل مع مشاكل الشباب من لقاء مناقشة رواية الدكتور: في ستَّة أيَّامٍ.",
