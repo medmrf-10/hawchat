@@ -179,6 +179,69 @@
    "aligned": 5,
    "transcribed": 5,
    "status": "مكتملة التفريغ"
+  },
+  {
+   "slug": "abdelmonem-juz30",
+   "title": "تفسير جزء عمّ",
+   "sheikh_slug": "ahmed-abdelmonem",
+   "count": 20,
+   "aligned": 0,
+   "transcribed": 20,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alamri-adab-murid",
+   "title": "آداب سلوك المريد",
+   "sheikh_slug": "ali-mahmoud-alomari",
+   "count": 12,
+   "aligned": 0,
+   "transcribed": 12,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alamri-barahin-kitab",
+   "title": "كتاب أم البراهين",
+   "sheikh_slug": "ali-mahmoud-alomari",
+   "count": 8,
+   "aligned": 0,
+   "transcribed": 8,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alamri-barahin-sharh",
+   "title": "شرح كتاب شرح أم البراهين للإمام السنوسي",
+   "sheikh_slug": "ali-mahmoud-alomari",
+   "count": 3,
+   "aligned": 0,
+   "transcribed": 3,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alamri-hisam",
+   "title": "شرح الحسام الكاتي على إيساغوجي",
+   "sheikh_slug": "ali-mahmoud-alomari",
+   "count": 30,
+   "aligned": 0,
+   "transcribed": 30,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alamri-iqtisad",
+   "title": "الاقتصاد في الاعتقاد",
+   "sheikh_slug": "ali-mahmoud-alomari",
+   "count": 46,
+   "aligned": 0,
+   "transcribed": 46,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alamri-mughni",
+   "title": "مغني الطلاب شرح إيساغوجي",
+   "sheikh_slug": "ali-mahmoud-alomari",
+   "count": 5,
+   "aligned": 0,
+   "transcribed": 5,
+   "status": "مفرّغة — المحاذاة جارية"
   }
  ]
 }
