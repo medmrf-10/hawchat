@@ -44,6 +44,19 @@ REDIRECTS = {  # old row id → new row id (best single match)
     'habib-ali-aljifri--jifri-mut-123': 'habib-ali-aljifri--123',
     'ahmed-alsayed--alsayed-mut-672': 'ahmed-alsayed--672',
     'ahmed-alsayed--alsayed-mut-686': 'ahmed-alsayed--686',
+    # ids that re-keyed before the row_ids freeze — cover the old spellings
+    'bardouni-husaymi--ajhuri': 'bardouni-husaymi--10',
+    'said-bouti--bardouni-ajhuri': 'bardouni-husaymi--10',
+    'habib-ali-aljifri--jifri-insaniyya': 'habib-ali-aljifri--117',
+    'said-bouti--bouti-muhammad': 'said-bouti--366',
+    'ali-gomaa--gomaa-mut-822': 'ali-gomaa--822',
+    'ali-gomaa--mut-822': 'ali-gomaa--822',
+    'ali-gomaa--gomaa-khawarij': 'ali-gomaa--822',
+    'ali-gomaa--khawarij': 'ali-gomaa--822',
+    'bardouni-husaymi--iqbar-intisar': 'bardouni-husaymi--994',
+    'bardouni-husaymi--bardouni-iqbar-intisar': 'bardouni-husaymi--994',
+    'bardouni-husaymi--sharh-risala-2': 'bardouni-husaymi--1003',
+    'bardouni-husaymi--bardouni-sharh-risala-2': 'bardouni-husaymi--1003',
 }
 
 WARN = []
