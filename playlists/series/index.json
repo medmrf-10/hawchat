@@ -131,7 +131,7 @@
    "title": "تفسير جزء عمّ",
    "sheikh_slug": "ahmed-abdelmonem",
    "count": 20,
-   "aligned": 3,
+   "aligned": 4,
    "transcribed": 20,
    "status": "مفرّغة — المحاذاة جارية"
   },
@@ -193,9 +193,9 @@
    "slug": "alamri-mughni",
    "title": "مغني الطلاب شرح إيساغوجي",
    "sheikh_slug": "ali-mahmoud-alomari",
-   "count": 19,
+   "count": 28,
    "aligned": 0,
-   "transcribed": 19,
+   "transcribed": 28,
    "status": "مفرّغة — المحاذاة جارية"
   },
   {
@@ -311,21 +311,72 @@
    "sheikh_slug": "dhaker-alhashimi",
    "title": "ألف باء الزواج",
    "count": 75,
-   "status": "المحاذاة جارية — 28/75"
+   "status": "المحاذاة جارية — 28/75",
+   "aligned": 28,
+   "transcribed": 73
   },
   {
    "slug": "hashimi-tarbiya",
    "sheikh_slug": "dhaker-alhashimi",
    "title": "ألف باء التربية",
    "count": 108,
-   "status": "المحاذاة جارية — 3/108"
+   "status": "المحاذاة جارية — 3/108",
+   "aligned": 3,
+   "transcribed": 72
   },
   {
    "slug": "hashimi-fiqh-nafs",
    "sheikh_slug": "dhaker-alhashimi",
    "title": "مجالس فقه النفس",
    "count": 181,
-   "status": "المحاذاة جارية — 0/181"
+   "status": "المحاذاة جارية — 0/181",
+   "aligned": 0,
+   "transcribed": 30
+  },
+  {
+   "slug": "alamri-muhadara",
+   "title": "محاضرة علمية",
+   "sheikh_slug": "ali-mahmoud-alomari",
+   "count": 1,
+   "aligned": 0,
+   "transcribed": 1,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alamri-nasafiyya",
+   "title": "مقدمة شرح العقائد النسفية",
+   "sheikh_slug": "ali-mahmoud-alomari",
+   "count": 14,
+   "aligned": 0,
+   "transcribed": 14,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alamri-qawaid-tasawwuf",
+   "title": "قواعد التصوف",
+   "sheikh_slug": "ali-mahmoud-alomari",
+   "count": 2,
+   "aligned": 0,
+   "transcribed": 2,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alamri-qushayriyya",
+   "title": "الرسالة القشيرية",
+   "sheikh_slug": "ali-mahmoud-alomari",
+   "count": 4,
+   "aligned": 0,
+   "transcribed": 4,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alamri-sulam",
+   "title": "شرح السلم المنورق للفاضل الدمنهوري",
+   "sheikh_slug": "ali-mahmoud-alomari",
+   "count": 14,
+   "aligned": 0,
+   "transcribed": 14,
+   "status": "مفرّغة — المحاذاة جارية"
   }
  ]
 }
