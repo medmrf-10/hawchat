@@ -49,6 +49,12 @@ REDIRECTS = {  # old row id → new row id (best single match)
 WARN = []
 def warn(m): WARN.append(m); print('WARN:', m, file=sys.stderr)
 
+def dump_atomic(obj, path, sort_keys=False):
+    tmp = path + '.tmp'
+    with open(tmp, 'w', encoding='utf-8') as f:
+        json.dump(obj, f, ensure_ascii=False, separators=(',', ':'), sort_keys=sort_keys)
+    os.replace(tmp, path)
+
 def J(p):
     try:
         return json.load(open(p, encoding='utf-8'))
@@ -259,7 +265,7 @@ def rebuild_lessons_indexes():
         idx['tf'] = tf
         idx['align'] = sorted(af)   # disk is authoritative — stale lists get rebuilt
         idx['txt'] = sorted(tf)
-        json.dump(idx, open(idx_path, 'w'), ensure_ascii=False, separators=(',', ':'))
+        dump_atomic(idx, idx_path)
 
 # ── load sources ──────────────────────────────────────────────
 rebuild_lessons_indexes()   # disk-truth first — rows count on fresh lists
@@ -579,11 +585,9 @@ if (disk_align > 0 and tot_watch == 0) or (disk_txt > 0 and tot_read == 0):
     import sys; sys.exit(2)
 
 dst = os.path.join(BASE, 'sheikh_stats.json')
-tmp = dst + '.tmp'
-json.dump(out, open(tmp, 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
-os.replace(tmp, dst)
-json.dump(REDIRECTS, open(os.path.join(BASE, 'redirects.json'), 'w'), ensure_ascii=False)
-json.dump(ROW_IDS, open(os.path.join(BASE, 'row_ids.json'), 'w'), ensure_ascii=False)
+dump_atomic(out, dst)
+dump_atomic(REDIRECTS, os.path.join(BASE, 'redirects.json'), sort_keys=True)
+dump_atomic(ROW_IDS, os.path.join(BASE, 'row_ids.json'), sort_keys=True)
 # flat search index (P7): [{id,title,sh,sname}]
 search = []
 for slug, v in out.items():
@@ -592,7 +596,7 @@ for slug, v in out.items():
     for r in v.get('rows') or []:
         search.append({'id': r['id'], 'title': r['title'], 'sh': slug, 'sname': v['name'],
                        'rd': r['rdn'], 'ls': r['wan']})
-json.dump(search, open(os.path.join(BASE, 'search.json'), 'w'), ensure_ascii=False, separators=(',', ':'))
+dump_atomic(search, os.path.join(BASE, 'search.json'))
 
 print('sheikhs', len(out) - 1, 'read', sum(v['read'] for k, v in out.items() if k != '_meta'),
       'watch', sum(v['watch'] for k, v in out.items() if k != '_meta'),
