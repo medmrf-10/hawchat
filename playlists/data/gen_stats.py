@@ -34,6 +34,16 @@ REDIRECTS = {  # old row id → new row id (best single match)
     'said-bouti--bouti-rihab': 'said-bouti--337',
     'said-bouti--bouti-hikam': 'said-bouti--386',
     'said-bouti--bouti-tafsir': 'said-bouti--414',
+    # folded playlist-identified rows → canonical legacy id
+    'said-bouti--bouti-mut-353': 'said-bouti--353',
+    'said-bouti--bouti-tazkiya': 'said-bouti--415',
+    'said-bouti--bouti-sahaba': 'said-bouti--387',
+    'said-bouti--bouti-ibada': 'said-bouti--416',
+    'said-bouti--bouti-mut-386': 'said-bouti--386',
+    'said-bouti--bouti-dayoon': 'said-bouti--365',
+    'habib-ali-aljifri--jifri-mut-123': 'habib-ali-aljifri--123',
+    'ahmed-alsayed--alsayed-mut-672': 'ahmed-alsayed--672',
+    'ahmed-alsayed--alsayed-mut-686': 'ahmed-alsayed--686',
 }
 
 WARN = []
@@ -452,7 +462,7 @@ for sh in sheikhs:
         # legacy title-fold for mut rows without plid
         if r.get('mutId') and not r.get('sSlug') and not r.get('plid'):
             t = norm(r['title'])
-            tgt = next((r2 for r2 in rows if r2.get('sSlug') and norm(r2['title']) == t), None)
+            tgt = next((r2 for r2 in rows if (r2.get('sSlug') or r2.get('trSr')) and norm(r2['title']) == t), None)
             if tgt:
                 tgt['rdn'] = max(tgt['rdn'], r['rdn'])
                 tgt['rtt'] = max(tgt['rtt'], r['rtt'])
