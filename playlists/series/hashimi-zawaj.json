@@ -76,7 +76,7 @@
    "video": "F0fHbpkn0iI",
    "chars": 74556,
    "dur": "113:29",
-   "align": false
+   "align": true
   },
   {
    "n": 10,
@@ -84,7 +84,7 @@
    "video": "E6Gn0fAheyg",
    "chars": 70227,
    "dur": "113:22",
-   "align": false
+   "align": true
   },
   {
    "n": 11,
@@ -92,7 +92,7 @@
    "video": "u8B0Wvkoo18",
    "chars": 65643,
    "dur": "109:56",
-   "align": false
+   "align": true
   },
   {
    "n": 12,
@@ -100,7 +100,7 @@
    "video": "ZalpC-wAu1w",
    "chars": 78612,
    "dur": "120:41",
-   "align": false
+   "align": true
   },
   {
    "n": 13,
@@ -116,7 +116,7 @@
    "video": "2n0gsghTD0c",
    "chars": 77275,
    "dur": "121:36",
-   "align": false
+   "align": true
   },
   {
    "n": 15,
@@ -124,7 +124,7 @@
    "video": "ERDrj0muecM",
    "chars": 58447,
    "dur": "93:05",
-   "align": false
+   "align": true
   },
   {
    "n": 16,
@@ -402,7 +402,7 @@
    "n": 50,
    "title": "ألف باء الزواج 47 | حاجات الأنثى أو المرأة من واقع مشاركات الجمهور 02",
    "video": "nUyDliKq0RM",
-   "chars": 23265,
+   "chars": 57374,
    "dur": "93:30",
    "align": false
   },
@@ -410,7 +410,7 @@
    "n": 51,
    "title": "ألف باء الزواج 48 | حاجات الأنثى أو المرأة من واقع مشاركات الجمهور 03",
    "video": "vlk76QErPPc",
-   "chars": 0,
+   "chars": 56148,
    "dur": "101:58",
    "align": false
   },
@@ -418,7 +418,7 @@
    "n": 52,
    "title": "ألف باء الزواج 49 | حاجات الأنثى أو المرأة من واقع مشاركات الجمهور 04",
    "video": "OjZE8PzzPHk",
-   "chars": 0,
+   "chars": 36080,
    "dur": "89:30",
    "align": false
   },
@@ -426,7 +426,7 @@
    "n": 53,
    "title": "ألف باء الزواج 50 | حاجات الأنثى أو المرأة من واقع مشاركات الجمهور 05 والأخير",
    "video": "CMYgwWtV8Bw",
-   "chars": 0,
+   "chars": 22779,
    "dur": "78:03",
    "align": false
   },
@@ -434,7 +434,7 @@
    "n": 54,
    "title": "Marriage 101: 51 | Between Masculinity and Femininity",
    "video": "nUABPA_2nyk",
-   "chars": 0,
+   "chars": 27680,
    "dur": "54:35",
    "align": false
   },
