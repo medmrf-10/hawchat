@@ -209,6 +209,39 @@ def rows_from_files(files, base, plid=None, row_title=None):
     out.sort(key=lambda r: r['n'])
     return out
 
+def renumber_to_series(slug, rrows):
+    """Hybrid rows (transcript files + playlist series): the player page's
+    «النص كاملاً» link passes the SERIES lesson number, so read rows must be
+    numbered by series n — matched via the video id of each transcript file.
+    Files whose vid is not in the playlist get numbers after the series end."""
+    sd = J(os.path.join(PL, 'series', slug + '.json')) or {}
+    vmap = {l.get('video'): l.get('n') for l in sd.get('lessons', []) if l.get('video')}
+    tmap = {l.get('n'): l.get('title') for l in sd.get('lessons', [])}
+    if not vmap:
+        return rrows
+    taken = set()
+    out = []
+    for row in rrows:
+        v = row.get('vid')
+        if v and v in vmap:
+            n = vmap[v]
+            if n in taken:
+                continue
+            taken.add(n)
+            out.append(dict(row, n=n, title=tmap.get(n) or row['title']))
+    nxt = max(vmap.values()) + 1
+    for row in rrows:
+        v = row.get('vid')
+        if v and v in vmap:
+            continue
+        while nxt in taken:
+            nxt += 1
+        taken.add(nxt)
+        out.append(dict(row, n=nxt))
+        nxt += 1
+    out.sort(key=lambda r: r['n'])
+    return out
+
 def rows_from_lessons(slug):
     """Rows from playlists/lessons/<slug>/ + titles via series json."""
     li = J(os.path.join(PL, 'lessons', slug, 'index.json')) or {}
@@ -601,6 +634,11 @@ for sh in sheikhs:
                 if os.path.isdir(dd):
                     fl = sorted(f for f in os.listdir(dd) if f.endswith('.txt'))
             rrows = rows_from_files(fl, '../transcripts/%s/%s/' % (r['trSh'], r['trSr']), r.get('plid'), r['title'])
+            if r.get('sSlug'):
+                # «النص كاملاً» links carry series n — read rows must share it.
+                # lessons/NNN.txt are normalized copies of these same transcripts
+                lrows = rows_from_lessons(r['sSlug'])
+                rrows = lrows if len(lrows) >= len(rrows) else renumber_to_series(r['sSlug'], rrows)
         elif r.get('sSlug'):
             rrows = rows_from_lessons(r['sSlug'])
         write_read(r['id'], rrows)

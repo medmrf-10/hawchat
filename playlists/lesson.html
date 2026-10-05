@@ -211,9 +211,6 @@ document.addEventListener('keydown',e=>{
   const l=d.lessons.find(x=>x.n===ln);
   if(!l){app.innerHTML='<div class="errbox">الدرس غير موجود — <a href="series.html?s='+encodeURIComponent(slug)+'">عودة للسلسلة</a></div>';return}
   document.getElementById('back').href='series.html?s='+encodeURIComponent(slug);
-  // رابط «النص كاملاً» لقارئ التفريغ عند توفر صف مطابق
-  const stats=await j('data/sheikh_stats.json');let rowL=null;
-  if(stats&&stats[d.sheikh_slug])rowL=(stats[d.sheikh_slug].rows||[]).find(r=>r.sSlug===slug);
   const ln3=String(ln).padStart(3,'0'), ln2=String(ln).padStart(2,'0');
   const lidx=await j('lessons/'+encodeURIComponent(slug)+'/index.json');
   const hasMap=lidx&&lidx.af;           // rebuilt index = authoritative filenames
@@ -265,7 +262,7 @@ document.addEventListener('keydown',e=>{
     h+='<div class="stage" id="stage"><span class="wait">اضغط تشغيل — تظهر الجملة وتضيء الكلمة في وقتها</span></div>';
     h+='<div class="pos" id="pos"></div>';
     if(alcov<1)h+='<div style="text-align:center;margin-top:8px"><span class="covtag'+(alcov<0.7?' warn':'')+'">'+icS+' تغطية النص في هذه المحاذاة '+Math.round(alcov*100)+'%'+(alcov<0.7?' — قد تتقطع الإضاءة':'')+'</span></div>';
-    if(rowL)h+='<a class="tlink" href="tr.html?r='+encodeURIComponent(rowL.id)+'&l='+l.n+'">'+I.read+' النص كاملاً</a>';
+    h+='<a class="tlink" href="tr.html?s='+encodeURIComponent(slug)+'&l='+l.n+'">'+I.read+' النص كاملاً</a>';
   }else{
     if(l.video)h+='<div class="player" id="pl"><div class="cover" onclick="this.parentElement.innerHTML=\'<iframe src=https://www.youtube.com/embed/'+esc(l.video)+'?autoplay=1 allowfullscreen></iframe>\'"><span class="big">▶</span><span>تشغيل الدرس من يوتيوب — '+esc(l.video)+'</span></div></div>';
     h+='<div class="txt cin">'+(txt?esc(txt):'<div style="text-align:center;color:var(--dim);padding:30px;border:1px dashed var(--border);border-radius:12px">التفريغ غير متوفر لهذا الدرس بعد</div>')+'</div>';
