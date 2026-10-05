@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>سلاسل المشايخ — hawchat</title>
+<title>نص الدرس — سلاسل</title>
 <meta name="theme-color" content="#0b0f1a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -32,16 +32,18 @@ h1{font-family:var(--font-ui);font-size:var(--fs-lg);font-weight:700;color:var(-
 .navb a,.navb button{min-height:44px;padding:0 18px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--card);color:var(--txt);font-family:var(--font-ui);font-size:var(--fs-sm);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
 .navb a.off,.navb button.off{opacity:.35;pointer-events:none}
 .navb .pos{color:var(--acc2);font-size:var(--fs-sm);font-variant-numeric:tabular-nums}
-.tools{display:flex;gap:8px;margin-top:10px}
+@media(max-width:420px){.hd-lg{display:none}}
+.tools{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
 .tools button{width:44px;height:44px;border-radius:var(--r-sm);border:1px solid var(--border);background:var(--card);color:var(--txt);font-size:1rem;cursor:pointer}
+.tools .abtn{white-space:nowrap;min-height:44px;padding:0 14px;border-radius:var(--r-sm);border:1px solid var(--border);background:var(--card);color:var(--acc2);font-size:.85rem;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
 </style>
 </head>
 <body>
 <header class="hd"><div class="hd-in">
-  <a href="." id="back" class="btn" aria-label="سلاسل المشايخ" style="text-decoration:none">→</a>
-  <img src="../icons/icon-192.png" alt="" width="30" height="30" style="border-radius:8px">
-  <span class="brand">hawchat</span>
-  <span class="sub" id="hdr-sub" style="color:var(--dim);font-size:var(--fs-xs)">سلاسل المشايخ</span>
+  <a href="." id="back" class="btn" aria-label="عودة" style="text-decoration:none"><svg class="i" style="width:1.15em;height:1.15em"><use href="icons.svg#i-back"/></svg></a>
+  <img src="../icons/icon-192.png" alt="" width="30" height="30" style="border-radius:8px" class="hd-lg">
+  <span class="brand hd-lg">سلاسل</span>
+  <span class="sub" id="hdr-sub" style="color:var(--dim);font-size:var(--fs-xs);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">سلاسل المشايخ</span>
 </div></header>
 <div class="u-prog"><i id="pbar"></i></div>
 <main><div class="wrap">
@@ -151,7 +153,8 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
     if(row.unv)h+='<div class="unv">ترجمة آلية مأخوذة من يوتيوب — غير مدققة بعد</div>';
     h+='<div class="tools"><button id="fmi" aria-label="تصغير الخط">A−</button><button id="fpl" aria-label="تكبير الخط">A+</button>'
       +(aligned.has(x.n)?'<a class="abtn" href="lesson.html?s='+encodeURIComponent(row.sSlug||ssl)+'&l='+x.n+'">'+I.listen+' استمع لهذا الدرس</a>':'')
-      +'<a class="abtn" href="'+ALLR+'">كل الدروس</a></div>';
+      +'<a class="abtn" href="'+ALLR+'">كل الدروس</a>'
+      +'<button id="shr" aria-label="مشاركة الدرس" title="مشاركة الدرس" style="width:auto;padding:0 12px;gap:5px;display:inline-flex;align-items:center">↗ مشاركة</button></div>';
     h+='<div class="txt skel" id="tx" style="min-height:200px"></div>';
     app.innerHTML=h;
     const nav=document.getElementById('navb');nav.hidden=false;
@@ -160,6 +163,10 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
       +(i<ROWS.length-1?'<a href="'+SELF+'&l='+ROWS[i+1].n+'" id="nx">التالي ←</a>':'<a class="off">التالي ←</a>');
     document.getElementById('fmi').onclick=()=>{FS=Math.max(.8,FS-.1);localStorage.setItem('trfs',FS);document.getElementById('tx').style.fontSize=FS+'rem'};
     document.getElementById('fpl').onclick=()=>{FS=Math.min(1.9,FS+.1);localStorage.setItem('trfs',FS);document.getElementById('tx').style.fontSize=FS+'rem'};
+    const shb=document.getElementById('shr');
+    if(shb)shb.onclick=async()=>{const u=location.origin+location.pathname+SELF+'&l='+x.n;
+      try{if(navigator.share)await navigator.share({title:x.title,url:u});
+      else{await navigator.clipboard.writeText(u);shb.textContent='✓ نُسخ الرابط';setTimeout(()=>shb.innerHTML='↗ مشاركة',1800)}}catch(e){}};
     const p=document.getElementById('pv'),n=document.getElementById('nx');
     if(p)p.onclick=e=>{e.preventDefault();showLesson(i-1)};
     if(n)n.onclick=e=>{e.preventDefault();showLesson(i+1)};

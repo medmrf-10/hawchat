@@ -25,13 +25,24 @@
 .hero .meta{color:var(--dim);font-size:.78rem;margin-top:6px}
 .player{position:relative;width:100%;aspect-ratio:16/9;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--border);margin-top:12px;background:#000}
 .player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.ctrl{display:flex;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap}
-.ctrl .btn{min-width:44px;min-height:44px;padding:0 16px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--card);color:var(--txt);font-size:1rem;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px}
-.ctrl .btn:hover{border-color:var(--acc)}
-.ctrl .btn.main{background:var(--acc);color:#0b0f1a;font-weight:700;border-color:var(--acc)}
-.ctrl select{min-height:44px;padding:0 10px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--card);color:var(--txt);font-size:.85rem}
-.ctrl .tm{margin-inline-start:auto;color:var(--acc2);font-size:.85rem;font-variant-numeric:tabular-nums}
+.cbar{position:sticky;bottom:0;background:var(--bgt);backdrop-filter:blur(14px);border-top:1px solid var(--border);margin-top:12px;padding:8px 0 calc(8px + env(safe-area-inset-bottom));z-index:40}
+.crow{display:flex;align-items:center;justify-content:center;gap:10px}
+.crow .btn{min-width:48px;min-height:48px;padding:0 14px;border-radius:99px;border:1px solid var(--border);background:var(--card);color:var(--txt);font-size:1rem;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.crow .btn:hover{border-color:var(--acc)}
+.crow .btn.main{min-width:56px;min-height:56px;font-size:1.3rem;background:var(--acc);color:#0b0f1a;font-weight:700;border-color:var(--acc)}
+.crow .btn.ld{position:relative;color:transparent}
+.crow .btn.ld::after{content:'';position:absolute;width:20px;height:20px;border-radius:50%;border:2.5px solid var(--border);border-top-color:var(--acc);animation:ldsp .8s linear infinite}
+@keyframes ldsp{to{transform:rotate(360deg)}}
+.csub{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:6px}
+.csub .tm{color:var(--acc2);font-size:.85rem;font-variant-numeric:tabular-nums;min-width:70px}
+.csub .chip,.csub select{min-height:36px;padding:0 12px;border-radius:99px;border:1px solid var(--border);background:var(--card);color:var(--txt);font-size:.78rem;cursor:pointer;display:inline-flex;align-items:center;gap:5px}
+.csub .chip.on{border-color:var(--acc);color:var(--acc)}
+.ch{display:inline-block;font-size:.72rem;border:1px solid var(--line-2,var(--border));border-radius:99px;padding:3px 10px;color:var(--dim);margin-inline-end:4px}
+.ch.warn{border-color:rgba(224,90,90,.5);color:var(--err)}
 .stage{min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(145deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:var(--r-lg);margin-top:14px;padding:34px 26px}
+@media(max-width:520px){.stage{min-height:150px;padding:20px 16px}}
+@media(max-width:420px){.hd-lg{display:none}}
+.stage.idle .ph{opacity:.4}
 .stage .ph{font-family:var(--font-ar);font-size:1.5rem;line-height:2.3;text-align:center;color:var(--txt)}
 .stage .ph .w{color:#9aa3b5;opacity:.55;border-radius:6px;padding:0 3px;transition:opacity .12s,color .12s;cursor:pointer}
 .stage .ph .w.read{color:var(--acc);opacity:.75}
@@ -57,10 +68,10 @@
 </head>
 <body>
 <header class="hd"><div class="hd-in">
-  <a href="." id="back" class="btn" aria-label="سلاسل المشايخ" style="text-decoration:none">→</a>
-  <img src="../icons/icon-192.png" alt="" width="30" height="30" style="border-radius:8px">
-  <span class="brand">hawchat</span>
-  <span class="sub" id="hdr-sub" style="color:var(--dim);font-size:.8rem">درس</span>
+  <a href="." id="back" class="btn" aria-label="عودة" style="text-decoration:none"><svg class="i" style="width:1.15em;height:1.15em"><use href="icons.svg#i-back"/></svg></a>
+  <img src="../icons/icon-192.png" alt="" width="30" height="30" style="border-radius:8px" class="hd-lg">
+  <span class="brand hd-lg">سلاسل</span>
+  <span class="sub" id="hdr-sub" style="color:var(--dim);font-size:.8rem;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">درس</span>
 </div></header>
 <main><div class="wrap" id="app"><div class="skel" style="height:70px;margin-top:12px"></div><div class="skel" style="height:300px;margin-top:12px"></div></div></main>
 <script src="common.js?v=8"></script>
@@ -152,21 +163,25 @@ function mountPlayer(vid){
   window.onYouTubeIframeAPIReady=()=>{
     YTP=new YT.Player('yfp',{events:{
       onReady:()=>{ready=true;
-        const b=document.querySelector('.btn.main');if(b)b.textContent='تشغيل';
-        const sp=store.get('speed');if(sp&&sp!==1&&YTP.setPlaybackRate){YTP.setPlaybackRate(sp);const sel=document.getElementById('spd');if(sel)sel.value=String(sp)}
+        const b=document.getElementById('playb');if(b){b.classList.remove('ld');b.innerHTML='&#9654;'}
+        const sp=store.get('speed');if(sp&&sp!==1&&YTP.setPlaybackRate){YTP.setPlaybackRate(sp);const sel=document.getElementById('spd');if(sel)sel.textContent='×'+sp}
         const rp=T0||resumePos();if(rp>5)YTP.seekTo(rp,true);
         if(pendPlay){YTP.playVideo();pendPlay=false}},
-      onStateChange:(e)=>{const b=document.querySelector('.btn.main');if(b)b.textContent=(e.data===1||e.data===3)?'إيقاف':'تشغيل';
-        if(e.data===1){wakeLock(true);if(!timer)timer=setInterval(tick,150)}
+      onStateChange:(e)=>{const b=document.getElementById('playb');
+        const playing=(e.data===1||e.data===3);
+        if(b){b.innerHTML=playing?'&#10074;&#10074;':'&#9654;';b.setAttribute('aria-pressed',playing?'true':'false')}
+        if(e.data===1){wakeLock(true);const st=document.getElementById('stage');if(st)st.classList.remove('idle');if(!timer)timer=setInterval(tick,150)}
         else{wakeLock(false);if(e.data!==3&&timer){clearInterval(timer);timer=null}}
-        if(e.data===0&&AUTO_NEXT){const nx=document.getElementById('go-next');if(nx)nx.click()}
+        if(e.data===0&&nextOn()){const nx=document.getElementById('go-next');if(nx)nx.click()}
         if(e.data===0){const d=store._d();if(d.resume&&d.resume[RESK]){delete d.resume[RESK];store._w(d)}}}}});
   };
 }
 /* URL flags for phase-6 features (additive, off by default) */
 const FLAGS=new URLSearchParams(location.search);
-const AUTO_NEXT=FLAGS.get('next')==='1';
-const TELE=FLAGS.get('mode')==='tele';         // teleprompter prev/cur/next
+if(FLAGS.get('next')==='1')store.set('anx',1);
+if(FLAGS.get('mode')==='tele')store.set('tele',1);
+const nextOn=()=>store.get('anx')===1;         // auto-advance to next lesson
+let TELE=store.get('tele')===1;                // teleprompter prev/cur/next
 const HLLEGACY=FLAGS.get('hl')==='legacy';     // old single-word fill
 const RAWPH=FLAGS.get('ph')==='raw';           // do not merge short phrases
 const SLUG=FLAGS.get('s')||'',LN=parseInt(FLAGS.get('l'),10);
@@ -177,6 +192,25 @@ function savePos(){
   if(!YTP||!YTP.getCurrentTime)return;
   const p=YTP.getCurrentTime();
   if(p>3)store.setResume(RESK,Math.floor(p));
+}
+function playToggle(b){
+  if(!YTP){pendPlay=true;if(b)b.classList.add('ld');return}
+  const s=YTP.getPlayerState&&YTP.getPlayerState();
+  (s===1||s===3)?YTP.pauseVideo():YTP.playVideo();
+}
+const SPEEDS=[1,1.25,1.5,2,0.75];
+function phraseAt(t){let i=0;for(let k=0;k<PH.length;k++){if(PH[k][0][1]<=t)i=k;else break}return i}
+async function shareLesson(b){
+  const tm=(YTP&&YTP.getCurrentTime)?Math.floor(YTP.getCurrentTime()):0;
+  const u=location.origin+location.pathname+'?s='+encodeURIComponent(SLUG)+'&l='+LN+(tm>5?'&t='+tm:'');
+  try{if(navigator.share)await navigator.share({title:document.title,url:u});
+  else{await navigator.clipboard.writeText(u);const o=b.textContent;b.textContent='✓ نُسخ';setTimeout(()=>b.textContent=o,1600)}}catch(e){}
+}
+function cycleSpeed(){
+  const cur=store.get('speed')||1;
+  const nx=SPEEDS[(SPEEDS.indexOf(cur)+1)%SPEEDS.length]||1;
+  store.set('speed',nx);if(YTP&&YTP.setPlaybackRate)YTP.setPlaybackRate(nx);
+  const el=document.getElementById('spd');if(el)el.textContent='×'+nx;
 }
 function wakeLock(on){
   if(!('wakeLock' in navigator))return;
@@ -249,10 +283,10 @@ document.addEventListener('keydown',e=>{
   const _ls=d.lessons.map(x=>x.n).sort((a,b)=>a-b);
   const prev=d.lessons.find(x=>x.n===_ls.filter(n=>n<ln).pop()),
         next=d.lessons.find(x=>x.n===_ls.find(n=>n>ln));
-  let h='<div class="crumb cin"><a href="sheikh.html?s='+encodeURIComponent(d.sheikh_slug)+'">'+esc(d.sheikh)+'</a> ← <a href="row.html?s='+encodeURIComponent(slug)+'">'+esc(d.title)+'</a></div>';
-  h+='<div class="hero cin"><h1>الدرس '+l.n+': '+esc(l.title)+'</h1><div class="meta">'+d.count+' درساً في السلسلة'+((l.dur&&fmtDur(l.dur))?' · '+fmtDur(l.dur):'')+'</div>'
-    +(hasText?'<a class="tlink" style="margin-top:8px" href="tr.html?s='+encodeURIComponent(slug)+'&l='+l.n+'">'+I.read+' النص كاملاً</a>':'')
-    +'</div>';
+  if('mediaSession' in navigator)try{
+    if(prev)navigator.mediaSession.setActionHandler('previoustrack',()=>location.href='lesson.html?s='+encodeURIComponent(slug)+'&l='+prev.n);
+    if(next)navigator.mediaSession.setActionHandler('nexttrack',()=>location.href='lesson.html?s='+encodeURIComponent(slug)+'&l='+next.n);
+  }catch(e){}
   if(aln){
     AL=aln;PH=RAWPH?normAlign(aln).map(w=>[w]):buildPhrases(normAlign(aln));
     if(!PH.length){aln=null;PH=[]} // empty phrases → plain-text path
@@ -260,20 +294,31 @@ document.addEventListener('keydown',e=>{
   const alcov=aln&&!Array.isArray(aln)?(aln.cov||0):1;
   if(alcov<0.3)aln=null;  // below the site-wide listenable threshold → text lesson
   const hasText=!!(tfn||rrow);
+  const du=(l.dur&&fmtDur(l.dur))||'';
+  let h='<div class="crumb cin"><a href="sheikh.html?s='+encodeURIComponent(d.sheikh_slug)+'">'+esc(d.sheikh)+'</a> ← <a href="row.html?s='+encodeURIComponent(slug)+'">'+esc(d.title)+'</a></div>';
+  h+='<div class="hero cin"><h1>الدرس '+l.n+': '+esc(l.title)+'</h1><div class="meta">'
+    +'<span class="ch">الدرس '+l.n+' من '+d.count+'</span>'
+    +(du?'<span class="ch">'+icS+' '+du+'</span>':'')
+    +(alcov<0.7?'<span class="ch warn">تغطية المحاذاة '+Math.round(alcov*100)+'% — قد تتقطع الإضاءة</span>':'')
+    +'</div>'
+    +(hasText?'<a class="tlink" style="margin-top:8px" href="tr.html?s='+encodeURIComponent(slug)+'&l='+l.n+'">'+I.read+' النص كاملاً</a>':'')
+    +'</div>';
   if(aln&&l.video){
     h+='<div class="player"><iframe id="yfp" src="https://www.youtube-nocookie.com/embed/'+esc(l.video)+'?enablejsapi=1&rel=0&playsinline=1&iv_load_policy=3&hl=ar&origin='+encodeURIComponent(location.origin)+'" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>';
-    h+='<div class="ctrl">'
-      +'<button class="btn main" onclick="if(YTP){const s=YTP.getPlayerState&&YTP.getPlayerState();(s===1||s===3)?YTP.pauseVideo():YTP.playVideo()}else{pendPlay=true;this.textContent=\'جارٍ التحميل…\'}">تشغيل</button>'
-      +'<button class="btn" onclick="seekPhrase(curPh-1)">الجملة السابقة</button>'
-      +'<button class="btn" onclick="seekPhrase(curPh+1)">الجملة التالية</button>'
-      +'<button class="btn" onclick="YTP&&YTP.seekTo(Math.max(0,YTP.getCurrentTime()-10),true)" title="رجوع 10ث">↺10</button>'
-      +'<button class="btn" onclick="YTP&&YTP.seekTo(YTP.getCurrentTime()+10,true)" title="تقدم 10ث">10↻</button>'
-      +'<select id="spd" onchange="const v=parseFloat(this.value);YTP&&YTP.setPlaybackRate(v);store.set(\'speed\',v)"><option value="0.75">×0.75</option><option value="1" selected>×1</option><option value="1.25">×1.25</option><option value="1.5">×1.5</option><option value="2">×2</option></select>'
-      +'<select id="slp" title="مؤقت النوم" onchange="if(SLEEP){clearTimeout(SLEEP);SLEEP=null}const m=parseInt(this.value);if(m){SLEEP=setTimeout(()=>{YTP&&YTP.pauseVideo();SLEEP=null},m*60000)}this.title=m?\'يتوقف خلال \'+this.value+\' د\':\'مؤقت النوم\'"><option value="0">نوم —</option><option value="15">15د</option><option value="30">30د</option><option value="45">45د</option><option value="60">60د</option></select>'
-      +'<span class="tm" id="tm">0:00</span></div>';
-    h+='<div class="stage" id="stage"><span class="wait">اضغط تشغيل — تظهر الجملة وتضيء الكلمة في وقتها</span></div>';
+    h+='<div class="stage" id="stage"></div>';
     h+='<div class="pos" id="pos"></div>';
-    if(alcov<1)h+='<div style="text-align:center;margin-top:8px"><span class="covtag'+(alcov<0.7?' warn':'')+'">'+icS+' تغطية النص في هذه المحاذاة '+Math.round(alcov*100)+'%'+(alcov<0.7?' — قد تتقطع الإضاءة':'')+'</span></div>';
+    h+='<div class="cbar"><div class="crow">'
+      +'<button class="btn" onclick="seekPhrase(curPh-1)" aria-label="الجملة السابقة" title="الجملة السابقة">⇤</button>'
+      +'<button class="btn" onclick="YTP&&YTP.seekTo(Math.max(0,YTP.getCurrentTime()-10),true)" aria-label="رجوع 10 ثوانٍ">↺10</button>'
+      +'<button class="btn main ld" id="playb" aria-pressed="false" onclick="playToggle(this)" aria-label="تشغيل/إيقاف"></button>'
+      +'<button class="btn" onclick="YTP&&YTP.seekTo(YTP.getCurrentTime()+10,true)" aria-label="تقدم 10 ثوانٍ">10↻</button>'
+      +'<button class="btn" onclick="seekPhrase(curPh+1)" aria-label="الجملة التالية" title="الجملة التالية">⇥</button></div>'
+      +'<div class="csub"><span class="tm" id="tm">0:00</span>'
+      +'<button class="chip" id="spd" title="سرعة التشغيل" onclick="cycleSpeed()">×'+(store.get('speed')||1)+'</button>'
+      +'<select id="slp" title="مؤقت النوم" onchange="if(SLEEP){clearTimeout(SLEEP);SLEEP=null}const m=parseInt(this.value);if(m){SLEEP=setTimeout(()=>{YTP&&YTP.pauseVideo();SLEEP=null},m*60000)}this.title=m?\'يتوقف خلال \'+this.value+\' د\':\'مؤقت النوم\'"><option value="0">نوم —</option><option value="15">15د</option><option value="30">30د</option><option value="45">45د</option><option value="60">60د</option></select>'
+      +'<button class="chip'+(store.get('anx')===1?' on':'')+'" id="t-anx" title="التشغيل التلقائي للدرس التالي" onclick="const v=!(store.get(\'anx\')===1);store.set(\'anx\',v);this.classList.toggle(\'on\',v)">تلقائي</button>'
+      +'<button class="chip'+(TELE?' on':'')+'" id="t-tele" title="وضع الملقّن" onclick="TELE=!TELE;store.set(\'tele\',TELE?1:0);this.classList.toggle(\'on\',TELE);renderPhrase(Math.max(0,curPh))">ملقّن</button>'
+      +'<button class="chip" id="shr" title="مشاركة الدرس" onclick="shareLesson(this)">↗ مشاركة</button></div></div>';
   }else{
     if(l.video)h+='<div class="player" id="pl"><div class="cover" id="cvr"><span class="big">▶</span><span>تشغيل الدرس من يوتيوب</span></div></div>';
     h+='<div class="txt cin">'+(txt?esc(txt):'<div style="text-align:center;color:var(--dim);padding:30px;border:1px dashed var(--border);border-radius:12px">التفريغ غير متوفر لهذا الدرس بعد</div>')+'</div>';
@@ -286,7 +331,11 @@ document.addEventListener('keydown',e=>{
     f.src='https://www.youtube-nocookie.com/embed/'+l.video+'?autoplay=1&playsinline=1&rel=0&hl=ar';
     f.setAttribute('allow','autoplay; encrypted-media; picture-in-picture; fullscreen');f.setAttribute('allowfullscreen','');
     cvr.parentElement.replaceChild(f,cvr)};
-  if(aln)mountPlayer(l.video);
+  if(aln){
+    renderPhrase(phraseAt(T0||resumePos()));   // first phrase visible before the player loads
+    const st=document.getElementById('stage');if(st)st.classList.add('idle');
+    mountPlayer(l.video);
+  }
 })();
 if('serviceWorker' in navigator)swRegister('../sw.js');
 </script>
