@@ -356,27 +356,21 @@
    "sheikh_slug": "dhaker-alhashimi",
    "title": "ألف باء الزواج",
    "count": 75,
-   "status": "المحاذاة جارية — 29/75",
-   "aligned": 29,
-   "transcribed": 73
+   "status": "المحاذاة جارية — 29/75"
   },
   {
    "slug": "hashimi-tarbiya",
    "sheikh_slug": "dhaker-alhashimi",
    "title": "ألف باء التربية",
    "count": 108,
-   "status": "المحاذاة جارية — 3/108",
-   "aligned": 3,
-   "transcribed": 72
+   "status": "المحاذاة جارية — 3/108"
   },
   {
    "slug": "hashimi-fiqh-nafs",
    "sheikh_slug": "dhaker-alhashimi",
    "title": "مجالس فقه النفس",
    "count": 181,
-   "status": "المحاذاة جارية — 0/181",
-   "aligned": 0,
-   "transcribed": 41
+   "status": "المحاذاة جارية — 0/181"
   }
  ]
 }
