@@ -4,7 +4,7 @@
  "sheikh_slug": "ali-mahmoud-alomari",
  "title": "مغني الطلاب شرح إيساغوجي",
  "playlist": "https://www.youtube.com/playlist?list=PLa3XSU7qw_Yl_Tf3EZgcVxliTmb7PGcIF",
- "count": 9,
+ "count": 10,
  "lessons": [
   {
    "n": 2,
@@ -77,6 +77,14 @@
    "align": false,
    "chars": 14888,
    "dur": "27:31"
+  },
+  {
+   "n": 11,
+   "title": "مغني الطلاب شرح إيساغوجي",
+   "video": "nMMsI2mnh58",
+   "align": false,
+   "chars": 16189,
+   "dur": "33:33"
   }
  ]
 }
