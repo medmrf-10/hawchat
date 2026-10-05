@@ -252,7 +252,7 @@
    "video": "z9Lx3TGhPjQ",
    "chars": 138697,
    "dur": "188:00",
-   "align": false
+   "align": true
   },
   {
    "n": 32,
@@ -276,7 +276,7 @@
    "video": "yCG71YwkJZc",
    "chars": 104120,
    "dur": "137:47",
-   "align": false
+   "align": true
   },
   {
    "n": 35,
@@ -300,7 +300,7 @@
    "video": "vhpvA7BoLC8",
    "chars": 54338,
    "dur": "82:45",
-   "align": false
+   "align": true
   },
   {
    "n": 38,
