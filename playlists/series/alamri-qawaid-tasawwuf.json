@@ -1,0 +1,26 @@
+{
+ "slug": "alamri-qawaid-tasawwuf",
+ "sheikh": "علي محمود العمري",
+ "sheikh_slug": "ali-mahmoud-alomari",
+ "title": "قواعد التصوف",
+ "playlist": "https://www.youtube.com/playlist?list=PLa3XSU7qw_YkgEhoKP6nsOBG0xPf_Vc-6",
+ "count": 2,
+ "lessons": [
+  {
+   "n": 1,
+   "title": "قواعد التصوف وشواهد التَّعرف_ الدرس الأول_ الشيخ أحمد زرًّوق الفاسي رحمه الله تعالى",
+   "video": "fFr_LqX1Jf4",
+   "align": false,
+   "chars": 40234,
+   "dur": "75:34"
+  },
+  {
+   "n": 2,
+   "title": "قواعد التصوف وشواهد التَّعرف_ الدرس الثاني_ الشيخ أحمد زرًّوق الفاسي رحمه الله تعالى",
+   "video": "WAy4WIl-Xo4",
+   "align": false,
+   "chars": 27671,
+   "dur": "48:11"
+  }
+ ]
+}

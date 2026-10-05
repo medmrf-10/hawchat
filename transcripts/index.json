@@ -1272,14 +1272,23 @@
       "mughni-11_AlAmri.txt",
       "mughni-12_AlAmri.txt",
       "mughni-13_AlAmri.txt",
+      "mughni-14_AlAmri.txt",
       "mughni-15_AlAmri.txt",
       "mughni-16_AlAmri.txt",
+      "mughni-17_AlAmri.txt",
       "mughni-18_AlAmri.txt",
       "mughni-19_AlAmri.txt",
       "mughni-20_AlAmri.txt",
-      "mughni-21_AlAmri.txt"
+      "mughni-21_AlAmri.txt",
+      "mughni-22_AlAmri.txt",
+      "mughni-23_AlAmri.txt",
+      "mughni-24_AlAmri.txt",
+      "mughni-25_AlAmri.txt",
+      "mughni-26_AlAmri.txt",
+      "mughni-27_AlAmri.txt",
+      "mughni-28_AlAmri.txt"
      ],
-     "n": 19
+     "n": 28
     },
     {
      "slug": "barahin-muqtatafat",
@@ -1359,6 +1368,98 @@
       "mayar-ilm-02_AlAmri.txt"
      ],
      "n": 2
+    },
+    {
+     "slug": "falsafa-din",
+     "title": "فلسفة الدين",
+     "files": [
+      "falsafa-din-01_AlAmri.txt",
+      "falsafa-din-02_AlAmri.txt",
+      "falsafa-din-03_AlAmri.txt",
+      "falsafa-din-04_AlAmri.txt"
+     ],
+     "n": 4
+    },
+    {
+     "slug": "manhaj-iman",
+     "title": "المنهاج في شعب الإيمان",
+     "files": [
+      "manhaj-iman-01_AlAmri.txt",
+      "manhaj-iman-02_AlAmri.txt",
+      "manhaj-iman-03_AlAmri.txt",
+      "manhaj-iman-04_AlAmri.txt"
+     ],
+     "n": 4
+    },
+    {
+     "slug": "muhadara",
+     "title": "محاضرة علمية",
+     "files": [
+      "muhadara-01_AlAmri.txt"
+     ],
+     "n": 1
+    },
+    {
+     "slug": "nasafiyya",
+     "title": "مقدمة شرح العقائد النسفية",
+     "files": [
+      "nasafiyya-01_AlAmri.txt",
+      "nasafiyya-02_AlAmri.txt",
+      "nasafiyya-03_AlAmri.txt",
+      "nasafiyya-04_AlAmri.txt",
+      "nasafiyya-05_AlAmri.txt",
+      "nasafiyya-06_AlAmri.txt",
+      "nasafiyya-07_AlAmri.txt",
+      "nasafiyya-08_AlAmri.txt",
+      "nasafiyya-09_AlAmri.txt",
+      "nasafiyya-10_AlAmri.txt",
+      "nasafiyya-11_AlAmri.txt",
+      "nasafiyya-12_AlAmri.txt",
+      "nasafiyya-13_AlAmri.txt",
+      "nasafiyya-14_AlAmri.txt"
+     ],
+     "n": 14
+    },
+    {
+     "slug": "qawaid-tasawwuf",
+     "title": "قواعد التصوف",
+     "files": [
+      "qawaid-tasawwuf-01_AlAmri.txt",
+      "qawaid-tasawwuf-02_AlAmri.txt"
+     ],
+     "n": 2
+    },
+    {
+     "slug": "qushayriyya",
+     "title": "الرسالة القشيرية",
+     "files": [
+      "qushayriyya-01_AlAmri.txt",
+      "qushayriyya-02_AlAmri.txt",
+      "qushayriyya-03_AlAmri.txt",
+      "qushayriyya-04_AlAmri.txt"
+     ],
+     "n": 4
+    },
+    {
+     "slug": "sulam",
+     "title": "شرح السلم المنورق للفاضل الدمنهوري",
+     "files": [
+      "sulam-01_AlAmri.txt",
+      "sulam-02_AlAmri.txt",
+      "sulam-03_AlAmri.txt",
+      "sulam-04_AlAmri.txt",
+      "sulam-05_AlAmri.txt",
+      "sulam-06_AlAmri.txt",
+      "sulam-07_AlAmri.txt",
+      "sulam-08_AlAmri.txt",
+      "sulam-09_AlAmri.txt",
+      "sulam-10_AlAmri.txt",
+      "sulam-11_AlAmri.txt",
+      "sulam-12_AlAmri.txt",
+      "sulam-13_AlAmri.txt",
+      "sulam-14_AlAmri.txt"
+     ],
+     "n": 14
     }
    ],
    "slug": "ali-mahmoud-alomari"
