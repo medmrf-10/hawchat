@@ -131,7 +131,7 @@
    "title": "تفسير جزء عمّ",
    "sheikh_slug": "ahmed-abdelmonem",
    "count": 20,
-   "aligned": 2,
+   "aligned": 3,
    "transcribed": 20,
    "status": "مفرّغة — المحاذاة جارية"
   },
@@ -158,7 +158,7 @@
    "title": "كتاب أم البراهين",
    "sheikh_slug": "ali-mahmoud-alomari",
    "count": 14,
-   "aligned": 1,
+   "aligned": 2,
    "transcribed": 14,
    "status": "مفرّغة — المحاذاة جارية"
   },
@@ -166,9 +166,9 @@
    "slug": "alamri-barahin-sharh",
    "title": "شرح كتاب شرح أم البراهين للإمام السنوسي",
    "sheikh_slug": "ali-mahmoud-alomari",
-   "count": 15,
+   "count": 17,
    "aligned": 0,
-   "transcribed": 15,
+   "transcribed": 17,
    "status": "مفرّغة — المحاذاة جارية"
   },
   {
@@ -249,8 +249,8 @@
    "title": "ألف باء الزواج",
    "count": 75,
    "status": "المحاذاة جارية — 17/75",
-   "aligned": 10,
-   "transcribed": 53
+   "aligned": 18,
+   "transcribed": 68
   },
   {
    "slug": "hashimi-tarbiya",
