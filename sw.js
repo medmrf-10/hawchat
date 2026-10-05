@@ -3,7 +3,7 @@
    data:  JSON (stats, read rows, series) — stale-while-revalidate.
    text:  transcripts/alignments/images — cache-first, LRU-bounded, version-stable.
    No auto skipWaiting: pages show an update toast; users opt in. */
-const REV = 'v7-f050846x';
+const REV = 'v8-37x';
 const SHELL = 'hawchat-shell-' + REV;
 const DATA  = 'hawchat-data-v1';
 const TEXT  = 'hawchat-text-v1';
@@ -21,7 +21,10 @@ const SHELL_ASSETS = [
 ];
 
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(SHELL).then(c => c.addAll(SHELL_ASSETS)));
+  // resilient: a single missing asset must not kill the whole install
+  e.waitUntil(caches.open(SHELL).then(async c => {
+    await Promise.all(SHELL_ASSETS.map(u => c.add(u).catch(() => null)));
+  }));
   // NO skipWaiting — the update toast asks the user first.
 });
 
