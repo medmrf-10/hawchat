@@ -14,7 +14,7 @@
    "sheikh_slug": "said-bouti",
    "title": "يغالطونك إذ يقولون",
    "count": 38,
-   "status": "مفرّغة — المحاذاة جارية",
+   "status": "مكتملة التفريغ",
    "aligned": 38,
    "transcribed": 38
   },
@@ -23,7 +23,7 @@
    "sheikh_slug": "said-bouti",
    "title": "تاريخ التشريع الإسلامي",
    "count": 38,
-   "status": "مفرّغة — المحاذاة جارية",
+   "status": "مكتملة التفريغ",
    "aligned": 38,
    "transcribed": 38
   },
@@ -32,7 +32,7 @@
    "sheikh_slug": "said-bouti",
    "title": "مشاهد وعبر من القرآن والسنة",
    "count": 30,
-   "status": "مفرّغة — المحاذاة جارية",
+   "status": "مكتملة التفريغ",
    "aligned": 30,
    "transcribed": 30
   },
@@ -41,7 +41,7 @@
    "sheikh_slug": "said-bouti",
    "title": "رحلة الخلود",
    "count": 23,
-   "status": "مفرّغة — المحاذاة جارية",
+   "status": "مكتملة التفريغ",
    "aligned": 23,
    "transcribed": 23
   },
@@ -50,7 +50,7 @@
    "sheikh_slug": "said-bouti",
    "title": "الحب في القرآن",
    "count": 26,
-   "status": "مفرّغة — المحاذاة جارية",
+   "status": "مكتملة التفريغ",
    "aligned": 26,
    "transcribed": 26
   },
@@ -59,7 +59,7 @@
    "sheikh_slug": "said-bouti",
    "title": "كبرى اليقينيات الكونية",
    "count": 54,
-   "status": "مفرّغة — المحاذاة جارية",
+   "status": "مكتملة التفريغ",
    "aligned": 54,
    "transcribed": 54
   },
@@ -68,7 +68,7 @@
    "sheikh_slug": "said-bouti",
    "title": "علوم القرآن الكريم",
    "count": 63,
-   "status": "مفرّغة — المحاذاة جارية",
+   "status": "مكتملة التفريغ",
    "aligned": 63,
    "transcribed": 63
   },
@@ -77,7 +77,7 @@
    "sheikh_slug": "said-bouti",
    "title": "فقه السيرة النبوية",
    "count": 70,
-   "status": "مفرّغة — المحاذاة جارية",
+   "status": "مكتملة التفريغ",
    "aligned": 70,
    "transcribed": 70
   },
@@ -86,7 +86,7 @@
    "sheikh_slug": "said-bouti",
    "title": "خطب الجمعة 2012",
    "count": 52,
-   "status": "مفرّغة — المحاذاة جارية",
+   "status": "مكتملة التفريغ",
    "aligned": 52,
    "transcribed": 52
   },
@@ -95,7 +95,7 @@
    "sheikh_slug": "ali-gomaa",
    "title": "الرد على خوارج العصر",
    "count": 172,
-   "status": "المحاذاة جارية",
+   "status": "مفرّغة — المحاذاة جارية",
    "aligned": 146,
    "transcribed": 172
   },
@@ -131,7 +131,7 @@
    "title": "تفسير جزء عمّ",
    "sheikh_slug": "ahmed-abdelmonem",
    "count": 20,
-   "aligned": 4,
+   "aligned": 6,
    "transcribed": 20,
    "status": "مفرّغة — المحاذاة جارية"
   },
@@ -149,18 +149,18 @@
    "title": "آداب سلوك المريد",
    "sheikh_slug": "ali-mahmoud-alomari",
    "count": 12,
-   "aligned": 11,
+   "aligned": 12,
    "transcribed": 12,
-   "status": "مفرّغة — المحاذاة جارية"
+   "status": "مكتملة التفريغ"
   },
   {
    "slug": "alamri-barahin-kitab",
    "title": "كتاب أم البراهين",
    "sheikh_slug": "ali-mahmoud-alomari",
    "count": 14,
-   "aligned": 8,
+   "aligned": 14,
    "transcribed": 14,
-   "status": "مفرّغة — المحاذاة جارية"
+   "status": "مكتملة التفريغ"
   },
   {
    "slug": "alamri-barahin-sharh",
@@ -202,8 +202,8 @@
    "slug": "alasri-arbaa",
    "title": "لقاء الأربعاء",
    "sheikh_slug": "saif-alasri",
-   "count": 24,
-   "aligned": 24,
+   "count": 29,
+   "aligned": 29,
    "transcribed": 56,
    "status": "مكتملة التفريغ"
   },
@@ -230,9 +230,9 @@
    "title": "مقتطفات من دروس أم البراهين",
    "sheikh_slug": "ali-mahmoud-alomari",
    "count": 17,
-   "aligned": 0,
+   "aligned": 17,
    "transcribed": 17,
-   "status": "مفرّغة — المحاذاة جارية"
+   "status": "مكتملة التفريغ"
   },
   {
    "slug": "aouni-jabir",
@@ -356,21 +356,198 @@
    "sheikh_slug": "dhaker-alhashimi",
    "title": "ألف باء الزواج",
    "count": 75,
-   "status": "المحاذاة جارية — 32/75"
+   "status": "مفرّغة — المحاذاة جارية",
+   "aligned": 37,
+   "transcribed": 73
   },
   {
    "slug": "hashimi-tarbiya",
    "sheikh_slug": "dhaker-alhashimi",
    "title": "ألف باء التربية",
    "count": 108,
-   "status": "المحاذاة جارية — 3/108"
+   "status": "مفرّغة — المحاذاة جارية",
+   "aligned": 3,
+   "transcribed": 72
   },
   {
    "slug": "hashimi-fiqh-nafs",
    "sheikh_slug": "dhaker-alhashimi",
    "title": "مجالس فقه النفس",
    "count": 181,
-   "status": "المحاذاة جارية — 0/181"
+   "status": "مفرّغة — المحاذاة جارية",
+   "aligned": 0,
+   "transcribed": 41
+  },
+  {
+   "slug": "jifri-100",
+   "title": "مؤتمر التصوف",
+   "sheikh_slug": "habib-ali-aljifri",
+   "count": 20,
+   "aligned": 10,
+   "transcribed": 10,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "jifri-88",
+   "title": "رحلة كينيا 1433 Kenya 2012",
+   "sheikh_slug": "habib-ali-aljifri",
+   "count": 6,
+   "aligned": 3,
+   "transcribed": 3,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "jifri-89",
+   "title": "مؤتمر كندا RIS 2011",
+   "sheikh_slug": "habib-ali-aljifri",
+   "count": 23,
+   "aligned": 13,
+   "transcribed": 13,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "jifri-90",
+   "title": "محاضرات عامة",
+   "sheikh_slug": "habib-ali-aljifri",
+   "count": 703,
+   "aligned": 354,
+   "transcribed": 354,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "jifri-91",
+   "title": "آمنت بالله - الموسم 2",
+   "sheikh_slug": "habib-ali-aljifri",
+   "count": 54,
+   "aligned": 27,
+   "transcribed": 27,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "jifri-92",
+   "title": "آمنت بالله - الموسم 1",
+   "sheikh_slug": "habib-ali-aljifri",
+   "count": 52,
+   "aligned": 26,
+   "transcribed": 26,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "jifri-93",
+   "title": "مجالس البخاري",
+   "sheikh_slug": "habib-ali-aljifri",
+   "count": 54,
+   "aligned": 27,
+   "transcribed": 27,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "jifri-94",
+   "title": "برنامج حياتنا",
+   "sheikh_slug": "habib-ali-aljifri",
+   "count": 46,
+   "aligned": 23,
+   "transcribed": 23,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "jifri-95",
+   "title": "أيها المريد",
+   "sheikh_slug": "habib-ali-aljifri",
+   "count": 56,
+   "aligned": 28,
+   "transcribed": 28,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "jifri-96",
+   "title": "رحلة ماليزيا 1433 Malaysia Trip 2012",
+   "sheikh_slug": "habib-ali-aljifri",
+   "count": 6,
+   "aligned": 3,
+   "transcribed": 3,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "jifri-97",
+   "title": "رحلة بريطانيا 2012",
+   "sheikh_slug": "habib-ali-aljifri",
+   "count": 7,
+   "aligned": 4,
+   "transcribed": 4,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "jifri-98",
+   "title": "مقتطفات قصيرة",
+   "sheikh_slug": "habib-ali-aljifri",
+   "count": 54,
+   "aligned": 28,
+   "transcribed": 28,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "jifri-99",
+   "title": "الشجرة الطيبة",
+   "sheikh_slug": "habib-ali-aljifri",
+   "count": 16,
+   "aligned": 8,
+   "transcribed": 8,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "sariri-1",
+   "title": "مواعظ",
+   "sheikh_slug": "mouloud-sariri",
+   "count": 6,
+   "aligned": 3,
+   "transcribed": 3,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "sariri-2",
+   "title": "فوائد باب النكاح",
+   "sheikh_slug": "mouloud-sariri",
+   "count": 6,
+   "aligned": 3,
+   "transcribed": 3,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "sariri-3",
+   "title": "فوائد باب الجهاد",
+   "sheikh_slug": "mouloud-sariri",
+   "count": 186,
+   "aligned": 94,
+   "transcribed": 94,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "sariri-5",
+   "title": "كيف يكون بناء الأسرة",
+   "sheikh_slug": "mouloud-sariri",
+   "count": 30,
+   "aligned": 16,
+   "transcribed": 16,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "sariri-6",
+   "title": "فوائد أصولية",
+   "sheikh_slug": "mouloud-sariri",
+   "count": 105,
+   "aligned": 57,
+   "transcribed": 57,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "sariri-7",
+   "title": "فوائد باب الصلاة",
+   "sheikh_slug": "mouloud-sariri",
+   "count": 234,
+   "aligned": 119,
+   "transcribed": 119,
+   "status": "مفرّغة — المحاذاة جارية"
   }
  ]
 }
