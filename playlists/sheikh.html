@@ -135,10 +135,10 @@ function renderSeries(){
     const d=document.createElement('div');d.className='ser';
     let links='';
     if(r.watch)links+=`<a class="btn play" href="series.html?s=${encodeURIComponent(r.watch.slug)}" title="استمع/تصفح الدروس">${ICON.play}</a>`;
-    if(r.read)links+=`<a class="btn read" href="${MUT}#/s/${esc(r.read.id)}" target="_blank" rel="noopener" title="اقرأ التفريغ">${ICON.book}</a>`;
+    if(r.read&&r.read.files&&r.read.files.length)links+=`<a class="btn read" href="${MUT}#/s/${esc(r.read.id)}" target="_blank" rel="noopener" title="اقرأ التفريغ">${ICON.book}</a>`;
     const cc=[];
-    if(r.read)cc.push(`<b class="don">${r.read.files.length}</b> مفرّغ`);
-    if(r.watch)cc.push(`<b class="act">${r.watch.aligned}</b> مشاهد`);
+    if(r.read)cc.push(`<b class="don">${r.read.done||r.read.files.length}</b>/${r.read.total||r.read.files.length} مفرّغ`);
+    if(r.watch)cc.push(`<b class="act">${r.watch.aligned}</b>/${r.watch.count||r.watch.aligned} مشاهد`);
     d.innerHTML=`<span class="nm">${esc(r.title)}</span>
       <span class="cnt">${cc.join(' · ')}</span>${links}`;
     w.appendChild(d);
@@ -166,7 +166,7 @@ document.addEventListener('click',e=>{
   // two states only: readable (mutalaa manifest with files) or watchable (published with aligned lessons)
   const pub=(sidx?sidx.series.filter(x=>x.sheikh_slug===sh.slug&&(x.aligned||0)>0):[]);
   const muts=(mut&&Array.isArray(mut)?mut:(mut&&mut.series)||[])
-    .filter(m=>(nset.has(m.sheikh)||nset.has(norm(m.sheikh||'')))&&(m.files||[]).length>0);
+    .filter(m=>(nset.has(m.sheikh)||nset.has(norm(m.sheikh||'')))&&((m.done||0)>0||(m.files||[]).length>0));
   _rows=muts.map(m=>({title:m.name||m.title||('#'+m.id),read:m,watch:null}));
   // attach watchable pubs to rows by title; unmatched pubs become their own rows
   for(const s of pub){
