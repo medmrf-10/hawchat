@@ -251,6 +251,7 @@ def rebuild_lessons_indexes():
         json.dump(idx, open(idx_path, 'w'), ensure_ascii=False, separators=(',', ':'))
 
 # ── load sources ──────────────────────────────────────────────
+rebuild_lessons_indexes()   # disk-truth first — rows count on fresh lists
 sheikhs = (J(os.path.join(PL, 'data/sheikhs.json')) or {}).get('sheikhs', [])
 known   = {s['slug'] for s in sheikhs}
 sidx    = (J(os.path.join(PL, 'series/index.json')) or {}).get('series', [])
