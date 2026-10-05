@@ -163,17 +163,18 @@ def rows_from_files(files, base, plid=None, row_title=None):
         if not t or (FILENAMEISH.match(t) and not re.search(r'[؀-ۿ]', t)):
             t = ((row_title or '') + ' — ' if row_title else '') + 'الدرس %d' % n
         out.append({'n': n, 'title': t, 'file': f, 'base': base})
-    # never two lessons with the same n: later dups take next free number
-    used = set()
-    free = 1
+    # never two lessons with the same n. Two passes: real numbers are fixed
+    # first, then duplicates take max+1, max+2, … — a dup can never steal a
+    # real lesson's position and cascade-shift the rest
+    real_ns = {r['n'] for r in out}
+    nxt = (max(real_ns) + 1) if real_ns else 1
+    seen = set()
     for r in out:
-        if r['n'] in used:
-            while free in used:
-                free += 1
-            r['n'] = free
-            used.add(free)
-        else:
-            used.add(r['n'])
+        if r['n'] in seen:
+            warn('dup n=%d in %s → renumbered %d' % (r['n'], base, nxt))
+            r['n'] = nxt
+            nxt += 1
+        seen.add(r['n'])
     out.sort(key=lambda r: r['n'])
     return out
 
@@ -202,8 +203,11 @@ def rows_from_lessons(slug):
         out.append({'n': n, 'title': t or 'الدرس %d' % n, 'file': fn, 'base': 'lessons/%s/' % slug})
     return out
 
+_ALIGN_CACHE = {}
 def count_aligned(slug):
     """Aligned lessons that actually work: w non-empty AND cov>=0.5 (cov absent ok)."""
+    if slug in _ALIGN_CACHE:
+        return _ALIGN_CACHE[slug]
     d = os.path.join(PL, 'lessons', slug)
     li = J(os.path.join(d, 'index.json')) or {}
     nums = li.get('align') or []
@@ -234,6 +238,7 @@ def count_aligned(slug):
             w, cov = ad.get('w') or [], ad.get('cov')
         if w and (cov is None or cov >= 0.5):
             good += 1
+    _ALIGN_CACHE[slug] = good
     return good
 
 def rebuild_lessons_indexes():
@@ -261,11 +266,13 @@ def rebuild_lessons_indexes():
             m = re.match(r'^(\d+)\.txt$', fn)
             if m:
                 tf[int(m.group(1))] = fn
-        idx['af'] = af
-        idx['tf'] = tf
-        idx['align'] = sorted(af)   # disk is authoritative — stale lists get rebuilt
-        idx['txt'] = sorted(tf)
-        dump_atomic(idx, idx_path)
+        new_idx = dict(idx)
+        new_idx['af'] = af
+        new_idx['tf'] = tf
+        new_idx['align'] = sorted(af)   # disk is authoritative — stale lists get rebuilt
+        new_idx['txt'] = sorted(tf)
+        if new_idx != idx:            # write only on real change — keep worktree clean
+            dump_atomic(new_idx, idx_path)
 
 # ── load sources ──────────────────────────────────────────────
 rebuild_lessons_indexes()   # disk-truth first — rows count on fresh lists
@@ -461,10 +468,13 @@ for sh in sheikhs:
             r['trSh'] = k; r['trSr'] = sr.get('slug')
 
     # ── fold duplicates: same playlist = same series ──
+    # a row that was folded away can never be a fold target — otherwise two
+    # rows sharing a plid would fold into each other and BOTH disappear
     keep = []
+    folded = set()   # id() of absorbed rows
     for r in rows:
         if r.get('plid'):
-            tgt = next((r2 for r2 in rows if r2 is not r and r2.get('plid') == r['plid']), None)
+            tgt = next((r2 for r2 in rows if r2 is not r and id(r2) not in folded and r2.get('plid') == r['plid']), None)
             if tgt:
                 for f_ in ('rdn', 'rtt', 'wan', 'wtt'):
                     tgt[f_] = max(tgt[f_], r[f_])
@@ -473,15 +483,16 @@ for sh in sheikhs:
                         tgt[f_] = r[f_]
                 if not tgt.get('kind'):
                     tgt['kind'] = r['kind']
+                folded.add(id(r))
                 continue
         # legacy title-fold for mut rows without plid
         if r.get('mutId') and not r.get('sSlug') and not r.get('plid'):
             t = norm(r['title'])
-            tgt = next((r2 for r2 in rows if r2 is not r and (r2.get('sSlug') or r2.get('trSr')) and norm(r2['title']) == t), None)
+            tgt = next((r2 for r2 in rows if r2 is not r and id(r2) not in folded and (r2.get('sSlug') or r2.get('trSr')) and norm(r2['title']) == t), None)
             if not tgt:
                 mfiles = {os.path.basename(str(x)) for x in ((r.get('_mut') or {}).get('files') or [])}
                 for r2 in rows:
-                    if r2 is r or not (r2.get('trSh') and r2.get('trSr')):
+                    if r2 is r or id(r2) in folded or not (r2.get('trSh') and r2.get('trSr')):
                         continue
                     se2 = next((x for x in (tr.get(r2['trSh'], {}).get('series') or []) if x.get('slug') == r2['trSr']), None)
                     if not se2:
@@ -498,6 +509,7 @@ for sh in sheikhs:
                 tgt['rdn'] = max(tgt['rdn'], r['rdn'])
                 tgt['rtt'] = max(tgt['rtt'], r['rtt'])
                 tgt['mutId'] = r['mutId']; tgt['_mut'] = r.get('_mut')
+                folded.add(id(r))
                 continue
         keep.append(r)
     rows[:] = keep
@@ -505,10 +517,6 @@ for sh in sheikhs:
     # ── invariants + links + read-rows ──
     for r in rows:
         r.pop('_mut', None)
-        if r['wan'] > r['rdn']:
-            r['rdn'] = r['wan']
-        r['rtt'] = max(r['rtt'], r['rdn'])
-        r['wtt'] = r['rtt']
         key = r.get('mutId') or r.get('sSlug') or ((r.get('trSh') or '') + '-' + (r.get('trSr') or ''))
         keys = {k for k in (('m', r.get('mutId')), ('s', r.get('sSlug')),
                             ('p', r.get('plid')),
@@ -538,6 +546,14 @@ for sh in sheikhs:
         write_read(r['id'], rrows)
         if rrows and len(rrows) < r['rdn']:
             r['rdn'] = len(rrows)
+        if not rrows and r['rdn'] > 0:
+            warn('row %s: rdn=%d but empty read list → zeroed' % (r['id'], r['rdn']))
+            r['rdn'] = 0
+        # invariants enforced last, after every mutation above
+        if r['wan'] > r['rdn']:
+            r['rdn'] = r['wan']
+        r['rtt'] = max(r['rtt'], r['rdn'])
+        r['wtt'] = r['rtt']
         r['read'] = 'row.html?r=' + r['id']
         r['listen'] = ('row.html?r=' + r['id']) if r['wan'] > 0 and r.get('sSlug') else None
         r['rOk'] = bool(r['rtt'] and r['rdn'] >= r['rtt'])
