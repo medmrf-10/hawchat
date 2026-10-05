@@ -60,19 +60,24 @@
 <main><div class="wrap">
   <div class="hero cin"><h1>الشيوخ</h1><span class="pill" id="count"></span></div>
   <div id="kpis" class="cin"></div>
-  <div class="bar cin"><input type="text" id="flt" placeholder="ابحث عن شيخ…"></div>
+  <div class="bar cin"><input type="text" id="flt" placeholder="ابحث عن شيخ…"><button id="contF" class="chip" style="margin-inline-start:8px;border:1px solid var(--border);background:var(--card);color:var(--txt);padding:8px 14px;border-radius:999px;cursor:pointer;font-family:var(--font-ui)">المحتوى فقط</button></div>
   <div id="groups" class="grid"></div>
 </div></main>
 <script>
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 async function j(u){try{const r=await fetch(u);return r.ok?await r.json():null}catch(e){return null}}
 function normalize(s){return (s||'').replace(/[أإآ]/g,'ا').replace(/\s+/g,' ').trim()}
-let _groups=[],_slugs={},_photos={},flt='',_read={},_watch={},_readPub={};
+let _groups=[],_slugs={},_photos={},flt='',_read={},_watch={},_readPub={},onlyContent=false;
 function photo(name){return _photos[name]||_photos[normalize(name)]}
 function slugOf(name){return _slugs[name]||_slugs[normalize(name)]||normalize(name)}
 function render(){
   const g=document.getElementById('groups');g.innerHTML='';let i=0;
-  for(const gr of _groups)for(const name of gr.names){
+  let names=[];
+  for(const gr of _groups)for(const name of gr.names)names.push(name);
+  if(onlyContent)names=names.filter(n=>{const s=slugOf(n);return ((_read[n]||0)+(_readPub[s]||0)+(_watch[s]||0))>0})
+    .sort((a,b)=>{const sa=slugOf(a),sb=slugOf(b);
+      return ((_read[b]||0)+(_readPub[sb]||0)+(_watch[sb]||0))-((_read[a]||0)+(_readPub[sa]||0)+(_watch[sa]||0))});
+  for(const name of names){
     if(flt&&!normalize(name).includes(flt))continue;
     const a=document.createElement('a');
     a.className='sh cin';a.style.animationDelay=(Math.min(i++,30)*25)+'ms';
@@ -86,6 +91,7 @@ function render(){
   if(!i)g.innerHTML='<p class="sub">لا نتائج.</p>';
 }
 document.getElementById('flt').addEventListener('input',e=>{flt=normalize(e.target.value);render()});
+document.getElementById('contF').addEventListener('click',e=>{onlyContent=!onlyContent;e.target.style.background=onlyContent?'var(--acc)':'var(--card)';e.target.style.color=onlyContent?'#0b0f1a':'var(--txt)';render()});
 (async()=>{
   const bust='?v='+Date.now();
   const [data,photos,meta,pub,mut,tr]=await Promise.all([j('shuyukh.json'),j('photos.json'),j('data/sheikhs.json'),j('series/index.json'+bust),j('https://medmrf-10.github.io/des/mutalaa/data/manifest.json'+bust),j('../transcripts/index.json'+bust)]);

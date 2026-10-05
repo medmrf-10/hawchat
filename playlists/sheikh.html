@@ -169,7 +169,6 @@ document.addEventListener('click',e=>{
   document.title=sh.name_display+' — hawchat';
   document.getElementById('hdr-sub').textContent=sh.name_display;
   const nset=new Set([sh.name_display,sh.name,...(sh.aliases||[])].flatMap(x=>[x,norm(x)]));
-  const yts=[];if(chs&&chs.channels)for(const g of chs.channels)for(const c of (g.items||[]))if(nset.has(c.name)||nset.has(norm(c.name)))yts.push(c);
   const photo=(photos&&(photos[sh.name_display]||photos[sh.name]||photos[norm(sh.name_display)]))||sh.photo;
   const init=(sh.name_display||sh.name).replace(/^ال/,'').trim()[0]||'؟';
   // two states only: readable = published transcript (mutalaa files or lessons/<slug>/txt)
@@ -210,19 +209,6 @@ document.addEventListener('click',e=>{
       const n=k==='all'?_rows.length:_rows.filter(r=>{const sv=fv;fv=k;const m=rowMatch(r);fv=sv;return m}).length;
       return '<button class="chip'+(k==='all'?' on':'')+'" data-f="'+k+'">'+v+' <i style="font-style:normal;opacity:.7">'+n+'</i></button>'}).join('')+'</div>'
     +'<div id="srows"></div></div>';
-  h+='<div class="sec cin"><h2>تواصل</h2>';
-  let anyCh=false;
-  if(sh.website){anyCh=true;h+='<a class="lnk" href="'+esc(sh.website)+'" target="_blank" rel="noopener"><span class="ic">🌐</span><span class="t">'+esc(domain(sh.website))+'</span></a>'}
-  const rows=[];
-  for(const c of yts){rows.push({u:c.url,t:c.yt_title||'القناة الرسمية',v:c.verified,a:c.avatar});
-    for(const m of (c.more||[]))rows.push({u:m.url,t:m.yt_title||'قناة إضافية',v:false,a:m.avatar});}
-  for(const r of rows){anyCh=true;
-    const av=r.a?'<img class="av" src="'+esc(r.a)+'" alt="" loading="lazy" onerror="this.style.display=\'none\'">':'<span class="yts">'+YT+'</span>';
-    h+='<a class="lnk" href="'+esc(r.u)+'" target="_blank" rel="noopener">'+av+'<span class="t">'+esc(r.t)+'</span>'+(r.v?VCHK:'')+'<span class="yts">'+YT+'</span></a>'}
-  for(const c of (sh.channels||[])){anyCh=true;
-    h+='<a class="lnk" href="'+esc(c.url)+'" target="_blank" rel="noopener"><span class="yts">'+YT+'</span><span class="t">'+esc(c.label||domain(c.url))+'</span></a>'}
-  if(!anyCh)h+='<div class="empty">يُضاف لاحقاً</div>';
-  h+='</div>';
   if(sh.notes)h+='<div class="sec cin"><h2>ملاحظات</h2><div class="notes">'+esc(sh.notes)+'</div></div>';
   B.innerHTML=h;
   renderSeries();
