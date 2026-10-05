@@ -67,7 +67,7 @@
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 async function j(u){try{const r=await fetch(u);return r.ok?await r.json():null}catch(e){return null}}
 function normalize(s){return (s||'').replace(/[أإآ]/g,'ا').replace(/\s+/g,' ').trim()}
-let _groups=[],_slugs={},_photos={},flt='',_read={},_watch={};
+let _groups=[],_slugs={},_photos={},flt='',_read={},_watch={},_readPub={};
 function photo(name){return _photos[name]||_photos[normalize(name)]}
 function slugOf(name){return _slugs[name]||_slugs[normalize(name)]||normalize(name)}
 function render(){
@@ -95,7 +95,7 @@ document.getElementById('flt').addEventListener('input',e=>{flt=normalize(e.targ
     const d=s.name_display||s.name;
     for(const n of [s.name_display,s.name,...(s.aliases||[])]){_slugs[n]=s.slug;_slugs[normalize(n)]=s.slug;name2disp[normalize(n)]=d}
   }
-  const _readPub={};
+  _readPub={};
   for(const s of ((pub&&pub.series)||[])){
     if(!s.sheikh_slug)continue;
     if((s.aligned||0)>0)_watch[s.sheikh_slug]=(_watch[s.sheikh_slug]||0)+1;
