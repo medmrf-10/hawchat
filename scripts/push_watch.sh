@@ -71,22 +71,28 @@ while true; do
       # deleted data files → restore from pre-commit state
       dels=$(git diff --name-only --diff-filter=D "$sha^" "$sha" 2>/dev/null | grep -E "^(playlists/lessons/|lessons/|transcripts/)" | tr '\n' ' ')
       [ -n "$dels" ] && need_heal="$need_heal $dels"
-      # core file content reverts vs blessed tag
+      # core file content reverts vs blessed tag (generated files regen anyway — skip)
       while read -r cf; do
         [ -z "$cf" ] && continue
+        echo "$cf" | grep -qE "playlists/(data/(sheikh_stats|search|redirects|yt_titles)\.json|data/read/|series/index\.json|lessons/.+/index\.json)" && continue
         echo "$files" | grep -qx "$cf" || continue
         a=$(git rev-parse "site-core-v2:$cf" 2>/dev/null); b=$(git rev-parse "$sha:$cf" 2>/dev/null)
         [ -n "$a" ] && [ "$a" != "$b" ] && need_heal="$need_heal $cf"
       done < "$CORE"
-      # committed markers → resolve immediately
-      echo "$bad" | grep -q "marker:\|badjson:" && git checkout "$sha" -- . 2>/dev/null
+      # committed markers → checkout only the broken files for resolution
+      if echo "$bad" | grep -q "marker:\|badjson:"; then
+        for bf in $(echo "$bad" | tr ' ' '\n' | grep "^marker:\|^badjson:" | cut -d: -f2-); do
+          [ -n "$bf" ] && git checkout "$sha" -- "$bf" 2>/dev/null
+        done
+      fi
     done <<< "$new"
     git rev-parse origin/main > "$SEEN"
   fi
-  # working-tree vs tag drift sweep (catches reverts that slipped through)
+  # working-tree vs tag drift sweep (non-generated core files only)
   drift=""
   while read -r cf; do
     [ -z "$cf" ] && continue
+    echo "$cf" | grep -qE "playlists/(data/(sheikh_stats|search|redirects|yt_titles)\.json|data/read/|series/index\.json|lessons/.+/index\.json)" && continue
     a=$(git rev-parse "site-core-v2:$cf" 2>/dev/null); b=$(git hash-object "$cf" 2>/dev/null)
     [ -n "$a" ] && [ "$a" != "$b" ] && drift="$drift $cf"
   done < "$CORE"
