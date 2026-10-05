@@ -4,24 +4,8 @@
  "sheikh_slug": "ali-mahmoud-alomari",
  "title": "مقتطفات من دروس أم البراهين",
  "playlist": "https://www.youtube.com/playlist?list=PLa3XSU7qw_YlBZIplsv2MSTfwOO-Qa82r",
- "count": 16,
+ "count": 10,
  "lessons": [
-  {
-   "n": 1,
-   "title": "فهم العالم",
-   "video": "1SJb3wcgEL4",
-   "align": false,
-   "chars": 4283,
-   "dur": "8:52"
-  },
-  {
-   "n": 2,
-   "title": "إدراك حقائق الصفات السلبية",
-   "video": "zK73KLgXnEA",
-   "align": false,
-   "chars": 918,
-   "dur": "1:14"
-  },
   {
    "n": 3,
    "title": "شروط بطلان التسلسل",
@@ -45,14 +29,6 @@
    "align": false,
    "chars": 2631,
    "dur": "6:21"
-  },
-  {
-   "n": 6,
-   "title": "الخلاف في كلية الوجود بين أهل السنة والفلاسفة والمعتزلة",
-   "video": "0qytXoaRFew",
-   "align": false,
-   "chars": 3351,
-   "dur": "5:27"
   },
   {
    "n": 7,
@@ -109,30 +85,6 @@
    "align": false,
    "chars": 408,
    "dur": "0:43"
-  },
-  {
-   "n": 14,
-   "title": "أساس الشبه التي تثار حول الدين",
-   "video": "kY6Uu3wxoYA",
-   "align": false,
-   "chars": 2213,
-   "dur": "4:10"
-  },
-  {
-   "n": 16,
-   "title": "عبارات بعض الصوفية التي ظاهرها الحلول",
-   "video": "A4z5bdlY7No",
-   "align": false,
-   "chars": 1602,
-   "dur": "3:01"
-  },
-  {
-   "n": 17,
-   "title": "لماذا الصعوبة في كتب علم الكلام",
-   "video": "jmtIrE4ULE8",
-   "align": false,
-   "chars": 1852,
-   "dur": "2:59"
   }
  ]
 }

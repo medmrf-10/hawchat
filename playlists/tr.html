@@ -1,61 +1,138 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl"><head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>التفريغ — hawchat</title>
-<link rel="icon" href="../icons/favicon-180.png">
-<link rel="stylesheet" href="../theme.css">
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>سلاسل المشايخ — hawchat</title>
+<meta name="theme-color" content="#0b0f1a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="hawchat">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="icon" type="image/png" href="../icons/icon-192.png">
+<link rel="apple-touch-icon" href="../icons/favicon-180.png">
+<link rel="stylesheet" href="../theme.css?v=8">
+<link rel="stylesheet" href="common.css?v=8">
+<link rel="stylesheet" href="ui.css?v=8">
 <style>
-body{min-height:100vh}
-main{max-width:820px;margin:0 auto;padding:24px 18px 60px}
-.hd{display:flex;align-items:center;gap:10px;margin-bottom:14px}
-.hd a{color:var(--acc2);text-decoration:none;font-size:.9rem}
-.hd h1{font-size:1.15rem;margin:0}
-.sub{color:var(--dim);font-size:.8rem;margin-bottom:14px}
+.wrap{max-width:820px;margin:0 auto;padding:16px 16px 90px}
+h1{font-family:var(--font-ui);font-size:var(--fs-lg);font-weight:700;color:var(--txt);margin:10px 0 4px}
+.lsub{color:var(--dim);font-size:var(--fs-xs);margin-bottom:14px}
 .ls{display:flex;flex-direction:column;gap:8px}
-.ls button{all:unset;cursor:pointer;background:var(--card);border:1px solid var(--border);border-radius:var(--r-md);padding:10px 14px;font-family:var(--font-ui);font-size:.9rem;display:flex;justify-content:space-between;align-items:center}
-.ls button.on{border-color:var(--acc);color:var(--acc2)}
-.ls button:hover{border-color:var(--acc2)}
-.ls button i{font-style:normal;color:var(--dim);font-size:.75rem}
-.txt{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:24px;margin-top:16px;font-family:var(--font-ar);font-size:1.05rem;line-height:2.1;white-space:pre-wrap;display:none}
-</style></head><body>
-<main>
- <div class="hd"><a href="javascript:history.back()">→ رجوع</a><h1 id="ttl">التفريغ</h1></div>
- <div class="sub" id="meta"></div>
- <div class="ls" id="ls"></div>
- <div class="txt" id="txt"></div>
-</main>
+.ls a{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:var(--r-md);padding:13px 14px;font-size:var(--fs-sm);text-decoration:none;color:var(--txt);min-height:52px}
+@media(hover:hover){.ls a:hover{border-color:var(--acc2)}}
+.ls a.on{border-color:var(--acc);color:var(--acc2)}
+.ls .num{min-width:34px;height:34px;border-radius:50%;background:rgba(201,162,75,.1);border:1px solid var(--border);color:var(--acc2);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:var(--fs-sm);flex:none}
+.txt{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:26px;margin-top:14px;font-family:var(--font-ar);font-size:1.15rem;line-height:2.2;white-space:pre-wrap}
+.navb{position:fixed;bottom:0;left:0;right:0;background:var(--bgt);backdrop-filter:blur(14px);border-top:1px solid var(--border);padding:10px 14px calc(10px + env(safe-area-inset-bottom));display:flex;align-items:center;justify-content:center;gap:10px;z-index:50}
+.navb a,.navb button{min-height:44px;padding:0 18px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--card);color:var(--txt);font-family:var(--font-ui);font-size:var(--fs-sm);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.navb a.off,.navb button.off{opacity:.35;pointer-events:none}
+.navb .pos{color:var(--acc2);font-size:var(--fs-sm);font-variant-numeric:tabular-nums}
+.tools{display:flex;gap:8px;margin-top:10px}
+.tools button{width:44px;height:44px;border-radius:var(--r-sm);border:1px solid var(--border);background:var(--card);color:var(--txt);font-size:1rem;cursor:pointer}
+</style>
+</head>
+<body>
+<header class="hd"><div class="hd-in">
+  <a href="." id="back" class="btn" aria-label="سلاسل المشايخ" style="text-decoration:none">→</a>
+  <img src="../icons/icon-192.png" alt="" width="30" height="30" style="border-radius:8px">
+  <span class="brand">hawchat</span>
+  <span class="sub" id="hdr-sub" style="color:var(--dim);font-size:var(--fs-xs)">سلاسل المشايخ</span>
+</div></header>
+<div class="u-prog"><i id="pbar"></i></div>
+<main><div class="wrap">
+  <div id="crumb"></div>
+  <div id="app"><div class="skel" style="height:60px;margin-top:12px"></div><div class="skel" style="height:220px;margin-top:12px"></div></div>
+</div></main>
+<div class="navb" id="navb" hidden></div>
+<script src="common.js?v=8"></script>
 <script>
-function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
-async function j(u){try{const r=await fetch(u);return r.ok?await r.json():null}catch(e){return null}}
-async function t(u){try{const r=await fetch(u);return r.ok?await r.text():null}catch(e){return null}}
+let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
 (async()=>{
- const q=new URLSearchParams(location.search),sh=q.get('sh')||'',sr=q.get('s')||'',mid=q.get('id')||'';
- const T=document.getElementById('ttl'),M=document.getElementById('meta'),L=document.getElementById('ls'),X=document.getElementById('txt');
- let name='',title='',files=[],n=0,total=0,base='';
- if(mid){ // mutalaa source — same reader, unified
-  const man=await j('https://medmrf-10.github.io/des/mutalaa/data/manifest.json?v='+Date.now());
-  const ser=((man&&Array.isArray(man)?man:(man&&man.series)||[])).find(x=>String(x.id)===String(mid));
-  if(ser){name=ser.sheikh||'';title=ser.name||ser.title||'';files=ser.files||[];n=ser.done||files.length;total=ser.total||n;
-   base='https://medmrf-10.github.io/des/mutalaa/data/txt/'+encodeURIComponent(mid)+'/';}
- }else{
-  const idx=await j('../transcripts/index.json?v='+Date.now());
-  const sheikh=idx&&idx.sheikhs?idx.sheikhs[sh]:null;
-  const ser=sheikh?sheikh.series.find(x=>x.slug===sr):null;
-  if(ser){name=sheikh.name||'';title=ser.title;files=ser.files||[];n=ser.n||files.length;total=ser.total||n;
-   base='../transcripts/'+encodeURIComponent(sh)+'/'+encodeURIComponent(sr)+'/';}
- }
- if(!files.length){T.textContent='غير موجود';M.textContent='';L.innerHTML='<div class="sub">تعذر العثور على هذه السلسلة.</div>';return}
- T.textContent=name+' — '+title;
- M.textContent=n+' مفرّغ'+(total?' من '+total:'');
- files.forEach((f,i)=>{
-  const b=document.createElement('button');
-  b.innerHTML='<span>الحلقة '+(i+1)+'</span><i>'+esc(f)+'</i>';
-  b.onclick=async()=>{L.querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
-   X.style.display='block';X.textContent='يُحمَّل…';
-   const tx=await t(base+encodeURIComponent(f));
-   X.textContent=tx||'تعذر تحميل النص';X.scrollIntoView({behavior:'smooth'})};
-  L.appendChild(b);
- });
+  const q=new URLSearchParams(location.search);
+  const app=document.getElementById('app');
+  const stats=await j('data/sheikh_stats.json');
+  // resolve the row: ?r=<id> or legacy ?id=<mutId> / ?sh&s=
+  let rid=q.get('r'),row=null,slug=null;
+  const want=parseInt(q.get('l'),10);
+  function find(pred){for(const s in stats){if(s==='_meta')continue;const r=(stats[s].rows||[]).find(pred);if(r)return{slug:s,r,st:stats[s]}}return null}
+  let hit=null;
+  if(rid)hit=find(r=>r.id===rid);
+  if(!hit&&rid){ // legacy row id → redirect map (unmixed series keep working)
+    const rd=await j('data/redirects.json');
+    if(rd&&rd[rid]){rid=rd[rid];history.replaceState(null,'','?r='+encodeURIComponent(rid)+(want?'&l='+want:''));hit=find(r=>r.id===rid)}
+  }
+  if(!hit&&q.get('id'))hit=find(r=>String(r.mutId)===String(q.get('id')));
+  if(!hit&&q.get('sh'))hit=find(r=>r.trSh===q.get('sh')&&r.trSr===q.get('s'));
+  if(!hit){app.innerHTML='<div class="errbox">تعذر العثور على هذه السلسلة — <a href=".">عودة</a></div>';return}
+  slug=hit.slug;row=hit.r;META=hit.st;
+  document.getElementById('back').href='sheikh.html?s='+encodeURIComponent(slug);
+  document.getElementById('hdr-sub').textContent=META.name;
+  document.getElementById('crumb').innerHTML=hdr(null,[{h:'.',t:'سلاسل المشايخ'},{h:'sheikh.html?s='+encodeURIComponent(slug),t:META.name},{t:row.title}]);
+  const rows=await j('data/read/'+encodeURIComponent(row.id)+'.json');
+  if(!rows||!rows.length){app.innerHTML='<div class="errbox">تعذر تحميل نصوص هذه السلسلة — <a href="sheikh.html?s='+encodeURIComponent(slug)+'">عودة</a></div>';return}
+  ROWS=rows;
+  document.title=row.title+' — '+META.name;
+  // aligned lessons for "استمع لهذا الدرس"
+  let aligned=new Set();
+  if(row.listen){const li=await j('lessons/'+encodeURIComponent(row.sSlug)+'/index.json');aligned=new Set((li&&li.align)||[])}
+  const wantL=want;
+  const idx=wantL?ROWS.findIndex(x=>x.n===wantL):-1;
+  if(idx>=0){showLesson(idx)}else{showList()}
+  function showList(){
+    document.getElementById('navb').hidden=true;
+    store.markSeen(row.id);
+    const res=store.resume(row.id);
+    let h='<h1><bdi>'+esc(row.title)+'</bdi></h1><div class="lsub">'+esc(META.name)+' · '+pluralLesson(row.rdn)+(row.rtt&&row.rtt>row.rdn?' من '+row.rtt:'')+'</div>';
+    if(res&&res.n)h+='<a class="lsres" href="?r='+encodeURIComponent(row.id)+'&l='+res.n+'">تابع من حيث توقفت — الدرس '+res.n+'</a>';
+    h+='<div class="ls">';
+    ROWS.forEach((x,i)=>{h+='<a href="?r='+encodeURIComponent(row.id)+'&l='+x.n+'"><span class="num">'+x.n+'</span><span><bdi>'+esc(x.title)+'</bdi></span></a>'});
+    h+='</div>';
+    app.innerHTML=h;
+    if(res&&res.n)document.querySelector('.lsres').style.cssText='display:flex;align-items:center;gap:10px;background:rgba(201,162,75,.08);border:1px solid var(--acc);border-radius:var(--r-md);padding:12px 14px;margin-bottom:12px;color:var(--acc2);text-decoration:none;font-size:var(--fs-sm);min-height:44px';
+  }
+  let REQ=0;
+  async function showLesson(i){
+    CUR=i;const x=ROWS[i];const my=++REQ;
+    store.setResume(row.id,x.n);store.markSeen(row.id+':'+x.n);
+    window.scrollTo(0,0);
+    history.replaceState(null,'','?r='+encodeURIComponent(row.id)+'&l='+x.n);
+    document.title=x.title+' — '+row.title;
+    let h='<h1><bdi>'+esc(x.title)+'</bdi></h1><div class="lsub">الدرس '+x.n+' من '+ROWS.length+' · '+esc(META.name)+'</div>';
+    h+='<div class="tools"><button id="fmi" aria-label="تصغير الخط">A−</button><button id="fpl" aria-label="تكبير الخط">A+</button>'
+      +(aligned.has(x.n)?'<a class="abtn" style="height:44px;padding:0 14px;border:1px solid var(--listen);color:var(--listen);border-radius:8px;display:inline-flex;align-items:center;gap:6px;text-decoration:none" href="lesson.html?s='+encodeURIComponent(row.sSlug)+'&l='+x.n+'">'+I.listen+' استمع لهذا الدرس</a>':'')
+      +'<a class="abtn" style="height:44px;padding:0 14px;border:1px solid var(--border);color:var(--dim);border-radius:8px;display:inline-flex;align-items:center;gap:6px;text-decoration:none" href="?r='+encodeURIComponent(row.id)+'">كل الدروس</a></div>';
+    h+='<div class="txt skel" id="tx" style="min-height:200px"></div>';
+    app.innerHTML=h;
+    const nav=document.getElementById('navb');nav.hidden=false;
+    nav.innerHTML=(i>0?'<a href="?r='+encodeURIComponent(row.id)+'&l='+ROWS[i-1].n+'" id="pv">→ السابق</a>':'<a class="off">→ السابق</a>')
+      +'<span class="pos">'+(i+1)+' / '+ROWS.length+'</span>'
+      +(i<ROWS.length-1?'<a href="?r='+encodeURIComponent(row.id)+'&l='+ROWS[i+1].n+'" id="nx">التالي ←</a>':'<a class="off">التالي ←</a>');
+    document.getElementById('fmi').onclick=()=>{FS=Math.max(.8,FS-.1);localStorage.setItem('trfs',FS);document.getElementById('tx').style.fontSize=FS+'rem'};
+    document.getElementById('fpl').onclick=()=>{FS=Math.min(1.9,FS+.1);localStorage.setItem('trfs',FS);document.getElementById('tx').style.fontSize=FS+'rem'};
+    const p=document.getElementById('pv'),n=document.getElementById('nx');
+    if(p)p.onclick=e=>{e.preventDefault();showLesson(i-1)};
+    if(n)n.onclick=e=>{e.preventDefault();showLesson(i+1)};
+    const tx=await jtxt(x.base+encodeURIComponent(x.file));
+    if(my!==REQ)return;  // a newer lesson was opened while loading
+    const el=document.getElementById('tx');
+    if(!el)return;
+    el.classList.remove('skel');el.style.fontSize=FS+'rem';
+    el.textContent=tx||'تعذر تحميل النص';
+    // prefetch next
+    if(i<ROWS.length-1)jtxt(ROWS[i+1].base+encodeURIComponent(ROWS[i+1].file));
+    updProg();
+  }
+  function updProg(){
+    const p=document.getElementById('pbar');if(!p)return;
+    const h=document.documentElement;
+    const f=h.scrollTop/Math.max(1,h.scrollHeight-h.clientHeight);
+    p.style.width=Math.min(100,Math.max(0,f*100))+'%';
+  }
+  addEventListener('scroll',updProg,{passive:true});
 })();
-</script></body></html>
+if('serviceWorker' in navigator)swRegister('../sw.js');
+</script>
+</body>
+</html>
