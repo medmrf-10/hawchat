@@ -1,40 +1,16 @@
-@import url("fonts/fonts.css");
 /* hawchat — ثيم des/durus v1 (مستخرج، انظر THEME.md) */
 :root{
-  /* ليلٌ مُذهَّب — design tokens v2 */
-  --bg-0:#070a12;
-  --bg-1:#0b0f1a;
-  --bg-2:#111830;
-  --gold-1:#8a6d2f;
-  --gold-2:#c9a24b;
-  --gold-3:#e8c97a;
-  --gold-4:#f5e3b3;
-  --violet:#8b7cf6;
-  --green:#46c96d;
-  --red:#e05a5a;
-  --ink-1:#f5f1e8;
-  --ink-2:#b9c0d8;
-  --ink-3:#8b93b0;
-  --line-1:#232c48;
-  --line-2:#2a3350;
-  --e-1:0 1px 2px rgba(0,0,0,.35);
-  --e-2:0 6px 22px rgba(0,0,0,.38);
-  --e-3:0 14px 44px rgba(0,0,0,.5);
-  --e-gold:0 0 0 1px rgba(201,162,75,.28),0 8px 30px rgba(201,162,75,.08);
-  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:24px; --sp-6:36px;
-  --t-fast:.15s; --t-med:.28s; --ease:cubic-bezier(.2,.7,.2,1);
-  /* legacy aliases (keep — every page already uses these) */
-  --bg:var(--bg-1);
+  --bg:#0b0f1a;
   --bgt:rgba(11,15,26,.92);
   --card:#141b2e;
   --card2:#1a2238;
-  --border:var(--line-2);
-  --txt:var(--ink-1);
-  --dim:var(--ink-3);
-  --acc:var(--gold-2);
-  --acc2:var(--gold-3);
-  --acc3:var(--violet);
-  --ok:var(--green);
+  --border:#2a3350;
+  --txt:#f5f1e8;
+  --dim:#8b93b0;
+  --acc:#c9a24b;
+  --acc2:#e8c97a;
+  --acc3:#8b7cf6;
+  --ok:#46c96d;
   --skel:#141d3a;
   --r-lg:18px;
   --r-md:12px;
@@ -44,7 +20,6 @@
 }
 
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-[hidden]{display:none!important}
 html,body{overflow-x:hidden}
 body{background:var(--bg);color:var(--txt);font-family:var(--font-ui);min-height:100dvh;line-height:1.7;
   padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
@@ -54,9 +29,9 @@ body{background:var(--bg);color:var(--txt);font-family:var(--font-ui);min-height
 .hd-in{max-width:1100px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px}
 .brand{font-family:var(--font-ar);font-weight:700;font-size:1.35rem;background:linear-gradient(135deg,var(--acc2),var(--acc));-webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap}
 .card{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg)}
-.chip{flex:0 0 auto;background:var(--card);border:1px solid var(--border);border-radius:99px;color:var(--dim);font-family:inherit;font-size:.72rem;padding:8px 14px;cursor:pointer;min-height:44px}
+.chip{flex:0 0 auto;background:var(--card);border:1px solid var(--border);border-radius:99px;color:var(--dim);font-family:inherit;font-size:.72rem;padding:8px 14px;cursor:pointer;min-height:36px}
 .chip.on{background:var(--acc);border-color:var(--acc2);color:var(--bg);font-weight:800}
-.btn{width:44px;height:44px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--card);color:var(--acc2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem}
+.btn{width:42px;height:42px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--card);color:var(--acc2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem}
 .flab{font-size:.62rem;color:var(--dim);letter-spacing:.06em;white-space:nowrap}
 @keyframes cin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .cin{animation:cin .4s both}
@@ -64,5 +39,3 @@ body{background:var(--bg);color:var(--txt);font-family:var(--font-ui);min-height
 ::-webkit-scrollbar{width:10px;height:10px}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:99px}
 ::-webkit-scrollbar-track{background:transparent}
-:focus-visible{outline:2px solid var(--acc2);outline-offset:2px;border-radius:6px}
-@media (prefers-reduced-motion: reduce){.cin{animation:none}*{scroll-behavior:auto!important}}
