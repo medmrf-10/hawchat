@@ -99,9 +99,17 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
   // aligned lessons for "استمع لهذا الدرس"
   let aligned=new Set();
   if(row.listen){const li=await j('lessons/'+encodeURIComponent(row.sSlug)+'/index.json');aligned=new Set((li&&li.align)||[])}
+  // REQ must exist before the first showLesson(): a `let` declared below the call
+  // sits in its TDZ and threw on every ?l= deep link (blank page, no text)
+  let REQ=0;
   const wantL=want;
   const idx=wantL?ROWS.findIndex(x=>x.n===wantL):-1;
-  if(idx>=0){showLesson(idx)}else{showList()}
+  if(idx>=0){showLesson(idx,false)}else{showList()}
+  addEventListener('popstate',()=>{
+    const l2=new URLSearchParams(location.search).get('l');
+    const i2=l2?ROWS.findIndex(y=>y.n===parseInt(l2,10)):-1;
+    if(i2>=0)showLesson(i2,false);else showList();
+  });
   function showList(){
     document.getElementById('navb').hidden=true;
     store.markSeen(row.id);
@@ -115,7 +123,18 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
     app.innerHTML=h;
     if(res&&res.n)document.querySelector('.lsres').style.cssText='display:flex;align-items:center;gap:10px;background:rgba(201,162,75,.08);border:1px solid var(--acc);border-radius:var(--r-md);padding:12px 14px;margin-bottom:12px;color:var(--acc2);text-decoration:none;font-size:var(--fs-sm);min-height:44px';
   }
-  let REQ=0;
+  // one resolver for display + prefetch. series-native rows: lessons copy →
+  // transcripts by vid → padded probe (3 then 2 digits, both layouts exist)
+  async function loadText(x){
+    if(SROWS){
+      const base='lessons/'+encodeURIComponent(ssl)+'/';
+      if(x.trfile){const r=await jtxt(base+encodeURIComponent(x.trfile));if(r)return r}
+      if(x.vid&&VIDF[x.vid]&&row.trSh&&row.trSr){const r=await jtxt('../transcripts/'+encodeURIComponent(row.trSh)+'/'+encodeURIComponent(row.trSr)+'/'+encodeURIComponent(VIDF[x.vid]));if(r)return r}
+      const p3=String(x.n).padStart(3,'0'),p2=String(x.n).padStart(2,'0');
+      return (await jtxt(base+p3+'.txt'))||(p2!==p3?await jtxt(base+p2+'.txt'):null)||'';
+    }
+    return x.file?await jtxt(x.base+encodeURIComponent(x.file)):'';
+  }
   async function showLesson(i,push){
     CUR=i;const x=ROWS[i];const my=++REQ;
     store.setResume(row.id,x.n);store.markSeen(row.id+':'+x.n);
@@ -139,27 +158,14 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
     const p=document.getElementById('pv'),n=document.getElementById('nx');
     if(p)p.onclick=e=>{e.preventDefault();showLesson(i-1)};
     if(n)n.onclick=e=>{e.preventDefault();showLesson(i+1)};
-    addEventListener('popstate',()=>{
-      const l2=new URLSearchParams(location.search).get('l');
-      const i2=l2?ROWS.findIndex(y=>y.n===parseInt(l2,10)):-1;
-      if(i2>=0)showLesson(i2,false);else showList();
-    },{once:true});
-    const tx=await (async()=>{
-      if(SROWS){ // series-native rows: lessons copy → transcripts by vid → padded probe
-        const pad=String(x.n).padStart(3,'0');
-        if(x.trfile)return await jtxt('lessons/'+encodeURIComponent(ssl)+'/'+encodeURIComponent(x.trfile));
-        if(x.vid&&VIDF[x.vid]&&row.trSh&&row.trSr)return await jtxt('../transcripts/'+encodeURIComponent(row.trSh)+'/'+encodeURIComponent(row.trSr)+'/'+encodeURIComponent(VIDF[x.vid]));
-        return (await jtxt('lessons/'+encodeURIComponent(ssl)+'/'+pad+'.txt'))||'';
-      }
-      return await jtxt(x.base+encodeURIComponent(x.file));
-    })();
+    const tx=await loadText(x);
     if(my!==REQ)return;  // a newer lesson was opened while loading
     const el=document.getElementById('tx');
     if(!el)return;
     el.classList.remove('skel');el.style.fontSize=FS+'rem';
     el.textContent=tx||'تعذر تحميل النص';
     // prefetch next
-    if(i<ROWS.length-1)jtxt(ROWS[i+1].base+encodeURIComponent(ROWS[i+1].file));
+    if(i<ROWS.length-1)loadText(ROWS[i+1]);
     updProg();
   }
   function updProg(){
