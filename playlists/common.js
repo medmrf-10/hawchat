@@ -29,3 +29,67 @@ function hdr(sub,crumb){
  if(crumb&&crumb.length)c='<nav class="crumb" aria-label="مسار التنقل">'+crumb.map((x,i)=>(i?' ‹ ':'')+(x.h?'<a href="'+x.h+'">'+esc(x.t)+'</a>':esc(x.t))).join('')+'</nav>';
  return c;
 }
+/* service worker: register + update toast (no auto-reload) */
+function swRegister(path){
+ if(!('serviceWorker' in navigator))return;
+ navigator.serviceWorker.register(path).then(reg=>{
+  reg.addEventListener('updatefound',()=>{
+   const w=reg.installing;if(!w)return;
+   w.addEventListener('statechange',()=>{
+    if(w.state==='installed'&&navigator.serviceWorker.controller)showUpdToast(reg);
+   });
+  });
+ }).catch(()=>{});
+}
+function showUpdToast(reg){
+ if(document.getElementById('updtoast'))return;
+ const t=document.createElement('div');t.id='updtoast';
+ t.style.cssText='position:fixed;bottom:16px;left:16px;right:16px;z-index:99;background:var(--card2,#1a2238);border:1px solid var(--acc,#c9a24b);border-radius:14px;padding:12px 16px;display:flex;align-items:center;gap:12px;font-size:.85rem;box-shadow:0 8px 30px rgba(0,0,0,.4)';
+ t.innerHTML='<span style="flex:1">نسخة جديدة من الموقع جاهزة</span><button id="upd-btn" style="min-height:40px;padding:0 16px;border:0;border-radius:10px;background:var(--acc,#c9a24b);color:var(--bg,#0b0f1a);font-weight:700;cursor:pointer">تحديث</button>';
+ document.body.appendChild(t);
+ t.querySelector('#upd-btn').onclick=()=>{
+  const w=reg&&reg.waiting;
+  if(w){w.postMessage('SKIP_WAITING')}
+  let re=false;
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!re){re=true;location.reload()}});
+ };
+}
+/* local store: favorites / progress / continue / badges (P7) */
+const store={
+ k:'hc_store_v1',
+ _d(){try{return JSON.parse(localStorage.getItem(this.k))||{}}catch(e){return{}}},
+ _w(d){try{localStorage.setItem(this.k,JSON.stringify(d))}catch(e){}},
+ get(sec,def){const d=this._d();return d[sec]!==undefined?d[sec]:def},
+ set(sec,v){const d=this._d();d[sec]=v;this._w(d)},
+ fav(rid){const d=this._d();d.fav=d.fav||{};return!!d.fav[rid]},
+ favToggle(rid){const d=this._d();d.fav=d.fav||{};d.fav[rid]=!d.fav[rid];this._w(d);return d.fav[rid]},
+ seen(key){const d=this._d();return(d.seen||{})[key]},
+ markSeen(key){const d=this._d();d.seen=d.seen||{};d.seen[key]=Date.now();this._w(d)},
+ resume(rid){const d=this._d();return(d.resume||{})[rid]},
+ resumeList(){const d=this._d();const r=d.resume||{};return Object.keys(r).map(k=>({k:k,n:r[k].n,t:r[k].t})).sort((a,b)=>b.t-a.t)},
+ favList(){const d=this._d();const f=d.fav||{};return Object.keys(f).filter(k=>f[k])},
+ seenList(){const d=this._d();return Object.keys(d.seen||{})},
+ setResume(rid,n){const d=this._d();d.resume=d.resume||{};d.resume[rid]={n:n,t:Date.now()};
+  const ks=Object.keys(d.resume);if(ks.length>500){ks.sort((a,b)=>d.resume[a].t-d.resume[b].t);delete d.resume[ks[0]]}
+  this._w(d)},
+ export(){return JSON.stringify(this._d())},
+ import_(s){try{const d=JSON.parse(s);if(typeof d==='object'){this._w(d);return true}}catch(e){}return false},
+};
+/* offline-save a row's texts into the text cache (hawchat-text-v1) */
+async function offlineRow(rowId){
+  if(!('caches' in window))return{ok:false,why:'caches'};
+  try{
+    const rows=await(await fetch('data/read/'+encodeURIComponent(rowId)+'.json')).json();
+    const c=await caches.open('hawchat-text-v1');let n=0;
+    for(const x of rows){
+      const u=x.base+encodeURIComponent(x.file);
+      if(!(await c.match(u))){const r=await fetch(u);if(r.ok){await c.put(u,r);n++}}
+    }
+    return{ok:true,n:n,total:rows.length}
+  }catch(e){return{ok:false,why:String(e)}}
+}
+function fmtDur(s){
+ s=Math.round(+s||0);if(!s)return'';
+ const h=Math.floor(s/3600),m=Math.floor(s%3600/60),ss=s%60;
+ return h?h+':'+String(m).padStart(2,'0')+':'+String(ss).padStart(2,'0'):m+':'+String(ss).padStart(2,'0');
+}
