@@ -11,6 +11,8 @@
 <link rel="manifest" href="../manifest.webmanifest">
 <link rel="icon" type="image/png" href="../icons/icon-192.png">
 <link rel="apple-touch-icon" href="../icons/favicon-180.png">
+<link rel="preload" href="../fonts/IBMPlexSansArabic-400-arabic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/Amiri-400-arabic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../theme.css?v=8">
 <link rel="stylesheet" href="common.css?v=8">
 <link rel="stylesheet" href="ui.css?v=8">
@@ -234,7 +236,7 @@ document.addEventListener('keydown',e=>{
   const _ls=d.lessons.map(x=>x.n).sort((a,b)=>a-b);
   const prev=d.lessons.find(x=>x.n===_ls.filter(n=>n<ln).pop()),
         next=d.lessons.find(x=>x.n===_ls.find(n=>n>ln));
-  let h='<div class="crumb cin"><a href="sheikh.html?s='+esc(d.sheikh_slug)+'">'+esc(d.sheikh)+'</a> ← <a href="series.html?s='+encodeURIComponent(slug)+'">'+esc(d.title)+'</a></div>';
+  let h='<div class="crumb cin"><a href="sheikh.html?s='+encodeURIComponent(d.sheikh_slug)+'">'+esc(d.sheikh)+'</a> ← <a href="series.html?s='+encodeURIComponent(slug)+'">'+esc(d.title)+'</a></div>';
   h+='<div class="hero cin"><h1>الدرس '+l.n+': '+esc(l.title)+'</h1><div class="meta">'+d.count+' درساً في السلسلة'+(l.dur?' · '+fmtDur(l.dur):'')+'</div></div>';
   if(aln){
     AL=aln;PH=RAWPH?normAlign(aln).map(w=>[w]):buildPhrases(normAlign(aln));
@@ -242,7 +244,7 @@ document.addEventListener('keydown',e=>{
   }
   const alcov=aln&&!Array.isArray(aln)?(aln.cov||0):1;
   if(aln){
-    h+='<div class="player"><iframe id="yfp" src="https://www.youtube.com/embed/'+esc(l.video)+'?enablejsapi=1&rel=0&playsinline=1&iv_load_policy=3&hl=ar&origin='+encodeURIComponent(location.origin)+'" allowfullscreen></iframe></div>';
+    h+='<div class="player"><iframe id="yfp" src="https://www.youtube-nocookie.com/embed/'+esc(l.video)+'?enablejsapi=1&rel=0&playsinline=1&iv_load_policy=3&hl=ar&origin='+encodeURIComponent(location.origin)+'" allowfullscreen></iframe></div>';
     h+='<div class="ctrl">'
       +'<button class="btn main" onclick="if(YTP){YTP.playVideo()}else{pendPlay=true;this.textContent=\'جارٍ التحميل…\'}">تشغيل</button>'
       +'<button class="btn" onclick="YTP&&YTP.pauseVideo()">إيقاف</button>'
@@ -251,7 +253,7 @@ document.addEventListener('keydown',e=>{
       +'<button class="btn" onclick="YTP&&YTP.seekTo(Math.max(0,YTP.getCurrentTime()-10),true)" title="رجوع 10ث">↺10</button>'
       +'<button class="btn" onclick="YTP&&YTP.seekTo(YTP.getCurrentTime()+10,true)" title="تقدم 10ث">10↻</button>'
       +'<select id="spd" onchange="const v=parseFloat(this.value);YTP&&YTP.setPlaybackRate(v);store.set(\'speed\',v)"><option value="0.75">×0.75</option><option value="1" selected>×1</option><option value="1.25">×1.25</option><option value="1.5">×1.5</option><option value="2">×2</option></select>'
-      +'<select id="slp" title="مؤقت النوم" onchange="SLEEP=parseInt(this.value)?setTimeout(()=>{YTP&&YTP.pauseVideo()},parseInt(this.value)*60000):null;this.title=SLEEP?\'يتوقف خلال \'+this.value+\' د\':\'مؤقت النوم\'"><option value="0">نوم —</option><option value="15">15د</option><option value="30">30د</option><option value="45">45د</option><option value="60">60د</option></select>'
+      +'<select id="slp" title="مؤقت النوم" onchange="if(SLEEP){clearTimeout(SLEEP);SLEEP=null}const m=parseInt(this.value);if(m){SLEEP=setTimeout(()=>{YTP&&YTP.pauseVideo();SLEEP=null},m*60000)}this.title=m?\'يتوقف خلال \'+this.value+\' د\':\'مؤقت النوم\'"><option value="0">نوم —</option><option value="15">15د</option><option value="30">30د</option><option value="45">45د</option><option value="60">60د</option></select>'
       +'<span class="tm" id="tm">0:00</span></div>';
     h+='<div class="stage" id="stage"><span class="wait">اضغط تشغيل — تظهر الجملة وتضيء الكلمة في وقتها</span></div>';
     h+='<div class="pos" id="pos"></div>';

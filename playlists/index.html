@@ -12,6 +12,8 @@
 <link rel="manifest" href="../manifest.webmanifest">
 <link rel="icon" type="image/png" href="../icons/icon-192.png">
 <link rel="apple-touch-icon" href="../icons/favicon-180.png">
+<link rel="preload" href="../fonts/IBMPlexSansArabic-400-arabic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/Amiri-400-arabic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../theme.css?v=8">
 <link rel="stylesheet" href="common.css?v=8">
 <link rel="stylesheet" href="ui.css?v=8">
@@ -81,7 +83,7 @@ function draw(){
   g.innerHTML='';sg.innerHTML='';sr.innerHTML='';
   let withC=[],without=[],sres=[];
   for(const slug in _stats){if(slug==='_meta')continue;const st=_stats[slug];st._slug=slug;
-    withC.push(st)}
+    (st.rows&&st.rows.length?withC:without).push(st)}
   withC.sort((a,b)=>(a.order||999)-(b.order||999));
   without.sort((a,b)=>(a.order||999)-(b.order||999));
   for(const st of withC){
