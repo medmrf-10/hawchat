@@ -53,7 +53,14 @@ if base:
     if lost:
         fails.append('%d row ids vanished with no redirect: %s' % (len(lost), sorted(lost)[:8]))
     if nrd < brd:
-        fails.append('total read %d < published %d' % (nrd, brd))
+        # merge dedup is intentional: _meta.dd records rows the lessons/
+        # transcript merge dropped because another row already serves that
+        # lesson number (identical text, wrong n). Tolerate exactly that.
+        dd = sum((new.get('_meta') or {}).get('dd', {}).values())
+        if nrd + dd < brd:
+            fails.append('total read %d < published %d (dedup allowance %d)' % (nrd, brd, dd))
+        else:
+            print('note: read -%d covered by intentional merge dedup' % (brd - nrd))
     if nwa < bwa:
         fails.append('total watch %d < published %d' % (nwa, bwa))
     bcounts = {s: len((b if isinstance(b, dict) else {}).get('rows', []))

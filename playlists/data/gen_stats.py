@@ -65,6 +65,7 @@ REDIRECTS = {  # old row id → new row id (best single match)
 
 WARN = []
 SEARCH_L = {}   # row id → {ss, L:[[n,title]]} — lazy lesson-search index (E7)
+MERGE_DD = {}   # row id → rows intentionally deduped in the lessons/transcript merge
 def warn(m): WARN.append(m); print('WARN:', m, file=sys.stderr)
 
 def dump_atomic(obj, path, sort_keys=False):
@@ -689,6 +690,9 @@ for sh in sheikhs:
                     warn('merge %s: lessons=%d vs transcripts=%d — merged per-n' % (r['sSlug'], len(lrows), len(rrows)))
                 if dropped_:
                     warn('merge %s: %d transcript rows beyond series n>%d — dropped' % (r['sSlug'], dropped_, lim_))
+                dd_ = len(lrows) + len(rrows) - len(merged)
+                if dd_ > 0:
+                    MERGE_DD[r['id']] = dd_   # dedup is intentional — gate reads this
                 rrows = sorted(merged, key=lambda x: x['n'])
         elif r.get('sSlug'):
             rrows = rows_from_lessons(r['sSlug'])
@@ -742,7 +746,7 @@ def _last_commit_ts():
         pass
     return __import__('datetime').datetime.now(__import__('datetime').timezone.utc).isoformat()
 
-out['_meta'] = {'updated': _last_commit_ts()}
+out['_meta'] = {'updated': _last_commit_ts(), 'dd': MERGE_DD}
 
 # degenerate-output guard: never publish stats that contradict the disk.
 tot_read = sum(v['read'] for k, v in out.items() if k != '_meta')
