@@ -673,9 +673,10 @@
       "barahin-sharh-01_AlAmri.txt",
       "barahin-sharh-02_AlAmri.txt",
       "barahin-sharh-03_AlAmri.txt",
-      "barahin-sharh-04_AlAmri.txt"
+      "barahin-sharh-04_AlAmri.txt",
+      "barahin-sharh-05_AlAmri.txt"
      ],
-     "n": 4
+     "n": 5
     },
     {
      "slug": "hisam",
@@ -803,9 +804,11 @@
       "barahin-muqtatafat-11_AlAmri.txt",
       "barahin-muqtatafat-12_AlAmri.txt",
       "barahin-muqtatafat-13_AlAmri.txt",
-      "barahin-muqtatafat-14_AlAmri.txt"
+      "barahin-muqtatafat-14_AlAmri.txt",
+      "barahin-muqtatafat-16_AlAmri.txt",
+      "barahin-muqtatafat-17_AlAmri.txt"
      ],
-     "n": 14
+     "n": 16
     }
    ],
    "slug": "ali-mahmoud-alomari"

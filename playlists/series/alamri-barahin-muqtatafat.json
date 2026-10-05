@@ -4,7 +4,7 @@
  "sheikh_slug": "ali-mahmoud-alomari",
  "title": "مقتطفات من دروس أم البراهين",
  "playlist": "https://www.youtube.com/playlist?list=PLa3XSU7qw_YlBZIplsv2MSTfwOO-Qa82r",
- "count": 14,
+ "count": 16,
  "lessons": [
   {
    "n": 1,
@@ -117,6 +117,22 @@
    "align": false,
    "chars": 2213,
    "dur": "4:10"
+  },
+  {
+   "n": 16,
+   "title": "عبارات بعض الصوفية التي ظاهرها الحلول",
+   "video": "A4z5bdlY7No",
+   "align": false,
+   "chars": 1602,
+   "dur": "3:01"
+  },
+  {
+   "n": 17,
+   "title": "لماذا الصعوبة في كتب علم الكلام",
+   "video": "jmtIrE4ULE8",
+   "align": false,
+   "chars": 1852,
+   "dur": "2:59"
   }
  ]
 }

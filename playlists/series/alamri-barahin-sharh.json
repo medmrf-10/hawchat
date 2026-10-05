@@ -4,7 +4,7 @@
  "sheikh_slug": "ali-mahmoud-alomari",
  "title": "شرح كتاب شرح أم البراهين للإمام السنوسي",
  "playlist": "https://www.youtube.com/playlist?list=PLa3XSU7qw_YkCjDauyIudB0LbP_F8xHkB",
- "count": 4,
+ "count": 5,
  "lessons": [
   {
    "n": 1,
@@ -37,6 +37,14 @@
    "align": false,
    "chars": 48624,
    "dur": "95:41"
+  },
+  {
+   "n": 5,
+   "title": "الدَّرس الخامس شرح أم البراهين للشَّيخ أبي عبد الله السَّنوسي رضي الله عنه",
+   "video": "gze5UiPUaGs",
+   "align": false,
+   "chars": 50027,
+   "dur": "91:53"
   }
  ]
 }
