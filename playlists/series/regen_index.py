@@ -28,3 +28,10 @@ idx['series'] = list(by_slug.values())
 json.dump(idx, open('index.json', 'w'), ensure_ascii=False, indent=1)
 for s in idx['series']:
     print(s['slug'], s['count'], s['aligned'])
+
+# keep sheikh_stats.json in sync — single truth for cards + sheikh pages
+import subprocess, os
+try:
+    subprocess.run(['python3', os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'data', 'gen_stats.py')], check=False)
+except Exception as e:
+    print('stats regen skipped:', e)

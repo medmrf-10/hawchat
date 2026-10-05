@@ -42,6 +42,10 @@
 .sh .pb .px{background:var(--err,#e05a5a)}
 .sh .pb .pw{background:#6b7280}
 .sh .cnt{font-size:.62rem;color:var(--dim);margin-top:4px;line-height:1.3}
+.sh .icrow{display:flex;justify-content:center;gap:16px;margin-top:7px}
+.sh .ic{display:flex;flex-direction:column;align-items:center;line-height:1}
+.sh .ic i{font-style:normal;font-size:1.35rem}
+.sh .ic b{font-size:.95rem;font-weight:700;color:var(--txt);margin-top:2px}
 .sh.cin{animation:cin .35s both}
 .sub{color:var(--dim);font-size:.8rem}
 #kpis{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 4px}
@@ -67,25 +71,25 @@
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 async function j(u){try{const r=await fetch(u);return r.ok?await r.json():null}catch(e){return null}}
 function normalize(s){return (s||'').replace(/[أإآ]/g,'ا').replace(/\s+/g,' ').trim()}
-let _groups=[],_slugs={},_photos={},flt='',_read={},_watch={},_readPub={},onlyContent=false;
+let _groups=[],_slugs={},_photos={},flt='',_stats={},onlyContent=false;
 function photo(name){return _photos[name]||_photos[normalize(name)]}
 function slugOf(name){return _slugs[name]||_slugs[normalize(name)]||normalize(name)}
 function render(){
   const g=document.getElementById('groups');g.innerHTML='';let i=0;
   let names=[];
   for(const gr of _groups)for(const name of gr.names)names.push(name);
-  if(onlyContent)names=names.filter(n=>{const s=slugOf(n);return ((_read[n]||0)+(_readPub[s]||0)+(_watch[s]||0))>0})
-    .sort((a,b)=>{const sa=slugOf(a),sb=slugOf(b);
-      return ((_read[b]||0)+(_readPub[sb]||0)+(_watch[sb]||0))-((_read[a]||0)+(_readPub[sa]||0)+(_watch[sa]||0))});
+  if(onlyContent)names=names.filter(n=>{const st=_stats[slugOf(n)];return st&&((st.read||0)+(st.watch||0))>0})
+    .sort((a,b)=>{const sa=_stats[slugOf(a)]||{},sb=_stats[slugOf(b)]||{};
+      return ((sb.read||0)+(sb.watch||0))-((sa.read||0)+(sa.watch||0))});
   for(const name of names){
     if(flt&&!normalize(name).includes(flt))continue;
     const a=document.createElement('a');
     a.className='sh cin';a.style.animationDelay=(Math.min(i++,30)*25)+'ms';
     a.href='sheikh.html?s='+encodeURIComponent(slugOf(name));
     const p=photo(name),init=name.replace(/^ال/,'').trim()[0]||'؟';
-    const slug=slugOf(name),nw=_watch[slug]||0,nr=(_read[name]||0)+(_readPub[slug]||0);
+    const st=_stats[slugOf(name)]||{},nr=st.read||0,nw=st.watch||0;
     a.innerHTML='<div class="ph">'+(p?'<img src="'+p+'" alt="" loading="lazy" onerror="this.remove()">':'')+'<span>'+init+'</span></div><div class="nm">'+esc(name)+'</div>'
-      +((nr||nw)?'<div class="cnt">'+(nr?'📖 '+nr:'')+(nr&&nw?' · ':'')+(nw?'🎬 '+nw:'')+'</div>':'');
+      +((nr||nw)?'<div class="icrow">'+(nr?'<span class="ic"><i>📖</i><b>'+nr+'</b></span>':'')+(nw?'<span class="ic"><i>🎬</i><b>'+nw+'</b></span>':'')+'</div>':'');
     g.appendChild(a);
   }
   if(!i)g.innerHTML='<p class="sub">لا نتائج.</p>';
@@ -94,32 +98,15 @@ document.getElementById('flt').addEventListener('input',e=>{flt=normalize(e.targ
 document.getElementById('contF').addEventListener('click',e=>{onlyContent=!onlyContent;e.target.style.background=onlyContent?'var(--acc)':'var(--card)';e.target.style.color=onlyContent?'#0b0f1a':'var(--txt)';render()});
 (async()=>{
   const bust='?v='+Date.now();
-  const [data,photos,meta,pub,mut,tr]=await Promise.all([j('shuyukh.json'),j('photos.json'),j('data/sheikhs.json'),j('series/index.json'+bust),j('https://medmrf-10.github.io/des/mutalaa/data/manifest.json'+bust),j('../transcripts/index.json'+bust)]);
-  _photos=photos||{};
-  const name2disp={};
+  const [data,photos,meta,stats]=await Promise.all([j('shuyukh.json'),j('photos.json'),j('data/sheikhs.json'),j('data/sheikh_stats.json'+bust)]);
+  _photos=photos||{};_stats=stats||{};
   for(const s of ((meta&&meta.sheikhs)||[])){
-    const d=s.name_display||s.name;
-    for(const n of [s.name_display,s.name,...(s.aliases||[])]){_slugs[n]=s.slug;_slugs[normalize(n)]=s.slug;name2disp[normalize(n)]=d}
+    for(const n of [s.name_display,s.name,...(s.aliases||[])]){_slugs[n]=s.slug;_slugs[normalize(n)]=s.slug}
   }
-  _readPub={};
-  for(const s of ((pub&&pub.series)||[])){
-    if(!s.sheikh_slug)continue;
-    if((s.aligned||0)>0)_watch[s.sheikh_slug]=(_watch[s.sheikh_slug]||0)+1;
-    if((s.transcribed||0)>0)_readPub[s.sheikh_slug]=(_readPub[s.sheikh_slug]||0)+1;
-  }
-  for(const m of (Array.isArray(mut)?mut:(mut&&mut.series)||[])){
-    if(!(m.files||[]).length)continue;
-    const d=name2disp[normalize(m.sheikh||'')];
-    if(d)_read[d]=(_read[d]||0)+1;
-  }
-  for(const [k,v] of Object.entries((tr&&tr.sheikhs)||{})){
-    const sl=v.slug||k;
-    _readPub[sl]=(_readPub[sl]||0)+(v.series||[]).length;
-  }
-  const tR=Object.values(_read).reduce((a,b)=>a+b,0)+Object.values(_readPub).reduce((a,b)=>a+b,0),tW=Object.values(_watch).reduce((a,b)=>a+b,0);
+  let tR=0,tW=0;for(const v of Object.values(_stats)){tR+=v.read||0;tW+=v.watch||0}
   document.getElementById('kpis').innerHTML=
-    '<div class="k"><b>'+tR+'</b><span>سلسلة يُقرأ</span></div>'
-    +'<div class="k"><b>'+tW+'</b><span>سلسلة يُسمع</span></div>';
+    '<div class="k"><b>'+tR+'</b><span>درساً يُقرأ</span></div>'
+    +'<div class="k"><b>'+tW+'</b><span>درساً يُسمع</span></div>';
   if(!data||!data.groups){document.getElementById('groups').innerHTML='<p class="sub">تعذر تحميل القائمة.</p>';return}
   _groups=data.groups;
   let total=0;for(const g of _groups)total+=g.names.length;

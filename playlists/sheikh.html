@@ -60,6 +60,12 @@
 .ser .cnt{font-size:.66rem;color:var(--dim);white-space:nowrap}
 .cnt b{font-size:.78rem;color:var(--txt)}
 .cnt .act{color:var(--acc3)}.cnt .bad{color:#c0392b}.cnt .don{color:var(--acc)}
+.ser .icrow{display:flex;gap:14px;align-items:center;white-space:nowrap}
+.ser .ic{display:flex;flex-direction:column;align-items:center;line-height:1}
+.ser .ic i{font-style:normal;font-size:1.2rem;color:var(--acc2)}
+.ser .ic i svg{width:1.2rem;height:1.2rem;display:block}
+.ser .ic b{font-size:.95rem;font-weight:700;color:var(--txt);margin-top:2px}
+.ser .ic .ok{font-style:normal;color:#3ecf8e;font-size:.75rem;margin-top:1px}
 .btn{min-width:30px;height:30px;border-radius:var(--r-sm);border:1px solid var(--border);background:var(--card);color:var(--txt);font-size:.8rem;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0 7px;transition:border-color .15s;text-decoration:none}
 .btn:hover{border-color:var(--acc)}
 .btn.off{border-color:#c0392b;color:#c0392b}
@@ -75,7 +81,7 @@
 #toast.show{opacity:1}
 #toast.err{border-color:#c0392b;color:#ffb0a0}
 .btn svg{width:13px;height:13px;display:block}
-@media(max-width:640px){.ser{flex-wrap:wrap}.ser .nm{flex:1 1 100%}}
+@media(max-width:640px){.ser{flex-wrap:wrap}.ser .nm{flex:1 1 100%}.ser .icrow{gap:20px}}
 </style>
 </head>
 <body>
@@ -119,36 +125,38 @@ const ICON={
 
 const FILT={all:'الكل',listen:'يُسمع',read:'يُقرأ'};
 function rowMatch(r){
-  if(fv==='listen')return !!r.watch;
-  if(fv==='read')return !!(r.read||r.watch);
+  if(fv==='listen')return r.wan>0;
+  if(fv==='read')return (r.rdn>0||r.wan>0);
   return true;
 }
+function rLink(r){
+  if(r.kind==='mut'&&r.mutId!=null)return `tr.html?id=${encodeURIComponent(r.mutId)}`;
+  if(r.kind==='tr')return `tr.html?sh=${encodeURIComponent(r.trSh)}&s=${encodeURIComponent(r.trSr)}`;
+  if(r.sSlug)return `series.html?s=${encodeURIComponent(r.sSlug)}`;
+  if(r.trSh)return `tr.html?sh=${encodeURIComponent(r.trSh)}&s=${encodeURIComponent(r.trSr)}`;
+  return null;
+}
+const CHK='<svg viewBox="0 0 16 16" fill="currentColor" style="width:.8em;height:.8em"><path d="M13.8 3.2 6.2 10.8 2.6 7.2l-1.4 1.4 5 5 9-9z"/></svg>';
 function renderSeries(){
   const w=document.getElementById('srows');if(!w)return;
   w.innerHTML='';
   const rows=_rows.filter(rowMatch).sort((a,b)=>{
-    const wa=a.watch?0:1,wb=b.watch?0:1;
+    const wa=a.wan>0?0:1,wb=b.wan>0?0:1;
     if(wa!==wb)return wa-wb;
-    return a.title.localeCompare(b.title,'ar');
+    return (a.title||'').localeCompare(b.title||'','ar');
   });
   for(const r of rows){
     const d=document.createElement('div');d.className='ser';
+    const rdone=r.rtt>0&&r.rdn>=r.rtt, wdone=r.wtt>0&&r.wan>=r.wtt;
+    let nums='';
+    if(r.rdn>0)nums+=`<span class="ic"><i>${ICON.book}</i><b>${r.rdn}</b>${rdone?'<em class="ok">'+CHK+'</em>':''}</span>`;
+    if(r.wan>0)nums+=`<span class="ic"><i>${ICON.play}</i><b>${r.wan}</b>${wdone?'<em class="ok">'+CHK+'</em>':''}</span>`;
     let links='';
-    if(r.watch)links+=`<a class="btn play" href="series.html?s=${encodeURIComponent(r.watch.slug)}" title="استمع/تصفح الدروس">${ICON.play}</a>`;
-    if(r.read){
-      if(r.read.id)links+=`<a class="btn read" href="tr.html?id=${encodeURIComponent(r.read.id)}" title="اقرأ التفريغ">${ICON.book}</a>`;
-      else if(r.read.tr)links+=`<a class="btn read" href="tr.html?sh=${encodeURIComponent(r.read.sh)}&s=${encodeURIComponent(r.read.sr)}" title="اقرأ التفريغ">${ICON.book}</a>`;
-      else if(r.read.slug)links+=`<a class="btn read" href="series.html?s=${encodeURIComponent(r.read.slug)}" title="اقرأ التفريغ">${ICON.book}</a>`;
-    }
-    const cc=[];
-    if(r.read){
-      const dn=r.read.done||(r.read.files?r.read.files.length:0)||r.read.transcribed||r.read.n||0;
-      const tt=r.read.total||(r.read.files?r.read.files.length:0)||r.read.count||dn;
-      cc.push(`<b class="don">${dn}</b>/${tt} مفرّغ`);
-    }
-    if(r.watch)cc.push(`<b class="act">${r.watch.aligned}</b>/${r.watch.count||r.watch.aligned} مشاهد`);
+    const rl=rLink(r);
+    if(r.wan>0&&r.sSlug)links+=`<a class="btn play" href="series.html?s=${encodeURIComponent(r.sSlug)}" title="استمع/تصفح الدروس">${ICON.play}</a>`;
+    if(rl)links+=`<a class="btn read" href="${rl}" title="اقرأ التفريغ">${ICON.book}</a>`;
     d.innerHTML=`<span class="nm">${esc(r.title)}</span>
-      <span class="cnt">${cc.join(' · ')}</span>${links}`;
+      <span class="icrow">${nums}</span>${links}`;
     w.appendChild(d);
   }
   if(!rows.length)w.innerHTML='<div class="empty">لا سلاسل في هذا القسم.</div>';
@@ -160,9 +168,8 @@ document.addEventListener('click',e=>{
 (async()=>{
   const slug=new URLSearchParams(location.search).get('s')||'';
   const bust='?v='+Date.now();
-  const [data,photos,chs,sidx,mut,tr]=await Promise.all([
-    j('data/sheikhs.json'),j('photos.json'),j('channels.json'),j('series/index.json'+bust),
-    j(MUT+'data/manifest.json'+bust),j('../transcripts/index.json'+bust)]);
+  const [data,photos,chs,stats]=await Promise.all([
+    j('data/sheikhs.json'),j('photos.json'),j('channels.json'),j('data/sheikh_stats.json'+bust)]);
   const sh=data&&data.sheikhs?data.sheikhs.find(x=>x.slug===slug):null;
   const B=document.getElementById('body');
   if(!sh){B.innerHTML='<div class="empty">لم يُعثر على الشيخ المطلوب. <a href="." style="color:var(--acc2)">عودة للقائمة</a></div>';return}
@@ -171,36 +178,15 @@ document.addEventListener('click',e=>{
   const nset=new Set([sh.name_display,sh.name,...(sh.aliases||[])].flatMap(x=>[x,norm(x)]));
   const photo=(photos&&(photos[sh.name_display]||photos[sh.name]||photos[norm(sh.name_display)]))||sh.photo;
   const init=(sh.name_display||sh.name).replace(/^ال/,'').trim()[0]||'؟';
-  // two states only: readable = published transcript (mutalaa files or lessons/<slug>/txt)
-  // watchable = aligned>0 (a subset of readable)
-  const pub=(sidx?sidx.series.filter(x=>x.sheikh_slug===sh.slug&&((x.aligned||0)>0||(x.transcribed||0)>0)):[]);
-  const muts=(mut&&Array.isArray(mut)?mut:(mut&&mut.series)||[])
-    .filter(m=>(nset.has(m.sheikh)||nset.has(norm(m.sheikh||'')))&&((m.done||0)>0||(m.files||[]).length>0));
-  _rows=muts.map(m=>({title:m.name||m.title||('#'+m.id),read:m,watch:null}));
-  for(const s of pub){
-    const st=norm(s.title);let hit=null;
-    for(const r of _rows){const rt=norm(r.title);if(rt&&(rt.includes(st)||st.includes(rt))){hit=r;break}}
-    if(!hit){hit={title:s.title,read:null,watch:null};_rows.push(hit)}
-    if((s.aligned||0)>0)hit.watch=s;
-    if((s.transcribed||0)>0&&!hit.read)hit.read=s;
-  }
-  // raw transcript pushes (task pipelines uploading txt continuously)
-  for(const [k,v] of Object.entries((tr&&tr.sheikhs)||{})){
-    if((v.slug||k)!==sh.slug)continue;
-    for(const sr of (v.series||[])){
-      const st=norm(sr.title);let hit=null;
-      for(const r of _rows){const rt=norm(r.title);if(rt&&(rt.includes(st)||st.includes(rt))){hit=r;break}}
-      if(!hit){hit={title:sr.title,read:null,watch:null};_rows.push(hit)}
-      if(!hit.read)hit.read={tr:true,sh:k,sr:sr.slug,n:sr.n,total:sr.total};
-    }
-  }
-  _rows.sort((a,b)=>a.title.localeCompare(b.title,'ar'));
-  const nRead=_rows.filter(r=>r.read).length,nWatch=_rows.filter(r=>r.watch).length;
+  // two states only — same truth file the index cards read
+  const st=(stats&&stats[slug])||{rows:[],read:0,watch:0,nRead:0,nWatch:0};
+  _rows=st.rows||[];
+  const nRead=st.nRead||0,nWatch=st.nWatch||0;
   let h='<div class="hero cin"><div class="ph">'+(photo?'<img src="'+esc(photo)+'" alt="" onerror="this.remove()">':'')+'<span>'+esc(init)+'</span></div>'
     +'<div style="flex:1"><h1>'+esc(sh.name_display)+'</h1>'
     +(sh.name!==sh.name_display?'<div class="als">'+esc(sh.name)+'</div>':'')
     +((sh.aliases&&sh.aliases.length)?'<div class="als">'+sh.aliases.map(esc).join('، ')+'</div>':'')
-    +'<span class="grp">'+_rows.length+' سلسلة · '+nRead+' يُقرأ · '+nWatch+' يُسمع</span>'
+    +'<span class="grp">'+_rows.length+' سلسلة · '+(st.read||0)+' يُقرأ · '+(st.watch||0)+' يُسمع</span>'
     +'</div></div>';
   const YT='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.85-.46-5.58a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.15 1 12 1 12s0 3.85.46 5.58a2.78 2.78 0 0 0 1.94 2c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.85 23 12 23 12zM9.75 15.5v-7l6 3.5-6 3.5-6-3.5z"/></svg>';
   const VCHK='<span class="vbadge"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 9.2 4.6l-4.1-.2-.2 4.1L2.4 11.3l2.5 2.8.2 4.1 4.1-.2L12 20.6l2.8-2.5 4.1.2.2-4.1 4.1.2z"/><path d="M10.6 15.2 7.6 12.2l1.3-1.3 1.7 1.7 4.5-4.5 1.3 1.3z" fill="#0b0f1a"/></svg></span>';
