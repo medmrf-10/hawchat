@@ -124,7 +124,7 @@ const ic=id=>'<svg class="i"><use href="icons.svg#'+id+'"/></svg>';
         '<a class="ls cin" href="'+href+'"><span class="num">'+nn+'</span>'
         +'<span class="t"><bdi>'+esc(title)+'</bdi>'+(l.dur?'<small>'+esc(fmtDur(l.dur))+'</small>':'')+'</span>'
         +'<span class="bd">'+(rtxt.has(nn)?'<span class="ic-read" title="نص">'+ic('i-read')+'</span>':'')
-        +(aln.has(nn)?'<span class="ic-listen" title="محاذاة">'+ic('i-listen')+'</span>':'')+'</span></a>');
+        +(canL?'<span class="ic-listen" title="يُسمع">'+ic('i-listen')+'</span>':'')+'</span></a>');
     }
     if(!n)lst.innerHTML='<p class="empty">لا نتائج.</p>';
   };

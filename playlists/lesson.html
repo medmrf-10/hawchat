@@ -151,13 +151,14 @@ function mountPlayer(vid){
   setTimeout(()=>{if(!ready){const s=document.getElementById('stage');if(s)s.innerHTML='<span class="wait">المشغّل يتأخر — <a href="https://youtu.be/'+vid+'" target="_blank" rel="noopener" style="color:var(--acc2)">افتح الدرس على يوتيوب مباشرة</a></span>'}},8000);
   window.onYouTubeIframeAPIReady=()=>{
     YTP=new YT.Player('yfp',{events:{
-      onReady:()=>{ready=true;timer=setInterval(tick,150);
+      onReady:()=>{ready=true;
         const b=document.querySelector('.btn.main');if(b)b.textContent='تشغيل';
         const sp=store.get('speed');if(sp&&sp!==1&&YTP.setPlaybackRate){YTP.setPlaybackRate(sp);const sel=document.getElementById('spd');if(sel)sel.value=String(sp)}
         const rp=T0||resumePos();if(rp>5)YTP.seekTo(rp,true);
         if(pendPlay){YTP.playVideo();pendPlay=false}},
       onStateChange:(e)=>{const b=document.querySelector('.btn.main');if(b)b.textContent='تشغيل';
-        if(e.data===1)wakeLock(true);else wakeLock(false);
+        if(e.data===1){wakeLock(true);if(!timer)timer=setInterval(tick,150)}
+        else{wakeLock(false);if(e.data!==3&&timer){clearInterval(timer);timer=null}}
         if(e.data===0&&AUTO_NEXT){const nx=document.getElementById('go-next');if(nx)nx.click()}
         if(e.data===0){const d=store._d();if(d.resume&&d.resume[RESK]){delete d.resume[RESK];store._w(d)}}}}});
   };
@@ -182,7 +183,10 @@ function wakeLock(on){
   if(on){navigator.wakeLock.request('screen').then(w=>WLOCK=w).catch(()=>{})}
   else if(WLOCK){WLOCK.release().catch(()=>{});WLOCK=null}
 }
-document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&YTP&&YTP.getPlayerState&&YTP.getPlayerState()===1)wakeLock(true)});
+document.addEventListener('visibilitychange',()=>{
+  if(document.visibilityState==='visible'&&YTP&&YTP.getPlayerState&&YTP.getPlayerState()===1){wakeLock(true);if(!timer)timer=setInterval(tick,150)}
+  else if(document.visibilityState!=='visible'&&timer){clearInterval(timer);timer=null}
+});
 document.addEventListener('click',e=>{
   const sp=e.target.closest('.w');
   if(sp&&YTP){YTP.seekTo(parseFloat(sp.dataset.s),true);YTP.playVideo()}

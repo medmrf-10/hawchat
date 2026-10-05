@@ -128,11 +128,20 @@ function drawCont(){
   const rs=store.resumeList();if(!rs.length)return;
   const items=[];
   for(const it of rs.slice(0,4)){
-    const rid=it.k;let found=null;
-    for(const slug in _stats){if(slug==='_meta')continue;
-      const r=(_stats[slug].rows||[]).find(r=>r.id===rid);
-      if(r)found={r,st:_stats[slug]}}
-    if(found)items.push({h:'tr.html?r='+encodeURIComponent(rid)+'&l='+it.n,t:found.r.title,sub:found.st.name+' — الدرس '+it.n,rd:true});
+    // keys are 'lspos:<series slug>:<lesson n>' saved by lesson.html
+    const m=it.k.match(/^lspos:(.+):(\d+)$/);
+    let found=null,sl=null,ln=it.n;
+    if(m){sl=m[1];ln=parseInt(m[2],10)||it.n;
+      for(const slug in _stats){if(slug==='_meta')continue;
+        const r=(_stats[slug].rows||[]).find(r=>r.sSlug===sl);
+        if(r){found={r,st:_stats[slug]};break}}
+    }else{
+      for(const slug in _stats){if(slug==='_meta')continue;
+        const r=(_stats[slug].rows||[]).find(r=>r.id===it.k);
+        if(r){found={r,st:_stats[slug]};break}}
+    }
+    if(found)items.push({h:sl?'lesson.html?s='+encodeURIComponent(sl)+'&l='+ln+(it.n?'&t='+it.n:''):'tr.html?r='+encodeURIComponent(it.k)+'&l='+ln,
+      t:found.r.title,sub:found.st.name+' — الدرس '+ln,rd:!sl});
   }
   el.innerHTML=items.map(x=>'<a class="u-cont cin" href="'+esc(x.h)+'">'+ic(x.rd?'i-read':'i-listen')
     +'<span class="tt">'+esc(x.t)+'<small>'+esc(x.sub)+'</small></span><span class="go">تابِع ←</span></a>').join('');
