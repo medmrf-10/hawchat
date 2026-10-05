@@ -29,9 +29,9 @@ body{background:var(--bg);color:var(--txt);font-family:var(--font-ui);min-height
 .hd-in{max-width:1100px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px}
 .brand{font-family:var(--font-ar);font-weight:700;font-size:1.35rem;background:linear-gradient(135deg,var(--acc2),var(--acc));-webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap}
 .card{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg)}
-.chip{flex:0 0 auto;background:var(--card);border:1px solid var(--border);border-radius:99px;color:var(--dim);font-family:inherit;font-size:.72rem;padding:8px 14px;cursor:pointer;min-height:44px}
+.chip{flex:0 0 auto;background:var(--card);border:1px solid var(--border);border-radius:99px;color:var(--dim);font-family:inherit;font-size:.72rem;padding:8px 14px;cursor:pointer;min-height:36px}
 .chip.on{background:var(--acc);border-color:var(--acc2);color:var(--bg);font-weight:800}
-.btn{width:44px;height:44px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--card);color:var(--acc2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem}
+.btn{width:42px;height:42px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--card);color:var(--acc2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem}
 .flab{font-size:.62rem;color:var(--dim);letter-spacing:.06em;white-space:nowrap}
 @keyframes cin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .cin{animation:cin .4s both}
@@ -39,5 +39,3 @@ body{background:var(--bg);color:var(--txt);font-family:var(--font-ui);min-height
 ::-webkit-scrollbar{width:10px;height:10px}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:99px}
 ::-webkit-scrollbar-track{background:transparent}
-:focus-visible{outline:2px solid var(--acc2);outline-offset:2px;border-radius:6px}
-@media (prefers-reduced-motion: reduce){.cin{animation:none}*{scroll-behavior:auto!important}}

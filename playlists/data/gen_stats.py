@@ -49,11 +49,6 @@ def clean_title(t):
     t = re.sub(r'\s+', ' ', t).strip(' -–—|/\\')
     return OVR.get(t, t)
 
-# ── YouTube ground truth titles (video id / playlist id → title) ──
-YTT = J(os.path.join(BASE, 'yt_titles.json')) or {}
-YTV = YTT.get('v') or {}
-YTP = YTT.get('p') or {}
-
 # ── lesson-list extraction from a filename list ───────────────
 def rows_from_files(files, base):
     """[{n,title,file,base}] — n from NNN[_-] prefix else position."""
@@ -62,13 +57,9 @@ def rows_from_files(files, base):
         m = re.match(r'^(\d+)[_\- ]', os.path.basename(f))
         n = int(m.group(1)) if m else i + 1
         t = os.path.basename(f)
-        mv = re.match(r'^NA_([\w\-]{6,})\.txt$', t)
-        if mv and mv.group(1) in YTV:
-            t = YTV[mv.group(1)]
-        else:
-            t = re.sub(r'\.txt$', '', t)
-            t = re.sub(r'^\d+[_\- ]*\d*[_\- ]*', '', t)
-            t = re.split(r'[⧸｜]', t)[0]
+        t = re.sub(r'\.txt$', '', t)
+        t = re.sub(r'^\d+[_\- ]*\d*[_\- ]*', '', t)
+        t = re.split(r'[⧸｜]', t)[0]
         out.append({'n': n, 'title': clean_title(t) or f'الدرس {n}', 'file': f, 'base': base})
     return out
 
@@ -77,13 +68,8 @@ def rows_from_lessons(slug):
     + titles from series/<slug>.json."""
     li = J(os.path.join(PL, 'lessons', slug, 'index.json')) or {}
     nums = li.get('txt') or []
-    d = os.path.join(PL, 'lessons', slug)
-    if not nums and os.path.isdir(d):
-        nums = sorted(int(m.group(1)) for fn in os.listdir(d)
-                      for m in [re.match(r'^(\d+)\.txt$', fn)] if m)
     sd = J(os.path.join(PL, 'series', slug + '.json')) or {}
     titles = {l.get('n'): l.get('title') for l in sd.get('lessons', [])}
-    vids = {l.get('n'): l.get('video') for l in sd.get('lessons', [])}
     d = os.path.join(PL, 'lessons', slug)
     out = []
     for n in nums:
@@ -94,7 +80,7 @@ def rows_from_lessons(slug):
                 fn = cand; break
         if not fn:
             fn = '%03d.txt' % n
-        ttl = YTV.get(vids.get(n) or '') or titles.get(n) or f'الدرس {n}'
+        ttl = titles.get(n) or f'الدرس {n}'
         out.append({'n': n, 'title': clean_title(re.sub(r'^.*?\|\s*', '', ttl)),
                     'file': fn, 'base': 'lessons/%s/' % slug})
     return out
@@ -136,35 +122,19 @@ for sh in sheikhs:
             nset.add(x); nset.add(norm(x))
     rows = []
 
-    # identity: a series is its KEY (mutId / sSlug / trSh+trSr), never its title.
+    def hit(title):
+        st = norm(title)
+        for r in rows:
+            rt = norm(r['title'])
+            if rt and (rt in st or st in rt):
+                return r
+        return None
+
     def newrow(title):
         r = {'title': clean_title(title), 'rdn': 0, 'rtt': 0, 'wan': 0, 'wtt': 0,
              'kind': None}
         rows.append(r)
         return r
-
-    def srow(s_slug):
-        for r in rows:
-            if r.get('sSlug') == s_slug:
-                return r
-        return None
-
-    def trrow(k, sr_slug):
-        for r in rows:
-            if r.get('trSh') == k and r.get('trSr') == sr_slug:
-                return r
-        # same series known under lessons slug? (tr 'tawba' == s 'bouti-tawba')
-        for r in rows:
-            sl = r.get('sSlug')
-            if sl and (sl == sr_slug or sl.endswith('-' + sr_slug)):
-                return r
-        return None
-
-    def mutrow(m_id):
-        for r in rows:
-            if r.get('mutId') == m_id:
-                return r
-        return None
 
     # ── mutalaa manifest (readable) ──
     for m in muts:
@@ -172,13 +142,13 @@ for sh in sheikhs:
             continue
         if (m.get('done') or 0) <= 0 and not m.get('files'):
             continue
-        r = mutrow(m.get('id')) or newrow(m.get('name') or m.get('title') or ('#' + str(m.get('id'))))
+        r = hit(m.get('name') or m.get('title') or '') or newrow(m.get('name') or m.get('title') or ('#' + str(m.get('id'))))
         n = m.get('done') or len(m.get('files') or [])
         r['rdn'] = max(r['rdn'], n)
         r['rtt'] = max(r['rtt'], m.get('total') or 0, n)
         if not r['kind']:
-            r['kind'] = 'mut'
-        r['mutId'] = m.get('id')
+            r['kind'] = 'mut'; r['mutId'] = m.get('id')
+        r['trSh'] = r.get('trSh'); r.setdefault('mutId', m.get('id'))
         r['_mut'] = m  # stash for read-rows
 
     # ── series/index.json (aligned + transcribed) ──
@@ -187,13 +157,7 @@ for sh in sheikhs:
             continue
         if (s.get('aligned') or 0) <= 0 and (s.get('transcribed') or 0) <= 0:
             continue
-        r = srow(s['slug']) or newrow(s.get('title'))
-        if s['slug'] not in r.setdefault('_plchk', []):
-            r['_plchk'].append(s['slug'])
-            _sd = J(os.path.join(PL, 'series', s['slug'] + '.json')) or {}
-            _pl = (_sd.get('playlist') or '').split('list=')[-1].split('&')[0]
-            if _pl and YTP.get(_pl):
-                r['title'] = clean_title(YTP[_pl])
+        r = hit(s.get('title') or '') or newrow(s.get('title'))
         if (s.get('aligned') or 0) > 0:
             r['wan'] = max(r['wan'], s['aligned'])
             r['wtt'] = max(r['wtt'], s.get('count') or 0, s['aligned'])
@@ -210,31 +174,13 @@ for sh in sheikhs:
         if (v.get('slug') or k) != slug:
             continue
         for sr in (v.get('series') or []):
-            r = trrow(k, sr.get('slug')) or newrow(sr.get('title'))
+            r = hit(sr.get('title') or '') or newrow(sr.get('title'))
             n = sr.get('n') or len(sr.get('files') or [])
             r['rdn'] = max(r['rdn'], n)
             r['rtt'] = max(r['rtt'], sr.get('total') or 0, n)
             if not r['kind']:
                 r['kind'] = 'tr'
             r['trSh'] = k; r['trSr'] = sr.get('slug')
-
-    # ── fold exact-title duplicates: mut row == s row (same series, two sources) ──
-    seen = {}
-    keep = []
-    for r in rows:
-        if r.get('mutId') and not r.get('sSlug'):
-            t = norm(r['title'])
-            tgt = None
-            for r2 in rows:
-                if r2.get('sSlug') and norm(r2['title']) == t:
-                    tgt = r2; break
-            if tgt:
-                tgt['rdn'] = max(tgt['rdn'], r['rdn'])
-                tgt['rtt'] = max(tgt['rtt'], r['rtt'])
-                tgt['mutId'] = r['mutId']; tgt['_mut'] = r.get('_mut')
-                continue
-        keep.append(r)
-    rows[:] = keep
 
     # ── enforce invariants + links + read-rows ──
     for r in rows:
@@ -248,37 +194,30 @@ for sh in sheikhs:
             warn('%s/%s: rdn>rtt anomaly' % (slug, r['title']))
         key = r.get('mutId') or r.get('sSlug') or ((r.get('trSh') or '') + '-' + (r.get('trSr') or ''))
         r['id'] = '%s--%s' % (slug, re.sub(r'[^\w\-]', '', str(key)))
-        # read rows → data/read/<id>.json; rdn = actual files present (never more)
-        rrows = []
+        # read rows → data/read/<id>.json
         if r.get('kind') == 'mut' and r.get('mutId') is not None:
             m = next((x for x in muts if str(x.get('id')) == str(r['mutId'])), None)
             fl = (m or {}).get('files') or []
-            rrows = rows_from_files(fl, MUT_TXT + str(r['mutId']) + '/')
+            write_read(r['id'], rows_from_files(fl, MUT_TXT + str(r['mutId']) + '/'))
         elif r.get('trSh') and r.get('trSr'):
             se = next((x for x in (tr[r['trSh']].get('series') or []) if x.get('slug') == r['trSr']), {})
             fl = se.get('files') or []
-            rrows = rows_from_files(fl, '../transcripts/%s/%s/' % (r['trSh'], r['trSr']))
+            write_read(r['id'], rows_from_files(fl, '../transcripts/%s/%s/' % (r['trSh'], r['trSr'])))
         elif r.get('sSlug'):
-            rrows = rows_from_lessons(r['sSlug'])
-        write_read(r['id'], rrows)
-        if rrows and len(rrows) < r['rdn']:
-            warn('%s/%s: rdn %d → %d (files on disk)' % (slug, r['title'], r['rdn'], len(rrows)))
-            r['rdn'] = len(rrows)
+            write_read(r['id'], rows_from_lessons(r['sSlug']))
         r['read'] = 'tr.html?r=' + r['id']
         r['listen'] = ('series.html?s=' + r['sSlug']) if r['wan'] > 0 and r.get('sSlug') else None
         r['rOk'] = bool(r['rtt'] and r['rdn'] >= r['rtt'])
-        r['wOk'] = bool(r['rtt'] and r['wan'] >= r['rtt'])
+        r['wOk'] = bool(r['wtt'] and r['wan'] >= r['wtt'])
 
     rows.sort(key=lambda r: (-r['wan'], r['title'] or ''))
     read  = sum(r['rdn'] for r in rows)
     watch = sum(r['wan'] for r in rows)
     nm = sh.get('name_display') or sh.get('name') or slug
     photo = sh.get('photo') or photos.get(nm) or photos.get(sh.get('name')) or photos.get(norm(nm))
-    if photo:
-        photo = re.sub(r'^(\./)?playlists/', '', str(photo))
     out[slug] = {
         'name': nm,
-        'photo': photo,  # playlists/-relative (img/…)
+        'photo': photo,
         'order': ordmap.get(nm) or ordmap.get(norm(nm)) or 999,
         'aliases': sh.get('aliases') or [],
         'nSeries': len(rows),

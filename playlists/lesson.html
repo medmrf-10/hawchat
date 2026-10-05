@@ -12,7 +12,6 @@
 <link rel="icon" type="image/png" href="../icons/icon-192.png">
 <link rel="apple-touch-icon" href="../icons/favicon-180.png">
 <link rel="stylesheet" href="../theme.css">
-<link rel="stylesheet" href="common.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -38,8 +37,7 @@
 .stage .wait{color:var(--dim);font-size:.9rem}
 .pos{color:var(--dim);font-size:.75rem;text-align:center;margin-top:10px}
 .nav{display:flex;justify-content:space-between;margin-top:16px}
-.nav a{color:var(--acc2);text-decoration:none;font-size:.85rem;border:1px solid var(--border);border-radius:var(--r-md);padding:9px 16px;background:var(--card);min-height:44px;display:inline-flex;align-items:center}
-.tlink{display:inline-flex;align-items:center;gap:6px;color:var(--acc2);font-size:.78rem;text-decoration:none;border:1px solid var(--border);border-radius:var(--r-sm);padding:6px 12px;margin-top:10px;min-height:44px;box-sizing:border-box}
+.nav a{color:var(--acc2);text-decoration:none;font-size:.85rem;border:1px solid var(--border);border-radius:var(--r-md);padding:9px 16px;background:var(--card)}
 .nav a:hover{border-color:var(--acc)}
 .empty{color:var(--dim);padding:20px}
 .txt{background:linear-gradient(145deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:var(--r-lg);padding:22px;margin-top:16px;font-family:var(--font-ar);font-size:1.08rem;line-height:2.1;white-space:pre-wrap}
@@ -50,13 +48,12 @@
 </head>
 <body>
 <header class="hd"><div class="hd-in">
-  <a href="." id="back" class="btn" aria-label="سلاسل المشايخ" style="text-decoration:none">→</a>
+  <a href="javascript:history.back()" class="btn" aria-label="رجوع" style="text-decoration:none">→</a>
   <img src="../icons/icon-192.png" alt="" width="30" height="30" style="border-radius:8px">
   <span class="brand">hawchat</span>
   <span class="sub" id="hdr-sub" style="color:var(--dim);font-size:.8rem">درس</span>
 </div></header>
-<main><div class="wrap" id="app"><div class="skel" style="height:70px;margin-top:12px"></div><div class="skel" style="height:300px;margin-top:12px"></div></div></main>
-<script src="common.js"></script>
+<main><div class="wrap" id="app"><p class="empty">يحمّل…</p></div></main>
 <script>
 async function j(u){try{const r=await fetch(u);return r.ok?await r.json():null}catch(e){return null}}
 async function t(u){try{const r=await fetch(u);return r.ok?await r.text():null}catch(e){return null}}
@@ -148,11 +145,7 @@ document.addEventListener('click',e=>{
   const d=await j('series/'+encodeURIComponent(slug)+'.json');
   if(!d){app.innerHTML='<p class="empty">الدرس غير موجود.</p>';return}
   const l=d.lessons.find(x=>x.n===ln);
-  if(!l){app.innerHTML='<div class="errbox">الدرس غير موجود — <a href="series.html?s='+encodeURIComponent(slug)+'">عودة للسلسلة</a></div>';return}
-  document.getElementById('back').href='series.html?s='+encodeURIComponent(slug);
-  // رابط «النص كاملاً» لقارئ التفريغ عند توفر صف مطابق
-  const stats=await j('data/sheikh_stats.json');let rowL=null;
-  if(stats&&stats[d.sheikh_slug])rowL=(stats[d.sheikh_slug].rows||[]).find(r=>r.sSlug===slug);
+  if(!l){app.innerHTML='<p class="empty">الدرس غير موجود.</p>';return}
   const ln3=String(ln).padStart(3,'0'), ln2=String(ln).padStart(2,'0');
   let aln=await j('lessons/'+encodeURIComponent(slug)+'/'+ln3+'.align.json');
   if(!aln&&ln3!==ln2)aln=await j('lessons/'+encodeURIComponent(slug)+'/'+ln2+'.align.json');
@@ -174,10 +167,9 @@ document.addEventListener('click',e=>{
       +'<span class="tm" id="tm">0:00</span></div>';
     h+='<div class="stage" id="stage"><span class="wait">اضغط تشغيل — تظهر الجملة وتضيء الكلمة في وقتها</span></div>';
     h+='<div class="pos" id="pos"></div>';
-    if(rowL)h+='<a class="tlink" href="tr.html?r='+encodeURIComponent(rowL.id)+'&l='+l.n+'">'+I.read+' النص كاملاً</a>';
   }else{
     if(l.video)h+='<div class="player" id="pl"><div class="cover" onclick="this.parentElement.innerHTML=\'<iframe src=https://www.youtube.com/embed/'+esc(l.video)+'?autoplay=1 allowfullscreen></iframe>\'"><span class="big">▶</span><span>تشغيل الدرس من يوتيوب — '+esc(l.video)+'</span></div></div>';
-    h+='<div class="txt cin">'+(txt?esc(txt):'<div style="text-align:center;color:var(--dim);padding:30px;border:1px dashed var(--border);border-radius:12px">التفريغ غير متوفر لهذا الدرس بعد</div>')+'</div>';
+    h+='<div class="txt cin">'+(txt?esc(txt):'<div style="text-align:center;color:var(--dim);padding:30px;border:1px dashed var(--border);border-radius:12px">التفريغ غير متوفر بعد — هذا الدرس في طابور المعالجة</div>')+'</div>';
   }
   h+='<div class="nav">'+(prev?'<a href="lesson.html?s='+encodeURIComponent(slug)+'&l='+prev.n+'">→ الدرس السابق</a>':'<span></span>')
     +(next?'<a href="lesson.html?s='+encodeURIComponent(slug)+'&l='+next.n+'">الدرس التالي ←</a>':'<span></span>')+'</div>';

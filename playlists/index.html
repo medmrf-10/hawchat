@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>سلاسل المشايخ — hawchat</title>
+<title>الشيوخ — hawchat</title>
 <meta name="theme-color" content="#0b0f1a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,116 +13,105 @@
 <link rel="icon" type="image/png" href="../icons/icon-192.png">
 <link rel="apple-touch-icon" href="../icons/favicon-180.png">
 <link rel="stylesheet" href="../theme.css">
-<link rel="stylesheet" href="common.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 .wrap{max-width:1100px;margin:0 auto;padding:16px}
-.hero{display:flex;align-items:end;gap:14px;margin:10px 0 14px}
-.hero h1{font-family:var(--font-ui);font-size:var(--fs-xl);font-weight:700;color:var(--txt);margin:0}
-.hero .pill{font-size:var(--fs-xs);color:var(--dim);border:1px solid var(--border);border-radius:99px;padding:4px 12px;margin-bottom:6px;white-space:nowrap}
+.hero{display:flex;align-items:end;gap:14px;margin:10px 0 18px}
+.hero h1{font-family:var(--font-ar);font-size:1.7rem;font-weight:700;background:linear-gradient(135deg,var(--acc2),var(--acc));-webkit-background-clip:text;background-clip:text;color:transparent;margin:0}
+.hero .pill{font-size:.68rem;color:var(--dim);border:1px solid var(--border);border-radius:99px;padding:4px 12px;margin-bottom:6px;white-space:nowrap}
+.hero .abtn{margin-bottom:6px}
 .bar{display:flex;gap:8px;align-items:stretch;background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:8px;margin-bottom:6px}
-.bar input{flex:1;min-width:0;height:44px;background:var(--bg);border:1px solid var(--border);border-radius:var(--r-md);color:var(--txt);padding:0 14px;font-family:var(--font-ui);font-size:var(--fs-sm)}
+.bar input{flex:1;min-width:0;height:38px;background:var(--bg);border:1px solid var(--border);border-radius:var(--r-md);color:var(--txt);padding:0 14px;font-family:var(--font-ui);font-size:.85rem}
 .bar input:focus{outline:none;border-color:var(--acc)}
-.abtn{height:44px;padding:0 16px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--card2);color:var(--txt);font-family:var(--font-ui);font-size:var(--fs-xs);font-weight:600;cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;text-decoration:none}
-.abtn.on{background:var(--acc);color:var(--bg);border-color:var(--acc)}
-#kpis{display:flex;flex-wrap:wrap;gap:14px;margin:0 0 8px;align-items:center}
-#kpis .k{display:flex;flex-direction:column;align-items:center}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(108px,1fr));gap:10px;margin-top:12px}
-.sh{display:block;background:linear-gradient(145deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:var(--r-md);padding:10px 8px;text-decoration:none;color:var(--txt);text-align:center;transition:border-color .18s,transform .18s;min-height:44px}
-@media(hover:hover){.sh:hover{border-color:var(--acc);transform:translateY(-2px)}}
+.abtn{height:38px;padding:0 16px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--card2);color:var(--txt);font-family:var(--font-ui);font-size:.8rem;font-weight:600;cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;text-decoration:none}
+.abtn:hover{border-color:var(--acc)}
+@media(max-width:640px){.wrap{padding:12px}.hero h1{font-size:1.45rem}.bar input{height:44px;font-size:.95rem}}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:10px;margin-top:14px}
+.sh{display:block;background:linear-gradient(145deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:var(--r-md);padding:8px 8px 10px;text-decoration:none;color:var(--txt);text-align:center;transition:border-color .18s,transform .18s;position:relative}
+.sh:hover{border-color:var(--acc);transform:translateY(-2px)}
 .sh .ph{width:100%;aspect-ratio:1;height:auto;margin:0 0 7px;border-radius:50%;background:var(--skel);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;font-family:var(--font-ar);font-size:1.6rem;font-weight:700;color:var(--acc2)}
-.sh .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 25%}
-.sh .nm{font-family:var(--font-ui);font-size:var(--fs-sm);font-weight:600;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.sh .icrow{display:flex;justify-content:center;gap:16px;margin-top:8px}
-.sh.soon{opacity:.42;pointer-events:none}
-.soonh{width:100%;height:44px;margin-top:16px;background:var(--card);border:1px solid var(--border);border-radius:var(--r-md);color:var(--dim);font-family:var(--font-ui);font-size:var(--fs-sm);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
-.sres{margin-top:10px}
-.sres a{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:var(--r-md);padding:12px 14px;margin-bottom:8px;text-decoration:none;color:var(--txt);font-size:var(--fs-sm)}
-.sres a small{color:var(--dim);margin-inline-start:auto;white-space:nowrap}
-#nres{font-size:var(--fs-xs);color:var(--dim);margin-top:4px;min-height:1.2em}
-@media(max-width:640px){.wrap{padding:12px}.hero h1{font-size:var(--fs-lg)}}
+.sh .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.sh .nm{font-family:var(--font-ar);font-size:.8rem;font-weight:700;line-height:1.4}
+.sh .pb{height:5px;border-radius:99px;background:var(--skel);margin-top:7px;overflow:hidden;display:flex}
+.sh .pb i{display:block;height:100%}
+.sh .pb .pd{background:var(--gold,#d4a017)}
+.sh .pb .pa{background:var(--ok,#3fb27f)}
+.sh .pb .pp{background:var(--acc,#4f8cff)}
+.sh .pb .ph{background:#7ba4e8}
+.sh .pb .px{background:var(--err,#e05a5a)}
+.sh .pb .pw{background:#6b7280}
+.sh .cnt{font-size:.62rem;color:var(--dim);margin-top:4px;line-height:1.3}
+.sh .icrow{display:flex;justify-content:center;gap:16px;margin-top:7px}
+.sh .ic{display:flex;flex-direction:column;align-items:center;line-height:1}
+.sh .ic i{font-style:normal;font-size:1.35rem}
+.sh .ic b{font-size:.95rem;font-weight:700;color:var(--txt);margin-top:2px}
+.sh.cin{animation:cin .35s both}
+.sub{color:var(--dim);font-size:.8rem}
+#kpis{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 4px}
+#kpis .k{background:var(--card);border:1px solid var(--border);border-radius:var(--r-md);padding:8px 14px;text-align:center}
+#kpis .k b{display:block;font-size:1.05rem;color:var(--acc2)}
+#kpis .k span{font-size:.62rem;color:var(--dim)}
 </style>
 </head>
 <body>
 <header class="hd"><div class="hd-in">
-  <a href="../" class="btn" aria-label="الرئيسية" style="text-decoration:none">→</a>
+  <a href="../" class="btn" aria-label="رجوع" style="text-decoration:none">→</a>
   <img src="../icons/icon-192.png" alt="" width="30" height="30" style="border-radius:8px">
   <span class="brand">hawchat</span>
-  <span class="sub" style="color:var(--dim);font-size:var(--fs-xs)">سلاسل المشايخ</span>
+  <span class="sub">الشيوخ والسلاسل</span>
 </div></header>
 <main><div class="wrap">
-  <div class="hero cin"><h1>سلاسل المشايخ</h1><span class="pill" id="count"></span></div>
-  <div id="kpis" class="cin" role="status" aria-live="polite"></div>
-  <div class="bar cin">
-    <input type="search" id="flt" aria-label="ابحث عن شيخ أو سلسلة" enterkeyhint="search" placeholder="ابحث عن شيخ أو سلسلة…">
-  </div>
-  <div id="nres" aria-live="polite"></div>
+  <div class="hero cin"><h1>الشيوخ</h1><span class="pill" id="count"></span></div>
+  <div id="kpis" class="cin"></div>
+  <div class="bar cin"><input type="text" id="flt" placeholder="ابحث عن شيخ…"><button id="contF" class="chip" style="margin-inline-start:8px;border:1px solid var(--border);background:var(--card);color:var(--txt);padding:8px 14px;border-radius:999px;cursor:pointer;font-family:var(--font-ui)">المحتوى فقط</button></div>
   <div id="groups" class="grid"></div>
-  <div id="sres" class="sres"></div>
-  <button id="soonh" class="soonh" hidden></button>
-  <div id="soong" class="grid" hidden></div>
 </div></main>
-<script src="common.js"></script>
 <script>
-let _stats={},flt='',showSoon=false;
-function draw(){
-  const g=document.getElementById('groups'),sg=document.getElementById('soong'),sr=document.getElementById('sres');
-  g.innerHTML='';sg.innerHTML='';sr.innerHTML='';
-  let withC=[],without=[],sres=[];
-  for(const slug in _stats){if(slug==='_meta')continue;const st=_stats[slug];
-    ((st.read||0)+(st.watch||0)>0?withC:without).push(st)}
-  withC.sort((a,b)=>(a.order||999)-(b.order||999));
-  without.sort((a,b)=>(a.order||999)-(b.order||999));
-  let i=0;
-  for(const st of withC){
-    const hay=normalize(st.name+' '+(st.aliases||[]).join(' '));
-    if(flt&&!hay.includes(flt)){
-      // series title match → jump link to reader
-      for(const r of (st.rows||[]))if(normalize(r.title).includes(flt))sres.push({st,r});
-      continue}
-    const a=document.createElement('a');a.className='sh cin';a.style.animationDelay=(Math.min(i++,30)*25)+'ms';
-    a.href='sheikh.html?s='+encodeURIComponent(slugOf(st));
-    const init=(st.name||'؟').replace(/^ال/,'').trim()[0]||'؟';
-    a.innerHTML='<div class="ph">'+(st.photo?'<img src="'+esc(st.photo)+'" alt="" loading="lazy" onerror="this.remove()">':'')+'<span>'+init+'</span></div><div class="nm">'+esc(st.name)+'</div>'
-      +'<div class="icrow">'+(st.read?statChip('read',st.read,totalR(st),allR(st)):'')+(st.watch?statChip('listen',st.watch,totalR(st),allW(st)):'')+'</div>';
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+async function j(u){try{const r=await fetch(u);return r.ok?await r.json():null}catch(e){return null}}
+function normalize(s){return (s||'').replace(/[أإآ]/g,'ا').replace(/\s+/g,' ').trim()}
+let _groups=[],_slugs={},_photos={},flt='',_stats={},onlyContent=false;
+function photo(name){return _photos[name]||_photos[normalize(name)]}
+function slugOf(name){return _slugs[name]||_slugs[normalize(name)]||normalize(name)}
+function render(){
+  const g=document.getElementById('groups');g.innerHTML='';let i=0;
+  let names=[];
+  for(const gr of _groups)for(const name of gr.names)names.push(name);
+  if(onlyContent)names=names.filter(n=>{const st=_stats[slugOf(n)];return st&&((st.read||0)+(st.watch||0))>0})
+    .sort((a,b)=>{const sa=_stats[slugOf(a)]||{},sb=_stats[slugOf(b)]||{};
+      return ((sb.read||0)+(sb.watch||0))-((sa.read||0)+(sa.watch||0))});
+  for(const name of names){
+    if(flt&&!normalize(name).includes(flt))continue;
+    const a=document.createElement('a');
+    a.className='sh cin';a.style.animationDelay=(Math.min(i++,30)*25)+'ms';
+    a.href='sheikh.html?s='+encodeURIComponent(slugOf(name));
+    const p=photo(name),init=name.replace(/^ال/,'').trim()[0]||'؟';
+    const st=_stats[slugOf(name)]||{},nr=st.read||0,nw=st.watch||0;
+    a.innerHTML='<div class="ph">'+(p?'<img src="'+p+'" alt="" loading="lazy" onerror="this.remove()">':'')+'<span>'+init+'</span></div><div class="nm">'+esc(name)+'</div>'
+      +((nr||nw)?'<div class="icrow">'+(nr?'<span class="ic"><i>📖</i><b>'+nr+'</b></span>':'')+(nw?'<span class="ic"><i>🎬</i><b>'+nw+'</b></span>':'')+'</div>':'');
     g.appendChild(a);
   }
-  for(const st of without){
-    if(flt&&!normalize(st.name+' '+(st.aliases||[]).join(' ')).includes(flt))continue;
-    const a=document.createElement('a');a.className='sh soon';a.setAttribute('aria-disabled','true');a.removeAttribute('href');
-    const init=(st.name||'؟').replace(/^ال/,'').trim()[0]||'؟';
-    a.innerHTML='<div class="ph">'+(st.photo?'<img src="'+esc(st.photo)+'" alt="" loading="lazy" onerror="this.remove()">':'')+'<span>'+init+'</span></div><div class="nm">'+esc(st.name)+'</div>';
-    sg.appendChild(a);
-  }
-  for(const x of sres){
-    const a=document.createElement('a');
-    a.href=x.r.read;
-    a.innerHTML=I.read+'<span>'+esc(x.r.title)+'</span><small>'+esc(x.st.name)+'</small>';
-    sr.appendChild(a);
-  }
-  const sh=document.getElementById('soonh');
-  sh.hidden=!without.length;sg.hidden=!showSoon;
-  sh.innerHTML=showSoon?('إخفاء '+I.chev):('قريباً ('+without.length+') '+I.chev);
-  document.getElementById('count').textContent=withC.length+' شيخاً';
-  document.getElementById('nres').textContent=flt?(i+sres.length?'':'لا نتائج.'):'';
+  if(!i)g.innerHTML='<p class="sub">لا نتائج.</p>';
 }
-function slugOf(st){for(const s in _stats)if(_stats[s]===st)return s;return''}
-function totalR(st){let m=0;for(const r of st.rows)m=Math.max(m,r.rtt||0);return Math.max(m,st.read)}
-function totalW(st){let m=0;for(const r of st.rows)m=Math.max(m,r.wtt||0);return Math.max(m,st.watch)}
-function allR(st){return st.rows.every(r=>r.rOk)}
-function allW(st){return st.rows.every(r=>r.wOk)}
-document.getElementById('flt').addEventListener('input',e=>{flt=normalize(e.target.value);draw()});
-document.getElementById('soonh').addEventListener('click',()=>{showSoon=!showSoon;draw()});
+document.getElementById('flt').addEventListener('input',e=>{flt=normalize(e.target.value);render()});
+document.getElementById('contF').addEventListener('click',e=>{onlyContent=!onlyContent;e.target.style.background=onlyContent?'var(--acc)':'var(--card)';e.target.style.color=onlyContent?'#0b0f1a':'var(--txt)';render()});
 (async()=>{
-  document.getElementById('groups').innerHTML='<div class="skel" style="height:120px"></div><div class="skel" style="height:120px"></div>';
-  const stats=await j('data/sheikh_stats.json');
-  if(!stats){document.getElementById('groups').innerHTML='';document.getElementById('kpis').innerHTML='<div class="errbox">تعذر تحميل بيانات السلاسل — <a href=".">أعد المحاولة</a></div>';return}
-  _stats=stats;
-  let tR=0,tW=0;for(const k in stats){if(k==='_meta')continue;tR+=stats[k].read||0;tW+=stats[k].watch||0}
-  document.getElementById('kpis').innerHTML='<span class="k">'+statChip('read',tR,tR,true)+'</span><span class="k">'+statChip('listen',tW,tR,tW>=tR)+'</span>';
-  draw();
+  const bust='?v='+Date.now();
+  const [data,photos,meta,stats]=await Promise.all([j('shuyukh.json'),j('photos.json'),j('data/sheikhs.json'),j('data/sheikh_stats.json'+bust)]);
+  _photos=photos||{};_stats=stats||{};
+  for(const s of ((meta&&meta.sheikhs)||[])){
+    for(const n of [s.name_display,s.name,...(s.aliases||[])]){_slugs[n]=s.slug;_slugs[normalize(n)]=s.slug}
+  }
+  let tR=0,tW=0;for(const v of Object.values(_stats)){tR+=v.read||0;tW+=v.watch||0}
+  document.getElementById('kpis').innerHTML=
+    '<div class="k"><b>'+tR+'</b><span>درساً يُقرأ</span></div>'
+    +'<div class="k"><b>'+tW+'</b><span>درساً يُسمع</span></div>';
+  if(!data||!data.groups){document.getElementById('groups').innerHTML='<p class="sub">تعذر تحميل القائمة.</p>';return}
+  _groups=data.groups;
+  let total=0;for(const g of _groups)total+=g.names.length;
+  document.getElementById('count').textContent=total+' شيخاً';
+  render();
 })();
 if('serviceWorker' in navigator)navigator.serviceWorker.register('../sw.js').catch(()=>{});
 </script>
