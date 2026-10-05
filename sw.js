@@ -64,7 +64,7 @@ async function netFirst(req, cacheName, timeoutMs) {
    data:  JSON (stats, read rows, series) — stale-while-revalidate.
    text:  transcripts/alignments/images — cache-first, LRU-bounded, version-stable.
    No auto skipWaiting: pages show an update toast; users opt in. */
-const REV = 'v7-'ed400ac'660e8fb'1fae3c2'ce4803a'c4d671f'af93226'2fb6563'4cd5eeb'f6b091b'ec8e92d'228d96c'344430e'14a0ae6'd8f34b5'8b5085c'8ea2c5c';                               // stamped by safe_push
+const REV = 'v7-'8a399d3'ed400ac'660e8fb'1fae3c2'ce4803a'c4d671f'af93226'2fb6563'4cd5eeb'f6b091b'ec8e92d'228d96c'344430e'14a0ae6'd8f34b5'8b5085c'8ea2c5c';                               // stamped by safe_push
 const SHELL = 'hawchat-shell-' + REV;
 const DATA  = 'hawchat-data-v1';
 const TEXT  = 'hawchat-text-v1';
