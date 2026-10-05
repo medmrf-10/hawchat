@@ -131,7 +131,7 @@
    "title": "تفسير جزء عمّ",
    "sheikh_slug": "ahmed-abdelmonem",
    "count": 20,
-   "aligned": 3,
+   "aligned": 2,
    "transcribed": 20,
    "status": "مفرّغة — المحاذاة جارية"
   },
@@ -158,7 +158,7 @@
    "title": "كتاب أم البراهين",
    "sheikh_slug": "ali-mahmoud-alomari",
    "count": 14,
-   "aligned": 2,
+   "aligned": 1,
    "transcribed": 14,
    "status": "مفرّغة — المحاذاة جارية"
   },
@@ -166,9 +166,9 @@
    "slug": "alamri-barahin-sharh",
    "title": "شرح كتاب شرح أم البراهين للإمام السنوسي",
    "sheikh_slug": "ali-mahmoud-alomari",
-   "count": 17,
+   "count": 15,
    "aligned": 0,
-   "transcribed": 17,
+   "transcribed": 15,
    "status": "مفرّغة — المحاذاة جارية"
   },
   {
@@ -236,7 +236,7 @@
   },
   {
    "slug": "aouni-jabir",
-   "title": "ثمانية دروس بحديث جابر",
+   "title": "قصة سيدنا جابر",
    "sheikh_slug": "hatem-alaouni",
    "count": 8,
    "aligned": 8,
@@ -248,9 +248,9 @@
    "sheikh_slug": "dhaker-alhashimi",
    "title": "ألف باء الزواج",
    "count": 75,
-   "status": "المحاذاة جارية — 18/75",
-   "aligned": 18,
-   "transcribed": 68
+   "status": "المحاذاة جارية — 17/75",
+   "aligned": 10,
+   "transcribed": 53
   },
   {
    "slug": "hashimi-tarbiya",
