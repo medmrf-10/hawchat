@@ -104,7 +104,7 @@
    "title": "دورة مفاتح التدبر",
    "sheikh_slug": "fadhel-sulaiman",
    "count": 14,
-   "aligned": 0,
+   "aligned": 14,
    "status": "مكتملة التفريغ",
    "transcribed": 14
   },
@@ -113,7 +113,7 @@
    "title": "تدبر فرش القراءات",
    "sheikh_slug": "fadhel-sulaiman",
    "count": 28,
-   "aligned": 0,
+   "aligned": 18,
    "status": "مفرّغة — المحاذاة جارية",
    "transcribed": 28
   },
@@ -131,7 +131,7 @@
    "title": "تفسير جزء عمّ",
    "sheikh_slug": "ahmed-abdelmonem",
    "count": 20,
-   "aligned": 1,
+   "aligned": 2,
    "transcribed": 20,
    "status": "مفرّغة — المحاذاة جارية"
   },
@@ -149,7 +149,7 @@
    "title": "آداب سلوك المريد",
    "sheikh_slug": "ali-mahmoud-alomari",
    "count": 12,
-   "aligned": 0,
+   "aligned": 7,
    "transcribed": 12,
    "status": "مفرّغة — المحاذاة جارية"
   },
@@ -202,8 +202,8 @@
    "slug": "alasri-arbaa",
    "title": "لقاء الأربعاء",
    "sheikh_slug": "saif-alasri",
-   "count": 6,
-   "aligned": 6,
+   "count": 9,
+   "aligned": 9,
    "transcribed": 56,
    "status": "مكتملة التفريغ"
   },
@@ -236,7 +236,7 @@
   },
   {
    "slug": "aouni-jabir",
-   "title": "ثمانية دروس بحديث جابر",
+   "title": "قصة سيدنا جابر",
    "sheikh_slug": "hatem-alaouni",
    "count": 8,
    "aligned": 8,
@@ -248,27 +248,21 @@
    "sheikh_slug": "dhaker-alhashimi",
    "title": "ألف باء الزواج",
    "count": 75,
-   "status": "المحاذاة جارية — 9/75",
-   "aligned": 9,
-   "transcribed": 44
+   "status": "المحاذاة جارية — 13/75"
   },
   {
    "slug": "hashimi-tarbiya",
    "sheikh_slug": "dhaker-alhashimi",
    "title": "ألف باء التربية",
    "count": 108,
-   "status": "المحاذاة جارية — 3/108",
-   "aligned": 3,
-   "transcribed": 41
+   "status": "المحاذاة جارية — 3/108"
   },
   {
    "slug": "hashimi-fiqh-nafs",
    "sheikh_slug": "dhaker-alhashimi",
    "title": "مجالس فقه النفس",
    "count": 181,
-   "status": "المحاذاة جارية — 0/181",
-   "aligned": 0,
-   "transcribed": 0
+   "status": "المحاذاة جارية — 0/181"
   }
  ]
 }
