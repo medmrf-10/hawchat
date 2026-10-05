@@ -76,6 +76,27 @@
    "title": "الرد على خوارج العصر",
    "count": 172,
    "status": "المحاذاة جارية"
+  },
+  {
+   "slug": "fadel-dawra",
+   "sheikh_slug": "fadhel-sulaiman",
+   "title": "دورة مفاتح التدبر",
+   "count": 14,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "fadel-juz30",
+   "sheikh_slug": "fadhel-sulaiman",
+   "title": "تدبر سور الجزء الثلاثين",
+   "count": 47,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "fadel-farsh",
+   "sheikh_slug": "fadhel-sulaiman",
+   "title": "تدبر فرش القراءات",
+   "count": 28,
+   "status": "مفرّغة — المحاذاة جارية"
   }
  ]
 }
