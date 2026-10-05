@@ -2,6 +2,7 @@
  "sheikhs": {
   "abdelwahid": {
    "name": "الشيخ محمد عبد الواحد",
+   "slug": "muhammad-abdelwahid-hanbali",
    "series": [
     {
      "slug": "tawassul",
@@ -10,12 +11,14 @@
       "NA_G34cWaxDHWw.txt",
       "NA_WFLgTeRtEIo.txt"
      ],
-     "n": 2
+     "n": 2,
+     "total": 38
     }
    ]
   },
   "binsayib": {
    "name": "الشيخ عبد العزيز بن سايب",
+   "slug": "bensaib",
    "series": [
     {
      "slug": "akhadari",
@@ -25,12 +28,14 @@
       "NA_mY4yQSX4gN0.txt",
       "NA_rFSkLmkzZ10.txt"
      ],
-     "n": 3
+     "n": 3,
+     "total": 96
     }
    ]
   },
   "mashhour": {
    "name": "الشيخ عبد الرحمن المشهور",
+   "slug": "aboubakr-almashhour",
    "series": [
     {
      "slug": "azma",
@@ -43,7 +48,8 @@
       "NA_g3PTMYwyzNI.txt",
       "NA_vDXo4D0Ms8Y.txt"
      ],
-     "n": 6
+     "n": 6,
+     "total": 30
     },
     {
      "slug": "irtibat1",
@@ -56,7 +62,8 @@
       "NA_f8JENBakqj0.txt",
       "NA_mysX5mXeSwE.txt"
      ],
-     "n": 6
+     "n": 6,
+     "total": 49
     },
     {
      "slug": "kahf3",
@@ -71,7 +78,8 @@
       "NA__JeYwveOjUg.txt",
       "NA_c1JS7zxnwaQ.txt"
      ],
-     "n": 8
+     "n": 8,
+     "total": 30
     },
     {
      "slug": "khawatir",
@@ -86,7 +94,8 @@
       "NA_ryc9RzbfyNc.txt",
       "NA_ttQ3RjAztCo.txt"
      ],
-     "n": 8
+     "n": 8,
+     "total": 29
     },
     {
      "slug": "ni3ma",
@@ -99,7 +108,8 @@
       "NA_qucbE_qXk-c.txt",
       "NA_sQzN-FOT0vY.txt"
      ],
-     "n": 6
+     "n": 6,
+     "total": 27
     },
     {
      "slug": "usus",
@@ -109,7 +119,8 @@
       "NA_GRKR_8j2x_c.txt",
       "NA_e0zi4PGcZP4.txt"
      ],
-     "n": 3
+     "n": 3,
+     "total": 39
     }
    ]
   },
@@ -603,5 +614,5 @@
    ]
   }
  },
- "updated": "2026-10-05T07:45:43Z"
+ "updated": "2026-10-05T07:46:38Z"
 }
