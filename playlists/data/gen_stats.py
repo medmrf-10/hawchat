@@ -164,6 +164,10 @@ def rows_from_lessons(slug):
     """Rows from playlists/lessons/<slug>/ + titles via series json."""
     li = J(os.path.join(PL, 'lessons', slug, 'index.json')) or {}
     nums = li.get('txt') or []
+    d = os.path.join(PL, 'lessons', slug)
+    if not nums and os.path.isdir(d):
+        nums = sorted(int(m.group(1)) for fn in os.listdir(d)
+                      for m in [re.match(r'^(\d+)\.txt$', fn)] if m)
     sd = J(os.path.join(PL, 'series', slug + '.json')) or {}
     titles = {l.get('n'): l.get('title') for l in sd.get('lessons', [])}
     vids = {l.get('n'): l.get('video') for l in sd.get('lessons', [])}
@@ -207,6 +211,39 @@ def count_aligned(slug):
         if w and (cov is None or cov >= 0.5):
             good += 1
     return good
+
+def rebuild_lessons_indexes():
+    """For every lessons/<slug>/ dir: merge af/tf filename maps into index.json
+    (n → real filename on disk) so pages fetch exact files — no 404 probes."""
+    root = os.path.join(PL, 'lessons')
+    if not os.path.isdir(root):
+        return
+    for slug in os.listdir(root):
+        d = os.path.join(root, slug)
+        if not os.path.isdir(d):
+            continue
+        idx_path = os.path.join(d, 'index.json')
+        if not os.path.exists(idx_path):
+            continue
+        idx = J(idx_path)
+        if idx is None:
+            continue
+        af, tf = {}, {}
+        for fn in os.listdir(d):
+            m = re.match(r'^(\d+)\.align\.json$', fn)
+            if m:
+                af[int(m.group(1))] = fn
+                continue
+            m = re.match(r'^(\d+)\.txt$', fn)
+            if m:
+                tf[int(m.group(1))] = fn
+        idx['af'] = af
+        idx['tf'] = tf
+        if not idx.get('align'):
+            idx['align'] = sorted(af)
+        if not idx.get('txt'):
+            idx['txt'] = sorted(tf)
+        json.dump(idx, open(idx_path, 'w'), ensure_ascii=False, separators=(',', ':'))
 
 # ── load sources ──────────────────────────────────────────────
 sheikhs = (J(os.path.join(PL, 'data/sheikhs.json')) or {}).get('sheikhs', [])
@@ -301,7 +338,7 @@ for sh in sheikhs:
             continue
         if (m.get('done') or 0) <= 0 and not m.get('files'):
             continue
-        r = hit(m.get('name') or m.get('title') or '') or newrow(m.get('name') or m.get('title') or ('#' + str(m.get('id'))))
+        r = mutrow(m.get('id')) or newrow(m.get('name') or m.get('title') or ('#' + str(m.get('id'))))
         n = m.get('done') or len(m.get('files') or [])
         r['rdn'] = max(r['rdn'], n)
         r['rtt'] = max(r['rtt'], m.get('total') or 0, n)
@@ -418,10 +455,10 @@ for sh in sheikhs:
         write_read(r['id'], rrows)
         if rrows and len(rrows) < r['rdn']:
             r['rdn'] = len(rrows)
-        r['read'] = 'tr.html?r=' + r['id']
-        r['listen'] = ('series.html?s=' + r['sSlug']) if r['wan'] > 0 and r.get('sSlug') else None
+        r['read'] = 'row.html?r=' + r['id']
+        r['listen'] = ('row.html?r=' + r['id']) if r['wan'] > 0 and r.get('sSlug') else None
         r['rOk'] = bool(r['rtt'] and r['rdn'] >= r['rtt'])
-        r['wOk'] = bool(r['wtt'] and r['wan'] >= r['wtt'])
+        r['wOk'] = bool(r['rtt'] and r['wan'] >= r['rtt'])
 
     sordmap = sord.get(slug) or {}
     rows.sort(key=lambda r: (sordmap.get(r.get('id'), 9999), -r['wan'], natkey(r['title'])))
@@ -429,6 +466,8 @@ for sh in sheikhs:
     watch = sum(r['wan'] for r in rows)
     nm = sh.get('name_display') or sh.get('name') or slug
     photo = sh.get('photo') or photos.get(nm) or photos.get(sh.get('name')) or photos.get(norm(nm))
+    if photo:
+        photo = re.sub(r'^(\./)?playlists/', '', str(photo))
     out[slug] = {
         'name': nm,
         'photo': photo,
@@ -447,6 +486,16 @@ tmp = dst + '.tmp'
 json.dump(out, open(tmp, 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
 os.replace(tmp, dst)
 json.dump(REDIRECTS, open(os.path.join(BASE, 'redirects.json'), 'w'), ensure_ascii=False)
+# flat search index (P7): [{id,title,sh,sname}]
+search = []
+for slug, v in out.items():
+    if slug == '_meta':
+        continue
+    for r in v.get('rows') or []:
+        search.append({'id': r['id'], 'title': r['title'], 'sh': slug, 'sname': v['name'],
+                       'rd': r['rdn'], 'ls': r['wan']})
+json.dump(search, open(os.path.join(BASE, 'search.json'), 'w'), ensure_ascii=False, separators=(',', ':'))
+rebuild_lessons_indexes()
 print('sheikhs', len(out) - 1, 'read', sum(v['read'] for k, v in out.items() if k != '_meta'),
       'watch', sum(v['watch'] for k, v in out.items() if k != '_meta'),
       'warnings', len(WARN))
