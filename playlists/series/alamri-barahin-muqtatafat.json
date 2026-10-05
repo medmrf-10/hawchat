@@ -4,11 +4,19 @@
  "sheikh_slug": "ali-mahmoud-alomari",
  "title": "مقتطفات من دروس أم البراهين",
  "playlist": "https://www.youtube.com/playlist?list=PLa3XSU7qw_YlBZIplsv2MSTfwOO-Qa82r",
- "count": 10,
+ "count": 11,
  "lessons": [
   {
+   "n": 2,
+   "title": "إدراك حقائق الصفات السلبية",
+   "video": "zK73KLgXnEA",
+   "align": false,
+   "chars": 918,
+   "dur": "1:14"
+  },
+  {
    "n": 3,
-   "title": "مقتطفات من دروس أم البراهين",
+   "title": "شروط بطلان التسلسل",
    "video": "O03dATiQWZI",
    "align": false,
    "chars": 1067,
@@ -16,7 +24,7 @@
   },
   {
    "n": 4,
-   "title": "مقتطفات من دروس أم البراهين",
+   "title": "معنى الوجود الذاتي لله",
    "video": "TalS9A9zZAk",
    "align": false,
    "chars": 1534,
@@ -24,7 +32,7 @@
   },
   {
    "n": 5,
-   "title": "مقتطفات من دروس أم البراهين",
+   "title": "هل الوجود معنى كلي",
    "video": "UOvVNjyltzA",
    "align": false,
    "chars": 2631,
@@ -32,7 +40,7 @@
   },
   {
    "n": 7,
-   "title": "مقتطفات من دروس أم البراهين",
+   "title": "سبب الخلاف في جواز التكليف بما لا يطاق",
    "video": "_9sXHzrF_d4",
    "align": false,
    "chars": 2223,
@@ -40,7 +48,7 @@
   },
   {
    "n": 8,
-   "title": "مقتطفات من دروس أم البراهين",
+   "title": "عدد الصفات عند الأشاعرة",
    "video": "bJurrzGPKeA",
    "align": false,
    "chars": 1050,
@@ -48,7 +56,7 @@
   },
   {
    "n": 9,
-   "title": "مقتطفات من دروس أم البراهين",
+   "title": "من هو المقلد الذي كفره الإمام السنوسي",
    "video": "paBjJwYozhU",
    "align": false,
    "chars": 2825,
@@ -56,7 +64,7 @@
   },
   {
    "n": 10,
-   "title": "مقتطفات من دروس أم البراهين",
+   "title": "الفرق بين الصفات السلبية والمعاني من حيث جواز اتصاف الخلق بها",
    "video": "XG1qXIm5lLo",
    "align": false,
    "chars": 1857,
@@ -64,7 +72,7 @@
   },
   {
    "n": 11,
-   "title": "مقتطفات من دروس أم البراهين",
+   "title": "الأطفال فلاسفة فمالذي يقلل من إبداعهم ومايزيد فيه",
    "video": "8w9oBYXruWo",
    "align": false,
    "chars": 1943,
@@ -72,7 +80,7 @@
   },
   {
    "n": 12,
-   "title": "مقتطفات من دروس أم البراهين",
+   "title": "كيف نميز الذكي من البليد",
    "video": "Srhjq_zNhH0",
    "align": false,
    "chars": 2853,
@@ -80,7 +88,7 @@
   },
   {
    "n": 13,
-   "title": "مقتطفات من دروس أم البراهين",
+   "title": "المقصود بمعرفة صفات الله",
    "video": "4T1xJGwUxWs",
    "align": false,
    "chars": 408,
