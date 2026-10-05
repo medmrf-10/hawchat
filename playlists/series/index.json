@@ -2,93 +2,91 @@
  "series": [
   {
    "slug": "bouti-aqeeda",
+   "sheikh_slug": "said-bouti",
    "title": "دورة مختصرة في العقيدة الإسلامية",
-   "sheikh_slug": "said-bouti",
    "count": 10,
-   "aligned": 10,
-   "transcribed": 10,
-   "status": "مكتملة التفريغ"
-  },
-  {
-   "slug": "bouti-hubb",
-   "title": "الحب في القرآن",
-   "sheikh_slug": "said-bouti",
-   "count": 26,
-   "aligned": 26,
-   "transcribed": 26,
-   "status": "مكتملة التفريغ"
-  },
-  {
-   "slug": "bouti-khutab-2012",
-   "title": "خطب الجمعة 2012",
-   "sheikh_slug": "said-bouti",
-   "count": 52,
-   "aligned": 52,
-   "transcribed": 52,
-   "status": "مكتملة التفريغ"
-  },
-  {
-   "slug": "bouti-mashahid",
-   "title": "مشاهد وعبر من القرآن والسنة",
-   "sheikh_slug": "said-bouti",
-   "count": 30,
-   "aligned": 30,
-   "transcribed": 30,
-   "status": "مكتملة التفريغ"
-  },
-  {
-   "slug": "bouti-rihla",
-   "title": "رحلة الخلود",
-   "sheikh_slug": "said-bouti",
-   "count": 23,
-   "aligned": 23,
-   "transcribed": 23,
-   "status": "مكتملة التفريغ"
-  },
-  {
-   "slug": "bouti-sira",
-   "title": "فقه السيرة النبوية",
-   "sheikh_slug": "said-bouti",
-   "count": 70,
-   "aligned": 70,
-   "transcribed": 70,
-   "status": "مكتملة التفريغ"
-  },
-  {
-   "slug": "bouti-tarikh",
-   "title": "تاريخ التشريع الإسلامي",
-   "sheikh_slug": "said-bouti",
-   "count": 38,
-   "aligned": 38,
-   "transcribed": 38,
-   "status": "مكتملة التفريغ"
-  },
-  {
-   "slug": "bouti-ulum-quran",
-   "title": "علوم القرآن الكريم",
-   "sheikh_slug": "said-bouti",
-   "count": 63,
-   "aligned": 63,
-   "transcribed": 63,
-   "status": "مكتملة التفريغ"
+   "status": "مكتملة التفريغ",
+   "aligned": 10
   },
   {
    "slug": "bouti-yaghalitun",
-   "title": "يغالطونك إذ يقولون",
    "sheikh_slug": "said-bouti",
+   "title": "يغالطونك إذ يقولون",
    "count": 38,
-   "aligned": 38,
-   "transcribed": 38,
-   "status": "مكتملة التفريغ"
+   "status": "مفرّغة — المحاذاة جارية",
+   "aligned": 38
+  },
+  {
+   "slug": "bouti-tarikh",
+   "sheikh_slug": "said-bouti",
+   "title": "تاريخ التشريع الإسلامي",
+   "count": 38,
+   "status": "مفرّغة — المحاذاة جارية",
+   "aligned": 38
+  },
+  {
+   "slug": "bouti-mashahid",
+   "sheikh_slug": "said-bouti",
+   "title": "مشاهد وعبر من القرآن والسنة",
+   "count": 30,
+   "status": "مفرّغة — المحاذاة جارية",
+   "aligned": 30
+  },
+  {
+   "slug": "bouti-rihla",
+   "sheikh_slug": "said-bouti",
+   "title": "رحلة الخلود",
+   "count": 23,
+   "status": "مفرّغة — المحاذاة جارية",
+   "aligned": 23
+  },
+  {
+   "slug": "bouti-hubb",
+   "sheikh_slug": "said-bouti",
+   "title": "الحب في القرآن",
+   "count": 26,
+   "status": "مفرّغة — المحاذاة جارية",
+   "aligned": 26
   },
   {
    "slug": "bouti-yaqiniyyat",
-   "title": "كبرى اليقينيات الكونية",
    "sheikh_slug": "said-bouti",
+   "title": "كبرى اليقينيات الكونية",
    "count": 54,
-   "aligned": 54,
-   "transcribed": 54,
-   "status": "مكتملة التفريغ"
+   "status": "مفرّغة — المحاذاة جارية",
+   "aligned": 54
+  },
+  {
+   "slug": "bouti-ulum-quran",
+   "sheikh_slug": "said-bouti",
+   "title": "علوم القرآن الكريم",
+   "count": 63,
+   "status": "مفرّغة — المحاذاة جارية",
+   "aligned": 63
+  },
+  {
+   "slug": "bouti-sira",
+   "sheikh_slug": "said-bouti",
+   "title": "فقه السيرة النبوية",
+   "count": 70,
+   "status": "مفرّغة — المحاذاة جارية",
+   "aligned": 70
+  },
+  {
+   "slug": "bouti-khutab-2012",
+   "sheikh_slug": "said-bouti",
+   "title": "خطب الجمعة 2012",
+   "count": 52,
+   "status": "مفرّغة — المحاذاة جارية",
+   "aligned": 52
+  },
+  {
+   "slug": "gomaa-khawarij",
+   "sheikh_slug": "ali-gomaa",
+   "title": "الرد على خوارج العصر",
+   "count": 172,
+   "status": "المحاذاة جارية",
+   "aligned": 146
   },
   {
    "slug": "fadel-dawra",
@@ -96,7 +94,6 @@
    "sheikh_slug": "fadhel-sulaiman",
    "count": 14,
    "aligned": 14,
-   "transcribed": 14,
    "status": "مكتملة التفريغ"
   },
   {
@@ -104,8 +101,7 @@
    "title": "تدبر فرش القراءات",
    "sheikh_slug": "fadhel-sulaiman",
    "count": 28,
-   "aligned": 18,
-   "transcribed": 28,
+   "aligned": 12,
    "status": "مفرّغة — المحاذاة جارية"
   },
   {
@@ -114,143 +110,31 @@
    "sheikh_slug": "fadhel-sulaiman",
    "count": 47,
    "aligned": 0,
-   "transcribed": 47,
-   "status": "مفرّغة — المحاذاة جارية"
-  },
-  {
-   "slug": "gomaa-khawarij",
-   "title": "الرد على خوارج العصر",
-   "sheikh_slug": "ali-gomaa",
-   "count": 172,
-   "aligned": 146,
-   "transcribed": 172,
-   "status": "مفرّغة — المحاذاة جارية"
-  },
-  {
-   "slug": "hashimi-fiqh-nafs",
-   "title": "مجالس فقه النفس",
-   "sheikh_slug": "thakir-hashimi",
-   "count": 181,
-   "aligned": 0,
-   "transcribed": 0,
-   "status": "مفرّغة — المحاذاة جارية"
-  },
-  {
-   "slug": "hashimi-tarbiya",
-   "title": "ألف باء التربية",
-   "sheikh_slug": "thakir-hashimi",
-   "count": 108,
-   "aligned": 0,
-   "transcribed": 11,
    "status": "مفرّغة — المحاذاة جارية"
   },
   {
    "slug": "hashimi-zawaj",
-   "title": "ألف باء الزواج",
    "sheikh_slug": "thakir-hashimi",
+   "title": "ألف باء الزواج",
    "count": 75,
-   "aligned": 2,
-   "transcribed": 44,
-   "status": "مفرّغة — المحاذاة جارية"
+   "status": "المحاذاة جارية — 1/75",
+   "aligned": 1
   },
   {
-   "slug": "alasri-arbaa",
-   "title": "لقاء الأربعاء",
-   "sheikh_slug": "saif-alasri",
-   "count": 4,
-   "aligned": 4,
-   "transcribed": 56,
-   "status": "مكتملة التفريغ"
+   "slug": "hashimi-tarbiya",
+   "sheikh_slug": "thakir-hashimi",
+   "title": "ألف باء التربية",
+   "count": 108,
+   "status": "المحاذاة جارية — 0/108",
+   "aligned": 0
   },
   {
-   "slug": "aouni-ibada",
-   "title": "العبادة في القرآن",
-   "sheikh_slug": "hatem-alaouni",
-   "count": 2,
-   "aligned": 2,
-   "transcribed": 6,
-   "status": "مكتملة التفريغ"
-  },
-  {
-   "slug": "aouni-mousiqa",
-   "title": "الموسيقى والغناء في القرآن",
-   "sheikh_slug": "hatem-alaouni",
-   "count": 5,
-   "aligned": 5,
-   "transcribed": 5,
-   "status": "مكتملة التفريغ"
-  },
-  {
-   "slug": "abdelmonem-juz30",
-   "title": "تفسير جزء عمّ",
-   "sheikh_slug": "ahmed-abdelmonem",
-   "count": 20,
-   "aligned": 0,
-   "transcribed": 20,
-   "status": "مفرّغة — المحاذاة جارية"
-  },
-  {
-   "slug": "alamri-adab-murid",
-   "title": "آداب سلوك المريد",
-   "sheikh_slug": "ali-mahmoud-alomari",
-   "count": 12,
-   "aligned": 0,
-   "transcribed": 12,
-   "status": "مفرّغة — المحاذاة جارية"
-  },
-  {
-   "slug": "alamri-barahin-kitab",
-   "title": "كتاب أم البراهين",
-   "sheikh_slug": "ali-mahmoud-alomari",
-   "count": 12,
-   "aligned": 0,
-   "transcribed": 12,
-   "status": "مفرّغة — المحاذاة جارية"
-  },
-  {
-   "slug": "alamri-barahin-sharh",
-   "title": "شرح كتاب شرح أم البراهين للإمام السنوسي",
-   "sheikh_slug": "ali-mahmoud-alomari",
-   "count": 3,
-   "aligned": 0,
-   "transcribed": 3,
-   "status": "مفرّغة — المحاذاة جارية"
-  },
-  {
-   "slug": "alamri-hisam",
-   "title": "شرح الحسام الكاتي على إيساغوجي",
-   "sheikh_slug": "ali-mahmoud-alomari",
-   "count": 30,
-   "aligned": 0,
-   "transcribed": 30,
-   "status": "مفرّغة — المحاذاة جارية"
-  },
-  {
-   "slug": "alamri-iqtisad",
-   "title": "الاقتصاد في الاعتقاد",
-   "sheikh_slug": "ali-mahmoud-alomari",
-   "count": 46,
-   "aligned": 0,
-   "transcribed": 46,
-   "status": "مفرّغة — المحاذاة جارية"
-  },
-  {
-   "slug": "alamri-mughni",
-   "title": "مغني الطلاب شرح إيساغوجي",
-   "sheikh_slug": "ali-mahmoud-alomari",
-   "count": 6,
-   "aligned": 0,
-   "transcribed": 6,
-   "status": "مفرّغة — المحاذاة جارية"
-  },
-  {
-   "slug": "abdelwahid-tawassul",
-   "title": "التوسل والاستغاثة عند الحنابلة",
-   "sheikh_slug": "muhammad-abdelwahid-hanbali",
-   "count": 38,
-   "aligned": 1,
-   "transcribed": 1,
-   "status": "مفرّغة — المحاذاة جارية"
+   "slug": "hashimi-fiqh-nafs",
+   "sheikh_slug": "thakir-hashimi",
+   "title": "مجالس فقه النفس",
+   "count": 181,
+   "status": "المحاذاة جارية — 0/181",
+   "aligned": 0
   }
  ]
 }
