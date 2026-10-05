@@ -30,7 +30,7 @@
 .ls .t small{display:block;color:var(--ink-3);font-size:var(--fs-xs)}
 .ls .bd{display:flex;gap:10px;color:var(--ink-3)}
 .ls .bd .i{width:1.15em;height:1.15em}
-.ls .bd .ic-read{color:var(--gold-3)} .ls .bd .ic-listen{color:var(--violet)}
+.ls .bd .ic-read{color:var(--gold-3)} .ls .bd .ic-listen{color:var(--violet)} .ls .bd .ic-play{color:var(--muted);opacity:.7}
 .sflt{width:100%;height:48px;background:var(--bg-2);border:1px solid var(--line-2);border-radius:var(--r-md);
   color:var(--txt);padding:0 14px;font-family:var(--font-ui);font-size:var(--fs-sm);margin-top:12px}
 .sflt:focus{outline:none;border-color:var(--gold-2)}
@@ -126,7 +126,7 @@ const ic=id=>'<svg class="i"><use href="icons.svg#'+id+'"/></svg>';
         '<a class="ls cin" href="'+href+'"><span class="num">'+nn+'</span>'
         +'<span class="t"><bdi>'+esc(title)+'</bdi>'+(l.dur?'<small>'+esc(fmtDur(l.dur))+'</small>':'')+'</span>'
         +'<span class="bd">'+(rtxt.has(nn)?'<span class="ic-read" title="نص">'+ic('i-read')+'</span>':'')
-        +(canL?'<span class="ic-listen" title="يُسمع">'+ic('i-listen')+'</span>':'')+'</span></a>');
+        +(aln.has(nn)?'<span class="ic-listen" title="محاذاة نصية">'+ic('i-listen')+'</span>':(canL?'<span class="ic-play" title="فيديو فقط">'+ic('i-play')+'</span>':''))+'</span></a>');
     }
     if(!n)lst.innerHTML='<p class="empty">لا نتائج.</p>';
   };
