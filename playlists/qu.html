@@ -90,7 +90,7 @@ let FS=parseFloat(localStorage.getItem('trfs'))||1.15;
       +(i<qus.length-1?'<a href="?r='+encodeURIComponent(row.id)+'&l='+qus[i+1]+'">التالي ←</a>':'<a class="off">التالي ←</a>')
       +'<button id="zout" aria-label="تصغير الخط" title="تصغير الخط">أ−</button>'
       +'<button id="zin" aria-label="تكبير الخط" title="تكبير الخط">أ+</button>'
-      +'<button id="dnt" aria-label="نهاري/ليلي" title="نهاري/ليلي"><svg style="width:1.2em;height:1.2em"><use href="icons.svg?v=11#'+(dayNow?'i-sun':'i-moon')+'"/></svg></button>';
+      +'<button id="dnt" aria-label="نهاري/ليلي" title="نهاري/ليلي"><svg style="width:1.2em;height:1.2em"><use href="icons.svg?v=12#'+(dayNow?'i-sun':'i-moon')+'"/></svg></button>';
     const zAp=()=>{localStorage.setItem('trfs',FS);const el=document.getElementById('qwrap');if(el)el.style.fontSize=FS+'rem'};
     document.getElementById('zin').onclick=()=>{FS=Math.min(2.6,+(FS+0.15).toFixed(2));zAp()};
     document.getElementById('zout').onclick=()=>{FS=Math.max(0.8,+(FS-0.15).toFixed(2));zAp()};
@@ -98,7 +98,7 @@ let FS=parseFloat(localStorage.getItem('trfs'))||1.15;
       const day=document.documentElement.dataset.theme!=='day';
       if(day)document.documentElement.dataset.theme='day';else delete document.documentElement.dataset.theme;
       store.set('trtheme',day?'day':'night');
-      document.getElementById('dnt').innerHTML='<svg style="width:1.2em;height:1.2em"><use href="icons.svg?v=11#'+(day?'i-sun':'i-moon')+'"/></svg>';
+      document.getElementById('dnt').innerHTML='<svg style="width:1.2em;height:1.2em"><use href="icons.svg?v=12#'+(day?'i-sun':'i-moon')+'"/></svg>';
       const mc=document.querySelector('meta[name="theme-color"]');if(mc)mc.setAttribute('content',day?'#f6f0df':'#0b0f1a');
     };
   }

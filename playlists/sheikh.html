@@ -61,7 +61,7 @@
 .u-sr .sn .n.ok{color:var(--green)}
 .u-sr .sn .sep{color:var(--ink-3);font-size:.7rem}
 .shn{font-size:1.3rem;font-weight:800;line-height:1.4;margin:0}.shs{color:var(--ink-3);font-size:var(--fs-xs);margin-top:4px}
-.fchips{display:flex;gap:6px;overflow-x:auto;margin:12px -14px 4px;padding:0 14px 2px;scrollbar-width:none}.fchips::-webkit-scrollbar{display:none}
+.fchips{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 4px}.fchips::-webkit-scrollbar{display:none}
 .fc{flex:none;min-height:40px;display:inline-flex;align-items:center;gap:6px;padding:0 13px;border-radius:99px;border:1px solid var(--line-2);background:var(--bg-2);color:var(--ink-2);font:inherit;font-size:var(--fs-xs);cursor:pointer}
 .fc .i{width:15px;height:15px}.fc b{color:var(--ink-3);font-weight:600}.fc.on{border-color:var(--gold-2);color:var(--gold-3);background:rgba(201,162,75,.12)}
 .sr{display:flex;flex-direction:column;gap:6px;padding:14px 16px;margin-top:8px;border-radius:var(--r-md);border:1px solid var(--line-1);
@@ -91,7 +91,7 @@
 <script>
 let flt=new Set();
 let _rows=[],_slug='',_st=null;
-const ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';
+const ic=id=>'<svg class="i"><use href="icons.svg?v=12#'+id+'"/></svg>';
 const FCOUNT={rd:r=>r.rdn||0,yt:r=>r.ytn||0,lsn:r=>r.wan||0,qu:r=>r.qn||0,aud:r=>(r.ytn||0)+(r.aun||0),fav:r=>store.fav(r.id)?1:0,sm:r=>r.sun||0};
 const FALABEL={rd:'قراءة',yt:'يوتيوب',lsn:'مشاهدة حية',qu:'أسئلة',aud:'استماع',fav:'مفضلة',sm:'تلخيص'};
 function rowMatch(r){

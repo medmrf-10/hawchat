@@ -23,7 +23,7 @@
 .stat .bar i{display:block;height:100%;background:var(--read)}
 .stat.lst .bar i{background:var(--listen)}
 /* breadcrumb */
-.crumb{font-size:var(--fs-xs);color:var(--dim);margin-top:6px;display:flex;gap:6px;flex-wrap:nowrap;align-items:center;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
+.crumb{font-size:var(--fs-xs);color:var(--dim);margin-top:6px;display:flex;gap:6px;flex-wrap:wrap;align-items:center;min-width:0}
 .crumb::-webkit-scrollbar{display:none}
 .crumb a{color:var(--acc2);text-decoration:none;display:inline-flex;align-items:center;min-height:44px;min-width:44px;flex:none}
 .crumb bdi,.crumb>span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}

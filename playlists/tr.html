@@ -198,13 +198,13 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
     app.innerHTML=h;
     const nav=document.getElementById('navb');nav.hidden=false;
     const dayNow=document.documentElement.dataset.theme==='day';
-    nav.innerHTML='<button id="cpy" aria-label="نسخ نص الدرس" title="نسخ نص الدرس كاملاً"><svg style="width:1.1em;height:1.1em"><use href="icons.svg?v=11#i-copy"/></svg><span class="cpl"> نسخ</span></button>'
+    nav.innerHTML='<button id="cpy" aria-label="نسخ نص الدرس" title="نسخ نص الدرس كاملاً"><svg style="width:1.1em;height:1.1em"><use href="icons.svg?v=12#i-copy"/></svg><span class="cpl"> نسخ</span></button>'
       +(summed.has(x.n)?'<button id="sum" title="عرض ملخص الدرس" style="min-width:44px;color:var(--acc2)">☰</button>':'')
       +(aligned.has(x.n)?'<a href="lesson.html?s='+encodeURIComponent(row.sSlug||ssl)+'&l='+x.n+'" title="مشاهدة حية مع المحاذاة" style="min-width:44px;color:var(--violet)">▶</a>':'')
       +'<span class="pos">'+(i+1)+' / '+ROWS.length+'</span>'
       +'<button id="zout" aria-label="تصغير الخط" title="تصغير الخط" style="min-width:44px">أ−</button>'
       +'<button id="zin" aria-label="تكبير الخط" title="تكبير الخط" style="min-width:44px">أ+</button>'
-      +'<button id="dnt" aria-label="تبديل نهاري/ليلي" title="نهاري/ليلي" style="min-height:44px;width:44px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--card);color:var(--txt);cursor:pointer;display:inline-flex;align-items:center;justify-content:center"><svg style="width:1.2em;height:1.2em"><use href="icons.svg?v=11#'+(dayNow?'i-sun':'i-moon')+'"/></svg></button>';
+      +'<button id="dnt" aria-label="تبديل نهاري/ليلي" title="نهاري/ليلي" style="min-height:44px;width:44px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--card);color:var(--txt);cursor:pointer;display:inline-flex;align-items:center;justify-content:center"><svg style="width:1.2em;height:1.2em"><use href="icons.svg?v=12#'+(dayNow?'i-sun':'i-moon')+'"/></svg></button>';
     const sb=document.getElementById('sum');if(sb)sb.onclick=()=>showSum();
     const zAp=()=>{localStorage.setItem('trfs',FS);document.querySelectorAll('.txt').forEach(e=>e.style.fontSize=FS+'rem')};
     document.getElementById('zin').onclick=()=>{FS=Math.min(2.6,+(FS+0.15).toFixed(2));zAp()};
@@ -213,7 +213,7 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
       const day=document.documentElement.dataset.theme!=='day';
       if(day)document.documentElement.dataset.theme='day';else delete document.documentElement.dataset.theme;
       store.set('trtheme',day?'day':'night');
-      document.getElementById('dnt').innerHTML='<svg style="width:1.2em;height:1.2em"><use href="icons.svg?v=11#'+(day?'i-sun':'i-moon')+'"/></svg>';
+      document.getElementById('dnt').innerHTML='<svg style="width:1.2em;height:1.2em"><use href="icons.svg?v=12#'+(day?'i-sun':'i-moon')+'"/></svg>';
       const mc=document.querySelector('meta[name="theme-color"]');if(mc)mc.setAttribute('content',day?'#f6f0df':'#0b0f1a');
     };
     const tx=cleanTxt(await loadText(x));

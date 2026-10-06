@@ -20,9 +20,9 @@
 </head>
 <body class="dpage">
 <header class="hd dhd"><div class="hd-in">
-  <a href="." id="back" class="btn" aria-label="قائمة دروس السلسلة"><svg class="i"><use href="icons.svg?v=11#i-back"/></svg></a>
+  <a href="." id="back" class="btn" aria-label="قائمة دروس السلسلة"><svg class="i"><use href="icons.svg?v=12#i-back"/></svg></a>
   <a class="dhd-t" id="hser" href="."><b id="hrow">سلاسل المشايخ</b><small id="hsh"></small></a>
-  <button class="btn" id="bshare" aria-label="مشاركة الدرس"><svg class="i"><use href="icons.svg?v=11#i-share"/></svg></button>
+  <button class="btn" id="bshare" aria-label="مشاركة الدرس"><svg class="i"><use href="icons.svg?v=12#i-share"/></svg></button>
 </div><div class="u-prog"><i id="pbar"></i></div></header>
 <main class="dmain">
   <section id="media" class="dmedia"></section>
@@ -34,7 +34,7 @@
 </main>
 <nav class="dnav" id="dnav" aria-label="التنقل بين الدروس" hidden>
   <button id="nprev" aria-label="الدرس السابق"><svg class="i" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" style="transform:scaleX(-1)"><path d="M10 3 5 8l5 5"/></svg><span>السابق</span></button>
-  <button id="nlist" class="dpos" aria-haspopup="dialog" aria-label="كل دروس السلسلة"><svg class="i"><use href="icons.svg?v=11#i-list"/></svg><span id="npos"></span></button>
+  <button id="nlist" class="dpos" aria-haspopup="dialog" aria-label="كل دروس السلسلة"><svg class="i"><use href="icons.svg?v=12#i-list"/></svg><span id="npos"></span></button>
   <button id="nnext" aria-label="الدرس التالي"><span>التالي</span><svg class="i" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 3 5 8l5 5"/></svg></button>
 </nav>
 <div class="dsheet" id="sheet" hidden role="dialog" aria-modal="true" aria-label="دروس السلسلة">
@@ -49,7 +49,7 @@
 <script src="core.js?v=2"></script>
 <script src="media.js?v=1"></script>
 <script>
-const ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';
+const ic=id=>'<svg class="i"><use href="icons.svg?v=12#'+id+'"/></svg>';
 const TABS=[['read','النص','i-read'],['sm','الملخص','i-list'],['qu','أسئلة وأجوبة','i-qu']];
 const $=id=>document.getElementById(id);
 let ctx,row,st,X,TAB,MED,AP=null,REQ=0,FS=parseFloat(localStorage.getItem('trfs'))||1.15;

@@ -16,7 +16,7 @@ const HM=(()=>{
   const SP=[0.75,1,1.25,1.5,1.75,2];
   /* audio-only player; returns {destroy}. el gets the whole UI. */
   function audio(el,o){
-    const ic=i=>'<svg class="i"><use href="icons.svg?v=11#'+i+'"/></svg>';
+    const ic=i=>'<svg class="i"><use href="icons.svg?v=12#'+i+'"/></svg>';
     let si=Math.max(0,SP.indexOf(+store.get('aspd',1)));if(si<0)si=1;
     el.innerHTML='<div class="ap" role="group" aria-label="مشغّل الصوت">'
       +'<div class="ap-ph"><div id="apy"></div></div>'

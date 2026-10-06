@@ -31,7 +31,9 @@
 .gapnote{display:flex;align-items:center;gap:8px;color:var(--ink-3);font-size:var(--fs-xs);padding:2px 14px}
 .gapnote i{flex:1;height:1px;background:var(--line-1)}
 .stitle{font-size:1.15rem;font-weight:800;margin:4px 0 2px}
-.smeta{color:var(--ink-3);font-size:var(--fs-xs);margin-bottom:4px}
+.smeta{color:var(--ink-3);font-size:var(--fs-xs);margin-bottom:4px}.smeta a{display:inline-block;padding:12px 0;margin:-12px 0}
+.avall{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin-top:12px;font-size:var(--fs-xs);color:var(--ink-3)}
+.avall i{font-style:normal;display:inline-flex;align-items:center;gap:4px;color:var(--ink-2)}.avall .i{width:15px;height:15px;color:var(--gold-2)}
 .lrow .t small{display:block;color:var(--ink-3);font-size:var(--fs-xs)}
 .lrow .bd{display:flex;gap:10px;color:var(--ink-3)}
 .lrow .bd .i{width:1.15em;height:1.15em}
@@ -51,7 +53,7 @@
   background:linear-gradient(160deg,rgba(224,90,79,.08),var(--bg-2));color:var(--txt)}
 .ytpl .i{width:26px;height:26px;color:#e05a4f;flex:none}
 .ytpl span{flex:1;font-size:var(--fs-sm)}.ytpl small{display:block;color:var(--ink-3);font-size:var(--fs-xs)}
-.mchips{display:flex;gap:6px;overflow-x:auto;margin-top:12px;padding-bottom:2px;scrollbar-width:none}
+.mchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
 .mchips::-webkit-scrollbar{display:none}
 .mc{flex:none;min-height:40px;display:inline-flex;align-items:center;gap:6px;padding:0 12px;border-radius:99px;border:1px solid var(--line-2);
   background:var(--bg-2);color:var(--ink-2);font-family:var(--font-ui);font-size:var(--fs-xs);cursor:pointer}
@@ -76,7 +78,7 @@
 <script src="common.js?v=11"></script>
 <script src="core.js?v=2"></script>
 <script>
-const ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';
+const ic=id=>'<svg class="i"><use href="icons.svg?v=12#'+id+'"/></svg>';
 const MIC={listen:'i-watch',read:'i-read',yt:'i-yt',aud:'i-audio',sm:'i-list',qu:'i-qu'};
 (async()=>{
   const q=new URLSearchParams(location.search);
@@ -93,6 +95,8 @@ const MIC={listen:'i-watch',read:'i-read',yt:'i-yt',aud:'i-audio',sm:'i-list',qu
   const ln0=parseInt(q.get('l'),10)||0;
   if(ln0&&ctx.by.has(ln0)){const x=ctx.by.get(ln0),m=HC.best(x,mode);if(m){location.replace(HC.href(ctx,x,m));return}}
   const cnt={};for(const [k] of HC.MODES)cnt[k]=ctx.list.filter(x=>x.has[k]).length;
+  const NL=ctx.list.length,full=k=>cnt[k]===NL,part=HC.MODES.filter(([k])=>cnt[k]&&!full(k)&&k!=='aud');
+  const allM=HC.MODES.filter(([k])=>full(k)&&k!=='aud');
   const MN=Object.fromEntries(HC.MODES.map(m=>[m[0],m[2]]));
   document.title=(mode?MN[mode]+' — ':'')+row.title+' — '+st.name;
   const hist=(store.get('hist',[])||[]).find(h=>h.r===row.id);
@@ -102,9 +106,10 @@ const MIC={listen:'i-watch',read:'i-read',yt:'i-yt',aud:'i-audio',sm:'i-list',qu
     +'<div class="resline"><button class="rfav" id="rfav" aria-pressed="'+store.fav(row.id)+'">'+ic('i-star')+'<span>'+(store.fav(row.id)?'في المفضلة':'أضف للمفضلة')+'</span></button>'
     +'<button class="rfav" id="roff">'+ic('i-offline')+'<span>حفظ للقراءة دون اتصال</span></button>'
     +(resX?'<a href="'+HC.href(ctx,resX,HC.best(resX,rs.m||mode))+'">'+ic('i-play')+'تابع: الدرس '+resX.n+'</a>':'')+'</div>'
-    +'<div class="mchips" role="toolbar" aria-label="تصفية حسب المتوفر">'
-      +'<button class="mc'+(mode?'':' on')+'" data-m="">الكل <b>'+ctx.list.length+'</b></button>'
-      +HC.MODES.filter(([k])=>cnt[k]).map(([k,i,a])=>'<button class="mc'+(mode===k?' on':'')+'" data-m="'+k+'" title="'+a+'">'+ic(i)+'<span>'+a+'</span> <b>'+cnt[k]+'</b></button>').join('')+'</div>'
+    +(allM.length?'<div class="avall"><span>في كل الدروس:</span>'+allM.map(([k,i,a])=>'<i>'+ic(i)+a+'</i>').join('')+'</div>':'')
+    +(part.length?'<div class="mchips" role="toolbar" aria-label="تصفية حسب المتوفر">'
+      +'<button class="mc'+(mode&&!full(mode)?'':' on')+'" data-m="">الكل <b>'+ctx.list.length+'</b></button>'
+      +part.map(([k,i,a])=>'<button class="mc'+(mode===k?' on':'')+'" data-m="'+k+'" title="'+a+'">'+ic(i)+'<span>'+a+'</span> <b>'+cnt[k]+'</b></button>').join('')+'</div>':'')
     +'<input class="sflt" id="sflt" type="search" aria-label="ابحث في دروس السلسلة" placeholder="ابحث في دروس السلسلة…">'
     +(row.unv?'<div class="unv">ترجمة آلية مأخوذة من يوتيوب — غير مدققة بعد</div>':'')
     +'<div id="ytpl"></div><div id="lst" aria-live="polite"></div>';
@@ -121,7 +126,7 @@ const MIC={listen:'i-watch',read:'i-read',yt:'i-yt',aud:'i-audio',sm:'i-list',qu
       const seen=store.seen(row.id+':'+x.n),isCur=rs&&rs.n===x.n;
       h+='<a class="lrow cin'+(seen?' seen':'')+(isCur?' cur':'')+'" href="'+HC.href(ctx,x,m)+'"><span class="num">'+x.n+'</span>'
         +'<span class="t"><bdi>'+esc(x.title)+'</bdi>'+((x.dur||x.parts)?'<small>'+[HC.partOf(x),x.dur?fmtDur(x.dur):''].filter(Boolean).join(' · ')+'</small>':'')+'</span>'
-        +'<span class="bd" aria-label="المتوفر">'+HC.MODES.filter(([k])=>x.has[k]&&k!=='aud').map(([k,i,a])=>'<span class="ic-'+k+'" title="'+a+'">'+ic(i)+'</span>').join('')+'</span></a>';
+        +'<span class="bd" aria-label="المتوفر">'+part.filter(([k])=>x.has[k]).map(([k,i,a])=>'<span class="ic-'+k+'" title="'+a+'">'+ic(i)+'</span>').join('')+'</span></a>';
     }
     lst.innerHTML=n?h:'<p class="empty">'+(fq?'لا نتائج.':'لا دروس بعد.')+'</p>';
   };

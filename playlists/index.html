@@ -63,11 +63,11 @@ main .wrap>div:last-child{padding:0 var(--sp-3)}
 .u-sh .shm{color:var(--ink-3);font-size:.72rem;margin-top:2px}
 .u-sh .shc{display:flex;gap:10px;justify-content:center;margin-top:8px;min-height:18px}
 .u-sh .shc i{font-style:normal;display:inline-flex;align-items:center;gap:3px;font-size:.72rem;color:var(--gold-3);font-variant-numeric:tabular-nums}
-.u-sh .shc i.v{color:var(--violet)}.u-sh .shc i.s{color:#4fb3c9}.u-sh .shc .i{width:14px;height:14px}
+.u-sh .shc i,.u-sh .shc i.v,.u-sh .shc i.s{color:var(--ink-2)}.u-sh .shc .i{color:var(--gold-2)}.u-sh .shc .i{width:14px;height:14px}
 .u-sh .nm{min-height:2.8em;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;padding:0 6px;max-width:100%;overflow-wrap:anywhere}
-.u-sh .shc{flex-wrap:wrap;gap:4px 8px;padding:0 4px}
+.u-sh .shc{flex-wrap:nowrap;gap:9px;padding:0 4px;max-width:100%}.u-sh .shc i{gap:3px;white-space:nowrap}
 .u-sh .shm{padding:0 4px}
-@media(max-width:360px){.u-sh .ph{width:56px;height:56px}.u-sh .shc i{font-size:.68rem}}
+@media(max-width:360px){.u-sh .ph{width:60px;height:60px}.u-sh .shc{gap:6px}.u-sh .shc i{font-size:.66rem}.u-sh .shc .i{width:12px;height:12px}}
 .gsrch{position:relative;margin:0 var(--sp-3) 16px}
 .gsrch input{width:100%;height:48px;background:var(--bg-2);border:1px solid var(--line-2);border-radius:var(--r-md);color:var(--txt);
   padding:0 14px;font-family:var(--font-ui);font-size:var(--fs-sm)}
@@ -79,13 +79,13 @@ main .wrap>div:last-child{padding:0 var(--sp-3)}
 .gempty{color:var(--ink-3);text-align:center}
 .ctit{display:none}
 #cont{padding:0!important}#cont .u-sech{margin-top:4px}
-#cont .crow{padding:0 var(--sp-3) 6px;scroll-snap-type:x mandatory;scroll-padding:0 var(--sp-3)}
-#cont .ccard{scroll-snap-align:start;flex:0 0 min(84%,320px);max-width:none;display:flex;flex-direction:row;align-items:center;gap:12px;padding:12px;border-radius:16px;min-height:84px}
+#cont .crow{padding:0 var(--sp-3)}
+#cont .ccard{flex:none;width:100%;max-width:none;display:flex;flex-direction:row;align-items:center;gap:12px;padding:12px;border-radius:16px;min-height:84px}
 #cont .ccard.first{border-color:rgba(201,162,75,.5);background:linear-gradient(160deg,rgba(201,162,75,.14),var(--card))}
 #cont .cph{flex:none;width:52px;height:52px;border-radius:50%;overflow:hidden;background:var(--bg-2);border:2px solid var(--gold-1)}#cont .cph img{width:100%;height:100%;object-fit:cover;object-position:50% 22%}
 #cont .cbd{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}#cont .cm{color:var(--gold-3);font-size:.7rem}
 #cont .cgo{flex:none;width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--gold-3),var(--gold-2));color:#0b0f1a;display:flex;align-items:center;justify-content:center}#cont .cgo .i{width:18px;height:18px;margin-inline-start:-2px}
-.crow{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:16px;scrollbar-width:none}
+.crow{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
 .crow::-webkit-scrollbar{display:none}
 .ccard{flex:0 0 72%;max-width:280px;display:flex;flex-direction:column;gap:3px;padding:12px 14px;border-radius:var(--r-md);
   border:1px solid var(--line-2);background:linear-gradient(160deg,var(--card),var(--bg-2));color:var(--txt);text-decoration:none}
@@ -117,7 +117,7 @@ main .wrap>div:last-child{padding:0 var(--sp-3)}
 <script src="core.js?v=2"></script>
 <script>
 let _stats={},showSoon=false,_mode='lsn';
-const ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';
+const ic=id=>'<svg class="i"><use href="icons.svg?v=12#'+id+'"/></svg>';
 const MODES=[['rd','i-read','قراءة'],['yt','i-yt','يوتيوب'],['lsn','i-watch','مشاهدة حية'],['qu','i-qu','أسئلة'],['aud','i-audio','استماع'],['sm','i-list','تلخيص']];
 const MCOUNT={rd:r=>r.rdn||0,yt:r=>r.ytn||0,lsn:r=>r.wan||0,qu:r=>r.qn||0,aud:r=>(r.ytn||0)+(r.aun||0),sm:r=>r.sun||0};
 function drawBar(){
@@ -191,7 +191,7 @@ document.getElementById('impf').addEventListener('change',e=>{
 });
 /* continue where you left off — written by core.js on every lesson page */
 function drawCont(){
-  const h=(store.get('hist',[])||[]).slice(0,6),el=document.getElementById('cont');
+  const h=(store.get('hist',[])||[]).slice(0,3),el=document.getElementById('cont');
   const MN={listen:'مشاهدة حية',read:'قراءة',yt:'فيديو',aud:'استماع',sm:'ملخص',qu:'أسئلة'};
   const own={};for(const s in _stats){if(s==='_meta')continue;for(const r of _stats[s].rows||[])own[r.id]=_stats[s]}
   el.innerHTML=h.length?'<div class="u-sech"><h2>تابع من حيث توقفت</h2></div><div class="crow">'+h.map((x,i)=>{const st=own[x.r]||{};

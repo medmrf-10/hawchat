@@ -95,7 +95,7 @@ const HC=(()=>{
     d.seen=d.seen||{};d.seen[rowId+':'+n]=Date.now();
     store._w(d);
   }
-  const _ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';
+  const _ic=id=>'<svg class="i"><use href="icons.svg?v=12#'+id+'"/></svg>';
   /* lesson pages: a tab strip that switches mode for the SAME lesson */
   async function mountTabs(active){
     try{
@@ -108,12 +108,12 @@ const HC=(()=>{
       let bar=document.getElementById('ltabs');
       if(!bar){bar=document.createElement('nav');bar.id='ltabs';bar.className='ltabs';bar.setAttribute('aria-label','طريقة عرض الدرس');
         const hd=document.querySelector('header.hd');hd?hd.after(bar):document.body.prepend(bar)}
-      const avail=MODES.filter(([k])=>x.has[k]);
+      const SHORT={listen:'مشاهدة',yt:'فيديو'};const avail=MODES.filter(([k])=>x.has[k]);
       if(avail.length<2){bar.hidden=true;return}
       bar.hidden=false;
       bar.innerHTML='<div class="ltabs-in">'+avail.map(([k,i,a])=>k===active
-        ?'<span class="lt on" aria-current="page">'+_ic(i)+'<span>'+a+'</span></span>'
-        :'<a class="lt" href="'+href(ctx,x,k)+'">'+_ic(i)+'<span>'+a+'</span></a>').join('')+'</div>';
+        ?'<span class="lt on" aria-current="page">'+_ic(i)+'<span>'+(SHORT[k]||a)+'</span></span>'
+        :'<a class="lt" href="'+href(ctx,x,k)+'">'+_ic(i)+'<span>'+(SHORT[k]||a)+'</span></a>').join('')+'</div>';
     }catch(e){}
   }
   // pages that switch lesson in place (pushState) keep their tabs in sync
