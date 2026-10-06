@@ -120,7 +120,6 @@ input,select,textarea{font-size:16px}
 .tile.rd{color:var(--gold-3)}.tile.lsn{color:var(--violet)}.tile.sm{color:#4fb3c9}.tile.yt{color:#e05a4f}.tile.qu{color:#8fb3e0}
 .tile.fv{color:var(--ink-3)}
 .tile.fv.on{color:var(--gold-3);background:rgba(201,162,75,.12)}
-.tile.ok{border-color:rgba(70,201,109,.6);box-shadow:inset 0 0 0 1px rgba(70,201,109,.22)}
 .tile.ok .i{box-shadow:0 0 0 2px rgba(70,201,109,.75);border-radius:50%;padding:2px}
 .tile.off{opacity:.32}
 .tgrid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line-1);
