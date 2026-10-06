@@ -46,17 +46,7 @@ a.mini{color:var(--ink-3);display:inline-flex;align-items:center;justify-content
   <span class="sub" style="color:var(--ink-3);font-size:var(--fs-xs)">سلاسل المشايخ</span>
 </div></header>
 <main><div class="wrap">
-  <div class="u-hero cin"><h1>سلاسل المشايخ</h1>
-    <div class="meta"><span id="count"></span><span class="kpis" id="kpis"></span><span id="upd" style="color:var(--ink-3);font-size:var(--fs-xs)"></span></div>
-  </div>
-  <div class="u-search cin"><input type="search" id="flt" aria-label="ابحث عن شيخ أو سلسلة" enterkeyhint="search" placeholder="ابحث عن شيخ أو سلسلة…"><svg class="i"><use href="icons.svg#i-search"/></svg></div>
-  <div id="cont"></div>
-  <div id="favwrap" hidden>
-    <div class="u-sech"><h2>المفضلة</h2><span class="cnt" id="favcnt"></span></div>
-    <div id="favs" class="u-grid favgrid"></div>
-  </div>
   <div class="u-sech"><h2>المشايخ</h2><span class="cnt" id="shcnt"></span></div>
-  <div id="nres" aria-live="polite"></div>
   <div id="groups" class="u-grid"></div>
   <div id="sres" class="sres"></div>
   <button id="soonh" class="soonh" hidden></button>
@@ -68,13 +58,8 @@ a.mini{color:var(--ink-3);display:inline-flex;align-items:center;justify-content
 </div></main>
 <script src="common.js?v=11"></script>
 <script>
-let _stats={},flt='',showSoon=false;
-let _sl=null,_slP=null;
-// E7: lesson-level titles load lazily on the first search keystroke —
-// the index (~500KB) isn't worth fetching for users who never search.
-function loadSL(){if(!_slP)_slP=j('data/search_lessons.json').then(d=>{_sl=d||{}});return _slP}
+let _stats={},showSoon=false;
 const ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';
-const num=(kind,n,label,ok,icn)=>'<span class="u-num '+kind+'">'+ic(icn||(kind==='rd'?'i-read':'i-listen'))+'<b>'+n+'</b>'+(ok?'<b class="ok">'+ic('i-check')+'</b>':'')+'<small>'+label+'</small></span>';
 function shCard(st,slug,fav){
   const init=(st.name||'؟').replace(/^ال/,'').trim()[0]||'؟';
   const rows=st.rows||[];
@@ -96,97 +81,25 @@ function shCard(st,slug,fav){
     +tk('sm','i-list',agg('sm'),'تلخيص')
     +'</span></div>';
 }
-function slugOf(st){for(const s in _stats)if(_stats[s]===st)return s;return''}
-function allR(st){return st.rows.length&&st.rows.every(r=>r.rOk)}
-function allW(st){const w=st.rows.filter(r=>r.wtt);return w.length&&w.every(r=>r.wOk)}
+
 function draw(){
-  const g=document.getElementById('groups'),sg=document.getElementById('soong'),sr=document.getElementById('sres');
-  g.innerHTML='';sg.innerHTML='';sr.innerHTML='';
-  let withC=[],without=[],sres=[];
+  const g=document.getElementById('groups'),sg=document.getElementById('soong');
+  g.innerHTML='';sg.innerHTML='';
+  let withC=[],without=[];
   for(const slug in _stats){if(slug==='_meta')continue;const st=_stats[slug];st._slug=slug;
     (st.rows&&st.rows.length?withC:without).push(st)}
   withC.sort((a,b)=>(a.order||999)-(b.order||999));
   without.sort((a,b)=>(a.order||999)-(b.order||999));
-  for(const st of withC){
-    const hay=normalize(st.name+' '+(st.aliases||[]).join(' '));
-    if(flt&&!hay.includes(flt)){
-      for(const r of (st.rows||[]))if(normalize(r.title).includes(flt))sres.push({st,r});
-      continue}
-    g.insertAdjacentHTML('beforeend',shCard(st,st._slug));
-  }
+  for(const st of withC)g.insertAdjacentHTML('beforeend',shCard(st,st._slug));
   for(const st of without){
-    if(flt&&!normalize(st.name+' '+(st.aliases||[]).join(' ')).includes(flt))continue;
     const init=(st.name||'؟').replace(/^ال/,'').trim()[0]||'؟';
-    sg.insertAdjacentHTML('beforeend','<a class="u-sh soon" aria-disabled="true"><span class="ph"><span>'+init+'</span></span><span class="nm">'+esc(st.name)+'</span></a>');
-  }
-  for(const x of sres){
-    sr.insertAdjacentHTML('beforeend','<a href="'+esc(x.r.read)+'"><span>'+esc(x.r.title)+'</span><small>'+esc(x.st.name)+'</small></a>');
-  }
-  let lmatch=0;
-  if(flt&&_sl){
-    let n=0;
-    for(const slug in _stats){if(slug==='_meta')continue;const st=_stats[slug];
-      for(const r of (st.rows||[])){const e=_sl[r.id];if(!e)continue;
-        for(const pair of (e.L||[])){const ln=pair[0],lt=pair[1]||('الدرس '+ln);
-          if(!normalize(lt).includes(flt))continue;if(++n>24)break;
-          const href=e.ss?('lesson.html?s='+encodeURIComponent(e.ss)+'&l='+ln):('tr.html?r='+encodeURIComponent(r.id)+'&l='+ln);
-          sr.insertAdjacentHTML('beforeend','<a href="'+esc(href)+'"><span>'+esc(lt)+'</span><small>'+esc(r.title+' — '+st.name)+'</small></a>');
-        }if(n>24)break}if(n>24)break}
-    lmatch=n;
+    sg.insertAdjacentHTML('beforeend','<div class="u-sh soon" aria-disabled="true"><span class="ph"><span>'+init+'</span></span><span class="nm">'+esc(st.name)+'</span></div>');
   }
   const sh=document.getElementById('soonh');
   sh.hidden=!without.length;sg.hidden=!showSoon;
   sh.innerHTML=showSoon?'إخفاء':'قريباً ('+without.length+')';
-  document.getElementById('count').textContent=withC.length+' شيخاً';
   document.getElementById('shcnt').textContent=withC.length+' شيخاً';
-  document.getElementById('nres').textContent=flt?(withC.some(st=>normalize(st.name+' '+(st.aliases||[]).join(' ')).includes(flt))||sres.length||lmatch?'':'لا نتائج.'):'';
-  drawFavs();
 }
-function drawFavs(){
-  const f=store.favList(),wrap=document.getElementById('favwrap'),el=document.getElementById('favs');
-  const cards=[];
-  for(const slug in _stats){if(slug==='_meta')continue;const st=_stats[slug];
-    if(!st.rows)continue;
-    for(const r of st.rows)if(f.includes(r.id))cards.push({st,r,slug});
-  }
-  wrap.hidden=!cards.length;
-  document.getElementById('favcnt').textContent=cards.length?cards.length+' سلسلة':'';
-  const seenL=store.seenList();
-  el.innerHTML=cards.map(x=>'<a class="u-sh" href="'+esc(x.r.read)+'">'
-    +''
-    +'<span class="ph"><span>'+esc((x.st.name||'؟').replace(/^ال/,'').trim()[0]||'؟')+'</span></span>'
-    +'<span class="nm">'+esc(x.r.title)+'</span>'
-    +'<span class="stats">'+(x.r.rdn?num('rd',x.r.rdn,'مقروء',x.r.rOk):'')+(x.r.wan?num('ls',x.r.wan,'مسموع',x.r.wOk):'')+(x.r.unv?num('unv',x.r.wan,'آلي غير مدقق',0,'i-auto'):'')+(x.r.sun?num('sm',x.r.sun,'ملخّص',0,'i-list'):'')+'</span></a>').join('');
-}
-function resumeItems(){
-  const rs=store.resumeList();if(!rs.length)return[];
-  const items=[];
-  for(const it of rs.slice(0,4)){
-    // keys are 'lspos:<series slug>:<lesson n>' saved by lesson.html
-    const m=it.k.match(/^lspos:(.+):(\d+)$/);
-    let found=null,sl=null,ln=it.n;
-    if(m){sl=m[1];ln=parseInt(m[2],10)||it.n;
-      for(const slug in _stats){if(slug==='_meta')continue;
-        const r=(_stats[slug].rows||[]).find(r=>r.sSlug===sl);
-        if(r){found={r,st:_stats[slug]};break}}
-    }else{
-      for(const slug in _stats){if(slug==='_meta')continue;
-        const r=(_stats[slug].rows||[]).find(r=>r.id===it.k);
-        if(r){found={r,st:_stats[slug]};break}}
-    }
-    if(found)items.push({h:sl?'lesson.html?s='+encodeURIComponent(sl)+'&l='+ln+(it.n?'&t='+it.n:''):'tr.html?r='+encodeURIComponent(it.k)+'&l='+ln,
-      t:found.r.title,sub:found.st.name+' — الدرس '+ln,rd:!sl,unv:found.r.unv});
-  }
-  return items;
-}
-function drawCont(){
-  const el=document.getElementById('cont');el.innerHTML='';
-  const items=resumeItems();if(!items.length)return;
-  el.innerHTML=items.map(x=>'<a class="u-cont cin" href="'+esc(x.h)+'">'+ic(x.rd?'i-read':(x.unv?'i-auto':'i-listen'))
-    +'<span class="tt">'+esc(x.t)+'<small>'+esc(x.sub)+'</small></span><span class="go">تابِع ←</span></a>').join('');
-}
-document.getElementById('flt').addEventListener('input',e=>{flt=normalize(e.target.value);
-  if(flt&&!_sl)loadSL().then(draw);else draw()});
 document.getElementById('soonh').addEventListener('click',()=>{showSoon=!showSoon;draw()});
 document.getElementById('exp').addEventListener('click',async e=>{
   e.preventDefault();
@@ -205,7 +118,7 @@ document.getElementById('impf').addEventListener('change',e=>{
   r.onload=()=>{
     if(store.import_(r.result)){
       const d=store._d(),nf=Object.keys(d.fav||{}).length,nr=Object.keys(d.resume||{}).length;
-      drawCont();drawFavs();
+      draw();
       if(typeof toast==='function')toast('استُعيدت بياناتك ('+nf+' مفضلة، '+nr+' موضع استئناف)');
     }else if(typeof toast==='function')toast('ملف غير صالح');
   };
@@ -214,17 +127,9 @@ document.getElementById('impf').addEventListener('change',e=>{
 (async()=>{
   document.getElementById('groups').innerHTML='<div class="skel" style="height:200px;border-radius:18px"></div><div class="skel" style="height:200px;border-radius:18px"></div>';
   const stats=await j('data/sheikh_stats.json');
-  if(!stats){document.getElementById('groups').innerHTML='';document.getElementById('kpis').innerHTML='<div class="errbox">تعذر تحميل بيانات السلاسل — <a href=".">أعد المحاولة</a></div>';return}
+  if(!stats){document.getElementById('groups').innerHTML='<div class="errbox">تعذر تحميل بيانات السلاسل — <a href=".">أعد المحاولة</a></div>';return}
   _stats=stats;
-  const upd=document.getElementById('upd');
-  if(upd&&stats._meta&&stats._meta.updated)upd.textContent='آخر تحديث: '+new Date(stats._meta.updated).toLocaleDateString('ar',{day:'numeric',month:'long'});
-  const qp=new URLSearchParams(location.search);
-  if(qp.get('go')==='cont'){const it=resumeItems();if(it.length){location.replace(it[0].h);return}}
-  if(qp.get('focus')==='search')setTimeout(()=>document.getElementById('flt').focus(),80);
-  let tR=0,tW=0;for(const k in stats){if(k==='_meta')continue;tR+=stats[k].read||0;tW+=stats[k].watch||0}
-  const tS=Object.keys(stats).filter(k=>k!=='_meta').reduce((a,k)=>a+(stats[k].sum||0),0);
-  document.getElementById('kpis').innerHTML=num('rd',tR,'مقروء',false)+num('ls',tW,'مسموع',false)+(tS?num('sm',tS,'ملخّص',false,'i-list'):'');
-  drawCont();draw();
+  draw();
 })();
 if('serviceWorker' in navigator)swRegister('../sw.js');
 </script>
