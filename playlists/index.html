@@ -85,7 +85,11 @@ function drawBar(){
 function shCard(st,slug){
   const init=(st.name||'؟').replace(/^ال/,'').trim()[0]||'؟';
   let tot=0,mn=0;
-  for(const r of st.rows||[]){tot+=r.ytn||r.wtt||0;if(_mode)mn+=MCOUNT[_mode](r)}
+  for(const r of st.rows||[]){
+    // aud's denominator is every audio item (yt + hosted), else the yt total —
+    // otherwise pct can exceed 100% and render fused like "91100%"
+    tot+=_mode==='aud'?(r.ytn||0)+(r.aun||0):(r.ytn||r.wtt||0);
+    if(_mode)mn+=MCOUNT[_mode](r)}
   const pct=tot?Math.round(mn/tot*100):0;
   return '<div class="u-sh cin">'
     +'<a class="u-top" href="sheikh.html?s='+encodeURIComponent(slug)+(_mode?'&f='+_mode:'')+'">'
@@ -104,8 +108,8 @@ function draw(){
   without.sort((a,b)=>(a.order||999)-(b.order||999));
   for(const st of withC)g.insertAdjacentHTML('beforeend',shCard(st,st._slug));
   for(const st of without){
-    const init=(st.name||'؟').replace(/^ال/,'').trim()[0]||'؟';
-    sg.insertAdjacentHTML('beforeend','<div class="u-sh soon" aria-disabled="true"><span class="ph"><span>'+init+'</span></span><span class="nm">'+esc(st.name)+'</span></div>');
+    // name only — an initial letter glued visually onto the name ("شالشعراوي")
+    sg.insertAdjacentHTML('beforeend','<div class="u-sh soon" aria-disabled="true"><span class="nm" style="flex-basis:auto;padding:14px 8px">'+esc(st.name)+'</span></div>');
   }
   const sh=document.getElementById('soonh');
   sh.hidden=!without.length;sg.hidden=!showSoon;

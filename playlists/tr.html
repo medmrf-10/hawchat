@@ -98,9 +98,12 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
   const synthetic=!slug;
   document.getElementById('back').href=SROWS?('row.html?s='+encodeURIComponent(ssl)):('sheikh.html?s='+encodeURIComponent(slug));
   document.getElementById('hdr-sub').textContent=META.name;
+  // crumb links use the row id (?r=) — ?s= yields «سلسلة غير موجودة» for
+  // rows without an sSlug, and «undefined» when the page was opened via ?r=
+  const rowHref='row.html?r='+encodeURIComponent(row.id);
   document.getElementById('crumb').innerHTML=synthetic
-    ?hdr(null,[{h:'.',t:'سلاسل المشايخ'},{h:'row.html?s='+encodeURIComponent(ssl),t:row.title}])
-    :hdr(null,[{h:'.',t:'سلاسل المشايخ'},{h:'sheikh.html?s='+encodeURIComponent(slug),t:META.name},{h:'row.html?s='+encodeURIComponent(ssl||row.sSlug),t:row.title}]);
+    ?hdr(null,[{h:'.',t:'سلاسل المشايخ'},{h:rowHref,t:row.title}])
+    :hdr(null,[{h:'.',t:'سلاسل المشايخ'},{h:'sheikh.html?s='+encodeURIComponent(slug),t:META.name},{h:rowHref,t:row.title}]);
   const rows=SROWS||(await j('data/read/'+encodeURIComponent(row.id)+'.json'));
   if(!rows||!rows.length){app.innerHTML='<div class="errbox">تعذر تحميل نصوص هذه السلسلة — <a href="sheikh.html?s='+encodeURIComponent(slug)+'">عودة</a></div>';return}
   // text-by-n fallback for ?s= rows lacking a lessons copy — the generator
@@ -137,7 +140,7 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
     h+='<div class="ls">';
     ROWS.forEach((x,i)=>{const hasT=!SROWS||x.trfile||byN[x.n];
       const seen=store.seen(row.id+':'+x.n),cur=res&&res.n===x.n;
-      if(hasT)h+='<a'+(cur?' class="on"':'')+' href="'+SELF+'&l='+x.n+'"><span class="num">'+x.n+'</span><span style="flex:1"><bdi>'+esc(x.title)+'</bdi></span>'+(seen?'<span style="color:var(--ok,#5fbf7f);flex:none">'+I.check+'</span>':'')+'</a>';
+      if(hasT)h+='<a'+(cur?' class="on"':'')+' href="'+SELF+'&l='+x.n+'"><span class="num">'+x.n+'</span><span style="flex:1"><bdi>'+esc(x.title)+'</bdi></span>'+(summed.has(x.n)?'<span title="فيه ملخص" style="color:var(--acc2);flex:none;font-size:.9rem">☰</span>':'')+(seen?'<span style="color:var(--ok,#5fbf7f);flex:none">'+I.check+'</span>':'')+'</a>';
       else h+='<a class="off" aria-disabled="true" style="opacity:.45;pointer-events:none"><span class="num" style="opacity:.6">'+x.n+'</span><span><bdi>'+esc(x.title)+'</bdi><small style="display:block;color:var(--dim)">لا نص بعد</small></span></a>'});
     h+='</div>';
     app.innerHTML=h;
@@ -156,7 +159,10 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
       break;
     }
     t=L.slice(i).join('\n');
-    return t.replace(/^https?:\/\/\S+\s*$/gm,'').replace(/\n{3,}/g,'\n\n').trim();
+    return t
+      .replace(/^(السلسلة|الشيخ|الفيديو|الحلقة|الدرس|الرابط|المصدر)\s*[:：].{0,200}$/gm,'')
+      .replace(/^<?https?:\/\/\S+>?\s*$/gm,'')
+      .replace(/\n{3,}/g,'\n\n').trim();
   }
   // one resolver for display + prefetch. series-native rows: lessons copy →
   // transcripts by vid → padded probe (3 then 2 digits, both layouts exist)
@@ -187,10 +193,12 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
     const nav=document.getElementById('navb');nav.hidden=false;
     const dayNow=document.documentElement.dataset.theme==='day';
     nav.innerHTML='<button id="cpy" aria-label="نسخ نص الدرس" title="نسخ نص الدرس كاملاً">⧉ نسخ</button>'
+      +(summed.has(x.n)?'<button id="sum" title="عرض ملخص الدرس" style="min-width:44px;color:var(--acc2)">☰</button>':'')
       +'<span class="pos">'+(i+1)+' / '+ROWS.length+'</span>'
       +'<button id="zout" aria-label="تصغير الخط" title="تصغير الخط" style="min-width:44px">أ−</button>'
       +'<button id="zin" aria-label="تكبير الخط" title="تكبير الخط" style="min-width:44px">أ+</button>'
       +'<button id="dnt" aria-label="تبديل نهاري/ليلي" title="نهاري/ليلي" style="min-height:44px;width:44px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--card);color:var(--txt);cursor:pointer;display:inline-flex;align-items:center;justify-content:center"><svg style="width:1.2em;height:1.2em"><use href="icons.svg?v=11#'+(dayNow?'i-sun':'i-moon')+'"/></svg></button>';
+    const sb=document.getElementById('sum');if(sb)sb.onclick=()=>showSum();
     const zAp=()=>{localStorage.setItem('trfs',FS);document.querySelectorAll('.txt').forEach(e=>e.style.fontSize=FS+'rem')};
     document.getElementById('zin').onclick=()=>{FS=Math.min(2.6,+(FS+0.15).toFixed(2));zAp()};
     document.getElementById('zout').onclick=()=>{FS=Math.max(0.8,+(FS-0.15).toFixed(2));zAp()};
