@@ -637,6 +637,12 @@ for sh in sheikhs:
         keep.append(r)
     rows[:] = keep
 
+    # sanctioned deletes (owner order): banned row ids / series slugs never surface —
+    # whatever source feeds them (mut manifest, series json, transcripts, inbox).
+    _sd = J(os.path.join(BASE, 'sanctioned_deletes.json')) or {}
+    _banned_ids = set(_sd.get('rows') or [])
+    _banned_slugs = set(_sd.get('slugs') or [])
+
     # ── invariants + links + read-rows ──
     for r in rows:
         r.pop('_mut', None)
@@ -649,6 +655,8 @@ for sh in sheikhs:
         for tag, kv in sorted(keys):
             rid = rid or ROW_IDS.get(slug, {}).get('%s:%s' % (tag, kv))
         r['id'] = rid or '%s--%s' % (slug, re.sub(r'[^\w\-]', '', str(key)))
+        if r['id'] in _banned_ids or r.get('sSlug') in _banned_slugs:
+            continue
         for tag, kv in keys:
             ROW_IDS.setdefault(slug, {})['%s:%s' % (tag, kv)] = r['id']
         rrows = []
@@ -720,6 +728,8 @@ for sh in sheikhs:
         r['rOk'] = bool(r['rtt'] and r['rdn'] >= r['rtt'])
         r['wOk'] = bool(r['rtt'] and r['wan'] >= r['rtt'])
 
+    rows[:] = [r for r in rows if r.get('id') and r['id'] not in _banned_ids
+               and r.get('sSlug') not in _banned_slugs]
     sordmap = sord.get(slug) or {}
     rows.sort(key=lambda r: (sordmap.get(r.get('id'), 9999), -r['wan'], natkey(r['title'])))
     read  = sum(r['rdn'] for r in rows)
@@ -789,6 +799,13 @@ for slug, v in out.items():
 dump_atomic(search, os.path.join(BASE, 'search.json'))
 # E7: per-row lesson titles — lazy-loaded by the index's #flt on first keystroke
 dump_atomic(SEARCH_L, os.path.join(BASE, 'search_lessons.json'), sort_keys=True)
+
+# drop stale read files of sanctioned-deleted rows (they may linger from before the ban)
+_sd2 = J(os.path.join(BASE, 'sanctioned_deletes.json')) or {}
+for _rid in (_sd2.get('rows') or []):
+    _f = os.path.join(BASE, 'read', _rid + '.json')
+    if os.path.exists(_f):
+        os.remove(_f)
 
 print('sheikhs', len(out) - 1, 'read', sum(v['read'] for k, v in out.items() if k != '_meta'),
       'watch', sum(v['watch'] for k, v in out.items() if k != '_meta'),
