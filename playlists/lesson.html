@@ -34,7 +34,8 @@ html,body{height:100%;overflow:hidden}
 .stage .tnx{margin-top:10px}
 .stage .ph{order:0}
 .pos{color:var(--dim);font-size:.7rem;text-align:center;margin-top:4px}
-.cbar{flex:none;margin-top:8px;display:flex;flex-direction:column;gap:6px}
+.czone{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:8px;margin-top:8px}
+.cbar{display:flex;flex-direction:column;gap:6px}
 .crow{display:flex;align-items:center;justify-content:center;gap:8px}
 .crow .btn{min-width:52px;min-height:52px;padding:0 12px;border-radius:99px;border:1px solid var(--border);background:var(--card);color:var(--txt);font-size:1rem;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:4px}
 .crow .btn:hover{border-color:var(--acc)}
@@ -290,7 +291,7 @@ document.addEventListener('keydown',e=>{
   if(aln&&l.video){
     h+='<div class="player"><iframe id="yfp" src="https://www.youtube-nocookie.com/embed/'+esc(l.video)+'?enablejsapi=1&rel=0&playsinline=1&iv_load_policy=3&hl=ar&origin='+encodeURIComponent(location.origin)+'" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>';
     h+='<div class="stage" id="stage"></div>';
-    h+='<div class="pos" id="pos"></div>';
+    h+='<div class="czone"><div class="pos" id="pos"></div>';
     h+='<div class="cbar"><div class="crow">'
       +'<button class="btn" onclick="seekPhrase(curPh-1)" aria-label="الجملة السابقة" title="الجملة السابقة">⇤</button>'
       +'<button class="btn" onclick="YTP&&YTP.seekTo(Math.max(0,YTP.getCurrentTime()-10),true)" aria-label="رجوع 10 ثوانٍ">↺10</button>'
@@ -302,7 +303,7 @@ document.addEventListener('keydown',e=>{
       +'<select id="slp" title="مؤقت النوم" onchange="if(SLEEP){clearTimeout(SLEEP);SLEEP=null}const m=parseInt(this.value);if(m){SLEEP=setTimeout(()=>{YTP&&YTP.pauseVideo();SLEEP=null},m*60000)}this.title=m?\'يتوقف خلال \'+this.value+\' د\':\'مؤقت النوم\'"><option value="0">نوم —</option><option value="15">15د</option><option value="30">30د</option><option value="45">45د</option><option value="60">60د</option></select>'
       +'<button class="chip'+(store.get('anx')===1?' on':'')+'" id="t-anx" title="التشغيل التلقائي للدرس التالي" onclick="const v=!(store.get(\'anx\')===1);store.set(\'anx\',v);this.classList.toggle(\'on\',v)">تلقائي</button>'
       +'<button class="chip'+(TELE?' on':'')+'" id="t-tele" title="وضع الملقّن" onclick="TELE=!TELE;store.set(\'tele\',TELE?1:0);this.classList.toggle(\'on\',TELE);renderPhrase(Math.max(0,curPh))">ملقّن</button>'
-      +'<button class="chip" id="shr" title="مشاركة الدرس" onclick="shareLesson(this)">↗ مشاركة</button></div></div>';
+      +'<button class="chip" id="shr" title="مشاركة الدرس" onclick="shareLesson(this)">↗ مشاركة</button></div></div></div>';
   }else{
     if(l.video)h+='<div class="player" id="pl"><div class="cover" id="cvr"><span class="big">▶</span><span>تشغيل الدرس من يوتيوب</span></div></div>';
     h+='<div class="tools" style="display:flex;gap:8px;margin-top:10px"><button id="fmi" aria-label="تصغير الخط" style="width:44px;height:44px;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--txt);font-size:1rem;cursor:pointer">A−</button>'
