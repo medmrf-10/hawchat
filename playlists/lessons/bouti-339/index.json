@@ -1,1 +1,1 @@
-{"af":{"1":"001.align.json"},"tf":{"1":"001.txt"},"align":[1],"alignOk":[1],"txt":[1]}
+{"af":{"4":"004.align.json","1":"001.align.json"},"tf":{"1":"001.txt","4":"004.txt"},"align":[1,4],"alignOk":[1,4],"txt":[1,4]}
