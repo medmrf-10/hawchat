@@ -29,7 +29,7 @@
 .u-num.rd .i{color:var(--gold-3)} .u-num.ls .i{color:var(--violet)}
 
 /* ── صف سلسلة (بطاقة) ── */
-.u-sr{position:relative;display:flex;flex-direction:column;gap:var(--sp-3);
+.u-sr{position:relative;display:flex;flex-direction:column;gap:var(--sp-3);text-decoration:none;color:inherit;
   background:linear-gradient(160deg,var(--card),var(--bg-2));border:1px solid var(--line-1);
   border-radius:var(--r-lg);padding:var(--sp-4);margin-bottom:var(--sp-3);box-shadow:var(--e-1);
   transition:border-color var(--t-fast) var(--ease)}
