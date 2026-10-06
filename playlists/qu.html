@@ -11,6 +11,7 @@
 <link rel="apple-touch-icon" href="../icons/favicon-180.png">
 <link rel="preload" href="../fonts/IBMPlexSansArabic-400-arabic.woff2" as="font" href="../fonts/IBMPlexSansArabic-400-arabic.woff2" crossorigin>
 <link rel="preload" href="../fonts/Amiri-400-arabic.woff2" as="font" href="../fonts/Amiri-400-arabic.woff2" crossorigin>
+<script>try{if(JSON.parse(localStorage.getItem('hc_store_v1')||'{}').trtheme==='day')document.documentElement.dataset.theme='day'}catch(e){}</script>
 <link rel="stylesheet" href="../theme.css?v=11">
 <link rel="stylesheet" href="common.css?v=11">
 <link rel="stylesheet" href="ui.css?v=11">
@@ -19,8 +20,10 @@
 h1{font-family:var(--font-ar);font-size:1.45rem;font-weight:700;color:var(--txt);margin:8px 0 4px;line-height:1.6}
 .lsub{color:var(--dim);font-size:var(--fs-xs);margin-bottom:16px}
 .qa{background:var(--card);border:1px solid var(--line-1);border-radius:var(--r-lg);padding:26px 28px;margin-bottom:14px;box-shadow:var(--e-1)}
-.qa .q{font-family:var(--font-ar);font-size:1.2rem;line-height:2.2;color:var(--gold-3);font-weight:700;margin-bottom:10px}
-.qa .a{font-family:var(--font-ar);font-size:1.15rem;line-height:2.2;color:var(--txt);white-space:pre-wrap}
+.qa .q{font-family:var(--font-ar);font-size:1.04em;line-height:2.2;color:var(--gold-3);font-weight:700;margin-bottom:10px}
+.qa .a{font-family:var(--font-ar);font-size:1em;line-height:2.2;color:var(--txt);white-space:pre-wrap}
+#qwrap{max-width:66ch;margin:0 auto;font-size:1.15rem}
+.navb button{min-height:44px;min-width:44px;padding:0 12px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--card);color:var(--txt);font-size:var(--fs-sm);cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
 .navb{position:fixed;bottom:0;left:0;right:0;background:var(--bgt);backdrop-filter:blur(14px);border-top:1px solid var(--border);padding:10px 14px calc(10px + env(safe-area-inset-bottom));display:flex;align-items:center;justify-content:center;gap:10px;z-index:50}
 .navb a{min-height:44px;padding:0 18px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--card);color:var(--txt);font-size:var(--fs-sm);text-decoration:none;display:inline-flex;align-items:center;gap:8px}
 .navb a.off{opacity:.35;pointer-events:none}
@@ -39,6 +42,7 @@ h1{font-family:var(--font-ar);font-size:1.45rem;font-weight:700;color:var(--txt)
 <script src="common.js?v=11"></script>
 <script>
 // عقد البيانات: lessons/<سلسلة>/NNN.qu.json — {"qa":[{"q":"…","a":"…"}]}
+let FS=parseFloat(localStorage.getItem('trfs'))||1.15;
 (async()=>{
   const q=new URLSearchParams(location.search);
   const app=document.getElementById('app');
@@ -67,15 +71,30 @@ h1{font-family:var(--font-ar);font-size:1.45rem;font-weight:700;color:var(--txt)
     const i=qus.indexOf(n);
     const fn=quf[n];const d=fn?await j('lessons/'+encodeURIComponent(row.sSlug)+'/'+encodeURIComponent(fn)):null;
     document.title='أسئلة الدرس '+n+' — '+row.title;
-    let h='<h1><bdi>'+esc(titleOf(n))+'</bdi></h1><div class="lsub">'+esc(row.title)+' · أسئلة الدرس '+n+' · '+esc(st.name)+'</div>';
+    let h='<h1><bdi>'+esc(titleOf(n))+'</bdi></h1><div class="lsub">'+esc(row.title)+' · أسئلة الدرس '+n+' · '+esc(st.name)+'</div><div id="qwrap" style="font-size:'+FS+'rem">';
     const qa=(d&&(d.qa||d.questions))||[];
     if(!qa.length){h+='<div class="errbox">تعذر تحميل الأسئلة.</div>'}
     else h+=qa.map(x=>'<div class="qa cin"><div class="q">'+esc(x.q||x.question||'')+'</div><div class="a">'+esc(x.a||x.answer||'')+'</div></div>').join('');
+    h+='</div>';
     app.innerHTML=h;
     const nav=document.getElementById('navb');nav.hidden=false;
+    const dayNow=document.documentElement.dataset.theme==='day';
     nav.innerHTML=(i>0?'<a href="?r='+encodeURIComponent(row.id)+'&l='+qus[i-1]+'">→ السابق</a>':'<a class="off">→ السابق</a>')
-      +'<span class="pos">'+esc(row.title)+' — '+(i+1)+' / '+qus.length+'</span>'
-      +(i<qus.length-1?'<a href="?r='+encodeURIComponent(row.id)+'&l='+qus[i+1]+'">التالي ←</a>':'<a class="off">التالي ←</a>');
+      +'<span class="pos">'+(i+1)+' / '+qus.length+'</span>'
+      +(i<qus.length-1?'<a href="?r='+encodeURIComponent(row.id)+'&l='+qus[i+1]+'">التالي ←</a>':'<a class="off">التالي ←</a>')
+      +'<button id="zout" aria-label="تصغير الخط" title="تصغير الخط">أ−</button>'
+      +'<button id="zin" aria-label="تكبير الخط" title="تكبير الخط">أ+</button>'
+      +'<button id="dnt" aria-label="نهاري/ليلي" title="نهاري/ليلي"><svg style="width:1.2em;height:1.2em"><use href="icons.svg?v=11#'+(dayNow?'i-sun':'i-moon')+'"/></svg></button>';
+    const zAp=()=>{localStorage.setItem('trfs',FS);const el=document.getElementById('qwrap');if(el)el.style.fontSize=FS+'rem'};
+    document.getElementById('zin').onclick=()=>{FS=Math.min(2.6,+(FS+0.15).toFixed(2));zAp()};
+    document.getElementById('zout').onclick=()=>{FS=Math.max(0.8,+(FS-0.15).toFixed(2));zAp()};
+    document.getElementById('dnt').onclick=()=>{
+      const day=document.documentElement.dataset.theme!=='day';
+      if(day)document.documentElement.dataset.theme='day';else delete document.documentElement.dataset.theme;
+      store.set('trtheme',day?'day':'night');
+      document.getElementById('dnt').innerHTML='<svg style="width:1.2em;height:1.2em"><use href="icons.svg?v=11#'+(day?'i-sun':'i-moon')+'"/></svg>';
+      const mc=document.querySelector('meta[name="theme-color"]');if(mc)mc.setAttribute('content',day?'#f6f0df':'#0b0f1a');
+    };
   }
   show(want&&qus.includes(want)?want:qus[0]);
 })();

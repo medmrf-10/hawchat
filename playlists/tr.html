@@ -188,7 +188,12 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
     const dayNow=document.documentElement.dataset.theme==='day';
     nav.innerHTML='<button id="cpy" aria-label="نسخ نص الدرس" title="نسخ نص الدرس كاملاً">⧉ نسخ</button>'
       +'<span class="pos">'+(i+1)+' / '+ROWS.length+'</span>'
+      +'<button id="zout" aria-label="تصغير الخط" title="تصغير الخط" style="min-width:44px">أ−</button>'
+      +'<button id="zin" aria-label="تكبير الخط" title="تكبير الخط" style="min-width:44px">أ+</button>'
       +'<button id="dnt" aria-label="تبديل نهاري/ليلي" title="نهاري/ليلي" style="min-height:44px;width:44px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--card);color:var(--txt);cursor:pointer;display:inline-flex;align-items:center;justify-content:center"><svg style="width:1.2em;height:1.2em"><use href="icons.svg?v=11#'+(dayNow?'i-sun':'i-moon')+'"/></svg></button>';
+    const zAp=()=>{localStorage.setItem('trfs',FS);document.querySelectorAll('.txt').forEach(e=>e.style.fontSize=FS+'rem')};
+    document.getElementById('zin').onclick=()=>{FS=Math.min(2.6,+(FS+0.15).toFixed(2));zAp()};
+    document.getElementById('zout').onclick=()=>{FS=Math.max(0.8,+(FS-0.15).toFixed(2));zAp()};
     document.getElementById('dnt').onclick=()=>{
       const day=document.documentElement.dataset.theme!=='day';
       if(day)document.documentElement.dataset.theme='day';else delete document.documentElement.dataset.theme;
@@ -242,7 +247,6 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
     el.innerHTML='<b style="color:var(--acc2)">☰ الملخص</b>'
       +(sm.summary||sm.p?'<p style="line-height:2">'+esc(sm.summary||sm.p)+'</p>':'')
       +(sm.points&&sm.points.length?'<ul>'+sm.points.map(b=>'<li style="line-height:1.9">'+esc(b)+'</li>').join('')+'</ul>':'')
-      +(sm.fit||sm.s?'<div style="color:var(--acc2);font-size:.85rem;margin-top:8px">يصلح لدرس مسجد: '+esc(sm.fit||sm.s)+'</div>':'')
       +(sm.note?'<div style="color:var(--txt3);font-size:.8rem;margin-top:6px">'+esc(sm.note)+'</div>':'');
     return false;
   };

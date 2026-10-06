@@ -66,7 +66,7 @@ main .wrap>div:last-child{padding:0 var(--sp-3)}
 </div></main>
 <script src="common.js?v=11"></script>
 <script>
-let _stats={},showSoon=false,_mode='';
+let _stats={},showSoon=false,_mode='lsn';
 const ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';
 const MODES=[['rd','i-read','قراءة'],['yt','i-yt','يوتيوب'],['lsn','i-watch','مشاهدة حية'],['qu','i-qu','أسئلة'],['aud','i-audio','استماع'],['sm','i-list','تلخيص']];
 const MCOUNT={rd:r=>r.rdn||0,yt:r=>r.ytn||0,lsn:r=>r.wan||0,qu:r=>r.qn||0,aud:r=>(r.ytn||0)+(r.aun||0),sm:r=>r.sun||0};
