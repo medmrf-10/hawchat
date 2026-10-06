@@ -1,0 +1,861 @@
+{
+ "audit": "t232-naqid",
+ "head": "3b95d6cc",
+ "a_sheikhs_no_photo": [
+  {
+   "slug": "maktaba",
+   "name": "مكتبة المتون والشروح المفرغة",
+   "photo_field": ""
+  }
+ ],
+ "b_auto_transcripts": {
+  "sanctioned_rows_on_disk": [
+   {
+    "row": "habib-ali-aljifri--jifri-90",
+    "dir": "jifri-90",
+    "txt_files": 354
+   },
+   {
+    "row": "habib-ali-aljifri--95",
+    "dir": "jifri-95",
+    "txt_files": 28
+   },
+   {
+    "row": "habib-ali-aljifri--jifri-98",
+    "dir": "jifri-98",
+    "txt_files": 28
+   },
+   {
+    "row": "habib-ali-aljifri--91",
+    "dir": "jifri-91",
+    "txt_files": 27
+   },
+   {
+    "row": "habib-ali-aljifri--jifri-93",
+    "dir": "jifri-93",
+    "txt_files": 27
+   },
+   {
+    "row": "habib-ali-aljifri--92",
+    "dir": "jifri-92",
+    "txt_files": 26
+   },
+   {
+    "row": "habib-ali-aljifri--jifri-94",
+    "dir": "jifri-94",
+    "txt_files": 23
+   },
+   {
+    "row": "habib-ali-aljifri--jifri-89",
+    "dir": "jifri-89",
+    "txt_files": 13
+   },
+   {
+    "row": "habib-ali-aljifri--jifri-100",
+    "dir": "jifri-100",
+    "txt_files": 10
+   },
+   {
+    "row": "habib-ali-aljifri--99",
+    "dir": "jifri-99",
+    "txt_files": 8
+   },
+   {
+    "row": "habib-ali-aljifri--jifri-97",
+    "dir": "jifri-97",
+    "txt_files": 4
+   },
+   {
+    "row": "habib-ali-aljifri--jifri-88",
+    "dir": "jifri-88",
+    "txt_files": 3
+   },
+   {
+    "row": "habib-ali-aljifri--jifri-96",
+    "dir": "jifri-96",
+    "txt_files": 3
+   },
+   {
+    "row": "mouloud-sariri--sariri-7",
+    "dir": "sariri-7",
+    "txt_files": 119
+   },
+   {
+    "row": "mouloud-sariri--sariri-3",
+    "dir": "sariri-3",
+    "txt_files": 94
+   },
+   {
+    "row": "mouloud-sariri--sariri-6",
+    "dir": "sariri-6",
+    "txt_files": 57
+   },
+   {
+    "row": "mouloud-sariri--sariri-5",
+    "dir": "sariri-5",
+    "txt_files": 16
+   },
+   {
+    "row": "mouloud-sariri--sariri-2",
+    "dir": "sariri-2",
+    "txt_files": 3
+   },
+   {
+    "row": "mouloud-sariri--sariri-1",
+    "dir": "sariri-1",
+    "txt_files": 3
+   }
+  ],
+  "sanctioned_txt_total": 846,
+  "sanctioned_dirs_count": 19,
+  "stale_read_index_entries": [
+   "mouloud-sariri--sariri-7",
+   "maath-hawa--hawa-mut-453",
+   "maath-hawa--hawa-mut-442",
+   "mouloud-sariri--sariri-1",
+   "habib-omar-ibn-hafiz--habib-omar-199",
+   "maath-hawa--hawa-mut-450",
+   "maath-hawa--hawa-mut-457",
+   "maath-hawa--hawa-mut-460",
+   "maath-hawa--hawa-mut-454",
+   "habib-ali-aljifri--jifri-97",
+   "habib-omar-ibn-hafiz--habib-omar-201",
+   "maath-hawa--hawa-mut-434",
+   "maath-hawa--hawa-mut-981",
+   "maath-hawa--hawa-mut-424",
+   "maath-hawa--hawa-mut-447",
+   "habib-ali-aljifri--jifri-90",
+   "habib-omar-ibn-hafiz--habib-omar-193",
+   "maath-hawa--hawa-mut-427",
+   "mouloud-sariri--sariri-6",
+   "maath-hawa--hawa-mut-421",
+   "mouloud-sariri--sariri-3",
+   "habib-ali-aljifri--jifri-94",
+   "mouloud-sariri--sariri-5",
+   "maath-hawa--hawa-mut-433",
+   "maath-hawa--hawa-mut-443",
+   "habib-ali-aljifri--jifri-96",
+   "habib-omar-ibn-hafiz--habib-omar-196",
+   "habib-omar-ibn-hafiz--195",
+   "maath-hawa--hawa-mut-444",
+   "habib-omar-ibn-hafiz--habib-omar-198",
+   "maath-hawa--hawa-mut-441",
+   "habib-ali-aljifri--91",
+   "habib-ali-aljifri--jifri-93",
+   "maath-hawa--hawa-mut-419",
+   "habib-omar-ibn-hafiz--habib-omar-200",
+   "habib-ali-aljifri--99",
+   "habib-omar-ibn-hafiz--habib-omar-197",
+   "maath-hawa--hawa-mut-438",
+   "maath-hawa--hawa-mut-420",
+   "maath-hawa--hawa-mut-448",
+   "habib-ali-aljifri--jifri-100",
+   "maath-hawa--hawa-mut-440",
+   "maath-hawa--hawa-mut-455",
+   "habib-ali-aljifri--jifri-88",
+   "mouloud-sariri--sariri-2",
+   "maath-hawa--hawa-mut-431",
+   "maath-hawa--hawa-mut-452",
+   "habib-ali-aljifri--jifri-98",
+   "maath-hawa--hawa-mut-445",
+   "habib-ali-aljifri--95",
+   "habib-ali-aljifri--jifri-89",
+   "habib-ali-aljifri--92"
+  ],
+  "unsanctioned_caption_style": [
+   {
+    "dir": "alasri-arbaa",
+    "files": 1,
+    "sample": [
+     "028.txt"
+    ]
+   },
+   {
+    "dir": "alsayed-mut-628",
+    "files": 5,
+    "sample": [
+     "005.txt",
+     "022.txt",
+     "026.txt",
+     "027.txt"
+    ]
+   },
+   {
+    "dir": "alsayed-mut-630",
+    "files": 2,
+    "sample": [
+     "004.txt",
+     "007.txt"
+    ]
+   },
+   {
+    "dir": "alsayed-mut-636",
+    "files": 5,
+    "sample": [
+     "016.txt",
+     "017.txt",
+     "018.txt",
+     "019.txt"
+    ]
+   },
+   {
+    "dir": "alsayed-mut-645",
+    "files": 2,
+    "sample": [
+     "007.txt",
+     "012.txt"
+    ]
+   },
+   {
+    "dir": "alsayed-mut-651",
+    "files": 1,
+    "sample": [
+     "007.txt"
+    ]
+   },
+   {
+    "dir": "alsayed-mut-653",
+    "files": 4,
+    "sample": [
+     "001.txt",
+     "004.txt",
+     "006.txt",
+     "011.txt"
+    ]
+   },
+   {
+    "dir": "alsayed-mut-656",
+    "files": 9,
+    "sample": [
+     "003.txt",
+     "004.txt",
+     "016.txt",
+     "022.txt"
+    ]
+   },
+   {
+    "dir": "alsayed-mut-660",
+    "files": 3,
+    "sample": [
+     "001.txt",
+     "008.txt",
+     "013.txt"
+    ]
+   },
+   {
+    "dir": "alsayed-mut-661",
+    "files": 15,
+    "sample": [
+     "006.txt",
+     "008.txt",
+     "014.txt",
+     "018.txt"
+    ]
+   },
+   {
+    "dir": "alsayed-mut-671",
+    "files": 3,
+    "sample": [
+     "001.txt",
+     "002.txt",
+     "007.txt"
+    ]
+   },
+   {
+    "dir": "alsayed-mut-672",
+    "files": 6,
+    "sample": [
+     "003.txt",
+     "004.txt",
+     "005.txt",
+     "006.txt"
+    ]
+   },
+   {
+    "dir": "alsayed-mut-674",
+    "files": 1,
+    "sample": [
+     "015.txt"
+    ]
+   },
+   {
+    "dir": "alsayed-mut-675",
+    "files": 2,
+    "sample": [
+     "002.txt",
+     "004.txt"
+    ]
+   },
+   {
+    "dir": "alsayed-mut-738",
+    "files": 1,
+    "sample": [
+     "027.txt"
+    ]
+   },
+   {
+    "dir": "bouti-339",
+    "files": 3,
+    "sample": [
+     "004.txt",
+     "010.txt",
+     "011.txt"
+    ]
+   },
+   {
+    "dir": "bouti-344",
+    "files": 2,
+    "sample": [
+     "002.txt",
+     "005.txt"
+    ]
+   },
+   {
+    "dir": "bouti-347",
+    "files": 1,
+    "sample": [
+     "005.txt"
+    ]
+   },
+   {
+    "dir": "bouti-353",
+    "files": 2,
+    "sample": [
+     "005.txt",
+     "009.txt"
+    ]
+   },
+   {
+    "dir": "bouti-355",
+    "files": 1,
+    "sample": [
+     "013.txt"
+    ]
+   },
+   {
+    "dir": "bouti-hubb",
+    "files": 3,
+    "sample": [
+     "02.txt",
+     "04.txt",
+     "15.txt"
+    ]
+   },
+   {
+    "dir": "bouti-khutab-2012",
+    "files": 9,
+    "sample": [
+     "03.txt",
+     "06.txt",
+     "27.txt",
+     "33.txt"
+    ]
+   },
+   {
+    "dir": "bouti-sira",
+    "files": 11,
+    "sample": [
+     "16.txt",
+     "18.txt",
+     "34.txt",
+     "43.txt"
+    ]
+   },
+   {
+    "dir": "bouti-ulum-quran",
+    "files": 10,
+    "sample": [
+     "05.txt",
+     "07.txt",
+     "12.txt",
+     "13.txt"
+    ]
+   },
+   {
+    "dir": "bouti-yaghalitun",
+    "files": 2,
+    "sample": [
+     "33.txt",
+     "34.txt"
+    ]
+   },
+   {
+    "dir": "bouti-yaqiniyyat",
+    "files": 6,
+    "sample": [
+     "22.txt",
+     "26.txt",
+     "33.txt",
+     "35.txt"
+    ]
+   },
+   {
+    "dir": "gomaa-khawarij",
+    "files": 49,
+    "sample": [
+     "017.txt",
+     "022.txt",
+     "026.txt",
+     "027.txt"
+    ]
+   },
+   {
+    "dir": "hashimi-tarbiya",
+    "files": 2,
+    "sample": [
+     "034.txt",
+     "063.txt"
+    ]
+   },
+   {
+    "dir": "hashimi-zawaj",
+    "files": 2,
+    "sample": [
+     "005.txt",
+     "021.txt"
+    ]
+   }
+  ]
+ },
+ "c_soon_sheikhs": [
+  {
+   "slug": "abdelkader-alhussein",
+   "name": "عبد القادر الحسين",
+   "dd_rows": 0,
+   "read_rows": 0,
+   "read_sanctioned": 0
+  },
+  {
+   "slug": "awn-alqudoumi",
+   "name": "عون القدومي",
+   "dd_rows": 0,
+   "read_rows": 0,
+   "read_sanctioned": 0
+  },
+  {
+   "slug": "ayman-abdelrahim",
+   "name": "أيمن عبد الرحيم",
+   "dd_rows": 0,
+   "read_rows": 0,
+   "read_sanctioned": 0
+  },
+  {
+   "slug": "daddo",
+   "name": "الددو",
+   "dd_rows": 0,
+   "read_rows": 0,
+   "read_sanctioned": 0
+  },
+  {
+   "slug": "fadhel-samarrai",
+   "name": "فاضل السامرائي",
+   "dd_rows": 0,
+   "read_rows": 0,
+   "read_sanctioned": 0
+  },
+  {
+   "slug": "fathi-safi",
+   "name": "فتحي صافي",
+   "dd_rows": 0,
+   "read_rows": 0,
+   "read_sanctioned": 0
+  },
+  {
+   "slug": "hamza-belkacem",
+   "name": "حمزة بلقاسم",
+   "dd_rows": 0,
+   "read_rows": 0,
+   "read_sanctioned": 0
+  },
+  {
+   "slug": "maath-hawa",
+   "name": "معاذ سعيد حوى",
+   "dd_rows": 0,
+   "read_rows": 34,
+   "read_sanctioned": 25
+  },
+  {
+   "slug": "osama-alazhari",
+   "name": "أسامة الأزهري",
+   "dd_rows": 0,
+   "read_rows": 0,
+   "read_sanctioned": 0
+  },
+  {
+   "slug": "said-kamali",
+   "name": "سعيد الكملي",
+   "dd_rows": 0,
+   "read_rows": 0,
+   "read_sanctioned": 0
+  },
+  {
+   "slug": "sharawi",
+   "name": "الشعراوي",
+   "dd_rows": 0,
+   "read_rows": 0,
+   "read_sanctioned": 0
+  }
+ ],
+ "orphan_lesson_dirs": [
+  {
+   "dir": "sariri-33",
+   "files": 1
+  },
+  {
+   "dir": "sariri-40",
+   "files": 1
+  },
+  {
+   "dir": "sariri-4",
+   "files": 1
+  },
+  {
+   "dir": "sariri-18",
+   "files": 1
+  },
+  {
+   "dir": "sariri-46",
+   "files": 1
+  },
+  {
+   "dir": "habib-ali-aljifri--117",
+   "files": 31
+  },
+  {
+   "dir": "habib-ali-aljifri--jifri-insaniyya",
+   "files": 31
+  },
+  {
+   "dir": "sariri-11",
+   "files": 1
+  },
+  {
+   "dir": "sariri-19",
+   "files": 1
+  },
+  {
+   "dir": "habib-omar-ibn-hafiz--164",
+   "files": 16
+  },
+  {
+   "dir": "sariri-47",
+   "files": 1
+  },
+  {
+   "dir": "sariri-27",
+   "files": 1
+  },
+  {
+   "dir": "mouloud-sariri--55",
+   "files": 86
+  },
+  {
+   "dir": "habib-ali-aljifri--113",
+   "files": 31
+  },
+  {
+   "dir": "sariri-29",
+   "files": 1
+  },
+  {
+   "dir": "sariri-28",
+   "files": 1
+  },
+  {
+   "dir": "sariri-78",
+   "files": 1
+  },
+  {
+   "dir": "sariri-38",
+   "files": 1
+  },
+  {
+   "dir": "habib-ali-aljifri--125",
+   "files": 29
+  },
+  {
+   "dir": "bouti-338",
+   "files": 1
+  },
+  {
+   "dir": "sariri-14",
+   "files": 1
+  },
+  {
+   "dir": "sariri-39",
+   "files": 1
+  },
+  {
+   "dir": "sariri-32",
+   "files": 1
+  },
+  {
+   "dir": "sariri-37",
+   "files": 1
+  },
+  {
+   "dir": "sariri-15",
+   "files": 1
+  },
+  {
+   "dir": "bouti-340",
+   "files": 1
+  },
+  {
+   "dir": "sariri-23",
+   "files": 1
+  },
+  {
+   "dir": "sariri-12",
+   "files": 1
+  },
+  {
+   "dir": "sariri-64",
+   "files": 1
+  },
+  {
+   "dir": "sariri-44",
+   "files": 1
+  },
+  {
+   "dir": "bouti-352",
+   "files": 1
+  },
+  {
+   "dir": "sariri-17",
+   "files": 1
+  },
+  {
+   "dir": "sariri-72",
+   "files": 1
+  },
+  {
+   "dir": "sariri-26",
+   "files": 1
+  },
+  {
+   "dir": "sariri-74",
+   "files": 1
+  },
+  {
+   "dir": "sariri-41",
+   "files": 1
+  },
+  {
+   "dir": "sariri-10",
+   "files": 1
+  },
+  {
+   "dir": "habib-ali-aljifri--134",
+   "files": 31
+  },
+  {
+   "dir": "sariri-58",
+   "files": 1
+  },
+  {
+   "dir": "sariri-36",
+   "files": 1
+  },
+  {
+   "dir": "sariri-21",
+   "files": 1
+  },
+  {
+   "dir": "sariri-61",
+   "files": 1
+  },
+  {
+   "dir": "habib-omar-ibn-hafiz--195",
+   "files": 15
+  },
+  {
+   "dir": "sariri-20",
+   "files": 1
+  },
+  {
+   "dir": "sariri-52",
+   "files": 1
+  },
+  {
+   "dir": "habib-omar-ibn-hafiz--218",
+   "files": 14
+  },
+  {
+   "dir": "sariri-34",
+   "files": 1
+  },
+  {
+   "dir": "sariri-65",
+   "files": 1
+  },
+  {
+   "dir": "habib-omar-ibn-hafiz--220",
+   "files": 17
+  },
+  {
+   "dir": "sariri-13",
+   "files": 1
+  },
+  {
+   "dir": "sariri-31",
+   "files": 1
+  },
+  {
+   "dir": "sariri-57",
+   "files": 1
+  },
+  {
+   "dir": "bouti-348",
+   "files": 1
+  },
+  {
+   "dir": "sariri-55",
+   "files": 1
+  },
+  {
+   "dir": "sariri-22",
+   "files": 1
+  },
+  {
+   "dir": "bouti-349",
+   "files": 1
+  },
+  {
+   "dir": "bouti-341",
+   "files": 1
+  },
+  {
+   "dir": "sariri-16",
+   "files": 1
+  },
+  {
+   "dir": "habib-ali-aljifri--123",
+   "files": 33
+  },
+  {
+   "dir": "sariri-63",
+   "files": 1
+  },
+  {
+   "dir": "bouti-342",
+   "files": 1
+  },
+  {
+   "dir": "habib-ali-aljifri--122",
+   "files": 41
+  },
+  {
+   "dir": "sariri-54",
+   "files": 1
+  },
+  {
+   "dir": "sariri-42",
+   "files": 1
+  },
+  {
+   "dir": "sariri-85",
+   "files": 1
+  },
+  {
+   "dir": "sariri-49",
+   "files": 1
+  },
+  {
+   "dir": "sariri-60",
+   "files": 1
+  },
+  {
+   "dir": "habib-ali-aljifri--102",
+   "files": 33
+  },
+  {
+   "dir": "habib-ali-aljifri--jifri-mut-123",
+   "files": 33
+  },
+  {
+   "dir": "sariri-59",
+   "files": 1
+  },
+  {
+   "dir": "sariri-71",
+   "files": 1
+  },
+  {
+   "dir": "sariri-62",
+   "files": 1
+  },
+  {
+   "dir": "habib-ali-aljifri--128",
+   "files": 27
+  },
+  {
+   "dir": "sariri-8",
+   "files": 1
+  },
+  {
+   "dir": "sariri-53",
+   "files": 1
+  },
+  {
+   "dir": "sariri-25",
+   "files": 1
+  },
+  {
+   "dir": "habib-ali-aljifri--114",
+   "files": 31
+  },
+  {
+   "dir": "sariri-51",
+   "files": 1
+  },
+  {
+   "dir": "bouti-354",
+   "files": 1
+  },
+  {
+   "dir": "sariri-45",
+   "files": 1
+  },
+  {
+   "dir": "bouti-346",
+   "files": 1
+  },
+  {
+   "dir": "bouti-350",
+   "files": 1
+  },
+  {
+   "dir": "sariri-30",
+   "files": 1
+  },
+  {
+   "dir": "sariri-48",
+   "files": 1
+  },
+  {
+   "dir": "habib-omar-ibn-hafiz--169",
+   "files": 16
+  },
+  {
+   "dir": "habib-ali-aljifri--101",
+   "files": 34
+  },
+  {
+   "dir": "sariri-43",
+   "files": 1
+  },
+  {
+   "dir": "sariri-9",
+   "files": 1
+  },
+  {
+   "dir": "sariri-24",
+   "files": 1
+  },
+  {
+   "dir": "habib-omar-ibn-hafiz--178",
+   "files": 32
+  }
+ ]
+}
