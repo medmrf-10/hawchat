@@ -25,15 +25,19 @@
   border-radius:var(--r-md);color:var(--ink-3);font-family:var(--font-ui);font-size:var(--fs-sm);
   cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
 a.mini{color:var(--ink-3);display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;padding:0 4px}
-.u-grid{grid-template-columns:repeat(2,1fr)!important}
-.u-sh{padding:var(--sp-3) 0 0;overflow:hidden}
-.u-sh .ph{width:64px;height:64px}
-.u-sh .nm{font-size:.82rem;margin-top:var(--sp-2)}
-.u-sh .u-top{display:flex;flex-direction:column;align-items:center;text-decoration:none;color:inherit;width:100%;padding:0 var(--sp-2) var(--sp-2)}
+.wrap{padding-left:0;padding-right:0}
+.u-grid{grid-template-columns:repeat(2,1fr)!important;gap:0}
+.u-sh{padding:var(--sp-2) 0 0;overflow:hidden;border-radius:0}
+.u-sh .ph{width:56px;height:56px}
+.u-sh .nm{font-size:.8rem;margin-top:5px;-webkit-line-clamp:1;min-height:1.45em}
+.u-sh .u-top{display:flex;flex-direction:column;align-items:center;text-decoration:none;color:inherit;width:100%;padding:0 var(--sp-2) 6px}
 .u-sh .tgrid{width:100%;margin:0;grid-template-columns:repeat(2,1fr)}
-.u-sh .tgrid .tile{height:50px}
-.u-sh .tgrid .tile .i{width:19px;height:19px}
-.u-sh .tgrid .tile b{font-size:.8rem}
+.u-sh .tgrid .tile{height:44px}
+.u-sh .tgrid .tile .i{width:18px;height:18px}
+.u-sh .tgrid .tile b{font-size:.78rem}
+.u-sech{padding:0 var(--sp-3)}
+.soonh{margin:16px var(--sp-3) 0;width:calc(100% - 2*var(--sp-3))}
+main .wrap>div:last-child{padding:0 var(--sp-3)}
 </style>
 </head>
 <body>
