@@ -64,11 +64,11 @@ let FS=parseFloat(localStorage.getItem('trfs'))||1.3;
   const row=hit.r,st=hit.st,slug=hit.slug;
   document.getElementById('hdr-sub').textContent=st.name;
   document.getElementById('back').href='row.html?r='+encodeURIComponent(row.id)+'&m=sm';
-  const ldir=row.sSlug||row.id;
-  const lidx=await j('lessons/'+encodeURIComponent(ldir)+'/index.json');
+  const ldir=row.ld??(row.sSlug||row.id);
+  const lidx=ldir?await j('lessons/'+encodeURIComponent(ldir)+'/index.json'):null;
   const smf=(lidx&&lidx.sumf)||{},sums=(lidx&&lidx.sum)||[],ti=(lidx&&lidx.ti)||{};
   if(!sums.length){app.innerHTML='<div class="errbox">لا ملخصات لهذه السلسلة — <a href="row.html?r='+encodeURIComponent(row.id)+'">عودة</a></div>';return}
-  const srows=await j('data/sum/'+encodeURIComponent(row.id)+'.json')||[];
+  const srows=row.rdn?(await j('data/read/'+encodeURIComponent(row.id)+'.json')||[]):[];
   const titleOf=n=>{const x=srows.find(y=>y.n===n);return ti[n]||(x&&x.title)||('الدرس '+n)};
   async function show(n){
     const i=sums.indexOf(n);

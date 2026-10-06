@@ -64,13 +64,14 @@ let FS=parseFloat(localStorage.getItem('trfs'))||1.15;
   const row=hit.r,st=hit.st;
   document.getElementById('hdr-sub').textContent=st.name;
   document.getElementById('back').href='row.html?r='+encodeURIComponent(row.id)+'&m=qu';
-  const lidx=await j('lessons/'+encodeURIComponent(row.sSlug)+'/index.json');
+  const QDIR=row.ld??row.sSlug;
+  const lidx=QDIR?await j('lessons/'+encodeURIComponent(QDIR)+'/index.json'):null;
   const quf=(lidx&&lidx.quf)||{},qus=(lidx&&lidx.qu)||[],ti=(lidx&&lidx.ti)||{};
   if(!qus.length){app.innerHTML='<div class="errbox">لا أسئلة لهذه السلسلة بعد — <a href="row.html?r='+encodeURIComponent(row.id)+'">عودة</a></div>';return}
   const titleOf=n=>ti[n]||('الدرس '+n);
   async function show(n){
     const i=qus.indexOf(n);
-    const fn=quf[n];const d=fn?await j('lessons/'+encodeURIComponent(row.sSlug)+'/'+encodeURIComponent(fn)):null;
+    const fn=quf[n];const d=fn?await j('lessons/'+encodeURIComponent(QDIR)+'/'+encodeURIComponent(fn)):null;
     document.title='أسئلة الدرس '+n+' — '+row.title;
     let h='<h1><bdi>'+esc(titleOf(n))+'</bdi></h1><div class="lsub">'+esc(row.title)+' · أسئلة الدرس '+n+' · '+esc(st.name)+'</div><div id="qwrap" style="font-size:'+FS+'rem">';
     const qa=(d&&(d.qa||d.questions))||[];

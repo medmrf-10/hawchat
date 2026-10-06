@@ -657,6 +657,38 @@ for sh in sheikhs:
         keep.append(r)
     rows[:] = keep
 
+    # ── fold id collisions: two rows whose keys resolve to the same frozen id
+    # ARE the same series (row_ids.json said so) — emitting both breaks the
+    # audit (duplicate row id) and blocks every deploy. Merge into the first.
+    def _rid_of(r):
+        key = r.get('mutId') or r.get('sSlug') or ((r.get('trSh') or '') + '-' + (r.get('trSr') or ''))
+        ks = {k for k in (('m', r.get('mutId')), ('s', r.get('sSlug')), ('p', r.get('plid')),
+                          ('t', (r.get('trSh') + '-' + r['trSr']) if r.get('trSh') and r.get('trSr') else None))
+              if k[1]} | {('k', str(key))}
+        for tag, kv in sorted(ks):
+            v = ROW_IDS.get(slug, {}).get('%s:%s' % (tag, kv))
+            if v:
+                return v
+        return None
+    _byid, keep = {}, []
+    for r in rows:
+        rid0 = _rid_of(r)
+        tgt = _byid.get(rid0) if rid0 else None
+        if tgt is None:
+            if rid0:
+                _byid[rid0] = r
+            keep.append(r)
+            continue
+        for f_ in ('rdn', 'rtt', 'wan', 'wtt'):
+            tgt[f_] = max(tgt.get(f_) or 0, r.get(f_) or 0)
+        for f_ in ('mutId', 'sSlug', 'trSh', 'trSr', 'plid', 'unv'):
+            if r.get(f_) and not tgt.get(f_):
+                tgt[f_] = r[f_]
+        if not tgt.get('kind'):
+            tgt['kind'] = r.get('kind')
+        warn('id collision %s: folded %s into %s' % (rid0, r.get('kind'), tgt.get('kind')))
+    rows[:] = keep
+
     # ── invariants + links + read-rows ──
     for r in rows:
         r.pop('_mut', None)
@@ -741,6 +773,10 @@ for sh in sheikhs:
             r['ytn'] = r['wtt']
             audir = os.path.join(PL, 'audio', r['sSlug'])
             r['aun'] = len([f for f in os.listdir(audir) if f.endswith('.mp3')]) if os.path.isdir(audir) else 0
+        # ld = lessons/<dir> that really has an index.json ('' = none) — pages
+        # used to probe lessons/<sSlug||id>/ and 404'd on ~80 rows
+        r['ld'] = next((d for d in (r.get('sSlug'), r['id']) if d and
+                        os.path.isfile(os.path.join(PL, 'lessons', d, 'index.json'))), '')
         # E7: lesson titles for the lazy search index
         if rrows:
             SEARCH_L[r['id']] = {'ss': r.get('sSlug'), 'L': [[x['n'], x['title']] for x in rrows]}

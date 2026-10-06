@@ -94,7 +94,7 @@ const ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';
   // lessons: series json (aligned) + read-file list
   const [sd,alidx,rows,audx]=await Promise.all([
     row.sSlug?j('series/'+encodeURIComponent(row.sSlug)+'.json'):null,
-    j('lessons/'+encodeURIComponent(row.sSlug||row.id)+'/index.json'),
+    (row.ld??row.sSlug)?j('lessons/'+encodeURIComponent(row.ld??row.sSlug)+'/index.json'):null,
     j('data/read/'+encodeURIComponent(row.id)+'.json'),
     j('audio/index.json')]);
   const akey=row.sSlug||row.id;
@@ -143,17 +143,20 @@ const ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';
     +(mode==='yt'&&row.yt?'<a class="ytpl cin" href="yt.html?r='+encodeURIComponent(row.id)+'">'+ic('i-yt')+'<span><b>تشغيل قائمة يوتيوب كاملة</b><small>'+(row.ytn||0)+' فيديو — مشغّل داخلي بلا تفريغ</small></span></a>':'')
     +'<div id="lst" aria-live="polite"></div>';
   // lesson titles carry «series — sheikh» boilerplate (~60% noise per باحث's audit)
-  const cleanTitle=t=>{let s=String(t||'');
+  const cleanTitle=(t,nn)=>{let s=String(t||'');
+    s=s.replace(/#[\p{L}\p{N}_]+/gu,' ');
+    const m=s.match(/^\s*([\d٠-٩]+)\s*[-–—:|.)]\s*/);
+    if(m&&+m[1].replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d))===nn)s=s.slice(m[0].length);
     s=s.replace(/\s*[(\[]?\s*[Ww]ith [Ee]nglish [Tt]ranslation\s*[)\]]?\s*/g,'');
     s=s.replace(/⧵|：/g,' — ');
     for(const strip of [row.title,st.name]){if(!strip)continue;
       s=s.split(strip).join('');s=s.replace(/\s*[-–—|]\s*$/,'').replace(/^\s*[-–—|]\s*/,'')}
-    return s.replace(/\s{2,}/g,' ').replace(/^[\s—–-]+|[\s—–-]+$/g,'')||String(t||'')};
+    return s.replace(/(\s*[|｜]\s*)+$/,'').replace(/^(\s*[|｜:]\s*)+/,'').replace(/\s{2,}/g,' ').replace(/^[\s—–-]+|[\s—–-]+$/g,'')||String(t||'')};
   const draw=fq=>{
     const lst=document.getElementById('lst');lst.innerHTML='';let n=0,prev=0;
     for(const nn of sorted){
       const l=L(nn),rx=rtxt.get(nn);
-      const title=cleanTitle(tin[nn]||(rx&&rx.title)||l.title||('الدرس '+nn));
+      const title=cleanTitle(tin[nn]||(rx&&rx.title)||l.title||('الدرس '+nn),nn);
       if(fq&&!normalize(title).includes(fq)&&!String(nn).includes(fq))continue;n++;
       const canL=aln.has(nn)||(l.video&&l.video.length>=8);
       // each tile-mode opens its own page — no mixing of read/watch/summary
