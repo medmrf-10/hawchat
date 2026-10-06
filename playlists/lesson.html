@@ -247,11 +247,11 @@ document.addEventListener('keydown',e=>{
   // stats → read row for this series: enables the full-text button and the
   // text fallback for lessons whose transcript lives only in data/read
   const stats=await j('data/sheikh_stats.json');
-  let readRows=null;
+  let readRows=null,rdRow=null;
   if(stats){
     for(const s in stats){if(s==='_meta')continue;
       const rw=(stats[s].rows||[]).find(r=>r.sSlug===slug);
-      if(rw){const rr=await j('data/read/'+encodeURIComponent(rw.id)+'.json');if(rr)readRows={};(rr||[]).forEach(x=>readRows[x.n]=x);break}}
+      if(rw){rdRow=rw;const rr=await j('data/read/'+encodeURIComponent(rw.id)+'.json');if(rr)readRows={};(rr||[]).forEach(x=>readRows[x.n]=x);break}}
   }
   const rrow=readRows&&readRows[ln];
   let txt=aln?null:(tfn?await jtxt('lessons/'+encodeURIComponent(slug)+'/'+tfn)
@@ -303,7 +303,10 @@ document.addEventListener('keydown',e=>{
       +'<select id="slp" title="مؤقت النوم" onchange="if(SLEEP){clearTimeout(SLEEP);SLEEP=null}const m=parseInt(this.value);if(m){SLEEP=setTimeout(()=>{YTP&&YTP.pauseVideo();SLEEP=null},m*60000)}this.title=m?\'يتوقف خلال \'+this.value+\' د\':\'مؤقت النوم\'"><option value="0">نوم —</option><option value="15">15د</option><option value="30">30د</option><option value="45">45د</option><option value="60">60د</option></select>'
       +'<button class="chip'+(store.get('anx')===1?' on':'')+'" id="t-anx" title="التشغيل التلقائي للدرس التالي" onclick="const v=!(store.get(\'anx\')===1);store.set(\'anx\',v);this.classList.toggle(\'on\',v)">تلقائي</button>'
       +'<button class="chip'+(TELE?' on':'')+'" id="t-tele" title="وضع الملقّن" onclick="TELE=!TELE;store.set(\'tele\',TELE?1:0);this.classList.toggle(\'on\',TELE);renderPhrase(Math.max(0,curPh))">ملقّن</button>'
-      +'<button class="chip" id="shr" title="مشاركة الدرس" onclick="shareLesson(this)">↗ مشاركة</button></div></div></div>';
+      +'<button class="chip" id="shr" title="مشاركة الدرس" onclick="shareLesson(this)">↗ مشاركة</button>'
+      +(rdRow?'<a class="chip" href="tr.html?r='+encodeURIComponent(rdRow.id)+'&l='+ln+'" title="قراءة التفريغ">قراءة</a>':'')
+      +((lidx&&lidx.sum&&(lidx.sum||[]).indexOf(ln)>=0)?'<a class="chip" href="sm.html?s='+encodeURIComponent(slug)+'&l='+ln+'" title="ملخص الدرس">☰ ملخص</a>':'')
+      +'</div></div></div>';
   }else{
     if(l.video)h+='<div class="player" id="pl"><div class="cover" id="cvr"><span class="big">▶</span><span>تشغيل الدرس من يوتيوب</span></div></div>';
     h+='<div class="tools" style="display:flex;gap:8px;margin-top:10px"><button id="fmi" aria-label="تصغير الخط" style="width:44px;height:44px;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--txt);font-size:1rem;cursor:pointer">A−</button>'

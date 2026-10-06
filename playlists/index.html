@@ -26,7 +26,7 @@
   cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
 a.mini{color:var(--ink-3);display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;padding:0 4px}
 .wrap{padding-left:0;padding-right:0}
-.u-grid{grid-template-columns:repeat(2,1fr)!important;gap:0}
+.u-grid{grid-template-columns:repeat(auto-fill,minmax(180px,1fr))!important;gap:0}
 .u-sh{padding:var(--sp-2) 0 0;overflow:hidden;border-radius:0;position:relative}
 .u-sh .cntx{position:absolute;top:6px;inset-inline-end:8px;font-family:var(--font-ui);
   font-size:1.15rem;font-weight:800;color:var(--gold-3);line-height:1;pointer-events:none}
@@ -60,6 +60,7 @@ main .wrap>div:last-child{padding:0 var(--sp-3)}
 </div></header>
 <main><div class="wrap">
   <div class="ubar" id="ubar" role="toolbar" aria-label="تصفية السلاسل"></div>
+  <div id="ubar-sub" class="cin" style="margin:-8px 0 10px;font-size:.72rem;color:var(--gold-3);font-family:var(--font-ui)"></div>
   <div id="groups" class="u-grid"></div>
   <button id="soonh" class="soonh" hidden></button>
   <div id="soong" class="u-grid" hidden style="margin-top:12px"></div>
@@ -81,6 +82,8 @@ function drawBar(){
     _mode=(_mode===b.dataset.k)?'':b.dataset.k;
     drawBar();draw();
   });
+  const lbl=document.getElementById('ubar-sub'),mn=_mode&&(MODES.find(x=>x[0]===_mode)||[])[2];
+  if(lbl)lbl.textContent=mn?('العرض: '+mn):'';
 }
 function shCard(st,slug){
   const init=(st.name||'؟').replace(/^ال/,'').trim()[0]||'؟';

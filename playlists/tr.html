@@ -117,8 +117,8 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
   // aligned lessons for "استمع لهذا الدرس" — the same listenable threshold
   // (cov>=0.3) the cards count with, not just any alignment file
   let aligned=new Set(),summed=new Set();
-  if(row.listen||row.summ){const li=await j('lessons/'+encodeURIComponent(row.sSlug||ssl||row.id)+'/index.json');
-    aligned=new Set((li&&(li.alignOk||li.align))||[]);summed=new Set((li&&li.sum)||[])}
+  if(row.listen||row.sun||row.sSlug){const li=await j('lessons/'+encodeURIComponent(row.sSlug||ssl||row.id)+'/index.json');
+    aligned=new Set((li&&(li.alignOk||li.align))||[]);summed=new Set((li&&li.sum)||[]);window._sumIdx=li}
   // REQ must exist before the first showLesson(): a `let` declared below the call
   // sits in its TDZ and threw on every ?l= deep link (blank page, no text)
   let REQ=0;
@@ -194,6 +194,7 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
     const dayNow=document.documentElement.dataset.theme==='day';
     nav.innerHTML='<button id="cpy" aria-label="نسخ نص الدرس" title="نسخ نص الدرس كاملاً">⧉ نسخ</button>'
       +(summed.has(x.n)?'<button id="sum" title="عرض ملخص الدرس" style="min-width:44px;color:var(--acc2)">☰</button>':'')
+      +(aligned.has(x.n)?'<a href="lesson.html?s='+encodeURIComponent(row.sSlug||ssl)+'&l='+x.n+'" title="مشاهدة حية مع المحاذاة" style="min-width:44px;color:var(--violet)">▶</a>':'')
       +'<span class="pos">'+(i+1)+' / '+ROWS.length+'</span>'
       +'<button id="zout" aria-label="تصغير الخط" title="تصغير الخط" style="min-width:44px">أ−</button>'
       +'<button id="zin" aria-label="تكبير الخط" title="تكبير الخط" style="min-width:44px">أ+</button>'
@@ -248,7 +249,7 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
     const el=document.getElementById('sump');
     if(!el.hidden){el.hidden=true;return false}
     el.hidden=false;el.innerHTML='<div class="skel" style="height:80px"></div>';
-    if(_sumIdx===null)_sumIdx=await j('lessons/'+encodeURIComponent(row.sSlug||ssl||row.id)+'/index.json');
+    if(_sumIdx===null)_sumIdx=window._sumIdx||await j('lessons/'+encodeURIComponent(row.sSlug||ssl||row.id)+'/index.json');
     const fn=_sumIdx&&_sumIdx.sumf&&_sumIdx.sumf[n];
     const sm=fn?await j('lessons/'+encodeURIComponent(row.sSlug||ssl||row.id)+'/'+encodeURIComponent(fn)):null;
     if(!sm){el.innerHTML='<i>تعذر تحميل الملخص.</i>';return false}
