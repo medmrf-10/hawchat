@@ -86,13 +86,7 @@ function shCard(st,slug,fav){
   return '<div class="u-sh cin">'
     +'<a class="u-top" href="sheikh.html?s='+encodeURIComponent(slug)+'">'
     +'<span class="ph">'+(st.photo?'<img src="'+esc(st.photo)+'" alt="" loading="lazy" onerror="this.remove()">':'')+'<span>'+init+'</span></span>'
-    +'<span class="nm">'+esc(st.name)+'</span>'
-    +'<span class="stats">'
-    +(st.read?num('rd',st.read,'مقروء',allR(st)):'')
-    +(st.watch?num('ls',st.watch,'مسموع',allW(st)):'')
-    +(st.uwatch?num('unv',st.uwatch,'آلي غير مدقق',0,'i-auto'):'')
-    +(st.sum?num('sm',st.sum,'ملخّص',0,'i-list'):'')
-    +'</span></a>'
+    +'<span class="nm">'+esc(st.name)+'</span></a>'
     +'<span class="tgrid">'
     +tk('rd','i-read',agg('rd'),'قراءة')
     +tk('yt','i-yt',agg('yt'),'استماع من يوتيوب')
