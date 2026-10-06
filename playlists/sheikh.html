@@ -65,7 +65,7 @@ function renderSeries(){
       +'<div class="t"><bdi>'+esc(r.title)+'</bdi>'+(done?'<span class="done" title="مكتمل">'+ic('i-check')+'</span>':'')+'</div>'
       +'<div class="acts">'
       +(r.read?'<a class="u-act rd" href="'+esc(r.read)+'">'+ic('i-read')+' اقرأ <b>'+r.rdn+'</b>'+(r.rdn<r.rtt?'<small>/'+r.rtt+'</small>':'')+(r.rOk?'<small>'+ic('i-check')+'</small>':'')+'</a>':'')
-      +(r.listen?'<a class="u-act lsn" href="'+esc(r.listen)+'">'+ic('i-listen')+' استمع <b>'+r.wan+'</b>'+(r.wan<r.rtt?'<small>/'+r.rtt+'</small>':'')+(r.wOk?'<small>'+ic('i-check')+'</small>':'')+'</a>':'')
+      +(r.listen?'<a class="u-act lsn'+(r.unv?' unv':'')+'" href="'+esc(r.listen)+'">'+ic(r.unv?'i-auto':'i-listen')+(r.unv?' آلي ':' استمع ')+'<b>'+r.wan+'</b>'+(r.wan<r.rtt?'<small>/'+r.rtt+'</small>':'')+(r.wOk?'<small>'+ic('i-check')+'</small>':'')+'</a>':'')
       +'</div></div>');
   }
   if(!rows.length)w.innerHTML='<div class="empty">لا سلاسل في هذا القسم.</div>';
@@ -92,10 +92,10 @@ document.addEventListener('click',e=>{
   document.getElementById('crumb').innerHTML=hdr(null,[{h:'.',t:'سلاسل المشايخ'},{t:st.name}]);
   const init=(st.name||'؟').replace(/^ال/,'').trim()[0]||'؟';
   const photo=st.photo?String(st.photo).replace(/^\/+/,''):null;
-  const num=(kind,n,label,ok)=>'<span class="u-num '+kind+'">'+ic(kind==='rd'?'i-read':'i-listen')+'<b>'+n+'</b>'+(ok?'<b class="ok">'+ic('i-check')+'</b>':'')+'<small>'+label+'</small></span>';
+  const num=(kind,n,label,ok,icn)=>'<span class="u-num '+kind+'">'+ic(icn||(kind==='rd'?'i-read':'i-listen'))+'<b>'+n+'</b>'+(ok?'<b class="ok">'+ic('i-check')+'</b>':'')+'<small>'+label+'</small></span>';
   let h='<div class="u-hero cin"><div class="hero"><div class="ph">'+(photo?'<img src="'+esc(photo)+'" alt="" onerror="this.remove()">':'')+'<span>'+esc(init)+'</span></div>'
     +'<div style="flex:1"><h1>'+esc(st.name)+'</h1>'
-    +'<div class="stats">'+(st.read?num('rd',st.read,'مقروء',_rows.every(r=>r.rOk)):'')+(st.watch?num('ls',st.watch,'مسموع',_rows.filter(r=>r.wtt).every(r=>r.wOk)):'')+'</div>'
+    +'<div class="stats">'+(st.read?num('rd',st.read,'مقروء',_rows.every(r=>r.rOk)):'')+(st.watch?num('ls',st.watch,'مسموع',_rows.filter(r=>r.wtt).every(r=>r.wOk)):'')+(st.uwatch?num('unv',st.uwatch,'آلي غير مدقق',0,'i-auto'):'')+'</div>'
     +'<div style="font-size:var(--fs-xs);color:var(--ink-3);margin-top:8px">'+pluralSeries(st.nSeries)+'</div>'
     +'</div></div></div>';
   h+='<div class="u-sech cin"><h2>السلاسل</h2><span class="cnt">'+_rows.length+'</span></div><div class="u-fbar cin" role="radiogroup">'

@@ -2,3 +2,5 @@ __pycache__/
 playlists/data/helm_*.json
 __pycache__/
 *.pyc
+*.wwords.json
+_site/

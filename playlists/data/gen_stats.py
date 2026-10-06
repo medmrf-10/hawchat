@@ -65,6 +65,7 @@ REDIRECTS = {  # old row id → new row id (best single match)
 
 WARN = []
 SEARCH_L = {}   # row id → {ss, L:[[n,title]]} — lazy lesson-search index (E7)
+MERGE_DD = {}   # row id → rows intentionally deduped in the lessons/transcript merge
 def warn(m): WARN.append(m); print('WARN:', m, file=sys.stderr)
 
 def dump_atomic(obj, path, sort_keys=False):
@@ -497,6 +498,8 @@ for sh in sheikhs:
             continue
         r = srow(s['slug']) or newrow(s.get('title'))
         _sd = J(os.path.join(PL, 'series', s['slug'] + '.json')) or {}
+        if s.get('unv') or _sd.get('unv'):
+            r['unv'] = 1
         _pl = (_sd.get('playlist') or '').split('list=')[-1].split('&')[0]
         if _pl:
             r['plid'] = _pl
@@ -535,6 +538,8 @@ for sh in sheikhs:
                 continue
             r = newrow(sd.get('title') or dsl)
             r['sSlug'] = dsl
+            if sd.get('unv'):
+                r['unv'] = 1
             r['kind'] = r['kind'] or 's'
             r['wan'] = real
             _pl = (sd.get('playlist') or '').split('list=')[-1].split('&')[0]
@@ -689,6 +694,9 @@ for sh in sheikhs:
                     warn('merge %s: lessons=%d vs transcripts=%d — merged per-n' % (r['sSlug'], len(lrows), len(rrows)))
                 if dropped_:
                     warn('merge %s: %d transcript rows beyond series n>%d — dropped' % (r['sSlug'], dropped_, lim_))
+                dd_ = len(lrows) + len(rrows) - len(merged)
+                if dd_ > 0:
+                    MERGE_DD[r['id']] = dd_   # dedup is intentional — gate reads this
                 rrows = sorted(merged, key=lambda x: x['n'])
         elif r.get('sSlug'):
             rrows = rows_from_lessons(r['sSlug'])
@@ -728,6 +736,7 @@ for sh in sheikhs:
         'nSeries': len(rows),
         'rows': rows,
         'read': read, 'watch': watch,
+        'uwatch': sum(r['wan'] for r in rows if r.get('unv')),
         'nRead': sum(1 for r in rows if r['rdn']),
         'nWatch': sum(1 for r in rows if r['wan']),
     }
@@ -742,7 +751,7 @@ def _last_commit_ts():
         pass
     return __import__('datetime').datetime.now(__import__('datetime').timezone.utc).isoformat()
 
-out['_meta'] = {'updated': _last_commit_ts()}
+out['_meta'] = {'updated': _last_commit_ts(), 'dd': MERGE_DD}
 
 # degenerate-output guard: never publish stats that contradict the disk.
 tot_read = sum(v['read'] for k, v in out.items() if k != '_meta')
