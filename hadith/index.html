@@ -58,6 +58,20 @@ details{margin:8px 0}
 details summary{cursor:pointer;color:var(--acc2);font-size:.78rem;padding:6px 0}
 .secttl{font-family:var(--font-ar);font-size:1.05rem;color:var(--acc2);margin:18px 0 6px;border-bottom:1px solid var(--border);padding-bottom:6px}
 .sopen{color:var(--acc);font-size:.7rem;text-decoration:underline;cursor:pointer;margin-inline-start:8px}
+.gp{border:1px solid var(--border);border-radius:10px;margin:8px 0;overflow:hidden;background:var(--card)}
+.gp>summary{padding:11px 14px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:8px;list-style:none}
+.gp>summary::-webkit-details-marker{display:none}
+.gp>summary .p{color:var(--acc2);font-weight:700;font-size:.85rem}
+.gp>summary .n{color:var(--dim);font-size:.68rem;white-space:nowrap}
+.gp.k{margin:6px 10px;background:var(--card2);border-color:var(--border)}
+.gp.k>summary .p{color:var(--txt);font-weight:600}
+.gp-b{padding:2px 10px 8px}
+.bab{margin:4px 0;background:var(--bg);border-radius:8px}
+.bab>summary{padding:8px 12px;display:flex;justify-content:space-between;gap:8px;font-size:.78rem}
+.bab>summary .bt{color:var(--txt)}
+.bab>summary .n{color:var(--dim);font-size:.68rem;white-space:nowrap}
+.bab .bl{padding:2px 6px 6px}
+.bab .bl .row{border-bottom:1px solid var(--border)}
 .parttext{font-family:var(--font-ar);font-size:1.15rem;line-height:2.4;white-space:pre-wrap;background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:22px;margin:14px 0}
 .parttext .isn{color:var(--acc3)}
 .back{color:var(--dim);font-size:.78rem;cursor:pointer;display:inline-block;margin-bottom:8px}
@@ -116,7 +130,7 @@ async function vHome(){
   <div class="sub">${ix.totals.matn_hadiths.toLocaleString('ar')} حديثاً في ${mats.length} متناً · ${ix.totals.sharh_books_n} شرحاً · ${ix.totals.parts.toLocaleString('ar')} جزء شرح</div>
   <div class="srch"><input id="q" placeholder="ابحث بكلمة في المتون والشروح… (مثال: الصلاة)" enterkeyhint="search"><button onclick="doSearch()">بحث</button></div>
   <div class="secttl">كتب الشامي الأربعة</div>
-  <div class="doors">${cats.map(([c,v])=>`<div class="door" onclick="go('#/s/${c}')"><b>${esc(CATS[cnOf(c)]||c)}</b><span>${v.hadiths.toLocaleString('ar')} حديثاً</span></div>`).join('')}</div>
+  <div class="doors">${cats.map(([c,v])=>`<div class="door" onclick="go('#/s/${c}')"><b>${esc(CATS[cnOf(c)]||c)}</b><span>${v.hadiths.toLocaleString('ar')} حديثاً — مقاصد وكتب وأبواب</span></div>`).join('')}</div>
   <div class="secttl">المتون (${mats.length})</div>
   <div class="doors">${mats.map(([id,n])=>`<div class="door" onclick="go('#/m/${id}')"><b>${esc(MATN_NAMES[id]||id)}</b><span>${n.toLocaleString('ar')} حديثاً</span></div>`).join('')}</div>
   <div class="secttl">كتب الشروح (${ix.sharh_books.length})</div>
@@ -183,20 +197,64 @@ async function vMatnHadith(book,no){
     :'<div class="sub">لم يُعثر له على موضع في كتب الشامي.</div>';
 }
 
-/* ---------- shami cat list ---------- */
-async function vShami(cat,page=1){
-  app.innerHTML='<div class="loading">جارٍ تحميل كتالوج الشامي…</div>';
-  const d=await gz(`hadiths/${cat}.json.gz`);
-  const ids=Object.keys(d).sort((a,b)=>d[a].no-d[b].no);
-  const per=100,pages=Math.ceil(ids.length/per);
-  page=Math.max(1,Math.min(page,pages));
-  const slice=ids.slice((page-1)*per,page*per);
+/* ---------- shami cat list — تقسيم المقاصد والكتب والأبواب ---------- */
+let BOOKS=null;
+const SHB_URL='https://medmrf-10.github.io/des/shami/books.json';
+async function booksIdx(){
+  if(!BOOKS){
+    const r=await fetch(SHB_URL);if(!r.ok)throw new Error(r.status);
+    BOOKS=await r.json();
+  }
+  return BOOKS;
+}
+let _shCat=null,_shD=null,_shGroups=null;
+app.addEventListener('toggle',e=>{
+  const t=e.target;
+  if(t.tagName!=='DETAILS'||!t.open||t.dataset.gi===undefined||t.dataset.f)return;
+  t.dataset.f='1';
+  const g=_shGroups[+t.dataset.gi];
+  const box=t.querySelector('.bl');
+  if(!g||!box)return;
+  box.innerHTML=g.ids.map(id=>{const r=_shD[String(id)];return r?`<div class="row" onclick="go('#/h/${cnOf(_shCat)}/${id}')"><span class="no">${r.no}</span><span class="tx">${esc(r.text.slice(0,95))}…</span>${r.hukm?`<span class="bb" style="color:${/ضعيف|منكر|موضوع|واه|مردود/.test(r.hukm)?'#d98a8a':'#7fd99b'}">${esc(r.hukm)}</span>`:''}</div>`:''}).join('');
+},true);
+async function vShami(cat){
+  app.innerHTML='<div class="loading">جارٍ تحميل تقسيم الكتاب…</div>';
+  const [d,books]=await Promise.all([gz(`hadiths/${cat}.json.gz`),booksIdx()]);
+  const bk=(books||[]).find(b=>b.slug===cat);
+  if(!bk){ // كتاب بلا فهرس مقاصد — قائمة مسطّحة احتياطية
+    const ids=Object.keys(d).sort((a,b)=>d[a].no-d[b].no);
+    app.innerHTML=`<span class="back" onclick="go('#/')">‹ الرئيسية</span><div class="h-title cin">${esc(CATS[cnOf(cat)]||cat)}</div><div class="sub">${ids.length.toLocaleString('ar')} حديثاً</div><div class="card">${ids.slice(0,300).map(id=>{const r=d[id];return`<div class="row" onclick="go('#/h/${cnOf(cat)}/${id}')"><span class="no">${r.no}</span><span class="tx">${esc(r.text.slice(0,95))}…</span></div>`}).join('')}</div>`;
+    return;
+  }
+  _shCat=cat;_shD=d;_shGroups=bk.groups;
+  const tree={};
+  for(const g of bk.groups){
+    const p=g.path||[];const l1=p[0]||'عام';
+    const lvl=(tree[l1]=tree[l1]||{n:0,kids:{},leaf:[]});
+    lvl.n+=g.ids.length;
+    if(p.length>=3){
+      const k=(lvl.kids[p[1]]=lvl.kids[p[1]]||{n:0,babs:[]});
+      k.n+=g.ids.length;k.babs.push(g);
+    }else lvl.leaf.push(g);
+  }
+  const GI=[];bk.groups.forEach((g,i)=>GI.push(i));
+  let gi=0;
+  const babHtml=g=>{const i=gi++;return`<details class="bab" data-gi="${i}"><summary><span class="bt">${esc(g.path[g.path.length-1])}</span><span class="n">${g.ids.length} حديثاً</span></summary><div class="bl"></div></details>`};
+  let h='';
+  for(const l1 in tree){
+    const lvl=tree[l1];
+    h+=`<details class="gp"><summary><span class="p">${esc(l1)}</span><span class="n">${lvl.n.toLocaleString('ar')} حديثاً</span></summary><div class="gp-b">`;
+    for(const k in lvl.kids){
+      h+=`<details class="gp k"><summary><span class="p">${esc(k)}</span><span class="n">${lvl.kids[k].n.toLocaleString('ar')} حديثاً</span></summary><div class="gp-b">${lvl.kids[k].babs.map(babHtml).join('')}</div></details>`;
+    }
+    h+=lvl.leaf.map(babHtml).join('')+'</div></details>';
+  }
+  const maq=Object.keys(tree).length;
   app.innerHTML=`
   <span class="back" onclick="go('#/')">‹ الرئيسية</span>
-  <div class="h-title cin">${esc(CATS[cnOf(cat)]||cat)}</div>
-  <div class="sub">${ids.length.toLocaleString('ar')} حديثاً — صفحة ${page.toLocaleString('ar')}/${pages.toLocaleString('ar')}</div>
-  <div class="card">${slice.map(id=>{const r=d[id];return`<div class="row" onclick="go('#/h/${cnOf(cat)}/${id}')"><span class="no">${r.no}</span><span class="tx">${esc(r.text.slice(0,95))}…</span><span class="bb">${esc(r.bab.split(':')[0])}</span></div>`}).join('')}</div>
-  <div class="pg"><button ${page<=1?'disabled':''} onclick="go('#/s/${cat}/${page-1}')">السابق</button><span>${page} / ${pages}</span><button ${page>=pages?'disabled':''} onclick="go('#/s/${cat}/${page+1}')">التالي</button></div>`;
+  <div class="h-title cin">${esc(bk.name||CATS[cnOf(cat)]||cat)}</div>
+  <div class="sub">${maq.toLocaleString('ar')} مقاصد · ${Object.keys(d).length.toLocaleString('ar')} حديثاً — افتح المقصد ثم الكتاب ثم الباب</div>
+  ${h}`;
 }
 
 /* ---------- hadith detail ---------- */
@@ -204,6 +262,22 @@ async function vHadith(cat,id){
   app.innerHTML='<div class="loading">جارٍ تحميل الحديث…</div>';
   let r;
   try{r=await gz(`hadith/${cat}/${id}.json.gz`)}catch(e){app.innerHTML='<div class="err">تعذر تحميل الحديث.</div>';return}
+  let pathStr='';
+  try{
+    const books=await booksIdx();
+    const cn={1:'usul',2:'maalem',3:'wajiz',4:'kulliyya'}[cat];
+    const bk=(books||[]).find(b=>b.slug===cn);
+    if(bk){
+      window._shPath=window._shPath||{};
+      if(!window._shPath[cn]){
+        const m={};
+        for(const g of bk.groups)for(const i2 of g.ids)m[i2]=g.path;
+        window._shPath[cn]=m;
+      }
+      const p=window._shPath[cn][id];
+      if(p)pathStr=p.join(' ‹ ');
+    }
+  }catch(e){}
   const locs=Object.entries(r.locs||{});
   const sh=(r.sharh||[]);
   let prevNo=null,nextNo=null;
@@ -217,7 +291,7 @@ async function vHadith(cat,id){
     <div class="meta">
       <span class="mit"><b>${esc(CATS[cat]||'الشامي')}</b> · رقم ${r.no}</span>
       ${r.reference?`<span class="mit">المرجع: <b>${esc(r.reference)}</b></span>`:''}
-      ${r.bab?`<span class="mit">${esc(r.bab)}</span>`:''}
+      ${pathStr?`<span class="mit" style="flex-basis:100%">${esc(pathStr)}</span>`:(r.bab?`<span class="mit">${esc(r.bab)}</span>`:'')}
       ${hukmBadge(r.hukm)}
     </div>
   </div>

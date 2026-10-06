@@ -75,7 +75,7 @@ async function vSurah(s){
 }
 async function vAyah(s,a){
   app.innerHTML='<div class="loading">جارٍ تحميل التفاسير…</div>';
-  const [d,q]=await Promise.all([gz('ayah/'+s+'/'+a),eds(),gz('quran/'+String(s).padStart(3,'0')+'.json.gz')]);
+  const [d,q]=await Promise.all([gz('ayah/'+s+'/'+a+'.json.gz'),eds(),gz('quran/'+String(s).padStart(3,'0')+'.json.gz')]);
   const at=(q&&q.ayahs&&q.ayahs[a]&&q.ayahs[a].t)||'';
   let h='<h2 style="font-family:var(--font-ar)"><a href="#/s/'+s+'" style="color:var(--gold-3);text-decoration:none">سورة '+esc(SURAHS[s-1])+'</a> — الآية '+a+'</h2>';
   h+='<div class="aya" style="cursor:default">'+esc(at)+'</div>';
