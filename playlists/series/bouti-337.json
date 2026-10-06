@@ -1,0 +1,38 @@
+{
+ "slug": "bouti-337",
+ "sheikh": "سعيد رمضان البوطي",
+ "sheikh_slug": "said-bouti",
+ "title": "في رحاب القرآن",
+ "playlist": "https://www.youtube.com/playlist?list=PL01kYZIehH-o-hti9ShELqqWevqfj47o6",
+ "count": 4,
+ "lessons": [
+  {
+   "n": 1,
+   "title": "برومو في رحاب القرآن",
+   "video": "KZshzi96BQI",
+   "chars": 524,
+   "dur": "1:08"
+  },
+  {
+   "n": 2,
+   "title": "1- في رحاب القرآن | شهر رمضان شهر القرآن",
+   "video": "6SOCzyajuC4",
+   "chars": 1308,
+   "dur": "3:53"
+  },
+  {
+   "n": 3,
+   "title": "2- في رحاب القرآن | القرآن ربيع القلب",
+   "video": "B84IL2MDI8w",
+   "chars": 1764,
+   "dur": "4:19"
+  },
+  {
+   "n": 4,
+   "title": "3 - في رحاب القرآن | فضل القرآن على اللغة العربية",
+   "video": "aekcNXP20lM",
+   "chars": 1357,
+   "dur": "3:33"
+  }
+ ]
+}
