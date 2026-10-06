@@ -20,7 +20,7 @@ import json, os, re, sys, subprocess, urllib.request, collections
 
 BASE = os.path.dirname(os.path.abspath(__file__))          # playlists/data
 PL   = os.path.dirname(BASE)                                # playlists
-ROOT = os.path.dirname(PL)                                  # hawchat root
+ROOT = os.path.dirname(PL)                                  # hawshat root
 CAT  = '/home/ubuntu/durus/catalog/plists/'
 MUT_TXT = 'https://medmrf-10.github.io/des/mutalaa/data/txt/'
 MUT_MAN = 'https://medmrf-10.github.io/des/mutalaa/data/manifest.json'

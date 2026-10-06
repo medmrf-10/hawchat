@@ -76,12 +76,12 @@ const store={
  export(){return JSON.stringify(this._d())},
  import_(s){try{const d=JSON.parse(s);if(typeof d==='object'){this._w(d);return true}}catch(e){}return false},
 };
-/* offline-save a row's texts + JSON into the pinned cache (hawchat-pinned-v1 — never LRU-trimmed) */
+/* offline-save a row's texts + JSON into the pinned cache (hawshat-pinned-v1 — never LRU-trimmed) */
 async function offlineRow(rowId,sSlug){
   if(!('caches' in window))return{ok:false,why:'caches'};
   try{
     if(navigator.storage&&navigator.storage.persist)navigator.storage.persist().catch(()=>{});
-    const c=await caches.open('hawchat-pinned-v1');let n=0;
+    const c=await caches.open('hawshat-pinned-v1');let n=0;
     const put=async u=>{try{
       if(await c.match(u))return 1;
       const r=await fetch(u);if(r.ok){await c.put(u,r);return 1}return 0
@@ -107,7 +107,7 @@ async function offlineRow(rowId,sSlug){
 }
 async function isPinned(rowId){
   if(!('caches' in window))return false;
-  try{return!!(await(await caches.open('hawchat-pinned-v1')).match('data/read/'+encodeURIComponent(rowId)+'.json'))}catch(e){return false}
+  try{return!!(await(await caches.open('hawshat-pinned-v1')).match('data/read/'+encodeURIComponent(rowId)+'.json'))}catch(e){return false}
 }
 /* toast / errState / emptyState — shared status components (D4) */
 function toast(msg,ms){
