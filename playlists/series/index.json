@@ -202,8 +202,8 @@
    "slug": "alasri-arbaa",
    "title": "لقاء الأربعاء",
    "sheikh_slug": "saif-alasri",
-   "count": 29,
-   "aligned": 29,
+   "count": 17,
+   "aligned": 39,
    "transcribed": 56,
    "status": "مكتملة التفريغ"
   },
@@ -547,6 +547,78 @@
    "count": 234,
    "aligned": 119,
    "transcribed": 119,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "habib-omar-193",
+   "title": "دروس الفجر - شرح كتاب الموطأ للإمام مالك",
+   "sheikh_slug": "habib-omar-ibn-hafiz",
+   "count": 2,
+   "aligned": 2,
+   "transcribed": 2,
+   "status": "مكتملة التفريغ"
+  },
+  {
+   "slug": "habib-omar-195",
+   "title": "لذاتي بذاتي",
+   "sheikh_slug": "habib-omar-ibn-hafiz",
+   "count": 28,
+   "aligned": 14,
+   "transcribed": 14,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "habib-omar-196",
+   "title": "فعاليات الدورة التعليمية ال32 بدار المصطفى بتريم",
+   "sheikh_slug": "habib-omar-ibn-hafiz",
+   "count": 123,
+   "aligned": 62,
+   "transcribed": 62,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "habib-omar-197",
+   "title": "ملتقى الدعاة العشرين بدار المصطفى",
+   "sheikh_slug": "habib-omar-ibn-hafiz",
+   "count": 8,
+   "aligned": 4,
+   "transcribed": 4,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "habib-omar-198",
+   "title": "الوصايا النافعة",
+   "sheikh_slug": "habib-omar-ibn-hafiz",
+   "count": 30,
+   "aligned": 16,
+   "transcribed": 16,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "habib-omar-199",
+   "title": "موسم شهداء مؤتة الأبرار - الأردن 1447هـ",
+   "sheikh_slug": "habib-omar-ibn-hafiz",
+   "count": 52,
+   "aligned": 26,
+   "transcribed": 26,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "habib-omar-200",
+   "title": "رحلة كيرلا ، الهند - ذو القعدة 1444 - India Dawah Trip 2023",
+   "sheikh_slug": "habib-omar-ibn-hafiz",
+   "count": 28,
+   "aligned": 14,
+   "transcribed": 14,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "habib-omar-201",
+   "title": "محاضرات توجيهية تربوية",
+   "sheikh_slug": "habib-omar-ibn-hafiz",
+   "count": 116,
+   "aligned": 58,
+   "transcribed": 58,
    "status": "مفرّغة — المحاذاة جارية"
   }
  ]
