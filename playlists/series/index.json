@@ -96,8 +96,8 @@
    "title": "الرد على خوارج العصر",
    "count": 172,
    "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 146,
-   "transcribed": 172
+   "aligned": 133,
+   "transcribed": 167
   },
   {
    "slug": "fadel-dawra",
@@ -131,7 +131,7 @@
    "title": "تفسير جزء عمّ",
    "sheikh_slug": "ahmed-abdelmonem",
    "count": 20,
-   "aligned": 6,
+   "aligned": 16,
    "transcribed": 20,
    "status": "مفرّغة — المحاذاة جارية"
   },
@@ -167,25 +167,25 @@
    "title": "شرح كتاب شرح أم البراهين للإمام السنوسي",
    "sheikh_slug": "ali-mahmoud-alomari",
    "count": 24,
-   "aligned": 0,
+   "aligned": 24,
    "transcribed": 24,
-   "status": "مفرّغة — المحاذاة جارية"
+   "status": "مكتملة التفريغ"
   },
   {
    "slug": "alamri-hisam",
    "title": "شرح الحسام الكاتي على إيساغوجي",
    "sheikh_slug": "ali-mahmoud-alomari",
    "count": 32,
-   "aligned": 0,
+   "aligned": 32,
    "transcribed": 32,
-   "status": "مفرّغة — المحاذاة جارية"
+   "status": "مكتملة التفريغ"
   },
   {
    "slug": "alamri-iqtisad",
    "title": "الاقتصاد في الاعتقاد",
    "sheikh_slug": "ali-mahmoud-alomari",
    "count": 46,
-   "aligned": 0,
+   "aligned": 4,
    "transcribed": 46,
    "status": "مفرّغة — المحاذاة جارية"
   },
@@ -248,27 +248,27 @@
    "title": "لقاء البث المباشر",
    "sheikh_slug": "ali-mahmoud-alomari",
    "count": 1,
-   "aligned": 0,
+   "aligned": 1,
    "transcribed": 1,
-   "status": "مفرّغة — المحاذاة جارية"
+   "status": "مكتملة التفريغ"
   },
   {
    "slug": "alamri-durus-amma",
    "title": "دروس عامة",
    "sheikh_slug": "ali-mahmoud-alomari",
    "count": 4,
-   "aligned": 0,
+   "aligned": 4,
    "transcribed": 4,
-   "status": "مفرّغة — المحاذاة جارية"
+   "status": "مكتملة التفريغ"
   },
   {
    "slug": "alamri-falsafa-haditha",
    "title": "دروس في الفلسفة الحديثة",
    "sheikh_slug": "ali-mahmoud-alomari",
    "count": 10,
-   "aligned": 0,
+   "aligned": 10,
    "transcribed": 10,
-   "status": "مفرّغة — المحاذاة جارية"
+   "status": "مكتملة التفريغ"
   },
   {
    "slug": "alamri-liqaat",
@@ -293,9 +293,9 @@
    "title": "فلسفة الدين",
    "sheikh_slug": "ali-mahmoud-alomari",
    "count": 4,
-   "aligned": 0,
+   "aligned": 4,
    "transcribed": 4,
-   "status": "مفرّغة — المحاذاة جارية"
+   "status": "مكتملة التفريغ"
   },
   {
    "slug": "alamri-manhaj-iman",
@@ -357,7 +357,7 @@
    "title": "ألف باء الزواج",
    "count": 75,
    "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 37,
+   "aligned": 56,
    "transcribed": 73
   },
   {
@@ -366,7 +366,7 @@
    "title": "ألف باء التربية",
    "count": 108,
    "status": "مفرّغة — المحاذاة جارية",
-   "aligned": 3,
+   "aligned": 13,
    "transcribed": 72
   },
   {
@@ -548,6 +548,231 @@
    "aligned": 119,
    "transcribed": 119,
    "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alsayed-mut-628",
+   "title": "السيرة النبوية للمصلحين",
+   "sheikh_slug": "ahmed-alsayed",
+   "count": 32,
+   "aligned": 0,
+   "transcribed": 32,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alsayed-mut-630",
+   "title": "تاريخ الفكر الغربي الحديث",
+   "sheikh_slug": "ahmed-alsayed",
+   "count": 7,
+   "aligned": 0,
+   "transcribed": 7,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alsayed-mut-636",
+   "title": "الطريق إلى بيت المقدس",
+   "sheikh_slug": "ahmed-alsayed",
+   "count": 23,
+   "aligned": 0,
+   "transcribed": 23,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alsayed-mut-645",
+   "title": "التجارب الإصلاحية في العصر الحديث",
+   "sheikh_slug": "ahmed-alsayed",
+   "count": 12,
+   "aligned": 0,
+   "transcribed": 12,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alsayed-mut-651",
+   "title": "سير وعبر للمصلحين",
+   "sheikh_slug": "ahmed-alsayed",
+   "count": 16,
+   "aligned": 0,
+   "transcribed": 16,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alsayed-mut-652",
+   "title": "السنن الإلهية وأثرها في الإصلاح",
+   "sheikh_slug": "ahmed-alsayed",
+   "count": 7,
+   "aligned": 0,
+   "transcribed": 7,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alsayed-mut-653",
+   "title": "يوم الفرقان... يوم بدر العظيم",
+   "sheikh_slug": "ahmed-alsayed",
+   "count": 12,
+   "aligned": 0,
+   "transcribed": 12,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alsayed-mut-656",
+   "title": "أنوار السنة المحمدية | رياض الصالحين",
+   "sheikh_slug": "ahmed-alsayed",
+   "count": 63,
+   "aligned": 2,
+   "transcribed": 63,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alsayed-mut-659",
+   "title": "التزكية للمصلحين",
+   "sheikh_slug": "ahmed-alsayed",
+   "count": 5,
+   "aligned": 0,
+   "transcribed": 5,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alsayed-mut-660",
+   "title": "الأمة بين احتلالين",
+   "sheikh_slug": "ahmed-alsayed",
+   "count": 19,
+   "aligned": 0,
+   "transcribed": 19,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alsayed-mut-661",
+   "title": "خير القرون",
+   "sheikh_slug": "ahmed-alsayed",
+   "count": 40,
+   "aligned": 0,
+   "transcribed": 40,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alsayed-mut-671",
+   "title": "البناء التزكوي للجيل الصاعد",
+   "sheikh_slug": "ahmed-alsayed",
+   "count": 7,
+   "aligned": 0,
+   "transcribed": 7,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alsayed-mut-672",
+   "title": "المنهج الإصلاحي من سورتي الأنفال والتوبة",
+   "sheikh_slug": "ahmed-alsayed",
+   "count": 9,
+   "aligned": 0,
+   "transcribed": 9,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alsayed-mut-674",
+   "title": "سوية المؤمن: جلسات شبابية",
+   "sheikh_slug": "ahmed-alsayed",
+   "count": 6,
+   "aligned": 0,
+   "transcribed": 6,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alsayed-mut-675",
+   "title": "تدبر سورة الأنفال",
+   "sheikh_slug": "ahmed-alsayed",
+   "count": 7,
+   "aligned": 0,
+   "transcribed": 7,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alsayed-mut-686",
+   "title": "تدبر سورة التوبة",
+   "sheikh_slug": "ahmed-alsayed",
+   "count": 6,
+   "aligned": 0,
+   "transcribed": 6,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alsayed-mut-687",
+   "title": "مقاصد السور",
+   "sheikh_slug": "ahmed-alsayed",
+   "count": 5,
+   "aligned": 0,
+   "transcribed": 5,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "alsayed-mut-738",
+   "title": "سيرة رسول الله ﷺ",
+   "sheikh_slug": "ahmed-alsayed",
+   "count": 2,
+   "aligned": 0,
+   "transcribed": 2,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "bouti-337",
+   "title": "في رحاب القرآن",
+   "sheikh_slug": "said-bouti",
+   "count": 9,
+   "aligned": 9,
+   "transcribed": 9,
+   "status": "مكتملة التفريغ"
+  },
+  {
+   "slug": "bouti-339",
+   "title": "الكآبة .. أسباب وعلاج",
+   "sheikh_slug": "said-bouti",
+   "count": 1,
+   "aligned": 11,
+   "transcribed": 11,
+   "status": "مكتملة التفريغ"
+  },
+  {
+   "slug": "bouti-343",
+   "title": "اللغة العربية في القرآن الكريم",
+   "sheikh_slug": "said-bouti",
+   "count": 1,
+   "aligned": 7,
+   "transcribed": 7,
+   "status": "مكتملة التفريغ"
+  },
+  {
+   "slug": "bouti-344",
+   "title": "خطب الجمعة للإمام الشهيد البوطي في عام 2010",
+   "sheikh_slug": "said-bouti",
+   "count": 2,
+   "aligned": 22,
+   "transcribed": 22,
+   "status": "مكتملة التفريغ"
+  },
+  {
+   "slug": "bouti-347",
+   "title": "شكر الله تعالى في القرآن الكريم",
+   "sheikh_slug": "said-bouti",
+   "count": 1,
+   "aligned": 7,
+   "transcribed": 7,
+   "status": "مكتملة التفريغ"
+  },
+  {
+   "slug": "bouti-353",
+   "title": "الآداب الاجتماعية في القرآن الكريم",
+   "sheikh_slug": "said-bouti",
+   "count": 1,
+   "aligned": 8,
+   "transcribed": 8,
+   "status": "مكتملة التفريغ"
+  },
+  {
+   "slug": "bouti-355",
+   "title": "مقتطفات من سلسلة علوم القرآن الكريم",
+   "sheikh_slug": "said-bouti",
+   "count": 4,
+   "aligned": 4,
+   "transcribed": 4,
+   "status": "مكتملة التفريغ"
   }
  ]
 }
