@@ -1,1 +1,1 @@
-{"af":{"5":"005.align.json","1":"001.align.json","2":"002.align.json"},"tf":{"1":"001.txt","5":"005.txt","2":"002.txt"},"align":[1,2,5],"alignOk":[1,2,5],"txt":[1,2,5]}
+{"af":{"4":"004.align.json","5":"005.align.json","6":"006.align.json","1":"001.align.json","2":"002.align.json"},"tf":{"1":"001.txt","6":"006.txt","4":"004.txt","5":"005.txt","2":"002.txt"},"align":[1,2,4,5,6],"alignOk":[1,2,4,5,6],"txt":[1,2,4,5,6]}
