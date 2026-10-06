@@ -73,7 +73,7 @@
 let flt=new Set();
 let _rows=[],_slug='',_st=null;
 const ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';
-const FCOUNT={rd:r=>r.rdn||0,yt:r=>r.ytn||0,lsn:r=>r.wan||0,qu:r=>r.qn||0,aud:r=>r.ytn||0,fav:r=>store.fav(r.id)?1:0,sm:r=>r.sun||0};
+const FCOUNT={rd:r=>r.rdn||0,yt:r=>r.ytn||0,lsn:r=>r.wan||0,qu:r=>r.qn||0,aud:r=>(r.ytn||0)+(r.aun||0),fav:r=>store.fav(r.id)?1:0,sm:r=>r.sun||0};
 const FALABEL={rd:'قراءة',yt:'يوتيوب',lsn:'مشاهدة حية',qu:'أسئلة',aud:'استماع',fav:'مفضلة',sm:'تلخيص'};
 function rowMatch(r){
   for(const k of flt)if(!FCOUNT[k](r))return false;

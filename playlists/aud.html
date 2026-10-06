@@ -1,0 +1,79 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>استماع</title>
+<meta name="theme-color" content="#0e1413">
+<link rel="stylesheet" href="tokens.css?v=11">
+<link rel="stylesheet" href="ui.css?v=11">
+<style>
+body{background:var(--bg-1);color:var(--txt)}
+.wrap{max-width:640px;margin:0 auto;padding:14px 14px 90px}
+h1{font-family:var(--font-ar);font-size:1.4rem;font-weight:700;color:var(--txt);margin:10px 0 4px;line-height:1.6}
+.lsub{color:var(--dim);font-size:var(--fs-xs);margin-bottom:14px}
+.audcard{margin-top:22px;background:var(--bg-2);border:1px solid var(--line-1);border-radius:var(--r-lg);padding:26px 18px;display:flex;flex-direction:column;align-items:center;gap:18px;box-shadow:var(--e-2)}
+.audcard .disc{width:96px;height:96px;border-radius:50%;background:rgba(123,201,140,.10);border:1.5px solid rgba(123,201,140,.45);display:flex;align-items:center;justify-content:center;color:#7bc98c}
+.audcard .disc .i{width:44px;height:44px}
+.audcard audio{width:100%;border-radius:var(--r-md);outline:none}
+.spd{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.spd button{min-height:36px;padding:0 14px;border-radius:var(--r-md);border:1px solid var(--line-2);background:var(--bg-1);color:var(--ink-2);font:inherit;font-size:var(--fs-xs);cursor:pointer}
+.spd button.on{color:#7bc98c;border-color:rgba(123,201,140,.6);background:rgba(123,201,140,.08)}
+.hint{display:flex;align-items:center;gap:10px;margin-top:14px;padding:10px 14px;border-radius:var(--r-md);border:1px solid var(--line-2);background:var(--bg-2);color:var(--ink-3);font-size:var(--fs-xs)}
+.hint .i{width:18px;height:18px;color:#7bc98c;flex:none}
+.errbox{margin:40px 0;padding:18px;border-radius:var(--r-md);border:1px solid var(--line-2);background:var(--bg-2);text-align:center}
+.errbox a{color:var(--gold-3)}
+.navb{position:fixed;bottom:0;left:0;right:0;background:var(--bgt);backdrop-filter:blur(14px);border-top:1px solid var(--border);padding:10px 14px calc(10px + env(safe-area-inset-bottom));display:flex;align-items:center;justify-content:center;gap:10px;z-index:50}
+.navb a{min-height:44px;padding:0 18px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--card);color:var(--txt);font-size:var(--fs-sm);text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.navb a.off{opacity:.35;pointer-events:none}
+.navb .pos{color:var(--acc2);font-size:var(--fs-sm);max-width:40vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+</style>
+</head>
+<body>
+<header class="hd"><div class="hd-in">
+  <a href="." id="back" class="btn" aria-label="عودة" style="text-decoration:none">→</a>
+  <img src="../icons/icon-192.png" alt="" width="30" height="30" style="border-radius:8px">
+  <span class="brand">استماع</span>
+  <span class="sub" id="hdr-sub" style="color:var(--dim);font-size:var(--fs-xs);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">صوتيات الموقع</span>
+</div></header>
+<main><div class="wrap" id="app"><div class="skel" style="height:50px;margin-top:12px"></div><div class="skel" style="height:200px;margin-top:12px;border-radius:18px"></div></div></main>
+<div class="navb" id="navb" hidden></div>
+<script src="common.js?v=11"></script>
+<script>
+const ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';
+(async()=>{
+  const q=new URLSearchParams(location.search);
+  const app=document.getElementById('app'),nav=document.getElementById('navb');
+  const k=q.get('k'),n0=parseInt(q.get('n')||'0',10);
+  if(!k){app.innerHTML='<div class="errbox">لا سلسلة صوتية محددة — <a href=".">عودة</a></div>';return}
+  const adx=await j('audio/index.json');
+  const grp=(adx&&adx[k])||null;
+  if(!grp||!grp.items||!grp.items.length){app.innerHTML='<div class="errbox">لا صوتيات لهذه السلسلة بعد — <a href=".">عودة</a></div>';return}
+  const items=[...grp.items].sort((a,b)=>a.n-b.n);
+  const i0=Math.max(0,items.findIndex(x=>x.n===n0));
+  const it=items[i0]||items[0];
+  document.getElementById('hdr-sub').textContent=grp.title||'';
+  document.getElementById('back').href='row.html?r='+encodeURIComponent(k)+'&m=aud';
+  document.title=(it.t||('الدرس '+it.n))+' — '+ (grp.title||'استماع');
+  app.innerHTML='<h1><bdi>'+esc(it.t||('الدرس '+it.n))+'</bdi></h1>'
+    +'<div class="lsub">'+esc(grp.title||'')+' · '+(i0+1)+' / '+items.length+'</div>'
+    +'<div class="audcard"><span class="disc">'+ic('i-audio')+'</span>'
+    +'<audio id="au" controls preload="metadata" src="audio/'+encodeURI(it.f)+'"></audio>'
+    +'<div class="spd">'+[0.75,1,1.25,1.5,2].map(s=>'<button data-s="'+s+'"'+(s===1?' class="on"':'')+'>×'+s+'</button>').join('')+'</div></div>'
+    +'<div class="hint">'+ic('i-audio')+'<span>صوت أصلي من الموقع — يستمر التشغيل مع إطفاء الشاشة وتظهر أزرار التحكم على شاشة القفل.</span></div>';
+  const au=document.getElementById('au');
+  au.addEventListener('play',()=>{store.markSeen(k+':'+it.n)});
+  document.querySelectorAll('.spd button').forEach(b=>b.onclick=()=>{
+    au.playbackRate=parseFloat(b.dataset.s);
+    document.querySelectorAll('.spd button').forEach(x=>x.classList.toggle('on',x===b))});
+  if('mediaSession' in navigator){try{
+    navigator.mediaSession.metadata=new MediaMetadata({title:it.t||('الدرس '+it.n),artist:grp.artist||'',album:grp.title||'صوتيات الموقع'});
+    const go=d=>{const j2=i0+d;if(items[j2])location.href='aud.html?k='+encodeURIComponent(k)+'&n='+items[j2].n};
+    navigator.mediaSession.setActionHandler('previoustrack',()=>go(-1));
+    navigator.mediaSession.setActionHandler('nexttrack',()=>go(1));
+  }catch(e){}}
+  nav.hidden=false;
+  nav.innerHTML=(i0>0?'<a href="aud.html?k='+encodeURIComponent(k)+'&n='+items[i0-1].n+'">→ السابق</a>':'<a class="off">→ السابق</a>')
+    +'<span class="pos">'+esc(grp.title||'')+' — '+(i0+1)+' / '+items.length+'</span>'
+    +(i0<items.length-1?'<a href="aud.html?k='+encodeURIComponent(k)+'&n='+items[i0+1].n+'">التالي ←</a>':'<a class="off">التالي ←</a>');
+  au.addEventListener('ended',()=>{if(items[i0+1])location.href='aud.html?k='+encodeURIComponent(k)+'&n='+items[i0+1].n});
+})();
+</script>
+</body></html>

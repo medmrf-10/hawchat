@@ -87,10 +87,13 @@ const ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';
   document.getElementById('hdr-sub').textContent=st.name;
   document.title=row.title+' — '+st.name;
   // lessons: series json (aligned) + read-file list
-  const [sd,alidx,rows]=await Promise.all([
+  const [sd,alidx,rows,audx]=await Promise.all([
     row.sSlug?j('series/'+encodeURIComponent(row.sSlug)+'.json'):null,
     j('lessons/'+encodeURIComponent(row.sSlug||row.id)+'/index.json'),
-    j('data/read/'+encodeURIComponent(row.id)+'.json')]);
+    j('data/read/'+encodeURIComponent(row.id)+'.json'),
+    j('audio/index.json')]);
+  const akey=row.sSlug||row.id;
+  const audMap=new Map((((audx||{})[akey]||{}).items||[]).map(a=>[a.n,a]));
   const aln=new Set((alidx&&(alidx.alignOk||alidx.align))||[]);
   const smn=new Set((alidx&&alidx.sum)||[]);
   const qun=new Set((alidx&&alidx.qu)||[]);
@@ -98,7 +101,7 @@ const ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';
   const txn=new Set((alidx&&alidx.txt)||[]);
   const rtxt=new Map((rows||[]).map(x=>[x.n,x]));
   // unified lesson list: every n that has text OR align
-  const ns=new Set([...aln,...txn,...rtxt.keys()]);
+  const ns=new Set([...aln,...txn,...rtxt.keys(),...audMap.keys()]);
   const lessons=(sd&&sd.lessons)||[];
   for(const l of lessons)if((l.video||aln.has(l.n)||txn.has(l.n)))ns.add(l.n);
   let sorted=[...ns].sort((a,b)=>a-b);
@@ -108,7 +111,8 @@ const ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';
   let mode=q.get('m');if(mode==='ltx')mode='yt';
   if(mode==='listen')sorted=sorted.filter(n=>aln.has(n));
   else if(mode==='read')sorted=sorted.filter(n=>txn.has(n)||rtxt.has(n));
-  else if(mode==='yt'||mode==='aud')sorted=sorted.filter(n=>{const ll=L(n),rx=rtxt.get(n);return (ll.video&&ll.video.length>=8)||(rx&&rx.vid)});
+  else if(mode==='yt')sorted=sorted.filter(n=>{const ll=L(n),rx=rtxt.get(n);return (ll.video&&ll.video.length>=8)||(rx&&rx.vid)});
+  else if(mode==='aud')sorted=sorted.filter(n=>{const ll=L(n),rx=rtxt.get(n);return (ll.video&&ll.video.length>=8)||(rx&&rx.vid)||audMap.has(n)});
   else if(mode==='sm')sorted=sorted.filter(n=>smn.has(n));
   else if(mode==='qu')sorted=sorted.filter(n=>qun.has(n));
   const MN={read:'قراءة',yt:'يوتيوب',aud:'استماع',listen:'مشاهدة حية',sm:'تلخيص',qu:'أسئلة'};
@@ -131,6 +135,8 @@ const ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';
       const href=mode==='sm' ? 'sm.html?r='+encodeURIComponent(row.id)+'&l='+nn
         : mode==='qu' ? 'qu.html?r='+encodeURIComponent(row.id)+'&l='+nn
         : mode==='read' ? 'tr.html?r='+encodeURIComponent(row.id)+'&l='+nn
+        : mode==='aud'&&audMap.has(nn)&&!(L(nn).video&&L(nn).video.length>=8)&&!(rtxt.get(nn)||{}).vid
+            ? 'aud.html?k='+encodeURIComponent(akey)+'&n='+nn
         : mode==='yt'||mode==='aud' ? ((L(nn).video&&L(nn).video.length>=8)
             ? 'yt.html?s='+encodeURIComponent(row.sSlug)+'&l='+nn+(mode==='aud'?'&a=1':'')
             : 'yt.html?v='+encodeURIComponent((rtxt.get(nn)||{}).vid||'')+'&r='+encodeURIComponent(row.id)+'&l='+nn+(mode==='aud'?'&a=1':''))
@@ -144,6 +150,7 @@ const ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';
         +'<span class="bd">'+(seen?'<span class="ic-seen" title="شوهد" style="color:var(--green)">'+ic('i-check')+'</span>':'')
         +(rtxt.has(nn)?'<span class="ic-read" title="نص">'+ic('i-read')+'</span>':'')
         +(smn.has(nn)?'<span class="ic-sum" title="ملخّص" style="color:var(--gold-3)">'+ic('i-list')+'</span>':'')
+        +(audMap.has(nn)?'<span class="ic-audio" title="صوتية الموقع" style="color:#7bc98c">'+ic('i-audio')+'</span>':'')
         +(aln.has(nn)?'<span class="ic-listen'+(row.unv?' unv':'')+'" title="'+(row.unv?'محاذاة على ترجمة آلية غير مدققة':'محاذاة نصية')+'">'+ic(row.unv?'i-auto':'i-listen')+'</span>':(canL?'<span class="ic-play" title="فيديو فقط">'+ic('i-play')+'</span>':''))+'</span></a>');
     }
     if(!n)lst.innerHTML='<p class="empty">لا نتائج.</p>';
@@ -156,6 +163,7 @@ const ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';
     location.replace(mode==='sm'?'sm.html?r='+encodeURIComponent(row.id)+'&l='+ln0
       :mode==='qu'?'qu.html?r='+encodeURIComponent(row.id)+'&l='+ln0
       :mode==='read'?'tr.html?r='+encodeURIComponent(row.id)+'&l='+ln0
+      :mode==='aud'&&audMap.has(ln0)&&!(L(ln0).video&&L(ln0).video.length>=8)&&!(rtxt.get(ln0)||{}).vid?'aud.html?k='+encodeURIComponent(akey)+'&n='+ln0
       :(mode==='yt'||mode==='aud')&&L(ln0).video&&L(ln0).video.length>=8?'yt.html?s='+encodeURIComponent(row.sSlug)+'&l='+ln0+(mode==='aud'?'&a=1':'')
       :mode==='yt'||mode==='aud'?'yt.html?v='+encodeURIComponent((rtxt.get(ln0)||{}).vid||'')+'&r='+encodeURIComponent(row.id)+'&l='+ln0+(mode==='aud'?'&a=1':'')
       :canL?'lesson.html?s='+encodeURIComponent(row.sSlug)+'&l='+ln0

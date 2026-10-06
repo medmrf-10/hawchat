@@ -25,7 +25,7 @@ const SHELL_ASSETS = [
   './playlists/series.html', './playlists/tr.html', './playlists/lesson.html',
   './playlists/common.css', './playlists/common.js',
   './playlists/ui.css', './playlists/icons.svg', './playlists/row.html',
-  './playlists/yt.html', './playlists/sm.html', './playlists/qu.html',
+  './playlists/yt.html', './playlists/sm.html', './playlists/qu.html', './playlists/aud.html',
   './icons/icon-192.png',
 ];
 

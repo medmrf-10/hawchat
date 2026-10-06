@@ -441,6 +441,8 @@ for g in (order.get('groups') or []):
         oi += 1; ordmap[nm] = oi; ordmap[norm(nm)] = oi
 photos  = J(os.path.join(PL, 'photos.json')) or {}
 sord    = J(os.path.join(BASE, 'series_order.json')) or {}
+# صوتيات الموقع المستضافة محلياً — audio/index.json مفهرس بمفتاح sSlug أو id الصف
+AUDX    = J(os.path.join(PL, 'audio', 'index.json')) or {}
 
 for s in sidx:
     if s.get('sheikh_slug') and s['sheikh_slug'] not in known:
@@ -828,6 +830,8 @@ for sh in sheikhs:
                 r['sun'] = len(_srows)
                 r['summ'] = 'row.html?r=' + r['id'] + '&m=sm'
                 write_sum(r['id'], _srows)
+        _ait = (AUDX.get(_ldir) or {}).get('items') or []
+        r['aun'] = len(_ait)
         # E7: lesson titles for the lazy search index
         if rrows:
             SEARCH_L[r['id']] = {'ss': r.get('sSlug'), 'L': [[x['n'], x['title']] for x in rrows]}
