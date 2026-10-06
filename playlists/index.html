@@ -31,6 +31,11 @@
 a.mini{color:var(--ink-3);display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;padding:0 4px}
 .kpis{display:flex;gap:24px;align-items:center;margin-top:4px}
 .favgrid .u-sh .ph{border-color:var(--gold-2)}
+.u-sh .u-top{display:flex;flex-direction:column;align-items:center;text-decoration:none;color:inherit;width:100%;padding-bottom:var(--sp-2)}
+.u-sh .tgrid{width:100%}
+.u-sh .tgrid .tile{height:58px}
+.u-sh .tgrid .tile .i{width:20px;height:20px}
+.u-sh .tgrid .tile b{font-size:.85rem}
 </style>
 </head>
 <body>
@@ -68,11 +73,18 @@ let _sl=null,_slP=null;
 // E7: lesson-level titles load lazily on the first search keystroke —
 // the index (~500KB) isn't worth fetching for users who never search.
 function loadSL(){if(!_slP)_slP=j('data/search_lessons.json').then(d=>{_sl=d||{}});return _slP}
-const ic=id=>'<svg class="i"><use href="icons.svg#'+id+'"/></svg>';
+const ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';
 const num=(kind,n,label,ok,icn)=>'<span class="u-num '+kind+'">'+ic(icn||(kind==='rd'?'i-read':'i-listen'))+'<b>'+n+'</b>'+(ok?'<b class="ok">'+ic('i-check')+'</b>':'')+'<small>'+label+'</small></span>';
 function shCard(st,slug,fav){
   const init=(st.name||'؟').replace(/^ال/,'').trim()[0]||'؟';
-  return '<a class="u-sh cin" href="sheikh.html?s='+encodeURIComponent(slug)+'">'
+  const rows=st.rows||[];
+  const agg=k=>{let s=0;for(const r of rows)s+=(k==='rd'?r.rdn:k==='yt'?r.ytn:k==='lsn'?r.wan:k==='qu'?r.qn:k==='sm'?r.sun:0)||0;return s};
+  const favn=rows.reduce((a,r)=>a+(store.fav(r.id)?1:0),0);
+  const tk=(k,icn,n,al,fk)=>n>0
+    ?'<a class="tile '+k+'" href="sheikh.html?s='+encodeURIComponent(slug)+'&f='+(fk||k)+'" aria-label="'+al+' — '+n+'">'+ic(icn)+'<b>'+n+'</b></a>'
+    :'<span class="tile '+k+' off" aria-hidden="true">'+ic(icn)+'<b>'+(n||0)+'</b></span>';
+  return '<div class="u-sh cin">'
+    +'<a class="u-top" href="sheikh.html?s='+encodeURIComponent(slug)+'">'
     +'<span class="ph">'+(st.photo?'<img src="'+esc(st.photo)+'" alt="" loading="lazy" onerror="this.remove()">':'')+'<span>'+init+'</span></span>'
     +'<span class="nm">'+esc(st.name)+'</span>'
     +'<span class="stats">'
@@ -80,7 +92,15 @@ function shCard(st,slug,fav){
     +(st.watch?num('ls',st.watch,'مسموع',allW(st)):'')
     +(st.uwatch?num('unv',st.uwatch,'آلي غير مدقق',0,'i-auto'):'')
     +(st.sum?num('sm',st.sum,'ملخّص',0,'i-list'):'')
-    +'</span></a>';
+    +'</span></a>'
+    +'<span class="tgrid">'
+    +tk('rd','i-read',agg('rd'),'قراءة')
+    +tk('yt','i-yt',agg('yt'),'استماع من يوتيوب')
+    +tk('lsn','i-listen',agg('lsn'),'استماع مع إضاءة الكلمة')
+    +tk('qu','i-qu',agg('qu'),'أسئلة')
+    +tk('fv','i-star',favn,'مفضلة','fav')
+    +tk('sm','i-list',agg('sm'),'تلخيص')
+    +'</span></div>';
 }
 function slugOf(st){for(const s in _stats)if(_stats[s]===st)return s;return''}
 function allR(st){return st.rows.length&&st.rows.every(r=>r.rOk)}

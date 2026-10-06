@@ -65,14 +65,15 @@ h1{font-family:var(--font-ar);font-size:1.45rem;font-weight:700;color:var(--txt)
   const row=hit.r,st=hit.st,slug=hit.slug;
   document.getElementById('hdr-sub').textContent=st.name;
   document.getElementById('back').href='row.html?r='+encodeURIComponent(row.id)+'&m=sm';
-  const lidx=await j('lessons/'+encodeURIComponent(row.sSlug)+'/index.json');
+  const ldir=row.sSlug||row.id;
+  const lidx=await j('lessons/'+encodeURIComponent(ldir)+'/index.json');
   const smf=(lidx&&lidx.sumf)||{},sums=(lidx&&lidx.sum)||[],ti=(lidx&&lidx.ti)||{};
   if(!sums.length){app.innerHTML='<div class="errbox">لا ملخصات لهذه السلسلة — <a href="row.html?r='+encodeURIComponent(row.id)+'">عودة</a></div>';return}
   const srows=await j('data/sum/'+encodeURIComponent(row.id)+'.json')||[];
   const titleOf=n=>{const x=srows.find(y=>y.n===n);return ti[n]||(x&&x.title)||('الدرس '+n)};
   async function show(n){
     const i=sums.indexOf(n);
-    const fn=smf[n];const sm=fn?await j('lessons/'+encodeURIComponent(row.sSlug)+'/'+encodeURIComponent(fn)):null;
+    const fn=smf[n];const sm=fn?await j('lessons/'+encodeURIComponent(ldir)+'/'+encodeURIComponent(fn)):null;
     document.title='ملخص الدرس '+n+' — '+row.title;
     let h='<h1><bdi>'+esc(titleOf(n))+'</bdi></h1><div class="lsub">'+esc(row.title)+' · ملخص الدرس '+n+' من '+sums.length+' · '+esc(st.name)+'</div>';
     if(!sm){app.innerHTML=h+'<div class="errbox">تعذر تحميل الملخص.</div>';return}

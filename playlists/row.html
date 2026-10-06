@@ -89,7 +89,7 @@ const ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';
   // lessons: series json (aligned) + read-file list
   const [sd,alidx,rows]=await Promise.all([
     row.sSlug?j('series/'+encodeURIComponent(row.sSlug)+'.json'):null,
-    row.sSlug?j('lessons/'+encodeURIComponent(row.sSlug)+'/index.json'):null,
+    j('lessons/'+encodeURIComponent(row.sSlug||row.id)+'/index.json'),
     j('data/read/'+encodeURIComponent(row.id)+'.json')]);
   const aln=new Set((alidx&&(alidx.alignOk||alidx.align))||[]);
   const smn=new Set((alidx&&alidx.sum)||[]);

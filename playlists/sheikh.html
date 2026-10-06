@@ -153,6 +153,8 @@ document.addEventListener('click',e=>{
       .map(([k,icn])=>'<button type="button" class="tile ftile '+k+'" data-k="'+k+'" role="checkbox" aria-checked="false" aria-label="'+FALABEL[k]+'" title="'+FALABEL[k]+'">'+ic(icn)+'<b>'+ftot(k)+'</b></button>').join('')+'</div>'
     +'<div id="srows"></div>';
   B.innerHTML=h;
+  const fq=(q.get('f')||'').split(',').filter(k=>FCOUNT[k]);
+  fq.forEach(k=>{flt.add(k);const t=document.querySelector('.ftile[data-k="'+k+'"]');if(t){t.classList.add('sel');t.setAttribute('aria-checked','true')}});
   renderSeries();
 })();
 if('serviceWorker' in navigator)swRegister('../sw.js');

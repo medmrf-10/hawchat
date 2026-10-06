@@ -805,15 +805,17 @@ for sh in sheikhs:
                         break
             if r['yt']:
                 r['ytn'] = _se.get('total') or len(_se.get('files') or []) or len(rrows)
-        # التلخيص: agent-uploaded NNN.sum.json files beside the lessons
+        # التلخيص: agent-uploaded NNN.sum.json files beside the lessons.
+        # الصفوف بلا sSlug تقرأ من playlists/lessons/<row.id>/ نفس العقد.
         r['sun'] = 0
         r['summ'] = None
-        if r.get('sSlug'):
-            _li = J(os.path.join(PL, 'lessons', r['sSlug'], 'index.json')) or {}
+        _ldir = r.get('sSlug') or r['id']
+        if _ldir:
+            _li = J(os.path.join(PL, 'lessons', _ldir, 'index.json')) or {}
             _smf = _li.get('sumf') or {}
             _srows = []
             for _n in sorted(_smf):
-                _sm = J(os.path.join(PL, 'lessons', r['sSlug'], _smf[_n]))
+                _sm = J(os.path.join(PL, 'lessons', _ldir, _smf[_n]))
                 if not isinstance(_sm, dict):
                     continue
                 _tt = next((x['title'] for x in rrows if x['n'] == _n), None) or 'الدرس %s' % _n
