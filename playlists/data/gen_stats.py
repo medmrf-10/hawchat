@@ -763,6 +763,23 @@ for sh in sheikhs:
         elif r.get('plid'):
             r['yt'] = 'https://www.youtube.com/playlist?list=' + r['plid']
             r['ytn'] = r['rtt']
+        elif r.get('mutId') is not None:
+            _m = next((x for x in muts if str(x.get('id')) == str(r['mutId'])), None)
+            if _m and _m.get('url'):
+                r['yt'] = _m['url']
+                r['ytn'] = _m.get('total') or len(rrows)
+        if not r['yt'] and r.get('trSh') and r.get('trSr'):
+            _se = next((x for x in (tr.get(r['trSh'], {}).get('series') or [])
+                        if x.get('slug') == r['trSr']), {})
+            r['yt'] = _se.get('playlist') or None
+            if not r['yt']:
+                for _f in (_se.get('files') or []):
+                    _mm = re.match(r'^[^_]+_([A-Za-z0-9_\-]{6,20})\.txt$', _f)
+                    if _mm:
+                        r['yt'] = 'https://www.youtube.com/watch?v=' + _mm.group(1)
+                        break
+            if r['yt']:
+                r['ytn'] = _se.get('total') or len(_se.get('files') or []) or len(rrows)
         # التلخيص: agent-uploaded NNN.sum.json files beside the lessons
         r['sun'] = 0
         r['summ'] = None
