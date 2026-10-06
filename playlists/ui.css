@@ -106,7 +106,3 @@ input,select,textarea{font-size:16px}
   color:var(--ink-3);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;flex:none}
 .u-fav .i{width:20px;height:20px}
 .u-fav.on{color:var(--gold-3);border-color:var(--gold-2);background:rgba(201,162,75,.1)}
-
-/* unv: ترجمات يوتيوب الآلية — رمز آلي مميز بلون تحذيري */
-.u-num.unv .i,.u-act.unv,.ic-listen.unv{color:var(--warn,#d98a2b)}
-.u-act.unv{border-color:rgba(217,138,43,.5)}

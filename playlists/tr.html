@@ -37,12 +37,6 @@ h1{font-family:var(--font-ui);font-size:var(--fs-lg);font-weight:700;color:var(-
 .tools{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
 .tools button{width:44px;height:44px;border-radius:var(--r-sm);border:1px solid var(--border);background:var(--card);color:var(--txt);font-size:1rem;cursor:pointer}
 .tools .abtn{white-space:nowrap;min-height:44px;padding:0 14px;border-radius:var(--r-sm);border:1px solid var(--border);background:var(--card);color:var(--acc2);font-size:.85rem;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
-.tsrch{display:flex;gap:6px;align-items:center;margin-top:10px}
-.tsrch input{flex:1;min-height:44px;border-radius:var(--r-sm);border:1px solid var(--border);background:var(--card);color:var(--txt);font-family:var(--font-ui);font-size:var(--fs-sm);padding:0 12px}
-.tsrch button{width:44px;height:44px;border-radius:var(--r-sm);border:1px solid var(--border);background:var(--card);color:var(--txt);cursor:pointer}
-.tsrch .tc{color:var(--dim);font-size:var(--fs-xs);min-width:44px;text-align:center;font-variant-numeric:tabular-nums}
-.txt mark{background:rgba(201,162,75,.28);color:inherit;border-radius:3px;padding:0 1px}
-.txt mark.cur{background:var(--acc);color:var(--bg)}
 </style>
 </head>
 <body>
@@ -163,9 +157,7 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
       +(aligned.has(x.n)?'<a class="abtn" href="lesson.html?s='+encodeURIComponent(row.sSlug||ssl)+'&l='+x.n+'">'+I.listen+' استمع لهذا الدرس</a>':'')
       +'<a class="abtn" href="'+ALLR+'">كل الدروس</a>'
       +'<button id="shr" aria-label="مشاركة الدرس" title="مشاركة الدرس" style="width:auto;padding:0 12px;gap:5px;display:inline-flex;align-items:center">↗ مشاركة</button>'
-      +'<button id="cpy" aria-label="نسخ نص الدرس" title="نسخ نص الدرس كاملاً" style="width:auto;padding:0 12px">⧉ نسخ</button>'
-      +'<button id="srch" aria-label="بحث في النص" title="بحث داخل نص الدرس">⌕</button></div>';
-    h+='<div class="tsrch" id="tsr" hidden><input id="tsq" type="search" placeholder="ابحث داخل نص الدرس…" enterkeyhint="search" aria-label="بحث داخل نص الدرس"><button id="tsp" aria-label="النتيجة السابقة">↑</button><span class="tc" id="tsc"></span><button id="tsn" aria-label="النتيجة التالية">↓</button></div>';
+      +'<button id="cpy" aria-label="نسخ نص الدرس" title="نسخ نص الدرس كاملاً" style="width:auto;padding:0 12px">⧉ نسخ</button></div>';
     h+='<div class="txt skel" id="tx" style="min-height:200px"></div>';
     app.innerHTML=h;
     const nav=document.getElementById('navb');nav.hidden=false;
@@ -186,29 +178,7 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
     const el=document.getElementById('tx');
     if(!el)return;
     el.classList.remove('skel');el.style.fontSize=FS+'rem';
-    const sb=document.getElementById('srch');
-    if(sb)sb.onclick=()=>{const bar=document.getElementById('tsr');bar.hidden=!bar.hidden;if(!bar.hidden)document.getElementById('tsq').focus()};
     if(tx){el.textContent=tx;
-      // E8: in-text search — normalized matching (diacritics/alef forms) with
-      // mark highlighting + prev/next navigation, all client-side
-      const nrm=[];const nmap=[];
-      for(let ci=0;ci<tx.length;ci++){const cc=normalize(tx[ci]);for(const ch of cc){nrm.push(ch);nmap.push(ci)}}
-      const NT=nrm.join('');let MS=[],mc=-1;
-      const tq=document.getElementById('tsq'),tc=document.getElementById('tsc');
-      const renderHL=()=>{
-        if(!MS.length){el.textContent=tx;tc.textContent=tq.value.trim()?'0/0':'';return}
-        let h='',p=0;
-        MS.forEach((mm,hi)=>{h+=esc(tx.slice(p,mm[0]))+'<mark'+(hi===mc?' class="cur"':'')+'>'+esc(tx.slice(mm[0],mm[1]))+'</mark>';p=mm[1]});
-        el.innerHTML=h+esc(tx.slice(p));
-        tc.textContent=(mc+1)+'/'+MS.length};
-      const goHit=d=>{if(!MS.length)return;mc=(mc+d+MS.length)%MS.length;renderHL();const c=el.querySelector('mark.cur');if(c)c.scrollIntoView({block:'center',behavior:'smooth'})};
-      tq.oninput=()=>{
-        const qq=normalize(tq.value);MS=[];mc=-1;
-        if(qq){let p=0;while(true){const f=NT.indexOf(qq,p);if(f<0)break;MS.push([nmap[f],nmap[f+qq.length-1]+1]);p=f+qq.length}if(MS.length)mc=0}
-        renderHL();
-        if(mc>=0){const c=el.querySelector('mark.cur');if(c)c.scrollIntoView({block:'center'})}};
-      document.getElementById('tsp').onclick=()=>goHit(-1);
-      document.getElementById('tsn').onclick=()=>goHit(1);
       // E6: restore reading position inside this lesson
       const pk='trp:'+row.id+':'+x.n,sp=store.get(pk);
       if(sp&&sp.f>0.02)setTimeout(()=>{const h=document.documentElement;window.scrollTo(0,Math.max(0,(h.scrollHeight-h.clientHeight)*sp.f))},60);
