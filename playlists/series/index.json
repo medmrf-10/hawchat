@@ -203,7 +203,7 @@
    "title": "لقاء الأربعاء",
    "sheikh_slug": "saif-alasri",
    "count": 17,
-   "aligned": 50,
+   "aligned": 56,
    "transcribed": 56,
    "status": "مكتملة التفريغ"
   },
@@ -377,6 +377,177 @@
    "status": "مفرّغة — المحاذاة جارية",
    "aligned": 0,
    "transcribed": 41
+  },
+  {
+   "slug": "jifri-100",
+   "title": "مؤتمر التصوف",
+   "sheikh_slug": "habib-ali-aljifri",
+   "count": 20,
+   "aligned": 10,
+   "transcribed": 10,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "jifri-88",
+   "title": "رحلة كينيا 1433 Kenya 2012",
+   "sheikh_slug": "habib-ali-aljifri",
+   "count": 6,
+   "aligned": 3,
+   "transcribed": 3,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "jifri-89",
+   "title": "مؤتمر كندا RIS 2011",
+   "sheikh_slug": "habib-ali-aljifri",
+   "count": 23,
+   "aligned": 13,
+   "transcribed": 13,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "jifri-90",
+   "title": "محاضرات عامة",
+   "sheikh_slug": "habib-ali-aljifri",
+   "count": 703,
+   "aligned": 354,
+   "transcribed": 354,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "jifri-91",
+   "title": "آمنت بالله - الموسم 2",
+   "sheikh_slug": "habib-ali-aljifri",
+   "count": 54,
+   "aligned": 27,
+   "transcribed": 27,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "jifri-92",
+   "title": "آمنت بالله - الموسم 1",
+   "sheikh_slug": "habib-ali-aljifri",
+   "count": 52,
+   "aligned": 26,
+   "transcribed": 26,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "jifri-93",
+   "title": "مجالس البخاري",
+   "sheikh_slug": "habib-ali-aljifri",
+   "count": 54,
+   "aligned": 27,
+   "transcribed": 27,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "jifri-94",
+   "title": "برنامج حياتنا",
+   "sheikh_slug": "habib-ali-aljifri",
+   "count": 46,
+   "aligned": 23,
+   "transcribed": 23,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "jifri-95",
+   "title": "أيها المريد",
+   "sheikh_slug": "habib-ali-aljifri",
+   "count": 56,
+   "aligned": 28,
+   "transcribed": 28,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "jifri-96",
+   "title": "رحلة ماليزيا 1433 Malaysia Trip 2012",
+   "sheikh_slug": "habib-ali-aljifri",
+   "count": 6,
+   "aligned": 3,
+   "transcribed": 3,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "jifri-97",
+   "title": "رحلة بريطانيا 2012",
+   "sheikh_slug": "habib-ali-aljifri",
+   "count": 7,
+   "aligned": 4,
+   "transcribed": 4,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "jifri-98",
+   "title": "مقتطفات قصيرة",
+   "sheikh_slug": "habib-ali-aljifri",
+   "count": 54,
+   "aligned": 28,
+   "transcribed": 28,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "jifri-99",
+   "title": "الشجرة الطيبة",
+   "sheikh_slug": "habib-ali-aljifri",
+   "count": 16,
+   "aligned": 8,
+   "transcribed": 8,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "sariri-1",
+   "title": "مواعظ",
+   "sheikh_slug": "mouloud-sariri",
+   "count": 6,
+   "aligned": 3,
+   "transcribed": 3,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "sariri-2",
+   "title": "فوائد باب النكاح",
+   "sheikh_slug": "mouloud-sariri",
+   "count": 6,
+   "aligned": 3,
+   "transcribed": 3,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "sariri-3",
+   "title": "فوائد باب الجهاد",
+   "sheikh_slug": "mouloud-sariri",
+   "count": 186,
+   "aligned": 94,
+   "transcribed": 94,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "sariri-5",
+   "title": "كيف يكون بناء الأسرة",
+   "sheikh_slug": "mouloud-sariri",
+   "count": 30,
+   "aligned": 16,
+   "transcribed": 16,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "sariri-6",
+   "title": "فوائد أصولية",
+   "sheikh_slug": "mouloud-sariri",
+   "count": 105,
+   "aligned": 57,
+   "transcribed": 57,
+   "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "sariri-7",
+   "title": "فوائد باب الصلاة",
+   "sheikh_slug": "mouloud-sariri",
+   "count": 234,
+   "aligned": 119,
+   "transcribed": 119,
+   "status": "مفرّغة — المحاذاة جارية"
   }
  ]
 }
