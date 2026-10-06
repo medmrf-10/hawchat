@@ -88,27 +88,52 @@ const FMODE={rd:'read',yt:'yt',lsn:'listen',qu:'qu',aud:'aud',sm:'sm'};
 function activeMode(){for(const k of ['rd','yt','lsn','sm','qu','aud'])if(flt.has(k))return FMODE[k];return''}
 function renderSeries(){
   const w=document.getElementById('srows');if(!w)return;
-  const rows=_rows.filter(rowMatch);
+  let rows=_rows.filter(rowMatch);
+  // a filter that yields nothing shows ALL series with a notice — never an
+  // empty page for a sheikh whose content lives under other modes
+  let fellBack=false;
+  if(flt.size&&!rows.length){rows=_rows.slice();fellBack=true}
   if(flt.size)rows.sort((a,b)=>{let d=0;for(const k of flt)d+=FCOUNT[k](b)-FCOUNT[k](a);return d});
   w.innerHTML='';
   const m=activeMode();
   const fk=['rd','yt','lsn','sm','qu','aud'].find(k=>flt.has(k));
+  if(fellBack)w.insertAdjacentHTML('beforeend','<div class="empty" style="padding:8px 4px">لا سلاسل في هذا القسم — كل السلاسل أدناه</div>');
   for(const r of rows){
     let nums='';
     if(fk){
-      const tot=r.wtt||r.rtt||0;
       const mc=FCOUNT[fk](r);
+      // aud counts every audio item (yt + hosted); other modes compare to the yt total
+      const tot=fk==='aud'?(r.ytn||0)+(r.aun||0):(r.wtt||r.rtt||0);
       const ok1=tot>0&&mc>=tot;
-      const ok2=tot>0&&(r.ytn||0)>=tot;
+      const ok2=tot>0&&(r.ytn||0)>=(r.wtt||r.rtt||0);
       nums='<span class="sn"><i class="n'+(ok1?' ok':'')+'" title="دروس فيها '+FALABEL[fk]+'">'+kfmt(mc)+'</i>'
         +'<span class="sep">/</span>'
         +'<i class="n'+(ok2?' ok':'')+'" title="إجمالي حلقات السلسلة">'+kfmt(tot)+'</i></span>';
+    }else{
+      const tot=r.wtt||r.rtt||0;
+      if(tot>0)nums='<span class="sn"><i class="n" title="عدد الدروس">'+kfmt(tot)+'</i></span>';
     }
     w.insertAdjacentHTML('beforeend',
       '<a class="u-sr cin" href="row.html?r='+encodeURIComponent(r.id)+(m?'&m='+m:'')+'">'
       +'<div class="srow"><div class="t"><bdi>'+esc(r.title)+'</bdi></div>'+nums+'</div></a>');
   }
-  if(!rows.length)w.innerHTML='<div class="empty">'+(flt.has('fav')?'لا سلاسل مفضلة':'لا سلاسل في هذا القسم.')+'</div>';
+  if(!rows.length)w.innerHTML='<div class="empty">'+(flt.has('fav')?'لا سلاسل مفضلة':'لا سلاسل بعد.')+'</div>';
+}
+function renderHero(){
+  const st=_st;if(!st)return;
+  const init=(st.name||'؟').replace(/^ال/,'').trim()[0]||'؟';
+  let h='<div class="hero cin"><span class="ph">'
+    +(st.photo?'<img src="'+esc(st.photo)+'" alt="" onerror="this.remove()">':'')
+    +'<span>'+init+'</span></span>'
+    +'<div style="min-width:0"><div style="font-size:1.3rem;font-weight:800;line-height:1.4">'+esc(st.name)+'</div>'
+    +'<div style="color:var(--ink-3);font-size:var(--fs-xs);margin-top:4px">'+pluralSeries(st.rows.length)+' · '+kfmt(st.rows.reduce((a,r)=>a+(r.ytn||r.wtt||0),0))+' درساً</div></div></div>'
+    +'<div class="fbar tgrid" id="fbar">'+['rd','yt','lsn','qu','aud','sm'].map(k=>{
+      let c=0;for(const r of _rows)c+=FCOUNT[k](r);
+      return '<button class="tile ftile '+(flt.has(k)?'sel':'')+(c?'':' off')+'" data-k="'+k+'" title="'+FALABEL[k]+'">'+ic({'rd':'i-read','yt':'i-yt','lsn':'i-watch','qu':'i-qu','aud':'i-audio','sm':'i-list'}[k])+'<b>'+kfmt(c)+'</b></button>'}).join('')
+    +'<button class="tile ftile fv'+(flt.has('fav')?' sel':'')+'" data-k="fav" title="مفضلة">'+ic('i-star')+'<b>'+_rows.filter(r=>store.fav(r.id)).length+'</b></button></div>';
+  const el=document.getElementById('hero');if(el)el.innerHTML=h;
+  document.querySelectorAll('#fbar .ftile').forEach(b=>b.onclick=()=>{
+    const k=b.dataset.k;flt.has(k)?flt.delete(k):flt.add(k);renderHero();renderSeries()});
 }
 (async()=>{
   const q=new URLSearchParams(location.search);
@@ -120,10 +145,10 @@ function renderSeries(){
   _rows=st.rows||[];
   document.title=st.name+' — سلاسل المشايخ';
   document.getElementById('hdr-sub').textContent=st.name;
-  B.innerHTML='<div id="srows"></div>';
+  B.innerHTML='<div id="hero"></div><div id="srows" style="margin-top:14px"></div>';
   const fq=(q.get('f')||'').split(',').filter(k=>FCOUNT[k]);
   fq.forEach(k=>flt.add(k));
-  renderSeries();
+  renderHero();renderSeries();
 })();
 if('serviceWorker' in navigator)swRegister('../sw.js');
 </script>

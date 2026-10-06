@@ -41,7 +41,7 @@ const ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';
 (async()=>{
   const q=new URLSearchParams(location.search);
   const app=document.getElementById('app'),nav=document.getElementById('navb');
-  const k=q.get('k'),n0=parseInt(q.get('n')||'0',10);
+  const k=q.get('k')||q.get('s'),n0=parseInt(q.get('n')||q.get('l')||'0',10);
   if(!k){app.innerHTML='<div class="errbox">لا سلسلة صوتية محددة — <a href=".">عودة</a></div>';return}
   const adx=await j('audio/index.json');
   const grp=(adx&&adx[k])||null;

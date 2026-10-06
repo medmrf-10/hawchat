@@ -47,11 +47,12 @@ let FS=parseFloat(localStorage.getItem('trfs'))||1.3;
   const q=new URLSearchParams(location.search);
   const app=document.getElementById('app');
   let rid=q.get('r'),want=parseInt(q.get('l'),10)||0;
+  const sSlug=q.get('s'); // accept ?s=<series slug> too — every page resolves both
   const stats=await j('data/sheikh_stats.json');
   let hit=null;
-  if(stats&&rid){
+  if(stats&&(rid||sSlug)){
     for(const s in stats){if(s==='_meta')continue;
-      const r=(stats[s].rows||[]).find(r=>r.id===rid);
+      const r=(stats[s].rows||[]).find(r=>(rid&&r.id===rid)||(sSlug&&r.sSlug===sSlug));
       if(r){hit={slug:s,r,st:stats[s]};break}}
     if(!hit){const red=await j('data/redirects.json');
       if(red&&red[rid]){rid=red[rid];

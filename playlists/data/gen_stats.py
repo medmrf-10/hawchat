@@ -343,7 +343,7 @@ def rebuild_lessons_indexes():
             idx = {}   # missing or corrupt index → rebuild from disk
         # F8: a file class is authoritative; same-n collisions are warned and
         # resolved deterministically (longest padding wins: 001.txt > 01.txt)
-        afc, tfc = {}, {}
+        afc, tfc, suc, quc = {}, {}, {}, {}
         for fn in os.listdir(d):
             m = re.match(r'^(\d+)\.align\.json$', fn)
             if m:
@@ -352,7 +352,15 @@ def rebuild_lessons_indexes():
             m = re.match(r'^(\d+)\.txt$', fn)
             if m:
                 tfc.setdefault(int(m.group(1)), []).append(fn)
-        af, tf = {}, {}
+                continue
+            m = re.match(r'^(\d+)\.sum\.json$', fn)
+            if m:
+                suc.setdefault(int(m.group(1)), []).append(fn)
+                continue
+            m = re.match(r'^(\d+)\.qu\.json$', fn)
+            if m:
+                quc.setdefault(int(m.group(1)), []).append(fn)
+        af, tf, suf, quf = {}, {}, {}, {}
         for n, fns in afc.items():
             if len(fns) > 1:
                 warn('%s: %d align files for n=%d %s → using %s' % (slug, len(fns), n, fns, sorted(fns)[-1]))
@@ -361,6 +369,14 @@ def rebuild_lessons_indexes():
             if len(fns) > 1:
                 warn('%s: %d txt files for n=%d %s → using %s' % (slug, len(fns), n, fns, sorted(fns)[-1]))
             tf[n] = sorted(fns)[-1]
+        for n, fns in suc.items():
+            if len(fns) > 1:
+                warn('%s: %d sum files for n=%d %s → using %s' % (slug, len(fns), n, fns, sorted(fns)[-1]))
+            suf[n] = sorted(fns)[-1]
+        for n, fns in quc.items():
+            if len(fns) > 1:
+                warn('%s: %d qu files for n=%d %s → using %s' % (slug, len(fns), n, fns, sorted(fns)[-1]))
+            quf[n] = sorted(fns)[-1]
         ok_nums = []
         for n in sorted(af):
             ad = J(os.path.join(d, af[n]))
@@ -378,6 +394,10 @@ def rebuild_lessons_indexes():
         new_idx['align'] = sorted(af)   # disk is authoritative — stale lists get rebuilt
         new_idx['alignOk'] = ok_nums    # playable set (w non-empty, cov>=0.3) — matches wan
         new_idx['txt'] = sorted(tf)
+        new_idx['sum'] = sorted(suf)    # disk authoritative — same rule as align/txt
+        new_idx['sumf'] = suf
+        new_idx['qu'] = sorted(quf)
+        new_idx['quf'] = quf
         if new_idx != idx:            # write only on real change — keep worktree clean
             dump_atomic(new_idx, idx_path)
 
@@ -714,6 +734,13 @@ for sh in sheikhs:
         r['wtt'] = r['rtt']
         r['read'] = 'row.html?r=' + r['id']
         r['listen'] = ('row.html?r=' + r['id'] + '&m=listen') if r['wan'] > 0 and r.get('sSlug') else None
+        if r.get('sSlug'):
+            lix = J(os.path.join(PL, 'lessons', r['sSlug'], 'index.json')) or {}
+            r['qn'] = len(lix.get('qu') or [])
+            r['sun'] = len(lix.get('sum') or [])
+            r['ytn'] = r['wtt']
+            audir = os.path.join(PL, 'audio', r['sSlug'])
+            r['aun'] = len([f for f in os.listdir(audir) if f.endswith('.mp3')]) if os.path.isdir(audir) else 0
         # E7: lesson titles for the lazy search index
         if rrows:
             SEARCH_L[r['id']] = {'ss': r.get('sSlug'), 'L': [[x['n'], x['title']] for x in rrows]}
