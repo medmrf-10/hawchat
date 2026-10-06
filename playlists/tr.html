@@ -143,6 +143,21 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
     app.innerHTML=h;
     if(res&&res.n)document.querySelector('.lsres').style.cssText='display:flex;align-items:center;gap:10px;background:rgba(201,162,75,.08);border:1px solid var(--acc);border-radius:var(--r-md);padding:12px 14px;margin-bottom:12px;color:var(--acc2);text-decoration:none;font-size:var(--fs-sm);min-height:44px';
   }
+  // strip a yaml-ish metadata head (الشيخ:/السلسلة:/الفيديو: links …) — it ends
+  // at the first blank line; a non-header first line means there is no head
+  function cleanTxt(t){
+    if(!t)return t;
+    const L=t.split('\n');let i=0;
+    while(i<L.length){
+      const s=L[i].trim();
+      if(!s){i++;break}
+      if(/[:：]/.test(s)&&!/[،.؟!]/.test(s)&&s.length<160){i++;continue}
+      if(/^https?:\/\/\S+$/.test(s)){i++;continue}
+      break;
+    }
+    t=L.slice(i).join('\n');
+    return t.replace(/^https?:\/\/\S+\s*$/gm,'').replace(/\n{3,}/g,'\n\n').trim();
+  }
   // one resolver for display + prefetch. series-native rows: lessons copy →
   // transcripts by vid → padded probe (3 then 2 digits, both layouts exist)
   async function loadText(x){
@@ -166,24 +181,14 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
     document.title=x.title+' — '+row.title;
     let h='<h1><bdi>'+esc(x.title)+'</bdi></h1><div class="lsub">الدرس '+x.n+' من '+ROWS.length+' · '+esc(META.name)+'</div>';
     if(row.unv)h+='<div class="unv">ترجمة آلية مأخوذة من يوتيوب — غير مدققة بعد</div>';
-    h+='<div class="tools"><button id="fmi" aria-label="تصغير الخط">A−</button><button id="fpl" aria-label="تكبير الخط">A+</button>'
-      +(aligned.has(x.n)?'<a class="abtn" href="lesson.html?s='+encodeURIComponent(row.sSlug||ssl)+'&l='+x.n+'">'+I.listen+' استمع لهذا الدرس</a>':'')
-      +(summed.has(x.n)?'<a class="abtn" id="sumb" href="#" onclick="return showSum()">☰ الملخص</a>':'')
-      +'<a class="abtn" href="'+ALLR+'">كل الدروس</a>'
-      +'<button id="shr" aria-label="مشاركة الدرس" title="مشاركة الدرس" style="width:auto;padding:0 12px;gap:5px;display:inline-flex;align-items:center">↗ مشاركة</button>'
-      +'<button id="cpy" aria-label="نسخ نص الدرس" title="نسخ نص الدرس كاملاً" style="width:auto;padding:0 12px">⧉ نسخ</button>'
-      +'<button id="dnt2" aria-label="تبديل نهاري/ليلي" title="نهاري/ليلي">'+(document.documentElement.dataset.theme==='day'?'☀':'☾')+'</button>'
-      +'<button id="srch" aria-label="بحث في النص" title="بحث داخل نص الدرس">⌕</button></div>';
-    h+='<div class="tsrch" id="tsr" hidden><input id="tsq" type="search" placeholder="ابحث داخل نص الدرس…" enterkeyhint="search" aria-label="بحث داخل نص الدرس"><button id="tsp" aria-label="النتيجة السابقة">↑</button><span class="tc" id="tsc"></span><button id="tsn" aria-label="النتيجة التالية">↓</button></div>';
     h+='<div class="txt skel" id="tx" style="min-height:200px"></div>'
       +'<div class="txt" id="sump" hidden style="margin-top:10px"></div>';
     app.innerHTML=h;
     const nav=document.getElementById('navb');nav.hidden=false;
     const dayNow=document.documentElement.dataset.theme==='day';
-    nav.innerHTML=(i>0?'<a href="'+SELF+'&l='+ROWS[i-1].n+'" id="pv">→ السابق</a>':'<a class="off">→ السابق</a>')
+    nav.innerHTML='<button id="cpy" aria-label="نسخ نص الدرس" title="نسخ نص الدرس كاملاً">⧉ نسخ</button>'
       +'<span class="pos">'+(i+1)+' / '+ROWS.length+'</span>'
-      +'<button id="dnt" aria-label="تبديل نهاري/ليلي" title="نهاري/ليلي" style="min-height:44px;width:44px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--card);color:var(--txt);cursor:pointer;display:inline-flex;align-items:center;justify-content:center"><svg style="width:1.2em;height:1.2em"><use href="icons.svg?v=11#'+(dayNow?'i-sun':'i-moon')+'"/></svg></button>'
-      +(i<ROWS.length-1?'<a href="'+SELF+'&l='+ROWS[i+1].n+'" id="nx">التالي ←</a>':'<a class="off">التالي ←</a>');
+      +'<button id="dnt" aria-label="تبديل نهاري/ليلي" title="نهاري/ليلي" style="min-height:44px;width:44px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--card);color:var(--txt);cursor:pointer;display:inline-flex;align-items:center;justify-content:center"><svg style="width:1.2em;height:1.2em"><use href="icons.svg?v=11#'+(dayNow?'i-sun':'i-moon')+'"/></svg></button>';
     document.getElementById('dnt').onclick=()=>{
       const day=document.documentElement.dataset.theme!=='day';
       if(day)document.documentElement.dataset.theme='day';else delete document.documentElement.dataset.theme;
@@ -191,45 +196,12 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
       document.getElementById('dnt').innerHTML='<svg style="width:1.2em;height:1.2em"><use href="icons.svg?v=11#'+(day?'i-sun':'i-moon')+'"/></svg>';
       const mc=document.querySelector('meta[name="theme-color"]');if(mc)mc.setAttribute('content',day?'#f6f0df':'#0b0f1a');
     };
-    const dn2=document.getElementById('dnt2');
-    if(dn2)dn2.onclick=()=>{document.getElementById('dnt').click()};
-    document.getElementById('fmi').onclick=()=>{FS=Math.max(.8,FS-.1);localStorage.setItem('trfs',FS);document.getElementById('tx').style.fontSize=FS+'rem'};
-    document.getElementById('fpl').onclick=()=>{FS=Math.min(1.9,FS+.1);localStorage.setItem('trfs',FS);document.getElementById('tx').style.fontSize=FS+'rem'};
-    const shb=document.getElementById('shr');
-    if(shb)shb.onclick=async()=>{const u=location.origin+location.pathname+SELF+'&l='+x.n;
-      try{if(navigator.share)await navigator.share({title:x.title,url:u});
-      else{await navigator.clipboard.writeText(u);shb.textContent='✓ نُسخ الرابط';setTimeout(()=>shb.innerHTML='↗ مشاركة',1800)}}catch(e){}};
-    const p=document.getElementById('pv'),n=document.getElementById('nx');
-    if(p)p.onclick=e=>{e.preventDefault();showLesson(i-1)};
-    if(n)n.onclick=e=>{e.preventDefault();showLesson(i+1)};
-    const tx=await loadText(x);
+    const tx=cleanTxt(await loadText(x));
     if(my!==REQ)return;  // a newer lesson was opened while loading
     const el=document.getElementById('tx');
     if(!el)return;
     el.classList.remove('skel');el.style.fontSize=FS+'rem';
-    const sb=document.getElementById('srch');
-    if(sb)sb.onclick=()=>{const bar=document.getElementById('tsr');bar.hidden=!bar.hidden;if(!bar.hidden)document.getElementById('tsq').focus()};
     if(tx){el.textContent=tx;
-      // E8: in-text search — normalized matching (diacritics/alef forms) with
-      // mark highlighting + prev/next navigation, all client-side
-      const nrm=[];const nmap=[];
-      for(let ci=0;ci<tx.length;ci++){const cc=normalize(tx[ci]);for(const ch of cc){nrm.push(ch);nmap.push(ci)}}
-      const NT=nrm.join('');let MS=[],mc=-1;
-      const tq=document.getElementById('tsq'),tc=document.getElementById('tsc');
-      const renderHL=()=>{
-        if(!MS.length){el.textContent=tx;tc.textContent=tq.value.trim()?'0/0':'';return}
-        let h='',p=0;
-        MS.forEach((mm,hi)=>{h+=esc(tx.slice(p,mm[0]))+'<mark'+(hi===mc?' class="cur"':'')+'>'+esc(tx.slice(mm[0],mm[1]))+'</mark>';p=mm[1]});
-        el.innerHTML=h+esc(tx.slice(p));
-        tc.textContent=(mc+1)+'/'+MS.length};
-      const goHit=d=>{if(!MS.length)return;mc=(mc+d+MS.length)%MS.length;renderHL();const c=el.querySelector('mark.cur');if(c)c.scrollIntoView({block:'center',behavior:'smooth'})};
-      tq.oninput=()=>{
-        const qq=normalize(tq.value);MS=[];mc=-1;
-        if(qq){let p=0;while(true){const f=NT.indexOf(qq,p);if(f<0)break;MS.push([nmap[f],nmap[f+qq.length-1]+1]);p=f+qq.length}if(MS.length)mc=0}
-        renderHL();
-        if(mc>=0){const c=el.querySelector('mark.cur');if(c)c.scrollIntoView({block:'center'})}};
-      document.getElementById('tsp').onclick=()=>goHit(-1);
-      document.getElementById('tsn').onclick=()=>goHit(1);
       // E6: restore reading position inside this lesson
       const pk='trp:'+row.id+':'+x.n,sp=store.get(pk);
       if(sp&&sp.f>0.02)setTimeout(()=>{const h=document.documentElement;window.scrollTo(0,Math.max(0,(h.scrollHeight-h.clientHeight)*sp.f))},60);

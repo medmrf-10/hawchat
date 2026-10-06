@@ -131,3 +131,4 @@ function fmtDur(s){
  const h=Math.floor(s/3600),m=Math.floor(s%3600/60),ss=s%60;
  return h?h+':'+String(m).padStart(2,'0')+':'+String(ss).padStart(2,'0'):m+':'+String(ss).padStart(2,'0');
 }
+function kfmt(n){n=+n||0;return n>999?((n/1000).toFixed(1).replace(/\.0$/,'')+'k'):String(n)}

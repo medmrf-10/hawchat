@@ -68,8 +68,8 @@ function shCard(st,slug,fav){
   const favn=rows.reduce((a,r)=>a+(store.fav(r.id)?1:0),0);
   const ytOk=rows.length&&rows.every(r=>{const t=Math.max(r.rtt||0,r.wtt||0);return t===0||(r.ytn||0)>=t});
   const tk=(k,icn,n,al,fk,ok)=>n>0
-    ?'<a class="tile '+k+(ok?' ok':'')+'" href="sheikh.html?s='+encodeURIComponent(slug)+'&f='+(fk||k)+'" aria-label="'+al+' — '+n+'">'+ic(icn)+'<b>'+n+'</b></a>'
-    :'<span class="tile '+k+' off" aria-hidden="true">'+ic(icn)+'<b>'+(n||0)+'</b></span>';
+    ?'<a class="tile '+k+(ok?' ok':'')+'" href="sheikh.html?s='+encodeURIComponent(slug)+'&f='+(fk||k)+'" aria-label="'+al+' — '+n+'">'+ic(icn)+'<b>'+kfmt(n)+'</b></a>'
+    :'<span class="tile '+k+' off" aria-hidden="true">'+ic(icn)+'<b>'+kfmt(n||0)+'</b></span>';
   return '<div class="u-sh cin">'
     +'<a class="u-top" href="sheikh.html?s='+encodeURIComponent(slug)+'">'
     +'<span class="ph">'+(st.photo?'<img src="'+esc(st.photo)+'" alt="" loading="lazy" onerror="this.remove()">':'')+'<span>'+init+'</span></span>'

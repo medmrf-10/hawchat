@@ -748,6 +748,12 @@ for sh in sheikhs:
                 rrows = sorted(merged, key=lambda x: x['n'])
         elif r.get('sSlug'):
             rrows = rows_from_lessons(r['sSlug'])
+        # vids recovered from file headers (الفيديو: youtu.be/…) → data/ytmap/<id>.json
+        _ytm = J(os.path.join(BASE, 'ytmap', r['id'] + '.json')) or {}
+        if _ytm:
+            for x in rrows:
+                if not x.get('vid') and _ytm.get(str(x['n'])):
+                    x['vid'] = _ytm[str(x['n'])]
         write_read(r['id'], rrows)
         if rrows and len(rrows) != r['rdn']:
             # card counter must equal the actual list — Mohamed's mismatch report

@@ -104,17 +104,7 @@ function renderSeries(){
   _rows=st.rows||[];
   document.title=st.name+' — سلاسل المشايخ';
   document.getElementById('hdr-sub').textContent=st.name;
-  document.getElementById('crumb').innerHTML=hdr(null,[{h:'.',t:'سلاسل المشايخ'},{t:st.name}]);
-  const init=(st.name||'؟').replace(/^ال/,'').trim()[0]||'؟';
-  const photo=st.photo?String(st.photo).replace(/^\/+/,''):null;
-  const num=(kind,n,label,ok,icn)=>'<span class="u-num '+kind+'">'+ic(icn||(kind==='rd'?'i-read':'i-listen'))+'<b>'+n+'</b>'+(ok?'<b class="ok">'+ic('i-check')+'</b>':'')+'<small>'+label+'</small></span>';
-  let h='<div class="u-hero cin"><div class="hero"><div class="ph">'+(photo?'<img src="'+esc(photo)+'" alt="" onerror="this.remove()">':'')+'<span>'+esc(init)+'</span></div>'
-    +'<div style="flex:1"><h1>'+esc(st.name)+'</h1>'
-    +'<div class="stats">'+(st.read?num('rd',st.read,'مقروء',_rows.every(r=>r.rOk)):'')+(st.watch?num('ls',st.watch,'مسموع',_rows.filter(r=>r.wtt).every(r=>r.wOk)):'')+(st.uwatch?num('unv',st.uwatch,'آلي غير مدقق',0,'i-auto'):'')+'</div>'
-    +'<div style="font-size:var(--fs-xs);color:var(--ink-3);margin-top:8px">'+pluralSeries(st.nSeries)+'</div>'
-    +'</div></div></div>';
-  h+='<div class="u-sech cin"><h2>السلاسل</h2><span class="cnt">'+_rows.length+'</span></div><div id="srows"></div>';
-  B.innerHTML=h;
+  B.innerHTML='<div id="srows"></div>';
   const fq=(q.get('f')||'').split(',').filter(k=>FCOUNT[k]);
   fq.forEach(k=>flt.add(k));
   renderSeries();

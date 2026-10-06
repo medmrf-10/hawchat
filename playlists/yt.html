@@ -19,10 +19,21 @@ h1{font-family:var(--font-ar);font-size:1.4rem;font-weight:700;color:var(--txt);
 .lsub{color:var(--dim);font-size:var(--fs-xs);margin-bottom:14px}
 .player{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line-1);box-shadow:var(--e-2)}
 .player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.player.aud{aspect-ratio:auto;height:64px;border-radius:var(--r-md)}
+.player.aud{position:absolute;width:1px;height:1px;opacity:.02;overflow:hidden;border:0}
+.audcard{margin-top:22px;background:var(--bg-2);border:1px solid var(--line-1);border-radius:var(--r-lg);padding:22px 18px;display:flex;flex-direction:column;align-items:center;gap:14px;box-shadow:var(--e-2)}
+.audcard .disc{width:88px;height:88px;border-radius:50%;background:rgba(123,201,140,.10);border:1.5px solid rgba(123,201,140,.45);display:flex;align-items:center;justify-content:center;color:#7bc98c}
+.audcard .disc .i{width:40px;height:40px}
+.astate{color:var(--ink-3);font-size:var(--fs-xs)}
+.audbar{width:100%;height:8px;border-radius:99px;background:var(--bg-1);border:1px solid var(--line-1);cursor:pointer;position:relative;overflow:hidden}
+.audbar i{position:absolute;inset-block:0;inset-inline-start:0;width:0%;background:#7bc98c;border-radius:99px}
+.atime{width:100%;display:flex;justify-content:space-between;color:var(--ink-3);font-size:.72rem;font-variant-numeric:tabular-nums}
+.atrans{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:center}
+.atrans button{min-width:52px;min-height:52px;border-radius:50%;border:1px solid var(--line-2);background:var(--bg-1);color:var(--txt);font:inherit;font-size:.82rem;cursor:pointer}
+.atrans button.big{width:64px;height:64px;font-size:1.3rem;color:#7bc98c;border-color:rgba(123,201,140,.5)}
+.atrans button.spd{border-radius:var(--r-md);min-width:58px;color:#7bc98c}
 .audhint{display:flex;align-items:center;gap:10px;margin-top:12px;padding:10px 14px;border-radius:var(--r-md);
-  border:1px solid var(--line-2);background:var(--bg-2);color:var(--ink-2);font-size:var(--fs-xs)}
-.audhint .i{width:20px;height:20px;color:var(--green);flex:none}
+  border:1px solid var(--line-2);background:var(--bg-2);color:var(--ink-3);font-size:var(--fs-xs)}
+.audhint .i{width:18px;height:18px;color:#7bc98c;flex:none}
 .cover{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;cursor:pointer;
   background:linear-gradient(160deg,rgba(224,90,79,.16),var(--bg-1));color:#e05a4f}
 .cover .big{width:76px;height:76px;border-radius:50%;background:rgba(224,90,79,.14);border:1.5px solid rgba(224,90,79,.6);
@@ -56,10 +67,69 @@ const EMB='https://www.youtube-nocookie.com/embed/';
 function embedUrl(vid,autoplay){
   return EMB+encodeURIComponent(vid)+'?playsinline=1&rel=0&hl=ar&iv_load_policy=3'+(autoplay?'&autoplay=1':'');
 }
-function makeAudio(pl,title,artist,vid){
+let _ytapi=null;
+function ytApi(){
+  if(!_ytapi)_ytapi=new Promise(res=>{
+    const pv=window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady=()=>{if(pv)pv();res(window.YT)};
+    const s=document.createElement('script');s.src='https://www.youtube.com/iframe_api';document.head.appendChild(s);
+  });
+  return _ytapi;
+}
+function fmtT(s){s=Math.max(0,Math.floor(s||0));const h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;
+  return h?h+':'+String(m).padStart(2,'0')+':'+String(x).padStart(2,'0'):m+':'+String(x).padStart(2,'0')}
+/* مشغّل استماع حقيقي: iframe يوتيوب مخفي 1px + أزرارنا عبر IFrame API.
+   إخفاء display:none يوقف يوتيوب أحياناً — 1px شفاف يبقيه حياً. */
+async function makeAudio(pl,opts){
+  const {vid,title,artist,onEnd,onPrev,onNext}=opts;
   pl.classList.add('aud');
-  pl.insertAdjacentHTML('afterend','<div class="audhint">'+ic('i-audio')+'<span>نمط استماع — شريط المشغّل أعلاه؛ اتركه يعمل ثم أطفئ الشاشة وسيستمر الصوت (تظهر أزرار التحكم على شاشة القفل).</span></div>');
-  if('mediaSession' in navigator){try{navigator.mediaSession.metadata=new MediaMetadata({title:title,artist:artist||'',album:'سلاسل المشايخ'});}catch(e){}}
+  pl.insertAdjacentHTML('afterend',
+    '<div class="audcard"><span class="disc">'+ic('i-audio')+'</span>'
+    +'<div class="astate" id="ast">اضغط تشغيل</div>'
+    +'<div class="audbar" id="abar"><i id="abf"></i></div>'
+    +'<div class="atime"><span id="atd">0:00</span><span id="atc">0:00</span></div>'
+    +'<div class="atrans">'
+    +'<button id="abk" aria-label="رجوع ١٠ ثوانٍ">−١٠</button>'
+    +'<button id="app" class="big" aria-label="تشغيل/إيقاف">▶</button>'
+    +'<button id="afw" aria-label="تقديم ١٠ ثوانٍ">+١٠</button>'
+    +'<button id="asp" class="spd" aria-label="سرعة التشغيل">×1</button>'
+    +'</div></div>'
+    +'<div class="audhint">'+ic('i-audio')+'<span>نمط استماع — أطفئ الشاشة ويستمر الصوت، وتظهر أزرار التحكم على شاشة القفل.</span></div>');
+  const host=document.createElement('div');host.id='ytph';pl.appendChild(host);
+  const G=id=>document.getElementById(id);
+  const spd=[0.75,1,1.25,1.5,2];let si=1,playing=false,timer=null;
+  const setAst=t=>{G('ast').textContent=t};
+  const upd=()=>{try{
+    const d=player.getDuration()||0,c=player.getCurrentTime()||0;
+    G('atd').textContent=fmtT(d);G('atc').textContent=fmtT(c);
+    G('abf').style.width=(d?Math.min(100,c/d*100):0)+'%';
+  }catch(e){}};
+  const YT=await ytApi();
+  const player=new YT.Player(host,{videoId:vid,
+    playerVars:{autoplay:1,controls:0,playsinline:1,rel:0,disablekb:1,fs:0,iv_load_policy:3,hl:'ar'},
+    events:{onStateChange:e=>{
+      playing=(e.data===1);
+      G('app').textContent=playing?'⏸':'▶';
+      setAst(playing?'يُشغَّل الآن':(e.data===3?'يجري التحميل…':(e.data===0?'انتهى':(e.data===2?'متوقف مؤقتاً':'جاهز'))));
+      if(e.data===0&&onEnd)onEnd();
+      upd();
+    },onReady:upd,onError:()=>setAst('تعذر التشغيل — افتح على يوتيوب')}});
+  timer=setInterval(upd,500);
+  G('app').onclick=()=>{playing?player.pauseVideo():player.playVideo()};
+  G('abk').onclick=()=>{try{player.seekTo(Math.max(0,player.getCurrentTime()-10),true)}catch(e){}};
+  G('afw').onclick=()=>{try{player.seekTo(player.getCurrentTime()+10,true)}catch(e){}};
+  G('asp').onclick=()=>{si=(si+1)%spd.length;player.setPlaybackRate(spd[si]);G('asp').textContent='×'+spd[si]};
+  G('abar').onclick=e=>{try{const r=e.currentTarget.getBoundingClientRect(),d=player.getDuration()||0;
+    if(d)player.seekTo(d*((e.clientX-r.left)/r.width),true)}catch(e){}};
+  if('mediaSession' in navigator){try{
+    navigator.mediaSession.metadata=new MediaMetadata({title:title,artist:artist||'',album:'سلاسل المشايخ'});
+    navigator.mediaSession.setActionHandler('play',()=>player.playVideo());
+    navigator.mediaSession.setActionHandler('pause',()=>player.pauseVideo());
+    navigator.mediaSession.setActionHandler('seekbackward',()=>G('abk').click());
+    navigator.mediaSession.setActionHandler('seekforward',()=>G('afw').click());
+    if(onPrev)navigator.mediaSession.setActionHandler('previoustrack',onPrev);
+    if(onNext)navigator.mediaSession.setActionHandler('nexttrack',onNext);
+  }catch(e){}}
 }
 function plidOf(url){
   const m=String(url||'').match(/[?&]list=([A-Za-z0-9_-]+)/);return m&&m[1];
@@ -84,7 +154,8 @@ function vidOf(url){
       +'<div class="player" id="pl"><div class="cover" id="cvr"><span class="big">▶</span><span>تشغيل من يوتيوب</span></div></div>'
       +'<a class="ext" href="https://youtu.be/'+esc(vv)+'" target="_blank" rel="noopener">'+ic('i-yt')+' افتح على يوتيوب</a>';
     document.getElementById('cvr').onclick=()=>{document.getElementById('pl').innerHTML='<iframe src="'+embedUrl(vv,true)+'" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>'};
-    if(q.get('a'))makeAudio(document.getElementById('pl'),row?row.title:'درس يوتيوب',st?st.name:'',vv);
+    if(q.get('a')){document.getElementById('pl').innerHTML='';
+      makeAudio(document.getElementById('pl'),{vid:vv,title:row?row.title:'درس يوتيوب',artist:st?st.name:''})}
     return;
   }
 
@@ -116,7 +187,10 @@ function vidOf(url){
       +'<a class="ext" href="https://youtu.be/'+esc(l.video)+'" target="_blank" rel="noopener">'+ic('i-yt')+' افتح على يوتيوب</a>';
     app.innerHTML=h;
     document.getElementById('cvr').onclick=()=>{document.getElementById('pl').innerHTML='<iframe src="'+embedUrl(l.video,true)+'" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>'};
-    if(q.get('a'))makeAudio(document.getElementById('pl'),l.title||('الدرس '+l.n),d.sheikh||'',l.video);
+    if(q.get('a')){document.getElementById('pl').innerHTML='';document.getElementById('cvr')&&document.getElementById('cvr').remove();
+      const go=j2=>{if(vl[j2]!=null)location.href='?s='+encodeURIComponent(slug)+'&l='+vl[j2]+'&a=1'};
+      makeAudio(document.getElementById('pl'),{vid:l.video,title:l.title||('الدرس '+l.n),artist:d.sheikh||'',
+        onEnd:()=>go(i+1),onPrev:()=>go(i-1),onNext:()=>go(i+1)})}
     nav.hidden=false;
     nav.innerHTML=(i>0?'<a href="?s='+encodeURIComponent(slug)+'&l='+vl[i-1]+(q.get('a')?'&a=1':'')+'">→ السابق</a>':'<a class="off">→ السابق</a>')
       +'<span class="pos">'+esc(d.title)+' — '+(i+1)+' / '+vl.length+'</span>'
