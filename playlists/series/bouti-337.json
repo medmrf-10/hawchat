@@ -4,7 +4,7 @@
  "sheikh_slug": "said-bouti",
  "title": "في رحاب القرآن",
  "playlist": "https://www.youtube.com/playlist?list=PL01kYZIehH-o-hti9ShELqqWevqfj47o6",
- "count": 4,
+ "count": 9,
  "lessons": [
   {
    "n": 1,
@@ -33,6 +33,41 @@
    "video": "aekcNXP20lM",
    "chars": 1357,
    "dur": "3:33"
+  },
+  {
+   "n": 5,
+   "title": "4 - في رحاب القرآن | لماذا تحارب اللغة العربية؟",
+   "video": "wylN6nquEsY",
+   "chars": 1347,
+   "dur": "3:33"
+  },
+  {
+   "n": 6,
+   "title": "5 - في رحاب القرآن | تعلم تلاوة القرآن بالتلقي",
+   "video": "9RaiK31GKe4",
+   "chars": 826,
+   "dur": "2:15"
+  },
+  {
+   "n": 7,
+   "title": "6 - في رحاب القرآن | وهل يفترس القرآن أحداً ؟!!",
+   "video": "4PLL4cDptn0",
+   "chars": 1613,
+   "dur": "3:40"
+  },
+  {
+   "n": 8,
+   "title": "7 - في رحاب القرآن | واقع مؤسف",
+   "video": "G2h_xLYR6O0",
+   "chars": 1577,
+   "dur": "3:43"
+  },
+  {
+   "n": 9,
+   "title": "8 - في رحاب القرآن | بين لسانٍ رطْبٍ ولسانٍ متخشب",
+   "video": "Trg_HHMKkVc",
+   "chars": 702,
+   "dur": "1:53"
   }
  ]
 }

@@ -1,4 +1,4 @@
-/* hawshat service worker v7 — 3-tier cache.
+/* hawchat service worker v7 — 3-tier cache.
    shell: app assets (html/css/js/fonts/icons) — versioned, replaced per deploy.
    data:  JSON (stats, read rows, series) — stale-while-revalidate.
    text:  transcripts/alignments/images — cache-first, LRU-bounded, version-stable.
@@ -10,11 +10,11 @@
                                  bump ?v= when the asset changes inside a REV.
    - *.json                     → SWR in DATA (wiped per REV).
    - *.txt/.align.*/icons.svg/images → SWR in TEXT (REV-stable). */
-const REV = 'v8-57';
-const SHELL = 'hawshat-shell-' + REV;
-const DATA  = 'hawshat-data-' + REV;   // versioned with the build — no stale mixes
-const TEXT  = 'hawshat-text-v1';
-const PIN   = 'hawshat-pinned-v1';   // user-saved rows — never LRU-trimmed
+const REV = 'v8-42';
+const SHELL = 'hawchat-shell-' + REV;
+const DATA  = 'hawchat-data-' + REV;   // versioned with the build — no stale mixes
+const TEXT  = 'hawchat-text-v1';
+const PIN   = 'hawchat-pinned-v1';   // user-saved rows — never LRU-trimmed
 const KEEP  = [SHELL, DATA, TEXT, PIN];
 const MAXE  = 250;                              // LRU bound for text/data caches
 
@@ -25,7 +25,6 @@ const SHELL_ASSETS = [
   './playlists/series.html', './playlists/tr.html', './playlists/lesson.html',
   './playlists/common.css', './playlists/common.js',
   './playlists/ui.css', './playlists/icons.svg', './playlists/row.html',
-  './playlists/yt.html', './playlists/sm.html', './playlists/qu.html', './playlists/aud.html',
   './icons/icon-192.png',
 ];
 

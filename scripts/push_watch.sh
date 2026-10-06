@@ -4,7 +4,7 @@
 #  - deletions under playlists/lessons|lessons|transcripts (restore from sha~1)
 #  - committed conflict markers in *.json under playlists/ + transcripts/ (resolve → newest side)
 # Logs to push_violations.log; LAST_VIOLATION for hub relay.
-cd /home/ubuntu/hawshat || exit 1
+cd /home/ubuntu/hawchat || exit 1
 LOG=/home/ubuntu/align_pkgs/push_violations.log
 SEEN=/home/ubuntu/align_pkgs/push_watch_last
 CORE=/home/ubuntu/align_pkgs/site_core_files.txt

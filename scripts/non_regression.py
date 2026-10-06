@@ -12,7 +12,7 @@ import json, os, sys, urllib.request
 
 ROOT = os.path.join(os.path.dirname(__file__), '..')
 PL = os.path.join(ROOT, 'playlists')
-LIVE = 'https://medmrf-10.github.io/hawshat/playlists/data/sheikh_stats.json'
+LIVE = 'https://medmrf-10.github.io/hawchat/playlists/data/sheikh_stats.json'
 
 def J(p):
     try:

@@ -20,7 +20,7 @@ import json, os, re, sys, subprocess, urllib.request, collections
 
 BASE = os.path.dirname(os.path.abspath(__file__))          # playlists/data
 PL   = os.path.dirname(BASE)                                # playlists
-ROOT = os.path.dirname(PL)                                  # hawshat root
+ROOT = os.path.dirname(PL)                                  # hawchat root
 CAT  = '/home/ubuntu/durus/catalog/plists/'
 MUT_TXT = 'https://medmrf-10.github.io/des/mutalaa/data/txt/'
 MUT_MAN = 'https://medmrf-10.github.io/des/mutalaa/data/manifest.json'
@@ -343,7 +343,7 @@ def rebuild_lessons_indexes():
             idx = {}   # missing or corrupt index → rebuild from disk
         # F8: a file class is authoritative; same-n collisions are warned and
         # resolved deterministically (longest padding wins: 001.txt > 01.txt)
-        afc, tfc, smc, quc = {}, {}, {}, {}
+        afc, tfc = {}, {}
         for fn in os.listdir(d):
             m = re.match(r'^(\d+)\.align\.json$', fn)
             if m:
@@ -352,19 +352,7 @@ def rebuild_lessons_indexes():
             m = re.match(r'^(\d+)\.txt$', fn)
             if m:
                 tfc.setdefault(int(m.group(1)), []).append(fn)
-                continue
-            m = re.match(r'^(\d+)\.sum\.json$', fn)
-            if m:
-                smc.setdefault(int(m.group(1)), []).append(fn)
-                continue
-            m = re.match(r'^(\d+)\.qu\.json$', fn)
-            if m:
-                quc.setdefault(int(m.group(1)), []).append(fn)
-        af, tf, smf, quf = {}, {}, {}, {}
-        for n, fns in smc.items():
-            if len(fns) > 1:
-                warn('%s: %d sum files for n=%d %s → using %s' % (slug, len(fns), n, fns, sorted(fns)[-1]))
-            smf[n] = sorted(fns)[-1]
+        af, tf = {}, {}
         for n, fns in afc.items():
             if len(fns) > 1:
                 warn('%s: %d align files for n=%d %s → using %s' % (slug, len(fns), n, fns, sorted(fns)[-1]))
@@ -373,10 +361,6 @@ def rebuild_lessons_indexes():
             if len(fns) > 1:
                 warn('%s: %d txt files for n=%d %s → using %s' % (slug, len(fns), n, fns, sorted(fns)[-1]))
             tf[n] = sorted(fns)[-1]
-        for n, fns in quc.items():
-            if len(fns) > 1:
-                warn('%s: %d qu files for n=%d %s → using %s' % (slug, len(fns), n, fns, sorted(fns)[-1]))
-            quf[n] = sorted(fns)[-1]
         ok_nums = []
         for n in sorted(af):
             ad = J(os.path.join(d, af[n]))
@@ -394,21 +378,6 @@ def rebuild_lessons_indexes():
         new_idx['align'] = sorted(af)   # disk is authoritative — stale lists get rebuilt
         new_idx['alignOk'] = ok_nums    # playable set (w non-empty, cov>=0.3) — matches wan
         new_idx['txt'] = sorted(tf)
-        new_idx['sum'] = sorted(smf)   # NNN.sum.json — agent-written summaries
-        new_idx['sumf'] = smf
-        new_idx['qu'] = sorted(quf)    # NNN.qu.json — agent-written Q&A
-        new_idx['quf'] = quf
-        # display titles: an Arabic series title wins; filename-style titles
-        # (NNN_<videoid>) fall back to YouTube ground truth, then «الدرس N»
-        _sd = J(os.path.join(PL, 'series', slug + '.json')) or {}
-        _ti = {}
-        for l in (_sd.get('lessons') or []):
-            t = (l.get('title') or '').strip()
-            if t and re.search(r'[\u0600-\u06FF]', t):
-                continue
-            _ti[l['n']] = YTV.get(l.get('video')) or ('الدرس ' + str(l['n']))
-        if _ti:
-            new_idx['ti'] = _ti
         if new_idx != idx:            # write only on real change — keep worktree clean
             dump_atomic(new_idx, idx_path)
 
@@ -441,26 +410,17 @@ for g in (order.get('groups') or []):
         oi += 1; ordmap[nm] = oi; ordmap[norm(nm)] = oi
 photos  = J(os.path.join(PL, 'photos.json')) or {}
 sord    = J(os.path.join(BASE, 'series_order.json')) or {}
-# صوتيات الموقع المستضافة محلياً — audio/index.json مفهرس بمفتاح sSlug أو id الصف
-AUDX    = J(os.path.join(PL, 'audio', 'index.json')) or {}
 
 for s in sidx:
     if s.get('sheikh_slug') and s['sheikh_slug'] not in known:
         warn('orphan series %s → unknown sheikh_slug %s' % (s.get('slug'), s.get('sheikh_slug')))
 
 os.makedirs(os.path.join(BASE, 'read'), exist_ok=True)
-os.makedirs(os.path.join(BASE, 'sum'), exist_ok=True)
 
 def write_read(row_id, rows):
     p = os.path.join(BASE, 'read', row_id + '.json')
     tmp = p + '.tmp'
     json.dump(rows, open(tmp, 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
-    os.replace(tmp, p)
-
-def write_sum(row_id, srows):
-    p = os.path.join(BASE, 'sum', row_id + '.json')
-    tmp = p + '.tmp'
-    json.dump(srows, open(tmp, 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
     os.replace(tmp, p)
 
 def natkey(t):
@@ -677,12 +637,6 @@ for sh in sheikhs:
         keep.append(r)
     rows[:] = keep
 
-    # sanctioned deletes (owner order): banned row ids / series slugs never surface —
-    # whatever source feeds them (mut manifest, series json, transcripts, inbox).
-    _sd = J(os.path.join(BASE, 'sanctioned_deletes.json')) or {}
-    _banned_ids = set(_sd.get('rows') or [])
-    _banned_slugs = set(_sd.get('slugs') or [])
-
     # ── invariants + links + read-rows ──
     for r in rows:
         r.pop('_mut', None)
@@ -695,8 +649,6 @@ for sh in sheikhs:
         for tag, kv in sorted(keys):
             rid = rid or ROW_IDS.get(slug, {}).get('%s:%s' % (tag, kv))
         r['id'] = rid or '%s--%s' % (slug, re.sub(r'[^\w\-]', '', str(key)))
-        if r['id'] in _banned_ids or r.get('sSlug') in _banned_slugs:
-            continue
         for tag, kv in keys:
             ROW_IDS.setdefault(slug, {})['%s:%s' % (tag, kv)] = r['id']
         rrows = []
@@ -748,12 +700,6 @@ for sh in sheikhs:
                 rrows = sorted(merged, key=lambda x: x['n'])
         elif r.get('sSlug'):
             rrows = rows_from_lessons(r['sSlug'])
-        # vids recovered from file headers (الفيديو: youtu.be/…) → data/ytmap/<id>.json
-        _ytm = J(os.path.join(BASE, 'ytmap', r['id'] + '.json')) or {}
-        if _ytm:
-            for x in rrows:
-                if not x.get('vid') and _ytm.get(str(x['n'])):
-                    x['vid'] = _ytm[str(x['n'])]
         write_read(r['id'], rrows)
         if rrows and len(rrows) != r['rdn']:
             # card counter must equal the actual list — Mohamed's mismatch report
@@ -768,84 +714,12 @@ for sh in sheikhs:
         r['wtt'] = r['rtt']
         r['read'] = 'row.html?r=' + r['id']
         r['listen'] = ('row.html?r=' + r['id'] + '&m=listen') if r['wan'] > 0 and r.get('sSlug') else None
-        # يوتيوب + استماع مع نص بلا محاذاة: كل سلسلة لها قائمة/فيديوهات — بلا هاردكود، من مصدرها
-        r['yt'] = None; r['ytn'] = 0; r['ltx'] = None; r['ltn'] = 0
-        _vids = set()
-        if r.get('sSlug'):
-            _sd = J(os.path.join(PL, 'series', r['sSlug'] + '.json')) or {}
-            _vids = {l.get('n') for l in (_sd.get('lessons') or []) if l.get('video')}
-            _plu = _sd.get('playlist') or ''
-            if _plu:
-                r['yt'] = _plu
-            elif _vids:
-                _fv = next((l.get('video') for l in _sd.get('lessons') or [] if l.get('video')), None)
-                if _fv:
-                    r['yt'] = 'https://www.youtube.com/watch?v=' + _fv
-            if _vids:
-                _li2 = J(os.path.join(PL, 'lessons', r['sSlug'], 'index.json')) or {}
-                _txt = set(_li2.get('txt') or []) | set(_li2.get('alignOk') or []) \
-                    | {x['n'] for x in rrows}
-                r['ytn'] = len(_vids)
-                r['ltn'] = len(_vids & _txt)
-                if r['ltn'] > 0:
-                    r['ltx'] = 'row.html?r=' + r['id'] + '&m=ltx'
-            if r.get('sSlug'):
-                _li3 = J(os.path.join(PL, 'lessons', r['sSlug'], 'index.json')) or {}
-                r['qn'] = len(_li3.get('qu') or [])
-                r['qna'] = ('row.html?r=' + r['id'] + '&m=qu') if r['qn'] else None
-        elif r.get('plid'):
-            r['yt'] = 'https://www.youtube.com/playlist?list=' + r['plid']
-            r['ytn'] = r['rtt']
-        elif r.get('mutId') is not None:
-            _m = next((x for x in muts if str(x.get('id')) == str(r['mutId'])), None)
-            if _m and _m.get('url'):
-                r['yt'] = _m['url']
-                r['ytn'] = _m.get('total') or len(rrows)
-        if not r['yt'] and r.get('trSh') and r.get('trSr'):
-            _se = next((x for x in (tr.get(r['trSh'], {}).get('series') or [])
-                        if x.get('slug') == r['trSr']), {})
-            r['yt'] = _se.get('playlist') or None
-            if not r['yt']:
-                for _f in (_se.get('files') or []):
-                    _mm = re.match(r'^[^_]+_([A-Za-z0-9_\-]{6,20})\.txt$', _f)
-                    if _mm:
-                        r['yt'] = 'https://www.youtube.com/watch?v=' + _mm.group(1)
-                        break
-            if r['yt']:
-                r['ytn'] = _se.get('total') or len(_se.get('files') or []) or len(rrows)
-        # التلخيص: agent-uploaded NNN.sum.json files beside the lessons.
-        # الصفوف بلا sSlug تقرأ من playlists/lessons/<row.id>/ نفس العقد.
-        r['sun'] = 0
-        r['summ'] = None
-        _ldir = r.get('sSlug') or r['id']
-        if _ldir:
-            _li = J(os.path.join(PL, 'lessons', _ldir, 'index.json')) or {}
-            _smf = _li.get('sumf') or {}
-            _srows = []
-            for _n in sorted(_smf):
-                _sm = J(os.path.join(PL, 'lessons', _ldir, _smf[_n]))
-                if not isinstance(_sm, dict):
-                    continue
-                _tt = next((x['title'] for x in rrows if x['n'] == _n), None) or 'الدرس %s' % _n
-                _srows.append({'n': _n, 'title': _tt,
-                               'p': _sm.get('summary') or _sm.get('p') or '',
-                               'b': _sm.get('points') or _sm.get('b') or [],
-                               's': _sm.get('fit') or _sm.get('s') or '',
-                               't': _sm.get('note') or ''})
-            if _srows:
-                r['sun'] = len(_srows)
-                r['summ'] = 'row.html?r=' + r['id'] + '&m=sm'
-                write_sum(r['id'], _srows)
-        _ait = (AUDX.get(_ldir) or {}).get('items') or []
-        r['aun'] = len(_ait)
         # E7: lesson titles for the lazy search index
         if rrows:
             SEARCH_L[r['id']] = {'ss': r.get('sSlug'), 'L': [[x['n'], x['title']] for x in rrows]}
         r['rOk'] = bool(r['rtt'] and r['rdn'] >= r['rtt'])
         r['wOk'] = bool(r['rtt'] and r['wan'] >= r['rtt'])
 
-    rows[:] = [r for r in rows if r.get('id') and r['id'] not in _banned_ids
-               and r.get('sSlug') not in _banned_slugs]
     sordmap = sord.get(slug) or {}
     rows.sort(key=lambda r: (sordmap.get(r.get('id'), 9999), -r['wan'], natkey(r['title'])))
     read  = sum(r['rdn'] for r in rows)
@@ -863,7 +737,6 @@ for sh in sheikhs:
         'rows': rows,
         'read': read, 'watch': watch,
         'uwatch': sum(r['wan'] for r in rows if r.get('unv')),
-        'sum': sum(r['sun'] for r in rows),
         'nRead': sum(1 for r in rows if r['rdn']),
         'nWatch': sum(1 for r in rows if r['wan']),
     }
@@ -916,13 +789,6 @@ for slug, v in out.items():
 dump_atomic(search, os.path.join(BASE, 'search.json'))
 # E7: per-row lesson titles — lazy-loaded by the index's #flt on first keystroke
 dump_atomic(SEARCH_L, os.path.join(BASE, 'search_lessons.json'), sort_keys=True)
-
-# drop stale read files of sanctioned-deleted rows (they may linger from before the ban)
-_sd2 = J(os.path.join(BASE, 'sanctioned_deletes.json')) or {}
-for _rid in (_sd2.get('rows') or []):
-    _f = os.path.join(BASE, 'read', _rid + '.json')
-    if os.path.exists(_f):
-        os.remove(_f)
 
 print('sheikhs', len(out) - 1, 'read', sum(v['read'] for k, v in out.items() if k != '_meta'),
       'watch', sum(v['watch'] for k, v in out.items() if k != '_meta'),

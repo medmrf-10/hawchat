@@ -8,16 +8,15 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="hawshat">
+<meta name="apple-mobile-web-app-title" content="hawchat">
 <link rel="manifest" href="../manifest.webmanifest">
 <link rel="icon" type="image/png" href="../icons/icon-192.png">
 <link rel="apple-touch-icon" href="../icons/favicon-180.png">
 <link rel="preload" href="../fonts/IBMPlexSansArabic-400-arabic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../fonts/Amiri-400-arabic.woff2" as="font" type="font/woff2" crossorigin>
-<script>try{if(JSON.parse(localStorage.getItem('hc_store_v1')||'{}').trtheme==='day')document.documentElement.dataset.theme='day'}catch(e){}</script>
-<link rel="stylesheet" href="../theme.css?v=11">
-<link rel="stylesheet" href="common.css?v=11">
-<link rel="stylesheet" href="ui.css?v=11">
+<link rel="stylesheet" href="../theme.css?v=9">
+<link rel="stylesheet" href="common.css?v=9">
+<link rel="stylesheet" href="ui.css?v=9">
 <style>
 .wrap{max-width:820px;margin:0 auto;padding:16px 16px 90px}
 h1{font-family:var(--font-ui);font-size:var(--fs-lg);font-weight:700;color:var(--txt);margin:10px 0 4px}
@@ -28,12 +27,8 @@ h1{font-family:var(--font-ui);font-size:var(--fs-lg);font-weight:700;color:var(-
 @media(hover:hover){.ls a:hover{border-color:var(--acc2)}}
 .ls a.on{border-color:var(--acc);color:var(--acc2)}
 .ls .num{min-width:34px;height:34px;border-radius:50%;background:rgba(201,162,75,.1);border:1px solid var(--border);color:var(--acc2);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:var(--fs-sm);flex:none}
-/* قراءة بملء الشاشة — بلا صندوق: النص يشغل العرض كاملاً على الهاتف، 66ch على الواسع */
-.txt{background:transparent;border:0;border-radius:0;box-shadow:none;
-  max-width:66ch;margin:14px auto 0;padding:6px 4px 30px;
-  font-family:var(--font-ar);font-size:1.34rem;line-height:2.6;white-space:pre-wrap;color:var(--txt)}
-#sump{border-top:1px dashed var(--border)}
-@media(max-width:480px){.txt{padding:4px 2px 26px}}
+.txt{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:26px;margin-top:14px;font-family:var(--font-ar);font-size:1.15rem;line-height:2.2;white-space:pre-wrap}
+@media(max-width:480px){.txt{padding:18px 16px}}
 .navb{position:fixed;bottom:0;left:0;right:0;background:var(--bgt);backdrop-filter:blur(14px);border-top:1px solid var(--border);padding:10px 14px calc(10px + env(safe-area-inset-bottom));display:flex;align-items:center;justify-content:center;gap:10px;z-index:50}
 .navb a,.navb button{min-height:44px;padding:0 18px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--card);color:var(--txt);font-family:var(--font-ui);font-size:var(--fs-sm);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
 .navb a.off,.navb button.off{opacity:.35;pointer-events:none}
@@ -63,7 +58,7 @@ h1{font-family:var(--font-ui);font-size:var(--fs-lg);font-weight:700;color:var(-
   <div id="app"><div class="skel" style="height:60px;margin-top:12px"></div><div class="skel" style="height:220px;margin-top:12px"></div></div>
 </div></main>
 <div class="navb" id="navb" hidden></div>
-<script src="common.js?v=11"></script>
+<script src="common.js?v=9"></script>
 <script>
 let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
 (async()=>{
@@ -82,7 +77,7 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
     const sd=await j('series/'+encodeURIComponent(ssl)+'.json');
     if(sd){
       const lidx=await j('lessons/'+encodeURIComponent(ssl)+'/index.json');
-      SROWS=(sd.lessons||[]).map(l=>({n:l.n,title:(lidx&&lidx.ti&&lidx.ti[l.n])||l.title,vid:l.video,trfile:(lidx&&lidx.tf&&lidx.tf[l.n])||null}));
+      SROWS=(sd.lessons||[]).map(l=>({n:l.n,title:l.title,vid:l.video,trfile:(lidx&&lidx.tf&&lidx.tf[l.n])||null}));
       if(!hit){hit={slug:'',r:{id:'tr:'+ssl,title:sd.title||ssl,sSlug:ssl,rdn:SROWS.length},st:{name:sd.sheikh||'سلسلة'}}}
     }
   }
@@ -113,9 +108,8 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
   document.title=row.title+' — '+META.name;
   // aligned lessons for "استمع لهذا الدرس" — the same listenable threshold
   // (cov>=0.3) the cards count with, not just any alignment file
-  let aligned=new Set(),summed=new Set();
-  if(row.listen||row.summ){const li=await j('lessons/'+encodeURIComponent(row.sSlug||ssl||row.id)+'/index.json');
-    aligned=new Set((li&&(li.alignOk||li.align))||[]);summed=new Set((li&&li.sum)||[])}
+  let aligned=new Set();
+  if(row.listen){const li=await j('lessons/'+encodeURIComponent(row.sSlug||ssl)+'/index.json');aligned=new Set((li&&(li.alignOk||li.align))||[])}
   // REQ must exist before the first showLesson(): a `let` declared below the call
   // sits in its TDZ and threw on every ?l= deep link (blank page, no text)
   let REQ=0;
@@ -143,21 +137,6 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
     app.innerHTML=h;
     if(res&&res.n)document.querySelector('.lsres').style.cssText='display:flex;align-items:center;gap:10px;background:rgba(201,162,75,.08);border:1px solid var(--acc);border-radius:var(--r-md);padding:12px 14px;margin-bottom:12px;color:var(--acc2);text-decoration:none;font-size:var(--fs-sm);min-height:44px';
   }
-  // strip a yaml-ish metadata head (الشيخ:/السلسلة:/الفيديو: links …) — it ends
-  // at the first blank line; a non-header first line means there is no head
-  function cleanTxt(t){
-    if(!t)return t;
-    const L=t.split('\n');let i=0;
-    while(i<L.length){
-      const s=L[i].trim();
-      if(!s){i++;break}
-      if(/[:：]/.test(s)&&!/[،.؟!]/.test(s)&&s.length<160){i++;continue}
-      if(/^https?:\/\/\S+$/.test(s)){i++;continue}
-      break;
-    }
-    t=L.slice(i).join('\n');
-    return t.replace(/^https?:\/\/\S+\s*$/gm,'').replace(/\n{3,}/g,'\n\n').trim();
-  }
   // one resolver for display + prefetch. series-native rows: lessons copy →
   // transcripts by vid → padded probe (3 then 2 digits, both layouts exist)
   async function loadText(x){
@@ -173,7 +152,6 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
   }
   async function showLesson(i,push){
     CUR=i;const x=ROWS[i];const my=++REQ;
-    window._sumN=x.n;
     store.setResume(row.id,x.n);store.markSeen(row.id+':'+x.n);
     window.scrollTo(0,0);
     const u=SELF+'&l='+x.n;
@@ -181,32 +159,56 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
     document.title=x.title+' — '+row.title;
     let h='<h1><bdi>'+esc(x.title)+'</bdi></h1><div class="lsub">الدرس '+x.n+' من '+ROWS.length+' · '+esc(META.name)+'</div>';
     if(row.unv)h+='<div class="unv">ترجمة آلية مأخوذة من يوتيوب — غير مدققة بعد</div>';
-    h+='<div class="txt skel" id="tx" style="min-height:200px"></div>'
-      +'<div class="txt" id="sump" hidden style="margin-top:10px"></div>';
+    h+='<div class="tools"><button id="fmi" aria-label="تصغير الخط">A−</button><button id="fpl" aria-label="تكبير الخط">A+</button>'
+      +(aligned.has(x.n)?'<a class="abtn" href="lesson.html?s='+encodeURIComponent(row.sSlug||ssl)+'&l='+x.n+'">'+I.listen+' استمع لهذا الدرس</a>':'')
+      +'<a class="abtn" href="'+ALLR+'">كل الدروس</a>'
+      +'<button id="shr" aria-label="مشاركة الدرس" title="مشاركة الدرس" style="width:auto;padding:0 12px;gap:5px;display:inline-flex;align-items:center">↗ مشاركة</button>'
+      +'<button id="cpy" aria-label="نسخ نص الدرس" title="نسخ نص الدرس كاملاً" style="width:auto;padding:0 12px">⧉ نسخ</button>'
+      +'<button id="srch" aria-label="بحث في النص" title="بحث داخل نص الدرس">⌕</button></div>';
+    h+='<div class="tsrch" id="tsr" hidden><input id="tsq" type="search" placeholder="ابحث داخل نص الدرس…" enterkeyhint="search" aria-label="بحث داخل نص الدرس"><button id="tsp" aria-label="النتيجة السابقة">↑</button><span class="tc" id="tsc"></span><button id="tsn" aria-label="النتيجة التالية">↓</button></div>';
+    h+='<div class="txt skel" id="tx" style="min-height:200px"></div>';
     app.innerHTML=h;
     const nav=document.getElementById('navb');nav.hidden=false;
-    const dayNow=document.documentElement.dataset.theme==='day';
-    nav.innerHTML='<button id="cpy" aria-label="نسخ نص الدرس" title="نسخ نص الدرس كاملاً">⧉ نسخ</button>'
+    nav.innerHTML=(i>0?'<a href="'+SELF+'&l='+ROWS[i-1].n+'" id="pv">→ السابق</a>':'<a class="off">→ السابق</a>')
       +'<span class="pos">'+(i+1)+' / '+ROWS.length+'</span>'
-      +'<button id="zout" aria-label="تصغير الخط" title="تصغير الخط" style="min-width:44px">أ−</button>'
-      +'<button id="zin" aria-label="تكبير الخط" title="تكبير الخط" style="min-width:44px">أ+</button>'
-      +'<button id="dnt" aria-label="تبديل نهاري/ليلي" title="نهاري/ليلي" style="min-height:44px;width:44px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--card);color:var(--txt);cursor:pointer;display:inline-flex;align-items:center;justify-content:center"><svg style="width:1.2em;height:1.2em"><use href="icons.svg?v=11#'+(dayNow?'i-sun':'i-moon')+'"/></svg></button>';
-    const zAp=()=>{localStorage.setItem('trfs',FS);document.querySelectorAll('.txt').forEach(e=>e.style.fontSize=FS+'rem')};
-    document.getElementById('zin').onclick=()=>{FS=Math.min(2.6,+(FS+0.15).toFixed(2));zAp()};
-    document.getElementById('zout').onclick=()=>{FS=Math.max(0.8,+(FS-0.15).toFixed(2));zAp()};
-    document.getElementById('dnt').onclick=()=>{
-      const day=document.documentElement.dataset.theme!=='day';
-      if(day)document.documentElement.dataset.theme='day';else delete document.documentElement.dataset.theme;
-      store.set('trtheme',day?'day':'night');
-      document.getElementById('dnt').innerHTML='<svg style="width:1.2em;height:1.2em"><use href="icons.svg?v=11#'+(day?'i-sun':'i-moon')+'"/></svg>';
-      const mc=document.querySelector('meta[name="theme-color"]');if(mc)mc.setAttribute('content',day?'#f6f0df':'#0b0f1a');
-    };
-    const tx=cleanTxt(await loadText(x));
+      +(i<ROWS.length-1?'<a href="'+SELF+'&l='+ROWS[i+1].n+'" id="nx">التالي ←</a>':'<a class="off">التالي ←</a>');
+    document.getElementById('fmi').onclick=()=>{FS=Math.max(.8,FS-.1);localStorage.setItem('trfs',FS);document.getElementById('tx').style.fontSize=FS+'rem'};
+    document.getElementById('fpl').onclick=()=>{FS=Math.min(1.9,FS+.1);localStorage.setItem('trfs',FS);document.getElementById('tx').style.fontSize=FS+'rem'};
+    const shb=document.getElementById('shr');
+    if(shb)shb.onclick=async()=>{const u=location.origin+location.pathname+SELF+'&l='+x.n;
+      try{if(navigator.share)await navigator.share({title:x.title,url:u});
+      else{await navigator.clipboard.writeText(u);shb.textContent='✓ نُسخ الرابط';setTimeout(()=>shb.innerHTML='↗ مشاركة',1800)}}catch(e){}};
+    const p=document.getElementById('pv'),n=document.getElementById('nx');
+    if(p)p.onclick=e=>{e.preventDefault();showLesson(i-1)};
+    if(n)n.onclick=e=>{e.preventDefault();showLesson(i+1)};
+    const tx=await loadText(x);
     if(my!==REQ)return;  // a newer lesson was opened while loading
     const el=document.getElementById('tx');
     if(!el)return;
     el.classList.remove('skel');el.style.fontSize=FS+'rem';
+    const sb=document.getElementById('srch');
+    if(sb)sb.onclick=()=>{const bar=document.getElementById('tsr');bar.hidden=!bar.hidden;if(!bar.hidden)document.getElementById('tsq').focus()};
     if(tx){el.textContent=tx;
+      // E8: in-text search — normalized matching (diacritics/alef forms) with
+      // mark highlighting + prev/next navigation, all client-side
+      const nrm=[];const nmap=[];
+      for(let ci=0;ci<tx.length;ci++){const cc=normalize(tx[ci]);for(const ch of cc){nrm.push(ch);nmap.push(ci)}}
+      const NT=nrm.join('');let MS=[],mc=-1;
+      const tq=document.getElementById('tsq'),tc=document.getElementById('tsc');
+      const renderHL=()=>{
+        if(!MS.length){el.textContent=tx;tc.textContent=tq.value.trim()?'0/0':'';return}
+        let h='',p=0;
+        MS.forEach((mm,hi)=>{h+=esc(tx.slice(p,mm[0]))+'<mark'+(hi===mc?' class="cur"':'')+'>'+esc(tx.slice(mm[0],mm[1]))+'</mark>';p=mm[1]});
+        el.innerHTML=h+esc(tx.slice(p));
+        tc.textContent=(mc+1)+'/'+MS.length};
+      const goHit=d=>{if(!MS.length)return;mc=(mc+d+MS.length)%MS.length;renderHL();const c=el.querySelector('mark.cur');if(c)c.scrollIntoView({block:'center',behavior:'smooth'})};
+      tq.oninput=()=>{
+        const qq=normalize(tq.value);MS=[];mc=-1;
+        if(qq){let p=0;while(true){const f=NT.indexOf(qq,p);if(f<0)break;MS.push([nmap[f],nmap[f+qq.length-1]+1]);p=f+qq.length}if(MS.length)mc=0}
+        renderHL();
+        if(mc>=0){const c=el.querySelector('mark.cur');if(c)c.scrollIntoView({block:'center'})}};
+      document.getElementById('tsp').onclick=()=>goHit(-1);
+      document.getElementById('tsn').onclick=()=>goHit(1);
       // E6: restore reading position inside this lesson
       const pk='trp:'+row.id+':'+x.n,sp=store.get(pk);
       if(sp&&sp.f>0.02)setTimeout(()=>{const h=document.documentElement;window.scrollTo(0,Math.max(0,(h.scrollHeight-h.clientHeight)*sp.f))},60);
@@ -234,22 +236,6 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
     if(CUR>=0&&now-_spT>800){_spT=now;const x=ROWS[CUR];if(x)store.set('trp:'+row.id+':'+x.n,{f:Math.round(f*1000)/1000})}
   }
   addEventListener('scroll',updProg,{passive:true});
-  let _sumIdx=null;
-  window.showSum=async()=>{
-    const n=window._sumN;if(!n)return false;
-    const el=document.getElementById('sump');
-    if(!el.hidden){el.hidden=true;return false}
-    el.hidden=false;el.innerHTML='<div class="skel" style="height:80px"></div>';
-    if(_sumIdx===null)_sumIdx=await j('lessons/'+encodeURIComponent(row.sSlug||ssl||row.id)+'/index.json');
-    const fn=_sumIdx&&_sumIdx.sumf&&_sumIdx.sumf[n];
-    const sm=fn?await j('lessons/'+encodeURIComponent(row.sSlug||ssl||row.id)+'/'+encodeURIComponent(fn)):null;
-    if(!sm){el.innerHTML='<i>تعذر تحميل الملخص.</i>';return false}
-    el.innerHTML='<b style="color:var(--acc2)">☰ الملخص</b>'
-      +(sm.summary||sm.p?'<p style="line-height:2">'+esc(sm.summary||sm.p)+'</p>':'')
-      +(sm.points&&sm.points.length?'<ul>'+sm.points.map(b=>'<li style="line-height:1.9">'+esc(b)+'</li>').join('')+'</ul>':'')
-      +(sm.note?'<div style="color:var(--txt3);font-size:.8rem;margin-top:6px">'+esc(sm.note)+'</div>':'');
-    return false;
-  };
 })();
 if('serviceWorker' in navigator)swRegister('../sw.js');
 </script>

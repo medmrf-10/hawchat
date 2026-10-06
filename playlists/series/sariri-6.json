@@ -1,0 +1,849 @@
+{
+ "slug": "sariri-6",
+ "sheikh": "مولود السريري",
+ "sheikh_slug": "mouloud-sariri",
+ "title": "فوائد أصولية",
+ "count": 105,
+ "lessons": [
+  {
+   "n": 1,
+   "title": "أقسام المجاز اللغوي // فوائد علمية",
+   "video": "HXNsOcG6lcY",
+   "chars": 1861,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 1,
+   "title": "أقسام المجاز اللغوي // فوائد علمية",
+   "video": "HXNsOcG6lcY",
+   "chars": 1861,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 2,
+   "title": "هل الحسن والقبح أمران ذاتيان أم اعتباريان؟",
+   "video": "SIvab_aMpjw",
+   "chars": 3688,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 2,
+   "title": "هل الحسن والقبح أمران ذاتيان أم اعتباريان؟",
+   "video": "SIvab_aMpjw",
+   "chars": 3688,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 3,
+   "title": "إطلاقات الحسن والقبح عند الأشاعرة",
+   "video": "KshGYuiBr08",
+   "chars": 3484,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 3,
+   "title": "إطلاقات الحسن والقبح عند الأشاعرة",
+   "video": "KshGYuiBr08",
+   "chars": 3484,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 4,
+   "title": "أهمية فن التخريج",
+   "video": "mZdTSn6sWN8",
+   "chars": 2200,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 4,
+   "title": "أهمية فن التخريج",
+   "video": "mZdTSn6sWN8",
+   "chars": 2200,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 5,
+   "title": "أول ما يطلب في علم أصول الفقه",
+   "video": "64OUJ6ioHwI",
+   "chars": 2229,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 5,
+   "title": "أول ما يطلب في علم أصول الفقه",
+   "video": "64OUJ6ioHwI",
+   "chars": 2229,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 6,
+   "title": "هل الدليل محصور في اللفظ؟",
+   "video": "2asy1IV2ZAY",
+   "chars": 1559,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 6,
+   "title": "هل الدليل محصور في اللفظ؟",
+   "video": "2asy1IV2ZAY",
+   "chars": 1559,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 7,
+   "title": "هل الكفار مخاطبون بفروع الشريعة؟",
+   "video": "kMQPDolfQug",
+   "chars": 1602,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 7,
+   "title": "هل الكفار مخاطبون بفروع الشريعة؟",
+   "video": "kMQPDolfQug",
+   "chars": 1602,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 8,
+   "title": "مواطن ترجيح الشك عند المالكية",
+   "video": "tE2UWImKCjk",
+   "chars": 2884,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 8,
+   "title": "مواطن ترجيح الشك عند المالكية",
+   "video": "tE2UWImKCjk",
+   "chars": 2884,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 9,
+   "title": "حد العلم والجهل",
+   "video": "CEtZyjQPYcM",
+   "chars": 4708,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 9,
+   "title": "حد العلم والجهل",
+   "video": "CEtZyjQPYcM",
+   "chars": 4708,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 10,
+   "title": "The Difference Between the Specified General and the General Intended as Specifi",
+   "video": "BvIAb8bTKDg",
+   "chars": 1064,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 11,
+   "title": "أسس الخلاف في مسألة وجود المجاز في اللغة وعدمه",
+   "video": "myEnugxh2TM",
+   "chars": 3704,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 11,
+   "title": "أسس الخلاف في مسألة وجود المجاز في اللغة وعدمه",
+   "video": "myEnugxh2TM",
+   "chars": 3704,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 12,
+   "title": "أنواع الحقيقة",
+   "video": "6NhcUQw8WOg",
+   "chars": 1301,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 12,
+   "title": "أنواع الحقيقة",
+   "video": "6NhcUQw8WOg",
+   "chars": 1301,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 13,
+   "title": "أقسام فعل النبي  صلى الله عليه و سلم  باعتبار أحواله الذاتية",
+   "video": "kSynXHPvSeA",
+   "chars": 7034,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 13,
+   "title": "أقسام فعل النبي  صلى الله عليه و سلم  باعتبار أحواله الذاتية",
+   "video": "kSynXHPvSeA",
+   "chars": 7034,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 14,
+   "title": "حقيقة الظن والوهم والشك",
+   "video": "HsE9VFGT_lY",
+   "chars": 1300,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 14,
+   "title": "حقيقة الظن والوهم والشك",
+   "video": "HsE9VFGT_lY",
+   "chars": 1300,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 15,
+   "title": "أهمية العناية بمبحث النظر",
+   "video": "zczzSvalCP8",
+   "chars": 3781,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 15,
+   "title": "أهمية العناية بمبحث النظر",
+   "video": "zczzSvalCP8",
+   "chars": 3781,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 16,
+   "title": "حقيقة الظاهر",
+   "video": "7BmBNIKBdXQ",
+   "chars": 6620,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 16,
+   "title": "حقيقة الظاهر",
+   "video": "7BmBNIKBdXQ",
+   "chars": 6620,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 17,
+   "title": "أهم فائدة في مبحث الحقيقة",
+   "video": "HsY2BNImlHo",
+   "chars": 4704,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 17,
+   "title": "أهم فائدة في مبحث الحقيقة",
+   "video": "HsY2BNImlHo",
+   "chars": 4704,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 18,
+   "title": "المادة الكلامية في علم أصول الفقه",
+   "video": "pA3NwunHUKA",
+   "chars": 4983,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 18,
+   "title": "المادة الكلامية في علم أصول الفقه",
+   "video": "pA3NwunHUKA",
+   "chars": 4983,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 19,
+   "title": "ضرورة استصحاب ضوابط العمل بالقواعد",
+   "video": "ukNLBnoU140",
+   "chars": 2185,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 19,
+   "title": "ضرورة استصحاب ضوابط العمل بالقواعد",
+   "video": "ukNLBnoU140",
+   "chars": 2185,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 20,
+   "title": "الفرق بين القواعد الأصولية والقواعد الفقهية  فوائد علمية عالي الدقة والحجم",
+   "video": "ukxcadPzuAw",
+   "chars": 5378,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 20,
+   "title": "الفرق بين القواعد الأصولية والقواعد الفقهية  فوائد علمية عالي الدقة والحجم",
+   "video": "ukxcadPzuAw",
+   "chars": 5378,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 22,
+   "title": "هل القواعد الأصولية حجة ؟ \\\\ فوائد علمية",
+   "video": "vunOSsVq8sg",
+   "chars": 5575,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 22,
+   "title": "هل القواعد الأصولية حجة ؟ \\\\ فوائد علمية",
+   "video": "vunOSsVq8sg",
+   "chars": 5575,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 23,
+   "title": "The principle of transformation in substances \\\\ Scientific benefits",
+   "video": "mqqBQpcq7CU",
+   "chars": 4025,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 23,
+   "title": "The principle of transformation in substances \\\\ Scientific benefits",
+   "video": "mqqBQpcq7CU",
+   "chars": 4025,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 24,
+   "title": "حقيقة العرف اللغوي في زمن النبوة \\\\ فوائد علمية",
+   "video": "TncAQzydzPA",
+   "chars": 5822,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 24,
+   "title": "حقيقة العرف اللغوي في زمن النبوة \\\\ فوائد علمية",
+   "video": "TncAQzydzPA",
+   "chars": 5822,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 25,
+   "title": "الفرق بين القواعد الأصولية والقواعد الفقهية \\\\ فوائد علمية",
+   "video": "iD56eu20aug",
+   "chars": 5342,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 25,
+   "title": "الفرق بين القواعد الأصولية والقواعد الفقهية \\\\ فوائد علمية",
+   "video": "iD56eu20aug",
+   "chars": 5342,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 40,
+   "title": "The Difference Between the Condition of Obligation and the Condition of Validity",
+   "video": "MX8T5tRGIuI",
+   "chars": 302,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 42,
+   "title": "The Categories of Truth",
+   "video": "kqu5loBmIek",
+   "chars": 1282,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 42,
+   "title": "The Categories of Truth",
+   "video": "kqu5loBmIek",
+   "chars": 1282,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 43,
+   "title": "Juristic Preference Is Nine-Tenths of Knowledge",
+   "video": "e1ZLlj--8zw",
+   "chars": 1006,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 44,
+   "title": "The Reality of the Coerced",
+   "video": "Bk-wbDhh0ds",
+   "chars": 1177,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 45,
+   "title": "أقسام المجاز اللغوي // فوائد علمية",
+   "video": "HXNsOcG6lcY",
+   "chars": 1861,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 45,
+   "title": "أقسام المجاز اللغوي // فوائد علمية",
+   "video": "HXNsOcG6lcY",
+   "chars": 1861,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 46,
+   "title": "هل الحسن والقبح أمران ذاتيان أم اعتباريان؟",
+   "video": "SIvab_aMpjw",
+   "chars": 3688,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 46,
+   "title": "هل الحسن والقبح أمران ذاتيان أم اعتباريان؟",
+   "video": "SIvab_aMpjw",
+   "chars": 3688,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 47,
+   "title": "إطلاقات الحسن والقبح عند الأشاعرة",
+   "video": "KshGYuiBr08",
+   "chars": 3484,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 47,
+   "title": "إطلاقات الحسن والقبح عند الأشاعرة",
+   "video": "KshGYuiBr08",
+   "chars": 3484,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 48,
+   "title": "أهمية فن التخريج",
+   "video": "mZdTSn6sWN8",
+   "chars": 2200,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 48,
+   "title": "أهمية فن التخريج",
+   "video": "mZdTSn6sWN8",
+   "chars": 2200,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 49,
+   "title": "أول ما يطلب في علم أصول الفقه",
+   "video": "64OUJ6ioHwI",
+   "chars": 2229,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 49,
+   "title": "أول ما يطلب في علم أصول الفقه",
+   "video": "64OUJ6ioHwI",
+   "chars": 2229,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 50,
+   "title": "هل الدليل محصور في اللفظ؟",
+   "video": "2asy1IV2ZAY",
+   "chars": 1559,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 50,
+   "title": "هل الدليل محصور في اللفظ؟",
+   "video": "2asy1IV2ZAY",
+   "chars": 1559,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 51,
+   "title": "هل الكفار مخاطبون بفروع الشريعة؟",
+   "video": "kMQPDolfQug",
+   "chars": 1602,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 51,
+   "title": "هل الكفار مخاطبون بفروع الشريعة؟",
+   "video": "kMQPDolfQug",
+   "chars": 1602,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 52,
+   "title": "مواطن ترجيح الشك عند المالكية",
+   "video": "tE2UWImKCjk",
+   "chars": 2884,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 52,
+   "title": "مواطن ترجيح الشك عند المالكية",
+   "video": "tE2UWImKCjk",
+   "chars": 2884,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 53,
+   "title": "حد العلم والجهل",
+   "video": "CEtZyjQPYcM",
+   "chars": 4708,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 53,
+   "title": "حد العلم والجهل",
+   "video": "CEtZyjQPYcM",
+   "chars": 4708,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 54,
+   "title": "The Difference Between the Specified General and the General Intended as Specifi",
+   "video": "BvIAb8bTKDg",
+   "chars": 1064,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 54,
+   "title": "The Difference Between the Specified General and the General Intended as Specifi",
+   "video": "BvIAb8bTKDg",
+   "chars": 1064,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 55,
+   "title": "أسس الخلاف في مسألة وجود المجاز في اللغة وعدمه",
+   "video": "myEnugxh2TM",
+   "chars": 3704,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 55,
+   "title": "أسس الخلاف في مسألة وجود المجاز في اللغة وعدمه",
+   "video": "myEnugxh2TM",
+   "chars": 3704,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 56,
+   "title": "أنواع الحقيقة",
+   "video": "6NhcUQw8WOg",
+   "chars": 1301,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 56,
+   "title": "أنواع الحقيقة",
+   "video": "6NhcUQw8WOg",
+   "chars": 1301,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 57,
+   "title": "أقسام فعل النبي  صلى الله عليه و سلم  باعتبار أحواله الذاتية",
+   "video": "kSynXHPvSeA",
+   "chars": 7034,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 57,
+   "title": "أقسام فعل النبي  صلى الله عليه و سلم  باعتبار أحواله الذاتية",
+   "video": "kSynXHPvSeA",
+   "chars": 7034,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 58,
+   "title": "حقيقة الظن والوهم والشك",
+   "video": "HsE9VFGT_lY",
+   "chars": 1300,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 58,
+   "title": "حقيقة الظن والوهم والشك",
+   "video": "HsE9VFGT_lY",
+   "chars": 1300,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 59,
+   "title": "أهمية العناية بمبحث النظر",
+   "video": "zczzSvalCP8",
+   "chars": 3781,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 59,
+   "title": "أهمية العناية بمبحث النظر",
+   "video": "zczzSvalCP8",
+   "chars": 3781,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 60,
+   "title": "حقيقة الظاهر",
+   "video": "7BmBNIKBdXQ",
+   "chars": 6620,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 60,
+   "title": "حقيقة الظاهر",
+   "video": "7BmBNIKBdXQ",
+   "chars": 6620,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 61,
+   "title": "أهم فائدة في مبحث الحقيقة",
+   "video": "HsY2BNImlHo",
+   "chars": 4704,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 61,
+   "title": "أهم فائدة في مبحث الحقيقة",
+   "video": "HsY2BNImlHo",
+   "chars": 4704,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 62,
+   "title": "المادة الكلامية في علم أصول الفقه",
+   "video": "pA3NwunHUKA",
+   "chars": 4983,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 62,
+   "title": "المادة الكلامية في علم أصول الفقه",
+   "video": "pA3NwunHUKA",
+   "chars": 4983,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 63,
+   "title": "ضرورة استصحاب ضوابط العمل بالقواعد",
+   "video": "ukNLBnoU140",
+   "chars": 2185,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 63,
+   "title": "ضرورة استصحاب ضوابط العمل بالقواعد",
+   "video": "ukNLBnoU140",
+   "chars": 2185,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 64,
+   "title": "الفرق بين القواعد الأصولية والقواعد الفقهية  فوائد علمية عالي الدقة والحجم",
+   "video": "ukxcadPzuAw",
+   "chars": 5378,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 64,
+   "title": "الفرق بين القواعد الأصولية والقواعد الفقهية  فوائد علمية عالي الدقة والحجم",
+   "video": "ukxcadPzuAw",
+   "chars": 5378,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 65,
+   "title": "Some Conditions for Inquiry",
+   "video": "Ys6ZY2CnnOE",
+   "chars": 3154,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 66,
+   "title": "هل القواعد الأصولية حجة ؟ \\\\ فوائد علمية",
+   "video": "vunOSsVq8sg",
+   "chars": 5575,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 66,
+   "title": "هل القواعد الأصولية حجة ؟ \\\\ فوائد علمية",
+   "video": "vunOSsVq8sg",
+   "chars": 5575,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 67,
+   "title": "The principle of transformation in substances \\\\ Scientific benefits",
+   "video": "mqqBQpcq7CU",
+   "chars": 4025,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 67,
+   "title": "The principle of transformation in substances \\\\ Scientific benefits",
+   "video": "mqqBQpcq7CU",
+   "chars": 4025,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 68,
+   "title": "حقيقة العرف اللغوي في زمن النبوة \\\\ فوائد علمية",
+   "video": "TncAQzydzPA",
+   "chars": 5822,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 68,
+   "title": "حقيقة العرف اللغوي في زمن النبوة \\\\ فوائد علمية",
+   "video": "TncAQzydzPA",
+   "chars": 5822,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 69,
+   "title": "الفرق بين القواعد الأصولية والقواعد الفقهية \\\\ فوائد علمية",
+   "video": "iD56eu20aug",
+   "chars": 5342,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 69,
+   "title": "الفرق بين القواعد الأصولية والقواعد الفقهية \\\\ فوائد علمية",
+   "video": "iD56eu20aug",
+   "chars": 5342,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 84,
+   "title": "The Difference Between the Condition of Obligation and the Condition of Validity",
+   "video": "MX8T5tRGIuI",
+   "chars": 302,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 86,
+   "title": "The Categories of Truth",
+   "video": "kqu5loBmIek",
+   "chars": 1282,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 87,
+   "title": "Juristic Preference Is Nine-Tenths of Knowledge",
+   "video": "e1ZLlj--8zw",
+   "chars": 1006,
+   "dur": "",
+   "align": true
+  },
+  {
+   "n": 88,
+   "title": "The Reality of the Coerced",
+   "video": "Bk-wbDhh0ds",
+   "chars": 1177,
+   "dur": "",
+   "align": true
+  }
+ ]
+}

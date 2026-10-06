@@ -10,7 +10,7 @@
    "n": 1,
    "title": "( 1 ) دروس في الفلسفة",
    "video": "CpDhOFf-DA0",
-   "align": false,
+   "align": true,
    "chars": 39748,
    "dur": "81:09"
   },
@@ -18,7 +18,7 @@
    "n": 2,
    "title": "( 2 ) دروس في الفلسفة",
    "video": "zJcIgcge248",
-   "align": false,
+   "align": true,
    "chars": 39806,
    "dur": "79:38"
   },
@@ -26,7 +26,7 @@
    "n": 3,
    "title": "( 3 ) دروس في الفلسفة",
    "video": "o5FWdHMO6rA",
-   "align": false,
+   "align": true,
    "chars": 41526,
    "dur": "85:50"
   },
@@ -34,7 +34,7 @@
    "n": 4,
    "title": "( 4 ) دروس في الفلسفة",
    "video": "mezR3_jY-A0",
-   "align": false,
+   "align": true,
    "chars": 43879,
    "dur": "97:29"
   },
@@ -42,7 +42,7 @@
    "n": 5,
    "title": "( 5 ) دروس في الفلسفة",
    "video": "RO8SIwNcDIs",
-   "align": false,
+   "align": true,
    "chars": 47669,
    "dur": "92:27"
   },
@@ -50,7 +50,7 @@
    "n": 6,
    "title": "( 6 ) دروس في الفلسفة",
    "video": "6Tm34X-tSwI",
-   "align": false,
+   "align": true,
    "chars": 41789,
    "dur": "76:26"
   },
@@ -58,7 +58,7 @@
    "n": 7,
    "title": "( 7 ) دروس في الفلسفة",
    "video": "p-Z3IlALPRM",
-   "align": false,
+   "align": true,
    "chars": 39092,
    "dur": "85:16"
   },
@@ -66,7 +66,7 @@
    "n": 8,
    "title": "( 8 ) دروس في الفلسفة",
    "video": "stN30w_BZq8",
-   "align": false,
+   "align": true,
    "chars": 29999,
    "dur": "61:22"
   },
@@ -74,7 +74,7 @@
    "n": 9,
    "title": "( 9 ) دروس في الفلسفة",
    "video": "oCL9mpH4aU0",
-   "align": false,
+   "align": true,
    "chars": 40078,
    "dur": "82:54"
   },
@@ -82,7 +82,7 @@
    "n": 10,
    "title": "( 10 ) دروس في الفلسفة",
    "video": "ZxZSOcLhFjs",
-   "align": false,
+   "align": true,
    "chars": 40899,
    "dur": "85:30"
   }

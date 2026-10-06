@@ -1,4 +1,4 @@
-name: hawshat-build
+name: hawchat-build
 
 on:
   push:

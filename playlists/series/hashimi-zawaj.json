@@ -308,7 +308,7 @@
    "video": "BBY8typy7F4",
    "chars": 60366,
    "dur": "93:27",
-   "align": false
+   "align": true
   },
   {
    "n": 39,
@@ -316,7 +316,7 @@
    "video": "HT1Y4l3ScCY",
    "chars": 62012,
    "dur": "96:06",
-   "align": false
+   "align": true
   },
   {
    "n": 40,
@@ -324,7 +324,7 @@
    "video": "NcgXdJz2e5g",
    "chars": 53525,
    "dur": "88:09",
-   "align": false
+   "align": true
   },
   {
    "n": 41,
@@ -332,7 +332,7 @@
    "video": "gwy5eO4HuW0",
    "chars": 53010,
    "dur": "88:36",
-   "align": false
+   "align": true
   },
   {
    "n": 42,
@@ -340,7 +340,7 @@
    "video": "4-HFuXAS7y8",
    "chars": 47384,
    "dur": "81:56",
-   "align": false
+   "align": true
   },
   {
    "n": 43,
@@ -348,7 +348,7 @@
    "video": "Wy5PoOxYLF0",
    "chars": 50030,
    "dur": "89:05",
-   "align": false
+   "align": true
   },
   {
    "n": 44,
@@ -364,7 +364,7 @@
    "video": "qS2Ys0vF74Y",
    "chars": 68357,
    "dur": "106:01",
-   "align": false
+   "align": true
   },
   {
    "n": 46,
@@ -372,7 +372,7 @@
    "video": "KhG2AisZAnc",
    "chars": 48545,
    "dur": "78:53",
-   "align": false
+   "align": true
   },
   {
    "n": 47,
@@ -380,7 +380,7 @@
    "video": "5G1_Q7bHmmo",
    "chars": 55487,
    "dur": "93:36",
-   "align": false
+   "align": true
   },
   {
    "n": 48,
@@ -388,7 +388,7 @@
    "video": "AHza39ckpF4",
    "chars": 54955,
    "dur": "90:36",
-   "align": false
+   "align": true
   },
   {
    "n": 49,
@@ -396,7 +396,7 @@
    "video": "5IBSysp7pWE",
    "chars": 52115,
    "dur": "87:20",
-   "align": false
+   "align": true
   },
   {
    "n": 50,
@@ -444,7 +444,7 @@
    "video": "q3eWgPemfk8",
    "chars": 38628,
    "dur": "60:51",
-   "align": false
+   "align": true
   },
   {
    "n": 56,
@@ -452,7 +452,7 @@
    "video": "B7bejcMQkOk",
    "chars": 44227,
    "dur": "71:49",
-   "align": false
+   "align": true
   },
   {
    "n": 57,
@@ -460,7 +460,7 @@
    "video": "AR7fhJJ1834",
    "chars": 46701,
    "dur": "75:34",
-   "align": false
+   "align": true
   },
   {
    "n": 58,
@@ -468,7 +468,7 @@
    "video": "T5xYAMmcM_E",
    "chars": 38596,
    "dur": "60:07",
-   "align": false
+   "align": true
   },
   {
    "n": 59,
@@ -476,7 +476,7 @@
    "video": "L9xyvbp_Bu8",
    "chars": 39537,
    "dur": "62:26",
-   "align": false
+   "align": true
   },
   {
    "n": 60,
@@ -540,7 +540,7 @@
    "video": "yPLXgx8pFA4",
    "chars": 19786,
    "dur": "30:09",
-   "align": false
+   "align": true
   },
   {
    "n": 68,
@@ -564,7 +564,7 @@
    "video": "AeSlvRLAv08",
    "chars": 36117,
    "dur": "60:55",
-   "align": false
+   "align": true
   },
   {
    "n": 71,
@@ -580,7 +580,7 @@
    "video": "wO7RMVDQMHQ",
    "chars": 28099,
    "dur": "44:03",
-   "align": false
+   "align": true
   },
   {
    "n": 73,

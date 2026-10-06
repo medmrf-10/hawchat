@@ -1,5 +1,5 @@
 @import url("fonts/fonts.css");
-/* hawshat — ثيم des/durus v1 (مستخرج، انظر THEME.md) */
+/* hawchat — ثيم des/durus v1 (مستخرج، انظر THEME.md) */
 :root{
   /* ليلٌ مُذهَّب — design tokens v2 */
   --bg-0:#070a12;
@@ -67,23 +67,3 @@ body{background:var(--bg);color:var(--txt);font-family:var(--font-ui);min-height
 ::-webkit-scrollbar-track{background:transparent}
 :focus-visible{outline:2px solid var(--acc2);outline-offset:2px;border-radius:6px}
 @media (prefers-reduced-motion: reduce){.cin{animation:none}*{scroll-behavior:auto!important}}
-
-/* نهاري ورقي — يُفعَّل بـ data-theme="day" على <html> (القارئ tr.html) */
-[data-theme="day"]{
-  --bg-0:#efe7d2; --bg-1:#f6f0df; --bg-2:#ece2c8;
-  --gold-1:#9a7b34; --gold-2:#8a6d1f; --gold-3:#6d5516; --gold-4:#4f3f0e;
-  --violet:#5a4bd6; --green:#1f9d4c; --red:#c23b2e;
-  --ink-1:#26211a; --ink-2:#4d4636; --ink-3:#7d7259;
-  --line-1:#ddd0ae; --line-2:#d3c49c;
-  --e-1:0 1px 2px rgba(90,70,20,.10);
-  --e-2:0 6px 22px rgba(90,70,20,.12);
-  --e-3:0 14px 44px rgba(90,70,20,.16);
-  --e-gold:0 0 0 1px rgba(138,109,31,.25),0 8px 30px rgba(138,109,31,.10);
-  --bgt:rgba(246,240,223,.92);
-  --card:#fdf9ec; --card2:#f1e8cf;
-  --border:var(--line-2);
-  --txt:var(--ink-1); --dim:var(--ink-3);
-  --acc:var(--gold-2); --acc2:var(--gold-3); --acc3:var(--violet);
-  --ok:var(--green); --skel:#e5daba;
-}
-[data-theme="day"] ::selection{background:var(--acc);color:#fdf9ec}

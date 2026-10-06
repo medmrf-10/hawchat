@@ -2,7 +2,7 @@
 """align_to_transcript.py <audio> <transcript.txt> <out.json>
 Forced-align a KNOWN transcript to audio via faster-whisper word timestamps
 + difflib mapping. Output: {"w":[[word,start,end,seg],...]}
-Caches raw whisper output under ~/.cache/hawshat/wwords/ (outside the repo)
+Caches raw whisper output under ~/.cache/hawchat/wwords/ (outside the repo)
 keyed by the output path's sha1, so caches never land in the published tree."""
 import sys, json, re, os, difflib, hashlib
 from faster_whisper import WhisperModel
@@ -33,7 +33,7 @@ def whisper_words(audio, cache):
     return ww
 
 def wwords_cache(out_path):
-    d = os.path.join(os.path.expanduser('~'), '.cache', 'hawshat', 'wwords')
+    d = os.path.join(os.path.expanduser('~'), '.cache', 'hawchat', 'wwords')
     os.makedirs(d, exist_ok=True)
     return os.path.join(d, hashlib.sha1(os.path.abspath(out_path).encode()).hexdigest() + '.json')
 
