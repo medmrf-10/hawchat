@@ -27,7 +27,7 @@ h1{font-family:var(--font-ui);font-size:var(--fs-lg);font-weight:700;color:var(-
 @media(hover:hover){.ls a:hover{border-color:var(--acc2)}}
 .ls a.on{border-color:var(--acc);color:var(--acc2)}
 .ls .num{min-width:34px;height:34px;border-radius:50%;background:rgba(201,162,75,.1);border:1px solid var(--border);color:var(--acc2);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:var(--fs-sm);flex:none}
-.txt{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:26px;margin-top:14px;font-family:var(--font-ar);font-size:1.15rem;line-height:2.2;white-space:pre-wrap}
+.txt{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:34px 30px;margin-top:14px;font-family:var(--font-ar);font-size:1.28rem;line-height:2.45;white-space:pre-wrap;color:var(--txt);box-shadow:var(--e-1)}
 @media(max-width:480px){.txt{padding:18px 16px}}
 .navb{position:fixed;bottom:0;left:0;right:0;background:var(--bgt);backdrop-filter:blur(14px);border-top:1px solid var(--border);padding:10px 14px calc(10px + env(safe-area-inset-bottom));display:flex;align-items:center;justify-content:center;gap:10px;z-index:50}
 .navb a,.navb button{min-height:44px;padding:0 18px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--card);color:var(--txt);font-family:var(--font-ui);font-size:var(--fs-sm);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
@@ -77,7 +77,7 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
     const sd=await j('series/'+encodeURIComponent(ssl)+'.json');
     if(sd){
       const lidx=await j('lessons/'+encodeURIComponent(ssl)+'/index.json');
-      SROWS=(sd.lessons||[]).map(l=>({n:l.n,title:l.title,vid:l.video,trfile:(lidx&&lidx.tf&&lidx.tf[l.n])||null}));
+      SROWS=(sd.lessons||[]).map(l=>({n:l.n,title:(lidx&&lidx.ti&&lidx.ti[l.n])||l.title,vid:l.video,trfile:(lidx&&lidx.tf&&lidx.tf[l.n])||null}));
       if(!hit){hit={slug:'',r:{id:'tr:'+ssl,title:sd.title||ssl,sSlug:ssl,rdn:SROWS.length},st:{name:sd.sheikh||'سلسلة'}}}
     }
   }

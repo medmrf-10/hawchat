@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>الأسئلة — سلاسل المشايخ</title>
+<meta name="theme-color" content="#0b0f1a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="icon" type="image/png" href="../icons/icon-192.png">
+<link rel="apple-touch-icon" href="../icons/favicon-180.png">
+<link rel="preload" href="../fonts/IBMPlexSansArabic-400-arabic.woff2" as="font" href="../fonts/IBMPlexSansArabic-400-arabic.woff2" crossorigin>
+<link rel="preload" href="../fonts/Amiri-400-arabic.woff2" as="font" href="../fonts/Amiri-400-arabic.woff2" crossorigin>
+<link rel="stylesheet" href="../theme.css?v=10">
+<link rel="stylesheet" href="common.css?v=10">
+<link rel="stylesheet" href="ui.css?v=10">
+<style>
+.wrap{max-width:860px;margin:0 auto;padding:16px 16px 90px}
+h1{font-family:var(--font-ar);font-size:1.45rem;font-weight:700;color:var(--txt);margin:8px 0 4px;line-height:1.6}
+.lsub{color:var(--dim);font-size:var(--fs-xs);margin-bottom:16px}
+.qa{background:var(--card);border:1px solid var(--line-1);border-radius:var(--r-lg);padding:26px 28px;margin-bottom:14px;box-shadow:var(--e-1)}
+.qa .q{font-family:var(--font-ar);font-size:1.2rem;line-height:2.2;color:var(--gold-3);font-weight:700;margin-bottom:10px}
+.qa .a{font-family:var(--font-ar);font-size:1.15rem;line-height:2.2;color:var(--txt);white-space:pre-wrap}
+.navb{position:fixed;bottom:0;left:0;right:0;background:var(--bgt);backdrop-filter:blur(14px);border-top:1px solid var(--border);padding:10px 14px calc(10px + env(safe-area-inset-bottom));display:flex;align-items:center;justify-content:center;gap:10px;z-index:50}
+.navb a{min-height:44px;padding:0 18px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--card);color:var(--txt);font-size:var(--fs-sm);text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.navb a.off{opacity:.35;pointer-events:none}
+.navb .pos{color:var(--acc2);font-size:var(--fs-sm)}
+</style>
+</head>
+<body>
+<header class="hd"><div class="hd-in">
+  <a href="." id="back" class="btn" aria-label="عودة" style="text-decoration:none"><svg class="i" style="width:1.15em;height:1.15em"><use href="icons.svg#i-back"/></svg></a>
+  <img src="../icons/icon-192.png" alt="" width="30" height="30" style="border-radius:8px">
+  <span class="brand">الأسئلة</span>
+  <span class="sub" id="hdr-sub" style="color:var(--dim);font-size:var(--fs-xs);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">سلاسل المشايخ</span>
+</div></header>
+<main><div class="wrap" id="app"><div class="skel" style="height:60px;margin-top:12px"></div><div class="skel" style="height:260px;margin-top:12px"></div></div></main>
+<div class="navb" id="navb" hidden></div>
+<script src="common.js?v=10"></script>
+<script>
+// عقد البيانات: lessons/<سلسلة>/NNN.qu.json — {"qa":[{"q":"…","a":"…"}]}
+(async()=>{
+  const q=new URLSearchParams(location.search);
+  const app=document.getElementById('app');
+  let rid=q.get('r'),want=parseInt(q.get('l'),10)||0;
+  const stats=await j('data/sheikh_stats.json');
+  let hit=null;
+  if(stats&&rid){
+    for(const s in stats){if(s==='_meta')continue;
+      const r=(stats[s].rows||[]).find(r=>r.id===rid);
+      if(r){hit={slug:s,r,st:stats[s]};break}}
+    if(!hit){const red=await j('data/redirects.json');
+      if(red&&red[rid]){rid=red[rid];
+        for(const s in stats){if(s==='_meta')continue;
+          const r=(stats[s].rows||[]).find(r=>r.id===rid);
+          if(r){hit={slug:s,r,st:stats[s]};break}}}}
+  }
+  if(!hit){app.innerHTML='<div class="errbox">لم يُعثر على السلسلة — <a href=".">عودة</a></div>';return}
+  const row=hit.r,st=hit.st;
+  document.getElementById('hdr-sub').textContent=st.name;
+  document.getElementById('back').href='row.html?r='+encodeURIComponent(row.id)+'&m=qu';
+  const lidx=await j('lessons/'+encodeURIComponent(row.sSlug)+'/index.json');
+  const quf=(lidx&&lidx.quf)||{},qus=(lidx&&lidx.qu)||[],ti=(lidx&&lidx.ti)||{};
+  if(!qus.length){app.innerHTML='<div class="errbox">لا أسئلة لهذه السلسلة بعد — <a href="row.html?r='+encodeURIComponent(row.id)+'">عودة</a></div>';return}
+  const titleOf=n=>ti[n]||('الدرس '+n);
+  async function show(n){
+    const i=qus.indexOf(n);
+    const fn=quf[n];const d=fn?await j('lessons/'+encodeURIComponent(row.sSlug)+'/'+encodeURIComponent(fn)):null;
+    document.title='أسئلة الدرس '+n+' — '+row.title;
+    let h='<h1><bdi>'+esc(titleOf(n))+'</bdi></h1><div class="lsub">'+esc(row.title)+' · أسئلة الدرس '+n+' · '+esc(st.name)+'</div>';
+    const qa=(d&&(d.qa||d.questions))||[];
+    if(!qa.length){h+='<div class="errbox">تعذر تحميل الأسئلة.</div>'}
+    else h+=qa.map(x=>'<div class="qa cin"><div class="q">'+esc(x.q||x.question||'')+'</div><div class="a">'+esc(x.a||x.answer||'')+'</div></div>').join('');
+    app.innerHTML=h;
+    const nav=document.getElementById('navb');nav.hidden=false;
+    nav.innerHTML=(i>0?'<a href="?r='+encodeURIComponent(row.id)+'&l='+qus[i-1]+'">→ السابق</a>':'<a class="off">→ السابق</a>')
+      +'<span class="pos">'+esc(row.title)+' — '+(i+1)+' / '+qus.length+'</span>'
+      +(i<qus.length-1?'<a href="?r='+encodeURIComponent(row.id)+'&l='+qus[i+1]+'">التالي ←</a>':'<a class="off">التالي ←</a>');
+  }
+  show(want&&qus.includes(want)?want:qus[0]);
+})();
+if('serviceWorker' in navigator)swRegister('../sw.js');
+</script>
+</body>
+</html>
