@@ -13,9 +13,9 @@
 <link rel="apple-touch-icon" href="../icons/favicon-180.png">
 <link rel="preload" href="../fonts/IBMPlexSansArabic-400-arabic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../fonts/Amiri-400-arabic.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../theme.css?v=9">
-<link rel="stylesheet" href="common.css?v=9">
-<link rel="stylesheet" href="ui.css?v=9">
+<link rel="stylesheet" href="../theme.css?v=11">
+<link rel="stylesheet" href="common.css?v=11">
+<link rel="stylesheet" href="ui.css?v=11">
 <style>
 .wrap{max-width:1100px;margin:0 auto;padding:12px 14px 24px}
 .hero{display:flex;align-items:center;gap:16px}
@@ -24,7 +24,6 @@
   overflow:hidden;position:relative;font-family:var(--font-ar);font-size:2rem;font-weight:700;color:var(--gold-3);flex:none}
 .hero .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 22%}
 .hero .stats{display:flex;gap:24px;margin-top:10px}
-.u-sr .t{padding-inline-end:48px}
 .chip{min-height:44px;padding:0 16px;border-radius:99px;border:1px solid var(--line-2);
   background:var(--bg-2);color:var(--txt);font-family:var(--font-ui);font-size:var(--fs-xs);
   font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
@@ -35,14 +34,17 @@
   background:var(--bg-2);text-decoration:none;padding:5px;transition:border-color var(--t-fast) var(--ease)}
 .tile .i{width:1.25em;height:1.25em}
 .tile b{font-size:var(--fs-sm);font-weight:700}
-.tile.rd{color:var(--gold-3)}.tile.ltx{color:#6fb585}.tile.lsn{color:var(--violet)}.tile.sm{color:#4fb3c9}.tile.yt{color:#e05a4f}.tile.qu{color:#8fb3e0}
+.tile.rd{color:var(--gold-3)}.tile.lsn{color:var(--violet)}.tile.sm{color:#4fb3c9}.tile.yt{color:#e05a4f}.tile.qu{color:#8fb3e0}
+.tile.fv{color:var(--ink-3);cursor:pointer;font-family:var(--font-ui)}
+.tile.fv.on{color:var(--gold-3);background:rgba(201,162,75,.12)}
 .tile.ok{border-color:rgba(70,201,109,.6);box-shadow:inset 0 0 0 1px rgba(70,201,109,.22)}
 .tile.off{opacity:.32}
 .tgrid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line-1);
   margin:0 calc(-1*var(--sp-4)) calc(-1*var(--sp-4));border-radius:0 0 var(--r-lg) var(--r-lg);overflow:hidden}
-.tgrid .tile{width:auto;height:72px;border:0;border-radius:0;box-shadow:inset 0 0 0 .5px var(--line-2)}
-.tgrid .tile .i{width:26px;height:26px}
-.tgrid .tile b{font-size:1.05rem}
+.tgrid .tile{width:auto;height:66px;border:0;border-radius:0;box-shadow:inset 0 0 0 .5px var(--line-2)}
+.tgrid button.tile{border:0;border-radius:0;font:inherit}
+.tgrid .tile .i{width:22px;height:22px}
+.tgrid .tile b{font-size:.95rem}
 .tgrid .tile.ok{box-shadow:inset 0 0 0 .5px var(--line-2),inset 0 0 0 2px rgba(70,201,109,.75)}
 .tgrid.fbar{margin:12px 0 0;border:1px solid var(--line-1);border-radius:var(--r-lg)}
 .ftile{cursor:pointer;position:relative}
@@ -50,10 +52,9 @@
 .ftile.sel::after{content:'';position:absolute;top:4px;inset-inline-start:5px;width:12px;height:12px;
   background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 5.5 9.5 16 4 10.5" fill="none" stroke="%2370c96d" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>');
   background-size:contain;background-repeat:no-repeat}
-.fbar{display:flex;gap:10px;justify-content:center;margin-top:12px;flex-wrap:wrap}
+.fbar{margin-top:12px}
 @media(hover:hover){a.tile:hover,.ftile:hover{border-color:var(--gold-2)}}
-.u-sr .t{padding:0 40px;text-align:center}
-.u-sr .u-fav{position:absolute;top:10px;inset-inline-start:10px}
+.u-sr .t{padding:0 12px;text-align:center}
 </style>
 </head>
 <body>
@@ -67,20 +68,25 @@
   <div id="crumb"></div>
   <div id="body"><div class="skel" style="height:140px;margin-top:10px;border-radius:18px"></div><div class="skel" style="height:300px;margin-top:12px;border-radius:18px"></div></div>
 </div></main>
-<script src="common.js?v=9"></script>
+<script src="common.js?v=11"></script>
 <script>
 let flt=new Set();
 let _rows=[],_slug='',_st=null;
-const ic=id=>'<svg class="i"><use href="icons.svg#'+id+'"/></svg>';
-const FCOUNT={rd:r=>r.rdn||0,ltx:r=>r.ltn||0,lsn:r=>r.wan||0,sm:r=>r.sun||0,yt:r=>r.ytn||0,qu:r=>r.qn||0};
+const ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';
+const FCOUNT={rd:r=>r.rdn||0,yt:r=>r.ytn||0,lsn:r=>r.wan||0,qu:r=>r.qn||0,fav:r=>store.fav(r.id)?1:0,sm:r=>r.sun||0};
+const FALABEL={rd:'قراءة',yt:'استماع من يوتيوب',lsn:'استماع مع إضاءة الكلمة',qu:'أسئلة',fav:'مفضلة',sm:'تلخيص'};
 function rowMatch(r){
   for(const k of flt)if(!FCOUNT[k](r))return false;
   return true;
 }
-function tile(href,ok,icon,n,cls,ext){
-  const c='tile '+cls+(ok?' ok':'');
-  return (href&&n>0)?'<a class="'+c+'" href="'+esc(href)+'"'+(ext?' target="_blank" rel="noopener"':'')+'>'+ic(icon)+'<b>'+n+'</b></a>'
-    :'<span class="'+c+' off">'+ic(icon)+'<b>'+(n||0)+'</b></span>';
+function tile(href,ok,icon,n,cls,ext,lbl){
+  const c='tile '+cls+(ok?' ok':''),al=lbl?' aria-label="'+esc(lbl)+' — '+(n||0)+'"':'';
+  return (href&&n>0)?'<a class="'+c+'" href="'+esc(href)+'"'+al+(ext?' target="_blank" rel="noopener"':'')+'>'+ic(icon)+'<b>'+n+'</b></a>'
+    :'<span class="'+c+' off"'+al+'>'+ic(icon)+'<b>'+(n||0)+'</b></span>';
+}
+function favTile(r){
+  const on=store.fav(r.id);
+  return '<button type="button" class="tile fv'+(on?' on':'')+'" data-fav="'+r.id+'" aria-pressed="'+(on?'true':'false')+'" aria-label="مفضلة">'+ic('i-star')+'<b>'+(on?'محفوظة':'حفظ')+'</b></button>';
 }
 function renderSeries(){
   const w=document.getElementById('srows');if(!w)return;
@@ -92,26 +98,34 @@ function renderSeries(){
     const done=r.rOk&&(r.wtt?r.wOk:true);
     w.insertAdjacentHTML('beforeend',
       '<div class="u-sr cin">'
-      +'<button class="u-fav'+(store.fav(r.id)?' on':'')+'" data-fav="'+r.id+'" aria-label="مفضلة">'+ic('i-star')+'</button>'
       +'<div class="t"><bdi>'+esc(r.title)+'</bdi></div>'
       +'<div class="tgrid">'
-      +tile(r.read,r.rOk,'i-read',r.rdn,'rd')
-      +tile(r.ltx,false,'i-text',r.ltn||0,'ltx')
-      +tile(r.listen,r.wOk,r.unv?'i-auto':'i-listen',r.wan,'lsn')
-      +tile(r.summ,(r.rtt&&r.sun>=r.rtt),'i-list',r.sun||0,'sm')
-      +tile(r.yt,false,'i-yt',r.ytn||0,'yt',1)
-      +tile(r.qna,false,'i-qu',r.qn||0,'qu')
+      +tile(r.read?r.read+'&m=read':null,r.rOk,'i-read',r.rdn,'rd',0,'قراءة')
+      +tile((r.sSlug||r.yt)?('row.html?r='+encodeURIComponent(r.id)+'&m=yt'):null,false,'i-yt',r.ytn||0,'yt',0,'استماع من يوتيوب')
+      +tile(r.listen,r.wOk,r.unv?'i-auto':'i-listen',r.wan,'lsn',0,'استماع مع إضاءة الكلمة')
+      +tile(r.qna,false,'i-qu',r.qn||0,'qu',0,'أسئلة')
+      +favTile(r)
+      +tile(r.summ,(r.rtt&&r.sun>=r.rtt),'i-list',r.sun||0,'sm',0,'تلخيص')
       +'</div></div>');
   }
-  if(!rows.length)w.innerHTML='<div class="empty">لا سلاسل في هذا القسم.</div>';
+  if(!rows.length)w.innerHTML='<div class="empty">'+(flt.has('fav')?'لا سلاسل مفضلة — اضغط مربع النجمة في أي بطاقة لحفظها':'لا سلاسل في هذا القسم.')+'</div>';
 }
 document.addEventListener('click',e=>{
   const fv=e.target.closest('[data-fav]');
-  if(fv){store.favToggle(fv.dataset.fav);fv.classList.toggle('on',store.fav(fv.dataset.fav));return}
+  if(fv){
+    const on=store.favToggle(fv.dataset.fav);
+    fv.classList.toggle('on',on);fv.setAttribute('aria-pressed',on?'true':'false');
+    const b=fv.querySelector('b');if(b)b.textContent=on?'محفوظة':'حفظ';
+    const fb=document.querySelector('.ftile[data-k="fav"] b');
+    if(fb)fb.textContent=String(_rows.reduce((a,x)=>a+(store.fav(x.id)?1:0),0));
+    if(flt.has('fav'))renderSeries();
+    return
+  }
   const t=e.target.closest('.ftile');if(!t)return;
   const k=t.dataset.k;
   flt.has(k)?flt.delete(k):flt.add(k);
   t.classList.toggle('sel',flt.has(k));
+  t.setAttribute('aria-checked',flt.has(k)?'true':'false');
   renderSeries();
 });
 (async()=>{
@@ -135,8 +149,8 @@ document.addEventListener('click',e=>{
     +'</div></div></div>';
   const ftot=k=>_rows.reduce((a,r)=>a+FCOUNT[k](r),0);
   h+='<div class="u-sech cin"><h2>السلاسل</h2><span class="cnt">'+_rows.length+'</span></div><div class="tgrid fbar cin">'
-    +[['rd','i-read'],['ltx','i-text'],['lsn','i-listen'],['sm','i-list'],['yt','i-yt'],['qu','i-qu']]
-      .map(([k,icn])=>'<span class="tile ftile '+k+'" data-k="'+k+'" role="checkbox" aria-checked="false">'+ic(icn)+'<b>'+ftot(k)+'</b></span>').join('')+'</div>'
+    +[['rd','i-read'],['yt','i-yt'],['lsn','i-listen'],['qu','i-qu'],['fav','i-star'],['sm','i-list']]
+      .map(([k,icn])=>'<button type="button" class="tile ftile '+k+'" data-k="'+k+'" role="checkbox" aria-checked="false" aria-label="'+FALABEL[k]+'" title="'+FALABEL[k]+'">'+ic(icn)+'<b>'+ftot(k)+'</b></button>').join('')+'</div>'
     +'<div id="srows"></div>';
   B.innerHTML=h;
   renderSeries();
