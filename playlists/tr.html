@@ -108,8 +108,9 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
   document.title=row.title+' — '+META.name;
   // aligned lessons for "استمع لهذا الدرس" — the same listenable threshold
   // (cov>=0.3) the cards count with, not just any alignment file
-  let aligned=new Set();
-  if(row.listen){const li=await j('lessons/'+encodeURIComponent(row.sSlug||ssl)+'/index.json');aligned=new Set((li&&(li.alignOk||li.align))||[])}
+  let aligned=new Set(),summed=new Set();
+  if(row.listen||row.summ){const li=await j('lessons/'+encodeURIComponent(row.sSlug||ssl)+'/index.json');
+    aligned=new Set((li&&(li.alignOk||li.align))||[]);summed=new Set((li&&li.sum)||[])}
   // REQ must exist before the first showLesson(): a `let` declared below the call
   // sits in its TDZ and threw on every ?l= deep link (blank page, no text)
   let REQ=0;
@@ -152,6 +153,7 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
   }
   async function showLesson(i,push){
     CUR=i;const x=ROWS[i];const my=++REQ;
+    window._sumN=x.n;
     store.setResume(row.id,x.n);store.markSeen(row.id+':'+x.n);
     window.scrollTo(0,0);
     const u=SELF+'&l='+x.n;
@@ -161,12 +163,14 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
     if(row.unv)h+='<div class="unv">ترجمة آلية مأخوذة من يوتيوب — غير مدققة بعد</div>';
     h+='<div class="tools"><button id="fmi" aria-label="تصغير الخط">A−</button><button id="fpl" aria-label="تكبير الخط">A+</button>'
       +(aligned.has(x.n)?'<a class="abtn" href="lesson.html?s='+encodeURIComponent(row.sSlug||ssl)+'&l='+x.n+'">'+I.listen+' استمع لهذا الدرس</a>':'')
+      +(summed.has(x.n)?'<a class="abtn" id="sumb" href="#" onclick="return showSum()">☰ الملخص</a>':'')
       +'<a class="abtn" href="'+ALLR+'">كل الدروس</a>'
       +'<button id="shr" aria-label="مشاركة الدرس" title="مشاركة الدرس" style="width:auto;padding:0 12px;gap:5px;display:inline-flex;align-items:center">↗ مشاركة</button>'
       +'<button id="cpy" aria-label="نسخ نص الدرس" title="نسخ نص الدرس كاملاً" style="width:auto;padding:0 12px">⧉ نسخ</button>'
       +'<button id="srch" aria-label="بحث في النص" title="بحث داخل نص الدرس">⌕</button></div>';
     h+='<div class="tsrch" id="tsr" hidden><input id="tsq" type="search" placeholder="ابحث داخل نص الدرس…" enterkeyhint="search" aria-label="بحث داخل نص الدرس"><button id="tsp" aria-label="النتيجة السابقة">↑</button><span class="tc" id="tsc"></span><button id="tsn" aria-label="النتيجة التالية">↓</button></div>';
-    h+='<div class="txt skel" id="tx" style="min-height:200px"></div>';
+    h+='<div class="txt skel" id="tx" style="min-height:200px"></div>'
+      +'<div class="txt" id="sump" hidden style="margin-top:10px"></div>';
     app.innerHTML=h;
     const nav=document.getElementById('navb');nav.hidden=false;
     nav.innerHTML=(i>0?'<a href="'+SELF+'&l='+ROWS[i-1].n+'" id="pv">→ السابق</a>':'<a class="off">→ السابق</a>')
@@ -236,6 +240,23 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
     if(CUR>=0&&now-_spT>800){_spT=now;const x=ROWS[CUR];if(x)store.set('trp:'+row.id+':'+x.n,{f:Math.round(f*1000)/1000})}
   }
   addEventListener('scroll',updProg,{passive:true});
+  let _sumIdx=null;
+  window.showSum=async()=>{
+    const n=window._sumN;if(!n)return false;
+    const el=document.getElementById('sump');
+    if(!el.hidden){el.hidden=true;return false}
+    el.hidden=false;el.innerHTML='<div class="skel" style="height:80px"></div>';
+    if(_sumIdx===null)_sumIdx=await j('lessons/'+encodeURIComponent(row.sSlug||ssl)+'/index.json');
+    const fn=_sumIdx&&_sumIdx.sumf&&_sumIdx.sumf[n];
+    const sm=fn?await j('lessons/'+encodeURIComponent(row.sSlug||ssl)+'/'+encodeURIComponent(fn)):null;
+    if(!sm){el.innerHTML='<i>تعذر تحميل الملخص.</i>';return false}
+    el.innerHTML='<b style="color:var(--acc2)">☰ الملخص</b>'
+      +(sm.summary||sm.p?'<p style="line-height:2">'+esc(sm.summary||sm.p)+'</p>':'')
+      +(sm.points&&sm.points.length?'<ul>'+sm.points.map(b=>'<li style="line-height:1.9">'+esc(b)+'</li>').join('')+'</ul>':'')
+      +(sm.fit||sm.s?'<div style="color:var(--acc2);font-size:.85rem;margin-top:8px">يصلح لدرس مسجد: '+esc(sm.fit||sm.s)+'</div>':'')
+      +(sm.note?'<div style="color:var(--txt3);font-size:.8rem;margin-top:6px">'+esc(sm.note)+'</div>':'');
+    return false;
+  };
 })();
 if('serviceWorker' in navigator)swRegister('../sw.js');
 </script>

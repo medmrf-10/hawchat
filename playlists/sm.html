@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>الملخصات — سلاسل المشايخ</title>
+<meta name="theme-color" content="#0b0f1a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="icon" type="image/png" href="../icons/icon-192.png">
+<link rel="apple-touch-icon" href="../icons/favicon-180.png">
+<link rel="preload" href="../fonts/IBMPlexSansArabic-400-arabic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/Amiri-400-arabic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../theme.css?v=10">
+<link rel="stylesheet" href="common.css?v=10">
+<link rel="stylesheet" href="ui.css?v=10">
+<style>
+.wrap{max-width:820px;margin:0 auto;padding:12px 14px 24px}
+.scard{background:linear-gradient(160deg,var(--card),var(--bg-2));border:1px solid var(--line-1);
+  border-radius:var(--r-md);padding:14px 16px;margin-top:10px}
+.scard .hd2{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.scard .num{width:34px;height:34px;min-width:34px;border-radius:50%;background:rgba(201,162,75,.1);
+  border:1px solid var(--line-1);color:var(--gold-3);display:flex;align-items:center;justify-content:center;font-weight:700}
+.scard .tt{flex:1;font-weight:700;font-size:var(--fs-sm);line-height:1.6}
+.scard .tt a{color:var(--txt);text-decoration:none}
+.scard .fit{min-width:fit-content;font-size:var(--fs-xs);padding:3px 10px;border-radius:999px;border:1px solid var(--line-2);color:var(--gold-3)}
+.scard .fit.ok{border-color:rgba(80,200,120,.4);color:#7fdca4}
+.scard .fit.mid{color:var(--gold-3)}
+.scard .fit.no{color:var(--muted)}
+.scard p{font-size:var(--fs-sm);line-height:2;color:var(--txt);margin:4px 0 8px}
+.scard ul{margin:0;padding-inline-start:20px}
+.scard li{font-size:var(--fs-sm);line-height:1.9;color:var(--txt)}
+.scard .note{font-size:var(--fs-xs);color:var(--ink-3);margin-top:8px;border-top:1px dashed var(--line-1);padding-top:8px}
+.u-hero h1{padding-inline-end:8px}
+</style>
+</head>
+<body>
+<header class="hd"><div class="hd-in">
+  <a href="." id="back" class="btn" aria-label="سلاسل المشايخ" style="text-decoration:none">→</a>
+  <img src="../icons/icon-192.png" alt="" width="30" height="30" style="border-radius:8px">
+  <span class="brand">سلاسل</span>
+  <span class="sub" id="hdr-sub" style="color:var(--ink-3);font-size:var(--fs-xs)">التلخيص</span>
+</div></header>
+<main><div class="wrap" id="app"><div class="skel" style="height:130px;margin-top:10px;border-radius:18px"></div><div class="skel" style="height:300px;margin-top:12px;border-radius:18px"></div></div></main>
+<script src="common.js?v=10"></script>
+<script>
+const ic=id=>'<svg class="i"><use href="icons.svg#'+id+'"/></svg>';
+(async()=>{
+  const q=new URLSearchParams(location.search);
+  const app=document.getElementById('app');
+  let rid=q.get('r');
+  const stats=await j('data/sheikh_stats.json');
+  let hit=null;
+  if(stats&&rid){
+    let found=false;
+    for(const s in stats){if(s==='_meta')continue;
+      if((stats[s].rows||[]).some(r=>r.id===rid)){found=true;break}}
+    if(!found){const red=await j('data/redirects.json');if(red&&red[rid])rid=red[rid]}
+    for(const s in stats){if(s==='_meta')continue;
+      const r=(stats[s].rows||[]).find(r=>r.id===rid);
+      if(r){hit={slug:s,r,st:stats[s]};break}}
+  }
+  if(!hit||!hit.r.summ){app.innerHTML='<div class="errbox">لا ملخصات لهذه السلسلة — <a href=".">عودة</a></div>';return}
+  const row=hit.r,st=hit.st;
+  document.getElementById('back').href='row.html?r='+encodeURIComponent(row.id);
+  document.getElementById('hdr-sub').textContent=st.name;
+  document.title='ملخصات '+row.title+' — '+st.name;
+  const srows=await j('data/sum/'+encodeURIComponent(row.id)+'.json');
+  if(!srows||!srows.length){app.innerHTML='<div class="errbox">لا ملخصات لهذه السلسلة — <a href="row.html?r='+encodeURIComponent(row.id)+'">عودة للسلسلة</a></div>';return}
+  const fc=s=>s==='نعم'?'ok':(s==='جزئياً'?'mid':'no');
+  let h='<nav class="crumb cin"><a href=".">سلاسل المشايخ</a> ‹ <a href="sheikh.html?s='+encodeURIComponent(hit.slug)+'">'+esc(st.name)+'</a> ‹ <a href="row.html?r='+encodeURIComponent(row.id)+'"><bdi>'+esc(row.title)+'</bdi></a> ‹ التلخيص</nav>';
+  h+='<div class="u-hero cin"><h1><bdi>'+esc(row.title)+'</bdi></h1><div class="meta">'
+    +'<span class="u-num sm">'+ic('i-list')+'<b>'+row.sun+'</b><small>ملخّص</small></span></div></div>';
+  for(const x of srows){
+    h+='<div class="scard cin" id="l'+x.n+'"><div class="hd2"><span class="num">'+x.n+'</span>'
+      +'<span class="tt">'+(row.sSlug?'<a href="tr.html?s='+encodeURIComponent(row.sSlug)+'&l='+x.n+'">'+esc(x.title)+'</a>':esc(x.title))+'</span>'
+      +(x.s?'<span class="fit '+fc(x.s)+'">'+esc(x.s)+'</span>':'')+'</div>'
+      +(x.p?'<p>'+esc(x.p)+'</p>':'')
+      +(x.b&&x.b.length?'<ul>'+x.b.map(b=>'<li>'+esc(b)+'</li>').join('')+'</ul>':'')
+      +(x.t?'<div class="note">'+esc(x.t)+'</div>':'')+'</div>';
+  }
+  app.innerHTML=h;
+})();
+</script>
+</body>
+</html>

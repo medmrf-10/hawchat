@@ -343,7 +343,7 @@ def rebuild_lessons_indexes():
             idx = {}   # missing or corrupt index → rebuild from disk
         # F8: a file class is authoritative; same-n collisions are warned and
         # resolved deterministically (longest padding wins: 001.txt > 01.txt)
-        afc, tfc = {}, {}
+        afc, tfc, smc = {}, {}, {}
         for fn in os.listdir(d):
             m = re.match(r'^(\d+)\.align\.json$', fn)
             if m:
@@ -352,7 +352,15 @@ def rebuild_lessons_indexes():
             m = re.match(r'^(\d+)\.txt$', fn)
             if m:
                 tfc.setdefault(int(m.group(1)), []).append(fn)
-        af, tf = {}, {}
+                continue
+            m = re.match(r'^(\d+)\.sum\.json$', fn)
+            if m:
+                smc.setdefault(int(m.group(1)), []).append(fn)
+        af, tf, smf = {}, {}, {}
+        for n, fns in smc.items():
+            if len(fns) > 1:
+                warn('%s: %d sum files for n=%d %s → using %s' % (slug, len(fns), n, fns, sorted(fns)[-1]))
+            smf[n] = sorted(fns)[-1]
         for n, fns in afc.items():
             if len(fns) > 1:
                 warn('%s: %d align files for n=%d %s → using %s' % (slug, len(fns), n, fns, sorted(fns)[-1]))
@@ -378,6 +386,8 @@ def rebuild_lessons_indexes():
         new_idx['align'] = sorted(af)   # disk is authoritative — stale lists get rebuilt
         new_idx['alignOk'] = ok_nums    # playable set (w non-empty, cov>=0.3) — matches wan
         new_idx['txt'] = sorted(tf)
+        new_idx['sum'] = sorted(smf)   # NNN.sum.json — agent-written summaries
+        new_idx['sumf'] = smf
         if new_idx != idx:            # write only on real change — keep worktree clean
             dump_atomic(new_idx, idx_path)
 
@@ -416,11 +426,18 @@ for s in sidx:
         warn('orphan series %s → unknown sheikh_slug %s' % (s.get('slug'), s.get('sheikh_slug')))
 
 os.makedirs(os.path.join(BASE, 'read'), exist_ok=True)
+os.makedirs(os.path.join(BASE, 'sum'), exist_ok=True)
 
 def write_read(row_id, rows):
     p = os.path.join(BASE, 'read', row_id + '.json')
     tmp = p + '.tmp'
     json.dump(rows, open(tmp, 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
+    os.replace(tmp, p)
+
+def write_sum(row_id, srows):
+    p = os.path.join(BASE, 'sum', row_id + '.json')
+    tmp = p + '.tmp'
+    json.dump(srows, open(tmp, 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
     os.replace(tmp, p)
 
 def natkey(t):
@@ -722,6 +739,27 @@ for sh in sheikhs:
         r['wtt'] = r['rtt']
         r['read'] = 'row.html?r=' + r['id']
         r['listen'] = ('row.html?r=' + r['id'] + '&m=listen') if r['wan'] > 0 and r.get('sSlug') else None
+        # التلخيص: agent-uploaded NNN.sum.json files beside the lessons
+        r['sun'] = 0
+        r['summ'] = None
+        if r.get('sSlug'):
+            _li = J(os.path.join(PL, 'lessons', r['sSlug'], 'index.json')) or {}
+            _smf = _li.get('sumf') or {}
+            _srows = []
+            for _n in sorted(_smf):
+                _sm = J(os.path.join(PL, 'lessons', r['sSlug'], _smf[_n]))
+                if not isinstance(_sm, dict):
+                    continue
+                _tt = next((x['title'] for x in rrows if x['n'] == _n), None) or 'الدرس %s' % _n
+                _srows.append({'n': _n, 'title': _tt,
+                               'p': _sm.get('summary') or _sm.get('p') or '',
+                               'b': _sm.get('points') or _sm.get('b') or [],
+                               's': _sm.get('fit') or _sm.get('s') or '',
+                               't': _sm.get('note') or ''})
+            if _srows:
+                r['sun'] = len(_srows)
+                r['summ'] = 'sm.html?r=' + r['id']
+                write_sum(r['id'], _srows)
         # E7: lesson titles for the lazy search index
         if rrows:
             SEARCH_L[r['id']] = {'ss': r.get('sSlug'), 'L': [[x['n'], x['title']] for x in rrows]}
@@ -747,6 +785,7 @@ for sh in sheikhs:
         'rows': rows,
         'read': read, 'watch': watch,
         'uwatch': sum(r['wan'] for r in rows if r.get('unv')),
+        'sum': sum(r['sun'] for r in rows),
         'nRead': sum(1 for r in rows if r['rdn']),
         'nWatch': sum(1 for r in rows if r['wan']),
     }

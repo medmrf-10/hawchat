@@ -87,6 +87,7 @@ const ic=id=>'<svg class="i"><use href="icons.svg#'+id+'"/></svg>';
     row.sSlug?j('lessons/'+encodeURIComponent(row.sSlug)+'/index.json'):null,
     j('data/read/'+encodeURIComponent(row.id)+'.json')]);
   const aln=new Set((alidx&&(alidx.alignOk||alidx.align))||[]);
+  const smn=new Set((alidx&&alidx.sum)||[]);
   const txn=new Set((alidx&&alidx.txt)||[]);
   const rtxt=new Map((rows||[]).map(x=>[x.n,x]));
   // unified lesson list: every n that has text OR align
@@ -110,6 +111,7 @@ const ic=id=>'<svg class="i"><use href="icons.svg#'+id+'"/></svg>';
     +'<h1><bdi>'+esc(row.title)+'</bdi></h1><div class="meta">'
     +(row.rdn?'<span class="u-num rd">'+ic('i-read')+'<b>'+row.rdn+'</b>'+(row.rdn<row.rtt?'<small>/'+row.rtt+'</small>':'')+(row.rOk?'<b class="ok">'+ic('i-check')+'</b>':'')+'<small>مقروء</small></span>':'')
     +(row.wan?'<span class="u-num lsn'+(row.unv?' unv':'')+'">'+ic(row.unv?'i-auto':'i-listen')+'<b>'+row.wan+'</b>'+(row.wan<row.rtt?'<small>/'+row.rtt+'</small>':'')+(row.wOk?'<b class="ok">'+ic('i-check')+'</b>':'')+'<small>'+(row.unv?'آلي غير مدقق':'مسموع')+'</small></span>':'')
+    +(row.sun?'<a class="u-num sm" href="'+esc(row.summ)+'" style="text-decoration:none">'+ic('i-list')+'<b>'+row.sun+'</b><small>ملخّص</small></a>':'')
     +(sd&&sd.playlist?'<a href="'+esc(sd.playlist)+'" target="_blank" rel="noopener">قائمة يوتيوب ↗</a>':'')
     +'</div>'
     +(row.unv?'<div class="unv">ترجمة آلية مأخوذة من يوتيوب — غير مدققة بعد</div>':'')
@@ -154,6 +156,7 @@ const ic=id=>'<svg class="i"><use href="icons.svg#'+id+'"/></svg>';
         +'<span class="t"><bdi>'+esc(title)+'</bdi>'+(l.dur?'<small>'+esc(fmtDur(l.dur))+'</small>':'')+'</span>'
         +'<span class="bd">'+(seen?'<span class="ic-seen" title="شوهد" style="color:var(--green)">'+ic('i-check')+'</span>':'')
         +(rtxt.has(nn)?'<span class="ic-read" title="نص">'+ic('i-read')+'</span>':'')
+        +(smn.has(nn)?'<span class="ic-sum" title="ملخّص" style="color:var(--gold-3)">'+ic('i-list')+'</span>':'')
         +(aln.has(nn)?'<span class="ic-listen'+(row.unv?' unv':'')+'" title="'+(row.unv?'محاذاة على ترجمة آلية غير مدققة':'محاذاة نصية')+'">'+ic(row.unv?'i-auto':'i-listen')+'</span>':(canL?'<span class="ic-play" title="فيديو فقط">'+ic('i-play')+'</span>':''))+'</span></a>');
     }
     if(!n)lst.innerHTML='<p class="empty">لا نتائج.</p>';
