@@ -26,7 +26,7 @@
   cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
 a.mini{color:var(--ink-3);display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;padding:0 4px}
 .u-grid{grid-template-columns:repeat(2,1fr)!important}
-.u-sh{padding:var(--sp-3) var(--sp-2) 0}
+.u-sh{padding:var(--sp-3) var(--sp-2) 0;overflow:hidden}
 .u-sh .ph{width:64px;height:64px}
 .u-sh .nm{font-size:.82rem;margin-top:var(--sp-2)}
 .u-sh .u-top{display:flex;flex-direction:column;align-items:center;text-decoration:none;color:inherit;width:100%;padding-bottom:var(--sp-2)}
@@ -62,8 +62,10 @@ function shCard(st,slug,fav){
   const rows=st.rows||[];
   const agg=k=>{let s=0;for(const r of rows)s+=(k==='rd'?r.rdn:k==='yt'?r.ytn:k==='lsn'?r.wan:k==='qu'?r.qn:k==='sm'?r.sun:0)||0;return s};
   const favn=rows.reduce((a,r)=>a+(store.fav(r.id)?1:0),0);
-  const tk=(k,icn,n,al,fk)=>n>0
-    ?'<a class="tile '+k+'" href="sheikh.html?s='+encodeURIComponent(slug)+'&f='+(fk||k)+'" aria-label="'+al+' — '+n+'">'+ic(icn)+'<b>'+n+'</b></a>'
+  const ytOk=rows.length&&rows.every(r=>{const t=Math.max(r.rtt||0,r.wtt||0);return t===0||(r.ytn||0)>=t});
+  const shOn=store.fav('sh:'+slug);
+  const tk=(k,icn,n,al,fk,ok)=>n>0
+    ?'<a class="tile '+k+(ok?' ok':'')+'" href="sheikh.html?s='+encodeURIComponent(slug)+'&f='+(fk||k)+'" aria-label="'+al+' — '+n+'">'+ic(icn)+'<b>'+n+'</b></a>'
     :'<span class="tile '+k+' off" aria-hidden="true">'+ic(icn)+'<b>'+(n||0)+'</b></span>';
   return '<div class="u-sh cin">'
     +'<a class="u-top" href="sheikh.html?s='+encodeURIComponent(slug)+'">'
@@ -71,10 +73,10 @@ function shCard(st,slug,fav){
     +'<span class="nm">'+esc(st.name)+'</span></a>'
     +'<span class="tgrid">'
     +tk('rd','i-read',agg('rd'),'قراءة')
-    +tk('yt','i-yt',agg('yt'),'استماع من يوتيوب')
+    +tk('yt','i-yt',agg('yt'),'استماع من يوتيوب',null,ytOk)
     +tk('lsn','i-listen',agg('lsn'),'استماع مع إضاءة الكلمة')
     +tk('qu','i-qu',agg('qu'),'أسئلة')
-    +tk('fv','i-star',favn,'مفضلة','fav')
+    +'<button type="button" class="tile fv'+(shOn?' on':'')+'" data-shfav="'+esc(slug)+'" aria-pressed="'+(shOn?'true':'false')+'" aria-label="مفضلة الشيخ">'+ic('i-star')+'<b>'+favn+'</b></button>'
     +tk('sm','i-list',agg('sm'),'تلخيص')
     +'</span></div>';
 }
@@ -97,6 +99,11 @@ function draw(){
   sh.innerHTML=showSoon?'إخفاء':'قريباً ('+without.length+')';
   document.getElementById('shcnt').textContent=withC.length+' شيخاً';
 }
+document.getElementById('groups').addEventListener('click',e=>{
+  const fv=e.target.closest('[data-shfav]');if(!fv)return;
+  const on=store.favToggle('sh:'+fv.dataset.shfav);
+  fv.classList.toggle('on',on);fv.setAttribute('aria-pressed',on?'true':'false');
+});
 document.getElementById('soonh').addEventListener('click',()=>{showSoon=!showSoon;draw()});
 document.getElementById('exp').addEventListener('click',async e=>{
   e.preventDefault();

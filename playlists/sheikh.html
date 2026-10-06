@@ -101,7 +101,7 @@ function renderSeries(){
       +'<div class="t"><bdi>'+esc(r.title)+'</bdi></div>'
       +'<div class="tgrid">'
       +tile(r.read?r.read+'&m=read':null,r.rOk,'i-read',r.rdn,'rd',0,'قراءة')
-      +tile((r.sSlug||r.yt)?('row.html?r='+encodeURIComponent(r.id)+'&m=yt'):null,false,'i-yt',r.ytn||0,'yt',0,'استماع من يوتيوب')
+      +tile((r.sSlug||r.yt)?('row.html?r='+encodeURIComponent(r.id)+'&m=yt'):null,(r.ytn&&r.ytn>=Math.max(r.rtt||0,r.wtt||0)),'i-yt',r.ytn||0,'yt',0,'استماع من يوتيوب')
       +tile(r.listen,r.wOk,r.unv?'i-auto':'i-listen',r.wan,'lsn',0,'استماع مع إضاءة الكلمة')
       +tile(r.qna,false,'i-qu',r.qn||0,'qu',0,'أسئلة')
       +favTile(r)
