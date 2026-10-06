@@ -88,6 +88,8 @@ const ic=id=>'<svg class="i"><use href="icons.svg#'+id+'"/></svg>';
     j('data/read/'+encodeURIComponent(row.id)+'.json')]);
   const aln=new Set((alidx&&(alidx.alignOk||alidx.align))||[]);
   const smn=new Set((alidx&&alidx.sum)||[]);
+  const qun=new Set((alidx&&alidx.qu)||[]);
+  const tin=(alidx&&alidx.ti)||{};
   const txn=new Set((alidx&&alidx.txt)||[]);
   const rtxt=new Map((rows||[]).map(x=>[x.n,x]));
   // unified lesson list: every n that has text OR align
@@ -102,6 +104,8 @@ const ic=id=>'<svg class="i"><use href="icons.svg#'+id+'"/></svg>';
   if(mode==='listen')sorted=sorted.filter(n=>aln.has(n));
   else if(mode==='read')sorted=sorted.filter(n=>txn.has(n)||rtxt.has(n));
   else if(mode==='ltx')sorted=sorted.filter(n=>{const ll=L(n);return ll.video&&(txn.has(n)||aln.has(n)||rtxt.has(n))});
+  else if(mode==='sm')sorted=sorted.filter(n=>smn.has(n));
+  else if(mode==='qu')sorted=sorted.filter(n=>qun.has(n));
   const rs=store.resume(row.id);
   store.markSeen(row.id);
   app.innerHTML='<input class="sflt" id="sflt" type="search" aria-label="ابحث في دروس السلسلة" placeholder="ابحث في دروس السلسلة…">'
@@ -111,11 +115,15 @@ const ic=id=>'<svg class="i"><use href="icons.svg#'+id+'"/></svg>';
     const lst=document.getElementById('lst');lst.innerHTML='';let n=0;
     for(const nn of sorted){
       const l=L(nn),rx=rtxt.get(nn);
-      const title=(rx&&rx.title)||l.title||('الدرس '+nn);
+      const title=tin[nn]||(rx&&rx.title)||l.title||('الدرس '+nn);
       if(fq&&!normalize(title).includes(fq)&&!String(nn).includes(fq))continue;n++;
       const canL=aln.has(nn)||(l.video&&l.video.length>=8);
-      const href=canL
-        ? 'lesson.html?s='+encodeURIComponent(row.sSlug)+'&l='+nn
+      // each tile-mode opens its own page — no mixing of read/watch/summary
+      const href=mode==='sm' ? 'sm.html?r='+encodeURIComponent(row.id)+'&l='+nn
+        : mode==='qu' ? 'qu.html?r='+encodeURIComponent(row.id)+'&l='+nn
+        : mode==='read' ? 'tr.html?r='+encodeURIComponent(row.id)+'&l='+nn
+        : (mode==='listen'||mode==='ltx') ? 'lesson.html?s='+encodeURIComponent(row.sSlug)+'&l='+nn
+        : canL ? 'lesson.html?s='+encodeURIComponent(row.sSlug)+'&l='+nn
         : 'tr.html?r='+encodeURIComponent(row.id)+'&l='+nn;
       const seen=store.seen(row.id+':'+nn),isCur=rs&&rs.n===nn;
       lst.insertAdjacentHTML('beforeend',
@@ -130,10 +138,14 @@ const ic=id=>'<svg class="i"><use href="icons.svg#'+id+'"/></svg>';
   };
   draw('');
   document.getElementById('sflt').addEventListener('input',e=>draw(normalize(e.target.value)));
-  // deep-link ?l=n → jump straight into the lesson
+  // deep-link ?l=n → jump straight into the mode's own page
   if(ln0&&sorted.includes(ln0)){
     const canL=aln.has(ln0)||(L(ln0).video&&L(ln0).video.length>=8);
-    location.replace(canL?'lesson.html?s='+encodeURIComponent(row.sSlug)+'&l='+ln0:'tr.html?r='+encodeURIComponent(row.id)+'&l='+ln0);
+    location.replace(mode==='sm'?'sm.html?r='+encodeURIComponent(row.id)+'&l='+ln0
+      :mode==='qu'?'qu.html?r='+encodeURIComponent(row.id)+'&l='+ln0
+      :mode==='read'?'tr.html?r='+encodeURIComponent(row.id)+'&l='+ln0
+      :canL?'lesson.html?s='+encodeURIComponent(row.sSlug)+'&l='+ln0
+      :'tr.html?r='+encodeURIComponent(row.id)+'&l='+ln0);
   }
 })();
 if('serviceWorker' in navigator)swRegister('../sw.js');

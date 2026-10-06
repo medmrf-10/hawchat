@@ -95,4 +95,9 @@
     <rect x="2.5" y="5.5" width="19" height="13" rx="3.4" fill="none" stroke="currentColor" stroke-width="1.8"/>
     <path d="M10 9l5 3-5 3z" fill="currentColor"/>
   </symbol>
+  <symbol id="i-qu" viewBox="0 0 24 24">
+    <path d="M12 3.5a8.5 8.5 0 0 0-8.5 8.5c0 1.6.45 3.1 1.24 4.38L3.5 20.5l4.3-1.22A8.5 8.5 0 1 0 12 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M9.6 9.6a2.4 2.4 0 0 1 4.7.6c0 1.6-2.3 2-2.3 3.3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="16.6" r="1.1" fill="currentColor"/>
+  </symbol>
 </svg>

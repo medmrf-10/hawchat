@@ -343,7 +343,7 @@ def rebuild_lessons_indexes():
             idx = {}   # missing or corrupt index → rebuild from disk
         # F8: a file class is authoritative; same-n collisions are warned and
         # resolved deterministically (longest padding wins: 001.txt > 01.txt)
-        afc, tfc, smc = {}, {}, {}
+        afc, tfc, smc, quc = {}, {}, {}, {}
         for fn in os.listdir(d):
             m = re.match(r'^(\d+)\.align\.json$', fn)
             if m:
@@ -356,7 +356,11 @@ def rebuild_lessons_indexes():
             m = re.match(r'^(\d+)\.sum\.json$', fn)
             if m:
                 smc.setdefault(int(m.group(1)), []).append(fn)
-        af, tf, smf = {}, {}, {}
+                continue
+            m = re.match(r'^(\d+)\.qu\.json$', fn)
+            if m:
+                quc.setdefault(int(m.group(1)), []).append(fn)
+        af, tf, smf, quf = {}, {}, {}, {}
         for n, fns in smc.items():
             if len(fns) > 1:
                 warn('%s: %d sum files for n=%d %s → using %s' % (slug, len(fns), n, fns, sorted(fns)[-1]))
@@ -369,6 +373,10 @@ def rebuild_lessons_indexes():
             if len(fns) > 1:
                 warn('%s: %d txt files for n=%d %s → using %s' % (slug, len(fns), n, fns, sorted(fns)[-1]))
             tf[n] = sorted(fns)[-1]
+        for n, fns in quc.items():
+            if len(fns) > 1:
+                warn('%s: %d qu files for n=%d %s → using %s' % (slug, len(fns), n, fns, sorted(fns)[-1]))
+            quf[n] = sorted(fns)[-1]
         ok_nums = []
         for n in sorted(af):
             ad = J(os.path.join(d, af[n]))
@@ -388,6 +396,19 @@ def rebuild_lessons_indexes():
         new_idx['txt'] = sorted(tf)
         new_idx['sum'] = sorted(smf)   # NNN.sum.json — agent-written summaries
         new_idx['sumf'] = smf
+        new_idx['qu'] = sorted(quf)    # NNN.qu.json — agent-written Q&A
+        new_idx['quf'] = quf
+        # display titles: an Arabic series title wins; filename-style titles
+        # (NNN_<videoid>) fall back to YouTube ground truth, then «الدرس N»
+        _sd = J(os.path.join(PL, 'series', slug + '.json')) or {}
+        _ti = {}
+        for l in (_sd.get('lessons') or []):
+            t = (l.get('title') or '').strip()
+            if t and re.search(r'[\u0600-\u06FF]', t):
+                continue
+            _ti[l['n']] = YTV.get(l.get('video')) or ('الدرس ' + str(l['n']))
+        if _ti:
+            new_idx['ti'] = _ti
         if new_idx != idx:            # write only on real change — keep worktree clean
             dump_atomic(new_idx, idx_path)
 
@@ -760,6 +781,10 @@ for sh in sheikhs:
                 r['ltn'] = len(_vids & _txt)
                 if r['ltn'] > 0:
                     r['ltx'] = 'row.html?r=' + r['id'] + '&m=ltx'
+            if r.get('sSlug'):
+                _li3 = J(os.path.join(PL, 'lessons', r['sSlug'], 'index.json')) or {}
+                r['qn'] = len(_li3.get('qu') or [])
+                r['qna'] = ('row.html?r=' + r['id'] + '&m=qu') if r['qn'] else None
         elif r.get('plid'):
             r['yt'] = 'https://www.youtube.com/playlist?list=' + r['plid']
             r['ytn'] = r['rtt']
@@ -799,7 +824,7 @@ for sh in sheikhs:
                                't': _sm.get('note') or ''})
             if _srows:
                 r['sun'] = len(_srows)
-                r['summ'] = 'sm.html?r=' + r['id']
+                r['summ'] = 'row.html?r=' + r['id'] + '&m=sm'
                 write_sum(r['id'], _srows)
         # E7: lesson titles for the lazy search index
         if rrows:
