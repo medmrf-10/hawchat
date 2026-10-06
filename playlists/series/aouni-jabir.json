@@ -1,1 +1,49 @@
-{"slug":"aouni-jabir","sheikh":"الشيخ حاتم العوني","sheikh_slug":"hatem-alaouni","title":"قصة سيدنا جابر","count":8,"lessons":[{"n":1,"title":"001_uYqJpWKfZPk","video":"uYqJpWKfZPk","dur":"18:40"},{"n":2,"title":"002_zL2JVAGsooM","video":"zL2JVAGsooM","dur":"18:22"},{"n":3,"title":"003_GwvaDsT6RyA","video":"GwvaDsT6RyA","dur":"17:32"},{"n":4,"title":"004_c3zEDThEyLg","video":"c3zEDThEyLg","dur":"14:51"},{"n":5,"title":"005_X2kn9G5G7H0","video":"X2kn9G5G7H0","dur":"15:16"},{"n":6,"title":"006_05YZI4BevOE","video":"05YZI4BevOE","dur":"17:10"},{"n":7,"title":"007_M0a7k4Mgu9w","video":"M0a7k4Mgu9w","dur":"12:18"},{"n":8,"title":"008_x_P4ENKcrbc","video":"x_P4ENKcrbc","dur":"19:08"}]}
+{
+ "slug": "aouni-jabir",
+ "sheikh": "الشيخ حاتم العوني",
+ "sheikh_slug": "hatem-alaouni",
+ "title": "قصة سيدنا جابر",
+ "count": 8,
+ "lessons": [
+  {
+   "n": 1,
+   "title": "001_uYqJpWKfZPk",
+   "video": "uYqJpWKfZPk"
+  },
+  {
+   "n": 2,
+   "title": "002_zL2JVAGsooM",
+   "video": "zL2JVAGsooM"
+  },
+  {
+   "n": 3,
+   "title": "003_GwvaDsT6RyA",
+   "video": "GwvaDsT6RyA"
+  },
+  {
+   "n": 4,
+   "title": "004_c3zEDThEyLg",
+   "video": "c3zEDThEyLg"
+  },
+  {
+   "n": 5,
+   "title": "005_X2kn9G5G7H0",
+   "video": "X2kn9G5G7H0"
+  },
+  {
+   "n": 6,
+   "title": "006_05YZI4BevOE",
+   "video": "05YZI4BevOE"
+  },
+  {
+   "n": 7,
+   "title": "007_M0a7k4Mgu9w",
+   "video": "M0a7k4Mgu9w"
+  },
+  {
+   "n": 8,
+   "title": "008_x_P4ENKcrbc",
+   "video": "x_P4ENKcrbc"
+  }
+ ]
+}

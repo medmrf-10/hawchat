@@ -1,1 +1,94 @@
-{"slug":"alasri-arbaa","sheikh":"الشيخ سيف العصري","sheikh_slug":"saif-alasri","title":"لقاء الأربعاء","count":17,"lessons":[{"n":1,"title":"001__KHu7y4YLM4","video":"_KHu7y4YLM4","dur":"40:40"},{"n":2,"title":"002_tXMvgnJWwUQ","video":"tXMvgnJWwUQ","dur":"44:54"},{"n":3,"title":"003_yS5osLsPHKg","video":"yS5osLsPHKg","dur":"33:03"},{"n":5,"title":"005_rzDCNAh6w0E","video":"rzDCNAh6w0E","dur":"37:33"},{"n":6,"title":"006_usjmuY49z_s","video":"usjmuY49z_s","dur":"39:04"},{"n":7,"title":"007_N5BSFt0jVgA","video":"N5BSFt0jVgA","dur":"31:01"},{"n":8,"title":"008_8KxNh_XGxOM","video":"8KxNh_XGxOM","dur":"41:56"},{"n":9,"title":"009_ao3EJ4rJ8Ig","video":"ao3EJ4rJ8Ig","dur":"37:26"},{"n":10,"title":"010_z2fLSiVH54s","video":"z2fLSiVH54s","dur":"42:39"},{"n":11,"title":"011_Oz8DY56Jh0w","video":"Oz8DY56Jh0w","dur":"32:45"},{"n":12,"title":"012_n76OZ0LqxOk","video":"n76OZ0LqxOk","dur":"35:17"},{"n":13,"title":"013_WqslCz6GJE8","video":"WqslCz6GJE8","dur":"45:24"},{"n":14,"title":"014_gWqllRs1g18","video":"gWqllRs1g18","dur":"39:32"},{"n":15,"title":"015_otZYCymtf60","video":"otZYCymtf60","dur":"47:45"},{"n":16,"title":"016_-gsBEDapebI","video":"-gsBEDapebI","dur":"46:00"},{"n":17,"title":"017_8b12sy8fGvc","video":"8b12sy8fGvc","dur":"29:59"},{"n":55,"title":"055_91QOssB3Gzo","video":"91QOssB3Gzo","dur":"1:02:11"}]}
+{
+ "slug": "alasri-arbaa",
+ "sheikh": "الشيخ سيف العصري",
+ "sheikh_slug": "saif-alasri",
+ "title": "لقاء الأربعاء",
+ "count": 17,
+ "lessons": [
+  {
+   "n": 1,
+   "title": "001__KHu7y4YLM4",
+   "video": "_KHu7y4YLM4"
+  },
+  {
+   "n": 2,
+   "title": "002_tXMvgnJWwUQ",
+   "video": "tXMvgnJWwUQ"
+  },
+  {
+   "n": 3,
+   "title": "003_yS5osLsPHKg",
+   "video": "yS5osLsPHKg"
+  },
+  {
+   "n": 5,
+   "title": "005_rzDCNAh6w0E",
+   "video": "rzDCNAh6w0E"
+  },
+  {
+   "n": 6,
+   "title": "006_usjmuY49z_s",
+   "video": "usjmuY49z_s"
+  },
+  {
+   "n": 7,
+   "title": "007_N5BSFt0jVgA",
+   "video": "N5BSFt0jVgA"
+  },
+  {
+   "n": 8,
+   "title": "008_8KxNh_XGxOM",
+   "video": "8KxNh_XGxOM"
+  },
+  {
+   "n": 9,
+   "title": "009_ao3EJ4rJ8Ig",
+   "video": "ao3EJ4rJ8Ig"
+  },
+  {
+   "n": 10,
+   "title": "010_z2fLSiVH54s",
+   "video": "z2fLSiVH54s"
+  },
+  {
+   "n": 11,
+   "title": "011_Oz8DY56Jh0w",
+   "video": "Oz8DY56Jh0w"
+  },
+  {
+   "n": 12,
+   "title": "012_n76OZ0LqxOk",
+   "video": "n76OZ0LqxOk"
+  },
+  {
+   "n": 13,
+   "title": "013_WqslCz6GJE8",
+   "video": "WqslCz6GJE8"
+  },
+  {
+   "n": 14,
+   "title": "014_gWqllRs1g18",
+   "video": "gWqllRs1g18"
+  },
+  {
+   "n": 15,
+   "title": "015_otZYCymtf60",
+   "video": "otZYCymtf60"
+  },
+  {
+   "n": 16,
+   "title": "016_-gsBEDapebI",
+   "video": "-gsBEDapebI"
+  },
+  {
+   "n": 17,
+   "title": "017_8b12sy8fGvc",
+   "video": "8b12sy8fGvc"
+  },
+  {
+   "n": 55,
+   "title": "055_91QOssB3Gzo",
+   "video": "91QOssB3Gzo"
+  }
+ ]
+}

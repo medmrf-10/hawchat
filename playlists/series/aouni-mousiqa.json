@@ -1,1 +1,34 @@
-{"slug":"aouni-mousiqa","sheikh":"الشيخ حاتم العوني","sheikh_slug":"hatem-alaouni","title":"الموسيقى والغناء في القرآن","count":5,"lessons":[{"n":1,"title":"001_GtilDSCAwv4","video":"GtilDSCAwv4","dur":"26:25"},{"n":2,"title":"002_XtneVd6Eh30","video":"XtneVd6Eh30","dur":"32:49"},{"n":3,"title":"003_VVPY42zv_SU","video":"VVPY42zv_SU","dur":"24:57"},{"n":4,"title":"004_8cx2kEyNR6M","video":"8cx2kEyNR6M","dur":"31:03"},{"n":5,"title":"005_tZQcwoVG4jg","video":"tZQcwoVG4jg","dur":"35:17"}]}
+{
+ "slug": "aouni-mousiqa",
+ "sheikh": "الشيخ حاتم العوني",
+ "sheikh_slug": "hatem-alaouni",
+ "title": "الموسيقى والغناء في القرآن",
+ "count": 5,
+ "lessons": [
+  {
+   "n": 1,
+   "title": "001_GtilDSCAwv4",
+   "video": "GtilDSCAwv4"
+  },
+  {
+   "n": 2,
+   "title": "002_XtneVd6Eh30",
+   "video": "XtneVd6Eh30"
+  },
+  {
+   "n": 3,
+   "title": "003_VVPY42zv_SU",
+   "video": "VVPY42zv_SU"
+  },
+  {
+   "n": 4,
+   "title": "004_8cx2kEyNR6M",
+   "video": "8cx2kEyNR6M"
+  },
+  {
+   "n": 5,
+   "title": "005_tZQcwoVG4jg",
+   "video": "tZQcwoVG4jg"
+  }
+ ]
+}
