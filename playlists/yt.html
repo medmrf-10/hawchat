@@ -2,6 +2,8 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
+<script>(function(){var q=new URLSearchParams(location.search);if(q.get('legacy'))return;var t=(q.get('l')&&(q.get('s')||q.get('r')))?(q.get('a')?'aud':'yt'):'';if(!t)return;var f=location.pathname.split('/').pop()+location.search;q.set('t',t);q.set('from',f);location.replace('d.html?'+q)})()</script>
+
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>استماع يوتيوب — سلاسل المشايخ</title>
 <meta name="theme-color" content="#0b0f1a">
@@ -12,7 +14,7 @@
 <link rel="preload" href="../fonts/IBMPlexSansArabic-400-arabic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../theme.css?v=11">
 <link rel="stylesheet" href="common.css?v=11">
-<link rel="stylesheet" href="ui.css?v=11">
+<link rel="stylesheet" href="ui.css?v=12">
 <style>
 .wrap{max-width:920px;margin:0 auto;padding:14px 14px 90px}
 h1{font-family:var(--font-ar);font-size:1.4rem;font-weight:700;color:var(--txt);margin:10px 0 4px;line-height:1.6}
@@ -61,8 +63,10 @@ h1{font-family:var(--font-ar);font-size:1.4rem;font-weight:700;color:var(--txt);
 <main><div class="wrap" id="app"><div class="skel" style="height:50px;margin-top:12px"></div><div class="skel" style="height:300px;margin-top:12px;border-radius:18px"></div></div></main>
 <div class="navb" id="navb" hidden></div>
 <script src="common.js?v=11"></script>
+<script src="core.js?v=2"></script>
+<script>HC.mountTabs(new URLSearchParams(location.search).get('a')?'aud':'yt')</script>
 <script>
-const ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';
+const ic=id=>'<svg class="i"><use href="icons.svg?v=12#'+id+'"/></svg>';
 const EMB='https://www.youtube-nocookie.com/embed/';
 function embedUrl(vid,autoplay){
   return EMB+encodeURIComponent(vid)+'?playsinline=1&rel=0&hl=ar&iv_load_policy=3'+(autoplay?'&autoplay=1':'');

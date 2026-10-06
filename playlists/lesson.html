@@ -15,15 +15,17 @@
 <link rel="preload" href="../fonts/Amiri-400-arabic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../theme.css?v=11">
 <link rel="stylesheet" href="common.css?v=11">
-<link rel="stylesheet" href="ui.css?v=11">
+<link rel="stylesheet" href="ui.css?v=12">
 <style>
 html,body{height:100%;overflow:hidden}
-.wrap{max-width:920px;margin:0 auto;height:calc(100dvh - 54px);display:flex;flex-direction:column;padding:8px 10px calc(8px + env(safe-area-inset-bottom))}
+body{display:flex;flex-direction:column;height:100vh;height:100dvh;height:var(--app-h,100dvh)}
+body>main{flex:1;min-height:0}
+.wrap{max-width:920px;margin:0 auto;height:100%;box-sizing:border-box;display:flex;flex-direction:column;padding:8px 10px max(10px,env(safe-area-inset-bottom))}
 .lst-head{display:none}
-.player{position:relative;width:100%;aspect-ratio:16/9;max-height:42vh;border-radius:var(--r-md);overflow:hidden;border:1px solid var(--border);background:#000;flex:none}
+.player{position:relative;width:100%;aspect-ratio:16/9;max-height:calc(var(--app-h,100dvh) * .32);border-radius:var(--r-md);overflow:hidden;border:1px solid var(--border);background:#000;flex:none}
 .player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.stage{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(145deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:var(--r-md);margin-top:8px;padding:16px 18px;overflow:hidden}
-.stage.idle .ph{opacity:.4}
+.stage{flex:1;min-height:96px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(145deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:var(--r-md);margin-top:8px;padding:16px 18px;overflow:hidden}
+.stage.idle .ph{opacity:.75}
 .stage .ph{font-family:var(--font-ar);font-size:clamp(1.15rem,4.5vw,1.6rem);line-height:2.1;text-align:center;color:var(--txt)}
 .stage .ph .w{color:#9aa3b5;opacity:.55;border-radius:6px;padding:0 3px;transition:opacity .12s,color .12s;cursor:pointer}
 .stage .ph .w.read{color:var(--acc);opacity:.75}
@@ -34,18 +36,20 @@ html,body{height:100%;overflow:hidden}
 .stage .tnx{margin-top:10px}
 .stage .ph{order:0}
 .pos{color:var(--dim);font-size:.7rem;text-align:center;margin-top:4px}
-.czone{flex:none;height:200px;display:flex;flex-direction:column;justify-content:center;gap:12px;margin-top:8px;background:linear-gradient(145deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:var(--r-md);padding:16px 22px}
-.crow{display:flex;align-items:center;justify-content:center;gap:14px}
-.crow .btn{min-width:52px;min-height:52px;padding:0 12px;border-radius:99px;border:1px solid var(--border);background:var(--card);color:var(--txt);font-size:1rem;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:4px}
+.czone{flex:none;display:flex;flex-direction:column;justify-content:center;gap:10px;margin-top:8px;background:linear-gradient(145deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:var(--r-md);padding:12px clamp(8px,3vw,22px) 10px}
+.crow{direction:ltr;display:flex;align-items:center;justify-content:center;gap:clamp(6px,2.6vw,16px)}
+.crow .btn{flex:none;width:clamp(44px,12.5vw,52px);height:clamp(44px,12.5vw,52px);padding:0;border-radius:99px;border:1px solid var(--border);background:var(--card);color:var(--txt);font-size:1rem;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:4px}
 .crow .btn:hover{border-color:var(--acc)}
-.crow .btn.main{min-width:64px;min-height:64px;font-size:1.4rem;background:var(--acc);color:#0b0f1a;font-weight:700;border-color:var(--acc)}
+.crow .btn .i{width:22px;height:22px}
+.crow .btn.main .i{width:28px;height:28px}
+.crow .btn.main{width:clamp(58px,17vw,66px);height:clamp(58px,17vw,66px);font-size:1.4rem;background:var(--acc);color:#0b0f1a;font-weight:700;border-color:var(--acc)}
 .crow .btn.ld{position:relative;color:transparent}
 .crow .btn.ld::after{content:'';position:absolute;width:22px;height:22px;border-radius:50%;border:2.5px solid var(--border);border-top-color:var(--acc);animation:ldsp .8s linear infinite}
 @keyframes ldsp{to{transform:rotate(360deg)}}
-.csub{display:flex;align-items:center;justify-content:center;gap:14px}
+.csub{display:flex;align-items:center;justify-content:center;gap:8px;min-width:0}
 .csub .tm{color:var(--acc2);font-size:.8rem;font-variant-numeric:tabular-nums}
-.csub .pos{flex:1;text-align:center}
-.csub .chip{min-height:40px;min-width:56px;justify-content:center;padding:0 10px;border-radius:99px;border:1px solid var(--border);background:var(--card);color:var(--txt);font-size:.78rem;cursor:pointer;display:inline-flex;align-items:center;gap:4px}
+.csub .pos{flex:1;min-width:0;text-align:center;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.csub .chip{flex:none;min-height:44px;min-width:48px;justify-content:center;padding:0 10px;border-radius:99px;border:1px solid var(--border);background:var(--card);color:var(--txt);font-size:.78rem;cursor:pointer;display:inline-flex;align-items:center;gap:4px}
 .csub .chip.on{border-color:var(--acc);color:var(--acc)}
 .nav{display:none}
 .txt{flex:1;min-height:0;overflow-y:auto;background:linear-gradient(145deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:var(--r-md);padding:18px;margin-top:8px;font-family:var(--font-ar);font-size:1.08rem;line-height:2.1;white-space:pre-wrap}
@@ -57,6 +61,7 @@ html,body{height:100%;overflow:hidden}
 </style>
 </head>
 <body>
+<script>(function(){const f=()=>document.documentElement.style.setProperty('--app-h',Math.round((window.visualViewport?visualViewport.height:innerHeight))+'px');f();addEventListener('resize',f);window.visualViewport&&visualViewport.addEventListener('resize',f)})()</script>
 <header class="hd"><div class="hd-in">
   <a href="." id="back" class="btn" aria-label="عودة" style="text-decoration:none"><svg class="i" style="width:1.15em;height:1.15em"><use href="icons.svg#i-back"/></svg></a>
   <img src="../icons/icon-192.png" alt="" width="30" height="30" style="border-radius:8px" class="hd-lg">
@@ -65,6 +70,8 @@ html,body{height:100%;overflow:hidden}
 </div></header>
 <main><div class="wrap" id="app"><div class="skel" style="height:70px;margin-top:12px"></div><div class="skel" style="height:300px;margin-top:12px"></div></div></main>
 <script src="common.js?v=11"></script>
+<script src="core.js?v=2"></script>
+<script>HC.mountTabs('listen')</script>
 <script>
 function fmtT(s){s=Math.max(0,Math.floor(s));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
 const icS='<svg class="i" style="width:1em;height:1em;vertical-align:-.12em"><use href="icons.svg#i-clock"/></svg>';
@@ -153,13 +160,13 @@ function mountPlayer(vid){
   window.onYouTubeIframeAPIReady=()=>{
     YTP=new YT.Player('yfp',{events:{
       onReady:()=>{ready=true;
-        const b=document.getElementById('playb');if(b){b.classList.remove('ld');b.innerHTML='&#9654;'}
+        const b=document.getElementById('playb');if(b){b.classList.remove('ld');b.innerHTML='<svg class="i"><use href="icons.svg?v=12#i-play"/></svg>'}
         const sp=store.get('speed');if(sp&&sp!==1&&YTP.setPlaybackRate){YTP.setPlaybackRate(sp);const sel=document.getElementById('spd');if(sel)sel.textContent='×'+sp}
         const rp=T0||resumePos();if(rp>5)YTP.seekTo(rp,true);
         if(pendPlay){YTP.playVideo();pendPlay=false}},
       onStateChange:(e)=>{const b=document.getElementById('playb');
         const playing=(e.data===1||e.data===3);
-        if(b){b.innerHTML=playing?'&#10074;&#10074;':'&#9654;';b.setAttribute('aria-pressed',playing?'true':'false')}
+        if(b){b.innerHTML=playing?'<svg class="i"><use href="icons.svg?v=12#i-pause"/></svg>':'<svg class="i"><use href="icons.svg?v=12#i-play"/></svg>';b.setAttribute('aria-pressed',playing?'true':'false')}
         if(e.data===1){wakeLock(true);const st=document.getElementById('stage');if(st)st.classList.remove('idle');if(!timer)timer=setInterval(tick,150)}
         else{wakeLock(false);if(e.data!==3&&timer){clearInterval(timer);timer=null}}
         if(e.data===0&&nextOn()){const nx=document.getElementById('go-next');if(nx)nx.click()}
@@ -286,16 +293,17 @@ document.addEventListener('keydown',e=>{
   if(alcov<0.3)aln=null;  // below the site-wide listenable threshold → text lesson
   const hasText=!!(tfn||rrow);
   const du=(l.dur&&fmtDur(l.dur))||'';
+  const I=i=>'<svg class="i"><use href="icons.svg?v=12#'+i+'"/></svg>';
   let h='';
   if(aln&&l.video){
     h+='<div class="player"><iframe id="yfp" src="https://www.youtube-nocookie.com/embed/'+esc(l.video)+'?enablejsapi=1&rel=0&playsinline=1&iv_load_policy=3&hl=ar&origin='+encodeURIComponent(location.origin)+'" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>';
     h+='<div class="stage" id="stage"></div>';
     h+='<div class="czone"><div class="crow">'
-      +'<button class="btn" onclick="seekPhrase(curPh-1)" aria-label="الجملة السابقة" title="الجملة السابقة">⇤</button>'
-      +'<button class="btn" onclick="YTP&&YTP.seekTo(Math.max(0,YTP.getCurrentTime()-10),true)" aria-label="رجوع 10 ثوانٍ">↺10</button>'
+      +'<button class="btn" onclick="seekPhrase(curPh-1)" aria-label="الجملة السابقة" title="الجملة السابقة">'+I('i-prev')+'</button>'
+      +'<button class="btn" onclick="YTP&&YTP.seekTo(Math.max(0,YTP.getCurrentTime()-10),true)" aria-label="رجوع 10 ثوانٍ" title="رجوع 10 ثوانٍ">'+I('i-rew10')+'</button>'
       +'<button class="btn main ld" id="playb" aria-pressed="false" onclick="playToggle(this)" aria-label="تشغيل/إيقاف"></button>'
-      +'<button class="btn" onclick="YTP&&YTP.seekTo(YTP.getCurrentTime()+10,true)" aria-label="تقدم 10 ثوانٍ">10↻</button>'
-      +'<button class="btn" onclick="seekPhrase(curPh+1)" aria-label="الجملة التالية" title="الجملة التالية">⇥</button></div>'
+      +'<button class="btn" onclick="YTP&&YTP.seekTo(YTP.getCurrentTime()+10,true)" aria-label="تقدم 10 ثوانٍ" title="تقدم 10 ثوانٍ">'+I('i-fwd10')+'</button>'
+      +'<button class="btn" onclick="seekPhrase(curPh+1)" aria-label="الجملة التالية" title="الجملة التالية">'+I('i-next')+'</button></div>'
       +'<div class="csub"><span class="tm" id="tm">0:00</span><span class="pos" id="pos"></span>'
       +'<button class="chip" id="spd" title="سرعة التشغيل" onclick="cycleSpeed()">×'+(store.get('speed')||1)+'</button>'
       +'<button class="chip'+(TELE?' on':'')+'" id="t-tele" title="وضع الملقّن" onclick="TELE=!TELE;store.set(\'tele\',TELE?1:0);this.classList.toggle(\'on\',TELE);renderPhrase(Math.max(0,curPh))">ملقّن</button>'

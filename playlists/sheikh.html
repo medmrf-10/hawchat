@@ -15,7 +15,7 @@
 <link rel="preload" href="../fonts/Amiri-400-arabic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../theme.css?v=11">
 <link rel="stylesheet" href="common.css?v=11">
-<link rel="stylesheet" href="ui.css?v=11">
+<link rel="stylesheet" href="ui.css?v=12">
 <style>
 .wrap{max-width:1100px;margin:0 auto;padding:12px 14px 24px}
 .hero{display:flex;align-items:center;gap:16px}
@@ -46,7 +46,7 @@
 .tgrid .tile .i{width:22px;height:22px}
 .tgrid .tile b{font-size:.95rem}
 .tgrid .tile.ok{box-shadow:inset 0 0 0 .5px var(--line-2),inset 0 0 0 2px rgba(70,201,109,.75)}
-.tgrid.fbar{margin:12px 0 0;border:1px solid var(--line-1);border-radius:var(--r-lg)}
+.tgrid.fbar{margin:12px 0 0;border:1px solid var(--line-1);border-radius:var(--r-lg);grid-template-columns:repeat(7,minmax(44px,1fr));overflow:hidden}
 .ftile{cursor:pointer;position:relative}
 .ftile.sel{border-color:var(--gold-2);box-shadow:inset 0 0 0 1px var(--gold-2)}
 .ftile.sel::after{content:'';position:absolute;top:4px;inset-inline-start:5px;width:12px;height:12px;
@@ -60,6 +60,20 @@
 .u-sr .sn .n{font-style:normal;color:var(--ink-3);font-size:.85rem;font-weight:700;font-family:var(--font-ui);font-variant-numeric:tabular-nums}
 .u-sr .sn .n.ok{color:var(--green)}
 .u-sr .sn .sep{color:var(--ink-3);font-size:.7rem}
+.shn{font-size:1.3rem;font-weight:800;line-height:1.4;margin:0}.shs{color:var(--ink-3);font-size:var(--fs-xs);margin-top:4px}
+.fchips{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 4px}.fchips::-webkit-scrollbar{display:none}
+.fc{flex:none;min-height:40px;display:inline-flex;align-items:center;gap:6px;padding:0 13px;border-radius:99px;border:1px solid var(--line-2);background:var(--bg-2);color:var(--ink-2);font:inherit;font-size:var(--fs-xs);cursor:pointer}
+.fc .i{width:15px;height:15px}.fc b{color:var(--ink-3);font-weight:600}.fc.on{border-color:var(--gold-2);color:var(--gold-3);background:rgba(201,162,75,.12)}
+.sr{display:flex;flex-direction:column;gap:6px;padding:14px 16px;margin-top:8px;border-radius:var(--r-md);border:1px solid var(--line-1);
+  background:linear-gradient(160deg,var(--card),var(--bg-2));color:var(--txt);text-decoration:none}
+@media(hover:hover){.sr:hover{border-color:var(--gold-2)}}
+.sr-t{font-size:var(--fs-md);font-weight:700;line-height:1.55}
+.sr-m{display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;color:var(--ink-3);font-size:.74rem}
+.sr-m i{font-style:normal;display:inline-flex;align-items:center;gap:3px;font-variant-numeric:tabular-nums}.sr-m .i{width:14px;height:14px}
+.a-rd{color:var(--gold-3)}.a-lsn{color:var(--violet)}.a-sm{color:#4fb3c9}.a-qu{color:#8fb3e0}.a-fav{color:var(--gold-3)}
+.sr-p{height:3px;border-radius:3px;background:var(--line-1);overflow:hidden}.sr-p i{display:block;height:100%;background:var(--green)}
+.sr-c{display:flex;justify-content:space-between;font-size:.72rem;color:var(--green)}.sr-c small{color:var(--ink-3)}
+@media(min-width:720px){#srows{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}}
 </style>
 </head>
 <body>
@@ -77,7 +91,7 @@
 <script>
 let flt=new Set();
 let _rows=[],_slug='',_st=null;
-const ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';
+const ic=id=>'<svg class="i"><use href="icons.svg?v=12#'+id+'"/></svg>';
 const FCOUNT={rd:r=>r.rdn||0,yt:r=>r.ytn||0,lsn:r=>r.wan||0,qu:r=>r.qn||0,aud:r=>(r.ytn||0)+(r.aun||0),fav:r=>store.fav(r.id)?1:0,sm:r=>r.sun||0};
 const FALABEL={rd:'قراءة',yt:'يوتيوب',lsn:'مشاهدة حية',qu:'أسئلة',aud:'استماع',fav:'مفضلة',sm:'تلخيص'};
 function rowMatch(r){
@@ -86,54 +100,45 @@ function rowMatch(r){
 }
 const FMODE={rd:'read',yt:'yt',lsn:'listen',qu:'qu',aud:'aud',sm:'sm'};
 function activeMode(){for(const k of ['rd','yt','lsn','sm','qu','aud'])if(flt.has(k))return FMODE[k];return''}
+const FIC={rd:'i-read',yt:'i-yt',lsn:'i-watch',qu:'i-qu',aud:'i-audio',sm:'i-list',fav:'i-star'};
+const lessonsOf=r=>Math.max(r.ytn||0,r.wtt||0,r.rtt||0,r.rdn||0);
+function seenIn(r){const p=r.id+':';let n=0;for(const k of store.seenList())if(k.startsWith(p))n++;return n}
 function renderSeries(){
   const w=document.getElementById('srows');if(!w)return;
-  let rows=_rows.filter(rowMatch);
-  // a filter that yields nothing shows ALL series with a notice — never an
-  // empty page for a sheikh whose content lives under other modes
-  let fellBack=false;
-  if(flt.size&&!rows.length){rows=_rows.slice();fellBack=true}
-  if(flt.size)rows.sort((a,b)=>{let d=0;for(const k of flt)d+=FCOUNT[k](b)-FCOUNT[k](a);return d});
-  w.innerHTML='';
-  const m=activeMode();
-  const fk=['rd','yt','lsn','sm','qu','aud'].find(k=>flt.has(k));
-  if(fellBack)w.insertAdjacentHTML('beforeend','<div class="empty" style="padding:8px 4px">لا سلاسل في هذا القسم — كل السلاسل أدناه</div>');
-  for(const r of rows){
-    let nums='';
-    if(fk){
-      const mc=FCOUNT[fk](r);
-      // aud counts every audio item (yt + hosted); other modes compare to the yt total
-      const tot=fk==='aud'?(r.ytn||0)+(r.aun||0):(r.wtt||r.rtt||0);
-      const ok1=tot>0&&mc>=tot;
-      const ok2=tot>0&&(r.ytn||0)>=(r.wtt||r.rtt||0);
-      nums='<span class="sn"><i class="n'+(ok1?' ok':'')+'" title="دروس فيها '+FALABEL[fk]+'">'+kfmt(mc)+'</i>'
-        +'<span class="sep">/</span>'
-        +'<i class="n'+(ok2?' ok':'')+'" title="إجمالي حلقات السلسلة">'+kfmt(tot)+'</i></span>';
-    }else{
-      const tot=r.wtt||r.rtt||0;
-      if(tot>0)nums='<span class="sn"><i class="n" title="عدد الدروس">'+kfmt(tot)+'</i></span>';
-    }
-    w.insertAdjacentHTML('beforeend',
-      '<a class="u-sr cin" href="row.html?r='+encodeURIComponent(r.id)+(m?'&m='+m:'')+'">'
-      +'<div class="srow"><div class="t"><bdi>'+esc(r.title)+'</bdi></div>'+nums+'</div></a>');
-  }
-  if(!rows.length)w.innerHTML='<div class="empty">'+(flt.has('fav')?'لا سلاسل مفضلة':'لا سلاسل بعد.')+'</div>';
+  const fq=normalize((document.getElementById('sq')||{}).value||'');
+  let rows=_rows.filter(r=>rowMatch(r)&&(!fq||normalize(r.title).includes(fq)));
+  const hist=(store.get('hist',[])||[]);
+  rows.sort((a,b)=>{const ha=hist.findIndex(h=>h.r===a.id),hb=hist.findIndex(h=>h.r===b.id);
+    if((ha>=0)!==(hb>=0))return ha>=0?-1:1;if(ha>=0)return ha-hb;
+    if(flt.size){let d=0;for(const k of flt)d+=FCOUNT[k](b)-FCOUNT[k](a);if(d)return d}return 0});
+  w.innerHTML=rows.map(r=>{
+    const L=lessonsOf(r),sn=seenIn(r),h=hist.find(x=>x.r===r.id);
+    const av=[['rd',r.rdn],['lsn',r.wan],['sm',r.sun],['qu',r.qn]].filter(x=>x[1]).map(([k,n])=>'<i class="a-'+k+'" title="'+FALABEL[k]+'">'+ic(FIC[k])+n+'</i>').join('');
+    return '<a class="sr cin" href="row.html?r='+encodeURIComponent(r.id)+'">'
+      +'<span class="sr-t"><bdi>'+esc(r.title)+'</bdi></span>'
+      +'<span class="sr-m"><span>'+pluralLesson(L)+'</span>'+av+(store.fav(r.id)?'<i class="a-fav">'+ic('i-star')+'</i>':'')+'</span>'
+      +(sn?'<span class="sr-p"><i style="width:'+Math.min(100,Math.round(sn/Math.max(1,L)*100))+'%"></i></span><span class="sr-c">'+(h?'تابع الدرس '+h.n:'')+'<small>شاهدت '+sn+' من '+L+'</small></span>':'')
+      +'</a>'}).join('')||'<div class="empty">'+(flt.has('fav')?'لا سلاسل مفضلة بعد — اضغط ☆ في صفحة السلسلة':'لا نتائج')+'</div>';
 }
 function renderHero(){
   const st=_st;if(!st)return;
   const init=(st.name||'؟').replace(/^ال/,'').trim()[0]||'؟';
+  const L=_rows.reduce((a,r)=>a+lessonsOf(r),0);
+  const keys=['rd','lsn','sm','qu','fav'].filter(k=>_rows.some(r=>FCOUNT[k](r)));
   let h='<div class="hero cin"><span class="ph">'
-    +(st.photo?'<img src="'+esc(st.photo)+'" alt="" onerror="this.remove()">':'')
-    +'<span>'+init+'</span></span>'
-    +'<div style="min-width:0"><div style="font-size:1.3rem;font-weight:800;line-height:1.4">'+esc(st.name)+'</div>'
-    +'<div style="color:var(--ink-3);font-size:var(--fs-xs);margin-top:4px">'+pluralSeries(st.rows.length)+' · '+kfmt(st.rows.reduce((a,r)=>a+(r.ytn||r.wtt||0),0))+' درساً</div></div></div>'
-    +'<div class="fbar tgrid" id="fbar">'+['rd','yt','lsn','qu','aud','sm'].map(k=>{
-      let c=0;for(const r of _rows)c+=FCOUNT[k](r);
-      return '<button class="tile ftile '+(flt.has(k)?'sel':'')+(c?'':' off')+'" data-k="'+k+'" title="'+FALABEL[k]+'">'+ic({'rd':'i-read','yt':'i-yt','lsn':'i-watch','qu':'i-qu','aud':'i-audio','sm':'i-list'}[k])+'<b>'+kfmt(c)+'</b></button>'}).join('')
-    +'<button class="tile ftile fv'+(flt.has('fav')?' sel':'')+'" data-k="fav" title="مفضلة">'+ic('i-star')+'<b>'+_rows.filter(r=>store.fav(r.id)).length+'</b></button></div>';
+    +(st.photo?'<img src="'+esc(st.photo)+'" alt="" onerror="this.remove()">':'')+'<span>'+init+'</span></span>'
+    +'<div style="min-width:0"><h1 class="shn">'+esc(st.name)+'</h1>'
+    +'<div class="shs">'+pluralSeries(_rows.length)+' · '+kfmt(L)+' درس</div></div></div>'
+    +(_rows.length>6?'<input class="sflt" id="sq" type="search" placeholder="ابحث في سلاسل '+esc(st.name)+'…" aria-label="ابحث في السلاسل">':'')
+    +'<div class="fchips" role="toolbar" aria-label="تصفية">'
+    +'<button class="fc'+(flt.size?'':' on')+'" data-k="">الكل <b>'+_rows.length+'</b></button>'
+    +keys.map(k=>{const c=_rows.filter(r=>FCOUNT[k](r)).length;
+      return '<button class="fc'+(flt.has(k)?' on':'')+'" data-k="'+k+'">'+ic(FIC[k])+FALABEL[k]+' <b>'+c+'</b></button>'}).join('')+'</div>';
   const el=document.getElementById('hero');if(el)el.innerHTML=h;
-  document.querySelectorAll('#fbar .ftile').forEach(b=>b.onclick=()=>{
-    const k=b.dataset.k;flt.has(k)?flt.delete(k):flt.add(k);renderHero();renderSeries()});
+  const sq=document.getElementById('sq');if(sq)sq.oninput=renderSeries;
+  document.querySelectorAll('.fchips .fc').forEach(b=>b.onclick=()=>{
+    const k=b.dataset.k;if(!k)flt.clear();else{const on=flt.has(k);flt.clear();if(!on)flt.add(k)}
+    document.querySelectorAll('.fchips .fc').forEach(c=>c.classList.toggle('on',c.dataset.k?flt.has(c.dataset.k):!flt.size));renderSeries()});
 }
 (async()=>{
   const q=new URLSearchParams(location.search);

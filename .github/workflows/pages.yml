@@ -30,6 +30,11 @@ jobs:
         run: python3 scripts/audit_site.py
       - name: Non-regression gate vs live stats
         run: python3 scripts/non_regression.py
+      - name: Full-site crawl (every sheikh/row/mode + first lesson)
+        run: |
+          pip install -q playwright==1.47.0
+          python3 -m playwright install --with-deps chromium >/dev/null
+          python3 scripts/crawl_site.py
       - name: Guard — no conflict markers
         run: |
           if git grep -nE '^(<{7}|={7}|>{7})' -- ':!*.md' | head -20 | grep .; then
