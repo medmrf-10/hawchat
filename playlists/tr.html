@@ -14,9 +14,10 @@
 <link rel="apple-touch-icon" href="../icons/favicon-180.png">
 <link rel="preload" href="../fonts/IBMPlexSansArabic-400-arabic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../fonts/Amiri-400-arabic.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../theme.css?v=9">
-<link rel="stylesheet" href="common.css?v=9">
-<link rel="stylesheet" href="ui.css?v=9">
+<script>try{if(JSON.parse(localStorage.getItem('hc_store_v1')||'{}').trtheme==='day')document.documentElement.dataset.theme='day'}catch(e){}</script>
+<link rel="stylesheet" href="../theme.css?v=11">
+<link rel="stylesheet" href="common.css?v=11">
+<link rel="stylesheet" href="ui.css?v=11">
 <style>
 .wrap{max-width:820px;margin:0 auto;padding:16px 16px 90px}
 h1{font-family:var(--font-ui);font-size:var(--fs-lg);font-weight:700;color:var(--txt);margin:10px 0 4px}
@@ -27,8 +28,12 @@ h1{font-family:var(--font-ui);font-size:var(--fs-lg);font-weight:700;color:var(-
 @media(hover:hover){.ls a:hover{border-color:var(--acc2)}}
 .ls a.on{border-color:var(--acc);color:var(--acc2)}
 .ls .num{min-width:34px;height:34px;border-radius:50%;background:rgba(201,162,75,.1);border:1px solid var(--border);color:var(--acc2);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:var(--fs-sm);flex:none}
-.txt{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:34px 30px;margin-top:14px;font-family:var(--font-ar);font-size:1.28rem;line-height:2.45;white-space:pre-wrap;color:var(--txt);box-shadow:var(--e-1)}
-@media(max-width:480px){.txt{padding:18px 16px}}
+/* قراءة بملء الشاشة — بلا صندوق: النص يشغل العرض كاملاً على الهاتف، 66ch على الواسع */
+.txt{background:transparent;border:0;border-radius:0;box-shadow:none;
+  max-width:66ch;margin:14px auto 0;padding:6px 4px 30px;
+  font-family:var(--font-ar);font-size:1.34rem;line-height:2.6;white-space:pre-wrap;color:var(--txt)}
+#sump{border-top:1px dashed var(--border)}
+@media(max-width:480px){.txt{padding:4px 2px 26px}}
 .navb{position:fixed;bottom:0;left:0;right:0;background:var(--bgt);backdrop-filter:blur(14px);border-top:1px solid var(--border);padding:10px 14px calc(10px + env(safe-area-inset-bottom));display:flex;align-items:center;justify-content:center;gap:10px;z-index:50}
 .navb a,.navb button{min-height:44px;padding:0 18px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--card);color:var(--txt);font-family:var(--font-ui);font-size:var(--fs-sm);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
 .navb a.off,.navb button.off{opacity:.35;pointer-events:none}
@@ -58,7 +63,7 @@ h1{font-family:var(--font-ui);font-size:var(--fs-lg);font-weight:700;color:var(-
   <div id="app"><div class="skel" style="height:60px;margin-top:12px"></div><div class="skel" style="height:220px;margin-top:12px"></div></div>
 </div></main>
 <div class="navb" id="navb" hidden></div>
-<script src="common.js?v=9"></script>
+<script src="common.js?v=11"></script>
 <script>
 let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
 (async()=>{
@@ -167,15 +172,27 @@ let ROWS=[],META={},CUR=-1,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
       +'<a class="abtn" href="'+ALLR+'">كل الدروس</a>'
       +'<button id="shr" aria-label="مشاركة الدرس" title="مشاركة الدرس" style="width:auto;padding:0 12px;gap:5px;display:inline-flex;align-items:center">↗ مشاركة</button>'
       +'<button id="cpy" aria-label="نسخ نص الدرس" title="نسخ نص الدرس كاملاً" style="width:auto;padding:0 12px">⧉ نسخ</button>'
+      +'<button id="dnt2" aria-label="تبديل نهاري/ليلي" title="نهاري/ليلي">'+(document.documentElement.dataset.theme==='day'?'☀':'☾')+'</button>'
       +'<button id="srch" aria-label="بحث في النص" title="بحث داخل نص الدرس">⌕</button></div>';
     h+='<div class="tsrch" id="tsr" hidden><input id="tsq" type="search" placeholder="ابحث داخل نص الدرس…" enterkeyhint="search" aria-label="بحث داخل نص الدرس"><button id="tsp" aria-label="النتيجة السابقة">↑</button><span class="tc" id="tsc"></span><button id="tsn" aria-label="النتيجة التالية">↓</button></div>';
     h+='<div class="txt skel" id="tx" style="min-height:200px"></div>'
       +'<div class="txt" id="sump" hidden style="margin-top:10px"></div>';
     app.innerHTML=h;
     const nav=document.getElementById('navb');nav.hidden=false;
+    const dayNow=document.documentElement.dataset.theme==='day';
     nav.innerHTML=(i>0?'<a href="'+SELF+'&l='+ROWS[i-1].n+'" id="pv">→ السابق</a>':'<a class="off">→ السابق</a>')
       +'<span class="pos">'+(i+1)+' / '+ROWS.length+'</span>'
+      +'<button id="dnt" aria-label="تبديل نهاري/ليلي" title="نهاري/ليلي" style="min-height:44px;width:44px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--card);color:var(--txt);cursor:pointer;display:inline-flex;align-items:center;justify-content:center"><svg style="width:1.2em;height:1.2em"><use href="icons.svg?v=11#'+(dayNow?'i-sun':'i-moon')+'"/></svg></button>'
       +(i<ROWS.length-1?'<a href="'+SELF+'&l='+ROWS[i+1].n+'" id="nx">التالي ←</a>':'<a class="off">التالي ←</a>');
+    document.getElementById('dnt').onclick=()=>{
+      const day=document.documentElement.dataset.theme!=='day';
+      if(day)document.documentElement.dataset.theme='day';else delete document.documentElement.dataset.theme;
+      store.set('trtheme',day?'day':'night');
+      document.getElementById('dnt').innerHTML='<svg style="width:1.2em;height:1.2em"><use href="icons.svg?v=11#'+(day?'i-sun':'i-moon')+'"/></svg>';
+      const mc=document.querySelector('meta[name="theme-color"]');if(mc)mc.setAttribute('content',day?'#f6f0df':'#0b0f1a');
+    };
+    const dn2=document.getElementById('dnt2');
+    if(dn2)dn2.onclick=()=>{document.getElementById('dnt').click()};
     document.getElementById('fmi').onclick=()=>{FS=Math.max(.8,FS-.1);localStorage.setItem('trfs',FS);document.getElementById('tx').style.fontSize=FS+'rem'};
     document.getElementById('fpl').onclick=()=>{FS=Math.min(1.9,FS+.1);localStorage.setItem('trfs',FS);document.getElementById('tx').style.fontSize=FS+'rem'};
     const shb=document.getElementById('shr');

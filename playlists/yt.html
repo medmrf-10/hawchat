@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>استماع يوتيوب — سلاسل المشايخ</title>
+<meta name="theme-color" content="#0b0f1a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="icon" type="image/png" href="../icons/icon-192.png">
+<link rel="apple-touch-icon" href="../icons/favicon-180.png">
+<link rel="preload" href="../fonts/IBMPlexSansArabic-400-arabic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../theme.css?v=11">
+<link rel="stylesheet" href="common.css?v=11">
+<link rel="stylesheet" href="ui.css?v=11">
+<style>
+.wrap{max-width:920px;margin:0 auto;padding:14px 14px 90px}
+h1{font-family:var(--font-ar);font-size:1.4rem;font-weight:700;color:var(--txt);margin:10px 0 4px;line-height:1.6}
+.lsub{color:var(--dim);font-size:var(--fs-xs);margin-bottom:14px}
+.player{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line-1);box-shadow:var(--e-2)}
+.player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.cover{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;cursor:pointer;
+  background:linear-gradient(160deg,rgba(224,90,79,.16),var(--bg-1));color:#e05a4f}
+.cover .big{width:76px;height:76px;border-radius:50%;background:rgba(224,90,79,.14);border:1.5px solid rgba(224,90,79,.6);
+  display:flex;align-items:center;justify-content:center;font-size:2rem;transition:transform .15s}
+@media(hover:hover){.cover:hover .big{transform:scale(1.07)}}
+.cover span{color:var(--ink-2);font-size:.88rem}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.ch{background:var(--bg-2);border:1px solid var(--line-1);border-radius:var(--r-sm);padding:7px 12px;font-size:.74rem;color:var(--ink-2)}
+.ext{display:inline-flex;align-items:center;gap:7px;margin-top:14px;min-height:44px;padding:0 16px;border-radius:var(--r-md);
+  border:1px solid var(--line-2);background:var(--bg-2);color:#e05a4f;font-size:var(--fs-sm);text-decoration:none}
+.unv{display:inline-block;background:rgba(201,162,75,.08);border:1px solid var(--line-2);border-radius:var(--r-md);padding:8px 12px;margin:10px 0;color:var(--gold-3);font-size:var(--fs-xs)}
+.navb{position:fixed;bottom:0;left:0;right:0;background:var(--bgt);backdrop-filter:blur(14px);border-top:1px solid var(--border);padding:10px 14px calc(10px + env(safe-area-inset-bottom));display:flex;align-items:center;justify-content:center;gap:10px;z-index:50}
+.navb a{min-height:44px;padding:0 18px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--card);color:var(--txt);font-size:var(--fs-sm);text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.navb a.off{opacity:.35;pointer-events:none}
+.navb .pos{color:var(--acc2);font-size:var(--fs-sm);max-width:40vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+</style>
+</head>
+<body>
+<header class="hd"><div class="hd-in">
+  <a href="." id="back" class="btn" aria-label="عودة" style="text-decoration:none">→</a>
+  <img src="../icons/icon-192.png" alt="" width="30" height="30" style="border-radius:8px">
+  <span class="brand">يوتيوب</span>
+  <span class="sub" id="hdr-sub" style="color:var(--dim);font-size:var(--fs-xs);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">استماع</span>
+</div></header>
+<main><div class="wrap" id="app"><div class="skel" style="height:50px;margin-top:12px"></div><div class="skel" style="height:300px;margin-top:12px;border-radius:18px"></div></div></main>
+<div class="navb" id="navb" hidden></div>
+<script src="common.js?v=11"></script>
+<script>
+const ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';
+const EMB='https://www.youtube-nocookie.com/embed/';
+function embedUrl(vid,autoplay){
+  return EMB+encodeURIComponent(vid)+'?playsinline=1&rel=0&hl=ar&iv_load_policy=3'+(autoplay?'&autoplay=1':'');
+}
+function plidOf(url){
+  const m=String(url||'').match(/[?&]list=([A-Za-z0-9_-]+)/);return m&&m[1];
+}
+function vidOf(url){
+  const m=String(url||'').match(/(?:watch\?v=|youtu\.be\/|embed\/)([A-Za-z0-9_-]{6,})/);return m&&m[1];
+}
+(async()=>{
+  const q=new URLSearchParams(location.search);
+  const app=document.getElementById('app'),nav=document.getElementById('navb');
+  const slug=q.get('s'),ln=parseInt(q.get('l'),10)||0,rid=q.get('r'),vv=q.get('v');
+
+  /* نمط ٣: فيديو مفرد بمعرف مباشر (?v=…&r=<rowid>) */
+  if(vv){
+    const stats=await j('data/sheikh_stats.json');let row=null,st=null;
+    if(stats&&rid)for(const s in stats){if(s==='_meta')continue;
+      const r=(stats[s].rows||[]).find(r=>r.id===rid);if(r){row=r;st=stats[s];break}}
+    document.title='درس يوتيوب — سلاسل';
+    if(st)document.getElementById('hdr-sub').textContent=st.name;
+    document.getElementById('back').href=rid?('row.html?r='+encodeURIComponent(rid)+'&m=yt'):'.';
+    app.innerHTML=(row?'<h1><bdi>'+esc(row.title)+'</bdi></h1><div class="lsub">'+esc(st.name)+'</div>':'<h1>درس يوتيوب</h1>')
+      +'<div class="player" id="pl"><div class="cover" id="cvr"><span class="big">▶</span><span>تشغيل من يوتيوب</span></div></div>'
+      +'<a class="ext" href="https://youtu.be/'+esc(vv)+'" target="_blank" rel="noopener">'+ic('i-yt')+' افتح على يوتيوب</a>';
+    document.getElementById('cvr').onclick=()=>{document.getElementById('pl').innerHTML='<iframe src="'+embedUrl(vv,true)+'" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>'};
+    return;
+  }
+
+  /* نمط ١: درس داخل سلسلة لها sSlug (?s=<slug>&l=<n>) */
+  if(slug){
+    const d=await j('series/'+encodeURIComponent(slug)+'.json');
+    if(!d){app.innerHTML='<div class="errbox">تعذر تحميل السلسلة — <a href=".">عودة</a></div>';return}
+    if(!ln){ // ?s بلا درس → قائمة الوضع
+      const stats=await j('data/sheikh_stats.json');
+      for(const s in stats){if(s==='_meta')continue;
+        const r=(stats[s].rows||[]).find(r=>r.sSlug===slug);
+        if(r){location.replace('row.html?r='+encodeURIComponent(r.id)+'&m=yt');return}}
+      location.replace('row.html?s='+encodeURIComponent(slug)+'&m=yt');return;
+    }
+    const l=d.lessons.find(x=>x.n===ln);
+    document.getElementById('hdr-sub').textContent=d.sheikh||'';
+    document.getElementById('back').href='row.html?s='+encodeURIComponent(slug)+'&m=yt';
+    if(!l){app.innerHTML='<div class="errbox">الدرس غير موجود — <a href="row.html?s='+encodeURIComponent(slug)+'&m=yt">عودة للقائمة</a></div>';return}
+    document.title=l.title?('الدرس '+l.n+': '+l.title):('الدرس '+l.n+' — '+d.title);
+    if(!l.video){app.innerHTML='<div class="errbox">لا فيديو لهذا الدرس — <a href="row.html?s='+encodeURIComponent(slug)+'&m=yt">عودة للقائمة</a></div>';return}
+    const vl=d.lessons.filter(x=>x.video&&x.video.length>=8).map(x=>x.n).sort((a,b)=>a-b);
+    const i=vl.indexOf(ln);
+    const du=(l.dur&&fmtDur(l.dur))||'';
+    let h='<div class="crumb cin"><a href="sheikh.html?s='+encodeURIComponent(d.sheikh_slug||'')+'">'+esc(d.sheikh||'')+'</a> ← <a href="row.html?s='+encodeURIComponent(slug)+'&m=yt">'+esc(d.title)+'</a></div>'
+      +'<h1><bdi>'+esc(l.title||('الدرس '+l.n))+'</bdi></h1>'
+      +'<div class="meta"><span class="ch">الدرس '+l.n+' من '+d.count+'</span>'+(du?'<span class="ch">'+esc(du)+'</span>':'')+'</div>'
+      +(d.unv?'<div class="unv">ترجمة آلية مأخوذة من يوتيوب — غير مدققة بعد</div>':'')
+      +'<div class="player" id="pl"><div class="cover" id="cvr"><span class="big">▶</span><span>تشغيل الدرس من يوتيوب</span></div></div>'
+      +'<a class="ext" href="https://youtu.be/'+esc(l.video)+'" target="_blank" rel="noopener">'+ic('i-yt')+' افتح على يوتيوب</a>';
+    app.innerHTML=h;
+    document.getElementById('cvr').onclick=()=>{document.getElementById('pl').innerHTML='<iframe src="'+embedUrl(l.video,true)+'" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>'};
+    nav.hidden=false;
+    nav.innerHTML=(i>0?'<a href="?s='+encodeURIComponent(slug)+'&l='+vl[i-1]+'">→ السابق</a>':'<a class="off">→ السابق</a>')
+      +'<span class="pos">'+esc(d.title)+' — '+(i+1)+' / '+vl.length+'</span>'
+      +(i<vl.length-1?'<a href="?s='+encodeURIComponent(slug)+'&l='+vl[i+1]+'">التالي ←</a>':'<a class="off">التالي ←</a>');
+    return;
+  }
+
+  /* نمط ٢: قائمة يوتيوب كاملة لصف بلا sSlug (?r=<rowid>) */
+  if(rid){
+    const stats=await j('data/sheikh_stats.json');let hit=null;
+    if(stats)for(const s in stats){if(s==='_meta')continue;
+      const r=(stats[s].rows||[]).find(r=>r.id===rid);if(r){hit={slug:s,r,st:stats[s]};break}}
+    if(!hit){const red=await j('data/redirects.json');
+      if(red&&red[rid]){const nr=red[rid];
+        for(const s in stats){if(s==='_meta')continue;
+          const r=(stats[s].rows||[]).find(r=>r.id===nr);if(r){hit={slug:s,r,st:stats[s]};break}}}}
+    if(!hit){app.innerHTML='<div class="errbox">لم يُعثر على السلسلة — <a href=".">عودة</a></div>';return}
+    const row=hit.r,st=hit.st;
+    document.getElementById('hdr-sub').textContent=st.name;
+    document.getElementById('back').href='row.html?r='+encodeURIComponent(row.id)+'&m=yt';
+    document.title=row.title+' — استماع يوتيوب';
+    const pl=plidOf(row.yt),wv=vidOf(row.yt);
+    let src=null;
+    if(pl)src=EMB+'videoseries?list='+encodeURIComponent(pl)+'&hl=ar&playsinline=1&rel=0';
+    else if(wv)src=embedUrl(wv,false);
+    let h='<h1><bdi>'+esc(row.title)+'</bdi></h1><div class="lsub">'+esc(st.name)+' · '+(row.ytn||0)+' فيديو على يوتيوب</div>'
+      +(row.unv?'<div class="unv">ترجمة آلية مأخوذة من يوتيوب — غير مدققة بعد</div>':'');
+    if(src)h+='<div class="player" id="pl"><div class="cover" id="cvr"><span class="big">▶</span><span>تشغيل القائمة كاملة من يوتيوب</span></div></div>';
+    else h+='<div class="errbox">رابط يوتيوب غير قابل للتضمين — افتحه مباشرة:</div>';
+    h+=(row.yt?'<a class="ext" href="'+esc(row.yt)+'" target="_blank" rel="noopener">'+ic('i-yt')+' افتح القائمة على يوتيوب</a>':'');
+    app.innerHTML=h;
+    if(src)document.getElementById('cvr').onclick=()=>{document.getElementById('pl').innerHTML='<iframe src="'+src+(src.includes('?')?'&autoplay=1':'')+'" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>'};
+    return;
+  }
+
+  app.innerHTML='<div class="errbox">رابط غير مكتمل — <a href=".">عودة للسلاسل</a></div>';
+})();
+if('serviceWorker' in navigator)swRegister('../sw.js');
+</script>
+</body>
+</html>
