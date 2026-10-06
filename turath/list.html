@@ -108,9 +108,9 @@
 <script>
 async function j(u){try{const r=await fetch(u);return r.ok?await r.json():null}catch(e){return null}}
 function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-const WREPO={o:'medmrf-10',r:'hawchat',br:'main',path:'track/wants.json'};
+const WREPO={o:'medmrf-10',r:'hawshat',br:'main',path:'track/wants.json'};
 const WLS='hw_track_wants_v1',WLT='hw_ghtok';
-const WTOPIC='hawchat-wants-9f3kq7x';
+const WTOPIC='hawshat-wants-9f3kq7x';
 let wants={version:1,updated_at:null,groups:{}},dirty=false;
 function ridOf(t){return t.yt?t.yt.split('list=')[1]:'t:'+t.t}
 function wgrp(sl){return wants.groups[sl]||(wants.groups[sl]={order:[],tags:{}})}

@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#0b0f1a">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="hawchat">
+<meta name="apple-mobile-web-app-title" content="hawshat">
 <link rel="manifest" href="../manifest.webmanifest">
 <link rel="icon" type="image/png" href="../icons/icon-192.png">
 <link rel="apple-touch-icon" href="../icons/favicon-180.png">
@@ -150,7 +150,7 @@ function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&l
 function domain(u){try{return new URL(u).hostname.replace(/^www\./,'')}catch(e){return u}}
 function norm(s){return (s||'').replace(/[أإآ]/g,'ا').replace(/\s+/g,' ').trim()}
 /* ── تعليم وترتيب السلاسل (مشترك مع track/wants.json) ── */
-const WREPO={o:'medmrf-10',r:'hawchat',br:'main',path:'track/wants.json'};
+const WREPO={o:'medmrf-10',r:'hawshat',br:'main',path:'track/wants.json'};
 const WLS='hw_track_wants_v1',WLT='hw_ghtok';
 let wants={version:1,updated_at:null,groups:{}};
 function ridOf(t){return t.yt?t.yt.split('list=')[1]:'t:'+t.t}
