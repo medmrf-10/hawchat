@@ -44,8 +44,9 @@ html,body{height:100%;overflow:hidden}
 @keyframes ldsp{to{transform:rotate(360deg)}}
 .csub{display:flex;align-items:center;justify-content:space-between;gap:6px}
 .csub .tm{color:var(--acc2);font-size:.8rem;font-variant-numeric:tabular-nums}
-.csub .chip,.csub select{min-height:44px;min-width:44px;justify-content:center;padding:0 10px;border-radius:99px;border:1px solid var(--border);background:var(--card);color:var(--txt);font-size:.78rem;cursor:pointer;display:inline-flex;align-items:center;gap:4px}
-.csub .chip.on{border-color:var(--acc);color:var(--acc)}
+.csub .chip,.csub select,.crow .chip{min-height:44px;min-width:44px;justify-content:center;padding:0 10px;border-radius:99px;border:1px solid var(--border);background:var(--card);color:var(--txt);font-size:.78rem;cursor:pointer;display:inline-flex;align-items:center;gap:4px}
+.csub .chip.on,.crow .chip.on{border-color:var(--acc);color:var(--acc)}
+.crow .chip{min-height:52px;min-width:52px;font-variant-numeric:tabular-nums}
 .nav{display:none}
 .txt{flex:1;min-height:0;overflow-y:auto;background:linear-gradient(145deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:var(--r-md);padding:18px;margin-top:8px;font-family:var(--font-ar);font-size:1.08rem;line-height:2.1;white-space:pre-wrap}
 .cover{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:linear-gradient(145deg,var(--card),var(--card2));cursor:pointer}
@@ -295,9 +296,9 @@ document.addEventListener('keydown',e=>{
       +'<button class="btn" onclick="YTP&&YTP.seekTo(Math.max(0,YTP.getCurrentTime()-10),true)" aria-label="رجوع 10 ثوانٍ">↺10</button>'
       +'<button class="btn main ld" id="playb" aria-pressed="false" onclick="playToggle(this)" aria-label="تشغيل/إيقاف"></button>'
       +'<button class="btn" onclick="YTP&&YTP.seekTo(YTP.getCurrentTime()+10,true)" aria-label="تقدم 10 ثوانٍ">10↻</button>'
+      +'<button class="chip" id="spd" title="سرعة التشغيل" onclick="cycleSpeed()">×'+(store.get('speed')||1)+'</button>'
       +'<button class="btn" onclick="seekPhrase(curPh+1)" aria-label="الجملة التالية" title="الجملة التالية">⇥</button></div>'
       +'<div class="csub"><span class="tm" id="tm">0:00</span>'
-      +'<button class="chip" id="spd" title="سرعة التشغيل" onclick="cycleSpeed()">×'+(store.get('speed')||1)+'</button>'
       +'<select id="slp" title="مؤقت النوم" onchange="if(SLEEP){clearTimeout(SLEEP);SLEEP=null}const m=parseInt(this.value);if(m){SLEEP=setTimeout(()=>{YTP&&YTP.pauseVideo();SLEEP=null},m*60000)}this.title=m?\'يتوقف خلال \'+this.value+\' د\':\'مؤقت النوم\'"><option value="0">نوم —</option><option value="15">15د</option><option value="30">30د</option><option value="45">45د</option><option value="60">60د</option></select>'
       +'<button class="chip'+(store.get('anx')===1?' on':'')+'" id="t-anx" title="التشغيل التلقائي للدرس التالي" onclick="const v=!(store.get(\'anx\')===1);store.set(\'anx\',v);this.classList.toggle(\'on\',v)">تلقائي</button>'
       +'<button class="chip'+(TELE?' on':'')+'" id="t-tele" title="وضع الملقّن" onclick="TELE=!TELE;store.set(\'tele\',TELE?1:0);this.classList.toggle(\'on\',TELE);renderPhrase(Math.max(0,curPh))">ملقّن</button>'

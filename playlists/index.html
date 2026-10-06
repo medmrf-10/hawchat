@@ -27,7 +27,9 @@
 a.mini{color:var(--ink-3);display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;padding:0 4px}
 .wrap{padding-left:0;padding-right:0}
 .u-grid{grid-template-columns:repeat(2,1fr)!important;gap:0}
-.u-sh{padding:var(--sp-2) 0 0;overflow:hidden;border-radius:0}
+.u-sh{padding:var(--sp-2) 0 0;overflow:hidden;border-radius:0;position:relative}
+.u-sh .cntx{position:absolute;top:6px;inset-inline-end:8px;font-family:var(--font-ui);
+  font-size:1.15rem;font-weight:800;color:var(--gold-3);line-height:1;pointer-events:none}
 .u-sh .ph{width:56px;height:56px}
 .u-sh .nm{font-size:.8rem;margin-top:5px;-webkit-line-clamp:1;min-height:1.45em}
 .u-sh .u-top{display:flex;flex-direction:column;align-items:center;text-decoration:none;color:inherit;width:100%;padding:var(--sp-2) var(--sp-2) var(--sp-3)}
@@ -67,6 +69,7 @@ main .wrap>div:last-child{padding:0 var(--sp-3)}
 let _stats={},showSoon=false,_mode='';
 const ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';
 const MODES=[['rd','i-read','قراءة'],['yt','i-yt','يوتيوب'],['lsn','i-watch','مشاهدة حية'],['qu','i-qu','أسئلة'],['aud','i-audio','استماع'],['sm','i-list','تلخيص']];
+const MCOUNT={rd:r=>r.rdn||0,yt:r=>r.ytn||0,lsn:r=>r.wan||0,qu:r=>r.qn||0,aud:r=>(r.ytn||0)+(r.aun||0),sm:r=>r.sun||0};
 function drawBar(){
   document.getElementById('ubar').innerHTML=MODES.map(([k,i,a])=>
     '<button class="ftile '+k+(_mode===k?' on':'')+'" data-k="'+k+'" aria-label="'+a+'" aria-pressed="'+(_mode===k)+'" title="'+a+'">'+ic(i)+'</button>').join('');
@@ -77,10 +80,15 @@ function drawBar(){
 }
 function shCard(st,slug){
   const init=(st.name||'؟').replace(/^ال/,'').trim()[0]||'؟';
+  let cnt='';
+  if(_mode){
+    let n=0;for(const r of st.rows||[])n+=MCOUNT[_mode](r);
+    cnt='<span class="cntx">'+kfmt(n)+'</span>';
+  }
   return '<div class="u-sh cin">'
     +'<a class="u-top" href="sheikh.html?s='+encodeURIComponent(slug)+(_mode?'&f='+_mode:'')+'">'
     +'<span class="ph">'+(st.photo?'<img src="'+esc(st.photo)+'" alt="" loading="lazy" onerror="this.remove()">':'')+'<span>'+init+'</span></span>'
-    +'<span class="nm">'+esc(st.name)+'</span></a></div>';
+    +'<span class="nm">'+esc(st.name)+'</span></a>'+cnt+'</div>';
 }
 
 function draw(){

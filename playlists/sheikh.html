@@ -54,11 +54,12 @@
   background-size:contain;background-repeat:no-repeat}
 .fbar{margin-top:12px}
 @media(hover:hover){a.tile:hover,.ftile:hover{border-color:var(--gold-2)}}
-.u-sr .t{padding:0 12px;text-align:center}
-.u-sr .sn{display:flex;justify-content:center;gap:14px;margin-top:8px}
-.u-sr .sn .n{font-style:normal;color:var(--ink-3);font-size:.85rem;font-weight:700;font-family:var(--font-ui)}
+.u-sr .srow{display:flex;align-items:center;gap:10px;padding:0 12px}
+.u-sr .t{flex:1;min-width:0;text-align:center}
+.u-sr .sn{flex:none;display:flex;gap:6px;direction:ltr}
+.u-sr .sn .n{font-style:normal;color:var(--ink-3);font-size:.85rem;font-weight:700;font-family:var(--font-ui);font-variant-numeric:tabular-nums}
 .u-sr .sn .n.ok{color:var(--green)}
-.u-sr .sn .n.ok::after{content:'✓';font-size:.7em;margin-inline-start:3px;vertical-align:1px}
+.u-sr .sn .sep{color:var(--ink-3);font-size:.7rem}
 </style>
 </head>
 <body>
@@ -100,11 +101,12 @@ function renderSeries(){
       const ok1=tot>0&&mc>=tot;
       const ok2=tot>0&&(r.ytn||0)>=tot;
       nums='<span class="sn"><i class="n'+(ok1?' ok':'')+'" title="دروس فيها '+FALABEL[fk]+'">'+kfmt(mc)+'</i>'
+        +'<span class="sep">/</span>'
         +'<i class="n'+(ok2?' ok':'')+'" title="إجمالي حلقات السلسلة">'+kfmt(tot)+'</i></span>';
     }
     w.insertAdjacentHTML('beforeend',
       '<a class="u-sr cin" href="row.html?r='+encodeURIComponent(r.id)+(m?'&m='+m:'')+'">'
-      +'<div class="t"><bdi>'+esc(r.title)+'</bdi></div>'+nums+'</a>');
+      +'<div class="srow"><div class="t"><bdi>'+esc(r.title)+'</bdi></div>'+nums+'</div></a>');
   }
   if(!rows.length)w.innerHTML='<div class="empty">'+(flt.has('fav')?'لا سلاسل مفضلة':'لا سلاسل في هذا القسم.')+'</div>';
 }
