@@ -35,10 +35,16 @@
   background:var(--bg-2);text-decoration:none;padding:5px;transition:border-color var(--t-fast) var(--ease)}
 .tile .i{width:1.25em;height:1.25em}
 .tile b{font-size:var(--fs-sm);font-weight:700}
-.tile.rd{color:var(--gold-3)}.tile.lsn{color:var(--violet)}.tile.sm{color:#4fb3c9}
+.tile.rd{color:var(--gold-3)}.tile.ltx{color:#6fb585}.tile.lsn{color:var(--violet)}.tile.sm{color:#4fb3c9}.tile.yt{color:#e05a4f}
 .tile.ok{border-color:rgba(70,201,109,.6);box-shadow:inset 0 0 0 1px rgba(70,201,109,.22)}
 .tile.off{opacity:.32}
-@media(hover:hover){a.tile:hover{border-color:var(--gold-2)}}
+.ftile{cursor:pointer;position:relative}
+.ftile.sel{border-color:var(--gold-2);box-shadow:inset 0 0 0 1px var(--gold-2)}
+.ftile.sel::after{content:'';position:absolute;top:4px;inset-inline-start:5px;width:12px;height:12px;
+  background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 5.5 9.5 16 4 10.5" fill="none" stroke="%2370c96d" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+  background-size:contain;background-repeat:no-repeat}
+.fbar{display:flex;gap:10px;justify-content:center;margin-top:12px;flex-wrap:wrap}
+@media(hover:hover){a.tile:hover,.ftile:hover{border-color:var(--gold-2)}}
 .u-sr .t{padding-inline-end:44px;text-align:center}
 </style>
 </head>
@@ -55,45 +61,46 @@
 </div></main>
 <script src="common.js?v=9"></script>
 <script>
-let fv=new URLSearchParams(location.search).get('f')||'all';
+let flt=new Set();
 let _rows=[],_slug='',_st=null;
 const ic=id=>'<svg class="i"><use href="icons.svg#'+id+'"/></svg>';
+const FCOUNT={rd:r=>r.rdn||0,ltx:r=>r.ltn||0,lsn:r=>r.wan||0,sm:r=>r.sun||0,yt:r=>r.ytn||0};
 function rowMatch(r){
-  if(fv==='listen')return r.wan>0;
-  if(fv==='done')return r.rOk||(r.wtt&&r.wOk);
+  for(const k of flt)if(!FCOUNT[k](r))return false;
   return true;
 }
-function tile(href,ok,icon,n,cls){
+function tile(href,ok,icon,n,cls,ext){
   const c='tile '+cls+(ok?' ok':'');
-  return (href&&n>0)?'<a class="'+c+'" href="'+esc(href)+'">'+ic(icon)+'<b>'+n+'</b></a>'
+  return (href&&n>0)?'<a class="'+c+'" href="'+esc(href)+'"'+(ext?' target="_blank" rel="noopener"':'')+'>'+ic(icon)+'<b>'+n+'</b></a>'
     :'<span class="'+c+' off">'+ic(icon)+'<b>'+(n||0)+'</b></span>';
 }
 function renderSeries(){
   const w=document.getElementById('srows');if(!w)return;
-  const rows=_rows.filter(rowMatch);w.innerHTML='';
-  const seen=store.seenList(),favs=store.favList();
+  const rows=_rows.filter(rowMatch);
+  if(flt.size)rows.sort((a,b)=>{let d=0;for(const k of flt)d+=FCOUNT[k](b)-FCOUNT[k](a);return d});
+  w.innerHTML='';
+  const seen=store.seenList();
   for(const r of rows){
     const done=r.rOk&&(r.wtt?r.wOk:true);
     w.insertAdjacentHTML('beforeend',
       '<div class="u-sr cin">'
       +''
-      +'<button class="u-fav'+(favs.includes(r.id)?' on':'')+'" data-fav="'+esc(r.id)+'" aria-label="مفضلة" style="position:absolute;top:10px;inset-inline-end:10px">'+ic('i-star')+'</button>'
       +'<div class="t"><bdi>'+esc(r.title)+'</bdi></div>'
       +'<div class="acts">'
       +tile(r.read,r.rOk,'i-read',r.rdn,'rd')
+      +tile(r.ltx,false,'i-text',r.ltn||0,'ltx')
       +tile(r.listen,r.wOk,r.unv?'i-auto':'i-listen',r.wan,'lsn')
       +tile(r.summ,(r.rtt&&r.sun>=r.rtt),'i-list',r.sun||0,'sm')
+      +tile(r.yt,false,'i-yt',r.ytn||0,'yt',1)
       +'</div></div>');
   }
   if(!rows.length)w.innerHTML='<div class="empty">لا سلاسل في هذا القسم.</div>';
 }
 document.addEventListener('click',e=>{
-  const fb=e.target.closest('[data-fav]');
-  if(fb){store.favToggle(fb.dataset.fav);fb.classList.toggle('on',store.fav(fb.dataset.fav));return}
-  const t=e.target.closest('.chip');if(!t)return;
-  document.querySelectorAll('.chip').forEach(x=>{x.classList.toggle('on',x===t);x.setAttribute('aria-pressed',x===t?'true':'false')});
-  fv=t.dataset.f;
-  const u=new URL(location);u.searchParams.set('f',fv);history.replaceState(null,'',u);
+  const t=e.target.closest('.ftile');if(!t)return;
+  const k=t.dataset.k;
+  flt.has(k)?flt.delete(k):flt.add(k);
+  t.classList.toggle('sel',flt.has(k));
   renderSeries();
 });
 (async()=>{
@@ -115,9 +122,10 @@ document.addEventListener('click',e=>{
     +'<div class="stats">'+(st.read?num('rd',st.read,'مقروء',_rows.every(r=>r.rOk)):'')+(st.watch?num('ls',st.watch,'مسموع',_rows.filter(r=>r.wtt).every(r=>r.wOk)):'')+(st.uwatch?num('unv',st.uwatch,'آلي غير مدقق',0,'i-auto'):'')+'</div>'
     +'<div style="font-size:var(--fs-xs);color:var(--ink-3);margin-top:8px">'+pluralSeries(st.nSeries)+'</div>'
     +'</div></div></div>';
-  h+='<div class="u-sech cin"><h2>السلاسل</h2><span class="cnt">'+_rows.length+'</span></div><div class="u-fbar cin" role="radiogroup">'
-    +[['all','الكل',_rows.length],['listen','يُسمع',_rows.filter(r=>r.wan>0).length],['done','مكتملة',_rows.filter(r=>r.rOk||(r.wtt&&r.wOk)).length]]
-      .map(([k,v,n])=>'<button class="chip'+(fv===k?' on':'')+'" data-f="'+k+'" aria-pressed="'+(fv===k)+'">'+v+' <i style="font-style:normal;opacity:.7">'+n+'</i></button>').join('')+'</div>'
+  const ftot=k=>_rows.reduce((a,r)=>a+FCOUNT[k](r),0);
+  h+='<div class="u-sech cin"><h2>السلاسل</h2><span class="cnt">'+_rows.length+'</span></div><div class="fbar cin">'
+    +[['rd','i-read'],['ltx','i-text'],['lsn','i-listen'],['sm','i-list'],['yt','i-yt']]
+      .map(([k,icn])=>'<span class="tile ftile '+k+'" data-k="'+k+'" role="checkbox" aria-checked="false">'+ic(icn)+'<b>'+ftot(k)+'</b></span>').join('')+'</div>'
     +'<div id="srows"></div>';
   B.innerHTML=h;
   renderSeries();

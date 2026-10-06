@@ -739,6 +739,30 @@ for sh in sheikhs:
         r['wtt'] = r['rtt']
         r['read'] = 'row.html?r=' + r['id']
         r['listen'] = ('row.html?r=' + r['id'] + '&m=listen') if r['wan'] > 0 and r.get('sSlug') else None
+        # يوتيوب + استماع مع نص بلا محاذاة: كل سلسلة لها قائمة/فيديوهات — بلا هاردكود، من مصدرها
+        r['yt'] = None; r['ytn'] = 0; r['ltx'] = None; r['ltn'] = 0
+        _vids = set()
+        if r.get('sSlug'):
+            _sd = J(os.path.join(PL, 'series', r['sSlug'] + '.json')) or {}
+            _vids = {l.get('n') for l in (_sd.get('lessons') or []) if l.get('video')}
+            _plu = _sd.get('playlist') or ''
+            if _plu:
+                r['yt'] = _plu
+            elif _vids:
+                _fv = next((l.get('video') for l in _sd.get('lessons') or [] if l.get('video')), None)
+                if _fv:
+                    r['yt'] = 'https://www.youtube.com/watch?v=' + _fv
+            if _vids:
+                _li2 = J(os.path.join(PL, 'lessons', r['sSlug'], 'index.json')) or {}
+                _txt = set(_li2.get('txt') or []) | set(_li2.get('alignOk') or []) \
+                    | {x['n'] for x in rrows}
+                r['ytn'] = len(_vids)
+                r['ltn'] = len(_vids & _txt)
+                if r['ltn'] > 0:
+                    r['ltx'] = 'row.html?r=' + r['id'] + '&m=ltx'
+        elif r.get('plid'):
+            r['yt'] = 'https://www.youtube.com/playlist?list=' + r['plid']
+            r['ytn'] = r['rtt']
         # التلخيص: agent-uploaded NNN.sum.json files beside the lessons
         r['sun'] = 0
         r['summ'] = None

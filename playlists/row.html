@@ -97,49 +97,16 @@ const ic=id=>'<svg class="i"><use href="icons.svg#'+id+'"/></svg>';
   let sorted=[...ns].sort((a,b)=>a-b);
   // B2: ?m=listen (from «استمع» on sheikh page) filters to aligned lessons;
   // ?m=read to lessons with text. Unfiltered default shows everything.
+  const L=n=>lessons.find(x=>x.n===n)||{};
   const mode=q.get('m');
   if(mode==='listen')sorted=sorted.filter(n=>aln.has(n));
   else if(mode==='read')sorted=sorted.filter(n=>txn.has(n)||rtxt.has(n));
-  const L=n=>lessons.find(x=>x.n===n)||{};
-  const favs=store.favList();
+  else if(mode==='ltx')sorted=sorted.filter(n=>{const ll=L(n);return ll.video&&(txn.has(n)||aln.has(n)||rtxt.has(n))});
   const rs=store.resume(row.id);
   store.markSeen(row.id);
-  let h='<nav class="crumb cin"><a href=".">سلاسل المشايخ</a> ‹ <a href="sheikh.html?s='+encodeURIComponent(slug)+'">'+esc(st.name)+'</a> ‹ <bdi>'+esc(row.title)+'</bdi></nav>';
-  h+='<div class="u-hero cin">'
-    +'<button class="u-fav'+(favs.includes(row.id)?' on':'')+'" id="favb" aria-label="مفضلة" style="position:absolute;top:12px;inset-inline-end:12px">'+ic('i-star')+'</button>'
-    +(row.rdn?'<button class="u-fav" id="dlb" aria-label="حفظ بلا اتصال" title="حفظ النصوص بلا اتصال" style="position:absolute;top:58px;inset-inline-end:12px">'+ic('i-dl')+'</button>':'')
-    +'<h1><bdi>'+esc(row.title)+'</bdi></h1><div class="meta">'
-    +(row.rdn?'<span class="u-num rd">'+ic('i-read')+'<b>'+row.rdn+'</b>'+(row.rdn<row.rtt?'<small>/'+row.rtt+'</small>':'')+(row.rOk?'<b class="ok">'+ic('i-check')+'</b>':'')+'<small>مقروء</small></span>':'')
-    +(row.wan?'<span class="u-num lsn'+(row.unv?' unv':'')+'">'+ic(row.unv?'i-auto':'i-listen')+'<b>'+row.wan+'</b>'+(row.wan<row.rtt?'<small>/'+row.rtt+'</small>':'')+(row.wOk?'<b class="ok">'+ic('i-check')+'</b>':'')+'<small>'+(row.unv?'آلي غير مدقق':'مسموع')+'</small></span>':'')
-    +(row.sun?'<a class="u-num sm" href="'+esc(row.summ)+'" style="text-decoration:none">'+ic('i-list')+'<b>'+row.sun+'</b><small>ملخّص</small></a>':'')
-    +(sd&&sd.playlist?'<a href="'+esc(sd.playlist)+'" target="_blank" rel="noopener">قائمة يوتيوب ↗</a>':'')
-    +'</div>'
+  app.innerHTML='<input class="sflt" id="sflt" type="search" aria-label="ابحث في دروس السلسلة" placeholder="ابحث في دروس السلسلة…">'
     +(row.unv?'<div class="unv">ترجمة آلية مأخوذة من يوتيوب — غير مدققة بعد</div>':'')
-    +(function(){const rn=rs&&rs.n;
-      if(mode==='listen'){
-        const first=[...aln].sort((a,b)=>a-b).find(n=>!store.seen(row.id+':'+n))||[...aln].sort((a,b)=>a-b)[0];
-        return '<div class="resline"><a href="lesson.html?s='+encodeURIComponent(row.sSlug)+'&l='+(first||1)+'">'+ic('i-play')+' ابدأ الاستماع'+(first?' — الدرس '+first:'')+'</a></div>'}
-      return (rn||row.rdn||row.wan)?'<div class="resline">'
-        +(rn?'<a href="lesson.html?s='+encodeURIComponent(row.sSlug)+'&l='+rn+'">'+ic('i-play')+' تابع من الدرس '+rn+'</a>':'')
-        +'<a href="lesson.html?s='+encodeURIComponent(row.sSlug)+'&l=1">ابدأ من الدرس 1</a></div>':''})()
-    +'<input class="sflt" id="sflt" type="search" aria-label="ابحث في دروس السلسلة" placeholder="ابحث في دروس السلسلة…"></div><div id="lst" aria-live="polite"></div>';
-  app.innerHTML=h;
-  document.getElementById('favb').addEventListener('click',e=>{
-    store.favToggle(row.id);e.currentTarget.classList.toggle('on',store.fav(row.id));
-  });
-  const dlb=document.getElementById('dlb');
-  if(dlb){
-    if(typeof isPinned==='function')isPinned(row.id).then(p=>{if(p)dlb.classList.add('on')});
-    dlb.addEventListener('click',async e=>{
-      e.currentTarget.style.opacity=.4;
-      if(typeof toast==='function')toast('يُحفظ بلا اتصال…');
-      const r=await offlineRow(row.id,row.sSlug);
-      e.currentTarget.style.opacity=1;
-      e.currentTarget.classList.toggle('on',!!r.ok);
-      if(typeof toast==='function')toast(r.ok?('حُفظت السلسلة بلا اتصال ('+r.n+' ملفاً)'):'تعذر الحفظ بلا اتصال',2800);
-      else e.currentTarget.title=r.ok?('محفوظة بلا اتصال'):'تعذر الحفظ';
-    });
-  }
+    +'<div id="lst" aria-live="polite"></div>';
   const draw=fq=>{
     const lst=document.getElementById('lst');lst.innerHTML='';let n=0;
     for(const nn of sorted){
