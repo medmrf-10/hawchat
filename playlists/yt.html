@@ -19,6 +19,10 @@ h1{font-family:var(--font-ar);font-size:1.4rem;font-weight:700;color:var(--txt);
 .lsub{color:var(--dim);font-size:var(--fs-xs);margin-bottom:14px}
 .player{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line-1);box-shadow:var(--e-2)}
 .player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.player.aud{aspect-ratio:auto;height:64px;border-radius:var(--r-md)}
+.audhint{display:flex;align-items:center;gap:10px;margin-top:12px;padding:10px 14px;border-radius:var(--r-md);
+  border:1px solid var(--line-2);background:var(--bg-2);color:var(--ink-2);font-size:var(--fs-xs)}
+.audhint .i{width:20px;height:20px;color:var(--green);flex:none}
 .cover{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;cursor:pointer;
   background:linear-gradient(160deg,rgba(224,90,79,.16),var(--bg-1));color:#e05a4f}
 .cover .big{width:76px;height:76px;border-radius:50%;background:rgba(224,90,79,.14);border:1.5px solid rgba(224,90,79,.6);
@@ -52,6 +56,11 @@ const EMB='https://www.youtube-nocookie.com/embed/';
 function embedUrl(vid,autoplay){
   return EMB+encodeURIComponent(vid)+'?playsinline=1&rel=0&hl=ar&iv_load_policy=3'+(autoplay?'&autoplay=1':'');
 }
+function makeAudio(pl,title,artist,vid){
+  pl.classList.add('aud');
+  pl.insertAdjacentHTML('afterend','<div class="audhint">'+ic('i-audio')+'<span>نمط استماع — شريط المشغّل أعلاه؛ اتركه يعمل ثم أطفئ الشاشة وسيستمر الصوت (تظهر أزرار التحكم على شاشة القفل).</span></div>');
+  if('mediaSession' in navigator){try{navigator.mediaSession.metadata=new MediaMetadata({title:title,artist:artist||'',album:'سلاسل المشايخ'});}catch(e){}}
+}
 function plidOf(url){
   const m=String(url||'').match(/[?&]list=([A-Za-z0-9_-]+)/);return m&&m[1];
 }
@@ -75,6 +84,7 @@ function vidOf(url){
       +'<div class="player" id="pl"><div class="cover" id="cvr"><span class="big">▶</span><span>تشغيل من يوتيوب</span></div></div>'
       +'<a class="ext" href="https://youtu.be/'+esc(vv)+'" target="_blank" rel="noopener">'+ic('i-yt')+' افتح على يوتيوب</a>';
     document.getElementById('cvr').onclick=()=>{document.getElementById('pl').innerHTML='<iframe src="'+embedUrl(vv,true)+'" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>'};
+    if(q.get('a'))makeAudio(document.getElementById('pl'),row?row.title:'درس يوتيوب',st?st.name:'',vv);
     return;
   }
 
@@ -91,7 +101,7 @@ function vidOf(url){
     }
     const l=d.lessons.find(x=>x.n===ln);
     document.getElementById('hdr-sub').textContent=d.sheikh||'';
-    document.getElementById('back').href='row.html?s='+encodeURIComponent(slug)+'&m=yt';
+    document.getElementById('back').href='row.html?s='+encodeURIComponent(slug)+(q.get('a')?'&m=aud':'&m=yt');
     if(!l){app.innerHTML='<div class="errbox">الدرس غير موجود — <a href="row.html?s='+encodeURIComponent(slug)+'&m=yt">عودة للقائمة</a></div>';return}
     document.title=l.title?('الدرس '+l.n+': '+l.title):('الدرس '+l.n+' — '+d.title);
     if(!l.video){app.innerHTML='<div class="errbox">لا فيديو لهذا الدرس — <a href="row.html?s='+encodeURIComponent(slug)+'&m=yt">عودة للقائمة</a></div>';return}
@@ -102,14 +112,15 @@ function vidOf(url){
       +'<h1><bdi>'+esc(l.title||('الدرس '+l.n))+'</bdi></h1>'
       +'<div class="meta"><span class="ch">الدرس '+l.n+' من '+d.count+'</span>'+(du?'<span class="ch">'+esc(du)+'</span>':'')+'</div>'
       +(d.unv?'<div class="unv">ترجمة آلية مأخوذة من يوتيوب — غير مدققة بعد</div>':'')
-      +'<div class="player" id="pl"><div class="cover" id="cvr"><span class="big">▶</span><span>تشغيل الدرس من يوتيوب</span></div></div>'
+      +'<div class="player" id="pl"><div class="cover" id="cvr"><span class="big">▶</span><span>'+(q.get('a')?'استماع — شغّل ثم أطفئ الشاشة':'تشغيل الدرس من يوتيوب')+'</span></div></div>'
       +'<a class="ext" href="https://youtu.be/'+esc(l.video)+'" target="_blank" rel="noopener">'+ic('i-yt')+' افتح على يوتيوب</a>';
     app.innerHTML=h;
     document.getElementById('cvr').onclick=()=>{document.getElementById('pl').innerHTML='<iframe src="'+embedUrl(l.video,true)+'" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>'};
+    if(q.get('a'))makeAudio(document.getElementById('pl'),l.title||('الدرس '+l.n),d.sheikh||'',l.video);
     nav.hidden=false;
-    nav.innerHTML=(i>0?'<a href="?s='+encodeURIComponent(slug)+'&l='+vl[i-1]+'">→ السابق</a>':'<a class="off">→ السابق</a>')
+    nav.innerHTML=(i>0?'<a href="?s='+encodeURIComponent(slug)+'&l='+vl[i-1]+(q.get('a')?'&a=1':'')+'">→ السابق</a>':'<a class="off">→ السابق</a>')
       +'<span class="pos">'+esc(d.title)+' — '+(i+1)+' / '+vl.length+'</span>'
-      +(i<vl.length-1?'<a href="?s='+encodeURIComponent(slug)+'&l='+vl[i+1]+'">التالي ←</a>':'<a class="off">التالي ←</a>');
+      +(i<vl.length-1?'<a href="?s='+encodeURIComponent(slug)+'&l='+vl[i+1]+(q.get('a')?'&a=1':'')+'">التالي ←</a>':'<a class="off">التالي ←</a>');
     return;
   }
 

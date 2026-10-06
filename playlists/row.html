@@ -108,10 +108,10 @@ const ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';
   let mode=q.get('m');if(mode==='ltx')mode='yt';
   if(mode==='listen')sorted=sorted.filter(n=>aln.has(n));
   else if(mode==='read')sorted=sorted.filter(n=>txn.has(n)||rtxt.has(n));
-  else if(mode==='yt')sorted=sorted.filter(n=>{const ll=L(n),rx=rtxt.get(n);return (ll.video&&ll.video.length>=8)||(rx&&rx.vid)});
+  else if(mode==='yt'||mode==='aud')sorted=sorted.filter(n=>{const ll=L(n),rx=rtxt.get(n);return (ll.video&&ll.video.length>=8)||(rx&&rx.vid)});
   else if(mode==='sm')sorted=sorted.filter(n=>smn.has(n));
   else if(mode==='qu')sorted=sorted.filter(n=>qun.has(n));
-  const MN={read:'قراءة',yt:'استماع يوتيوب',listen:'استماع مع إضاءة',sm:'تلخيص',qu:'أسئلة'};
+  const MN={read:'قراءة',yt:'يوتيوب',aud:'استماع',listen:'مشاهدة حية',sm:'تلخيص',qu:'أسئلة'};
   if(MN[mode])document.title=MN[mode]+' — '+row.title;
   const rs=store.resume(row.id);
   store.markSeen(row.id);
@@ -131,9 +131,9 @@ const ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';
       const href=mode==='sm' ? 'sm.html?r='+encodeURIComponent(row.id)+'&l='+nn
         : mode==='qu' ? 'qu.html?r='+encodeURIComponent(row.id)+'&l='+nn
         : mode==='read' ? 'tr.html?r='+encodeURIComponent(row.id)+'&l='+nn
-        : mode==='yt' ? ((L(nn).video&&L(nn).video.length>=8)
-            ? 'yt.html?s='+encodeURIComponent(row.sSlug)+'&l='+nn
-            : 'yt.html?v='+encodeURIComponent((rtxt.get(nn)||{}).vid||'')+'&r='+encodeURIComponent(row.id)+'&l='+nn)
+        : mode==='yt'||mode==='aud' ? ((L(nn).video&&L(nn).video.length>=8)
+            ? 'yt.html?s='+encodeURIComponent(row.sSlug)+'&l='+nn+(mode==='aud'?'&a=1':'')
+            : 'yt.html?v='+encodeURIComponent((rtxt.get(nn)||{}).vid||'')+'&r='+encodeURIComponent(row.id)+'&l='+nn+(mode==='aud'?'&a=1':''))
         : mode==='listen' ? 'lesson.html?s='+encodeURIComponent(row.sSlug)+'&l='+nn
         : canL ? 'lesson.html?s='+encodeURIComponent(row.sSlug)+'&l='+nn
         : 'tr.html?r='+encodeURIComponent(row.id)+'&l='+nn;
@@ -156,8 +156,8 @@ const ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';
     location.replace(mode==='sm'?'sm.html?r='+encodeURIComponent(row.id)+'&l='+ln0
       :mode==='qu'?'qu.html?r='+encodeURIComponent(row.id)+'&l='+ln0
       :mode==='read'?'tr.html?r='+encodeURIComponent(row.id)+'&l='+ln0
-      :mode==='yt'&&L(ln0).video&&L(ln0).video.length>=8?'yt.html?s='+encodeURIComponent(row.sSlug)+'&l='+ln0
-      :mode==='yt'?'yt.html?v='+encodeURIComponent((rtxt.get(ln0)||{}).vid||'')+'&r='+encodeURIComponent(row.id)+'&l='+ln0
+      :(mode==='yt'||mode==='aud')&&L(ln0).video&&L(ln0).video.length>=8?'yt.html?s='+encodeURIComponent(row.sSlug)+'&l='+ln0+(mode==='aud'?'&a=1':'')
+      :mode==='yt'||mode==='aud'?'yt.html?v='+encodeURIComponent((rtxt.get(ln0)||{}).vid||'')+'&r='+encodeURIComponent(row.id)+'&l='+ln0+(mode==='aud'?'&a=1':'')
       :canL?'lesson.html?s='+encodeURIComponent(row.sSlug)+'&l='+ln0
       :'tr.html?r='+encodeURIComponent(row.id)+'&l='+ln0);
   }
