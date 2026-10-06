@@ -52,7 +52,10 @@ const HC=(()=>{
         dur:l.dur||0,vid,sv:okVid(l.video),au:au.get(n),has});
     }
     list.sort((a,b)=>(ordOf(a.title)||a.n)-(ordOf(b.title)||b.n));
-    return {row,list,by:new Map(list.map(x=>[x.n,x])),akey};
+    // «العلمانية هي الحل» ×3 in a row = one talk in parts — say so instead of repeating
+    for(let i=0;i<list.length;){let k=i;while(k+1<list.length&&list[k+1].title===list[i].title)k++;
+      if(k>i)for(let p=i;p<=k;p++){list[p].part=p-i+1;list[p].parts=k-i+1}i=k+1}
+    return {row,list,by:new Map(list.map(x=>[x.n,x])),akey,li,rx,ld};
   }
   const ORD={'الأول':1,'الثاني':2,'الثالث':3,'الرابع':4,'الخامس':5,'السادس':6,'السابع':7,'الثامن':8,'التاسع':9,'العاشر':10,'الحادي':1,'العشرون':20,'الثلاثون':30,'الأربعون':40,'الخمسون':50,'الستون':60,'السبعون':70,'الثمانون':80,'التسعون':90,'المائة':100};
   // «الدرس السادس» in the title outranks upload order (n)
@@ -74,18 +77,12 @@ const HC=(()=>{
       const r2=s.split(strip).join('').replace(/^[\s|｜:—–-]+|[\s|｜:—–-]+$/g,'');if(r2.length>=4)s=r2}
     return s.replace(/(\s*[|｜]\s*)+$/,'').replace(/^(\s*[|｜:]\s*)+/,'').replace(/\s{2,}/g,' ').replace(/^[\s—–-]+|[\s—–-]+$/g,'').trim();
   }
+  /* one lesson page (d.html) for read/video/audio/summary/questions; the
+     word-synced player (lesson.html) stays separate — it is its own instrument */
   function href(ctx,x,m){
-    const row=ctx.row,id=encodeURIComponent(row.id),ss=encodeURIComponent(row.sSlug||''),n=x.n;
-    const yt=a=>(x.sv?'yt.html?s='+ss+'&l='+n:'yt.html?v='+encodeURIComponent(x.vid)+'&r='+id+'&l='+n)+(a?'&a=1':'');
-    switch(m){
-      case 'listen':return 'lesson.html?s='+ss+'&l='+n;
-      case 'read':return 'tr.html?r='+id+'&l='+n;
-      case 'yt':return yt(0);
-      case 'aud':return (x.au&&!x.vid)?'aud.html?k='+encodeURIComponent(ctx.akey)+'&n='+n:yt(1);
-      case 'sm':return 'sm.html?r='+id+'&l='+n;
-      case 'qu':return 'qu.html?r='+id+'&l='+n;
-    }
-    return null;
+    const row=ctx.row,id=encodeURIComponent(row.id),n=x.n;
+    if(m==='listen')return 'lesson.html?s='+encodeURIComponent(row.sSlug||'')+'&l='+n;
+    return 'd.html?r='+id+'&l='+n+(m?'&t='+m:'');
   }
   // the lesson's door: the requested mode if it has it, else the richest one
   function best(x,want){
@@ -125,5 +122,6 @@ const HC=(()=>{
       history[f]=function(){const r=o.apply(this,arguments);mountTabs(active);return r}}
     addEventListener('popstate',()=>mountTabs(active));
   }
-  return {MODES,PRI,stats,findRow,lessons,href,best,remember,mountTabs,follow,cleanTitle,ordOf};
+  const partOf=x=>x.parts?'الجزء '+x.part+' من '+x.parts:'';
+  return {partOf,MODES,PRI,stats,findRow,lessons,href,best,remember,mountTabs,follow,cleanTitle,ordOf};
 })();

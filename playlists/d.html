@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>درس — سلاسل المشايخ</title>
+<meta name="theme-color" content="#0b0f1a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="icon" type="image/png" href="../icons/icon-192.png">
+<link rel="apple-touch-icon" href="../icons/favicon-180.png">
+<link rel="preload" href="../fonts/IBMPlexSansArabic-400-arabic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/Amiri-400-arabic.woff2" as="font" type="font/woff2" crossorigin>
+<script>try{if(JSON.parse(localStorage.getItem('hc_store_v1')||'{}').trtheme==='day')document.documentElement.dataset.theme='day'}catch(e){}</script>
+<link rel="stylesheet" href="../theme.css?v=11">
+<link rel="stylesheet" href="common.css?v=11">
+<link rel="stylesheet" href="ui.css?v=12">
+</head>
+<body class="dpage">
+<header class="hd dhd"><div class="hd-in">
+  <a href="." id="back" class="btn" aria-label="قائمة دروس السلسلة"><svg class="i"><use href="icons.svg?v=11#i-back"/></svg></a>
+  <a class="dhd-t" id="hser" href="."><b id="hrow">سلاسل المشايخ</b><small id="hsh"></small></a>
+  <button class="btn" id="bshare" aria-label="مشاركة الدرس"><svg class="i"><use href="icons.svg?v=11#i-share"/></svg></button>
+</div><div class="u-prog"><i id="pbar"></i></div></header>
+<main class="dmain">
+  <section id="media" class="dmedia"></section>
+  <div class="dwrap">
+    <div id="dhead"><div class="skel" style="height:64px;margin-top:14px"></div></div>
+    <nav class="dtabs" id="dtabs" aria-label="محتوى الدرس" hidden></nav>
+    <article id="dbody" class="dbody"><div class="skel" style="height:260px;margin-top:14px"></div></article>
+  </div>
+</main>
+<nav class="dnav" id="dnav" aria-label="التنقل بين الدروس" hidden>
+  <button id="nprev" aria-label="الدرس السابق"><svg class="i" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" style="transform:scaleX(-1)"><path d="M10 3 5 8l5 5"/></svg><span>السابق</span></button>
+  <button id="nlist" class="dpos" aria-haspopup="dialog" aria-label="كل دروس السلسلة"><svg class="i"><use href="icons.svg?v=11#i-list"/></svg><span id="npos"></span></button>
+  <button id="nnext" aria-label="الدرس التالي"><span>التالي</span><svg class="i" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 3 5 8l5 5"/></svg></button>
+</nav>
+<div class="dsheet" id="sheet" hidden role="dialog" aria-modal="true" aria-label="دروس السلسلة">
+  <div class="dsheet-bg" data-close></div>
+  <div class="dsheet-in">
+    <div class="dsheet-hd"><b id="shT"></b><button class="btn" data-close aria-label="إغلاق">✕</button></div>
+    <input type="search" id="shQ" class="sflt" placeholder="ابحث في الدروس…" aria-label="ابحث في دروس السلسلة">
+    <div id="shL" class="dsheet-l"></div>
+  </div>
+</div>
+<script src="common.js?v=11"></script>
+<script src="core.js?v=2"></script>
+<script src="media.js?v=1"></script>
+<script>
+const ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';
+const TABS=[['read','النص','i-read'],['sm','الملخص','i-list'],['qu','أسئلة وأجوبة','i-qu']];
+const $=id=>document.getElementById(id);
+let ctx,row,st,X,TAB,MED,AP=null,REQ=0,FS=parseFloat(localStorage.getItem('trfs'))||1.15;
+function cleanTxt(t){
+  if(!t)return'';const L=t.split('\n');let i=0;
+  while(i<L.length){const s=L[i].trim();if(!s){i++;break}
+    if(/[:：]/.test(s)&&!/[،.؟!]/.test(s)&&s.length<160){i++;continue}
+    if(/^https?:\/\/\S+$/.test(s)){i++;continue}break}
+  return L.slice(i).join('\n').replace(/^(السلسلة|الشيخ|الفيديو|الحلقة|الدرس|الرابط|المصدر)\s*[:：].{0,200}$/gm,'')
+    .replace(/^<?https?:\/\/\S+>?\s*$/gm,'').replace(/\n{3,}/g,'\n\n').trim();
+}
+async function textOf(x){
+  const r=ctx.rx.get(x.n);
+  if(r&&r.file){const t=await jtxt(r.base+encodeURIComponent(r.file));if(t)return t}
+  const tf=ctx.li&&ctx.li.tf&&ctx.li.tf[x.n];
+  return (tf&&ctx.ld)?(await jtxt('lessons/'+encodeURIComponent(ctx.ld)+'/'+encodeURIComponent(tf))||''):'';
+}
+const lf=(k,x)=>{const f=ctx.li&&ctx.li[k]&&ctx.li[k][x.n];return f?j('lessons/'+encodeURIComponent(ctx.ld)+'/'+encodeURIComponent(f)):Promise.resolve(null)};
+const tabsOf=x=>TABS.filter(([k])=>x.has[k]);
+const url=(x,t)=>'?r='+encodeURIComponent(row.id)+'&l='+x.n+(t?'&t='+t:'');
+
+/* ── media: video (lite: thumbnail until tapped) or audio-only player ── */
+function drawMedia(autoplay){
+  if(AP){AP.destroy();AP=null}
+  const m=$('media'),x=X;
+  if(!x.vid){
+    m.innerHTML=x.au?'<div class="dm-au"><audio controls preload="metadata" src="audio/'+encodeURI(x.au.f)+'"></audio></div>':'';
+    m.hidden=!x.au;return}
+  m.hidden=false;
+  const sw='<div class="dm-sw" role="tablist" aria-label="طريقة التشغيل">'
+    +'<button role="tab" data-m="v" aria-selected="'+(MED==='v')+'">'+ic('i-yt')+'فيديو</button>'
+    +'<button role="tab" data-m="a" aria-selected="'+(MED==='a')+'">'+ic('i-audio')+'صوت فقط</button>'
+    +(x.has.listen?'<a class="dm-live" href="'+HC.href(ctx,x,'listen')+'">'+ic('i-watch')+'مشاهدة حية</a>':'')+'</div>';
+  if(MED==='a'){
+    m.className='dmedia aud';m.innerHTML='<div id="apw"></div>'+sw;
+    AP=HM.audio($('apw'),{vid:x.vid,key:row.id+':'+x.n,title:x.title,artist:st.name,album:row.title,autoplay,
+      onEnd:()=>{const nx=nb(1);if(nx){toast('الدرس التالي: '+nx.n);go(nx,true)}},onPrev:()=>{const p=nb(-1);p&&go(p,true)},onNext:()=>{const p=nb(1);p&&go(p,true)}});
+  }else{
+    m.className='dmedia vid';
+    m.innerHTML='<div class="dm-v" id="dmv"><button class="dm-cover" id="dmc" aria-label="تشغيل الفيديو"><img src="'+HM.thumb(x.vid)+'" alt="" loading="lazy" onerror="this.remove()"><span class="dm-play">'+ic('i-play')+'</span>'
+      +(x.dur?'<span class="dm-dur">'+esc(fmtDur(x.dur))+'</span>':'')+'</button></div>'+sw;
+    const play=()=>{$('dmv').innerHTML='<iframe src="'+HM.embed(x.vid,1)+'" title="'+esc(x.title)+'" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';m.classList.add('on')};
+    $('dmc').onclick=play;if(autoplay)play();
+  }
+  m.querySelectorAll('.dm-sw button').forEach(b=>b.onclick=()=>{
+    if(b.dataset.m===MED)return;const was=m.classList.contains('on')||!!AP;MED=b.dataset.m;store.set('dmed',MED);drawMedia(was)});
+}
+
+/* ── content tabs ── */
+function drawTabs(){
+  const ts=tabsOf(X),el=$('dtabs');
+  el.hidden=ts.length<2;
+  el.innerHTML=ts.map(([k,a,i])=>'<button data-t="'+k+'" aria-pressed="'+(k===TAB)+'">'+ic(i)+'<span>'+a+'</span></button>').join('');
+  el.querySelectorAll('button').forEach(b=>b.onclick=()=>{TAB=b.dataset.t;history.replaceState(null,'',url(X,TAB));
+    HC.remember(row.id,X.n,TAB,X.title,row.title);drawTabs();drawBody();
+    const top=$('dtabs').getBoundingClientRect().top;if(top<0)scrollTo({top:scrollY+top-70})});
+}
+const tools=extra=>'<div class="dtools">'+(extra||'')
+  +'<button id="zout" aria-label="تصغير الخط">أ−</button><button id="zin" aria-label="تكبير الخط">أ+</button>'
+  +'<button id="dnt" aria-label="نهاري / ليلي">'+ic(document.documentElement.dataset.theme==='day'?'i-sun':'i-moon')+'</button></div>';
+function wireTools(getCopy){
+  const ap=()=>{localStorage.setItem('trfs',FS);const b=$('dtx');if(b)b.style.fontSize=FS+'rem'};
+  $('zin').onclick=()=>{FS=Math.min(2.4,+(FS+.12).toFixed(2));ap()};
+  $('zout').onclick=()=>{FS=Math.max(.8,+(FS-.12).toFixed(2));ap()};
+  $('dnt').onclick=()=>{const day=document.documentElement.dataset.theme!=='day';
+    if(day)document.documentElement.dataset.theme='day';else delete document.documentElement.dataset.theme;
+    store.set('trtheme',day?'day':'night');$('dnt').innerHTML=ic(day?'i-sun':'i-moon');
+    const mc=document.querySelector('meta[name="theme-color"]');if(mc)mc.content=day?'#f6f0df':'#0b0f1a'};
+  const c=$('dcp');if(c)c.onclick=async()=>{try{await navigator.clipboard.writeText(getCopy()+'\n\n— '+X.title+'، '+row.title+'، '+st.name);toast('نُسخ')}catch(e){toast('تعذر النسخ')}};
+}
+const paras=t=>t.split(/\n+/).map(p=>p.trim()).filter(Boolean).map(p=>'<p>'+esc(p)+'</p>').join('');
+async function drawBody(){
+  const my=++REQ,b=$('dbody'),x=X;
+  if(!TAB){
+    b.innerHTML='<div class="dempty">'+ic('i-yt')+'<p>هذا الدرس متاح '+(x.vid?'بالفيديو والصوت':'بالصوت')+' فقط — لا نص مكتوب له بعد.</p></div>';return}
+  b.innerHTML='<div class="skel" style="height:240px;margin-top:14px"></div>';
+  if(TAB==='read'){
+    const t=cleanTxt(await textOf(x));if(my!==REQ)return;
+    if(!t){b.innerHTML=errState('تعذر تحميل النص','drawBody()');return}
+    b.innerHTML=tools('<button id="dcp" aria-label="نسخ النص">'+ic('i-copy')+'</button>')
+      +'<div class="dtx" id="dtx" style="font-size:'+FS+'rem">'+paras(t)+'</div>'
+      +'<div class="dend">'+ic('i-check')+' انتهى الدرس'+(nb(1)?' — <button id="dnext">الدرس التالي ←</button>':'')+'</div>';
+    wireTools(()=>t);
+    const nx=$('dnext');if(nx)nx.onclick=()=>go(nb(1),false);
+    const sp=store.get('trp:'+row.id+':'+x.n);
+    if(sp&&sp.f>0.03&&sp.f<0.97){const bt=document.createElement('button');bt.className='dresume';bt.innerHTML=ic('i-play')+'تابع القراءة من حيث توقفت ('+Math.round(sp.f*100)+'%)';
+      bt.onclick=()=>{const tx=$('dtx'),r=tx.getBoundingClientRect();scrollTo({top:scrollY+r.top+r.height*sp.f-120,behavior:'smooth'});bt.remove()};
+      b.prepend(bt);setTimeout(()=>bt.remove(),12000)}
+    const nn=nb(1);if(nn&&nn.has.read)setTimeout(()=>textOf(nn),1500);
+  }else if(TAB==='sm'){
+    const s=await lf('sumf',x);if(my!==REQ)return;
+    if(!s){b.innerHTML=errState('تعذر تحميل الملخص','drawBody()');return}
+    const body=s.summary||s.p||'',pts=s.points||[];
+    b.innerHTML=tools('<button id="dcp" aria-label="نسخ الملخص">'+ic('i-copy')+'</button>')
+      +'<div class="dtx dsm" id="dtx" style="font-size:'+FS+'rem">'+(body?'<p class="lead">'+esc(body)+'</p>':'')
+      +(pts.length?'<ol>'+pts.map(p=>'<li>'+esc(p)+'</li>').join('')+'</ol>':'')
+      +(s.note?'<p class="dnote">'+esc(s.note)+'</p>':'')+'</div>'
+      +(x.has.read?'<button class="dalt" data-t="read">'+ic('i-read')+'اقرأ نص الدرس كاملاً</button>':'');
+    wireTools(()=>body+(pts.length?'\n\n'+pts.map(p=>'• '+p).join('\n'):''));
+  }else if(TAB==='qu'){
+    const d=await lf('quf',x);if(my!==REQ)return;const qa=(d&&(d.qa||d.questions))||[];
+    if(!qa.length){b.innerHTML=errState('تعذر تحميل الأسئلة','drawBody()');return}
+    b.innerHTML=tools('<span class="dtools-l">'+qa.length+' سؤالاً — اضغط السؤال لترى الجواب</span>')
+      +'<div class="dqa" id="dtx" style="font-size:'+FS+'rem">'+qa.map((y,i)=>'<details><summary><b>'+(i+1)+'</b><span>'+esc(y.q||y.question||'')+'</span></summary><div>'+esc(y.a||y.answer||'')+'</div></details>').join('')+'</div>';
+    wireTools();
+  }
+  b.querySelectorAll('.dalt').forEach(a=>a.onclick=()=>{TAB=a.dataset.t;history.replaceState(null,'',url(X,TAB));drawTabs();drawBody();scrollTo({top:0})});
+}
+
+/* ── lesson switching ── */
+const idx=()=>ctx.list.indexOf(X);
+const nb=d=>ctx.list[idx()+d]||null;
+function go(x,autoplay,push=true){
+  if(!x)return;
+  const keep=TAB;X=x;
+  const ts=tabsOf(x).map(t=>t[0]);
+  TAB=ts.includes(keep)?keep:(ts[0]||'');
+  if(push)history.pushState(null,'',url(x,TAB));
+  scrollTo({top:0});
+  render(autoplay);
+}
+function render(autoplay){
+  const x=X,i=idx(),N=ctx.list.length;
+  document.title=x.title+' — '+row.title;
+  store.setResume(row.id,x.n);HC.remember(row.id,x.n,TAB||(MED==='a'?'aud':'yt'),x.title,row.title);
+  const part=HC.partOf(x);
+  $('dhead').innerHTML='<h1 class="dtitle"><bdi>'+esc(x.title)+'</bdi></h1>'
+    +'<div class="dmeta"><span>الدرس '+x.n+'</span>'+(part?'<span>'+part+'</span>':'')+(x.dur?'<span>'+esc(fmtDur(x.dur))+'</span>':'')
+    +(store.seen(row.id+':'+x.n)?'':'')+'</div>'
+    +(row.unv?'<div class="unv">ترجمة آلية مأخوذة من يوتيوب — غير مدققة بعد</div>':'');
+  drawMedia(autoplay);drawTabs();drawBody();
+  $('dnav').hidden=false;
+  $('npos').textContent=(i+1)+' / '+N;
+  $('nprev').disabled=i<=0;$('nnext').disabled=i>=N-1;
+  store.markSeen(row.id+':'+x.n);
+}
+/* ── lessons sheet ── */
+function sheet(open){
+  $('sheet').hidden=!open;document.body.classList.toggle('noscroll',open);
+  if(!open)return;
+  $('shT').textContent=row.title+' · '+pluralLesson(ctx.list.length);
+  const draw=()=>{const fq=normalize($('shQ').value);
+    $('shL').innerHTML=ctx.list.filter(x=>!fq||normalize(x.title).includes(fq)||String(x.n)===fq).map(x=>
+      '<button class="lrow'+(x===X?' cur':'')+(store.seen(row.id+':'+x.n)?' seen':'')+'" data-n="'+x.n+'"><span class="num">'+x.n+'</span><span class="t"><bdi>'+esc(x.title)+'</bdi>'
+      +(x.parts?'<small>'+HC.partOf(x)+'</small>':'')+'</span><span class="bd">'+HC.MODES.filter(([k])=>x.has[k]&&k!=='aud').map(([k,ii])=>'<span class="ic-'+k+'">'+ic(ii)+'</span>').join('')+'</span></button>').join('')
+      ||'<p class="empty">لا نتائج</p>';
+    $('shL').querySelectorAll('.lrow').forEach(b=>b.onclick=()=>{sheet(false);go(ctx.by.get(+b.dataset.n),!!AP)})};
+  $('shQ').value='';$('shQ').oninput=draw;draw();
+  const c=$('shL').querySelector('.cur');if(c)c.scrollIntoView({block:'center'});
+}
+(async()=>{
+  const q=new URLSearchParams(location.search);
+  const hit=await HC.findRow(q);
+  const back=()=>{const p=document.referrer&&new URL(document.referrer,location.href).pathname.split('/').pop();
+    // the old mode pages still know rows the shared resolver does not; never strand the user
+    if(q.get('from')){location.replace(q.get('from')+(q.get('from').includes('?')?'&':'?')+'legacy=1');return true}return false};
+  if(!hit){if(back())return;$('dbody').innerHTML='<div class="errbox">السلسلة غير موجودة — <a href=".">عودة</a></div>';$('dhead').innerHTML='';return}
+  row=hit.r;st=hit.st;row._sname=st.name;
+  ctx=await HC.lessons(row);
+  if(!ctx.list.length){if(back())return;$('dbody').innerHTML='<div class="errbox">لا دروس متاحة — <a href="row.html?r='+encodeURIComponent(row.id)+'">عودة</a></div>';$('dhead').innerHTML='';return}
+  const rh='row.html?r='+encodeURIComponent(row.id);
+  $('back').href=rh;$('hser').href=rh;$('hrow').textContent=row.title;$('hsh').textContent=st.name;
+  let t=q.get('t')||'';MED=store.get('dmed','v');
+  if(t==='aud'){MED='a';t=''}else if(t==='yt'){MED='v';t=''}
+  const want=parseInt(q.get('l')||q.get('n'),10);
+  if(want&&!ctx.by.has(want)&&back())return;
+  if(t==='listen'&&ctx.by.has(want)&&ctx.by.get(want).has.listen){location.replace(HC.href(ctx,ctx.by.get(want),'listen'));return}
+  X=ctx.by.get(want)||(t&&ctx.list.find(x=>x.has[t]))||ctx.by.get((store.resume(row.id)||{}).n)||ctx.list[0];
+  const ts=tabsOf(X).map(y=>y[0]);
+  TAB=ts.includes(t)?t:(ts.includes(store.get('dtab'))?store.get('dtab'):ts[0]||'');
+  history.replaceState(null,'',url(X,TAB));
+  render(false);
+  addEventListener('popstate',()=>{const p=new URLSearchParams(location.search),y=ctx.by.get(+p.get('l'));if(y){X=y;const t2=p.get('t');TAB=tabsOf(y).some(z=>z[0]===t2)?t2:(tabsOf(y)[0]||[''])[0];render(false)}});
+  $('nprev').onclick=()=>go(nb(-1),!!AP);$('nnext').onclick=()=>go(nb(1),!!AP);
+  $('nlist').onclick=()=>sheet(true);
+  $('sheet').addEventListener('click',e=>{if(e.target.closest('[data-close]'))sheet(false)});
+  addEventListener('keydown',e=>{if(e.target.closest('input,textarea'))return;
+    if(e.key==='Escape')sheet(false);
+    if(!$('sheet').hidden)return;
+    if(e.key==='ArrowLeft')go(nb(1),!!AP);if(e.key==='ArrowRight')go(nb(-1),!!AP);
+    if(e.key===' '&&AP){e.preventDefault();AP.toggle()}});
+  $('bshare').onclick=async()=>{const u=location.href,tt=X.title+' — '+row.title+' · '+st.name;
+    if(navigator.share){try{await navigator.share({title:tt,url:u})}catch(e){}}else{try{await navigator.clipboard.writeText(u);toast('نُسخ رابط الدرس')}catch(e){}}};
+  let _t=0;addEventListener('scroll',()=>{
+    const tx=$('dtx'),pb=$('pbar');if(!tx){pb.style.width='0';return}
+    const r=tx.getBoundingClientRect(),f=Math.min(1,Math.max(0,(innerHeight*.5-r.top)/r.height));
+    pb.style.width=(f*100)+'%';
+    const now=Date.now();if(TAB==='read'&&now-_t>800){_t=now;if(f>0.01)store.set('trp:'+row.id+':'+X.n,{f:Math.round(f*1000)/1000})}
+  },{passive:true});
+  addEventListener('beforeunload',()=>store.set('dtab',TAB));
+})();
+if('serviceWorker' in navigator)swRegister('../sw.js');
+</script>
+</body>
+</html>

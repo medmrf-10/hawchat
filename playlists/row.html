@@ -15,7 +15,7 @@
 <link rel="preload" href="../fonts/Amiri-400-arabic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../theme.css?v=11">
 <link rel="stylesheet" href="common.css?v=11">
-<link rel="stylesheet" href="ui.css?v=11">
+<link rel="stylesheet" href="ui.css?v=12">
 <style>
 .wrap{max-width:820px;margin:0 auto;padding:12px 14px 24px}
 .u-hero .meta a{color:var(--gold-3);text-decoration:none;font-size:var(--fs-xs);display:inline-flex;align-items:center;min-height:44px}
@@ -60,6 +60,9 @@
 .lrow .bd{gap:6px}.lrow .bd .i{width:15px;height:15px}
 .lrow .bd .ic-listen{color:var(--violet)}.lrow .bd .ic-read{color:var(--gold-3)}.lrow .bd .ic-yt{color:#e05a4f;opacity:.75}
 .lrow .bd .ic-sm{color:#4fb3c9}.lrow .bd .ic-qu{color:#8fb3e0}
+.resline .rfav{min-height:44px;display:inline-flex;align-items:center;gap:6px;padding:0 14px;border-radius:var(--r-md);border:1px solid var(--line-2);background:var(--bg-2);color:var(--ink-2);font:inherit;font-size:var(--fs-xs);cursor:pointer}
+.resline .rfav[aria-pressed=true]{color:var(--gold-3);border-color:var(--gold-2)}.resline .i{width:16px;height:16px}
+.resline a{background:var(--gold-2)!important;color:#0b0f1a!important;font-weight:700;border:0!important}
 </style>
 </head>
 <body>
@@ -71,7 +74,7 @@
 </div></header>
 <main><div class="wrap" id="app"><div class="skel" style="height:130px;margin-top:10px;border-radius:18px"></div><div class="skel" style="height:300px;margin-top:12px;border-radius:18px"></div></div></main>
 <script src="common.js?v=11"></script>
-<script src="core.js?v=1"></script>
+<script src="core.js?v=2"></script>
 <script>
 const ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';
 const MIC={listen:'i-watch',read:'i-read',yt:'i-yt',aud:'i-audio',sm:'i-list',qu:'i-qu'};
@@ -96,7 +99,9 @@ const MIC={listen:'i-watch',read:'i-read',yt:'i-yt',aud:'i-audio',sm:'i-list',qu
   const rs=hist||store.resume(row.id);
   const resX=rs&&ctx.by.get(rs.n);
   app.innerHTML='<div class="stitle cin"><bdi>'+esc(row.title)+'</bdi></div><div class="smeta"><a href="sheikh.html?s='+encodeURIComponent(slug)+'" style="color:inherit">'+esc(st.name)+'</a> · '+pluralLesson(ctx.list.length)+'</div>'
-    +(resX?'<div class="resline"><a href="'+HC.href(ctx,resX,HC.best(resX,rs.m||mode))+'">'+ic('i-play')+'تابع: الدرس '+resX.n+'</a></div>':'')
+    +'<div class="resline"><button class="rfav" id="rfav" aria-pressed="'+store.fav(row.id)+'">'+ic('i-star')+'<span>'+(store.fav(row.id)?'في المفضلة':'أضف للمفضلة')+'</span></button>'
+    +'<button class="rfav" id="roff">'+ic('i-offline')+'<span>حفظ للقراءة دون اتصال</span></button>'
+    +(resX?'<a href="'+HC.href(ctx,resX,HC.best(resX,rs.m||mode))+'">'+ic('i-play')+'تابع: الدرس '+resX.n+'</a>':'')+'</div>'
     +'<div class="mchips" role="toolbar" aria-label="تصفية حسب المتوفر">'
       +'<button class="mc'+(mode?'':' on')+'" data-m="">الكل <b>'+ctx.list.length+'</b></button>'
       +HC.MODES.filter(([k])=>cnt[k]).map(([k,i,a])=>'<button class="mc'+(mode===k?' on':'')+'" data-m="'+k+'" title="'+a+'">'+ic(i)+'<span>'+a+'</span> <b>'+cnt[k]+'</b></button>').join('')+'</div>'
@@ -115,12 +120,17 @@ const MIC={listen:'i-watch',read:'i-read',yt:'i-yt',aud:'i-audio',sm:'i-list',qu
       prev=x.n;
       const seen=store.seen(row.id+':'+x.n),isCur=rs&&rs.n===x.n;
       h+='<a class="lrow cin'+(seen?' seen':'')+(isCur?' cur':'')+'" href="'+HC.href(ctx,x,m)+'"><span class="num">'+x.n+'</span>'
-        +'<span class="t"><bdi>'+esc(x.title)+'</bdi>'+(x.dur?'<small>'+esc(fmtDur(x.dur))+'</small>':'')+'</span>'
+        +'<span class="t"><bdi>'+esc(x.title)+'</bdi>'+((x.dur||x.parts)?'<small>'+[HC.partOf(x),x.dur?fmtDur(x.dur):''].filter(Boolean).join(' · ')+'</small>':'')+'</span>'
         +'<span class="bd" aria-label="المتوفر">'+HC.MODES.filter(([k])=>x.has[k]&&k!=='aud').map(([k,i,a])=>'<span class="ic-'+k+'" title="'+a+'">'+ic(i)+'</span>').join('')+'</span></a>';
     }
     lst.innerHTML=n?h:'<p class="empty">'+(fq?'لا نتائج.':'لا دروس بعد.')+'</p>';
   };
   draw();
+  const fb=document.getElementById('rfav');fb.onclick=()=>{const on=store.favToggle(row.id);fb.setAttribute('aria-pressed',on);fb.querySelector('span').textContent=on?'في المفضلة':'أضف للمفضلة';toast(on?'أضيفت للمفضلة':'أزيلت من المفضلة')};
+  const ob=document.getElementById('roff');if(!row.rdn)ob.remove();else{
+    isPinned(row.id).then(p=>{if(p)ob.querySelector('span').textContent='محفوظة دون اتصال ✓'});
+    ob.onclick=async()=>{ob.disabled=true;ob.querySelector('span').textContent='جارٍ الحفظ…';const r=await offlineRow(row.id,row.ld||'');
+      ob.disabled=false;ob.querySelector('span').textContent=r.ok?'محفوظة دون اتصال ✓':'تعذر الحفظ';if(r.ok)toast('حُفظت '+r.total+' دروس للقراءة دون اتصال')}}
   document.getElementById('sflt').addEventListener('input',draw);
   document.querySelectorAll('.mchips .mc').forEach(b=>b.onclick=()=>{
     mode=b.dataset.m;const u=new URLSearchParams(location.search);mode?u.set('m',mode):u.delete('m');

@@ -1,9 +1,12 @@
 <!DOCTYPE html><html lang="ar" dir="rtl"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta charset="utf-8">
+<script>(function(){var q=new URLSearchParams(location.search);if(q.get('legacy'))return;var t=(q.get('k')||q.get('s'))?'aud':'';if(!t)return;var f=location.pathname.split('/').pop()+location.search;q.set('t',t);q.set('from',f);location.replace('d.html?'+q)})()</script>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>استماع</title>
 <meta name="theme-color" content="#0e1413">
-<link rel="stylesheet" href="tokens.css?v=11">
-<link rel="stylesheet" href="ui.css?v=11">
+<link rel="stylesheet" href="../theme.css?v=11">
+<link rel="stylesheet" href="common.css?v=11">
+<link rel="stylesheet" href="ui.css?v=12">
 <style>
 body{background:var(--bg-1);color:var(--txt)}
 .wrap{max-width:640px;margin:0 auto;padding:14px 14px 90px}
@@ -36,7 +39,7 @@ h1{font-family:var(--font-ar);font-size:1.4rem;font-weight:700;color:var(--txt);
 <main><div class="wrap" id="app"><div class="skel" style="height:50px;margin-top:12px"></div><div class="skel" style="height:200px;margin-top:12px;border-radius:18px"></div></div></main>
 <div class="navb" id="navb" hidden></div>
 <script src="common.js?v=11"></script>
-<script src="core.js?v=1"></script>
+<script src="core.js?v=2"></script>
 <script>HC.mountTabs('aud')</script>
 <script>
 const ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';

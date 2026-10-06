@@ -16,7 +16,7 @@
 <link rel="preload" href="../fonts/Amiri-400-arabic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../theme.css?v=11">
 <link rel="stylesheet" href="common.css?v=11">
-<link rel="stylesheet" href="ui.css?v=11">
+<link rel="stylesheet" href="ui.css?v=12">
 <style>
 .wrap{max-width:1100px;margin:0 auto;padding:12px 14px 24px}
 .sh.soon,.u-sh.soon{opacity:.42;pointer-events:none;filter:grayscale(.6)}
@@ -50,6 +50,13 @@ a.mini{color:var(--ink-3);display:inline-flex;align-items:center;justify-content
 .u-sech{padding:0 var(--sp-3)}
 .soonh{margin:16px var(--sp-3) 0;width:calc(100% - 2*var(--sp-3))}
 main .wrap>div:last-child{padding:0 var(--sp-3)}
+.hhero{padding:14px 2px 4px}.hhero h1{font-size:1.25rem;font-weight:800;line-height:1.5;margin:0}
+.hhero p{color:var(--ink-3);font-size:var(--fs-xs);margin:2px 0 0;font-variant-numeric:tabular-nums}
+.u-sh .shm{color:var(--ink-3);font-size:.72rem;margin-top:2px}
+.u-sh .shc{display:flex;gap:10px;justify-content:center;margin-top:8px;min-height:18px}
+.u-sh .shc i{font-style:normal;display:inline-flex;align-items:center;gap:3px;font-size:.72rem;color:var(--gold-3);font-variant-numeric:tabular-nums}
+.u-sh .shc i.v{color:var(--violet)}.u-sh .shc i.s{color:#4fb3c9}.u-sh .shc .i{width:14px;height:14px}
+.u-sh .nm{min-height:0}
 .gsrch{position:relative;margin:4px 0 14px}
 .gsrch input{width:100%;height:48px;background:var(--bg-2);border:1px solid var(--line-2);border-radius:var(--r-md);color:var(--txt);
   padding:0 14px;font-family:var(--font-ui);font-size:var(--fs-sm)}
@@ -76,10 +83,10 @@ main .wrap>div:last-child{padding:0 var(--sp-3)}
   <span class="brand">سلاسل</span>
 </div></header>
 <main><div class="wrap">
+  <div class="hhero"><h1>دروس المشايخ — اقرأ، شاهد، استمع</h1><p id="htot">&nbsp;</p></div>
   <div class="gsrch"><input id="gq" type="search" placeholder="ابحث عن سلسلة أو درس أو شيخ…" aria-label="بحث شامل" autocomplete="off"><div id="gres" aria-live="polite"></div></div>
   <div id="cont"></div>
-  <div class="ubar" id="ubar" role="toolbar" aria-label="تصفية السلاسل"></div>
-  <div id="ubar-sub" class="cin" style="margin:-8px 0 10px;font-size:.72rem;color:var(--gold-3);font-family:var(--font-ui)"></div>
+  <div class="u-sech"><h2>المشايخ</h2><span class="cnt" id="shcnt"></span></div>
   <div id="groups" class="u-grid"></div>
   <button id="soonh" class="soonh" hidden></button>
   <div id="soong" class="u-grid" hidden style="margin-top:12px"></div>
@@ -89,7 +96,7 @@ main .wrap>div:last-child{padding:0 var(--sp-3)}
   </div>
 </div></main>
 <script src="common.js?v=11"></script>
-<script src="core.js?v=1"></script>
+<script src="core.js?v=2"></script>
 <script>
 let _stats={},showSoon=false,_mode='lsn';
 const ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';
@@ -100,25 +107,27 @@ function drawBar(){
     '<button class="ftile '+k+(_mode===k?' on':'')+'" data-k="'+k+'" aria-label="'+a+'" aria-pressed="'+(_mode===k)+'" title="'+a+'">'+ic(i)+'</button>').join('');
   document.querySelectorAll('#ubar .ftile').forEach(b=>b.onclick=()=>{
     _mode=(_mode===b.dataset.k)?'':b.dataset.k;
-    drawBar();draw();
+    draw();
+  let S=0,R=0,L=0;for(const k in stats){if(k==='_meta')continue;const rs=stats[k].rows||[];if(rs.length)S++;R+=rs.length;
+    for(const r of rs)L+=Math.max(r.ytn||0,r.wtt||0,r.rtt||0,r.rdn||0)}
+  document.getElementById('htot').textContent=S+' شيخاً · '+kfmt(R)+' سلسلة · '+kfmt(L)+' درس';
+  document.getElementById('shcnt').textContent=S;
   });
   const lbl=document.getElementById('ubar-sub'),mn=_mode&&(MODES.find(x=>x[0]===_mode)||[])[2];
   if(lbl)lbl.textContent=mn?('العرض: '+mn):'';
 }
 function shCard(st,slug){
   const init=(st.name||'؟').replace(/^ال/,'').trim()[0]||'؟';
-  let tot=0,mn=0;
-  for(const r of st.rows||[]){
-    // aud's denominator is every audio item (yt + hosted), else the yt total —
-    // otherwise pct can exceed 100% and render fused like "91100%"
-    tot+=_mode==='aud'?(r.ytn||0)+(r.aun||0):(r.ytn||r.wtt||0);
-    if(_mode)mn+=MCOUNT[_mode](r)}
-  const pct=tot?Math.round(mn/tot*100):0;
-  return '<div class="u-sh cin">'
-    +'<a class="u-top" href="sheikh.html?s='+encodeURIComponent(slug)+(_mode?'&f='+_mode:'')+'">'
+  let L=0,rd=0,ls=0,sm=0;
+  for(const r of st.rows||[]){L+=Math.max(r.ytn||0,r.wtt||0,r.rtt||0,r.rdn||0);rd+=r.rdn||0;ls+=r.wan||0;sm+=r.sun||0}
+  const seen=(store.get('hist',[])||[]).some(h=>(st.rows||[]).some(r=>r.id===h.r));
+  return '<a class="u-sh cin" href="sheikh.html?s='+encodeURIComponent(slug)+'">'
+    +(seen?'<span class="u-badge">تتابعه</span>':'')
     +'<span class="ph">'+(st.photo?'<img src="'+esc(st.photo)+'" alt="" loading="lazy" onerror="this.remove()">':'')+'<span>'+init+'</span></span>'
-    +'<span class="snums"><span>'+kfmt(mn)+'</span><span>'+kfmt(tot)+'</span><span class="sm2">'+pct+'%</span></span>'
-    +'<span class="nm">'+esc(st.name)+'</span></a></div>';
+    +'<span class="nm">'+esc(st.name)+'</span>'
+    +'<span class="shm">'+pluralSeries((st.rows||[]).length)+' · '+kfmt(L)+' درس</span>'
+    +'<span class="shc">'+(rd?'<i title="دروس مكتوبة">'+ic('i-read')+kfmt(rd)+'</i>':'')+(ls?'<i class="v" title="مشاهدة حية">'+ic('i-watch')+kfmt(ls)+'</i>':'')+(sm?'<i class="s" title="ملخصات">'+ic('i-list')+kfmt(sm)+'</i>':'')+'</span>'
+    +'</a>';
 }
 
 function draw(){
@@ -167,7 +176,7 @@ function drawCont(){
   const h=(store.get('hist',[])||[]).slice(0,4),el=document.getElementById('cont');
   const MN={listen:'مشاهدة',read:'قراءة',yt:'يوتيوب',aud:'استماع',sm:'ملخص',qu:'أسئلة'};
   el.innerHTML=h.length?'<div class="ctit">تابع من حيث توقفت</div><div class="crow">'+h.map(x=>
-    '<a class="ccard" href="row.html?r='+encodeURIComponent(x.r)+'&l='+x.n+(x.m?'&m='+x.m:'')+'"><b><bdi>'+esc(x.rt||'')+'</bdi></b>'
+    '<a class="ccard" href="'+(x.m==='listen'?'row.html?r='+encodeURIComponent(x.r)+'&l='+x.n+'&m=listen':'d.html?r='+encodeURIComponent(x.r)+'&l='+x.n+(x.m?'&t='+x.m:''))+'"><b><bdi>'+esc(x.rt||'')+'</bdi></b>'
     +'<span>الدرس '+x.n+(x.m&&MN[x.m]?' · '+MN[x.m]:'')+'</span><small><bdi>'+esc(x.ti||'')+'</bdi></small></a>').join('')+'</div>':'';
 }
 let _sl=null,_slp=null;
@@ -184,7 +193,7 @@ async function gsearch(){
   const rt={};for(const s in _stats){if(s==='_meta')continue;for(const r of _stats[s].rows||[])rt[r.id]=[r.title,_stats[s].name]}
   const ls=[];
   for(const rid in _sl){if(!rt[rid])continue;for(const [n,t] of _sl[rid].L||[]){if(ls.length>=30)break;
-    if(normalize(t).includes(qq))ls.push('<a class="gr" href="row.html?r='+encodeURIComponent(rid)+'&l='+n+'"><b><bdi>'+esc(HC.cleanTitle(t,n,{title:rt[rid][0]})||t)+'</bdi></b><small>درس '+n+' · '+esc(rt[rid][0])+' · '+esc(rt[rid][1])+'</small></a>')}}
+    if(normalize(t).includes(qq))ls.push('<a class="gr" href="d.html?r='+encodeURIComponent(rid)+'&l='+n+'"><b><bdi>'+esc(HC.cleanTitle(t,n,{title:rt[rid][0]})||t)+'</bdi></b><small>درس '+n+' · '+esc(rt[rid][0])+' · '+esc(rt[rid][1])+'</small></a>')}}
   const all=out.slice(0,12).concat(ls);
   el.innerHTML=all.length?all.join(''):'<div class="gr gempty">لا نتائج لـ«'+esc(raw)+'»</div>';
 }
@@ -195,7 +204,11 @@ drawCont();
   const stats=await j('data/sheikh_stats.json');
   if(!stats){document.getElementById('groups').innerHTML='<div class="errbox">تعذر تحميل بيانات السلاسل — <a href=".">أعد المحاولة</a></div>';return}
   _stats=stats;
-  drawBar();draw();
+  draw();
+  let S=0,R=0,L=0;for(const k in stats){if(k==='_meta')continue;const rs=stats[k].rows||[];if(rs.length)S++;R+=rs.length;
+    for(const r of rs)L+=Math.max(r.ytn||0,r.wtt||0,r.rtt||0,r.rdn||0)}
+  document.getElementById('htot').textContent=S+' شيخاً · '+kfmt(R)+' سلسلة · '+kfmt(L)+' درس';
+  document.getElementById('shcnt').textContent=S;
 })();
 if('serviceWorker' in navigator)swRegister('../sw.js');
 </script>
