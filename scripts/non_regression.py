@@ -36,6 +36,9 @@ if not isinstance(new, dict) or not new:
     fails.append('new stats empty/invalid')
 if base:
     rd = J(os.path.join(PL, 'data/redirects.json')) or {}
+    sanctioned = set((J(os.path.join(PL, 'data/sanctioned_deletes.json')) or {}).get('rows', []))
+    if sanctioned:
+        print('note: %d sanctioned row deletions allowed' % len(sanctioned))
     nid, bid, nrd, nwa, brd, bwa = set(), set(), 0, 0, 0, 0
     nrow = {}
     for slug, s in new.items():
@@ -49,27 +52,37 @@ if base:
             continue
         for r in s.get('rows', []):
             bid.add(r['id']); brd += r.get('rdn', 0); bwa += r.get('wan', 0)
-    lost = {i for i in bid - nid if rd.get(i) not in nid and rd.get(i, i) != i}
+    lost = {i for i in bid - nid if i not in sanctioned and rd.get(i) not in nid and rd.get(i, i) != i}
     if lost:
         fails.append('%d row ids vanished with no redirect: %s' % (len(lost), sorted(lost)[:8]))
+    # sanctioned deletions contribute these drops — tolerable floor per total
+    srd = sum(r.get('rdn', 0) for k, s in base.items() if isinstance(s, dict)
+             for r in s.get('rows', []) if r['id'] in sanctioned)
+    swa = sum(r.get('wan', 0) for k, s in base.items() if isinstance(s, dict)
+             for r in s.get('rows', []) if r['id'] in sanctioned)
+    per_sheikh_sanction = {}
+    for k, s in base.items():
+        if isinstance(s, dict):
+            per_sheikh_sanction[k] = sum(1 for r in s.get('rows', []) if r['id'] in sanctioned)
     if nrd < brd:
         # merge dedup is intentional: _meta.dd records rows the lessons/
         # transcript merge dropped because another row already serves that
         # lesson number (identical text, wrong n). Tolerate exactly that.
         dd = sum((new.get('_meta') or {}).get('dd', {}).values())
-        if nrd + dd < brd:
-            fails.append('total read %d < published %d (dedup allowance %d)' % (nrd, brd, dd))
+        if nrd + dd < brd - srd:
+            fails.append('total read %d < published %d (dedup allowance %d, sanctioned %d)' % (nrd, brd, dd, srd))
         else:
             print('note: read -%d covered by intentional merge dedup' % (brd - nrd))
-    if nwa < bwa:
-        fails.append('total watch %d < published %d' % (nwa, bwa))
+    if nwa < bwa - swa:
+        fails.append('total watch %d < published %d (sanctioned %d)' % (nwa, bwa, swa))
     bcounts = {s: len((b if isinstance(b, dict) else {}).get('rows', []))
                for s, b in base.items() if s != '_meta'}
     ncounts = {s: len((n if isinstance(n, dict) else {}).get('rows', []))
                for s, n in new.items() if s != '_meta'}
     for slug, bc in bcounts.items():
-        if ncounts.get(slug, 0) < bc:
-            fails.append('sheikh %s rows %d -> %d' % (slug, bc, ncounts.get(slug, 0)))
+        allowance = per_sheikh_sanction.get(slug, 0)
+        if ncounts.get(slug, 0) < bc - allowance:
+            fails.append('sheikh %s rows %d -> %d (sanctioned %d)' % (slug, bc, ncounts.get(slug, 0), allowance))
 
 for f in fails:
     print('FAIL:', f)
