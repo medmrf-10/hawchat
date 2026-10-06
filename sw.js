@@ -10,7 +10,7 @@
                                  bump ?v= when the asset changes inside a REV.
    - *.json                     → SWR in DATA (wiped per REV).
    - *.txt/.align.*/icons.svg/images → SWR in TEXT (REV-stable). */
-const REV = 'v8-71';
+const REV = 'v8-72';
 const SHELL = 'hawshat-shell-' + REV;
 const DATA  = 'hawshat-data-' + REV;   // versioned with the build — no stale mixes
 const TEXT  = 'hawshat-text-v1';
