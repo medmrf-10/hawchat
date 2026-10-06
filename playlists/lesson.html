@@ -26,6 +26,11 @@
 .player{position:relative;width:100%;aspect-ratio:16/9;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--border);margin-top:12px;background:#000}
 .player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .cbar{position:sticky;bottom:0;background:var(--bgt);backdrop-filter:blur(14px);border-top:1px solid var(--border);margin-top:12px;padding:8px 0 calc(8px + env(safe-area-inset-bottom));z-index:40}
+.kw{display:flex;flex-direction:column;min-height:calc(100dvh - 110px)}
+.kw .kzone{flex:1;display:flex;flex-direction:column;min-height:0;margin-top:10px}
+.kw .kzone .stage{flex:1;min-height:0;margin-top:0;overflow-y:auto}
+.kw .kzone .pos{flex:none}
+.kw .kzone .cbar{position:static;flex:1;display:flex;flex-direction:column;justify-content:center;background:none;backdrop-filter:none;border-top:0;margin-top:0;padding:6px 0;z-index:auto}
 .crow{display:flex;align-items:center;justify-content:center;gap:10px}
 .crow .btn{min-width:48px;min-height:48px;padding:0 14px;border-radius:99px;border:1px solid var(--border);background:var(--card);color:var(--txt);font-size:1rem;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px}
 .crow .btn:hover{border-color:var(--acc)}
@@ -308,7 +313,7 @@ document.addEventListener('keydown',e=>{
     +'</div>';
   if(aln&&l.video){
     h+='<div class="player"><iframe id="yfp" src="https://www.youtube-nocookie.com/embed/'+esc(l.video)+'?enablejsapi=1&rel=0&playsinline=1&iv_load_policy=3&hl=ar&origin='+encodeURIComponent(location.origin)+'" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>';
-    h+='<div class="stage" id="stage"></div>';
+    h+='<div class="kzone"><div class="stage" id="stage"></div>';
     h+='<div class="pos" id="pos"></div>';
     h+='<div class="cbar"><div class="crow">'
       +'<button class="btn" onclick="seekPhrase(curPh-1)" aria-label="الجملة السابقة" title="الجملة السابقة">⇤</button>'
@@ -321,7 +326,7 @@ document.addEventListener('keydown',e=>{
       +'<select id="slp" title="مؤقت النوم" onchange="if(SLEEP){clearTimeout(SLEEP);SLEEP=null}const m=parseInt(this.value);if(m){SLEEP=setTimeout(()=>{YTP&&YTP.pauseVideo();SLEEP=null},m*60000)}this.title=m?\'يتوقف خلال \'+this.value+\' د\':\'مؤقت النوم\'"><option value="0">نوم —</option><option value="15">15د</option><option value="30">30د</option><option value="45">45د</option><option value="60">60د</option></select>'
       +'<button class="chip'+(store.get('anx')===1?' on':'')+'" id="t-anx" title="التشغيل التلقائي للدرس التالي" onclick="const v=!(store.get(\'anx\')===1);store.set(\'anx\',v);this.classList.toggle(\'on\',v)">تلقائي</button>'
       +'<button class="chip'+(TELE?' on':'')+'" id="t-tele" title="وضع الملقّن" onclick="TELE=!TELE;store.set(\'tele\',TELE?1:0);this.classList.toggle(\'on\',TELE);renderPhrase(Math.max(0,curPh))">ملقّن</button>'
-      +'<button class="chip" id="shr" title="مشاركة الدرس" onclick="shareLesson(this)">↗ مشاركة</button></div></div>';
+      +'<button class="chip" id="shr" title="مشاركة الدرس" onclick="shareLesson(this)">↗ مشاركة</button></div></div></div>';
   }else{
     if(l.video)h+='<div class="player" id="pl"><div class="cover" id="cvr"><span class="big">▶</span><span>تشغيل الدرس من يوتيوب</span></div></div>';
     h+='<div class="tools" style="display:flex;gap:8px;margin-top:10px"><button id="fmi" aria-label="تصغير الخط" style="width:44px;height:44px;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--txt);font-size:1rem;cursor:pointer">A−</button>'
@@ -334,6 +339,7 @@ document.addEventListener('keydown',e=>{
   h+='<div class="nav">'+(prev?'<a href="lesson.html?s='+encodeURIComponent(slug)+'&l='+prev.n+'">→ الدرس السابق</a>':'<span></span>')
     +(next?'<a id="go-next" href="lesson.html?s='+encodeURIComponent(slug)+'&l='+next.n+(AUTO_NEXT?'&next=1':'')+'">الدرس التالي ←</a>':'<span></span>')+'</div>';
   app.innerHTML=h;
+  if(aln&&l.video)app.classList.add('kw');
   const tFS=()=>{const el=document.getElementById('tx');if(el)el.style.fontSize=(parseFloat(localStorage.getItem('trfs'))||1.08)+'rem'};
   tFS();
   const fb=document.getElementById('fmi'),pb=document.getElementById('fpl');

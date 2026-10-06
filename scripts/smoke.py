@@ -6,7 +6,7 @@ Usage: python3 scripts/smoke.py [base_url]   (default: live site)
       python3 scripts/smoke.py http://localhost:8000/   (local)"""
 import json, os, sys, urllib.request
 
-BASE = sys.argv[1].rstrip('/') if len(sys.argv) > 1 else 'https://medmrf-10.github.io/hawchat/playlists'
+BASE = sys.argv[1].rstrip('/') if len(sys.argv) > 1 else 'https://medmrf-10.github.io/hawshat/playlists'
 ROOT = os.path.join(os.path.dirname(__file__), '..')
 PL = os.path.join(ROOT, 'playlists')
 

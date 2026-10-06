@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>التفسير — hawshat</title>
+<meta name="theme-color" content="#0b0f1a">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="icon" type="image/png" href="../icons/icon-192.png">
+<link rel="apple-touch-icon" href="../icons/favicon-180.png">
+<link rel="preload" href="../fonts/IBMPlexSansArabic-400-arabic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/Amiri-400-arabic.woff2" as="font" href="../fonts/Amiri-400-arabic.woff2" crossorigin>
+<link rel="stylesheet" href="../theme.css?v=11">
+<link rel="stylesheet" href="../playlists/common.css?v=11">
+<link rel="stylesheet" href="../playlists/ui.css?v=11">
+<style>
+.wrap{max-width:920px;margin:0 auto;padding:16px 16px 60px}
+.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(105px,1fr));gap:8px;margin-top:14px}
+.sgrid a{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line-1);border-radius:10px;padding:10px 8px;text-decoration:none;color:var(--txt);font-size:.88rem;min-height:44px}
+.sgrid a:hover{border-color:var(--gold-2)}
+.sgrid .sn{width:26px;height:26px;min-width:26px;border-radius:50%;background:rgba(201,162,75,.1);border:1px solid var(--line-1);color:var(--gold-3);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700}
+.aya{font-family:var(--font-ar);font-size:1.5rem;line-height:2.3;color:var(--txt);background:var(--card);border:1px solid var(--line-1);border-radius:14px;padding:18px 22px;margin:10px 0;cursor:pointer;transition:border-color .15s}
+.aya:hover{border-color:var(--gold-2)}
+.aya .an{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:1px solid var(--gold-1);color:var(--gold-3);font-size:.8rem;margin-inline-start:8px;vertical-align:middle}
+.tf{background:var(--bg-2);border:1px solid var(--line-1);border-radius:12px;padding:14px 18px;margin:10px 0}
+.tf .tn{color:var(--gold-3);font-weight:700;font-size:.9rem;margin-bottom:8px}
+.tf .tt{font-family:var(--font-ar);font-size:1.12rem;line-height:2.1;color:var(--txt);white-space:pre-wrap}
+.loading{color:var(--dim);text-align:center;padding:40px}
+</style>
+</head>
+<body>
+<header class="hd"><div class="hd-in">
+  <a href="../" class="btn" aria-label="البوابة" style="text-decoration:none">→</a>
+  <img src="../icons/icon-192.png" alt="" width="30" height="30" style="border-radius:8px">
+  <span class="brand">التفسير</span>
+  <span style="color:var(--ink-3);font-size:var(--fs-xs)">41 طبعة تفسير</span>
+</div></header>
+<main><div class="wrap" id="app"><div class="loading">جارٍ التحميل…</div></div></main>
+<script>
+const API='https://medmrf-10.github.io/tfsr/api/';
+const app=document.getElementById('app');
+const esc=s=>String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+let EDS=null;
+const SURAHS=['الفاتحة','البقرة','آل عمران','النساء','المائدة','الأنعام','الأعراف','الأنفال','التوبة','يونس','هود','يوسف','الرعد','إبراهيم','الحجر','النحل','الإسراء','الكهف','مريم','طه','الأنبياء','الحج','المؤمنون','النور','الفرقان','الشعراء','النمل','القصص','العنكبوت','الروم','لقمان','السجدة','الأحزاب','سبأ','فاطر','يس','الصافات','ص','الزمر','غافر','فصلت','الشورى','الزخرف','الدخان','الجاثية','الأحقاف','محمد','الفتح','الحجرات','ق','الذاريات','الطور','النجم','القمر','الرحمن','الواقعة','الحديد','المجادلة','الحشر','الممتحنة','الصف','الجمعة','المنافقون','التغابن','الطلاق','التحريم','الملك','القلم','الحاقة','المعارج','نوح','الجن','المزمل','المدثر','القيامة','الإنسان','المرسلات','النبأ','النازعات','عبس','التكوير','الانفطار','المطففين','الانشقاق','البروج','الطارق','الأعلى','الغاشية','الفجر','البلد','الشمس','الليل','الضحى','الشرح','التين','العلق','القدر','البينة','الزلزلة','العاديات','القارعة','التكاثر','العصر','الهمزة','الفيل','قريش','الماعون','الكوثر','الكافرون','النصر','المسد','الإخلاص','الفلق','الناس'];
+const AYAHS=[7,286,200,176,120,165,206,75,129,109,123,111,43,52,99,128,111,110,98,135,112,78,118,64,77,227,93,88,69,60,34,30,73,54,83,182,88,75,85,54,53,89,59,37,35,38,29,18,45,60,49,62,57,109,96,11,14,12,8,5,13,20,20,19,56,52,40,8,68,4,49,26,78,80,46,37,39,26,14,18,51,60,16,9,5,5,5,28,60,29,30,6,7,5,11,15,16,30,17,5,3];
+const cache={};
+async function gz(u){
+  if(cache[u])return cache[u];
+  const r=await fetch(API+u);if(!r.ok)throw new Error(r.status);
+  const buf=await r.arrayBuffer(),b=new Uint8Array(buf);
+  let t;
+  if(b[0]===0x1f&&b[1]===0x8b)t=await new Response(new Blob([buf]).stream().pipeThrough(new DecompressionStream('gzip'))).text();
+  else t=new TextDecoder().decode(buf);
+  const j=JSON.parse(t);cache[u]=j;return j;
+}
+async function eds(){if(!EDS)EDS=(await gz('index.json')).editions||[];return EDS}
+function edName(slug){const e=(EDS||[]).find(x=>x.slug===slug);return e?e.name:slug}
+
+async function vHome(){
+  app.innerHTML='<h2 style="font-family:var(--font-ar)">اختر السورة</h2><div class="sgrid">'
+    +SURAHS.map((n,i)=>'<a href="#/s/'+(i+1)+'"><span class="sn">'+(i+1)+'</span><span>'+esc(n)+'</span></a>').join('')
+    +'</div>';
+}
+async function vSurah(s){
+  app.innerHTML='<div class="loading">جارٍ تحميل السورة…</div>';
+  const qd=await gz('quran/'+String(s).padStart(3,'0')+'.json.gz');
+  const ay=(qd&&qd.ayahs)||{};
+  let h='<h2 style="font-family:var(--font-ar)">سورة '+esc(SURAHS[s-1])+' <small style="color:var(--dim);font-size:.6em">('+AYAHS[s-1]+' آية)</small></h2><p style="color:var(--dim);font-size:.85rem">اضغط أي آية لقراءة تفاسيرها</p>';
+  for(let a=1;a<=AYAHS[s-1];a++){
+    const t=ay[a]&&ay[a].t;
+    if(t)h+='<div class="aya" data-a="'+a+'"><span class="an">'+a+'</span>'+esc(t)+'</div>';
+  }
+  app.innerHTML=h;
+  app.querySelectorAll('.aya').forEach(el=>el.onclick=()=>location.hash='#/a/'+s+'/'+el.dataset.a);
+}
+async function vAyah(s,a){
+  app.innerHTML='<div class="loading">جارٍ تحميل التفاسير…</div>';
+  const [d,q]=await Promise.all([gz('ayah/'+s+'/'+a+'.json.gz'),eds(),gz('quran/'+String(s).padStart(3,'0')+'.json.gz')]);
+  const at=(q&&q.ayahs&&q.ayahs[a]&&q.ayahs[a].t)||'';
+  let h='<h2 style="font-family:var(--font-ar)"><a href="#/s/'+s+'" style="color:var(--gold-3);text-decoration:none">سورة '+esc(SURAHS[s-1])+'</a> — الآية '+a+'</h2>';
+  h+='<div class="aya" style="cursor:default">'+esc(at)+'</div>';
+  h+='<p style="color:var(--dim);font-size:.85rem;margin-top:18px">'+(d.tafsir?Object.keys(d.tafsir).length:0)+' طبعة تفسير</p>';
+  if(d.tafsir)for(const slug in d.tafsir){
+    const e=d.tafsir[slug];
+    h+='<div class="tf"><div class="tn">'+esc(edName(slug))+'</div><div class="tt">'+esc(e.p||'')+'</div></div>';
+  }
+  app.innerHTML=h;
+  window.scrollTo(0,0);
+}
+async function route(){
+  const h=location.hash||'#/';
+  try{
+    let m;
+    if(m=h.match(/^#\/s\/(\d+)/))await vSurah(parseInt(m[1]));
+    else if(m=h.match(/^#\/a\/(\d+)\/(\d+)/))await vAyah(parseInt(m[1]),parseInt(m[2]));
+    else await vHome();
+  }catch(e){app.innerHTML='<div class="errbox">تعذر التحميل — <a href="'+h+'">إعادة</a></div>'}
+}
+addEventListener('hashchange',route);
+route();
+</script>
+</body>
+</html>

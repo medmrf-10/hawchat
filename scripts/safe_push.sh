@@ -5,7 +5,7 @@
 #   clean tree, runs the gates, and is the ONLY writer to main.
 # Usage:  bash scripts/safe_push.sh "رسالة الالتزام"   (run from repo root)
 set -e
-cd "$(git rev-parse --show-toplevel 2>/dev/null)" || { echo "لست داخل مستودع hawchat"; exit 1; }
+cd "$(git rev-parse --show-toplevel 2>/dev/null)" || { echo "لست داخل مستودع hawshat"; exit 1; }
 MSG="${1:-تحديث}"
 
 # shared-tree wipe guard: deletions never travel through this script.

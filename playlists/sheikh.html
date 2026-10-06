@@ -13,9 +13,9 @@
 <link rel="apple-touch-icon" href="../icons/favicon-180.png">
 <link rel="preload" href="../fonts/IBMPlexSansArabic-400-arabic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../fonts/Amiri-400-arabic.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../theme.css?v=9">
-<link rel="stylesheet" href="common.css?v=9">
-<link rel="stylesheet" href="ui.css?v=9">
+<link rel="stylesheet" href="../theme.css?v=11">
+<link rel="stylesheet" href="common.css?v=11">
+<link rel="stylesheet" href="ui.css?v=11">
 <style>
 .wrap{max-width:1100px;margin:0 auto;padding:12px 14px 24px}
 .hero{display:flex;align-items:center;gap:16px}
@@ -24,11 +24,42 @@
   overflow:hidden;position:relative;font-family:var(--font-ar);font-size:2rem;font-weight:700;color:var(--gold-3);flex:none}
 .hero .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 22%}
 .hero .stats{display:flex;gap:24px;margin-top:10px}
-.u-sr .t{padding-inline-end:48px}
 .chip{min-height:44px;padding:0 16px;border-radius:99px;border:1px solid var(--line-2);
   background:var(--bg-2);color:var(--txt);font-family:var(--font-ui);font-size:var(--fs-xs);
   font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
 .chip.on{background:var(--gold-2);color:var(--bg-0);border-color:var(--gold-2)}
+.acts{display:flex;gap:10px;margin-top:12px;justify-content:center}
+.tile{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  width:60px;height:60px;border-radius:var(--r-md);border:1px solid var(--line-2);
+  background:var(--bg-2);text-decoration:none;padding:5px;transition:border-color var(--t-fast) var(--ease)}
+.tile .i{width:1.25em;height:1.25em}
+.tile b{font-size:var(--fs-sm);font-weight:700}
+.tile.rd{color:var(--gold-3)}.tile.lsn{color:var(--violet)}.tile.sm{color:#4fb3c9}.tile.yt{color:#e05a4f}.tile.qu{color:#8fb3e0}
+.tile.fv{color:var(--ink-3);cursor:pointer;font-family:var(--font-ui)}
+.tile.fv.on{color:var(--gold-3);background:rgba(201,162,75,.12)}
+.tile.ok{border-color:rgba(70,201,109,.6);box-shadow:inset 0 0 0 1px rgba(70,201,109,.22)}
+.tile.off{opacity:.32}
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line-1);
+  margin:0 calc(-1*var(--sp-4)) calc(-1*var(--sp-4));border-radius:0 0 var(--r-lg) var(--r-lg);overflow:hidden}
+.tgrid .tile{width:auto;height:66px;border:0;border-radius:0;box-shadow:inset 0 0 0 .5px var(--line-2)}
+.tgrid button.tile{border:0;border-radius:0;font:inherit}
+.tgrid .tile .i{width:22px;height:22px}
+.tgrid .tile b{font-size:.95rem}
+.tgrid .tile.ok{box-shadow:inset 0 0 0 .5px var(--line-2),inset 0 0 0 2px rgba(70,201,109,.75)}
+.tgrid.fbar{margin:12px 0 0;border:1px solid var(--line-1);border-radius:var(--r-lg)}
+.ftile{cursor:pointer;position:relative}
+.ftile.sel{border-color:var(--gold-2);box-shadow:inset 0 0 0 1px var(--gold-2)}
+.ftile.sel::after{content:'';position:absolute;top:4px;inset-inline-start:5px;width:12px;height:12px;
+  background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 5.5 9.5 16 4 10.5" fill="none" stroke="%2370c96d" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+  background-size:contain;background-repeat:no-repeat}
+.fbar{margin-top:12px}
+@media(hover:hover){a.tile:hover,.ftile:hover{border-color:var(--gold-2)}}
+.u-sr .srow{display:flex;align-items:center;gap:10px;padding:0 12px}
+.u-sr .t{flex:1;min-width:0;text-align:center}
+.u-sr .sn{flex:none;display:flex;gap:6px;direction:ltr}
+.u-sr .sn .n{font-style:normal;color:var(--ink-3);font-size:.85rem;font-weight:700;font-family:var(--font-ui);font-variant-numeric:tabular-nums}
+.u-sr .sn .n.ok{color:var(--green)}
+.u-sr .sn .sep{color:var(--ink-3);font-size:.7rem}
 </style>
 </head>
 <body>
@@ -42,43 +73,43 @@
   <div id="crumb"></div>
   <div id="body"><div class="skel" style="height:140px;margin-top:10px;border-radius:18px"></div><div class="skel" style="height:300px;margin-top:12px;border-radius:18px"></div></div>
 </div></main>
-<script src="common.js?v=9"></script>
+<script src="common.js?v=11"></script>
 <script>
-let fv=new URLSearchParams(location.search).get('f')||'all';
+let flt=new Set();
 let _rows=[],_slug='',_st=null;
-const ic=id=>'<svg class="i"><use href="icons.svg#'+id+'"/></svg>';
+const ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';
+const FCOUNT={rd:r=>r.rdn||0,yt:r=>r.ytn||0,lsn:r=>r.wan||0,qu:r=>r.qn||0,aud:r=>(r.ytn||0)+(r.aun||0),fav:r=>store.fav(r.id)?1:0,sm:r=>r.sun||0};
+const FALABEL={rd:'قراءة',yt:'يوتيوب',lsn:'مشاهدة حية',qu:'أسئلة',aud:'استماع',fav:'مفضلة',sm:'تلخيص'};
 function rowMatch(r){
-  if(fv==='listen')return r.wan>0;
-  if(fv==='done')return r.rOk||(r.wtt&&r.wOk);
+  for(const k of flt)if(!FCOUNT[k](r))return false;
   return true;
 }
+const FMODE={rd:'read',yt:'yt',lsn:'listen',qu:'qu',aud:'aud',sm:'sm'};
+function activeMode(){for(const k of ['rd','yt','lsn','sm','qu','aud'])if(flt.has(k))return FMODE[k];return''}
 function renderSeries(){
   const w=document.getElementById('srows');if(!w)return;
-  const rows=_rows.filter(rowMatch);w.innerHTML='';
-  const seen=store.seenList(),favs=store.favList();
+  const rows=_rows.filter(rowMatch);
+  if(flt.size)rows.sort((a,b)=>{let d=0;for(const k of flt)d+=FCOUNT[k](b)-FCOUNT[k](a);return d});
+  w.innerHTML='';
+  const m=activeMode();
+  const fk=['rd','yt','lsn','sm','qu','aud'].find(k=>flt.has(k));
   for(const r of rows){
-    const done=r.rOk&&(r.wtt?r.wOk:true);
+    let nums='';
+    if(fk){
+      const tot=r.wtt||r.rtt||0;
+      const mc=FCOUNT[fk](r);
+      const ok1=tot>0&&mc>=tot;
+      const ok2=tot>0&&(r.ytn||0)>=tot;
+      nums='<span class="sn"><i class="n'+(ok1?' ok':'')+'" title="دروس فيها '+FALABEL[fk]+'">'+kfmt(mc)+'</i>'
+        +'<span class="sep">/</span>'
+        +'<i class="n'+(ok2?' ok':'')+'" title="إجمالي حلقات السلسلة">'+kfmt(tot)+'</i></span>';
+    }
     w.insertAdjacentHTML('beforeend',
-      '<div class="u-sr cin">'
-      +''
-      +'<button class="u-fav'+(favs.includes(r.id)?' on':'')+'" data-fav="'+esc(r.id)+'" aria-label="مفضلة" style="position:absolute;top:10px;inset-inline-end:10px">'+ic('i-star')+'</button>'
-      +'<div class="t"><bdi>'+esc(r.title)+'</bdi>'+(done?'<span class="done" title="مكتمل">'+ic('i-check')+'</span>':'')+'</div>'
-      +'<div class="acts">'
-      +(r.read?'<a class="u-act rd" href="'+esc(r.read)+'">'+ic('i-read')+' اقرأ <b>'+r.rdn+'</b>'+(r.rdn<r.rtt?'<small>/'+r.rtt+'</small>':'')+(r.rOk?'<small>'+ic('i-check')+'</small>':'')+'</a>':'')
-      +(r.listen?'<a class="u-act lsn'+(r.unv?' unv':'')+'" href="'+esc(r.listen)+'">'+ic(r.unv?'i-auto':'i-listen')+(r.unv?' آلي ':' استمع ')+'<b>'+r.wan+'</b>'+(r.wan<r.rtt?'<small>/'+r.rtt+'</small>':'')+(r.wOk?'<small>'+ic('i-check')+'</small>':'')+'</a>':'')
-      +'</div></div>');
+      '<a class="u-sr cin" href="row.html?r='+encodeURIComponent(r.id)+(m?'&m='+m:'')+'">'
+      +'<div class="srow"><div class="t"><bdi>'+esc(r.title)+'</bdi></div>'+nums+'</div></a>');
   }
-  if(!rows.length)w.innerHTML='<div class="empty">لا سلاسل في هذا القسم.</div>';
+  if(!rows.length)w.innerHTML='<div class="empty">'+(flt.has('fav')?'لا سلاسل مفضلة':'لا سلاسل في هذا القسم.')+'</div>';
 }
-document.addEventListener('click',e=>{
-  const fb=e.target.closest('[data-fav]');
-  if(fb){store.favToggle(fb.dataset.fav);fb.classList.toggle('on',store.fav(fb.dataset.fav));return}
-  const t=e.target.closest('.chip');if(!t)return;
-  document.querySelectorAll('.chip').forEach(x=>{x.classList.toggle('on',x===t);x.setAttribute('aria-pressed',x===t?'true':'false')});
-  fv=t.dataset.f;
-  const u=new URL(location);u.searchParams.set('f',fv);history.replaceState(null,'',u);
-  renderSeries();
-});
 (async()=>{
   const q=new URLSearchParams(location.search);
   _slug=q.get('s')||'';
@@ -89,20 +120,9 @@ document.addEventListener('click',e=>{
   _rows=st.rows||[];
   document.title=st.name+' — سلاسل المشايخ';
   document.getElementById('hdr-sub').textContent=st.name;
-  document.getElementById('crumb').innerHTML=hdr(null,[{h:'.',t:'سلاسل المشايخ'},{t:st.name}]);
-  const init=(st.name||'؟').replace(/^ال/,'').trim()[0]||'؟';
-  const photo=st.photo?String(st.photo).replace(/^\/+/,''):null;
-  const num=(kind,n,label,ok,icn)=>'<span class="u-num '+kind+'">'+ic(icn||(kind==='rd'?'i-read':'i-listen'))+'<b>'+n+'</b>'+(ok?'<b class="ok">'+ic('i-check')+'</b>':'')+'<small>'+label+'</small></span>';
-  let h='<div class="u-hero cin"><div class="hero"><div class="ph">'+(photo?'<img src="'+esc(photo)+'" alt="" onerror="this.remove()">':'')+'<span>'+esc(init)+'</span></div>'
-    +'<div style="flex:1"><h1>'+esc(st.name)+'</h1>'
-    +'<div class="stats">'+(st.read?num('rd',st.read,'مقروء',_rows.every(r=>r.rOk)):'')+(st.watch?num('ls',st.watch,'مسموع',_rows.filter(r=>r.wtt).every(r=>r.wOk)):'')+(st.uwatch?num('unv',st.uwatch,'آلي غير مدقق',0,'i-auto'):'')+'</div>'
-    +'<div style="font-size:var(--fs-xs);color:var(--ink-3);margin-top:8px">'+pluralSeries(st.nSeries)+'</div>'
-    +'</div></div></div>';
-  h+='<div class="u-sech cin"><h2>السلاسل</h2><span class="cnt">'+_rows.length+'</span></div><div class="u-fbar cin" role="radiogroup">'
-    +[['all','الكل',_rows.length],['listen','يُسمع',_rows.filter(r=>r.wan>0).length],['done','مكتملة',_rows.filter(r=>r.rOk||(r.wtt&&r.wOk)).length]]
-      .map(([k,v,n])=>'<button class="chip'+(fv===k?' on':'')+'" data-f="'+k+'" aria-pressed="'+(fv===k)+'">'+v+' <i style="font-style:normal;opacity:.7">'+n+'</i></button>').join('')+'</div>'
-    +'<div id="srows"></div>';
-  B.innerHTML=h;
+  B.innerHTML='<div id="srows"></div>';
+  const fq=(q.get('f')||'').split(',').filter(k=>FCOUNT[k]);
+  fq.forEach(k=>flt.add(k));
   renderSeries();
 })();
 if('serviceWorker' in navigator)swRegister('../sw.js');

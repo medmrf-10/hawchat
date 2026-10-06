@@ -13,9 +13,9 @@
 <link rel="apple-touch-icon" href="../icons/favicon-180.png">
 <link rel="preload" href="../fonts/IBMPlexSansArabic-400-arabic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../fonts/Amiri-400-arabic.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../theme.css?v=9">
-<link rel="stylesheet" href="common.css?v=9">
-<link rel="stylesheet" href="ui.css?v=9">
+<link rel="stylesheet" href="../theme.css?v=11">
+<link rel="stylesheet" href="common.css?v=11">
+<link rel="stylesheet" href="ui.css?v=11">
 <style>
 .wrap{max-width:820px;margin:0 auto;padding:12px 14px 24px}
 .u-hero .meta a{color:var(--gold-3);text-decoration:none;font-size:var(--fs-xs);display:inline-flex;align-items:center;min-height:44px}
@@ -41,6 +41,11 @@
   color:var(--txt);padding:0 14px;font-family:var(--font-ui);font-size:var(--fs-sm);margin-top:12px}
 .sflt:focus{outline:none;border-color:var(--gold-2)}
 .unv{display:inline-block;background:rgba(201,162,75,.08);border:1px solid var(--line-2);border-radius:var(--r-md);padding:8px 12px;margin-top:10px;color:var(--gold-3);font-size:var(--fs-xs)}
+.ytpl{display:flex;align-items:center;gap:14px;margin-top:12px;padding:14px 16px;
+  border:1px solid rgba(224,90,79,.45);border-radius:var(--r-md);text-decoration:none;
+  background:linear-gradient(160deg,rgba(224,90,79,.08),var(--bg-2));color:var(--txt)}
+.ytpl .i{width:26px;height:26px;color:#e05a4f;flex:none}
+.ytpl span{flex:1;font-size:var(--fs-sm)}.ytpl small{display:block;color:var(--ink-3);font-size:var(--fs-xs)}
 </style>
 </head>
 <body>
@@ -51,9 +56,9 @@
   <span class="sub" id="hdr-sub" style="color:var(--ink-3);font-size:var(--fs-xs)">سلاسل المشايخ</span>
 </div></header>
 <main><div class="wrap" id="app"><div class="skel" style="height:130px;margin-top:10px;border-radius:18px"></div><div class="skel" style="height:300px;margin-top:12px;border-radius:18px"></div></div></main>
-<script src="common.js?v=9"></script>
+<script src="common.js?v=11"></script>
 <script>
-const ic=id=>'<svg class="i"><use href="icons.svg#'+id+'"/></svg>';
+const ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';
 (async()=>{
   const q=new URLSearchParams(location.search);
   const app=document.getElementById('app');
@@ -82,88 +87,81 @@ const ic=id=>'<svg class="i"><use href="icons.svg#'+id+'"/></svg>';
   document.getElementById('hdr-sub').textContent=st.name;
   document.title=row.title+' — '+st.name;
   // lessons: series json (aligned) + read-file list
-  const [sd,alidx,rows]=await Promise.all([
+  const [sd,alidx,rows,audx]=await Promise.all([
     row.sSlug?j('series/'+encodeURIComponent(row.sSlug)+'.json'):null,
-    row.sSlug?j('lessons/'+encodeURIComponent(row.sSlug)+'/index.json'):null,
-    j('data/read/'+encodeURIComponent(row.id)+'.json')]);
+    j('lessons/'+encodeURIComponent(row.sSlug||row.id)+'/index.json'),
+    j('data/read/'+encodeURIComponent(row.id)+'.json'),
+    j('audio/index.json')]);
+  const akey=row.sSlug||row.id;
+  const audMap=new Map((((audx||{})[akey]||{}).items||[]).map(a=>[a.n,a]));
   const aln=new Set((alidx&&(alidx.alignOk||alidx.align))||[]);
+  const smn=new Set((alidx&&alidx.sum)||[]);
+  const qun=new Set((alidx&&alidx.qu)||[]);
+  const tin=(alidx&&alidx.ti)||{};
   const txn=new Set((alidx&&alidx.txt)||[]);
   const rtxt=new Map((rows||[]).map(x=>[x.n,x]));
   // unified lesson list: every n that has text OR align
-  const ns=new Set([...aln,...txn,...rtxt.keys()]);
+  const ns=new Set([...aln,...txn,...rtxt.keys(),...audMap.keys()]);
   const lessons=(sd&&sd.lessons)||[];
   for(const l of lessons)if((l.video||aln.has(l.n)||txn.has(l.n)))ns.add(l.n);
   let sorted=[...ns].sort((a,b)=>a-b);
   // B2: ?m=listen (from «استمع» on sheikh page) filters to aligned lessons;
   // ?m=read to lessons with text. Unfiltered default shows everything.
-  const mode=q.get('m');
+  const L=n=>lessons.find(x=>x.n===n)||{};
+  let mode=q.get('m');if(mode==='ltx')mode='yt';
   if(mode==='listen')sorted=sorted.filter(n=>aln.has(n));
   else if(mode==='read')sorted=sorted.filter(n=>txn.has(n)||rtxt.has(n));
-  const L=n=>lessons.find(x=>x.n===n)||{};
-  const favs=store.favList();
+  else if(mode==='yt')sorted=sorted.filter(n=>{const ll=L(n),rx=rtxt.get(n);return (ll.video&&ll.video.length>=8)||(rx&&rx.vid)});
+  else if(mode==='aud')sorted=sorted.filter(n=>{const ll=L(n),rx=rtxt.get(n);return (ll.video&&ll.video.length>=8)||(rx&&rx.vid)||audMap.has(n)});
+  else if(mode==='sm')sorted=sorted.filter(n=>smn.has(n));
+  else if(mode==='qu')sorted=sorted.filter(n=>qun.has(n));
+  const MN={read:'قراءة',yt:'يوتيوب',aud:'استماع',listen:'مشاهدة حية',sm:'تلخيص',qu:'أسئلة'};
+  if(MN[mode])document.title=MN[mode]+' — '+row.title;
   const rs=store.resume(row.id);
   store.markSeen(row.id);
-  let h='<nav class="crumb cin"><a href=".">سلاسل المشايخ</a> ‹ <a href="sheikh.html?s='+encodeURIComponent(slug)+'">'+esc(st.name)+'</a> ‹ <bdi>'+esc(row.title)+'</bdi></nav>';
-  h+='<div class="u-hero cin">'
-    +'<button class="u-fav'+(favs.includes(row.id)?' on':'')+'" id="favb" aria-label="مفضلة" style="position:absolute;top:12px;inset-inline-end:12px">'+ic('i-star')+'</button>'
-    +(row.rdn?'<button class="u-fav" id="dlb" aria-label="حفظ بلا اتصال" title="حفظ النصوص بلا اتصال" style="position:absolute;top:58px;inset-inline-end:12px">'+ic('i-dl')+'</button>':'')
-    +'<h1><bdi>'+esc(row.title)+'</bdi></h1><div class="meta">'
-    +(row.rdn?'<span class="u-num rd">'+ic('i-read')+'<b>'+row.rdn+'</b>'+(row.rdn<row.rtt?'<small>/'+row.rtt+'</small>':'')+(row.rOk?'<b class="ok">'+ic('i-check')+'</b>':'')+'<small>مقروء</small></span>':'')
-    +(row.wan?'<span class="u-num lsn'+(row.unv?' unv':'')+'">'+ic(row.unv?'i-auto':'i-listen')+'<b>'+row.wan+'</b>'+(row.wan<row.rtt?'<small>/'+row.rtt+'</small>':'')+(row.wOk?'<b class="ok">'+ic('i-check')+'</b>':'')+'<small>'+(row.unv?'آلي غير مدقق':'مسموع')+'</small></span>':'')
-    +(sd&&sd.playlist?'<a href="'+esc(sd.playlist)+'" target="_blank" rel="noopener">قائمة يوتيوب ↗</a>':'')
-    +'</div>'
+  app.innerHTML='<input class="sflt" id="sflt" type="search" aria-label="ابحث في دروس السلسلة" placeholder="ابحث في دروس السلسلة…">'
     +(row.unv?'<div class="unv">ترجمة آلية مأخوذة من يوتيوب — غير مدققة بعد</div>':'')
-    +(function(){const rn=rs&&rs.n;
-      if(mode==='listen'){
-        const first=[...aln].sort((a,b)=>a-b).find(n=>!store.seen(row.id+':'+n))||[...aln].sort((a,b)=>a-b)[0];
-        return '<div class="resline"><a href="lesson.html?s='+encodeURIComponent(row.sSlug)+'&l='+(first||1)+'">'+ic('i-play')+' ابدأ الاستماع'+(first?' — الدرس '+first:'')+'</a></div>'}
-      return (rn||row.rdn||row.wan)?'<div class="resline">'
-        +(rn?'<a href="lesson.html?s='+encodeURIComponent(row.sSlug)+'&l='+rn+'">'+ic('i-play')+' تابع من الدرس '+rn+'</a>':'')
-        +'<a href="lesson.html?s='+encodeURIComponent(row.sSlug)+'&l=1">ابدأ من الدرس 1</a></div>':''})()
-    +'<input class="sflt" id="sflt" type="search" aria-label="ابحث في دروس السلسلة" placeholder="ابحث في دروس السلسلة…"></div><div id="lst" aria-live="polite"></div>';
-  app.innerHTML=h;
-  document.getElementById('favb').addEventListener('click',e=>{
-    store.favToggle(row.id);e.currentTarget.classList.toggle('on',store.fav(row.id));
-  });
-  const dlb=document.getElementById('dlb');
-  if(dlb){
-    if(typeof isPinned==='function')isPinned(row.id).then(p=>{if(p)dlb.classList.add('on')});
-    dlb.addEventListener('click',async e=>{
-      e.currentTarget.style.opacity=.4;
-      if(typeof toast==='function')toast('يُحفظ بلا اتصال…');
-      const r=await offlineRow(row.id,row.sSlug);
-      e.currentTarget.style.opacity=1;
-      e.currentTarget.classList.toggle('on',!!r.ok);
-      if(typeof toast==='function')toast(r.ok?('حُفظت السلسلة بلا اتصال ('+r.n+' ملفاً)'):'تعذر الحفظ بلا اتصال',2800);
-      else e.currentTarget.title=r.ok?('محفوظة بلا اتصال'):'تعذر الحفظ';
-    });
-  }
+    +(mode==='yt'&&row.yt?'<a class="ytpl cin" href="yt.html?r='+encodeURIComponent(row.id)+'">'+ic('i-yt')+'<span><b>تشغيل قائمة يوتيوب كاملة</b><small>'+(row.ytn||0)+' فيديو — مشغّل داخلي بلا تفريغ</small></span></a>':'')
+    +'<div id="lst" aria-live="polite"></div>';
   const draw=fq=>{
     const lst=document.getElementById('lst');lst.innerHTML='';let n=0;
     for(const nn of sorted){
       const l=L(nn),rx=rtxt.get(nn);
-      const title=(rx&&rx.title)||l.title||('الدرس '+nn);
+      const title=tin[nn]||(rx&&rx.title)||l.title||('الدرس '+nn);
       if(fq&&!normalize(title).includes(fq)&&!String(nn).includes(fq))continue;n++;
       const canL=aln.has(nn)||(l.video&&l.video.length>=8);
-      const href=canL
-        ? 'lesson.html?s='+encodeURIComponent(row.sSlug)+'&l='+nn
+      // each tile-mode opens its own page — no mixing of read/watch/summary
+      const href=mode==='sm' ? 'sm.html?r='+encodeURIComponent(row.id)+'&l='+nn
+        : mode==='qu' ? 'qu.html?r='+encodeURIComponent(row.id)+'&l='+nn
+        : mode==='read' ? 'tr.html?r='+encodeURIComponent(row.id)+'&l='+nn
+        : mode==='aud'&&audMap.has(nn)&&!(L(nn).video&&L(nn).video.length>=8)&&!(rtxt.get(nn)||{}).vid
+            ? 'aud.html?k='+encodeURIComponent(akey)+'&n='+nn
+        : mode==='yt'||mode==='aud' ? ((L(nn).video&&L(nn).video.length>=8)
+            ? 'yt.html?s='+encodeURIComponent(row.sSlug)+'&l='+nn+(mode==='aud'?'&a=1':'')
+            : 'yt.html?v='+encodeURIComponent((rtxt.get(nn)||{}).vid||'')+'&r='+encodeURIComponent(row.id)+'&l='+nn+(mode==='aud'?'&a=1':''))
+        : mode==='listen' ? 'lesson.html?s='+encodeURIComponent(row.sSlug)+'&l='+nn
+        : canL ? 'lesson.html?s='+encodeURIComponent(row.sSlug)+'&l='+nn
         : 'tr.html?r='+encodeURIComponent(row.id)+'&l='+nn;
       const seen=store.seen(row.id+':'+nn),isCur=rs&&rs.n===nn;
       lst.insertAdjacentHTML('beforeend',
         '<a class="lrow cin'+(seen?' seen':'')+(isCur?' cur':'')+'" href="'+href+'"><span class="num">'+nn+'</span>'
-        +'<span class="t"><bdi>'+esc(title)+'</bdi>'+(l.dur?'<small>'+esc(fmtDur(l.dur))+'</small>':'')+'</span>'
-        +'<span class="bd">'+(seen?'<span class="ic-seen" title="شوهد" style="color:var(--green)">'+ic('i-check')+'</span>':'')
-        +(rtxt.has(nn)?'<span class="ic-read" title="نص">'+ic('i-read')+'</span>':'')
-        +(aln.has(nn)?'<span class="ic-listen'+(row.unv?' unv':'')+'" title="'+(row.unv?'محاذاة على ترجمة آلية غير مدققة':'محاذاة نصية')+'">'+ic(row.unv?'i-auto':'i-listen')+'</span>':(canL?'<span class="ic-play" title="فيديو فقط">'+ic('i-play')+'</span>':''))+'</span></a>');
+        +'<span class="t"><bdi>'+esc(title)+'</bdi>'+(l.dur?'<small>'+esc(fmtDur(l.dur))+'</small>':'')+'</span></a>');
     }
     if(!n)lst.innerHTML='<p class="empty">لا نتائج.</p>';
   };
   draw('');
   document.getElementById('sflt').addEventListener('input',e=>draw(normalize(e.target.value)));
-  // deep-link ?l=n → jump straight into the lesson
+  // deep-link ?l=n → jump straight into the mode's own page
   if(ln0&&sorted.includes(ln0)){
     const canL=aln.has(ln0)||(L(ln0).video&&L(ln0).video.length>=8);
-    location.replace(canL?'lesson.html?s='+encodeURIComponent(row.sSlug)+'&l='+ln0:'tr.html?r='+encodeURIComponent(row.id)+'&l='+ln0);
+    location.replace(mode==='sm'?'sm.html?r='+encodeURIComponent(row.id)+'&l='+ln0
+      :mode==='qu'?'qu.html?r='+encodeURIComponent(row.id)+'&l='+ln0
+      :mode==='read'?'tr.html?r='+encodeURIComponent(row.id)+'&l='+ln0
+      :mode==='aud'&&audMap.has(ln0)&&!(L(ln0).video&&L(ln0).video.length>=8)&&!(rtxt.get(ln0)||{}).vid?'aud.html?k='+encodeURIComponent(akey)+'&n='+ln0
+      :(mode==='yt'||mode==='aud')&&L(ln0).video&&L(ln0).video.length>=8?'yt.html?s='+encodeURIComponent(row.sSlug)+'&l='+ln0+(mode==='aud'?'&a=1':'')
+      :mode==='yt'||mode==='aud'?'yt.html?v='+encodeURIComponent((rtxt.get(ln0)||{}).vid||'')+'&r='+encodeURIComponent(row.id)+'&l='+ln0+(mode==='aud'?'&a=1':'')
+      :canL?'lesson.html?s='+encodeURIComponent(row.sSlug)+'&l='+ln0
+      :'tr.html?r='+encodeURIComponent(row.id)+'&l='+ln0);
   }
 })();
 if('serviceWorker' in navigator)swRegister('../sw.js');
