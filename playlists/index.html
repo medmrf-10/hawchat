@@ -30,11 +30,17 @@ a.mini{color:var(--ink-3);display:inline-flex;align-items:center;justify-content
 .u-sh{padding:var(--sp-2) 0 0;overflow:hidden;border-radius:0}
 .u-sh .ph{width:56px;height:56px}
 .u-sh .nm{font-size:.8rem;margin-top:5px;-webkit-line-clamp:1;min-height:1.45em}
-.u-sh .u-top{display:flex;flex-direction:column;align-items:center;text-decoration:none;color:inherit;width:100%;padding:0 var(--sp-2) 6px}
-.u-sh .tgrid{width:100%;margin:0;grid-template-columns:repeat(2,1fr)}
-.u-sh .tgrid .tile{height:46px;flex-direction:row;gap:10px;justify-content:center}
-.u-sh .tgrid .tile .i{width:24px;height:24px}
-.u-sh .tgrid .tile b{font-size:1.02rem}
+.u-sh .u-top{display:flex;flex-direction:column;align-items:center;text-decoration:none;color:inherit;width:100%;padding:var(--sp-2) var(--sp-2) var(--sp-3)}
+.ubar{display:flex;justify-content:center;gap:10px;padding:4px var(--sp-3) 14px}
+.ubar .ftile{display:flex;align-items:center;justify-content:center;width:56px;height:56px;
+  border-radius:var(--r-md);border:1px solid var(--line-2);background:var(--bg-2);color:var(--ink-3);
+  cursor:pointer;transition:border-color var(--t-fast) var(--ease)}
+.ubar .ftile .i{width:24px;height:24px}
+.ubar .ftile.on{border-color:var(--gold-2);color:var(--gold-3);background:rgba(201,162,75,.12)}
+.ubar .ftile.rd.on{color:var(--gold-3)}.ubar .ftile.lsn.on{color:var(--violet)}
+.ubar .ftile.sm.on{color:#4fb3c9}.ubar .ftile.yt.on{color:#e05a4f}.ubar .ftile.qu.on{color:#8fb3e0}
+.ubar .ftile.aud.on{color:var(--green)}
+@media(hover:hover){.ubar .ftile:hover{border-color:var(--gold-2)}}
 .u-sech{padding:0 var(--sp-3)}
 .soonh{margin:16px var(--sp-3) 0;width:calc(100% - 2*var(--sp-3))}
 main .wrap>div:last-child{padding:0 var(--sp-3)}
@@ -45,10 +51,9 @@ main .wrap>div:last-child{padding:0 var(--sp-3)}
   <a href="../" class="btn" aria-label="الرئيسية" style="text-decoration:none">→</a>
   <img src="../icons/icon-192.png" alt="" width="30" height="30" style="border-radius:8px">
   <span class="brand">سلاسل</span>
-  <span class="sub" style="color:var(--ink-3);font-size:var(--fs-xs)">سلاسل المشايخ</span>
 </div></header>
 <main><div class="wrap">
-  <div class="u-sech"><h2>المشايخ</h2><span class="cnt" id="shcnt"></span></div>
+  <div class="ubar" id="ubar" role="toolbar" aria-label="تصفية السلاسل"></div>
   <div id="groups" class="u-grid"></div>
   <button id="soonh" class="soonh" hidden></button>
   <div id="soong" class="u-grid" hidden style="margin-top:12px"></div>
@@ -59,29 +64,23 @@ main .wrap>div:last-child{padding:0 var(--sp-3)}
 </div></main>
 <script src="common.js?v=11"></script>
 <script>
-let _stats={},showSoon=false;
+let _stats={},showSoon=false,_mode='';
 const ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';
-function shCard(st,slug,fav){
+const MODES=[['rd','i-read','قراءة'],['yt','i-yt','يوتيوب'],['lsn','i-watch','مشاهدة حية'],['qu','i-qu','أسئلة'],['aud','i-audio','استماع'],['sm','i-list','تلخيص']];
+function drawBar(){
+  document.getElementById('ubar').innerHTML=MODES.map(([k,i,a])=>
+    '<button class="ftile '+k+(_mode===k?' on':'')+'" data-k="'+k+'" aria-label="'+a+'" aria-pressed="'+(_mode===k)+'" title="'+a+'">'+ic(i)+'</button>').join('');
+  document.querySelectorAll('#ubar .ftile').forEach(b=>b.onclick=()=>{
+    _mode=(_mode===b.dataset.k)?'':b.dataset.k;
+    drawBar();draw();
+  });
+}
+function shCard(st,slug){
   const init=(st.name||'؟').replace(/^ال/,'').trim()[0]||'؟';
-  const rows=st.rows||[];
-  const agg=k=>{let s=0;for(const r of rows)s+=(k==='rd'?r.rdn:k==='yt'?r.ytn:k==='lsn'?r.wan:k==='qu'?r.qn:k==='aud'?(r.ytn||0)+(r.aun||0):k==='sm'?r.sun:0)||0;return s};
-  const favn=rows.reduce((a,r)=>a+(store.fav(r.id)?1:0),0);
-  const ytOk=rows.length&&rows.every(r=>{const t=Math.max(r.rtt||0,r.wtt||0);return t===0||(r.ytn||0)>=t});
-  const tk=(k,icn,n,al,fk,ok)=>n>0
-    ?'<a class="tile '+k+(ok?' ok':'')+'" href="sheikh.html?s='+encodeURIComponent(slug)+'&f='+(fk||k)+'" aria-label="'+al+' — '+n+'">'+ic(icn)+'<b>'+kfmt(n)+'</b></a>'
-    :'<span class="tile '+k+' off" aria-hidden="true">'+ic(icn)+'<b>'+kfmt(n||0)+'</b></span>';
   return '<div class="u-sh cin">'
-    +'<a class="u-top" href="sheikh.html?s='+encodeURIComponent(slug)+'">'
+    +'<a class="u-top" href="sheikh.html?s='+encodeURIComponent(slug)+(_mode?'&f='+_mode:'')+'">'
     +'<span class="ph">'+(st.photo?'<img src="'+esc(st.photo)+'" alt="" loading="lazy" onerror="this.remove()">':'')+'<span>'+init+'</span></span>'
-    +'<span class="nm">'+esc(st.name)+'</span></a>'
-    +'<span class="tgrid">'
-    +tk('rd','i-read',agg('rd'),'قراءة')
-    +tk('yt','i-yt',agg('yt'),'يوتيوب',null,ytOk)
-    +tk('lsn','i-watch',agg('lsn'),'مشاهدة حية')
-    +tk('qu','i-qu',agg('qu'),'أسئلة')
-    +tk('aud','i-audio',agg('aud'),'استماع','aud')
-    +tk('sm','i-list',agg('sm'),'تلخيص')
-    +'</span></div>';
+    +'<span class="nm">'+esc(st.name)+'</span></a></div>';
 }
 
 function draw(){
@@ -100,7 +99,6 @@ function draw(){
   const sh=document.getElementById('soonh');
   sh.hidden=!without.length;sg.hidden=!showSoon;
   sh.innerHTML=showSoon?'إخفاء':'قريباً ('+without.length+')';
-  document.getElementById('shcnt').textContent=withC.length+' شيخاً';
 }
 document.getElementById('soonh').addEventListener('click',()=>{showSoon=!showSoon;draw()});
 document.getElementById('exp').addEventListener('click',async e=>{
@@ -131,7 +129,7 @@ document.getElementById('impf').addEventListener('change',e=>{
   const stats=await j('data/sheikh_stats.json');
   if(!stats){document.getElementById('groups').innerHTML='<div class="errbox">تعذر تحميل بيانات السلاسل — <a href=".">أعد المحاولة</a></div>';return}
   _stats=stats;
-  draw();
+  drawBar();draw();
 })();
 if('serviceWorker' in navigator)swRegister('../sw.js');
 </script>
