@@ -33,6 +33,11 @@ a.mini{color:var(--ink-3);display:inline-flex;align-items:center;justify-content
 .u-sh .ph{width:56px;height:56px}
 .u-sh .nm{font-size:.8rem;margin-top:5px;-webkit-line-clamp:1;min-height:1.45em}
 .u-sh .u-top{display:flex;flex-direction:column;align-items:center;text-decoration:none;color:inherit;width:100%;padding:var(--sp-2) var(--sp-2) var(--sp-3)}
+.u-sh .u-top .ph{margin-inline-end:auto;margin-inline-start:16px}
+.u-sh .snums{position:absolute;top:12px;inset-inline-end:12px;display:flex;flex-direction:column;gap:6px;font-family:var(--font-ui);font-size:.74rem;color:var(--ink-3);pointer-events:none}
+.u-sh .snums span{display:flex;align-items:center;gap:6px}
+.u-sh .snums .i{width:14px;height:14px;opacity:.7}
+.u-sh .snums .cntx{position:static;font-size:1rem;font-weight:800;color:var(--gold-3)}
 .ubar{display:flex;justify-content:center;gap:10px;padding:4px var(--sp-3) 14px}
 .ubar .ftile{display:flex;align-items:center;justify-content:center;width:56px;height:56px;
   border-radius:var(--r-md);border:1px solid var(--line-2);background:var(--bg-2);color:var(--ink-3);
@@ -80,15 +85,20 @@ function drawBar(){
 }
 function shCard(st,slug){
   const init=(st.name||'؟').replace(/^ال/,'').trim()[0]||'؟';
-  let cnt='';
+  let rdn=0,wan=0,mc='';
+  for(const r of st.rows||[]){rdn+=r.rdn||0;wan+=r.wan||0}
   if(_mode){
     let n=0;for(const r of st.rows||[])n+=MCOUNT[_mode](r);
-    cnt='<span class="cntx">'+kfmt(n)+'</span>';
+    mc='<span class="cntx">'+kfmt(n)+'</span>';
   }
   return '<div class="u-sh cin">'
     +'<a class="u-top" href="sheikh.html?s='+encodeURIComponent(slug)+(_mode?'&f='+_mode:'')+'">'
     +'<span class="ph">'+(st.photo?'<img src="'+esc(st.photo)+'" alt="" loading="lazy" onerror="this.remove()">':'')+'<span>'+init+'</span></span>'
-    +'<span class="nm">'+esc(st.name)+'</span></a>'+cnt+'</div>';
+    +'<span class="snums">'+mc
+    +'<span>'+ic('i-read')+kfmt(rdn)+'</span>'
+    +'<span>'+ic('i-watch')+kfmt(wan)+'</span>'
+    +'<span>'+ic('i-list')+kfmt(st.nSeries||(st.rows||[]).length)+'</span></span>'
+    +'<span class="nm">'+esc(st.name)+'</span></a></div>';
 }
 
 function draw(){
