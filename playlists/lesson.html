@@ -34,20 +34,19 @@ html,body{height:100%;overflow:hidden}
 .stage .tnx{margin-top:10px}
 .stage .ph{order:0}
 .pos{color:var(--dim);font-size:.7rem;text-align:center;margin-top:4px}
-.czone{flex:none;display:flex;flex-direction:column;justify-content:center;gap:6px;margin-top:8px}
-.cbar{display:flex;flex-direction:column;gap:6px}
-.crow{display:flex;align-items:center;justify-content:center;gap:8px}
+.czone{flex:none;height:200px;display:flex;flex-direction:column;justify-content:center;gap:12px;margin-top:8px;background:linear-gradient(145deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:var(--r-md);padding:16px 22px}
+.crow{display:flex;align-items:center;justify-content:center;gap:14px}
 .crow .btn{min-width:52px;min-height:52px;padding:0 12px;border-radius:99px;border:1px solid var(--border);background:var(--card);color:var(--txt);font-size:1rem;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:4px}
 .crow .btn:hover{border-color:var(--acc)}
 .crow .btn.main{min-width:64px;min-height:64px;font-size:1.4rem;background:var(--acc);color:#0b0f1a;font-weight:700;border-color:var(--acc)}
 .crow .btn.ld{position:relative;color:transparent}
 .crow .btn.ld::after{content:'';position:absolute;width:22px;height:22px;border-radius:50%;border:2.5px solid var(--border);border-top-color:var(--acc);animation:ldsp .8s linear infinite}
 @keyframes ldsp{to{transform:rotate(360deg)}}
-.csub{display:flex;align-items:center;justify-content:center;gap:5px;flex-wrap:wrap}
+.csub{display:flex;align-items:center;justify-content:center;gap:14px}
 .csub .tm{color:var(--acc2);font-size:.8rem;font-variant-numeric:tabular-nums}
-.csub .chip,.csub select,.crow .chip{min-height:40px;min-width:40px;justify-content:center;padding:0 8px;border-radius:99px;border:1px solid var(--border);background:var(--card);color:var(--txt);font-size:.75rem;cursor:pointer;display:inline-flex;align-items:center;gap:4px}
-.csub .chip.on,.crow .chip.on{border-color:var(--acc);color:var(--acc)}
-.crow .chip{min-height:52px;min-width:52px;font-variant-numeric:tabular-nums}
+.csub .pos{flex:1;text-align:center}
+.csub .chip{min-height:40px;min-width:56px;justify-content:center;padding:0 10px;border-radius:99px;border:1px solid var(--border);background:var(--card);color:var(--txt);font-size:.78rem;cursor:pointer;display:inline-flex;align-items:center;gap:4px}
+.csub .chip.on{border-color:var(--acc);color:var(--acc)}
 .nav{display:none}
 .txt{flex:1;min-height:0;overflow-y:auto;background:linear-gradient(145deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:var(--r-md);padding:18px;margin-top:8px;font-family:var(--font-ar);font-size:1.08rem;line-height:2.1;white-space:pre-wrap}
 .cover{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:linear-gradient(145deg,var(--card),var(--card2));cursor:pointer}
@@ -291,22 +290,16 @@ document.addEventListener('keydown',e=>{
   if(aln&&l.video){
     h+='<div class="player"><iframe id="yfp" src="https://www.youtube-nocookie.com/embed/'+esc(l.video)+'?enablejsapi=1&rel=0&playsinline=1&iv_load_policy=3&hl=ar&origin='+encodeURIComponent(location.origin)+'" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>';
     h+='<div class="stage" id="stage"></div>';
-    h+='<div class="czone"><div class="pos" id="pos"></div>';
-    h+='<div class="cbar"><div class="crow">'
+    h+='<div class="czone"><div class="crow">'
       +'<button class="btn" onclick="seekPhrase(curPh-1)" aria-label="الجملة السابقة" title="الجملة السابقة">⇤</button>'
       +'<button class="btn" onclick="YTP&&YTP.seekTo(Math.max(0,YTP.getCurrentTime()-10),true)" aria-label="رجوع 10 ثوانٍ">↺10</button>'
       +'<button class="btn main ld" id="playb" aria-pressed="false" onclick="playToggle(this)" aria-label="تشغيل/إيقاف"></button>'
       +'<button class="btn" onclick="YTP&&YTP.seekTo(YTP.getCurrentTime()+10,true)" aria-label="تقدم 10 ثوانٍ">10↻</button>'
-      +'<button class="chip" id="spd" title="سرعة التشغيل" onclick="cycleSpeed()">×'+(store.get('speed')||1)+'</button>'
       +'<button class="btn" onclick="seekPhrase(curPh+1)" aria-label="الجملة التالية" title="الجملة التالية">⇥</button></div>'
-      +'<div class="csub"><span class="tm" id="tm">0:00</span>'
-      +'<select id="slp" title="مؤقت النوم" onchange="if(SLEEP){clearTimeout(SLEEP);SLEEP=null}const m=parseInt(this.value);if(m){SLEEP=setTimeout(()=>{YTP&&YTP.pauseVideo();SLEEP=null},m*60000)}this.title=m?\'يتوقف خلال \'+this.value+\' د\':\'مؤقت النوم\'"><option value="0">نوم —</option><option value="15">15د</option><option value="30">30د</option><option value="45">45د</option><option value="60">60د</option></select>'
-      +'<button class="chip'+(store.get('anx')===1?' on':'')+'" id="t-anx" title="التشغيل التلقائي للدرس التالي" onclick="const v=!(store.get(\'anx\')===1);store.set(\'anx\',v);this.classList.toggle(\'on\',v)">تلقائي</button>'
+      +'<div class="csub"><span class="tm" id="tm">0:00</span><span class="pos" id="pos"></span>'
+      +'<button class="chip" id="spd" title="سرعة التشغيل" onclick="cycleSpeed()">×'+(store.get('speed')||1)+'</button>'
       +'<button class="chip'+(TELE?' on':'')+'" id="t-tele" title="وضع الملقّن" onclick="TELE=!TELE;store.set(\'tele\',TELE?1:0);this.classList.toggle(\'on\',TELE);renderPhrase(Math.max(0,curPh))">ملقّن</button>'
-      +'<button class="chip" id="shr" title="مشاركة الدرس" onclick="shareLesson(this)">↗ مشاركة</button>'
-      +(rdRow?'<a class="chip" href="tr.html?r='+encodeURIComponent(rdRow.id)+'&l='+ln+'" title="قراءة التفريغ">قراءة</a>':'')
-      +((lidx&&lidx.sum&&(lidx.sum||[]).indexOf(ln)>=0)?'<a class="chip" href="sm.html?s='+encodeURIComponent(slug)+'&l='+ln+'" title="ملخص الدرس">☰ ملخص</a>':'')
-      +'</div></div></div>';
+      +'</div></div>';
   }else{
     if(l.video)h+='<div class="player" id="pl"><div class="cover" id="cvr"><span class="big">▶</span><span>تشغيل الدرس من يوتيوب</span></div></div>';
     h+='<div class="tools" style="display:flex;gap:8px;margin-top:10px"><button id="fmi" aria-label="تصغير الخط" style="width:44px;height:44px;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--txt);font-size:1rem;cursor:pointer">A−</button>'
