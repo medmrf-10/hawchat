@@ -51,6 +51,15 @@
   background:linear-gradient(160deg,rgba(224,90,79,.08),var(--bg-2));color:var(--txt)}
 .ytpl .i{width:26px;height:26px;color:#e05a4f;flex:none}
 .ytpl span{flex:1;font-size:var(--fs-sm)}.ytpl small{display:block;color:var(--ink-3);font-size:var(--fs-xs)}
+.mchips{display:flex;gap:6px;overflow-x:auto;margin-top:12px;padding-bottom:2px;scrollbar-width:none}
+.mchips::-webkit-scrollbar{display:none}
+.mc{flex:none;min-height:40px;display:inline-flex;align-items:center;gap:6px;padding:0 12px;border-radius:99px;border:1px solid var(--line-2);
+  background:var(--bg-2);color:var(--ink-2);font-family:var(--font-ui);font-size:var(--fs-xs);cursor:pointer}
+.mc .i{width:16px;height:16px}.mc b{color:var(--ink-3);font-weight:600}
+.mc.on{border-color:var(--gold-2);color:var(--gold-3);background:rgba(201,162,75,.10)}.mc.on b{color:var(--gold-3)}
+.lrow .bd{gap:6px}.lrow .bd .i{width:15px;height:15px}
+.lrow .bd .ic-listen{color:var(--violet)}.lrow .bd .ic-read{color:var(--gold-3)}.lrow .bd .ic-yt{color:#e05a4f;opacity:.75}
+.lrow .bd .ic-sm{color:#4fb3c9}.lrow .bd .ic-qu{color:#8fb3e0}
 </style>
 </head>
 <body>
@@ -62,141 +71,61 @@
 </div></header>
 <main><div class="wrap" id="app"><div class="skel" style="height:130px;margin-top:10px;border-radius:18px"></div><div class="skel" style="height:300px;margin-top:12px;border-radius:18px"></div></div></main>
 <script src="common.js?v=11"></script>
+<script src="core.js?v=1"></script>
 <script>
 const ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';
+const MIC={listen:'i-watch',read:'i-read',yt:'i-yt',aud:'i-audio',sm:'i-list',qu:'i-qu'};
 (async()=>{
   const q=new URLSearchParams(location.search);
   const app=document.getElementById('app');
-  // ?r=<row id> — resolves the row then shows series OR reader lessons
-  const stats=await j('data/sheikh_stats.json');
-  let rid=q.get('r'),slug=q.get('s'),ln0=parseInt(q.get('l'),10)||0;
-  let hit=null;
-  if(stats&&rid){
-    // row id not found → follow a redirect (rows get re-keyed when merged)
-    let found=false;
-    for(const s in stats){if(s==='_meta')continue;
-      if((stats[s].rows||[]).some(r=>r.id===rid)){found=true;break}}
-    if(!found){
-      const red=await j('data/redirects.json');
-      if(red&&red[rid])rid=red[rid];
-    }
-  }
-  if(stats){
-    for(const s in stats){if(s==='_meta')continue;
-      const r=(stats[s].rows||[]).find(r=>(rid&&r.id===rid)||(!rid&&slug&&r.sSlug===slug));
-      if(r){hit={slug:s,r,st:stats[s]};break}}
-  }
-  if(!hit){app.innerHTML='<div class="errbox">السلسلة غير موجودة — <a href=".">عودة</a></div>';return}
-  const row=hit.r,st=hit.st;slug=hit.slug;
+  const hit=await HC.findRow(q);
+  if(!hit){app.innerHTML='<div class="errbox">'+(navigator.onLine===false?'لا اتصال — حدّث الصفحة حين يعود':'السلسلة غير موجودة')+' — <a href=".">عودة</a></div>';return}
+  const row=hit.r,st=hit.st,slug=hit.slug;row._sname=st.name;
+  if(q.get('r')!==row.id){const u=new URLSearchParams(q);u.delete('s');u.delete('k');u.set('r',row.id);history.replaceState(null,'','?'+u)}
   document.getElementById('back').href='sheikh.html?s='+encodeURIComponent(slug);
-  document.getElementById('hdr-sub').textContent=row.title;
-  document.title=row.title+' — '+st.name;
-  // lessons: series json (aligned) + read-file list
-  const [sd,alidx,rows,audx]=await Promise.all([
-    row.sSlug?j('series/'+encodeURIComponent(row.sSlug)+'.json'):null,
-    (row.ld??row.sSlug)?j('lessons/'+encodeURIComponent(row.ld??row.sSlug)+'/index.json'):null,
-    j('data/read/'+encodeURIComponent(row.id)+'.json'),
-    j('audio/index.json')]);
-  const akey=row.sSlug||row.id;
-  const audMap=new Map((((audx||{})[akey]||{}).items||[]).map(a=>[a.n,a]));
-  const aln=new Set((alidx&&(alidx.alignOk||alidx.align))||[]);
-  const smn=new Set((alidx&&alidx.sum)||[]);
-  const qun=new Set((alidx&&alidx.qu)||[]);
-  const tin=(alidx&&alidx.ti)||{};
-  const txn=new Set((alidx&&alidx.txt)||[]);
-  const rtxt=new Map((rows||[]).map(x=>[x.n,x]));
-  // unified lesson list: every n that has text OR align
-  const ns=new Set([...aln,...txn,...rtxt.keys(),...audMap.keys()]);
-  const lessons=(sd&&sd.lessons)||[];
-  for(const l of lessons)if((l.video||aln.has(l.n)||txn.has(l.n)))ns.add(l.n);
-  // display order follows the lesson number IN THE TITLE («الدرس السادس») when
-  // present — file numbering (n) is upload order and can contradict it
-  const ORD={'الأول':1,'الثاني':2,'الثالث':3,'الرابع':4,'الخامس':5,'السادس':6,'السابع':7,'الثامن':8,'التاسع':9,'العاشر':10,'الحادي':1,'الثاني عشر':12,'العشرون':20,'الثلاثون':30,'الأربعون':40,'الخمسون':50,'الستون':60,'السبعون':70,'الثمانون':80,'التسعون':90,'المائة':100};
-  function ordOf(t){
-    if(!t)return 0;
-    let m=t.match(/الدرس\s+(?:ال)?(\d+)/);if(m)return +m[1];
-    m=t.match(/الدرس\s+ال([أ-ي\s]+?)(?:\s|$|—|-|\()/);
-    if(m){const w=m[1].trim().split(/\s+/).map(x=>x.replace(/^و/,'')).filter(Boolean);
-      let s=0,ok=0;for(const x of w){if(ORD[x]){s+=ORD[x];ok=1}}if(ok)return s}
-    return 0;
-  }
-  const ordKey=n=>{const l=L2(n),rx=rtxt.get(n);const t=tin[n]||(rx&&rx.title)||l.title||'';return ordOf(t)||n};
-  const L2=n=>lessons.find(x=>x.n===n)||{};
-  let sorted=[...ns].sort((a,b)=>ordKey(a)-ordKey(b));
-  // B2: ?m=listen (from «استمع» on sheikh page) filters to aligned lessons;
-  // ?m=read to lessons with text. Unfiltered default shows everything.
-  const L=L2;
+  document.getElementById('hdr-sub').textContent=st.name;
+  const ctx=await HC.lessons(row);
   let mode=q.get('m');if(mode==='ltx')mode='yt';
-  if(mode==='listen')sorted=sorted.filter(n=>aln.has(n));
-  else if(mode==='read')sorted=sorted.filter(n=>txn.has(n)||rtxt.has(n));
-  else if(mode==='yt')sorted=sorted.filter(n=>{const ll=L(n),rx=rtxt.get(n);return (ll.video&&ll.video.length>=8)||(rx&&rx.vid)});
-  else if(mode==='aud')sorted=sorted.filter(n=>{const ll=L(n),rx=rtxt.get(n);return (ll.video&&ll.video.length>=8)||(rx&&rx.vid)||audMap.has(n)});
-  else if(mode==='sm')sorted=sorted.filter(n=>smn.has(n));
-  else if(mode==='qu')sorted=sorted.filter(n=>qun.has(n));
-  const MN={read:'قراءة',yt:'يوتيوب',aud:'استماع',listen:'مشاهدة حية',sm:'تلخيص',qu:'أسئلة'};
-  if(MN[mode])document.title=MN[mode]+' — '+row.title;
-  const rs=store.resume(row.id);
-  store.markSeen(row.id);
-  app.innerHTML='<div class="stitle cin"><bdi>'+esc(row.title)+'</bdi></div><div class="smeta">'+esc(st.name)+' · '+pluralLesson(sorted.length)+'</div>'
+  if(!HC.MODES.some(m=>m[0]===mode))mode='';
+  const ln0=parseInt(q.get('l'),10)||0;
+  if(ln0&&ctx.by.has(ln0)){const x=ctx.by.get(ln0),m=HC.best(x,mode);if(m){location.replace(HC.href(ctx,x,m));return}}
+  const cnt={};for(const [k] of HC.MODES)cnt[k]=ctx.list.filter(x=>x.has[k]).length;
+  const MN=Object.fromEntries(HC.MODES.map(m=>[m[0],m[2]]));
+  document.title=(mode?MN[mode]+' — ':'')+row.title+' — '+st.name;
+  const hist=(store.get('hist',[])||[]).find(h=>h.r===row.id);
+  const rs=hist||store.resume(row.id);
+  const resX=rs&&ctx.by.get(rs.n);
+  app.innerHTML='<div class="stitle cin"><bdi>'+esc(row.title)+'</bdi></div><div class="smeta"><a href="sheikh.html?s='+encodeURIComponent(slug)+'" style="color:inherit">'+esc(st.name)+'</a> · '+pluralLesson(ctx.list.length)+'</div>'
+    +(resX?'<div class="resline"><a href="'+HC.href(ctx,resX,HC.best(resX,rs.m||mode))+'">'+ic('i-play')+'تابع: الدرس '+resX.n+'</a></div>':'')
+    +'<div class="mchips" role="toolbar" aria-label="تصفية حسب المتوفر">'
+      +'<button class="mc'+(mode?'':' on')+'" data-m="">الكل <b>'+ctx.list.length+'</b></button>'
+      +HC.MODES.filter(([k])=>cnt[k]).map(([k,i,a])=>'<button class="mc'+(mode===k?' on':'')+'" data-m="'+k+'" title="'+a+'">'+ic(i)+'<span>'+a+'</span> <b>'+cnt[k]+'</b></button>').join('')+'</div>'
     +'<input class="sflt" id="sflt" type="search" aria-label="ابحث في دروس السلسلة" placeholder="ابحث في دروس السلسلة…">'
     +(row.unv?'<div class="unv">ترجمة آلية مأخوذة من يوتيوب — غير مدققة بعد</div>':'')
-    +(mode==='yt'&&row.yt?'<a class="ytpl cin" href="yt.html?r='+encodeURIComponent(row.id)+'">'+ic('i-yt')+'<span><b>تشغيل قائمة يوتيوب كاملة</b><small>'+(row.ytn||0)+' فيديو — مشغّل داخلي بلا تفريغ</small></span></a>':'')
-    +'<div id="lst" aria-live="polite"></div>';
-  // lesson titles carry «series — sheikh» boilerplate (~60% noise per باحث's audit)
-  const cleanTitle=(t,nn)=>{let s=String(t||'');
-    s=s.replace(/#[\p{L}\p{N}_]+/gu,' ');
-    const m=s.match(/^\s*([\d٠-٩]+)\s*[-–—:|.)]\s*/);
-    if(m&&+m[1].replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d))===nn)s=s.slice(m[0].length);
-    s=s.replace(/\s*[(\[]?\s*[Ww]ith [Ee]nglish [Tt]ranslation\s*[)\]]?\s*/g,'');
-    s=s.replace(/⧵|：/g,' — ');
-    for(const strip of [row.title,st.name]){if(!strip)continue;
-      s=s.split(strip).join('');s=s.replace(/\s*[-–—|]\s*$/,'').replace(/^\s*[-–—|]\s*/,'')}
-    return s.replace(/(\s*[|｜]\s*)+$/,'').replace(/^(\s*[|｜:]\s*)+/,'').replace(/\s{2,}/g,' ').replace(/^[\s—–-]+|[\s—–-]+$/g,'')||String(t||'')};
-  const draw=fq=>{
-    const lst=document.getElementById('lst');lst.innerHTML='';let n=0,prev=0;
-    for(const nn of sorted){
-      const l=L(nn),rx=rtxt.get(nn);
-      const title=cleanTitle(tin[nn]||(rx&&rx.title)||l.title||('الدرس '+nn),nn);
-      if(fq&&!normalize(title).includes(fq)&&!String(nn).includes(fq))continue;n++;
-      const canL=aln.has(nn)||(l.video&&l.video.length>=8);
-      // each tile-mode opens its own page — no mixing of read/watch/summary
-      const href=mode==='sm' ? 'sm.html?r='+encodeURIComponent(row.id)+'&l='+nn
-        : mode==='qu' ? 'qu.html?r='+encodeURIComponent(row.id)+'&l='+nn
-        : mode==='read' ? 'tr.html?r='+encodeURIComponent(row.id)+'&l='+nn
-        : mode==='aud'&&audMap.has(nn)&&!(L(nn).video&&L(nn).video.length>=8)&&!(rtxt.get(nn)||{}).vid
-            ? 'aud.html?k='+encodeURIComponent(akey)+'&n='+nn
-        : mode==='yt'||mode==='aud' ? ((L(nn).video&&L(nn).video.length>=8)
-            ? 'yt.html?s='+encodeURIComponent(row.sSlug)+'&l='+nn+(mode==='aud'?'&a=1':'')
-            : 'yt.html?v='+encodeURIComponent((rtxt.get(nn)||{}).vid||'')+'&r='+encodeURIComponent(row.id)+'&l='+nn+(mode==='aud'?'&a=1':''))
-        : mode==='listen' ? 'lesson.html?s='+encodeURIComponent(row.sSlug)+'&l='+nn
-        : canL ? 'lesson.html?s='+encodeURIComponent(row.sSlug)+'&l='+nn
-        : 'tr.html?r='+encodeURIComponent(row.id)+'&l='+nn;
-      const seen=store.seen(row.id+':'+nn),isCur=rs&&rs.n===nn;
-      // a gap in the numbering reads as broken — mark it instead of hiding it
-      if(prev&&nn-prev>1)lst.insertAdjacentHTML('beforeend','<div class="gapnote"><i></i>الدروس '+(prev+1)+'–'+(nn-1)+' غير متاحة<i></i></div>');
-      prev=nn;
-      lst.insertAdjacentHTML('beforeend',
-        '<a class="lrow cin'+(seen?' seen':'')+(isCur?' cur':'')+'" href="'+href+'"><span class="num">'+nn+'</span>'
-        +'<span class="t"><bdi>'+esc(title)+'</bdi>'+(l.dur?'<small>'+esc(fmtDur(l.dur))+'</small>':'')+'</span>'
-        +(smn.has(nn)?'<span class="badge" title="فيه ملخص">☰</span>':'')
-        +'</a>');
+    +'<div id="ytpl"></div><div id="lst" aria-live="polite"></div>';
+  const draw=()=>{
+    const fq=normalize(document.getElementById('sflt').value);
+    document.getElementById('ytpl').innerHTML=(mode==='yt'&&row.yt)?'<a class="ytpl cin" href="yt.html?r='+encodeURIComponent(row.id)+'">'+ic('i-yt')+'<span><b>تشغيل قائمة يوتيوب كاملة</b><small>'+(row.ytn||0)+' فيديو — مشغّل داخلي بلا تفريغ</small></span></a>':'';
+    const lst=document.getElementById('lst');let h='',n=0,prev=0;
+    for(const x of ctx.list){
+      if(mode&&!x.has[mode])continue;
+      if(fq&&!normalize(x.title).includes(fq)&&!String(x.n).includes(fq))continue;n++;
+      const m=HC.best(x,mode);if(!m)continue;
+      if(!fq&&prev&&x.n-prev>1)h+='<div class="gapnote"><i></i>'+(x.n-prev===2?'الدرس '+(prev+1):'الدروس '+(prev+1)+'–'+(x.n-1))+' غير متاحة<i></i></div>';
+      prev=x.n;
+      const seen=store.seen(row.id+':'+x.n),isCur=rs&&rs.n===x.n;
+      h+='<a class="lrow cin'+(seen?' seen':'')+(isCur?' cur':'')+'" href="'+HC.href(ctx,x,m)+'"><span class="num">'+x.n+'</span>'
+        +'<span class="t"><bdi>'+esc(x.title)+'</bdi>'+(x.dur?'<small>'+esc(fmtDur(x.dur))+'</small>':'')+'</span>'
+        +'<span class="bd" aria-label="المتوفر">'+HC.MODES.filter(([k])=>x.has[k]&&k!=='aud').map(([k,i,a])=>'<span class="ic-'+k+'" title="'+a+'">'+ic(i)+'</span>').join('')+'</span></a>';
     }
-    if(!n)lst.innerHTML='<p class="empty">لا نتائج.</p>';
+    lst.innerHTML=n?h:'<p class="empty">'+(fq?'لا نتائج.':'لا دروس بعد.')+'</p>';
   };
-  draw('');
-  document.getElementById('sflt').addEventListener('input',e=>draw(normalize(e.target.value)));
-  // deep-link ?l=n → jump straight into the mode's own page
-  if(ln0&&sorted.includes(ln0)){
-    const canL=aln.has(ln0)||(L(ln0).video&&L(ln0).video.length>=8);
-    location.replace(mode==='sm'?'sm.html?r='+encodeURIComponent(row.id)+'&l='+ln0
-      :mode==='qu'?'qu.html?r='+encodeURIComponent(row.id)+'&l='+ln0
-      :mode==='read'?'tr.html?r='+encodeURIComponent(row.id)+'&l='+ln0
-      :mode==='aud'&&audMap.has(ln0)&&!(L(ln0).video&&L(ln0).video.length>=8)&&!(rtxt.get(ln0)||{}).vid?'aud.html?k='+encodeURIComponent(akey)+'&n='+ln0
-      :(mode==='yt'||mode==='aud')&&L(ln0).video&&L(ln0).video.length>=8?'yt.html?s='+encodeURIComponent(row.sSlug)+'&l='+ln0+(mode==='aud'?'&a=1':'')
-      :mode==='yt'||mode==='aud'?'yt.html?v='+encodeURIComponent((rtxt.get(ln0)||{}).vid||'')+'&r='+encodeURIComponent(row.id)+'&l='+ln0+(mode==='aud'?'&a=1':'')
-      :canL?'lesson.html?s='+encodeURIComponent(row.sSlug)+'&l='+ln0
-      :'tr.html?r='+encodeURIComponent(row.id)+'&l='+ln0);
-  }
+  draw();
+  document.getElementById('sflt').addEventListener('input',draw);
+  document.querySelectorAll('.mchips .mc').forEach(b=>b.onclick=()=>{
+    mode=b.dataset.m;const u=new URLSearchParams(location.search);mode?u.set('m',mode):u.delete('m');
+    history.replaceState(null,'','?'+u);document.title=(mode?MN[mode]+' — ':'')+row.title+' — '+st.name;
+    document.querySelectorAll('.mchips .mc').forEach(c=>c.classList.toggle('on',c===b));draw()});
 })();
 if('serviceWorker' in navigator)swRegister('../sw.js');
 </script>

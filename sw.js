@@ -10,7 +10,7 @@
                                  bump ?v= when the asset changes inside a REV.
    - *.json                     → SWR in DATA (wiped per REV).
    - *.txt/.align.*/icons.svg/images → SWR in TEXT (REV-stable). */
-const REV = 'v8-69';
+const REV = 'v8-70';
 const SHELL = 'hawshat-shell-' + REV;
 const DATA  = 'hawshat-data-' + REV;   // versioned with the build — no stale mixes
 const TEXT  = 'hawshat-text-v1';
@@ -24,7 +24,7 @@ const SHELL_ASSETS = [
   './playlists/', './playlists/index.html', './playlists/sheikh.html',
   './playlists/series.html', './playlists/tr.html', './playlists/lesson.html',
   './playlists/common.css', './playlists/common.js',
-  './playlists/ui.css', './playlists/icons.svg', './playlists/row.html',
+  './playlists/ui.css', './playlists/core.js', './playlists/icons.svg', './playlists/row.html',
   './playlists/yt.html', './playlists/sm.html', './playlists/qu.html', './playlists/aud.html',
   './icons/icon-192.png',
 ];

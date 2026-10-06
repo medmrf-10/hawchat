@@ -50,6 +50,23 @@ a.mini{color:var(--ink-3);display:inline-flex;align-items:center;justify-content
 .u-sech{padding:0 var(--sp-3)}
 .soonh{margin:16px var(--sp-3) 0;width:calc(100% - 2*var(--sp-3))}
 main .wrap>div:last-child{padding:0 var(--sp-3)}
+.gsrch{position:relative;margin:4px 0 14px}
+.gsrch input{width:100%;height:48px;background:var(--bg-2);border:1px solid var(--line-2);border-radius:var(--r-md);color:var(--txt);
+  padding:0 14px;font-family:var(--font-ui);font-size:var(--fs-sm)}
+.gsrch input:focus{outline:none;border-color:var(--gold-2)}
+#gres{display:flex;flex-direction:column;gap:6px;margin-top:6px;max-height:60vh;overflow:auto}
+#gres:empty{display:none}
+.gr{display:block;padding:10px 14px;border-radius:var(--r-md);border:1px solid var(--line-1);background:var(--bg-2);color:var(--txt);text-decoration:none;min-height:44px}
+.gr b{display:block;font-size:var(--fs-sm);font-weight:600;line-height:1.5}.gr small{color:var(--ink-3);font-size:var(--fs-xs)}
+.gempty{color:var(--ink-3);text-align:center}
+.ctit{font-size:var(--fs-xs);color:var(--gold-3);margin:0 2px 6px;font-weight:700}
+.crow{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:16px;scrollbar-width:none}
+.crow::-webkit-scrollbar{display:none}
+.ccard{flex:0 0 72%;max-width:280px;display:flex;flex-direction:column;gap:3px;padding:12px 14px;border-radius:var(--r-md);
+  border:1px solid var(--line-2);background:linear-gradient(160deg,var(--card),var(--bg-2));color:var(--txt);text-decoration:none}
+.ccard b{font-size:var(--fs-sm);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ccard span{color:var(--gold-3);font-size:var(--fs-xs)}
+.ccard small{color:var(--ink-3);font-size:var(--fs-xs);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -59,6 +76,8 @@ main .wrap>div:last-child{padding:0 var(--sp-3)}
   <span class="brand">سلاسل</span>
 </div></header>
 <main><div class="wrap">
+  <div class="gsrch"><input id="gq" type="search" placeholder="ابحث عن سلسلة أو درس أو شيخ…" aria-label="بحث شامل" autocomplete="off"><div id="gres" aria-live="polite"></div></div>
+  <div id="cont"></div>
   <div class="ubar" id="ubar" role="toolbar" aria-label="تصفية السلاسل"></div>
   <div id="ubar-sub" class="cin" style="margin:-8px 0 10px;font-size:.72rem;color:var(--gold-3);font-family:var(--font-ui)"></div>
   <div id="groups" class="u-grid"></div>
@@ -70,6 +89,7 @@ main .wrap>div:last-child{padding:0 var(--sp-3)}
   </div>
 </div></main>
 <script src="common.js?v=11"></script>
+<script src="core.js?v=1"></script>
 <script>
 let _stats={},showSoon=false,_mode='lsn';
 const ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';
@@ -142,6 +162,34 @@ document.getElementById('impf').addEventListener('change',e=>{
   };
   r.readAsText(f);
 });
+/* continue where you left off — written by core.js on every lesson page */
+function drawCont(){
+  const h=(store.get('hist',[])||[]).slice(0,4),el=document.getElementById('cont');
+  const MN={listen:'مشاهدة',read:'قراءة',yt:'يوتيوب',aud:'استماع',sm:'ملخص',qu:'أسئلة'};
+  el.innerHTML=h.length?'<div class="ctit">تابع من حيث توقفت</div><div class="crow">'+h.map(x=>
+    '<a class="ccard" href="row.html?r='+encodeURIComponent(x.r)+'&l='+x.n+(x.m?'&m='+x.m:'')+'"><b><bdi>'+esc(x.rt||'')+'</bdi></b>'
+    +'<span>الدرس '+x.n+(x.m&&MN[x.m]?' · '+MN[x.m]:'')+'</span><small><bdi>'+esc(x.ti||'')+'</bdi></small></a>').join('')+'</div>':'';
+}
+let _sl=null,_slp=null;
+async function gsearch(){
+  const raw=document.getElementById('gq').value,qq=normalize(raw),el=document.getElementById('gres');
+  if(qq.length<2){el.innerHTML='';return}
+  const out=[];
+  for(const s in _stats){if(s==='_meta')continue;const st=_stats[s];
+    if(normalize(st.name).includes(qq))out.push('<a class="gr" href="sheikh.html?s='+encodeURIComponent(s)+'"><b>'+esc(st.name)+'</b><small>شيخ · '+pluralSeries((st.rows||[]).length)+'</small></a>');
+    for(const r of st.rows||[])if(normalize(r.title).includes(qq))out.push('<a class="gr" href="row.html?r='+encodeURIComponent(r.id)+'"><b><bdi>'+esc(r.title)+'</bdi></b><small>سلسلة · '+esc(st.name)+'</small></a>')}
+  el.innerHTML=out.length?out.slice(0,12).join(''):'<div class="gr gempty">…</div>';
+  if(!_sl){_slp=_slp||j('data/search_lessons.json');_sl=await _slp||{}}
+  if(normalize(document.getElementById('gq').value)!==qq)return;
+  const rt={};for(const s in _stats){if(s==='_meta')continue;for(const r of _stats[s].rows||[])rt[r.id]=[r.title,_stats[s].name]}
+  const ls=[];
+  for(const rid in _sl){if(!rt[rid])continue;for(const [n,t] of _sl[rid].L||[]){if(ls.length>=30)break;
+    if(normalize(t).includes(qq))ls.push('<a class="gr" href="row.html?r='+encodeURIComponent(rid)+'&l='+n+'"><b><bdi>'+esc(HC.cleanTitle(t,n,{title:rt[rid][0]})||t)+'</bdi></b><small>درس '+n+' · '+esc(rt[rid][0])+' · '+esc(rt[rid][1])+'</small></a>')}}
+  const all=out.slice(0,12).concat(ls);
+  el.innerHTML=all.length?all.join(''):'<div class="gr gempty">لا نتائج لـ«'+esc(raw)+'»</div>';
+}
+let _gt=0;document.getElementById('gq').addEventListener('input',()=>{clearTimeout(_gt);_gt=setTimeout(gsearch,180)});
+drawCont();
 (async()=>{
   document.getElementById('groups').innerHTML='<div class="skel" style="height:200px;border-radius:18px"></div><div class="skel" style="height:200px;border-radius:18px"></div>';
   const stats=await j('data/sheikh_stats.json');

@@ -61,6 +61,8 @@ h1{font-family:var(--font-ar);font-size:1.4rem;font-weight:700;color:var(--txt);
 <main><div class="wrap" id="app"><div class="skel" style="height:50px;margin-top:12px"></div><div class="skel" style="height:300px;margin-top:12px;border-radius:18px"></div></div></main>
 <div class="navb" id="navb" hidden></div>
 <script src="common.js?v=11"></script>
+<script src="core.js?v=1"></script>
+<script>HC.mountTabs(new URLSearchParams(location.search).get('a')?'aud':'yt')</script>
 <script>
 const ic=id=>'<svg class="i"><use href="icons.svg?v=11#'+id+'"/></svg>';
 const EMB='https://www.youtube-nocookie.com/embed/';

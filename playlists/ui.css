@@ -136,3 +136,13 @@ input,select,textarea{font-size:16px}
   background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 5.5 9.5 16 4 10.5" fill="none" stroke="%2370c96d" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>');
   background-size:contain;background-repeat:no-repeat}
 @media(hover:hover){a.tile:hover,.ftile:hover{border-color:var(--gold-2)}}
+/* lesson mode tabs (core.js mountTabs) */
+.ltabs{position:relative;z-index:30;background:var(--bgt,rgba(11,15,26,.92));backdrop-filter:blur(12px);border-bottom:1px solid var(--line-1)}
+.ltabs-in{max-width:920px;margin:0 auto;display:flex;gap:4px;padding:6px 10px;overflow-x:auto;scrollbar-width:none}
+.ltabs-in::-webkit-scrollbar{display:none}
+.lt{flex:1 0 auto;min-height:44px;min-width:44px;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:0 12px;
+  border-radius:var(--r-md);color:var(--ink-2);text-decoration:none;font-family:var(--font-ui);font-size:var(--fs-xs);border:1px solid transparent}
+.lt .i{width:18px;height:18px}
+.lt.on{color:var(--gold-3);border-color:var(--gold-2);background:rgba(201,162,75,.10);font-weight:700}
+@media(hover:hover){a.lt:hover{border-color:var(--line-2);color:var(--txt)}}
+@media(max-width:480px){.lt span{display:none}.lt.on span{display:inline}}
