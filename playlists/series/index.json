@@ -710,6 +710,24 @@
    "aligned": 0,
    "transcribed": 2,
    "status": "مفرّغة — المحاذاة جارية"
+  },
+  {
+   "slug": "bouti-337",
+   "title": "في رحاب القرآن",
+   "sheikh_slug": "said-bouti",
+   "count": 4,
+   "aligned": 9,
+   "transcribed": 9,
+   "status": "مكتملة التفريغ"
+  },
+  {
+   "slug": "bouti-339",
+   "title": "الكآبة .. أسباب وعلاج",
+   "sheikh_slug": "said-bouti",
+   "count": 1,
+   "aligned": 1,
+   "transcribed": 1,
+   "status": "مكتملة التفريغ"
   }
  ]
 }
