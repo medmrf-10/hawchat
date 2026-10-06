@@ -26,12 +26,12 @@
   cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
 a.mini{color:var(--ink-3);display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;padding:0 4px}
 .wrap{padding-left:0;padding-right:0}
-.u-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:0}
+.u-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px;padding:0 var(--sp-3)}
 @media(min-width:720px){.u-grid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))!important}}
-.u-sh{padding:var(--sp-2) 0 0;overflow:hidden;border-radius:0;position:relative}
+.u-sh{padding:16px 6px 12px;overflow:hidden;border-radius:18px;position:relative}
 .u-sh .cntx{position:absolute;top:6px;inset-inline-end:8px;font-family:var(--font-ui);
   font-size:1.15rem;font-weight:800;color:var(--gold-3);line-height:1;pointer-events:none}
-.u-sh .ph{width:56px;height:56px}
+.u-sh .ph{width:72px;height:72px}
 .u-sh .nm{font-size:.8rem;margin-top:4px;flex-basis:100%;text-align:center;line-height:1.4}
 .u-sh .u-top{display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:center;text-decoration:none;color:inherit;width:100%;padding:var(--sp-2) var(--sp-2) var(--sp-3);position:relative}
 .u-sh .u-top .ph{width:78px;height:78px;flex:none;margin-inline-end:14px}
@@ -52,7 +52,13 @@ a.mini{color:var(--ink-3);display:inline-flex;align-items:center;justify-content
 #cont{padding:0 var(--sp-3)}
 .soonh{margin:16px var(--sp-3) 0;width:calc(100% - 2*var(--sp-3))}
 main .wrap>div:last-child{padding:0 var(--sp-3)}
-.hhero{padding:14px var(--sp-3) 4px}.hhero h1{font-size:1.25rem;font-weight:800;line-height:1.5;margin:0}
+.hhero{position:relative;margin:12px var(--sp-3) 14px;padding:22px 18px 20px;border-radius:22px;overflow:hidden;isolation:isolate;background:radial-gradient(120% 90% at 100% 0,rgba(201,162,75,.22),transparent 60%),radial-gradient(90% 80% at 0 100%,rgba(139,124,246,.14),transparent 60%),linear-gradient(160deg,#141b30,#0c111f);border:1px solid rgba(201,162,75,.28);box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 18px 50px rgba(0,0,0,.45)}
+.hhero::before{content:'';position:absolute;inset:0;z-index:-1;opacity:.07;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 44 44'%3E%3Cpath d='M22 2l5.9 14.1L42 22l-14.1 5.9L22 42l-5.9-14.1L2 22l14.1-5.9z' fill='none' stroke='%23e8c97a' stroke-width='1'/%3E%3C/svg%3E");background-size:44px 44px}
+.hhero .kick{display:inline-block;font-size:.7rem;font-weight:700;color:var(--gold-3);letter-spacing:.02em;border:1px solid rgba(201,162,75,.35);background:rgba(201,162,75,.08);border-radius:99px;padding:2px 10px;margin-bottom:10px}
+.hhero h1{font-family:var(--font-ar);font-size:clamp(1.5rem,6.4vw,2.1rem);font-weight:700;line-height:1.45;margin:0;color:var(--ink-1)}
+.hhero h1 em{font-style:normal;background:linear-gradient(135deg,var(--gold-4),var(--gold-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hstats{display:flex;gap:8px;margin-top:14px}.hstats div{flex:1;min-width:0;text-align:center;padding:8px 4px;border-radius:12px;background:rgba(7,10,18,.45);border:1px solid var(--line-1)}
+.hstats b{display:block;font-size:1.05rem;font-weight:800;color:var(--gold-3);font-variant-numeric:tabular-nums;line-height:1.3}.hstats span{font-size:.68rem;color:var(--ink-3)}
 .hhero p{color:var(--ink-3);font-size:var(--fs-xs);margin:2px 0 0;font-variant-numeric:tabular-nums}
 .u-sh .shm{color:var(--ink-3);font-size:.72rem;margin-top:2px}
 .u-sh .shc{display:flex;gap:10px;justify-content:center;margin-top:8px;min-height:18px}
@@ -62,7 +68,7 @@ main .wrap>div:last-child{padding:0 var(--sp-3)}
 .u-sh .shc{flex-wrap:wrap;gap:4px 8px;padding:0 4px}
 .u-sh .shm{padding:0 4px}
 @media(max-width:360px){.u-sh .ph{width:56px;height:56px}.u-sh .shc i{font-size:.68rem}}
-.gsrch{position:relative;margin:4px var(--sp-3) 14px}
+.gsrch{position:relative;margin:0 var(--sp-3) 16px}
 .gsrch input{width:100%;height:48px;background:var(--bg-2);border:1px solid var(--line-2);border-radius:var(--r-md);color:var(--txt);
   padding:0 14px;font-family:var(--font-ui);font-size:var(--fs-sm)}
 .gsrch input:focus{outline:none;border-color:var(--gold-2)}
@@ -71,7 +77,14 @@ main .wrap>div:last-child{padding:0 var(--sp-3)}
 .gr{display:block;padding:10px 14px;border-radius:var(--r-md);border:1px solid var(--line-1);background:var(--bg-2);color:var(--txt);text-decoration:none;min-height:44px}
 .gr b{display:block;font-size:var(--fs-sm);font-weight:600;line-height:1.5}.gr small{color:var(--ink-3);font-size:var(--fs-xs)}
 .gempty{color:var(--ink-3);text-align:center}
-.ctit{font-size:var(--fs-xs);color:var(--gold-3);margin:0 2px 6px;font-weight:700}
+.ctit{display:none}
+#cont{padding:0!important}#cont .u-sech{margin-top:4px}
+#cont .crow{padding:0 var(--sp-3) 6px;scroll-snap-type:x mandatory;scroll-padding:0 var(--sp-3)}
+#cont .ccard{scroll-snap-align:start;flex:0 0 min(84%,320px);max-width:none;display:flex;flex-direction:row;align-items:center;gap:12px;padding:12px;border-radius:16px;min-height:84px}
+#cont .ccard.first{border-color:rgba(201,162,75,.5);background:linear-gradient(160deg,rgba(201,162,75,.14),var(--card))}
+#cont .cph{flex:none;width:52px;height:52px;border-radius:50%;overflow:hidden;background:var(--bg-2);border:2px solid var(--gold-1)}#cont .cph img{width:100%;height:100%;object-fit:cover;object-position:50% 22%}
+#cont .cbd{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}#cont .cm{color:var(--gold-3);font-size:.7rem}
+#cont .cgo{flex:none;width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--gold-3),var(--gold-2));color:#0b0f1a;display:flex;align-items:center;justify-content:center}#cont .cgo .i{width:18px;height:18px;margin-inline-start:-2px}
 .crow{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:16px;scrollbar-width:none}
 .crow::-webkit-scrollbar{display:none}
 .ccard{flex:0 0 72%;max-width:280px;display:flex;flex-direction:column;gap:3px;padding:12px 14px;border-radius:var(--r-md);
@@ -88,7 +101,7 @@ main .wrap>div:last-child{padding:0 var(--sp-3)}
   <span class="brand">سلاسل</span>
 </div></header>
 <main><div class="wrap">
-  <div class="hhero"><h1>دروس المشايخ — اقرأ، شاهد، استمع</h1><p id="htot">&nbsp;</p></div>
+  <section class="hhero"><span class="kick">مكتبة الدروس المسموعة والمقروءة</span><h1>دروس المشايخ<br><em>اقرأ · شاهد · استمع</em></h1><div class="hstats"><div><b id="hs1">—</b><span>شيخاً</span></div><div><b id="hs2">—</b><span>سلسلة</span></div><div><b id="hs3">—</b><span>درساً</span></div></div></section>
   <div class="gsrch"><input id="gq" type="search" placeholder="ابحث عن سلسلة أو درس أو شيخ…" aria-label="بحث شامل" autocomplete="off"><div id="gres" aria-live="polite"></div></div>
   <div id="cont"></div>
   <div class="u-sech"><h2>المشايخ</h2><span class="cnt" id="shcnt"></span></div>
@@ -115,7 +128,7 @@ function drawBar(){
     draw();
   let S=0,R=0,L=0;for(const k in stats){if(k==='_meta')continue;const rs=stats[k].rows||[];if(rs.length)S++;R+=rs.length;
     for(const r of rs)L+=Math.max(r.ytn||0,r.wtt||0,r.rtt||0,r.rdn||0)}
-  document.getElementById('htot').textContent=S+' شيخاً · '+kfmt(R)+' سلسلة · '+kfmt(L)+' درس';
+  document.getElementById('hs1').textContent=S;document.getElementById('hs2').textContent=kfmt(R);document.getElementById('hs3').textContent=kfmt(L);
   document.getElementById('shcnt').textContent=S;
   });
   const lbl=document.getElementById('ubar-sub'),mn=_mode&&(MODES.find(x=>x[0]===_mode)||[])[2];
@@ -178,11 +191,14 @@ document.getElementById('impf').addEventListener('change',e=>{
 });
 /* continue where you left off — written by core.js on every lesson page */
 function drawCont(){
-  const h=(store.get('hist',[])||[]).slice(0,4),el=document.getElementById('cont');
-  const MN={listen:'مشاهدة',read:'قراءة',yt:'يوتيوب',aud:'استماع',sm:'ملخص',qu:'أسئلة'};
-  el.innerHTML=h.length?'<div class="ctit">تابع من حيث توقفت</div><div class="crow">'+h.map(x=>
-    '<a class="ccard" href="'+(x.m==='listen'?'row.html?r='+encodeURIComponent(x.r)+'&l='+x.n+'&m=listen':'d.html?r='+encodeURIComponent(x.r)+'&l='+x.n+(x.m?'&t='+x.m:''))+'"><b><bdi>'+esc(x.rt||'')+'</bdi></b>'
-    +'<span>الدرس '+x.n+(x.m&&MN[x.m]?' · '+MN[x.m]:'')+'</span><small><bdi>'+esc(x.ti||'')+'</bdi></small></a>').join('')+'</div>':'';
+  const h=(store.get('hist',[])||[]).slice(0,6),el=document.getElementById('cont');
+  const MN={listen:'مشاهدة حية',read:'قراءة',yt:'فيديو',aud:'استماع',sm:'ملخص',qu:'أسئلة'};
+  const own={};for(const s in _stats){if(s==='_meta')continue;for(const r of _stats[s].rows||[])own[r.id]=_stats[s]}
+  el.innerHTML=h.length?'<div class="u-sech"><h2>تابع من حيث توقفت</h2></div><div class="crow">'+h.map((x,i)=>{const st=own[x.r]||{};
+    const u=x.m==='listen'?'row.html?r='+encodeURIComponent(x.r)+'&l='+x.n+'&m=listen':'d.html?r='+encodeURIComponent(x.r)+'&l='+x.n+(x.m?'&t='+x.m:'');
+    return '<a class="ccard'+(i?'':' first')+'" href="'+u+'"><span class="cph">'+(st.photo?'<img src="'+esc(st.photo)+'" alt="" loading="lazy" onerror="this.remove()">':'')+'</span>'
+    +'<span class="cbd"><b><bdi>'+esc(x.rt||'')+'</bdi></b><small><bdi>'+esc(x.ti||'')+'</bdi></small>'
+    +'<span class="cm">الدرس '+x.n+(x.m&&MN[x.m]?' · '+MN[x.m]:'')+'</span></span><span class="cgo">'+ic('i-play')+'</span></a>'}).join('')+'</div>':'';
 }
 let _sl=null,_slp=null;
 async function gsearch(){
@@ -209,10 +225,10 @@ drawCont();
   const stats=await j('data/sheikh_stats.json');
   if(!stats){document.getElementById('groups').innerHTML='<div class="errbox">تعذر تحميل بيانات السلاسل — <a href=".">أعد المحاولة</a></div>';return}
   _stats=stats;
-  draw();
+  draw();drawCont();
   let S=0,R=0,L=0;for(const k in stats){if(k==='_meta')continue;const rs=stats[k].rows||[];if(rs.length)S++;R+=rs.length;
     for(const r of rs)L+=Math.max(r.ytn||0,r.wtt||0,r.rtt||0,r.rdn||0)}
-  document.getElementById('htot').textContent=S+' شيخاً · '+kfmt(R)+' سلسلة · '+kfmt(L)+' درس';
+  document.getElementById('hs1').textContent=S;document.getElementById('hs2').textContent=kfmt(R);document.getElementById('hs3').textContent=kfmt(L);
   document.getElementById('shcnt').textContent=S;
 })();
 if('serviceWorker' in navigator)swRegister('../sw.js');
