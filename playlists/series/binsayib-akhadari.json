@@ -1,0 +1,66 @@
+{
+ "slug": "binsayib-akhadari",
+ "sheikh": "عبد العزيز بن سايب",
+ "sheikh_slug": "bensaib",
+ "title": "شرح الأخضري",
+ "playlist": "https://www.youtube.com/playlist?list=PLkX3YqrI9_TUZwfepN0sxerEmb1LkFUTV",
+ "count": 8,
+ "lessons": [
+  {
+   "n": 1,
+   "title": "الدرس (1) : الطهارة",
+   "video": "9yVbAgWgJLU",
+   "chars": 23137,
+   "dur": ""
+  },
+  {
+   "n": 3,
+   "title": "الدرس [3]: فصل النجاسة 2 + فرائض الوضوء 1",
+   "video": "AUTLLpZEq9Y",
+   "chars": 34011,
+   "dur": ""
+  },
+  {
+   "n": 4,
+   "title": "الدرس [4] : فرائض الوضوء 2",
+   "video": "LNlRHINy5EY",
+   "chars": 34922,
+   "dur": ""
+  },
+  {
+   "n": 5,
+   "title": "الدرس (5) :سنن الوضوء",
+   "video": "mY4yQSX4gN0",
+   "chars": 30936,
+   "dur": ""
+  },
+  {
+   "n": 6,
+   "title": "الدرس (6) : فضائل الوضوء+ فصل نواقض الوضوء 1",
+   "video": "rFSkLmkzZ10",
+   "chars": 25539,
+   "dur": ""
+  },
+  {
+   "n": 7,
+   "title": "الدرس : (7) نواقض الوضوء 2",
+   "video": "EqM2m15wjqE",
+   "chars": 17137,
+   "dur": ""
+  },
+  {
+   "n": 8,
+   "title": "الدرس : (8) نواقض الوضوء 3",
+   "video": "gJ-zckE9AtI",
+   "chars": 19374,
+   "dur": ""
+  },
+  {
+   "n": 9,
+   "title": "الدرس : (9) نواقض الوضوء + فصل موانع الحدث",
+   "video": "R8p2RRkwlL4",
+   "chars": 26314,
+   "dur": ""
+  }
+ ]
+}
