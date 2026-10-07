@@ -1,1 +1,1 @@
-{"align":[],"txt":[1,2,3],"af":{},"tf":{"3":"03.txt","2":"02.txt","1":"01.txt"},"alignOk":[],"sum":[1,2,3],"sumf":{"3":"03.sum.json","1":"01.sum.json","2":"02.sum.json"},"qu":[],"quf":{}}
+{"align":[2,3],"txt":[1,2,3],"af":{"2":"02.align.json","3":"03.align.json"}}
