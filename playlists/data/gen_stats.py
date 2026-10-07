@@ -766,17 +766,18 @@ for sh in sheikhs:
         r['wtt'] = r['rtt']
         r['read'] = 'row.html?r=' + r['id']
         r['listen'] = ('row.html?r=' + r['id'] + '&m=listen') if r['wan'] > 0 and r.get('sSlug') else None
-        if r.get('sSlug'):
-            lix = J(os.path.join(PL, 'lessons', r['sSlug'], 'index.json')) or {}
-            r['qn'] = len(lix.get('qu') or [])
-            r['sun'] = len(lix.get('sum') or [])
-            r['ytn'] = r['wtt']
-            audir = os.path.join(PL, 'audio', r['sSlug'])
-            r['aun'] = len([f for f in os.listdir(audir) if f.endswith('.mp3')]) if os.path.isdir(audir) else 0
         # ld = lessons/<dir> that really has an index.json ('' = none) — pages
         # used to probe lessons/<sSlug||id>/ and 404'd on ~80 rows
         r['ld'] = next((d for d in (r.get('sSlug'), r['id']) if d and
                         os.path.isfile(os.path.join(PL, 'lessons', d, 'index.json'))), '')
+        if r['ld']:
+            lix = J(os.path.join(PL, 'lessons', r['ld'], 'index.json')) or {}
+            r['qn'] = len(lix.get('qu') or [])
+            r['sun'] = len(lix.get('sum') or [])
+        if r.get('sSlug'):
+            r['ytn'] = r['wtt']
+            audir = os.path.join(PL, 'audio', r['sSlug'])
+            r['aun'] = len([f for f in os.listdir(audir) if f.endswith('.mp3')]) if os.path.isdir(audir) else 0
         # E7: lesson titles for the lazy search index
         if rrows:
             SEARCH_L[r['id']] = {'ss': r.get('sSlug'), 'L': [[x['n'], x['title']] for x in rrows]}
