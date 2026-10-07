@@ -28,7 +28,10 @@ MUT_PIN = os.path.join(BASE, 'mut_manifest.json')
 
 # tr series that merge several YouTube playlists — excluded; mutalaa rows
 # cover the same playlists cleanly. Files stay on disk, untouched.
-TR_EXCLUDE = {('bouti', 'tawba'), ('bouti', 'rihab'), ('bouti', 'hikam'), ('bouti', 'tafsir')}
+TR_EXCLUDE = {('bouti', 'tawba'), ('bouti', 'rihab'), ('bouti', 'hikam'), ('bouti', 'tafsir'),
+            # dup rows removed by manager audit — excluded so a stale
+            # transcripts/index mirror cannot resurrect them:
+            ('sariri', 'manhaj-muntakhab'), ('maktaba', 'book-um_baraheen_d1')}
 # tr series verified to be the same recorded series as a mutalaa row
 # (different upload/playlist, same lessons) — fold into that mut row
 # instead of creating a duplicate row. Files stay on disk, untouched.
