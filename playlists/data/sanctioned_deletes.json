@@ -61,8 +61,9 @@
   "mouloud-sariri--sariri-manhaj-muntakhab",
   "maktaba--maktaba-book-um_baraheen_d1",
   "said-bouti--bouti-khutab-2010",
-  "said-bouti--bouti-muqtatafat-ulum"
+  "said-bouti--bouti-muqtatafat-ulum",
+  "ali-gomaa--822"
  ],
- "note": "dedup: keep richer copy (sums/align/local txt); watch loss on khutab-2010/muqtatafat-ulum is intentional — their aligned lessons were byte-copies, same audio playable under khutab-2012/ulum-quran",
+ "note": "dedup + whisper-txt cleanup: sanctioned watch loss = deleted dup aligns (khutab-2010/muqtatafat) + deleted whisper-transcript aligns (gomaa-822, DM.T387); identical playable content retained under khutab-2012/ulum-quran",
  "at": "2026-10-06"
 }
