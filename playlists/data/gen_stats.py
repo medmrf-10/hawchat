@@ -773,7 +773,10 @@ for sh in sheikhs:
         if r['ld']:
             lix = J(os.path.join(PL, 'lessons', r['ld'], 'index.json')) or {}
             r['qn'] = len(lix.get('qu') or [])
-            r['sun'] = len(lix.get('sum') or [])
+            # count only sums whose lesson the page can actually list —
+            # misnumbered sum files must not inflate the badge or open an empty sm view
+            resolvable = {x['n'] for x in rrows} | set(lix.get('txt') or []) | set(lix.get('align') or [])
+            r['sun'] = len(set(lix.get('sum') or []) & resolvable) if resolvable else len(lix.get('sum') or [])
         if r.get('sSlug'):
             r['ytn'] = r['wtt']
             audir = os.path.join(PL, 'audio', r['sSlug'])
