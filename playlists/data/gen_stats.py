@@ -768,7 +768,8 @@ for sh in sheikhs:
         r['listen'] = ('row.html?r=' + r['id'] + '&m=listen') if r['wan'] > 0 and r.get('sSlug') else None
         # ld = lessons/<dir> that really has an index.json ('' = none) — pages
         # used to probe lessons/<sSlug||id>/ and 404'd on ~80 rows
-        r['ld'] = next((d for d in (r.get('sSlug'), r['id']) if d and
+        trdir = (r['trSh'] + '-' + r['trSr']) if r.get('trSh') and r.get('trSr') else ''
+        r['ld'] = next((d for d in (r.get('sSlug'), r['id'], trdir) if d and
                         os.path.isfile(os.path.join(PL, 'lessons', d, 'index.json'))), '')
         if r['ld']:
             lix = J(os.path.join(PL, 'lessons', r['ld'], 'index.json')) or {}
