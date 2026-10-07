@@ -1,1 +1,1 @@
-{"af":{"5":"005.align.json","1":"001.align.json"},"tf":{"1":"001.txt","5":"005.txt"},"align":[1,5],"alignOk":[1,5],"txt":[1,5],"sum":[],"sumf":{},"qu":[],"quf":{}}
+{"af":{"5":"005.align.json","1":"001.align.json"},"tf":{"1":"001.txt","5":"005.txt"},"align":[1,5],"alignOk":[1,5],"txt":[1,5],"sum":[1,5],"sumf":{"1":"001.sum.json","5":"005.sum.json"},"qu":[],"quf":{}}
