@@ -59,8 +59,10 @@
   "ahmed-alsayed--636",
   "ahmed-alsayed--675",
   "mouloud-sariri--sariri-manhaj-muntakhab",
-  "maktaba--maktaba-book-um_baraheen_d1"
+  "maktaba--maktaba-book-um_baraheen_d1",
+  "said-bouti--bouti-khutab-2010",
+  "said-bouti--bouti-muqtatafat-ulum"
  ],
- "note": "dedup: keep richer copy (sums/align/local txt); duplicates removed per manager audit",
+ "note": "dedup: keep richer copy (sums/align/local txt); watch loss on khutab-2010/muqtatafat-ulum is intentional — their aligned lessons were byte-copies, same audio playable under khutab-2012/ulum-quran",
  "at": "2026-10-06"
 }
