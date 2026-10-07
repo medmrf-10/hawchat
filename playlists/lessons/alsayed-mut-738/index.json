@@ -1,1 +1,1 @@
-{"align":[],"txt":[21,27],"af":{},"tf":{"27":"027.txt","21":"021.txt"},"alignOk":[],"sum":[21,27],"sumf":{"27":"027.sum.json","21":"021.sum.json"},"qu":[],"quf":{}}
+{"align":[21],"txt":[21,27],"af":{"21":"021.align.json"},"tf":{"27":"027.txt","21":"021.txt"},"alignOk":[21],"sum":[21,27],"sumf":{"27":"027.sum.json","21":"021.sum.json"},"qu":[],"quf":{}}
