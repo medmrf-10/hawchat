@@ -53,21 +53,22 @@ a{color:var(--primary)}
   background:var(--glass);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
   transition:transform .28s ease}
 .top.hid{transform:translate(-50%,-52px)}
-body.les .top.hid{transform:translate(-50%,-100px)}
-main{display:block;padding-top:calc(100px + env(safe-area-inset-top))}
-body.les main{padding-top:calc(148px + env(safe-area-inset-top))}
+main{display:block;padding-top:calc(56px + env(safe-area-inset-top))}
+body.les main{padding-top:calc(104px + env(safe-area-inset-top))}
 .trow{display:flex;align-items:center}
 .r1{justify-content:space-between;height:52px;padding:0 16px 0 6px;position:relative}
-.r2{height:48px;border-top:1px solid var(--line)}
-.r2 .tab{flex:1;display:grid;place-items:center;height:48px;color:var(--muted);border:0;border-bottom:3px solid transparent;
+.bnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(100%,var(--app-max));z-index:8;display:flex;
+  padding-bottom:env(safe-area-inset-bottom);
+  background:var(--glass);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid var(--line)}
+.bnav .tab{flex:1;display:grid;place-items:center;height:56px;color:var(--muted);border:0;border-top:3px solid transparent;
   background:none;padding:0;font:inherit;text-decoration:none;cursor:pointer}
-.r2 .tab:focus-visible{outline:2px solid var(--primary);outline-offset:-6px}
-.r2 .tab svg{width:25px;height:25px}
+.bnav .tab:focus-visible{outline:2px solid var(--primary);outline-offset:-6px}
+.bnav .tab svg{width:25px;height:25px}
 .tab{position:relative}
 .bdg{position:absolute;top:9px;left:50%;transform:translateX(9px);width:8px;height:8px;border-radius:50%;background:var(--gold);display:none;box-shadow:0 0 0 2px var(--card)}
 .tab.hasf .bdg{display:block}
-.r2 .tab.on{color:var(--primary);border-bottom-color:var(--primary)}
-.r2 .tab:active{background:var(--soft)}
+.bnav .tab.on{color:var(--primary);border-top-color:var(--primary)}
+.bnav .tab:active{background:var(--soft)}
 .brand{display:flex;align-items:center;gap:10px;color:inherit;text-decoration:none}
 .brand img{width:30px;height:30px;border-radius:9px}
 .brand b{font:700 25px/1 var(--font-display);color:var(--primary)}
@@ -165,13 +166,13 @@ body.les main{padding-top:calc(148px + env(safe-area-inset-top))}
 .done{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:20px;height:20px;color:var(--gold)}
 .done svg{width:100%;height:100%}
 a.row:active{transform:scale(.985)}
-.fab{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom));left:14px;z-index:7;width:38px;height:38px;
+.fab{position:fixed;bottom:calc(76px + env(safe-area-inset-bottom));left:14px;z-index:7;width:38px;height:38px;
   display:grid;place-items:center;border-radius:50%;border:1px solid var(--line);background:var(--glass);
   -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);color:var(--text);cursor:pointer;
   opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .2s ease,transform .2s ease;padding:0}
 .fab.show{opacity:1;pointer-events:auto;transform:none}
 .fab svg{width:20px;height:20px}
-.tost{position:fixed;bottom:calc(18px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%) translateY(8px);
+.tost{position:fixed;bottom:calc(74px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%) translateY(8px);
   z-index:20;background:var(--text);color:var(--card);padding:10px 18px;border-radius:12px;font-size:14px;
   box-shadow:0 8px 24px rgba(0,0,0,.28);opacity:0;pointer-events:none;transition:opacity .22s ease,transform .22s ease}
 .tost.show{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -232,15 +233,15 @@ a.row:active{transform:scale(.985)}
       <div class="ctx" id="ctx"></div>
     </div>
     <div class="sbar" id="sbar" hidden><input type="search" id="sinput" placeholder="ابحث في الدروس والسلاسل…" autocomplete="off"><button class="ib" id="b-sx" aria-label="إغلاق" style="width:36px;height:36px;flex:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
-    <nav class="trow r2" id="tabs">
+    <nav class="lmodes" id="lmodes"></nav>
+  </header>
+  <nav class="bnav" id="tabs">
       <a href="#/" id="nv-home" class="tab on" aria-label="العلوم"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20v-1.5a4 4 0 0 0-4-4H6.5a4 4 0 0 0-4 4V20"/><circle cx="9.25" cy="7.5" r="3.75"/><path d="M21.5 20v-1.5a4 4 0 0 0-3-3.85M15.5 3.85a3.75 3.75 0 0 1 0 7.3"/></svg></a>
       <a href="#/fav" id="nv-fav" class="tab" aria-label="المفضلة"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3.5 2.6 5.3 5.9.9-4.25 4.1 1 5.8L12 16.9l-5.25 2.7 1-5.8L3.5 9.7l5.9-.9Z"/></svg><span class="bdg"></span></a>
       <a href="#/stats" id="nv-stats" class="tab" aria-label="إحصائي"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16M7 16v-5M12 16V6M17 16v-8"/></svg></a>
       <button class="tab" id="b-search" aria-label="بحث"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4.6-4.6"/></svg></button>
       <button class="tab" id="b-theme" aria-label="الشكل"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg></button>
-    </nav>
-    <nav class="lmodes" id="lmodes"></nav>
-  </header>
+  </nav>
   <div class="themes" id="themes" hidden>
     <button data-t="night" aria-pressed="true"><i style="background:#14110E"></i>ليل</button>
     <button data-t="paper" aria-pressed="false"><i style="background:#F4EEE2"></i>ورق</button>
