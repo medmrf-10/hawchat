@@ -36,10 +36,17 @@ a{color:var(--primary)}
 
 .app{min-height:100dvh;max-width:var(--app-max);margin:0 auto;padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
-/* الترويسة الزجاجية */
-.top{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;
-  height:calc(58px + env(safe-area-inset-top));padding:env(safe-area-inset-top) 16px 0 6px;
+/* الترويسة الزجاجية — صفّان بنمط فيسبوك */
+.top{position:sticky;top:0;z-index:5;display:flex;flex-direction:column;
+  padding-top:env(safe-area-inset-top);
   background:var(--glass);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.trow{display:flex;align-items:center}
+.r1{justify-content:space-between;height:52px;padding:0 16px 0 6px;position:relative}
+.r2{height:44px;border-top:1px solid var(--line)}
+.r2 .tab{flex:1;display:grid;place-items:center;height:44px;color:var(--muted);border-bottom:3px solid transparent;text-decoration:none;cursor:pointer}
+.r2 .tab svg{width:24px;height:24px}
+.r2 .tab.on{color:var(--primary);border-bottom-color:var(--primary)}
+.r2 .tab:active{background:var(--soft)}
 .brand{display:flex;align-items:center;gap:10px;color:inherit;text-decoration:none}
 .brand img{width:30px;height:30px;border-radius:9px}
 .brand b{font:700 25px/1 var(--font-display);color:var(--primary)}
@@ -47,10 +54,9 @@ a{color:var(--primary)}
 .acts{display:flex}
 .ib{flex:none;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;
   color:var(--muted);border:0;background:none;font:inherit;cursor:pointer}
-/* نمط فيسبوك: الترويسة تنكمش لصف أيقونات عند النزول */
-.top.min{height:calc(48px + env(safe-area-inset-top))}
-.top.min .brand img,.top.min .sim{display:none}
-.top.min .brand b{font-size:20px}
+/* نمط فيسبوك: الصف الأول يختفي بالنزول والثاني يبقى */
+.top.min .r1{display:none}
+.top.min .sbar{display:none}
 .ib:active{background:var(--press)}
 .sbar{position:absolute;left:8px;right:8px;bottom:7px;height:44px;display:flex;align-items:center;gap:6px;
   padding:0 14px 0 2px;background:var(--card);border:1px solid var(--line);border-radius:14px;animation:fade .18s ease-out}
@@ -182,12 +188,19 @@ body.lk .drawer .dbody{transform:none;transition:none}
 <body>
 <div class="app">
   <header class="top" id="top">
-    <a class="brand" href="#/"><img id="logo" alt=""><b>إرث</b><span class="sim">محاكاة</span></a>
-    <div class="acts">
-      <button class="ib" id="b-search" aria-label="بحث"></button>
-      <button class="ib" id="b-theme" aria-label="الشكل"></button>
+    <div class="trow r1">
+      <a class="brand" href="#/"><img id="logo" alt=""><b>إرث</b><span class="sim">محاكاة</span></a>
+      <div class="acts">
+        <button class="ib" id="b-search" aria-label="بحث"></button>
+        <button class="ib" id="b-theme" aria-label="الشكل"></button>
+      </div>
     </div>
     <div class="sbar" id="sbar" hidden><input type="search" id="sinput" placeholder="ابحث في الدروس…" autocomplete="off"></div>
+    <nav class="trow r2" id="tabs">
+      <a href="#/" id="nv-home" class="tab on" aria-label="العلوم"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20v-1.5a4 4 0 0 0-4-4H6.5a4 4 0 0 0-4 4V20"/><circle cx="9.25" cy="7.5" r="3.75"/><path d="M21.5 20v-1.5a4 4 0 0 0-3-3.85M15.5 3.85a3.75 3.75 0 0 1 0 7.3"/></svg></a>
+      <a href="#/fav" id="nv-fav" class="tab" aria-label="المفضلة"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3.5 2.6 5.3 5.9.9-4.25 4.1 1 5.8L12 16.9l-5.25 2.7 1-5.8L3.5 9.7l5.9-.9Z"/></svg></a>
+      <a href="#/stats" id="nv-stats" class="tab" aria-label="إحصائي"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16M7 16v-5M12 16V6M17 16v-8"/></svg></a>
+    </nav>
   </header>
   <div class="themes" id="themes" hidden>
     <button data-t="night" aria-pressed="true"><i style="background:#14110E"></i>ليل</button>
@@ -196,11 +209,6 @@ body.lk .drawer .dbody{transform:none;transition:none}
   <div class="crum" id="crum"></div>
   <main id="app"></main>
 </div>
-<nav class="nav">
-  <a href="#/" id="nv-home" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20v-1.5a4 4 0 0 0-4-4H6.5a4 4 0 0 0-4 4V20"/><circle cx="9.25" cy="7.5" r="3.75"/><path d="M21.5 20v-1.5a4 4 0 0 0-3-3.85M15.5 3.85a3.75 3.75 0 0 1 0 7.3"/></svg><span>العلوم</span></a>
-  <a href="#/fav" id="nv-fav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3.5 2.6 5.3 5.9.9-4.25 4.1 1 5.8L12 16.9l-5.25 2.7 1-5.8L3.5 9.7l5.9-.9Z"/></svg><span>المفضلة</span></a>
-  <a href="#/stats" id="nv-stats"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16M7 16v-5M12 16V6M17 16v-8"/></svg><span>إحصائي</span></a>
-</nav>
 <script>
 const BASE='https://medmrf-10.github.io/irth';
 const app=document.getElementById('app'),crum=document.getElementById('crum');
