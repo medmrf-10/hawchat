@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" data-theme="night">
 <head>
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('irth.theme')||'night'}catch(e){}</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>إرث — محاكاة التشغيل</title>
@@ -148,6 +149,7 @@ a{color:var(--primary)}
   border-radius:var(--r-2);background:var(--primary);color:var(--card);font:inherit;font-size:15px;cursor:pointer;
   text-decoration:none}
 .cta svg{width:20px;height:20px}
+.gttl{margin:22px 16px 8px;color:var(--gold);font-size:13px;font-weight:700}
 .pbar{height:3px;border-radius:999px;background:var(--soft);overflow:hidden}
 .pbar i{display:block;height:100%;width:0;background:var(--gold);transition:width .15s linear}
 .chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:5px 12px;
@@ -323,9 +325,17 @@ function viewStats(){
   navOn('stats');setCrumb([{t:'إحصائي'}]);
   const vids=Object.keys(VID).length,ser=SER.length,sci=Object.keys(SCI).length;
   const mins=Object.values(VID).reduce((a,v)=>a+(v.duration||0),0);
+  const perSh={},perSc={};
+  SER.forEach(s=>{const sh=VID[s.items[0]]?.speakers?.[0]||'';
+    const dur=s.items.reduce((a,v)=>a+(VID[v]?.duration||0),0);
+    perSh[sh]=perSh[sh]||{n:0,t:0};perSh[sh].n+=s.items.length;perSh[sh].t+=dur;
+    perSc[s.science]=perSc[s.science]||{n:0,t:0};perSc[s.science].n+=s.items.length;perSc[s.science].t+=dur});
+  const grp=(t,rows)=>`<div class="gttl">${t}</div>${rows.map((r,i)=>`<div class="row" style="--i:${i};cursor:default"><span class="ph">${firstLetter(r[0])}</span><span class="tx"><span class="nm" style="font-size:16px">${r[0]}</span><span class="mt">${pl3(r[1],'درس','درسان','دروس','درساً')}${r[2]?' · '+Math.round(r[2]/3600*10)/10+' س':''}</span></span></div>`).join('')}`;
   app.innerHTML=`<div class="list">${[
     ['سلسلة',ser],['درساً',vids],['علماً',sci],['ساعة من العلم',Math.round(mins/3600)]].map((r,i)=>
-    `<div class="row" style="--i:${i};cursor:default"><span class="ph">${r[1]}</span><span class="tx"><span class="nm" style="font-size:16px">${r[0]}</span></span></div>`).join('')}</div>`;
+    `<div class="row" style="--i:${i};cursor:default"><span class="ph">${r[1]}</span><span class="tx"><span class="nm" style="font-size:16px">${r[0]}</span></span></div>`).join('')}
+    ${grp('لكل شيخ',Object.entries(perSh).sort((a,b)=>b[1].n-a[1].n).map(([sh,d])=>[PER[sh]?.short||PER[sh]?.name||sh||'غير معروف',d.n,d.t]))}
+    ${grp('لكل علم',Object.entries(perSc).sort((a,b)=>b[1].n-a[1].n).map(([sc,d])=>[SCI[sc]?.name||sc,d.n,d.t]))}</div>`;
 }
 function viewSearch(q){
   navOn('home');
@@ -362,12 +372,12 @@ function viewSeries(id){
   const sh=VID[r.items[0]]?.speakers?.[0];
   const total=r.items.reduce((a,v)=>a+(VID[v]?.duration||0),0);
   setCrumb([{t:'العلوم',a:'#/'},{t:SCI[r.science]?.name||r.science,a:'#/science/'+r.science},{t:r.title}],
-    `${PER[sh]?.short||PER[sh]?.name||''}${PER[sh]?' · ':''}${pl3(r.items.length,'درس','درسان','دروس','درساً')} · ${Math.round(total/3600*10)/10} س${r.kind?' · '+kindAr(r.kind):''}`);
+    `${PER[sh]?.short||PER[sh]?.name||''}${PER[sh]?' · ':''}${pl3(r.items.length,'درس','درسان','دروس','درساً')}${total?' · '+Math.round(total/3600*10)/10+' س':''}${r.kind?' · '+kindAr(r.kind):''}`);
   document.title=r.title+' — إرث';
   app.innerHTML=`<div class="list"><a class="cta" href="#/lesson/${r.items[0]}">${ICONS.play}<span>استمع من البداية</span></a>${r.items.map((v,i)=>{const V=VID[v]||{};
     return `<a class="row" style="--i:${i}" href="#/lesson/${v}"><span class="ph" style="font-size:18px">${i+1}</span>
     <span class="tx"><span class="nm" style="font-size:16px">${esc(V.title||v)}</span>
-    <span class="mt">${fmtT(V.duration||0)}</span></span>${ICONS.chev}</a>`}).join('')}</div>`;
+    <span class="mt">${V.duration?fmtT(V.duration):''}</span></span>${ICONS.chev}</a>`}).join('')}</div>`;
 }
 
 /* ===== محرك الكاريوكي — نفس lesson.html: امتلاء ذهبي داخل الكلمة ===== */
