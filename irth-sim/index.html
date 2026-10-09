@@ -390,7 +390,9 @@ function viewSeries(id){
 }
 
 /* ===== محرك الكاريوكي — نفس lesson.html: امتلاء ذهبي داخل الكلمة ===== */
-let YTP=null,PH=[],curPh=-1,curW=-1,timer=null,pendPlay=false,SPANS=[],MODE='live';
+let YTP=null,PH=[],curPh=-1,curW=-1,timer=null,pendPlay=false,SPANS=[],MODE='live',curLes='';
+const POSK='irth_pos';let POS=new Map(JSON.parse(localStorage.getItem(POSK)||'[]'));
+function posSave(id,t){POS.set(id,Math.round(t));localStorage.setItem(POSK,JSON.stringify([...POS]))}
 const PBRK=/[،؛.!؟:…—]$/;
 function normAlign(a){const ws=a.words.split(' ').filter(Boolean);
   return ws.map((w,i)=>[w,(a.start[i]||0)/100,((a.start[i]||0)+(a.dur[i]||0))/100,0])}
@@ -411,6 +413,7 @@ function renderPhrase(i){
 function tick(){
   if(!YTP||!YTP.getCurrentTime||!PH.length)return;
   const tm=YTP.getCurrentTime();
+  if(curLes&&Math.round(tm*10)%22===0)posSave(curLes,tm)
   const bar=document.getElementById('tm');if(bar)bar.textContent=fmtT(tm)+' / '+fmtT(YTP.getDuration?YTP.getDuration():0);
   const pb=document.getElementById('pbar');if(pb){const d=YTP.getDuration()||1;pb.style.width=(tm/d*100)+'%'}
   let pi=curPh;
@@ -445,13 +448,16 @@ function mountPlayer(vid){
   setTimeout(()=>{if(!ready){const s=document.getElementById('stage');if(s)s.innerHTML='<span class="wait">المشغّل يتأخر — <a href="https://youtu.be/'+vid+'" target="_blank" rel="noopener">افتح على يوتيوب</a></span>'}},9000);
   const create=()=>{if(!document.getElementById('yfp'))return;
     YTP=new YT.Player('yfp',{videoId:vid,playerVars:{rel:0,playsinline:1,enablejsapi:1},events:{
-      onReady:()=>{ready=true;if(pendPlay){YTP.playVideo();pendPlay=false}},
+      onReady:()=>{ready=true;const sv=POS.get(curLes)||0;
+        if(sv>10){try{const d=YTP.getDuration()||0;if(!d||sv<d-15){YTP.seekTo(sv,true);tost('استئناف من '+fmtT(sv))}}catch(_){}}
+        if(pendPlay){YTP.playVideo();pendPlay=false}},
       onError:e=>{const s=document.getElementById('stage');if(s)s.innerHTML='<span class="wait">يوتيوب منع تضمين هذا الفيديو ('+e.data+') — <a href="https://youtu.be/'+vid+'" target="_blank" rel="noopener">افتحه على يوتيوب</a></span>'},
       onStateChange:e=>{
         const b=document.getElementById('playb');const playing=(e.data===1||e.data===3);
         if(b)b.innerHTML=playing?ICONS.pause:ICONS.play;
         if(e.data===1){if(!timer)timer=setInterval(tick,150)}
-        else if(e.data!==3&&timer){clearInterval(timer);timer=null}}}})};
+        else{if(e.data===0&&curLes)posSave(curLes,0);
+          if(e.data!==3&&timer){clearInterval(timer);timer=null}}}}})};
   if(window.YT&&YT.Player){create()}
   else{
     window.onYouTubeIframeAPIReady=create;
@@ -467,7 +473,7 @@ function setMode(m){
   document.getElementById('p-sum').style.display=m==='sum'?'':'none';
 }
 function viewLesson(id){
-  navOn('home');
+  navOn('home');curLes=id;
   const V=VID[id];
   if(!V){app.innerHTML='<div class="errbox">درس غير موجود</div>';return}
   const ser=SER.find(s=>s.items.includes(id));
