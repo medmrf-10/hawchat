@@ -267,7 +267,7 @@ async function boot(){
   }catch(e){app.innerHTML='<div class="errbox">تعذر تحميل بيانات إرث — حدّث الصفحة</div>';return}
   addEventListener('hashchange',route);route();
 }
-function navOn(k){document.querySelectorAll('.nav a').forEach(a=>a.classList.remove('on'));const n=document.getElementById('nv-'+k);if(n)n.classList.add('on')}
+function navOn(k){document.querySelectorAll('#tabs .tab').forEach(a=>a.classList.remove('on'));const n=document.getElementById('nv-'+k);if(n)n.classList.add('on')}
 addEventListener('scroll',()=>{if(document.body.classList.contains('lk'))return;
   document.getElementById('top').classList.toggle('min',scrollY>48)},{passive:true});
 function route(){
