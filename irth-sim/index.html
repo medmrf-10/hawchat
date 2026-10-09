@@ -69,10 +69,11 @@ a{color:var(--primary)}
   color:var(--muted);border:0;background:none;font:inherit;cursor:pointer}
 /* نمط فيسبوك: الصف الأول يختفي بالنزول والثاني يبقى */
 .top.min .r1{display:none}
-.top.min .sbar{display:none}
 .ib:active{background:var(--press)}
-.sbar{position:absolute;left:8px;right:8px;bottom:7px;height:44px;display:flex;align-items:center;gap:6px;
-  padding:0 14px 0 2px;background:var(--card);border:1px solid var(--line);border-radius:14px;animation:fade .18s ease-out}
+.sbar{position:fixed;z-index:12;left:50%;transform:translateX(-50%);top:calc(6px + env(safe-area-inset-top));
+  width:min(544px,calc(100% - 16px));height:44px;display:flex;align-items:center;gap:6px;
+  padding:0 14px 0 2px;background:var(--card);border:1px solid var(--line);border-radius:14px;
+  box-shadow:0 8px 24px rgba(0,0,0,.22);animation:fade .18s ease-out}
 .sbar[hidden]{display:none}
 .sbar input{flex:1;min-width:0;border:0;outline:0;background:none;font:inherit;color:var(--text)}
 .sbar input::placeholder{color:var(--muted)}
@@ -215,7 +216,7 @@ body.lk .drawer .dbody{transform:none;transition:none}
       <a class="brand" href="#/"><b>إرث</b></a>
       <div class="ctx" id="ctx"></div>
     </div>
-    <div class="sbar" id="sbar" hidden><input type="search" id="sinput" placeholder="ابحث في الدروس…" autocomplete="off"></div>
+    <div class="sbar" id="sbar" hidden><input type="search" id="sinput" placeholder="ابحث في الدروس والسلاسل…" autocomplete="off"><button class="ib" id="b-sx" aria-label="إغلاق" style="width:36px;height:36px;flex:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
     <nav class="trow r2" id="tabs">
       <a href="#/" id="nv-home" class="tab on" aria-label="العلوم"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20v-1.5a4 4 0 0 0-4-4H6.5a4 4 0 0 0-4 4V20"/><circle cx="9.25" cy="7.5" r="3.75"/><path d="M21.5 20v-1.5a4 4 0 0 0-3-3.85M15.5 3.85a3.75 3.75 0 0 1 0 7.3"/></svg></a>
       <a href="#/fav" id="nv-fav" class="tab" aria-label="المفضلة"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3.5 2.6 5.3 5.9.9-4.25 4.1 1 5.8L12 16.9l-5.25 2.7 1-5.8L3.5 9.7l5.9-.9Z"/></svg></a>
@@ -277,6 +278,7 @@ document.getElementById('b-theme').onclick=e=>{e.stopPropagation();THEMESW.hidde
 document.addEventListener('click',e=>{if(!e.target.closest('#themes,#b-theme'))THEMESW.hidden=true});
 const sbar=document.getElementById('sbar'),sinput=document.getElementById('sinput');
 document.getElementById('b-search').onclick=()=>{sbar.hidden=!sbar.hidden;if(!sbar.hidden)sinput.focus()};
+document.getElementById('b-sx').onclick=()=>{const had=sinput.value.trim();sbar.hidden=true;sinput.value='';if(had)viewSearch('')};
 sinput.oninput=()=>{const q=sinput.value.trim();if(location.hash.startsWith('#/lesson')||location.hash.startsWith('#/series'))return;viewSearch(q)};
 function setCrumb(parts,meta){ctx.innerHTML=parts.map((p,i)=>i<parts.length-1?`<a href="${p.a}">${esc(p.t)}</a>`:`<b>${esc(p.t)}</b>`).join(' <span style="opacity:.5">‹</span> ')+(meta?`<span class="dim"> · ${esc(meta)}</span>`:'')}
 
@@ -341,10 +343,13 @@ function viewStats(){
 function viewSearch(q){
   navOn('home');
   if(!q){route0();return}
+  const sres=SER.filter(s=>s.title.includes(q)).slice(0,8);
   const res=Object.values(VID).filter(v=>v.title.includes(q)).slice(0,40);
   setCrumb([{t:'العلوم',a:'#/'},{t:'بحث: '+q}]);
-  app.innerHTML=`<div class="list">${res.map((v,i)=>{const s=SER.find(x=>x.items.includes(v.id));
-    return `<a class="row" style="--i:${i}" href="#/lesson/${v.id}"><span class="ph">${firstLetter(v.title)}</span><span class="tx"><span class="nm" style="font-size:16px">${esc(v.title)}</span><span class="mt">${esc(s?s.title:'')}</span></span>${ICONS.chev}</a>`}).join('')||'<div class="empty">لا نتائج</div>'}</div>`;
+  const srows=sres.map((s,i)=>`<a class="row" style="--i:${i}" href="#/series/${s.id}"><span class="ph">${firstLetter(s.title)}</span><span class="tx"><span class="nm" style="font-size:16px">${esc(s.title)}</span><span class="mt">سلسلة · ${pl3(s.items.length,'درس','درسان','دروس','درساً')}</span></span>${ICONS.chev}</a>`).join('');
+  const vrows=res.map((v,i)=>{const s=SER.find(x=>x.items.includes(v.id));
+    return `<a class="row" style="--i:${i+sres.length}" href="#/lesson/${v.id}"><span class="ph">${firstLetter(v.title)}</span><span class="tx"><span class="nm" style="font-size:16px">${esc(v.title)}</span><span class="mt">${esc(s?s.title:'')}</span></span>${ICONS.chev}</a>`}).join('');
+  app.innerHTML=`<div class="list">${srows}${vrows||''}${!srows&&!vrows?'<div class="empty">لا نتائج</div>':''}</div>`;
 }
 function route0(){viewHome()}
 function kindAr(k){return {sharh:'شرح كتاب',mo7adara:'محاضرة','5o6ab':'خطبة',bernamej:'برنامج'}[k]||k||''}
