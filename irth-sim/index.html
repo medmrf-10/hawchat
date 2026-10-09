@@ -26,6 +26,16 @@
   --primary:#7b2d26;--gold:#ae8848;--soft:#eadfcb;--press:#f2eadb;
   --glass:rgba(244,238,226,.9);color-scheme:light;
 }
+[data-theme='white']{
+  --bg:#ffffff;--card:#f0f2f5;--text:#050505;--muted:#65676b;--line:#ced0d4;
+  --primary:#7b2d26;--gold:#ae8848;--soft:#e4e6eb;--press:#f0f2f5;
+  --glass:rgba(255,255,255,.92);color-scheme:light;
+}
+[data-theme='dark']{
+  --bg:#18191a;--card:#242526;--text:#e4e6eb;--muted:#b0b3b8;--line:#3e4042;
+  --primary:#e3a598;--gold:#c9a35c;--soft:#3a3b3c;--press:#2d2e2f;
+  --glass:rgba(24,25,26,.92);color-scheme:dark;
+}
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
 body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:16px}
@@ -36,15 +46,15 @@ a{color:var(--primary)}
 
 .app{min-height:100dvh;max-width:var(--app-max);margin:0 auto;padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
-/* الترويسة الزجاجية — صفّان بنمط فيسبوك */
+/* الترويسة الزجاجية — صف أيقونات واحد بنمط فيسبوك */
 .top{position:sticky;top:0;z-index:5;display:flex;flex-direction:column;
   padding-top:env(safe-area-inset-top);
   background:var(--glass);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
 .trow{display:flex;align-items:center}
 .r1{justify-content:space-between;height:52px;padding:0 16px 0 6px;position:relative}
-.r2{height:44px;border-top:1px solid var(--line)}
-.r2 .tab{flex:1;display:grid;place-items:center;height:44px;color:var(--muted);border-bottom:3px solid transparent;text-decoration:none;cursor:pointer}
-.r2 .tab svg{width:24px;height:24px}
+.r2{height:48px;border-top:1px solid var(--line)}
+.r2 .tab{flex:1;display:grid;place-items:center;height:48px;color:var(--muted);border-bottom:3px solid transparent;text-decoration:none;cursor:pointer}
+.r2 .tab svg{width:25px;height:25px}
 .r2 .tab.on{color:var(--primary);border-bottom-color:var(--primary)}
 .r2 .tab:active{background:var(--soft)}
 .brand{display:flex;align-items:center;gap:10px;color:inherit;text-decoration:none}
@@ -190,21 +200,21 @@ body.lk .drawer .dbody{transform:none;transition:none}
   <header class="top" id="top">
     <div class="trow r1">
       <a class="brand" href="#/"><img id="logo" alt=""><b>إرث</b><span class="sim">محاكاة</span></a>
-      <div class="acts">
-        <button class="ib" id="b-search" aria-label="بحث"></button>
-        <button class="ib" id="b-theme" aria-label="الشكل"></button>
-      </div>
     </div>
     <div class="sbar" id="sbar" hidden><input type="search" id="sinput" placeholder="ابحث في الدروس…" autocomplete="off"></div>
     <nav class="trow r2" id="tabs">
       <a href="#/" id="nv-home" class="tab on" aria-label="العلوم"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20v-1.5a4 4 0 0 0-4-4H6.5a4 4 0 0 0-4 4V20"/><circle cx="9.25" cy="7.5" r="3.75"/><path d="M21.5 20v-1.5a4 4 0 0 0-3-3.85M15.5 3.85a3.75 3.75 0 0 1 0 7.3"/></svg></a>
       <a href="#/fav" id="nv-fav" class="tab" aria-label="المفضلة"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3.5 2.6 5.3 5.9.9-4.25 4.1 1 5.8L12 16.9l-5.25 2.7 1-5.8L3.5 9.7l5.9-.9Z"/></svg></a>
       <a href="#/stats" id="nv-stats" class="tab" aria-label="إحصائي"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16M7 16v-5M12 16V6M17 16v-8"/></svg></a>
+      <button class="tab" id="b-search" aria-label="بحث"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4.6-4.6"/></svg></button>
+      <button class="tab" id="b-theme" aria-label="الشكل"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg></button>
     </nav>
   </header>
   <div class="themes" id="themes" hidden>
     <button data-t="night" aria-pressed="true"><i style="background:#14110E"></i>ليل</button>
     <button data-t="paper" aria-pressed="false"><i style="background:#F4EEE2"></i>ورق</button>
+    <button data-t="white" aria-pressed="false"><i style="background:#FFFFFF"></i>أبيض</button>
+    <button data-t="dark" aria-pressed="false"><i style="background:#18191A"></i>داكن</button>
   </div>
   <div class="crum" id="crum"></div>
   <main id="app"></main>
@@ -236,8 +246,7 @@ const ICONS={
  chev:'<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>'
 };
 const I=k=>ICONS[k]||'';
-document.getElementById('b-search').innerHTML=ICONS.s;
-document.getElementById('b-theme').innerHTML=ICONS.t;
+
 document.getElementById('logo').src=BASE+'/icons/icon-192.png';
 document.getElementById('logo').onerror=function(){this.style.display='none'};
 
@@ -275,7 +284,7 @@ function route(){
   try{YTP&&YTP.destroy&&YTP.destroy()}catch(_){}YTP=null;pendPlay=false;if(timer){clearInterval(timer);timer=null}
   const les=h.startsWith('lesson/');
   document.body.classList.toggle('lk',les);
-  document.getElementById('b-search').style.display=les?'none':'';
+  const bs=document.getElementById('b-search');if(bs)bs.style.display=les?'none':'';
   document.getElementById('sbar').hidden=true;sinput.value='';
   if(h.startsWith('science/'))viewScience(h.slice(8));
   else if(h.startsWith('series/'))viewSeries(h.slice(7));
