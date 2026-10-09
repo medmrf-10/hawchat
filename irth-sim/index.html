@@ -47,10 +47,15 @@ a{color:var(--primary)}
 
 .app{min-height:100dvh;max-width:var(--app-max);margin:0 auto;padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
-/* الترويسة الزجاجية — صف أيقونات واحد بنمط فيسبوك */
-.top{position:sticky;top:0;z-index:5;display:flex;flex-direction:column;
+/* الترويسة الزجاجية — ثابتة تنزلق بنمط فيسبوك */
+.top{position:fixed;top:0;left:50%;transform:translateX(-50%);width:min(100%,var(--app-max));z-index:6;display:flex;flex-direction:column;
   padding-top:env(safe-area-inset-top);
-  background:var(--glass);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+  background:var(--glass);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  transition:transform .28s ease}
+.top.hid{transform:translate(-50%,-52px)}
+body.les .top.hid{transform:translate(-50%,-100px)}
+main{display:block;padding-top:calc(100px + env(safe-area-inset-top))}
+body.les main{padding-top:calc(148px + env(safe-area-inset-top))}
 .trow{display:flex;align-items:center}
 .r1{justify-content:space-between;height:52px;padding:0 16px 0 6px;position:relative}
 .r2{height:48px;border-top:1px solid var(--line)}
@@ -67,8 +72,6 @@ a{color:var(--primary)}
 .acts{display:flex}
 .ib{flex:none;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;
   color:var(--muted);border:0;background:none;font:inherit;cursor:pointer}
-/* نمط فيسبوك: الصف الأول يختفي بالنزول والثاني يبقى */
-.top.min .r1{display:none}
 .ib:active{background:var(--press)}
 .sbar{position:fixed;z-index:12;left:50%;transform:translateX(-50%);top:calc(6px + env(safe-area-inset-top));
   width:min(544px,calc(100% - 16px));height:44px;display:flex;align-items:center;gap:6px;
@@ -127,13 +130,14 @@ a{color:var(--primary)}
 .stage .wait{color:var(--muted);font-size:14px}
 .stage .wait a{color:var(--primary)}
 
-/* شريط الأوضاع — مثل السابق: خيارات المحتوى */
-.modes{display:flex;gap:8px;margin:12px 16px 0;overflow-x:auto;scrollbar-width:none}
-.modes::-webkit-scrollbar{display:none}
-.mode{flex:none;display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:0 14px;border-radius:999px;
-  border:1px solid var(--line);background:var(--card);color:var(--muted);font:inherit;font-size:14px;cursor:pointer;text-decoration:none}
-.mode svg{width:18px;height:18px}
-.mode.on{border-color:var(--primary);color:var(--primary);background:var(--soft);font-weight:600}
+/* شريط الأوضاع داخل الترويسة — أيقونات صافية على كامل العرض */
+.lmodes{display:none;height:48px;border-top:1px solid var(--line);align-items:stretch}
+.lmodes:not(:empty){display:flex}
+.mtab{flex:1;display:grid;place-items:center;color:var(--muted);border:0;border-bottom:3px solid transparent;
+  background:none;padding:0;font:inherit;text-decoration:none;cursor:pointer}
+.mtab svg{width:23px;height:23px}
+.mtab.on{color:var(--primary);border-bottom-color:var(--primary)}
+.mtab:active{background:var(--soft)}
 
 .czone{margin:10px 16px 0;background:var(--card);border:1px solid var(--line);border-radius:var(--r-2);padding:12px 14px;
   display:flex;flex-direction:column;gap:10px}
@@ -197,27 +201,7 @@ a.row:active{transform:scale(.985)}
 .drow.cur .dnum{background:var(--primary);color:var(--card)}
 .dt{flex:1;min-width:0;font-size:14px;line-height:1.6}
 .dd{flex:none;color:var(--muted);font-size:12px}
-@media (min-width:700px){.list,.pane,.czone,.modes,.player,.stage{max-width:var(--app-max);margin-inline:auto}}
-
-/* ==== صفحة ثابتة: بلا أي حركة أو سكرول — أمر المدير ==== */
-*{animation:none!important;transition:none!important}
-body.lk{overflow:hidden;height:100dvh;overscroll-behavior:none;touch-action:manipulation}
-body.lk .app{height:100dvh;display:flex;flex-direction:column;overflow:hidden}
-body.lk main{flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column}
-body.lk .modes{flex:none;flex-wrap:nowrap;gap:5px;margin-top:8px;overflow:hidden}
-body.lk .mode{flex:1;justify-content:center;min-height:36px;padding:0 5px;font-size:12.5px;gap:4px;white-space:nowrap}
-body.lk .mode svg{width:15px;height:15px;flex:none}
-body.lk .player{flex:none;margin-top:8px;height:min(24dvh,172px)}
-body.lk .player:before{display:none}
-body.lk .stage{flex:1;min-height:64px;margin-top:8px;padding:8px 12px}
-body.lk .stage .ln{font-size:clamp(1rem,4.4vw,1.35rem);line-height:1.9}
-body.lk .czone{flex:none;margin-top:8px;padding:8px 12px;gap:6px}
-body.lk .crow{gap:0}
-body.lk .cbtn.main{width:52px;height:52px}
-body.lk .csub{font-size:12px}
-body.lk .pane{flex:1;min-height:0;margin-top:8px;overflow:hidden;display:flex;flex-direction:column}
-body.lk .txtp,body.lk .sump{flex:1;min-height:0;overflow:auto}
-body.lk .drawer .dbody{transform:none;transition:none}
+@media (min-width:700px){.list,.pane,.czone,.player,.stage{max-width:var(--app-max);margin-inline:auto}}
 </style>
 </head>
 <body>
@@ -235,6 +219,7 @@ body.lk .drawer .dbody{transform:none;transition:none}
       <button class="tab" id="b-search" aria-label="بحث"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4.6-4.6"/></svg></button>
       <button class="tab" id="b-theme" aria-label="الشكل"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg></button>
     </nav>
+    <nav class="lmodes" id="lmodes"></nav>
   </header>
   <div class="themes" id="themes" hidden>
     <button data-t="night" aria-pressed="true"><i style="background:#14110E"></i>ليل</button>
@@ -305,13 +290,14 @@ async function boot(){
   addEventListener('hashchange',route);route();
 }
 function navOn(k){document.querySelectorAll('#tabs .tab').forEach(a=>a.classList.remove('on'));const n=document.getElementById('nv-'+k);if(n)n.classList.add('on')}
-addEventListener('scroll',()=>{if(document.body.classList.contains('lk'))return;
-  document.getElementById('top').classList.toggle('min',scrollY>48)},{passive:true});
+let _ly=0;addEventListener('scroll',()=>{const y=scrollY,t=document.getElementById('top');
+  if(y<56)t.classList.remove('hid');else if(y>_ly+8)t.classList.add('hid');else if(y<_ly-8)t.classList.remove('hid');_ly=y},{passive:true});
 function route(){
   const h=location.hash.slice(2)||'';
   try{YTP&&YTP.destroy&&YTP.destroy()}catch(_){}YTP=null;pendPlay=false;if(timer){clearInterval(timer);timer=null}
   const les=h.startsWith('lesson/');
-  document.body.classList.toggle('lk',les);
+  document.body.classList.toggle('les',les);
+  if(!les)document.getElementById('lmodes').innerHTML='';
   const bs=document.getElementById('b-search');if(bs)bs.style.display=les?'none':'';
   document.getElementById('sbar').hidden=true;sinput.value='';
   if(h.startsWith('science/'))viewScience(h.slice(8));
@@ -475,7 +461,7 @@ function mountPlayer(vid){
 }
 function setMode(m){
   MODE=m;
-  document.querySelectorAll('.mode').forEach(x=>x.classList.toggle('on',x.dataset.m===m));
+  document.querySelectorAll('.mtab').forEach(x=>x.classList.toggle('on',x.dataset.m===m));
   document.getElementById('live').style.display=m==='live'?'':'none';
   document.getElementById('p-txt').style.display=m==='read'?'':'none';
   document.getElementById('p-sum').style.display=m==='sum'?'':'none';
@@ -491,14 +477,13 @@ function viewLesson(id){
   const idx=ser?ser.items.indexOf(id):-1;
   const nx=ser&&idx<ser.items.length-1?ser.items[idx+1]:null;
   const pv=ser&&idx>0?ser.items[idx-1]:null;
+  document.getElementById('lmodes').innerHTML=`
+    <button class="mtab on" data-m="live" onclick="setMode('live')" aria-label="حية">${I('watch')}</button>
+    ${(V.has||[]).includes('transcript')?`<button class="mtab" data-m="read" onclick="setMode('read')" aria-label="تفريغ">${I('read')}</button>`:''}
+    ${(V.has||[]).includes('summary')?`<button class="mtab" data-m="sum" onclick="setMode('sum')" aria-label="ملخص">${I('sum')}</button>`:''}
+    ${V.yt?`<a class="mtab" href="https://youtu.be/${V.yt}" target="_blank" rel="noopener" aria-label="يوتيوب">${I('yt')}</a>`:''}
+    <button class="mtab" id="b-list" onclick="openDrawer()" aria-label="الدروس">${I('list')}</button>`;
   app.innerHTML=`
-  <div class="modes" style="margin-top:12px">
-    <button class="mode on" data-m="live" onclick="setMode('live')">${I('watch')} حية</button>
-    ${(V.has||[]).includes('transcript')?`<button class="mode" data-m="read" onclick="setMode('read')">${I('read')} تفريغ</button>`:''}
-    ${(V.has||[]).includes('summary')?`<button class="mode" data-m="sum" onclick="setMode('sum')">${I('sum')} ملخص</button>`:''}
-    ${V.yt?`<a class="mode" href="https://youtu.be/${V.yt}" target="_blank" rel="noopener">${I('yt')} يوتيوب</a>`:''}
-    <button class="mode" id="b-list" onclick="openDrawer()">${I('list')} الدروس</button>
-  </div>
   <div id="live">
     ${V.yt?`<div class="player"><div id="yfp"></div></div>`:''}
     <div class="stage" id="stage"><span class="wait">يُحمّل…</span></div>
