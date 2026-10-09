@@ -152,6 +152,27 @@ a{color:var(--primary)}
 .dt{flex:1;min-width:0;font-size:14px;line-height:1.6}
 .dd{flex:none;color:var(--muted);font-size:12px}
 @media (min-width:700px){.list,.pane,.czone,.modes,.player,.stage,.lttl,.lsub,.crum{max-width:var(--app-max);margin-inline:auto}}
+
+/* ==== صفحة ثابتة: بلا أي حركة أو سكرول — أمر المدير ==== */
+*{animation:none!important;transition:none!important}
+body.lk{overflow:hidden;height:100dvh;overscroll-behavior:none;touch-action:manipulation}
+body.lk .app{height:100dvh;display:flex;flex-direction:column;overflow:hidden}
+body.lk main{flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column}
+body.lk .crum{flex:none;padding-top:8px;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+body.lk .modes{flex:none;flex-wrap:wrap;gap:6px;margin-top:8px;overflow:visible}
+body.lk .mode{min-height:34px;padding:0 11px;font-size:12.5px}
+body.lk .player{flex:none;margin-top:8px}
+body.lk .player:before{display:none}
+body.lk .player{height:min(28dvh,190px)}
+body.lk .stage{flex:1;min-height:70px;margin-top:8px;padding:8px 12px}
+body.lk .stage .ln{font-size:clamp(1rem,4.4vw,1.35rem);line-height:1.9}
+body.lk .czone{flex:none;margin-top:8px;padding:8px 12px;gap:6px}
+body.lk .crow{gap:0}
+body.lk .cbtn.main{width:52px;height:52px}
+body.lk .csub{font-size:12px}
+body.lk .pane{flex:1;min-height:0;margin-top:8px;overflow:hidden;display:flex;flex-direction:column}
+body.lk .txtp,body.lk .sump{flex:1;min-height:0;overflow:auto}
+body.lk .drawer .dbody{transform:none;transition:none}
 </style>
 </head>
 <body>
@@ -239,6 +260,7 @@ function route(){
   const h=location.hash.slice(2)||'';
   YTP&&YTP.destroy&&YTP.destroy();YTP=null;if(timer){clearInterval(timer);timer=null}
   const les=h.startsWith('lesson/');
+  document.body.classList.toggle('lk',les);
   document.getElementById('b-search').style.display=les?'none':'';
   document.getElementById('sbar').hidden=true;sinput.value='';
   if(h.startsWith('science/'))viewScience(h.slice(8));
@@ -395,11 +417,7 @@ function viewLesson(id){
     <div class="stage" id="stage"><span class="wait">يُحمّل…</span></div>
     <div class="czone">
       <div class="crow">
-        <button class="cbtn" onclick="seekPhrase(curPh-1)" aria-label="الجملة السابقة">${I('prev')}</button>
-        <button class="cbtn" onclick="YTP&&YTP.seekTo(Math.max(0,YTP.getCurrentTime()-10),true)" aria-label="رجوع 10 ثوانٍ">${I('rew')}</button>
         <button class="cbtn main" id="playb" onclick="playToggle(this)" aria-label="تشغيل/إيقاف">${I('play')}</button>
-        <button class="cbtn" onclick="YTP&&YTP.seekTo(YTP.getCurrentTime()+10,true)" aria-label="تقدم 10 ثوانٍ">${I('fwd')}</button>
-        <button class="cbtn" onclick="seekPhrase(curPh+1)" aria-label="الجملة التالية">${I('next')}</button>
       </div>
       <div class="csub"><span id="tm">0:00</span><span id="pos"></span>
         <button class="chip" id="spd" onclick="cycleSpeed()">×1</button></div>
