@@ -258,7 +258,8 @@ const ICONS={
  watch:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M10 8.5l5 3.5-5 3.5z" fill="currentColor" stroke="none"/></svg>',
  read:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 1 6.5 18H20"/></svg>',
  sum:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13"/><circle cx="4" cy="6" r="1" fill="currentColor"/><circle cx="4" cy="12" r="1" fill="currentColor"/><circle cx="4" cy="18" r="1" fill="currentColor"/></svg>',
- chev:'<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>'
+ chev:'<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>',
+ list:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 10.5h16M4 15h9"/><path d="M16.5 14.2v5.6l4.6-2.8z" fill="currentColor" stroke="none"/></svg>'
 };
 const I=k=>ICONS[k]||'';
 
@@ -471,10 +472,10 @@ function viewLesson(id){
   app.innerHTML=`
   <div class="modes" style="margin-top:12px">
     <button class="mode on" data-m="live" onclick="setMode('live')">${I('watch')} حية</button>
-    <button class="mode" data-m="read" onclick="setMode('read')">${I('read')} تفريغ</button>
-    <button class="mode" data-m="sum" onclick="setMode('sum')">${I('sum')} ملخص</button>
+    ${(V.has||[]).includes('transcript')?`<button class="mode" data-m="read" onclick="setMode('read')">${I('read')} تفريغ</button>`:''}
+    ${(V.has||[]).includes('summary')?`<button class="mode" data-m="sum" onclick="setMode('sum')">${I('sum')} ملخص</button>`:''}
     ${V.yt?`<a class="mode" href="https://youtu.be/${V.yt}" target="_blank" rel="noopener">${I('yt')} يوتيوب</a>`:''}
-    <button class="mode" id="b-list" onclick="document.getElementById('drawer').classList.add('open')">${I('sum')} الدروس</button>
+    <button class="mode" id="b-list" onclick="document.getElementById('drawer').classList.add('open')">${I('list')} الدروس</button>
   </div>
   <div id="live">
     ${V.yt?`<div class="player"><div id="yfp"></div></div>`:''}
@@ -495,7 +496,7 @@ function viewLesson(id){
   <div class="drawer" id="drawer" onclick="if(event.target===this)this.classList.remove('open')">
     <div class="dbody">
       <div class="dhead"><b>${esc(ser?ser.title:'')}</b><button class="ib" onclick="document.getElementById('drawer').classList.remove('open')">${I('x')}</button></div>
-      ${ser?ser.items.map((v,i)=>`<a class="drow${v===id?' cur':''}" href="#/lesson/${v}"><span class="dnum">${i+1}</span><span class="dt">${esc(VID[v]?.title||v)}</span><span class="dd">${fmtT(VID[v]?.duration||0)}</span></a>`).join(''):''}
+      ${ser?ser.items.map((v,i)=>`<a class="drow${v===id?' cur':''}" href="#/lesson/${v}"><span class="dnum">${i+1}</span><span class="dt">${esc(VID[v]?.title||v)}</span><span class="dd">${VID[v]?.duration?fmtT(VID[v].duration):''}</span></a>`).join(''):''}
     </div>
   </div>`;
   document.getElementById('p-txt').style.display='none';
