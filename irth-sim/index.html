@@ -95,10 +95,12 @@ a{color:var(--primary)}
 .mt{display:block;margin-top:2px;color:var(--muted);font-size:12.5px}
 .chev{flex:none;width:20px;height:20px;color:var(--muted)}
 .empty{padding:40px 0;text-align:center;color:var(--muted)}
-.crum{padding:12px 16px 0;color:var(--muted);font-size:13px}
-.crum a{color:var(--muted);text-decoration:none}
-.crum a:active{color:var(--primary)}
-.crum b{color:var(--text);font-weight:600}
+.ctx{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  color:var(--muted);font-size:13px;padding-inline-start:10px}
+.ctx a{color:var(--muted);text-decoration:none}
+.ctx a:active{color:var(--primary)}
+.ctx b{color:var(--text);font-weight:600}
+.ctx .dim{opacity:.75;font-size:12px}
 
 /* الشريط السفلي */
 .nav{position:fixed;z-index:7;bottom:0;left:0;right:0;display:flex;max-width:var(--app-max);margin:0 auto;
@@ -150,8 +152,6 @@ a{color:var(--primary)}
 .pts{margin:10px 0 0;padding:0 18px 0 0;color:var(--muted);font-size:14px;line-height:2}
 .navbt{display:flex;justify-content:space-between;gap:8px;margin:12px 16px 0}
 .navbt .chip{max-width:48%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-.lttl{font:700 18px var(--font-display);margin:14px 16px 0;color:var(--text)}
-.lsub{color:var(--muted);font-size:13px;margin:4px 16px 0}
 .skel{border-radius:var(--r-1);background:linear-gradient(90deg,var(--soft),var(--press),var(--soft));background-size:200% 100%;animation:sk 1.1s infinite}
 @keyframes sk{to{background-position:-200% 0}}
 .errbox{margin:40px 16px;padding:30px;text-align:center;color:var(--muted);background:var(--card);border:1px solid var(--line);border-radius:var(--r-2)}
@@ -171,14 +171,13 @@ a{color:var(--primary)}
 .drow.cur .dnum{background:var(--primary);color:var(--card)}
 .dt{flex:1;min-width:0;font-size:14px;line-height:1.6}
 .dd{flex:none;color:var(--muted);font-size:12px}
-@media (min-width:700px){.list,.pane,.czone,.modes,.player,.stage,.lttl,.lsub,.crum{max-width:var(--app-max);margin-inline:auto}}
+@media (min-width:700px){.list,.pane,.czone,.modes,.player,.stage{max-width:var(--app-max);margin-inline:auto}}
 
 /* ==== صفحة ثابتة: بلا أي حركة أو سكرول — أمر المدير ==== */
 *{animation:none!important;transition:none!important}
 body.lk{overflow:hidden;height:100dvh;overscroll-behavior:none;touch-action:manipulation}
 body.lk .app{height:100dvh;display:flex;flex-direction:column;overflow:hidden}
 body.lk main{flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column}
-body.lk .crum{flex:none;padding-top:8px;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 body.lk .modes{flex:none;flex-wrap:wrap;gap:6px;margin-top:8px;overflow:visible}
 body.lk .mode{min-height:34px;padding:0 11px;font-size:12.5px}
 body.lk .player{flex:none;margin-top:8px}
@@ -199,7 +198,8 @@ body.lk .drawer .dbody{transform:none;transition:none}
 <div class="app">
   <header class="top" id="top">
     <div class="trow r1">
-      <a class="brand" href="#/"><img id="logo" alt=""><b>إرث</b><span class="sim">محاكاة</span></a>
+      <a class="brand" href="#/"><b>إرث</b></a>
+      <div class="ctx" id="ctx"></div>
     </div>
     <div class="sbar" id="sbar" hidden><input type="search" id="sinput" placeholder="ابحث في الدروس…" autocomplete="off"></div>
     <nav class="trow r2" id="tabs">
@@ -216,12 +216,11 @@ body.lk .drawer .dbody{transform:none;transition:none}
     <button data-t="white" aria-pressed="false"><i style="background:#FFFFFF"></i>أبيض</button>
     <button data-t="dark" aria-pressed="false"><i style="background:#18191A"></i>داكن</button>
   </div>
-  <div class="crum" id="crum"></div>
   <main id="app"></main>
 </div>
 <script>
 const BASE='https://medmrf-10.github.io/irth';
-const app=document.getElementById('app'),crum=document.getElementById('crum');
+const app=document.getElementById('app'),ctx=document.getElementById('ctx');
 let SCI={},SER=[],VID={},PER={},WRK={};
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const fmtT=s=>{s=Math.max(0,Math.round(s));const h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;return (h?h+':':'')+String(m).padStart(2,'0')+':'+String(x).padStart(2,'0')};
@@ -247,8 +246,7 @@ const ICONS={
 };
 const I=k=>ICONS[k]||'';
 
-document.getElementById('logo').src=BASE+'/icons/icon-192.png';
-document.getElementById('logo').onerror=function(){this.style.display='none'};
+
 
 const THEMESW=document.getElementById('themes');
 const savedTheme=localStorage.getItem('irth.theme')||'night';
@@ -263,7 +261,7 @@ document.addEventListener('click',e=>{if(!e.target.closest('#themes,#b-theme'))T
 const sbar=document.getElementById('sbar'),sinput=document.getElementById('sinput');
 document.getElementById('b-search').onclick=()=>{sbar.hidden=!sbar.hidden;if(!sbar.hidden)sinput.focus()};
 sinput.oninput=()=>{const q=sinput.value.trim();if(location.hash.startsWith('#/lesson')||location.hash.startsWith('#/series'))return;viewSearch(q)};
-function setCrumb(parts){crum.innerHTML=parts.map((p,i)=>i<parts.length-1?`<a href="${p.a}">${esc(p.t)}</a>`:`<b>${esc(p.t)}</b>`).join(' <span style="opacity:.5">‹</span> ')}
+function setCrumb(parts,meta){ctx.innerHTML=parts.map((p,i)=>i<parts.length-1?`<a href="${p.a}">${esc(p.t)}</a>`:`<b>${esc(p.t)}</b>`).join(' <span style="opacity:.5">‹</span> ')+(meta?`<span class="dim"> · ${esc(meta)}</span>`:'')}
 
 async function boot(){
   app.innerHTML='<div class="list"><div class="empty">يُحمّل…</div></div>';
@@ -334,12 +332,11 @@ function viewSeries(id){
   navOn('home');
   const r=SER.find(x=>x.id===id);if(!r){app.innerHTML='<div class="errbox">سلسلة غير موجودة</div>';return}
   const sh=VID[r.items[0]]?.speakers?.[0];
-  setCrumb([{t:'العلوم',a:'#/'},{t:SCI[r.science]?.name||r.science,a:'#/science/'+r.science},{t:r.title}]);
-  document.title=r.title+' — إرث';
   const total=r.items.reduce((a,v)=>a+(VID[v]?.duration||0),0);
-  app.innerHTML=`<div class="lttl">${esc(r.title)}</div>
-  <div class="lsub">${esc(PER[sh]?.name||'')}${PER[sh]?' · ':''}${pl3(r.items.length,'درس','درسان','دروس','درساً')} · ${Math.round(total/3600*10)/10} س${r.kind?' · '+kindAr(r.kind):''}</div>
-  <div class="list">${r.items.map((v,i)=>{const V=VID[v]||{};
+  setCrumb([{t:'العلوم',a:'#/'},{t:SCI[r.science]?.name||r.science,a:'#/science/'+r.science},{t:r.title}],
+    `${PER[sh]?.name||''}${PER[sh]?' · ':''}${pl3(r.items.length,'درس','درسان','دروس','درساً')} · ${Math.round(total/3600*10)/10} س${r.kind?' · '+kindAr(r.kind):''}`);
+  document.title=r.title+' — إرث';
+  app.innerHTML=`<div class="list">${r.items.map((v,i)=>{const V=VID[v]||{};
     return `<a class="row" style="--i:${i}" href="#/lesson/${v}"><span class="ph" style="font-size:18px">${i+1}</span>
     <span class="tx"><span class="nm" style="font-size:16px">${esc(V.title||v)}</span>
     <span class="mt">${fmtT(V.duration||0)}</span></span>${ICONS.chev}</a>`}).join('')}</div>`;
