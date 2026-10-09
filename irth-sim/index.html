@@ -63,6 +63,9 @@ body.les main{padding-top:calc(148px + env(safe-area-inset-top))}
   background:none;padding:0;font:inherit;text-decoration:none;cursor:pointer}
 .r2 .tab:focus-visible{outline:2px solid var(--primary);outline-offset:-6px}
 .r2 .tab svg{width:25px;height:25px}
+.tab{position:relative}
+.bdg{position:absolute;top:9px;left:50%;transform:translateX(9px);width:8px;height:8px;border-radius:50%;background:var(--gold);display:none;box-shadow:0 0 0 2px var(--card)}
+.tab.hasf .bdg{display:block}
 .r2 .tab.on{color:var(--primary);border-bottom-color:var(--primary)}
 .r2 .tab:active{background:var(--soft)}
 .brand{display:flex;align-items:center;gap:10px;color:inherit;text-decoration:none}
@@ -224,7 +227,7 @@ a.row:active{transform:scale(.985)}
     <div class="sbar" id="sbar" hidden><input type="search" id="sinput" placeholder="ابحث في الدروس والسلاسل…" autocomplete="off"><button class="ib" id="b-sx" aria-label="إغلاق" style="width:36px;height:36px;flex:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
     <nav class="trow r2" id="tabs">
       <a href="#/" id="nv-home" class="tab on" aria-label="العلوم"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20v-1.5a4 4 0 0 0-4-4H6.5a4 4 0 0 0-4 4V20"/><circle cx="9.25" cy="7.5" r="3.75"/><path d="M21.5 20v-1.5a4 4 0 0 0-3-3.85M15.5 3.85a3.75 3.75 0 0 1 0 7.3"/></svg></a>
-      <a href="#/fav" id="nv-fav" class="tab" aria-label="المفضلة"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3.5 2.6 5.3 5.9.9-4.25 4.1 1 5.8L12 16.9l-5.25 2.7 1-5.8L3.5 9.7l5.9-.9Z"/></svg></a>
+      <a href="#/fav" id="nv-fav" class="tab" aria-label="المفضلة"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3.5 2.6 5.3 5.9.9-4.25 4.1 1 5.8L12 16.9l-5.25 2.7 1-5.8L3.5 9.7l5.9-.9Z"/></svg><span class="bdg"></span></a>
       <a href="#/stats" id="nv-stats" class="tab" aria-label="إحصائي"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16M7 16v-5M12 16V6M17 16v-8"/></svg></a>
       <button class="tab" id="b-search" aria-label="بحث"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4.6-4.6"/></svg></button>
       <button class="tab" id="b-theme" aria-label="الشكل"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg></button>
@@ -325,9 +328,11 @@ const FAVK='irth_fav';let FAV=new Set(JSON.parse(localStorage.getItem(FAVK)||'[]
   f.onclick=()=>scrollTo({top:0,behavior:'smooth'});document.body.appendChild(f)})();
 let _tt;function tost(msg){let t=document.getElementById('tost');if(!t){t=document.createElement('div');t.id='tost';t.className='tost';document.body.appendChild(t)}
   t.textContent=msg;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),1600)}
-function favToggle(id){const on=!FAV.has(id);on?FAV.add(id):FAV.delete(id);localStorage.setItem(FAVK,JSON.stringify([...FAV]));
+function favSync(){const n=document.getElementById('nv-fav');if(n)n.classList.toggle('hasf',FAV.size>0)}
+function favToggle(id){const on=!FAV.has(id);on?FAV.add(id):FAV.delete(id);localStorage.setItem(FAVK,JSON.stringify([...FAV]));favSync();
   tost(on?'أُضيف إلى المفضلة':'أُزيل من المفضلة');const b=document.getElementById('favb');if(b)b.classList.toggle('on',on)}
-function unfav(e,id){e.preventDefault();e.stopPropagation();FAV.delete(id);localStorage.setItem(FAVK,JSON.stringify([...FAV]));tost('أُزيل من المفضلة');
+favSync();
+function unfav(e,id){e.preventDefault();e.stopPropagation();FAV.delete(id);localStorage.setItem(FAVK,JSON.stringify([...FAV]));favSync();tost('أُزيل من المفضلة');
   const r=e.target.closest('.row');if(r){r.style.opacity='0';r.style.transform='translateX(-18px)';setTimeout(()=>viewFav(),180)}}
 function shareLes(){const u=location.href;
   if(navigator.share){navigator.share({title:document.title,url:u}).catch(()=>{})}
