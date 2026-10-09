@@ -53,7 +53,9 @@ a{color:var(--primary)}
 .trow{display:flex;align-items:center}
 .r1{justify-content:space-between;height:52px;padding:0 16px 0 6px;position:relative}
 .r2{height:48px;border-top:1px solid var(--line)}
-.r2 .tab{flex:1;display:grid;place-items:center;height:48px;color:var(--muted);border-bottom:3px solid transparent;text-decoration:none;cursor:pointer}
+.r2 .tab{flex:1;display:grid;place-items:center;height:48px;color:var(--muted);border:0;border-bottom:3px solid transparent;
+  background:none;padding:0;font:inherit;text-decoration:none;cursor:pointer}
+.r2 .tab:focus-visible{outline:2px solid var(--primary);outline-offset:-6px}
 .r2 .tab svg{width:25px;height:25px}
 .r2 .tab.on{color:var(--primary);border-bottom-color:var(--primary)}
 .r2 .tab:active{background:var(--soft)}
@@ -178,12 +180,12 @@ a{color:var(--primary)}
 body.lk{overflow:hidden;height:100dvh;overscroll-behavior:none;touch-action:manipulation}
 body.lk .app{height:100dvh;display:flex;flex-direction:column;overflow:hidden}
 body.lk main{flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column}
-body.lk .modes{flex:none;flex-wrap:wrap;gap:6px;margin-top:8px;overflow:visible}
-body.lk .mode{min-height:34px;padding:0 11px;font-size:12.5px}
-body.lk .player{flex:none;margin-top:8px}
+body.lk .modes{flex:none;flex-wrap:nowrap;gap:5px;margin-top:8px;overflow:hidden}
+body.lk .mode{flex:1;justify-content:center;min-height:36px;padding:0 5px;font-size:12.5px;gap:4px;white-space:nowrap}
+body.lk .mode svg{width:15px;height:15px;flex:none}
+body.lk .player{flex:none;margin-top:8px;height:min(24dvh,172px)}
 body.lk .player:before{display:none}
-body.lk .player{height:min(28dvh,190px)}
-body.lk .stage{flex:1;min-height:70px;margin-top:8px;padding:8px 12px}
+body.lk .stage{flex:1;min-height:64px;margin-top:8px;padding:8px 12px}
 body.lk .stage .ln{font-size:clamp(1rem,4.4vw,1.35rem);line-height:1.9}
 body.lk .czone{flex:none;margin-top:8px;padding:8px 12px;gap:6px}
 body.lk .crow{gap:0}
@@ -334,7 +336,7 @@ function viewSeries(id){
   const sh=VID[r.items[0]]?.speakers?.[0];
   const total=r.items.reduce((a,v)=>a+(VID[v]?.duration||0),0);
   setCrumb([{t:'العلوم',a:'#/'},{t:SCI[r.science]?.name||r.science,a:'#/science/'+r.science},{t:r.title}],
-    `${PER[sh]?.name||''}${PER[sh]?' · ':''}${pl3(r.items.length,'درس','درسان','دروس','درساً')} · ${Math.round(total/3600*10)/10} س${r.kind?' · '+kindAr(r.kind):''}`);
+    `${PER[sh]?.short||PER[sh]?.name||''}${PER[sh]?' · ':''}${pl3(r.items.length,'درس','درسان','دروس','درساً')} · ${Math.round(total/3600*10)/10} س${r.kind?' · '+kindAr(r.kind):''}`);
   document.title=r.title+' — إرث';
   app.innerHTML=`<div class="list">${r.items.map((v,i)=>{const V=VID[v]||{};
     return `<a class="row" style="--i:${i}" href="#/lesson/${v}"><span class="ph" style="font-size:18px">${i+1}</span>
@@ -432,11 +434,11 @@ function viewLesson(id){
   const pv=ser&&idx>0?ser.items[idx-1]:null;
   app.innerHTML=`
   <div class="modes" style="margin-top:12px">
-    <button class="mode on" data-m="live" onclick="setMode('live')">${I('watch')} مشاهدة حية</button>
-    <button class="mode" data-m="read" onclick="setMode('read')">${I('read')} قراءة تفريغ</button>
-    <button class="mode" data-m="sum" onclick="setMode('sum')">${I('sum')} قراءة ملخص</button>
+    <button class="mode on" data-m="live" onclick="setMode('live')">${I('watch')} حية</button>
+    <button class="mode" data-m="read" onclick="setMode('read')">${I('read')} تفريغ</button>
+    <button class="mode" data-m="sum" onclick="setMode('sum')">${I('sum')} ملخص</button>
     ${V.yt?`<a class="mode" href="https://youtu.be/${V.yt}" target="_blank" rel="noopener">${I('yt')} يوتيوب</a>`:''}
-    <button class="mode" id="b-list" onclick="document.getElementById('drawer').classList.add('open')" style="margin-inline-start:auto">${I('sum')} الدروس</button>
+    <button class="mode" id="b-list" onclick="document.getElementById('drawer').classList.add('open')">${I('sum')} الدروس</button>
   </div>
   <div id="live">
     ${V.yt?`<div class="player"><div id="yfp"></div></div>`:''}
