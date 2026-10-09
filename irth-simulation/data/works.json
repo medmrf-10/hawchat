@@ -9,6 +9,13 @@
    "kind": "matn"
   },
   {
+   "id": "umbaraheen",
+   "title": "أم البراهين",
+   "author": "said-bouti",
+   "science": "aqida",
+   "kind": "matn"
+  },
+  {
    "id": "risala-abi-zayd",
    "title": "رسالة ابن أبي زيد",
    "author": "said-bouti",
@@ -23,6 +30,13 @@
    "kind": "sharh"
   },
   {
+   "id": "waraqat",
+   "title": "الورقات",
+   "author": "said-bouti",
+   "science": "usul",
+   "kind": "matn"
+  },
+  {
    "id": "tawassul",
    "title": "وسائل التقرب",
    "author": "said-bouti",
@@ -35,6 +49,48 @@
    "author": "said-bouti",
    "science": "tazkiya",
    "kind": "kitab"
+  },
+  {
+   "id": "mughni-tullab",
+   "title": "مغني الطلاب",
+   "author": "said-bouti",
+   "science": "mantiq",
+   "kind": "sharh"
+  },
+  {
+   "id": "isagoge",
+   "title": "إيساغوجي",
+   "author": "said-bouti",
+   "science": "mantiq",
+   "kind": "matn"
+  },
+  {
+   "id": "juz-amma-tafsir",
+   "title": "تفسير جزء عم",
+   "author": "said-bouti",
+   "science": "tafsir",
+   "kind": "kitab"
+  },
+  {
+   "id": "arbain-nawawi",
+   "title": "الأربعون النووية",
+   "author": "said-bouti",
+   "science": "hadith",
+   "kind": "matn"
+  },
+  {
+   "id": "shamail",
+   "title": "الشمائل المحمدية",
+   "author": "said-bouti",
+   "science": "seerah",
+   "kind": "kitab"
+  },
+  {
+   "id": "alfiyya",
+   "title": "ألفية ابن مالك",
+   "author": "said-bouti",
+   "science": "arabiyya",
+   "kind": "nazm"
   }
  ]
 }

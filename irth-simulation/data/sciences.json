@@ -10,16 +10,32 @@
    "name": "الفقه"
   },
   {
+   "id": "usul",
+   "name": "أصول الفقه"
+  },
+  {
    "id": "tazkiya",
    "name": "التزكية"
+  },
+  {
+   "id": "tafsir",
+   "name": "التفسير"
+  },
+  {
+   "id": "hadith",
+   "name": "الحديث"
   },
   {
    "id": "seerah",
    "name": "السيرة"
   },
   {
-   "id": "uluom",
-   "name": "علوم القرآن"
+   "id": "arabiyya",
+   "name": "العربية"
+  },
+  {
+   "id": "mantiq",
+   "name": "المنطق"
   }
  ]
 }
