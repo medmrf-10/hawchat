@@ -418,8 +418,9 @@ function viewSearch(q){
   const srows=sres.map((s,i)=>`<a class="row" style="--i:${i}" href="#/series/${s.id}"><span class="ph">${firstLetter(s.title)}</span><span class="tx"><span class="nm" style="font-size:16px">${hl(s.title)}</span><span class="mt">سلسلة · ${pl3(s.items.length,'درس','درسان','دروس','درساً')}</span></span>${ICONS.chev}</a>`).join('');
   const vrows=res.map((v,i)=>{const s=SER.find(x=>x.items.includes(v.id));
     return `<a class="row" style="--i:${i+sres.length}" href="#/lesson/${v.id}"><span class="ph">${firstLetter(v.title)}</span><span class="tx"><span class="nm" style="font-size:16px">${hl(v.title)}</span><span class="mt">${esc(s?s.title:'')}${FAV.has(v.id)?`<span class="fvm">${ICONS.fav}</span>`:''}</span></span>${ICONS.chev}</a>`}).join('');
-  app.innerHTML=`<div class="list">${srows}${vrows||''}${!srows&&!vrows?'<div class="empty">لا نتائج</div>':''}</div>`;
+  app.innerHTML=`<div class="list">${srows}${vrows||''}${!srows&&!vrows?`<div class="empty">لا نتائج لـ«${esc(q)}»</div>${sugSearch()}`:''}</div>`;
 }
+function sugSearch(){const sug=[];for(const s of SER){for(const v of s.items){if((POS.get(v)||0)<=10&&VID[v]){sug.push([s,v]);if(sug.length>=4)return sug.map(([s,v],i)=>`<a class="row" style="--i:${i}" href="#/lesson/${v}"><span class="ph">${firstLetter(VID[v].title)}</span><span class="tx"><span class="nm" style="font-size:16px">${esc(VID[v].title)}</span><span class="mt">جرّب: ${esc(s.title)}</span></span>${ICONS.chev}</a>`).join('')}}}return''}
 function route0(){viewHome()}
 function kindAr(k){return {sharh:'شرح كتاب',mo7adara:'محاضرة','5o6ab':'خطبة',bernamej:'برنامج'}[k]||k||''}
 function resumeCard(){const id=localStorage.getItem('irth_last'),v=id&&VID[id],pv=v&&POS.get(id)||0;
