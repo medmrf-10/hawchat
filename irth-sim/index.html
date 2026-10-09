@@ -428,7 +428,8 @@ function kindAr(k){return {sharh:'شرح كتاب',mo7adara:'محاضرة','5o6a
 function resumeCard(){const id=localStorage.getItem('irth_last'),v=id&&VID[id],pv=v&&POS.get(id)||0;
   if(!v||pv<10)return'';const pc=v.duration?Math.min(99,Math.round(pv/v.duration*100)):0;
   const rem=v.duration?`متبقٍ ${fmtT(v.duration-pv)}`:`${pc}%`;
-  return `<a class="cta" href="#/lesson/${id}" style="margin-bottom:10px">${ICONS.play}<span>أكمل: ${esc(v.title||id)}</span><span class="mt" style="color:inherit;opacity:.8">${rem}</span></a>`}
+  const s=SER.find(x=>x.items.includes(id));
+  return `<a class="cta" href="#/lesson/${id}" style="margin-bottom:10px">${ICONS.play}<span>أكمل: ${esc(v.title||id)}</span><span class="mt" style="color:inherit;opacity:.8">${s?esc(s.title)+' · ':''}${rem}</span></a>`}
 function histStrip(){const ids=HIST.filter(i=>VID[i]).slice(0,4);
   if(!ids.length)return'';
   return `<div class="hst">${ids.map(id=>{const v=VID[id],pv=POS.get(id)||0,pc=v.duration?Math.min(99,Math.round(pv/v.duration*100)):0;
