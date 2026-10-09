@@ -435,10 +435,10 @@ function histStrip(){const ids=HIST.filter(i=>VID[i]).slice(0,8);
 function viewHome(){
   navOn('home');document.title='إرث — محاكاة التشغيل';
   setCrumb([{t:'العلوم'}]);
-  const counts={};SER.forEach(s=>counts[s.science]=(counts[s.science]||0)+1);
+  const counts={};const ong={};SER.forEach(s=>{counts[s.science]=(counts[s.science]||0)+1;s.items.forEach(v=>{const V=VID[v]||{},pv=POS.get(v)||0;if(pv>10&&V.duration&&pv<V.duration*.95)ong[s.science]=(ong[s.science]||0)+1})});
   app.innerHTML=`${resumeCard()}${histStrip()}<div class="list">${Object.values(SCI).map((sc,i)=>
     `<a class="row" style="--i:${i}" href="#/science/${sc.id}"><span class="ph">${firstLetter(sc.name)}</span>
-     <span class="tx"><span class="nm">${esc(sc.name)}</span><span class="mt">${pl3(counts[sc.id]||0,'سلسلة','سلسلتان','سلاسل','سلسلة')}</span></span>${ICONS.chev}</a>`).join('')}</div>`;
+     <span class="tx"><span class="nm">${esc(sc.name)}</span><span class="mt">${pl3(counts[sc.id]||0,'سلسلة','سلسلتان','سلاسل','سلسلة')}${ong[sc.id]?` · <span class="hl">${ong[sc.id]} تتابعها</span>`:''}</span></span>${ICONS.chev}</a>`).join('')}</div>`;
 }
 function viewScience(id){
   navOn('home');
