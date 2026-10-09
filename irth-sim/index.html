@@ -251,6 +251,9 @@ a.row:active{transform:scale(.985)}
 .drow.cur .dnum{background:var(--primary);color:var(--card)}
 .dt{flex:1;min-width:0;font-size:14px;line-height:1.6}
 .dd{flex:none;color:var(--muted);font-size:12px}
+.drow .dok{color:var(--gold);width:15px;height:15px;display:block}
+.drow .dok svg{width:100%;height:100%}
+.drow.fin .dt{opacity:.55}
 @media (min-width:700px){.list,.pane,.czone,.player,.stage{max-width:var(--app-max);margin-inline:auto}}
 body.les,body.les *{animation:none!important;transition:none!important}
 </style>
@@ -637,7 +640,7 @@ function viewLesson(id){
   <div class="drawer" id="drawer" onclick="if(event.target===this)this.classList.remove('open')">
     <div class="dbody">
       <div class="dhead"><b>${esc(ser?ser.title:'')}</b>${ser?`<span class="dim" style="font-size:12px;white-space:nowrap">${ser.items.indexOf(id)+1} / ${ser.items.length}</span>`:''}<button class="ib" onclick="document.getElementById('drawer').classList.remove('open')">${I('x')}</button></div>
-      ${ser?ser.items.map((v,i)=>`<a class="drow${v===id?' cur':''}" href="#/lesson/${v}"><span class="dnum">${i+1}</span><span class="dt">${esc(VID[v]?.title||v)}</span><span class="dd">${VID[v]?.duration?fmtT(VID[v].duration):''}</span></a>`).join(''):''}
+      ${ser?ser.items.map((v,i)=>{const V2=VID[v]||{},pv2=POS.get(v)||0,fin2=V2.duration&&pv2>=V2.duration*.95;return `<a class="drow${v===id?' cur':''}${fin2?' fin':''}" href="#/lesson/${v}"><span class="dnum">${fin2?`<span class="dok">${ICONS.ok}</span>`:i+1}</span><span class="dt">${esc(V2.title||v)}</span><span class="dd">${V2.duration?fmtT(V2.duration):''}</span></a>`}).join(''):''}
     </div>
   </div>`;
   document.getElementById('p-txt').style.display='none';
