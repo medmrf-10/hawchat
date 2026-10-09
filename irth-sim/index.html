@@ -401,7 +401,8 @@ function viewSeries(id){
   setCrumb([{t:'العلوم',a:'#/'},{t:SCI[r.science]?.name||r.science,a:'#/science/'+r.science},{t:r.title}],
     `${PER[sh]?.short||PER[sh]?.name||''}${PER[sh]?' · ':''}${pl3(r.items.length,'درس','درسان','دروس','درساً')}${total?' · '+Math.round(total/3600*10)/10+' س':''}${r.kind?' · '+kindAr(r.kind):''}`);
   document.title=r.title+' — إرث';
-  app.innerHTML=`<div class="list"><a class="cta" href="#/lesson/${r.items[0]}">${ICONS.play}<span>استمع من البداية</span></a>${r.items.map((v,i)=>{const V=VID[v]||{};const pv=POS.get(v)||0;
+  const cont=r.items.find(v=>{const V=VID[v]||{},pv=POS.get(v)||0;return pv>10&&(!V.duration||pv<V.duration*.95)});
+  app.innerHTML=`<div class="list"><a class="cta" href="#/lesson/${cont||r.items[0]}">${ICONS.play}<span>${cont?'أكمل من حيث توقفت':'استمع من البداية'}</span></a>${r.items.map((v,i)=>{const V=VID[v]||{};const pv=POS.get(v)||0;
     const pc=pv>10&&V.duration?Math.min(98,Math.round(pv/V.duration*100)):0;
     const fin=V.duration&&pv>=V.duration*.95;
     return `<a class="row" style="--i:${i}" href="#/lesson/${v}"><span class="ph" style="font-size:18px">${fin?`<span class="done">${ICONS.ok}</span>`:i+1}</span>
