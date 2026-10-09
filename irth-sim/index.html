@@ -102,8 +102,9 @@ body.les main{padding-top:calc(104px + env(safe-area-inset-top))}
   box-shadow:0 0 0 2px var(--card),0 0 0 3.5px var(--gold)}
 .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%}
 .tx{flex:1;min-width:0}
-.nm{display:block;font:700 20px/1.4 var(--font-display);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.mt{display:block;margin-top:2px;color:var(--muted);font-size:12.5px}
+.nm{display:block;font:700 20px/1.4 var(--font-display)}
+.mt{display:flex;flex-wrap:wrap;gap:3px 12px;margin-top:2px;color:var(--muted);font-size:12.5px}
+.mi{white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
 .chev{flex:none;width:20px;height:20px;color:var(--muted)}
 .empty{padding:40px 0;text-align:center;color:var(--muted)}
 .ctx{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
@@ -393,7 +394,7 @@ function viewFav(){navOn('fav');setCrumb([{t:'العلوم',a:'#/'},{t:'المف
   app.innerHTML=ids.length?`<div class="list">${ids.map((v,i)=>{const V=VID[v];const s=SER.find(x=>x.items.includes(v));const pv=POS.get(v)||0;const pc=V.duration?Math.min(99,Math.round(pv/V.duration*100)):0;
     return `<a class="row" style="--i:${i}" href="#/lesson/${v}"><span class="ph">${firstLetter(V.title)}</span>
     <span class="tx"><span class="nm" style="font-size:16px">${esc(V.title)}</span>
-    <span class="mt">${esc(s?s.title:'')}${V.duration?' · '+fmtT(V.duration):''}</span></span><button class="ufav" onclick="unfav(event,'${v}')" aria-label="إزالة من المفضلة">${I('fav')}</button>${pc?`<span class="rbar"><i style="width:${pc}%"></i></span>`:''}</a>`}).join('')}</div>`
+    <span class="mt">${s?`<span class="mi">${esc(s.title)}</span>`:''}${V.duration?`<span class="mi">${fmtT(V.duration)}</span>`:''}</span></span><button class="ufav" onclick="unfav(event,'${v}')" aria-label="إزالة من المفضلة">${I('fav')}</button>${pc?`<span class="rbar"><i style="width:${pc}%"></i></span>`:''}</a>`}).join('')}</div>`
   :'<div class="empty" style="margin-top:60px">لا مفضلات بعد — اضغط ★ داخل أي درس ليظهر هنا</div>'}
 function viewStats(){
   navOn('stats');setCrumb([{t:'إحصائي'}]);
@@ -405,8 +406,8 @@ function viewStats(){
     perSh[sh]=perSh[sh]||{n:0,t:0};perSh[sh].n+=s.items.length;perSh[sh].t+=dur;
     perSc[s.science]=perSc[s.science]||{n:0,t:0};perSc[s.science].n+=s.items.length;perSc[s.science].t+=dur});
   const grp=(t,rows)=>`<div class="gttl">${t}</div>${rows.map((r,i)=>r[3]
-    ?`<a class="row" style="--i:${i}" href="#/science/${r[3]}"><span class="ph">${firstLetter(r[0])}</span><span class="tx"><span class="nm" style="font-size:16px">${r[0]}</span><span class="mt">${pl3(r[1],'درس','درسان','دروس','درساً')}${r[2]?' · '+Math.round(r[2]/3600*10)/10+' س':''}</span></span>${ICONS.chev}</a>`
-    :`<div class="row" style="--i:${i};cursor:default"><span class="ph">${firstLetter(r[0])}</span><span class="tx"><span class="nm" style="font-size:16px">${r[0]}</span><span class="mt">${pl3(r[1],'درس','درسان','دروس','درساً')}${r[2]?' · '+Math.round(r[2]/3600*10)/10+' س':''}</span></span></div>`).join('')}`;
+    ?`<a class="row" style="--i:${i}" href="#/science/${r[3]}"><span class="ph">${firstLetter(r[0])}</span><span class="tx"><span class="nm" style="font-size:16px">${r[0]}</span><span class="mt"><span class="mi">${pl3(r[1],'درس','درسان','دروس','درساً')}</span>${r[2]?`<span class="mi">${Math.round(r[2]/3600*10)/10} س</span>`:''}</span></span>${ICONS.chev}</a>`
+    :`<div class="row" style="--i:${i};cursor:default"><span class="ph">${firstLetter(r[0])}</span><span class="tx"><span class="nm" style="font-size:16px">${r[0]}</span><span class="mt"><span class="mi">${pl3(r[1],'درس','درسان','دروس','درساً')}</span>${r[2]?`<span class="mi">${Math.round(r[2]/3600*10)/10} س</span>`:''}</span></span></div>`).join('')}`;
   const st=[...POS.entries()].filter(([,t])=>t>10);const fin=st.filter(([id,t])=>VID[id]?.duration&&t>=VID[id].duration*.95);
   const sec=st.reduce((a,[,t])=>a+t,0);
   app.innerHTML=`<div class="list">${[
@@ -427,20 +428,20 @@ function viewSearch(q){
   const res=Object.values(VID).filter(v=>v.title.includes(q)).slice(0,40);
   setCrumb([{t:'العلوم',a:'#/'},{t:'بحث: '+q}]);
   const hl=t=>q.length>=2?esc(t).split(esc(q)).join(`<span class="hl">${esc(q)}</span>`):esc(t);
-  const srows=sres.map((s,i)=>`<a class="row" style="--i:${i}" href="#/series/${s.id}"><span class="ph">${firstLetter(s.title)}</span><span class="tx"><span class="nm" style="font-size:16px">${hl(s.title)}</span><span class="mt">سلسلة · ${pl3(s.items.length,'درس','درسان','دروس','درساً')}</span></span>${ICONS.chev}</a>`).join('');
+  const srows=sres.map((s,i)=>`<a class="row" style="--i:${i}" href="#/series/${s.id}"><span class="ph">${firstLetter(s.title)}</span><span class="tx"><span class="nm" style="font-size:16px">${hl(s.title)}</span><span class="mt"><span class="mi">سلسلة</span><span class="mi">${pl3(s.items.length,'درس','درسان','دروس','درساً')}</span></span></span>${ICONS.chev}</a>`).join('');
   const vrows=res.map((v,i)=>{const s=SER.find(x=>x.items.includes(v.id));
-    return `<a class="row" style="--i:${i+sres.length}" href="#/lesson/${v.id}"><span class="ph">${firstLetter(v.title)}</span><span class="tx"><span class="nm" style="font-size:16px">${hl(v.title)}</span><span class="mt">${esc(s?s.title:'')}${FAV.has(v.id)?`<span class="fvm">${ICONS.fav}</span>`:''}</span></span>${ICONS.chev}</a>`}).join('');
+    return `<a class="row" style="--i:${i+sres.length}" href="#/lesson/${v.id}"><span class="ph">${firstLetter(v.title)}</span><span class="tx"><span class="nm" style="font-size:16px">${hl(v.title)}</span><span class="mt">${s?`<span class="mi">${esc(s.title)}</span>`:''}${FAV.has(v.id)?`<span class="mi"><span class="fvm">${ICONS.fav}</span></span>`:''}</span></span>${ICONS.chev}</a>`}).join('');
   const n=sres.length+res.length;
   app.innerHTML=`${n?`<div class="sprog">${pl3(n,'نتيجة','نتيجتان','نتائج','نتيجة')}</div>`:''}<div class="list">${srows}${vrows||''}${!n?`<div class="empty">لا نتائج لـ«${esc(q)}»</div>${sugSearch()}`:''}</div>`;
 }
-function sugSearch(){const sug=[];for(const s of SER){for(const v of s.items){if((POS.get(v)||0)<=10&&VID[v]){sug.push([s,v]);if(sug.length>=4)return sug.map(([s,v],i)=>`<a class="row" style="--i:${i}" href="#/lesson/${v}"><span class="ph">${firstLetter(VID[v].title)}</span><span class="tx"><span class="nm" style="font-size:16px">${esc(VID[v].title)}</span><span class="mt">جرّب: ${esc(s.title)}</span></span>${ICONS.chev}</a>`).join('')}}}return''}
+function sugSearch(){const sug=[];for(const s of SER){for(const v of s.items){if((POS.get(v)||0)<=10&&VID[v]){sug.push([s,v]);if(sug.length>=4)return sug.map(([s,v],i)=>`<a class="row" style="--i:${i}" href="#/lesson/${v}"><span class="ph">${firstLetter(VID[v].title)}</span><span class="tx"><span class="nm" style="font-size:16px">${esc(VID[v].title)}</span><span class="mt"><span class="mi">جرّب: ${esc(s.title)}</span></span></span>${ICONS.chev}</a>`).join('')}}}return''}
 function route0(){viewHome()}
 function kindAr(k){return {sharh:'شرح كتاب',mo7adara:'محاضرة','5o6ab':'خطبة',bernamej:'برنامج'}[k]||k||''}
 function resumeCard(){const id=localStorage.getItem('irth_last'),v=id&&VID[id],pv=v&&POS.get(id)||0;
   if(!v||pv<10)return'';const pc=v.duration?Math.min(99,Math.round(pv/v.duration*100)):0;
   const rem=v.duration?`متبقٍ ${fmtT(v.duration-pv)}`:`${pc}%`;
   const s=SER.find(x=>x.items.includes(id));
-  return `<a class="cta" href="#/lesson/${id}" style="margin-bottom:10px">${ICONS.play}<span>أكمل: ${esc(v.title||id)}</span><span class="mt" style="color:inherit;opacity:.8">${s?esc(s.title)+' · ':''}${rem}</span></a>`}
+  return `<a class="cta" href="#/lesson/${id}" style="margin-bottom:10px">${ICONS.play}<span>أكمل: ${esc(v.title||id)}</span><span class="mt" style="color:inherit;opacity:.8">${s?`<span class="mi">${esc(s.title)}</span>`:''}<span class="mi">${rem}</span></span></a>`}
 function histStrip(){const ids=HIST.filter(i=>VID[i]).slice(0,4);
   if(!ids.length)return'';
   return `<div class="hst">${ids.map(id=>{const v=VID[id],pv=POS.get(id)||0,pc=v.duration?Math.min(99,Math.round(pv/v.duration*100)):0;
@@ -451,7 +452,7 @@ function viewHome(){
   const counts={};const ong={};SER.forEach(s=>{counts[s.science]=(counts[s.science]||0)+1;s.items.forEach(v=>{const V=VID[v]||{},pv=POS.get(v)||0;if(pv>10&&V.duration&&pv<V.duration*.95)ong[s.science]=(ong[s.science]||0)+1})});
   app.innerHTML=`${resumeCard()}${histStrip()}<div class="list">${Object.values(SCI).map((sc,i)=>
     `<a class="row" style="--i:${i}" href="#/science/${sc.id}"><span class="ph">${firstLetter(sc.name)}</span>
-     <span class="tx"><span class="nm">${esc(sc.name)}</span><span class="mt">${pl3(counts[sc.id]||0,'سلسلة','سلسلتان','سلاسل','سلسلة')}${ong[sc.id]?` · <span class="hl">${ong[sc.id]} تتابعها</span>`:''}</span></span>${ICONS.chev}</a>`).join('')}</div>`;
+     <span class="tx"><span class="nm">${esc(sc.name)}</span><span class="mt"><span class="mi">${pl3(counts[sc.id]||0,'سلسلة','سلسلتان','سلاسل','سلسلة')}</span>${ong[sc.id]?`<span class="mi hl">${ong[sc.id]} تتابعها</span>`:''}</span></span>${ICONS.chev}</a>`).join('')}</div>`;
 }
 function viewScience(id){
   navOn('home');
@@ -464,7 +465,7 @@ function viewScience(id){
     const wp=r.items.length?Math.round(r.items.filter(v=>{const V=VID[v]||{};return V.duration&&(POS.get(v)||0)>=V.duration*.95}).length/r.items.length*100):0;
     return `<a class="row" style="--i:${i}" href="#/series/${r.id}"><span class="ph">${firstLetter(r.title)}</span>
     <span class="tx"><span class="nm" style="font-size:17px">${esc(r.title)}</span>
-    <span class="mt">${pl3(r.items.length,'درس','درسان','دروس','درساً')}${sh?' · '+esc(PER[sh]?.short||PER[sh]?.name||sh):''}${r.kind?' · '+kindAr(r.kind):''}</span></span>${wp===100?`<span class="newb" style="color:var(--gold);border-color:var(--gold)">اكتملت ✓</span>`:nw?`<span class="newb">${nw===r.items.length?'لم تشاهدها':pl3(nw,'درس جديد','درسان جديدان','دروس جديدة','درساً جديداً')}</span>`:''}${ICONS.chev}${wp>0&&wp<100?`<span class="rbar"><i style="width:${wp}%"></i></span>`:''}</a>`}).join('')}</div>`;
+    <span class="mt"><span class="mi">${pl3(r.items.length,'درس','درسان','دروس','درساً')}</span>${sh?`<span class="mi">${esc(PER[sh]?.short||PER[sh]?.name||sh)}</span>`:''}${r.kind?`<span class="mi">${kindAr(r.kind)}</span>`:''}</span></span>${wp===100?`<span class="newb" style="color:var(--gold);border-color:var(--gold)">اكتملت ✓</span>`:nw?`<span class="newb">${nw===r.items.length?'لم تشاهدها':pl3(nw,'درس جديد','درسان جديدان','دروس جديدة','درساً جديداً')}</span>`:''}${ICONS.chev}${wp>0&&wp<100?`<span class="rbar"><i style="width:${wp}%"></i></span>`:''}</a>`}).join('')}</div>`;
 }
 function shareSer(id){const u=location.origin+location.pathname+'#/series/'+id;
   if(navigator.share){navigator.share({title:document.title,url:u}).catch(()=>{})}
@@ -484,7 +485,7 @@ function viewSeries(id){
     const fin=V.duration&&pv>=V.duration*.95;
     return `<a class="row${fin?' fin':''}" style="--i:${i}" href="#/lesson/${v}"><span class="ph" style="font-size:18px">${fin?`<span class="done">${ICONS.ok}</span>`:i+1}</span>
     <span class="tx"><span class="nm" style="font-size:16px">${esc(V.title||v)}</span>
-    <span class="mt">${V.duration?fmtT(V.duration):''}${pv>10&&!fin&&V.duration?` · متبقٍ ${fmtT(V.duration-pv)}`:''}${FAV.has(v)?`<span class="fvm">${ICONS.fav}</span>`:''}</span></span>${ICONS.chev}${pc?`<span class="rbar"><i style="width:${pc}%"></i></span>`:''}</a>`}).join('')}</div>`;
+    <span class="mt">${V.duration?`<span class="mi">${fmtT(V.duration)}</span>`:''}${pv>10&&!fin&&V.duration?`<span class="mi">متبقٍ ${fmtT(V.duration-pv)}</span>`:''}${FAV.has(v)?`<span class="mi"><span class="fvm">${ICONS.fav}</span></span>`:''}</span></span>${ICONS.chev}${pc?`<span class="rbar"><i style="width:${pc}%"></i></span>`:''}</a>`}).join('')}</div>`;
 }
 
 /* ===== محرك الكاريوكي — نفس lesson.html: امتلاء ذهبي داخل الكلمة ===== */
