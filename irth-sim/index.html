@@ -178,6 +178,9 @@ body.les main{padding-top:calc(104px + env(safe-area-inset-top))}
 .ht{display:block;font-size:11.5px;line-height:1.4;margin-top:6px;max-height:32px;overflow:hidden;color:var(--dim)}
 .hbar{display:block;height:3px;border-radius:3px;background:var(--soft);margin-top:5px;overflow:hidden}
 .hbar i{display:block;height:100%;background:var(--gold);border-radius:3px}
+.sdrop{position:absolute;top:100%;right:0;left:0;background:var(--card);border:1px solid var(--soft);border-top:0;border-radius:0 0 14px 14px;padding:8px;display:flex;flex-wrap:wrap;gap:8px;z-index:9}
+.schip{border:1px solid var(--soft);border-radius:999px;padding:6px 12px;font-size:13px;color:var(--dim);background:none;cursor:pointer;font-family:inherit}
+.schip:active{background:var(--press);color:var(--fg)}
 .done{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:20px;height:20px;color:var(--gold)}
 .done svg{width:100%;height:100%}
 a.row:active{transform:scale(.985)}
@@ -312,9 +315,18 @@ document.querySelectorAll('#themes button').forEach(b=>{
 document.getElementById('b-theme').onclick=e=>{e.stopPropagation();THEMESW.hidden=!THEMESW.hidden};
 document.addEventListener('click',e=>{if(!e.target.closest('#themes,#b-theme'))THEMESW.hidden=true});
 const sbar=document.getElementById('sbar'),sinput=document.getElementById('sinput');
-document.getElementById('b-search').onclick=()=>{sbar.hidden=!sbar.hidden;if(!sbar.hidden)sinput.focus()};
-document.getElementById('b-sx').onclick=()=>{const had=sinput.value.trim();sbar.hidden=true;sinput.value='';if(had)viewSearch('')};
-sinput.oninput=()=>{const q=sinput.value.trim();if(location.hash.startsWith('#/lesson')||location.hash.startsWith('#/series'))return;viewSearch(q)};
+const SRCHK='irth_srch';let SRCH=JSON.parse(localStorage.getItem(SRCHK)||'[]');
+function srchSave(q){q=q.trim();if(q.length<2)return;SRCH=[q,...SRCH.filter(x=>x!==q)].slice(0,8);localStorage.setItem(SRCHK,JSON.stringify(SRCH))}
+function srchDrop(){let d=document.getElementById('sdrop');
+  if(sbar.hidden||sinput.value.trim()||!SRCH.length){if(d)d.remove();return}
+  if(!d){d=document.createElement('div');d.id='sdrop';d.className='sdrop';sbar.appendChild(d)}
+  d.innerHTML=SRCH.map(q=>`<button class="schip">${esc(q)}</button>`).join('');
+  d.querySelectorAll('.schip').forEach(b=>b.onclick=()=>{sinput.value=b.textContent;srchDrop();viewSearch(b.textContent)})}
+document.getElementById('b-search').onclick=()=>{sbar.hidden=!sbar.hidden;if(!sbar.hidden){sinput.focus();srchDrop()}};
+document.getElementById('b-sx').onclick=()=>{const had=sinput.value.trim();sbar.hidden=true;sinput.value='';srchDrop();if(had)viewSearch('')};
+sinput.oninput=()=>{const q=sinput.value.trim();srchDrop();if(location.hash.startsWith('#/lesson')||location.hash.startsWith('#/series'))return;viewSearch(q)};
+sinput.onkeydown=e=>{if(e.key==='Enter')srchSave(sinput.value)};
+app.addEventListener('click',e=>{if(e.target.closest('a.row')&&sinput.value.trim())srchSave(sinput.value)});
 function setCrumb(parts,meta){ctx.innerHTML=parts.map((p,i)=>i<parts.length-1?`<a href="${p.a}">${esc(p.t)}</a>`:`<b>${esc(p.t)}</b>`).join(' <span style="opacity:.5">‹</span> ')+(meta?`<span class="dim"> · ${esc(meta)}</span>`:'')}
 
 async function boot(){
