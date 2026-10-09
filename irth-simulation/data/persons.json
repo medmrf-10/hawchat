@@ -1,0 +1,98 @@
+{
+ "v": 1,
+ "rows": [
+  {
+   "id": "said-bouti",
+   "name": "محمد سعيد رمضان البوطي",
+   "aliases": [
+    "البوطي"
+   ]
+  },
+  {
+   "id": "ahmed-alsayed",
+   "name": "أحمد السيد"
+  },
+  {
+   "id": "ali-mahmoud-alomari",
+   "name": "علي محمود العمري",
+   "aliases": [
+    "العمري"
+   ]
+  },
+  {
+   "id": "adham-alasimi",
+   "name": "أدهم العاصمي"
+  },
+  {
+   "id": "habib-ali-aljifri",
+   "name": "الحبيب علي الجفري",
+   "aliases": [
+    "الجفري"
+   ]
+  },
+  {
+   "id": "habib-omar-ibn-hafiz",
+   "name": "الحبيب عمر بن حفيظ",
+   "aliases": [
+    "حبيب عمر"
+   ]
+  },
+  {
+   "id": "bardouni-husaymi",
+   "name": "محمد الطاهر البردوني",
+   "aliases": [
+    "البردوني"
+   ]
+  },
+  {
+   "id": "dhaker-alhashimi",
+   "name": "ذاكر الهاشمي"
+  },
+  {
+   "id": "ali-gomaa",
+   "name": "علي جمعة"
+  },
+  {
+   "id": "fadhel-sulaiman",
+   "name": "فاضل سليمان"
+  },
+  {
+   "id": "saif-alasri",
+   "name": "سيف العصري"
+  },
+  {
+   "id": "aboubakr-almashhour",
+   "name": "أبو بكر المشهور",
+   "aliases": [
+    "المشهور"
+   ]
+  },
+  {
+   "id": "mouloud-sariri",
+   "name": "مولود السريري"
+  },
+  {
+   "id": "hatem-alaouni",
+   "name": "حاتم العوني"
+  },
+  {
+   "id": "ahmed-abdelmonem",
+   "name": "أحمد عبد المنعم"
+  },
+  {
+   "id": "muhammad-abdelwahid-hanbali",
+   "name": "محمد عبد الواحد الحنبلي"
+  },
+  {
+   "id": "sharawi",
+   "name": "محمد متولي الشعراوي",
+   "aliases": [
+    "الشعراوي"
+   ]
+  },
+  {
+   "id": "fathi-safi",
+   "name": "فتحي صافي"
+  }
+ ]
+}

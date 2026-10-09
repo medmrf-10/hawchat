@@ -1,0 +1,40 @@
+{
+ "v": 1,
+ "rows": [
+  {
+   "id": "tahawiyya",
+   "title": "العقيدة الطحاوية",
+   "author": "said-bouti",
+   "science": "aqida",
+   "kind": "matn"
+  },
+  {
+   "id": "risala-abi-zayd",
+   "title": "رسالة ابن أبي زيد",
+   "author": "said-bouti",
+   "science": "fiqh",
+   "kind": "matn"
+  },
+  {
+   "id": "maqsad",
+   "title": "الفقه المقصد",
+   "author": "said-bouti",
+   "science": "fiqh",
+   "kind": "sharh"
+  },
+  {
+   "id": "tawassul",
+   "title": "وسائل التقرب",
+   "author": "said-bouti",
+   "science": "aqida",
+   "kind": "kitab"
+  },
+  {
+   "id": "tazkiya-quran",
+   "title": "التزكية في القرآن",
+   "author": "said-bouti",
+   "science": "tazkiya",
+   "kind": "kitab"
+  }
+ ]
+}
