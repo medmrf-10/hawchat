@@ -168,6 +168,8 @@ body.les main{padding-top:calc(104px + env(safe-area-inset-top))}
 .shr svg{width:18px;height:18px}
 .shr:active{background:var(--press)}
 .list .cta+.shr{position:absolute;left:14px;top:14px}
+.row.fin .nm{opacity:.55}
+.row.fin .mt{opacity:.45}
 .list{position:relative}
 .sprog .sbar{height:4px;border-radius:4px;background:var(--soft);overflow:hidden}
 .sprog .sbar i{display:block;height:100%;background:var(--gold);border-radius:4px}
@@ -468,7 +470,7 @@ function viewSeries(id){
   app.innerHTML=`<div class="list">${finN?`<div class="sprog"><span>شاهدت ${pl3(finN,'درس','درسان','دروس','درساً')} من ${r.items.length}</span><div class="sbar"><i style="width:${Math.round(finN/r.items.length*100)}%"></i></div></div>`:''}<a class="cta" href="#/lesson/${cont||r.items[0]}">${ICONS.play}<span>${cont?'أكمل من حيث توقفت':'استمع من البداية'}</span></a><button class="shr" onclick="shareSer('${r.id}')" aria-label="مشاركة السلسلة">${ICONS.share||ICONS.link||'↗'}</button>${r.items.map((v,i)=>{const V=VID[v]||{};const pv=POS.get(v)||0;
     const pc=pv>10&&V.duration?Math.min(98,Math.round(pv/V.duration*100)):0;
     const fin=V.duration&&pv>=V.duration*.95;
-    return `<a class="row" style="--i:${i}" href="#/lesson/${v}"><span class="ph" style="font-size:18px">${fin?`<span class="done">${ICONS.ok}</span>`:i+1}</span>
+    return `<a class="row${fin?' fin':''}" style="--i:${i}" href="#/lesson/${v}"><span class="ph" style="font-size:18px">${fin?`<span class="done">${ICONS.ok}</span>`:i+1}</span>
     <span class="tx"><span class="nm" style="font-size:16px">${esc(V.title||v)}</span>
     <span class="mt">${V.duration?fmtT(V.duration):''}${pv>10&&!fin&&V.duration?` · متبقٍ ${fmtT(V.duration-pv)}`:''}${FAV.has(v)?`<span class="fvm">${ICONS.fav}</span>`:''}</span></span>${ICONS.chev}${pc?`<span class="rbar"><i style="width:${pc}%"></i></span>`:''}</a>`}).join('')}</div>`;
 }
