@@ -163,6 +163,9 @@ body.les main{padding-top:calc(104px + env(safe-area-inset-top))}
 .row{transition:opacity .18s ease,transform .18s ease;position:relative}
 .rbar{position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--soft)}
 .rbar i{display:block;height:100%;background:var(--gold)}
+.sprog{display:flex;flex-direction:column;gap:6px;padding:10px 14px;margin-bottom:8px;color:var(--dim);font-size:13px}
+.sbar{height:4px;border-radius:4px;background:var(--soft);overflow:hidden}
+.sbar i{display:block;height:100%;background:var(--gold);border-radius:4px}
 .done{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:20px;height:20px;color:var(--gold)}
 .done svg{width:100%;height:100%}
 a.row:active{transform:scale(.985)}
@@ -425,7 +428,8 @@ function viewSeries(id){
     `${PER[sh]?.short||PER[sh]?.name||''}${PER[sh]?' · ':''}${pl3(r.items.length,'درس','درسان','دروس','درساً')}${total?' · '+Math.round(total/3600*10)/10+' س':''}${r.kind?' · '+kindAr(r.kind):''}`);
   document.title=r.title+' — إرث';
   const cont=r.items.find(v=>{const V=VID[v]||{},pv=POS.get(v)||0;return pv>10&&(!V.duration||pv<V.duration*.95)});
-  app.innerHTML=`<div class="list"><a class="cta" href="#/lesson/${cont||r.items[0]}">${ICONS.play}<span>${cont?'أكمل من حيث توقفت':'استمع من البداية'}</span></a>${r.items.map((v,i)=>{const V=VID[v]||{};const pv=POS.get(v)||0;
+  const finN=r.items.filter(v=>{const V=VID[v]||{};return V.duration&&(POS.get(v)||0)>=V.duration*.95}).length;
+  app.innerHTML=`<div class="list">${finN?`<div class="sprog"><span>شاهدت ${pl3(finN,'درساً واحداً','درسين','دروساً','درساً')} من ${r.items.length}</span><div class="sbar"><i style="width:${Math.round(finN/r.items.length*100)}%"></i></div></div>`:''}<a class="cta" href="#/lesson/${cont||r.items[0]}">${ICONS.play}<span>${cont?'أكمل من حيث توقفت':'استمع من البداية'}</span></a>${r.items.map((v,i)=>{const V=VID[v]||{};const pv=POS.get(v)||0;
     const pc=pv>10&&V.duration?Math.min(98,Math.round(pv/V.duration*100)):0;
     const fin=V.duration&&pv>=V.duration*.95;
     return `<a class="row" style="--i:${i}" href="#/lesson/${v}"><span class="ph" style="font-size:18px">${fin?`<span class="done">${ICONS.ok}</span>`:i+1}</span>
