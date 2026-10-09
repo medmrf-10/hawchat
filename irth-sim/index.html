@@ -627,6 +627,8 @@ function viewLesson(id){
         <button class="cbtn main" id="playb" onclick="playToggle(this)" aria-label="تشغيل/إيقاف">${I('play')}</button>
       </div>
       <div class="csub"><span id="tm">0:00</span><span id="pos" class="ppos"></span>
+        ${pv?`<a class="icob" href="#/lesson/${pv}" aria-label="الدرس السابق">${I('prev')}</a>`:''}
+        ${nx?`<a class="icob" href="#/lesson/${nx}" aria-label="الدرس التالي">${I('next')}</a>`:''}
         <button class="icob${FAV.has(id)?' on':''}" id="favb" onclick="favToggle('${id}')" aria-label="مفضلة">${I('fav')}</button>
         <button class="icob" onclick="shareLes()" aria-label="مشاركة">${I('share')}</button>
         <button class="chip" id="spd" onclick="cycleSpeed()">×1</button>
