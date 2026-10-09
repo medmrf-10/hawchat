@@ -164,6 +164,11 @@ body.les main{padding-top:calc(104px + env(safe-area-inset-top))}
 .rbar{position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--soft)}
 .rbar i{display:block;height:100%;background:var(--gold)}
 .sprog{display:flex;flex-direction:column;gap:6px;padding:10px 14px;margin-bottom:8px;color:var(--dim);font-size:13px}
+.shr{flex:none;width:40px;height:40px;border:1px solid var(--soft);border-radius:12px;background:none;color:var(--dim);cursor:pointer;display:grid;place-items:center;margin-bottom:10px}
+.shr svg{width:18px;height:18px}
+.shr:active{background:var(--press)}
+.list .cta+.shr{position:absolute;left:14px;top:14px}
+.list{position:relative}
 .sbar{height:4px;border-radius:4px;background:var(--soft);overflow:hidden}
 .sbar i{display:block;height:100%;background:var(--gold);border-radius:4px}
 .done{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:20px;height:20px;color:var(--gold)}
@@ -419,6 +424,9 @@ function viewScience(id){
     <span class="tx"><span class="nm" style="font-size:17px">${esc(r.title)}</span>
     <span class="mt">${pl3(r.items.length,'درس','درسان','دروس','درساً')}${sh?' · '+esc(PER[sh]?.short||PER[sh]?.name||sh):''}${r.kind?' · '+kindAr(r.kind):''}</span></span>${nw?`<span class="newb">${nw===r.items.length?'لم تشاهدها':pl3(nw,'درس جديد','درسان جديدان','دروس جديدة','درساً جديداً')}</span>`:''}${ICONS.chev}</a>`}).join('')}</div>`;
 }
+function shareSer(id){const u=location.origin+location.pathname+'#/series/'+id;
+  if(navigator.share){navigator.share({title:document.title,url:u}).catch(()=>{})}
+  else if(navigator.clipboard){navigator.clipboard.writeText(u).then(()=>tost('نُسخ رابط السلسلة')).catch(()=>{})}}
 function viewSeries(id){
   navOn('home');
   const r=SER.find(x=>x.id===id);if(!r){app.innerHTML='<div class="errbox">سلسلة غير موجودة</div>';return}
@@ -429,7 +437,7 @@ function viewSeries(id){
   document.title=r.title+' — إرث';
   const cont=r.items.find(v=>{const V=VID[v]||{},pv=POS.get(v)||0;return pv>10&&(!V.duration||pv<V.duration*.95)});
   const finN=r.items.filter(v=>{const V=VID[v]||{};return V.duration&&(POS.get(v)||0)>=V.duration*.95}).length;
-  app.innerHTML=`<div class="list">${finN?`<div class="sprog"><span>شاهدت ${pl3(finN,'درس','درسان','دروس','درساً')} من ${r.items.length}</span><div class="sbar"><i style="width:${Math.round(finN/r.items.length*100)}%"></i></div></div>`:''}<a class="cta" href="#/lesson/${cont||r.items[0]}">${ICONS.play}<span>${cont?'أكمل من حيث توقفت':'استمع من البداية'}</span></a>${r.items.map((v,i)=>{const V=VID[v]||{};const pv=POS.get(v)||0;
+  app.innerHTML=`<div class="list">${finN?`<div class="sprog"><span>شاهدت ${pl3(finN,'درس','درسان','دروس','درساً')} من ${r.items.length}</span><div class="sbar"><i style="width:${Math.round(finN/r.items.length*100)}%"></i></div></div>`:''}<a class="cta" href="#/lesson/${cont||r.items[0]}">${ICONS.play}<span>${cont?'أكمل من حيث توقفت':'استمع من البداية'}</span></a><button class="shr" onclick="shareSer('${r.id}')" aria-label="مشاركة السلسلة">${ICONS.share||ICONS.link||'↗'}</button>${r.items.map((v,i)=>{const V=VID[v]||{};const pv=POS.get(v)||0;
     const pc=pv>10&&V.duration?Math.min(98,Math.round(pv/V.duration*100)):0;
     const fin=V.duration&&pv>=V.duration*.95;
     return `<a class="row" style="--i:${i}" href="#/lesson/${v}"><span class="ph" style="font-size:18px">${fin?`<span class="done">${ICONS.ok}</span>`:i+1}</span>
