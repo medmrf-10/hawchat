@@ -155,7 +155,9 @@ body.les main{padding-top:calc(148px + env(safe-area-inset-top))}
 .ufav{flex:none;width:34px;height:34px;border:0;border-radius:50%;background:none;color:var(--gold);cursor:pointer;display:grid;place-items:center}
 .ufav svg{width:18px;height:18px;fill:currentColor;stroke:none}
 .ufav:active{background:var(--press)}
-.row{transition:opacity .18s ease,transform .18s ease}
+.row{transition:opacity .18s ease,transform .18s ease;position:relative}
+.rbar{position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--soft)}
+.rbar i{display:block;height:100%;background:var(--gold)}
 a.row:active{transform:scale(.985)}
 .tost{position:fixed;bottom:calc(18px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%) translateY(8px);
   z-index:20;background:var(--text);color:var(--card);padding:10px 18px;border-radius:12px;font-size:14px;
@@ -383,10 +385,11 @@ function viewSeries(id){
   setCrumb([{t:'العلوم',a:'#/'},{t:SCI[r.science]?.name||r.science,a:'#/science/'+r.science},{t:r.title}],
     `${PER[sh]?.short||PER[sh]?.name||''}${PER[sh]?' · ':''}${pl3(r.items.length,'درس','درسان','دروس','درساً')}${total?' · '+Math.round(total/3600*10)/10+' س':''}${r.kind?' · '+kindAr(r.kind):''}`);
   document.title=r.title+' — إرث';
-  app.innerHTML=`<div class="list"><a class="cta" href="#/lesson/${r.items[0]}">${ICONS.play}<span>استمع من البداية</span></a>${r.items.map((v,i)=>{const V=VID[v]||{};
+  app.innerHTML=`<div class="list"><a class="cta" href="#/lesson/${r.items[0]}">${ICONS.play}<span>استمع من البداية</span></a>${r.items.map((v,i)=>{const V=VID[v]||{};const pv=POS.get(v)||0;
+    const pc=pv>10&&V.duration?Math.min(99,Math.round(pv/V.duration*100)):0;
     return `<a class="row" style="--i:${i}" href="#/lesson/${v}"><span class="ph" style="font-size:18px">${i+1}</span>
     <span class="tx"><span class="nm" style="font-size:16px">${esc(V.title||v)}</span>
-    <span class="mt">${V.duration?fmtT(V.duration):''}${FAV.has(v)?`<span class="fvm">${ICONS.fav}</span>`:''}</span></span>${ICONS.chev}</a>`}).join('')}</div>`;
+    <span class="mt">${V.duration?fmtT(V.duration):''}${FAV.has(v)?`<span class="fvm">${ICONS.fav}</span>`:''}</span></span>${ICONS.chev}${pc?`<span class="rbar"><i style="width:${pc}%"></i></span>`:''}</a>`}).join('')}</div>`;
 }
 
 /* ===== محرك الكاريوكي — نفس lesson.html: امتلاء ذهبي داخل الكلمة ===== */
