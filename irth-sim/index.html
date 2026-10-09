@@ -148,6 +148,10 @@ a{color:var(--primary)}
 .csub .ppos{margin-inline-start:10px}
 .fvm{display:inline-block;width:12px;height:12px;color:var(--gold);vertical-align:-1px;margin-inline-start:6px}
 .fvm svg{width:100%;height:100%;display:block;fill:currentColor;stroke:none}
+.ufav{flex:none;width:34px;height:34px;border:0;border-radius:50%;background:none;color:var(--gold);cursor:pointer;display:grid;place-items:center}
+.ufav svg{width:18px;height:18px;fill:currentColor;stroke:none}
+.ufav:active{background:var(--press)}
+.row{transition:opacity .18s ease,transform .18s ease}
 .cta{display:flex;align-items:center;justify-content:center;gap:8px;height:44px;margin:12px 16px 4px;
   border-radius:var(--r-2);background:var(--primary);color:var(--card);font:inherit;font-size:15px;cursor:pointer;
   text-decoration:none}
@@ -315,6 +319,8 @@ function route(){
 const FAVK='irth_fav';let FAV=new Set(JSON.parse(localStorage.getItem(FAVK)||'[]'));
 function favToggle(id){FAV.has(id)?FAV.delete(id):FAV.add(id);localStorage.setItem(FAVK,JSON.stringify([...FAV]));
   const b=document.getElementById('favb');if(b)b.classList.toggle('on',FAV.has(id))}
+function unfav(e,id){e.preventDefault();e.stopPropagation();FAV.delete(id);localStorage.setItem(FAVK,JSON.stringify([...FAV]));
+  const r=e.target.closest('.row');if(r){r.style.opacity='0';r.style.transform='translateX(-18px)';setTimeout(()=>viewFav(),180)}}
 function shareLes(){const u=location.href;
   if(navigator.share){navigator.share({title:document.title,url:u}).catch(()=>{})}
   else if(navigator.clipboard){navigator.clipboard.writeText(u).then(()=>{
@@ -324,7 +330,7 @@ function viewFav(){navOn('fav');setCrumb([{t:'العلوم',a:'#/'},{t:'المف
   app.innerHTML=ids.length?`<div class="list">${ids.map((v,i)=>{const V=VID[v];const s=SER.find(x=>x.items.includes(v));
     return `<a class="row" style="--i:${i}" href="#/lesson/${v}"><span class="ph">${firstLetter(V.title)}</span>
     <span class="tx"><span class="nm" style="font-size:16px">${esc(V.title)}</span>
-    <span class="mt">${esc(s?s.title:'')}${V.duration?' · '+fmtT(V.duration):''}</span></span>${ICONS.chev}</a>`}).join('')}</div>`
+    <span class="mt">${esc(s?s.title:'')}${V.duration?' · '+fmtT(V.duration):''}</span></span><button class="ufav" onclick="unfav(event,'${v}')" aria-label="إزالة من المفضلة">${I('fav')}</button></a>`}).join('')}</div>`
   :'<div class="empty" style="margin-top:60px">لا مفضلات بعد — اضغط ★ داخل أي درس ليظهر هنا</div>'}
 function viewStats(){
   navOn('stats');setCrumb([{t:'إحصائي'}]);
