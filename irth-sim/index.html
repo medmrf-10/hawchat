@@ -407,14 +407,12 @@ function viewLesson(id){
   </div>
   <div class="pane" id="p-txt" style="display:none"><div class="txtp" id="txt"><div class="skel" style="height:120px"></div></div></div>
   <div class="pane" id="p-sum" style="display:none"><div id="sumw"><div class="skel" style="height:120px"></div></div></div>
-  <div class="navbt">
-    ${pv?`<a class="chip" href="#/lesson/${pv}">‹ ${esc((VID[pv]?.title||'').slice(0,30))}</a>`:'<span class="chip" style="opacity:.4">البداية</span>'}
-    ${nx?`<a class="chip" href="#/lesson/${nx}">${esc((VID[nx]?.title||'').slice(0,30))} ›</a>`:'<span class="chip" style="opacity:.4">النهاية</span>'}
-  </div>
-  <div class="lttl" style="font-size:16px;margin-top:16px">دروس السلسلة</div>
-  <div class="list">${ser?ser.items.map((v,i)=>`<a class="row" style="--i:${i};${v===id?'background:var(--soft)':''}" href="#/lesson/${v}">
-    <span class="ph" style="width:44px;height:44px;font-size:16px">${i+1}</span>
-    <span class="tx"><span class="nm" style="font-size:15px">${esc(VID[v]?.title||v)}</span></span></a>`).join(''):''}</div>`;
+  <div class="drawer" id="drawer" onclick="if(event.target===this)this.classList.remove('open')">
+    <div class="dbody">
+      <div class="dhead"><b>${esc(ser?ser.title:'')}</b><button class="ib" onclick="document.getElementById('drawer').classList.remove('open')">${I('x')}</button></div>
+      ${ser?ser.items.map((v,i)=>`<a class="drow${v===id?' cur':''}" href="#/lesson/${v}"><span class="dnum">${i+1}</span><span class="dt">${esc(VID[v]?.title||v)}</span><span class="dd">${fmtT(VID[v]?.duration||0)}</span></a>`).join(''):''}
+    </div>
+  </div>`;
   document.getElementById('p-txt').style.display='none';
   if(V.yt)mountPlayer(V.yt);
   loadStage(id);loadTxt(id);loadSum(id);
