@@ -77,7 +77,7 @@ body.les main{padding-top:calc(104px + env(safe-area-inset-top))}
 .ib{flex:none;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;
   color:var(--muted);border:0;background:none;font:inherit;cursor:pointer}
 .ib:active{background:var(--press)}
-.sbar{position:fixed;z-index:12;left:50%;transform:translateX(-50%);top:calc(6px + env(safe-area-inset-top));
+.sbar{position:fixed;z-index:60;left:50%;transform:translateX(-50%);top:calc(6px + env(safe-area-inset-top));
   width:min(544px,calc(100% - 16px));height:44px;display:flex;align-items:center;gap:6px;
   padding:0 14px 0 2px;background:var(--card);border:1px solid var(--line);border-radius:14px;
   box-shadow:0 8px 24px rgba(0,0,0,.22);animation:fade .18s ease-out}
@@ -127,8 +127,8 @@ body.les main{padding-top:calc(104px + env(safe-area-inset-top))}
 .player:before{content:'';display:block;padding-top:56.25%}
 .player iframe,.player #yfp{position:absolute;inset:0;width:100%;height:100%;border:0}
 .stage{position:relative;margin:10px 16px 0;background:var(--card);border:1px solid var(--line);border-radius:var(--r-2);
-  min-height:118px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px 16px;overflow:hidden}
-.stage .ln{font-family:var(--font-display);font-size:clamp(1.2rem,5vw,1.7rem);line-height:2.1;text-align:center;max-width:640px}
+  height:118px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px 16px;overflow:hidden}
+.stage .ln{font-family:var(--font-display);font-size:clamp(1.2rem,5vw,1.7rem);line-height:2.1;text-align:center;max-width:640px;max-height:calc(clamp(1.2rem,5vw,1.7rem)*4.2);overflow:hidden}
 .stage .w{cursor:pointer;color:var(--text);opacity:.62;transition:color .12s;border-radius:6px;padding:0 2px}
 .stage .w.read{color:var(--text);opacity:1}
 .stage .w.on{color:transparent}
@@ -171,11 +171,10 @@ body.les main{padding-top:calc(104px + env(safe-area-inset-top))}
 .list{position:relative}
 .sbar{height:4px;border-radius:4px;background:var(--soft);overflow:hidden}
 .sbar i{display:block;height:100%;background:var(--gold);border-radius:4px}
-.hst{display:flex;gap:10px;overflow-x:auto;padding:0 14px 12px;scrollbar-width:none}
-.hst::-webkit-scrollbar{display:none}
-.hc{flex:none;width:112px;text-decoration:none;color:var(--fg)}
-.hph{display:grid;place-items:center;height:64px;border:1px solid var(--soft);border-radius:12px;color:var(--gold);font-weight:700;font-size:22px;background:var(--card)}
-.ht{display:block;font-size:11.5px;line-height:1.4;margin-top:6px;max-height:32px;overflow:hidden;color:var(--dim)}
+.hst{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:0 14px 12px}
+.hc{text-decoration:none;color:var(--fg);border:1px solid var(--soft);border-radius:14px;padding:8px;background:var(--card);min-width:0}
+.hph{display:grid;place-items:center;height:56px;border-radius:10px;color:var(--gold);font-weight:700;font-size:22px;background:var(--soft)}
+.ht{display:block;font-size:11.5px;line-height:1.4;margin-top:6px;height:32px;overflow:hidden;color:var(--dim)}
 .hbar{display:block;height:3px;border-radius:3px;background:var(--soft);margin-top:5px;overflow:hidden}
 .hbar i{display:block;height:100%;background:var(--gold);border-radius:3px}
 .sdrop{position:absolute;top:100%;right:0;left:0;background:var(--card);border:1px solid var(--soft);border-top:0;border-radius:0 0 14px 14px;padding:8px;display:flex;flex-wrap:wrap;gap:8px;z-index:9}
@@ -252,9 +251,9 @@ a.row:active{transform:scale(.985)}
       <a class="brand" href="#/"><b>إرث</b></a>
       <div class="ctx" id="ctx"></div>
     </div>
-    <div class="sbar" id="sbar" hidden><input type="search" id="sinput" placeholder="ابحث في الدروس والسلاسل…" autocomplete="off"><button class="ib" id="b-sx" aria-label="إغلاق" style="width:36px;height:36px;flex:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
     <nav class="lmodes" id="lmodes"></nav>
   </header>
+  <div class="sbar" id="sbar" hidden><input type="search" id="sinput" placeholder="ابحث في الدروس والسلاسل…" autocomplete="off"><button class="ib" id="b-sx" aria-label="إغلاق" style="width:36px;height:36px;flex:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
   <nav class="bnav" id="tabs">
       <a href="#/" id="nv-home" class="tab on" aria-label="العلوم"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20v-1.5a4 4 0 0 0-4-4H6.5a4 4 0 0 0-4 4V20"/><circle cx="9.25" cy="7.5" r="3.75"/><path d="M21.5 20v-1.5a4 4 0 0 0-3-3.85M15.5 3.85a3.75 3.75 0 0 1 0 7.3"/></svg></a>
       <a href="#/fav" id="nv-fav" class="tab" aria-label="المفضلة"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3.5 2.6 5.3 5.9.9-4.25 4.1 1 5.8L12 16.9l-5.25 2.7 1-5.8L3.5 9.7l5.9-.9Z"/></svg><span class="bdg"></span></a>
@@ -323,7 +322,7 @@ function srchDrop(){let d=document.getElementById('sdrop');
   if(!d){d=document.createElement('div');d.id='sdrop';d.className='sdrop';sbar.appendChild(d)}
   d.innerHTML=SRCH.map(q=>`<button class="schip">${esc(q)}</button>`).join('');
   d.querySelectorAll('.schip').forEach(b=>b.onclick=()=>{sinput.value=b.textContent;srchDrop();viewSearch(b.textContent)})}
-document.getElementById('b-search').onclick=()=>{sbar.hidden=!sbar.hidden;if(!sbar.hidden){sinput.focus();srchDrop()}};
+document.getElementById('b-search').onclick=()=>{sbar.hidden=!sbar.hidden;if(!sbar.hidden){scrollTo({top:0});sinput.focus();srchDrop()}};
 document.getElementById('b-sx').onclick=()=>{const had=sinput.value.trim();sbar.hidden=true;sinput.value='';srchDrop();if(had)viewSearch('')};
 sinput.oninput=()=>{const q=sinput.value.trim();srchDrop();if(location.hash.startsWith('#/lesson')||location.hash.startsWith('#/series'))return;viewSearch(q)};
 sinput.onkeydown=e=>{if(e.key==='Enter')srchSave(sinput.value)};
@@ -428,7 +427,7 @@ function resumeCard(){const id=localStorage.getItem('irth_last'),v=id&&VID[id],p
   if(!v||pv<10)return'';const pc=v.duration?Math.min(99,Math.round(pv/v.duration*100)):0;
   const rem=v.duration?`متبقٍ ${fmtT(v.duration-pv)}`:`${pc}%`;
   return `<a class="cta" href="#/lesson/${id}" style="margin-bottom:10px">${ICONS.play}<span>أكمل: ${esc(v.title||id)}</span><span class="mt" style="color:inherit;opacity:.8">${rem}</span></a>`}
-function histStrip(){const ids=HIST.filter(i=>VID[i]).slice(0,8);
+function histStrip(){const ids=HIST.filter(i=>VID[i]).slice(0,4);
   if(!ids.length)return'';
   return `<div class="hst">${ids.map(id=>{const v=VID[id],pv=POS.get(id)||0,pc=v.duration?Math.min(99,Math.round(pv/v.duration*100)):0;
     return `<a class="hc" href="#/lesson/${id}"><span class="hph">${firstLetter(v.title)}</span><span class="ht">${esc(v.title||id)}</span><span class="hbar"><i style="width:${pc}%"></i></span></a>`}).join('')}</div>`}
