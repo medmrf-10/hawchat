@@ -134,7 +134,23 @@ a{color:var(--primary)}
 .skel{border-radius:var(--r-1);background:linear-gradient(90deg,var(--soft),var(--press),var(--soft));background-size:200% 100%;animation:sk 1.1s infinite}
 @keyframes sk{to{background-position:-200% 0}}
 .errbox{margin:40px 16px;padding:30px;text-align:center;color:var(--muted);background:var(--card);border:1px solid var(--line);border-radius:var(--r-2)}
-@media (min-width:700px){.list,.pane,.czone,.modes,.player,.stage,.lttl,.lsub,.navbt,.crum{max-width:var(--app-max);margin-inline:auto}}
+/* درج قائمة الدروس — يمين */
+.drawer{position:fixed;inset:0;z-index:20;background:rgba(0,0,0,.45);opacity:0;pointer-events:none;transition:opacity .2s}
+.drawer.open{opacity:1;pointer-events:auto}
+.dbody{position:absolute;top:0;bottom:0;right:0;width:min(86vw,340px);background:var(--card);border-inline-start:1px solid var(--line);
+  transform:translateX(100%);transition:transform .22s var(--ease);overflow-y:auto;padding-bottom:env(safe-area-inset-bottom)}
+.drawer.open .dbody{transform:none}
+.dhead{position:sticky;top:0;display:flex;align-items:center;justify-content:space-between;gap:8px;
+  padding:14px 16px;background:var(--card);border-bottom:1px solid var(--line);z-index:1}
+.dhead b{font:700 16px var(--font-display);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.drow{display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid var(--line);color:inherit;text-decoration:none}
+.drow:active{background:var(--soft)}
+.drow.cur{background:var(--soft)}
+.dnum{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--soft);color:var(--primary);font:700 13px var(--font-display);box-shadow:0 0 0 1.5px var(--gold)}
+.drow.cur .dnum{background:var(--primary);color:var(--card)}
+.dt{flex:1;min-width:0;font-size:14px;line-height:1.6}
+.dd{flex:none;color:var(--muted);font-size:12px}
+@media (min-width:700px){.list,.pane,.czone,.modes,.player,.stage,.lttl,.lsub,.crum{max-width:var(--app-max);margin-inline:auto}}
 </style>
 </head>
 <body>
@@ -221,9 +237,12 @@ function navOn(k){document.querySelectorAll('.nav a').forEach(a=>a.classList.rem
 function route(){
   const h=location.hash.slice(2)||'';
   YTP&&YTP.destroy&&YTP.destroy();YTP=null;if(timer){clearInterval(timer);timer=null}
+  const les=h.startsWith('lesson/');
+  document.getElementById('b-search').style.display=les?'none':'';
+  document.getElementById('sbar').hidden=true;sinput.value='';
   if(h.startsWith('science/'))viewScience(h.slice(8));
   else if(h.startsWith('series/'))viewSeries(h.slice(7));
-  else if(h.startsWith('lesson/'))viewLesson(h.slice(7));
+  else if(les)viewLesson(h.slice(7));
   else if(h==='fav'){navOn('fav');app.innerHTML='<div class="empty" style="margin-top:60px">المفضلة — قريباً في إرث</div>'}
   else if(h==='stats'){navOn('stats');viewStats()}
   else viewHome();
@@ -363,6 +382,13 @@ function viewLesson(id){
   const nx=ser&&idx<ser.items.length-1?ser.items[idx+1]:null;
   const pv=ser&&idx>0?ser.items[idx-1]:null;
   app.innerHTML=`
+  <div class="modes" style="margin-top:12px">
+    <button class="mode on" data-m="live" onclick="setMode('live')">${I('watch')} مشاهدة حية</button>
+    <button class="mode" data-m="read" onclick="setMode('read')">${I('read')} قراءة تفريغ</button>
+    <button class="mode" data-m="sum" onclick="setMode('sum')">${I('sum')} قراءة ملخص</button>
+    ${V.yt?`<a class="mode" href="https://youtu.be/${V.yt}" target="_blank" rel="noopener">${I('yt')} يوتيوب</a>`:''}
+    <button class="mode" id="b-list" onclick="document.getElementById('drawer').classList.add('open')" style="margin-inline-start:auto">${I('sum')} الدروس</button>
+  </div>
   <div id="live">
     ${V.yt?`<div class="player"><div id="yfp"></div></div>`:''}
     <div class="stage" id="stage"><span class="wait">يُحمّل…</span></div>
@@ -378,12 +404,6 @@ function viewLesson(id){
         <button class="chip" id="spd" onclick="cycleSpeed()">×1</button></div>
       <div class="pbar"><i id="pbar"></i></div>
     </div>
-  </div>
-  <div class="modes">
-    <button class="mode on" data-m="live" onclick="setMode('live')">${I('watch')} مشاهدة حية</button>
-    <button class="mode" data-m="read" onclick="setMode('read')">${I('read')} قراءة تفريغ</button>
-    <button class="mode" data-m="sum" onclick="setMode('sum')">${I('sum')} قراءة ملخص</button>
-    ${V.yt?`<a class="mode" href="https://youtu.be/${V.yt}" target="_blank" rel="noopener">${I('yt')} يوتيوب</a>`:''}
   </div>
   <div class="pane" id="p-txt" style="display:none"><div class="txtp" id="txt"><div class="skel" style="height:120px"></div></div></div>
   <div class="pane" id="p-sum" style="display:none"><div id="sumw"><div class="skel" style="height:120px"></div></div></div>
