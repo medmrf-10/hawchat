@@ -250,16 +250,7 @@ function viewHome(){
   navOn('home');document.title='إرث — محاكاة التشغيل';
   setCrumb([{t:'العلوم'}]);
   const counts={};SER.forEach(s=>counts[s.science]=(counts[s.science]||0)+1);
-  const rs=Object.keys(localStorage).filter(k=>k.startsWith('irth.pos.'))
-    .map(k=>{try{const p=JSON.parse(localStorage.getItem(k));return{vid:k.slice(9),...p}}catch(e){return null}})
-    .filter(x=>x&&x.pos>10&&!x.done).sort((a,b)=>(b.last||'').localeCompare(a.last||''))[0];
-  const rsv=rs?VID[rs.vid]:null;const rser=rsv?SER.find(s=>s.items.includes(rs.vid)):null;
-  const rhtml=rsv?`<a class="row" style="--i:0;background:var(--soft)" href="#/lesson/${rs.vid}">
-    <span class="ph" style="color:var(--gold)">${I('play')}</span>
-    <span class="tx"><span class="nm" style="font-size:16px">أكمل: ${esc(rsv.title)}</span>
-    <span class="mt">${esc(rser?rser.title:'')} · بقي ${Math.ceil(Math.max(0,(rs.dur-rs.pos))/60)} دقيقة</span>
-    <span style="display:block;height:3px;background:var(--line);border-radius:9px;margin-top:6px;overflow:hidden"><i style="display:block;height:100%;width:${Math.round(rs.pos/(rs.dur||1)*100)}%;background:var(--gold)"></i></span></span>${ICONS.chev}</a>`:'';
-  app.innerHTML=`${rhtml?`<div class="list" style="margin-top:14px">${rhtml}</div>`:''}<div class="list">${Object.values(SCI).map((sc,i)=>
+  app.innerHTML=`<div class="list">${Object.values(SCI).map((sc,i)=>
     `<a class="row" style="--i:${i}" href="#/science/${sc.id}"><span class="ph">${firstLetter(sc.name)}</span>
      <span class="tx"><span class="nm">${esc(sc.name)}</span><span class="mt">${pl3(counts[sc.id]||0,'سلسلة','سلسلتان','سلاسل','سلسلة')}</span></span>${ICONS.chev}</a>`).join('')}</div>`;
 }
@@ -290,10 +281,7 @@ function viewSeries(id){
 }
 
 /* ===== محرك الكاريوكي — نفس lesson.html: امتلاء ذهبي داخل الكلمة ===== */
-let YTP=null,PH=[],curPh=-1,curW=-1,timer=null,pendPlay=false,SPANS=[],MODE='live',curVid='';
-function savePos(vid,tm,dur){try{const k='irth.pos.'+vid;
-  localStorage.setItem(k,JSON.stringify({pos:Math.floor(tm),dur:Math.floor(dur||0),done:dur&&tm/dur>0.97?1:0,last:new Date().toISOString()}))}catch(e){}}
-function getPos(vid){try{return JSON.parse(localStorage.getItem('irth.pos.'+vid)||'null')}catch(e){return null}}
+let YTP=null,PH=[],curPh=-1,curW=-1,timer=null,pendPlay=false,SPANS=[],MODE='live';
 const PBRK=/[،؛.!؟:…—]$/;
 function normAlign(a){const ws=a.words.split(' ').filter(Boolean);
   return ws.map((w,i)=>[w,(a.start[i]||0)/100,((a.start[i]||0)+(a.dur[i]||0))/100,0])}
@@ -314,7 +302,6 @@ function renderPhrase(i){
 function tick(){
   if(!YTP||!YTP.getCurrentTime||!PH.length)return;
   const tm=YTP.getCurrentTime();
-  savePos(curVid,tm,YTP.getDuration?YTP.getDuration():0);
   const bar=document.getElementById('tm');if(bar)bar.textContent=fmtT(tm)+' / '+fmtT(YTP.getDuration?YTP.getDuration():0);
   const pb=document.getElementById('pbar');if(pb){const d=YTP.getDuration()||1;pb.style.width=(tm/d*100)+'%'}
   let pi=curPh;
@@ -350,14 +337,11 @@ function mountPlayer(vid){
   setTimeout(()=>{if(!ready){const s=document.getElementById('stage');if(s)s.innerHTML='<span class="wait">المشغّل يتأخر — <a href="https://youtu.be/'+vid+'" target="_blank" rel="noopener">افتح على يوتيوب</a></span>'}},9000);
   window.onYouTubeIframeAPIReady=()=>{
     YTP=new YT.Player('yfp',{events:{
-      onReady:()=>{ready=true;const p=getPos(curVid);
-        if(p&&p.pos>10&&!p.done){try{YTP.seekTo(p.pos,true)}catch(e){}}
-        if(pendPlay){YTP.playVideo();pendPlay=false}},
+      onReady:()=>{ready=true;if(pendPlay){YTP.playVideo();pendPlay=false}},
       onStateChange:e=>{
         const b=document.getElementById('playb');const playing=(e.data===1||e.data===3);
         if(b)b.innerHTML=playing?ICONS.pause:ICONS.play;
         if(e.data===1){if(!timer)timer=setInterval(tick,150)}
-        else if(e.data===0){savePos(curVid,YTP.getDuration?YTP.getDuration():0,1);autoNext()}
         else if(e.data!==3&&timer){clearInterval(timer);timer=null}}}})};
 }
 function setMode(m){
@@ -367,12 +351,8 @@ function setMode(m){
   document.getElementById('p-txt').style.display=m==='read'?'':'none';
   document.getElementById('p-sum').style.display=m==='sum'?'':'none';
 }
-function autoNext(){
-  const nx=document.getElementById('nxl');
-  if(nx){location.hash='#/lesson/'+nx.dataset.v}
-}
 function viewLesson(id){
-  navOn('home');curVid=id;
+  navOn('home');
   const V=VID[id];
   if(!V){app.innerHTML='<div class="errbox">درس غير موجود</div>';return}
   const ser=SER.find(s=>s.items.includes(id));
@@ -409,7 +389,7 @@ function viewLesson(id){
   <div class="pane" id="p-sum" style="display:none"><div id="sumw"><div class="skel" style="height:120px"></div></div></div>
   <div class="navbt">
     ${pv?`<a class="chip" href="#/lesson/${pv}">‹ ${esc((VID[pv]?.title||'').slice(0,30))}</a>`:'<span class="chip" style="opacity:.4">البداية</span>'}
-    ${nx?`<a class="chip" id="nxl" data-v="${nx}" href="#/lesson/${nx}">${esc((VID[nx]?.title||'').slice(0,30))} ›</a>`:'<span class="chip" style="opacity:.4">النهاية</span>'}
+    ${nx?`<a class="chip" href="#/lesson/${nx}">${esc((VID[nx]?.title||'').slice(0,30))} ›</a>`:'<span class="chip" style="opacity:.4">النهاية</span>'}
   </div>
   <div class="lttl" style="font-size:16px;margin-top:16px">دروس السلسلة</div>
   <div class="list">${ser?ser.items.map((v,i)=>`<a class="row" style="--i:${i};${v===id?'background:var(--soft)':''}" href="#/lesson/${v}">
