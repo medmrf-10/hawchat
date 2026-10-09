@@ -152,6 +152,11 @@ a{color:var(--primary)}
 .ufav svg{width:18px;height:18px;fill:currentColor;stroke:none}
 .ufav:active{background:var(--press)}
 .row{transition:opacity .18s ease,transform .18s ease}
+a.row:active{transform:scale(.985)}
+.tost{position:fixed;bottom:calc(18px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%) translateY(8px);
+  z-index:20;background:var(--text);color:var(--card);padding:10px 18px;border-radius:12px;font-size:14px;
+  box-shadow:0 8px 24px rgba(0,0,0,.28);opacity:0;pointer-events:none;transition:opacity .22s ease,transform .22s ease}
+.tost.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .cta{display:flex;align-items:center;justify-content:center;gap:8px;height:44px;margin:12px 16px 4px;
   border-radius:var(--r-2);background:var(--primary);color:var(--card);font:inherit;font-size:15px;cursor:pointer;
   text-decoration:none}
@@ -317,9 +322,11 @@ function route(){
   else viewHome();
 }
 const FAVK='irth_fav';let FAV=new Set(JSON.parse(localStorage.getItem(FAVK)||'[]'));
-function favToggle(id){FAV.has(id)?FAV.delete(id):FAV.add(id);localStorage.setItem(FAVK,JSON.stringify([...FAV]));
-  const b=document.getElementById('favb');if(b)b.classList.toggle('on',FAV.has(id))}
-function unfav(e,id){e.preventDefault();e.stopPropagation();FAV.delete(id);localStorage.setItem(FAVK,JSON.stringify([...FAV]));
+let _tt;function tost(msg){let t=document.getElementById('tost');if(!t){t=document.createElement('div');t.id='tost';t.className='tost';document.body.appendChild(t)}
+  t.textContent=msg;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),1600)}
+function favToggle(id){const on=!FAV.has(id);on?FAV.add(id):FAV.delete(id);localStorage.setItem(FAVK,JSON.stringify([...FAV]));
+  tost(on?'أُضيف إلى المفضلة':'أُزيل من المفضلة');const b=document.getElementById('favb');if(b)b.classList.toggle('on',on)}
+function unfav(e,id){e.preventDefault();e.stopPropagation();FAV.delete(id);localStorage.setItem(FAVK,JSON.stringify([...FAV]));tost('أُزيل من المفضلة');
   const r=e.target.closest('.row');if(r){r.style.opacity='0';r.style.transform='translateX(-18px)';setTimeout(()=>viewFav(),180)}}
 function shareLes(){const u=location.href;
   if(navigator.share){navigator.share({title:document.title,url:u}).catch(()=>{})}
