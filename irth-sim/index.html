@@ -251,6 +251,7 @@ a.row:active{transform:scale(.985)}
 .dt{flex:1;min-width:0;font-size:14px;line-height:1.6}
 .dd{flex:none;color:var(--muted);font-size:12px}
 @media (min-width:700px){.list,.pane,.czone,.player,.stage{max-width:var(--app-max);margin-inline:auto}}
+body.les,body.les *{animation:none!important;transition:none!important}
 </style>
 </head>
 <body>
@@ -374,7 +375,7 @@ function qrate(id,i,n,btn){QRATE[id+'#'+i]=n;try{localStorage.setItem(QRK,JSON.s
   btn.closest('.qr').querySelectorAll('.qrb').forEach((b,j)=>b.classList.toggle('on',j<n))}
 (function(){const f=document.createElement('button');f.id='fab';f.className='fab';f.setAttribute('aria-label','العودة لأعلى');
   f.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 14 6-6 6 6"/></svg>';
-  f.onclick=()=>scrollTo({top:0,behavior:'smooth'});document.body.appendChild(f)})();
+  f.onclick=()=>scrollTo({top:0,behavior:document.body.classList.contains('les')?'auto':'smooth'});document.body.appendChild(f)})();
 let _tt;function tost(msg){let t=document.getElementById('tost');if(!t){t=document.createElement('div');t.id='tost';t.className='tost';document.body.appendChild(t)}
   t.textContent=msg;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),1600)}
 function favSync(){const n=document.getElementById('nv-fav');if(n)n.classList.toggle('hasf',FAV.size>0)}
