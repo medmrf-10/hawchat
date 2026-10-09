@@ -181,6 +181,7 @@ body.les main{padding-top:calc(104px + env(safe-area-inset-top))}
 .sdrop{position:absolute;top:100%;right:0;left:0;background:var(--card);border:1px solid var(--soft);border-top:0;border-radius:0 0 14px 14px;padding:8px;display:flex;flex-wrap:wrap;gap:8px;z-index:9}
 .schip{border:1px solid var(--soft);border-radius:999px;padding:6px 12px;font-size:13px;color:var(--dim);background:none;cursor:pointer;font-family:inherit}
 .schip:active{background:var(--press);color:var(--fg)}
+.hl{color:var(--gold);font-weight:700}
 .done{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:20px;height:20px;color:var(--gold)}
 .done svg{width:100%;height:100%}
 a.row:active{transform:scale(.985)}
@@ -413,9 +414,10 @@ function viewSearch(q){
   const sres=SER.filter(s=>s.title.includes(q)).slice(0,8);
   const res=Object.values(VID).filter(v=>v.title.includes(q)).slice(0,40);
   setCrumb([{t:'العلوم',a:'#/'},{t:'بحث: '+q}]);
-  const srows=sres.map((s,i)=>`<a class="row" style="--i:${i}" href="#/series/${s.id}"><span class="ph">${firstLetter(s.title)}</span><span class="tx"><span class="nm" style="font-size:16px">${esc(s.title)}</span><span class="mt">سلسلة · ${pl3(s.items.length,'درس','درسان','دروس','درساً')}</span></span>${ICONS.chev}</a>`).join('');
+  const hl=t=>q.length>=2?esc(t).split(esc(q)).join(`<span class="hl">${esc(q)}</span>`):esc(t);
+  const srows=sres.map((s,i)=>`<a class="row" style="--i:${i}" href="#/series/${s.id}"><span class="ph">${firstLetter(s.title)}</span><span class="tx"><span class="nm" style="font-size:16px">${hl(s.title)}</span><span class="mt">سلسلة · ${pl3(s.items.length,'درس','درسان','دروس','درساً')}</span></span>${ICONS.chev}</a>`).join('');
   const vrows=res.map((v,i)=>{const s=SER.find(x=>x.items.includes(v.id));
-    return `<a class="row" style="--i:${i+sres.length}" href="#/lesson/${v.id}"><span class="ph">${firstLetter(v.title)}</span><span class="tx"><span class="nm" style="font-size:16px">${esc(v.title)}</span><span class="mt">${esc(s?s.title:'')}${FAV.has(v.id)?`<span class="fvm">${ICONS.fav}</span>`:''}</span></span>${ICONS.chev}</a>`}).join('');
+    return `<a class="row" style="--i:${i+sres.length}" href="#/lesson/${v.id}"><span class="ph">${firstLetter(v.title)}</span><span class="tx"><span class="nm" style="font-size:16px">${hl(v.title)}</span><span class="mt">${esc(s?s.title:'')}${FAV.has(v.id)?`<span class="fvm">${ICONS.fav}</span>`:''}</span></span>${ICONS.chev}</a>`}).join('');
   app.innerHTML=`<div class="list">${srows}${vrows||''}${!srows&&!vrows?'<div class="empty">لا نتائج</div>':''}</div>`;
 }
 function route0(){viewHome()}
