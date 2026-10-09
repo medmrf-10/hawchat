@@ -375,7 +375,8 @@ function viewStats(){
     ${st.length?grp('استماعك',[
       [pl3(st.length,'درس','درسان','دروس','دروساً')+' بدأته','',0],
       [Math.floor(sec/3600)+' س '+Math.round(sec%3600/60)+' د استماعاً','',0],
-      [pl3(fin.length,'درس','درسان','دروس','دروساً')+' أتممته','',0]]):''}
+      [pl3(fin.length,'درس','درسان','دروس','دروساً')+' أتممته','',0],
+      [pl3(streak(),'يوم','يومان','أيام','أياماً')+' استماعاً متتالياً','',0]]):''}
     ${grp('لكل شيخ',Object.entries(perSh).sort((a,b)=>b[1].n-a[1].n).map(([sh,d])=>[PER[sh]?.short||PER[sh]?.name||sh||'غير معروف',d.n,d.t]))}
     ${grp('لكل علم',Object.entries(perSc).sort((a,b)=>b[1].n-a[1].n).map(([sc,d])=>[SCI[sc]?.name||sc,d.n,d.t,sc]))}</div>`;
 }
@@ -435,7 +436,13 @@ function viewSeries(id){
 /* ===== محرك الكاريوكي — نفس lesson.html: امتلاء ذهبي داخل الكلمة ===== */
 let YTP=null,PH=[],curPh=-1,curW=-1,timer=null,pendPlay=false,SPANS=[],MODE='live',curLes='';
 const POSK='irth_pos';let POS=new Map(JSON.parse(localStorage.getItem(POSK)||'[]'));
-function posSave(id,t){POS.set(id,Math.round(t));localStorage.setItem(POSK,JSON.stringify([...POS]));localStorage.setItem('irth_last',id)}
+const DAYS=new Set(JSON.parse(localStorage.getItem('irth_days')||'[]'));
+function posSave(id,t){POS.set(id,Math.round(t));localStorage.setItem(POSK,JSON.stringify([...POS]));localStorage.setItem('irth_last',id);
+  const d=new Date().toISOString().slice(0,10);if(!DAYS.has(d)){DAYS.add(d);localStorage.setItem('irth_days',JSON.stringify([...DAYS]))}}
+function streak(){let s=0,d=new Date();
+  if(!DAYS.has(d.toISOString().slice(0,10)))d.setDate(d.getDate()-1);
+  while(DAYS.has(d.toISOString().slice(0,10))){s++;d.setDate(d.getDate()-1)}
+  return s}
 const PBRK=/[،؛.!؟:…—]$/;
 function normAlign(a){const ws=a.words.split(' ').filter(Boolean);
   const st=a.start||[],du=a.dur||[];
