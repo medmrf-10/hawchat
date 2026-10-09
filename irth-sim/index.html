@@ -33,7 +33,7 @@ main{max-width:960px;margin:0 auto;padding:var(--sp-3) var(--sp-3) var(--sp-6)}
 .heroc .who{font-size:var(--fs-sm);color:var(--dim);line-height:1.8}
 .heroc .who b{color:var(--txt);font-size:1.02rem}
 /* lesson page — نفس بنية lesson.html */
-.player{position:relative;width:100%;aspect-ratio:16/9;border-radius:var(--r-md);overflow:hidden;border:1px solid var(--border);background:#000}
+.player{position:relative;width:100%;aspect-ratio:16/9;max-height:calc(var(--app-h,100dvh) * .36);border-radius:var(--r-md);overflow:hidden;border:1px solid var(--border);background:#000}
 .player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .stage{min-height:170px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(145deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:var(--r-md);margin-top:var(--sp-2);padding:var(--sp-4) var(--sp-4);overflow:hidden}
 .stage.idle .ph{opacity:.75}
@@ -96,6 +96,10 @@ const $=s=>document.querySelector(s);
 const app=$('#app'),crumb=$('#crumb');
 let SCI={},PER={},WRK={},SER=[],VID={};
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+document.addEventListener('click',e=>{
+  const sp=e.target.closest('.stage .w');
+  if(sp&&YTP){YTP.seekTo(parseFloat(sp.dataset.s),true);YTP.playVideo()}
+});
 const fmtT=s=>{s=Math.max(0,Math.floor(+s||0));const h=~~(s/3600),m=~~(s%3600/60),x=s%60;return h?`${h}:${String(m).padStart(2,'0')}:${String(x).padStart(2,'0')}`:`${m}:${String(x).padStart(2,'0')}`};
 const I=i=>`<svg class="i"><use href="../playlists/icons.svg#${i}"/></svg>`;
 async function jget(p){const r=await fetch(BASE+p);if(!r.ok)throw p;return r.json()}
@@ -227,6 +231,12 @@ function tick(){
   }
 }
 function seekPhrase(i){if(!YTP||i<0||i>=PH.length)return;YTP.seekTo(Math.max(0,PH[i][0][1]-0.1),true);renderPhrase(i)}
+const SPEEDS=[1,1.25,1.5,2,0.75];let spdI=0;
+function cycleSpeed(){
+  spdI=(spdI+1)%SPEEDS.length;const v=SPEEDS[spdI];
+  if(YTP&&YTP.setPlaybackRate)YTP.setPlaybackRate(v);
+  const el=document.getElementById('spd');if(el)el.textContent='×'+v;
+}
 function playToggle(b){
   if(!YTP){pendPlay=true;if(b)b.classList.add('ld');return}
   const s=YTP.getPlayerState&&YTP.getPlayerState();
@@ -234,9 +244,11 @@ function playToggle(b){
 }
 function mountPlayer(vid){
   const tag=document.createElement('script');tag.src='https://www.youtube.com/iframe_api';document.head.appendChild(tag);
+  let ready=false;
+  setTimeout(()=>{if(!ready){const s=document.getElementById('stage');if(s)s.innerHTML='<span class="wait">المشغّل يتأخر — <a href="https://youtu.be/'+vid+'" target="_blank" rel="noopener" style="color:var(--acc2)">افتح الدرس على يوتيوب مباشرة</a></span>'}},9000);
   window.onYouTubeIframeAPIReady=()=>{
     YTP=new YT.Player('yfp',{events:{
-      onReady:()=>{const b=document.getElementById('playb');if(b){b.classList.remove('ld');b.innerHTML=I('i-play')}if(pendPlay){YTP.playVideo();pendPlay=false}},
+      onReady:()=>{ready=true;const b=document.getElementById('playb');if(b){b.classList.remove('ld');b.innerHTML=I('i-play')}if(pendPlay){YTP.playVideo();pendPlay=false}},
       onStateChange:e=>{
         const b=document.getElementById('playb');const playing=(e.data===1||e.data===3);
         if(b){b.innerHTML=playing?I('i-pause'):I('i-play');b.setAttribute('aria-pressed',playing?'true':'false')}
@@ -252,6 +264,7 @@ function viewLesson(id){
   const sh=V.speakers?.[0];
   setCrumb([{t:'العلوم',a:'#/'},...(ser?[{t:SCI[ser.science]?.name,a:'#/science/'+ser.science},{t:ser.title,a:'#/series/'+ser.id}]:[]),{t:V.title}]);
   document.getElementById('back').href=ser?'#/series/'+ser.id:'#/';
+  document.title=V.title+' — '+(ser?ser.title:'irth');
   const idx=ser?ser.items.indexOf(id):-1;
   const nx=ser&&idx<ser.items.length-1?ser.items[idx+1]:null;
   const pv=ser&&idx>0?ser.items[idx-1]:null;
@@ -269,6 +282,7 @@ function viewLesson(id){
           <button class="btn" onclick="seekPhrase(curPh+1)" aria-label="الجملة التالية">${I('i-next')}</button>
         </div>
         <div class="csub"><span class="tm" id="tm">0:00</span><span class="pos" id="pos"></span>
+          <button class="chip" id="spd" onclick="cycleSpeed()">×1</button>
           <button class="chip on" id="t-tele" onclick="TELE=!TELE;this.classList.toggle('on',TELE);renderPhrase(Math.max(0,curPh))">ملقّن</button>
           ${V.yt?`<a class="chip" href="https://youtu.be/${V.yt}" target="_blank" rel="noopener" style="text-decoration:none">${I('i-yt')} يوتيوب</a>`:''}
         </div>
@@ -278,10 +292,10 @@ function viewLesson(id){
         <div class="who"><b>${esc(V.title)}</b><br>${esc(ser?.title||'')} · الدرس ${idx+1} · ${fmtT(V.duration)} · ${esc(PER[sh]?.name||'')}${V.work&&WRK[V.work]?` · «${esc(WRK[V.work].title)}»`:''}</div>
       </div>
       <div class="tabs">
-        <div class="tab" data-t="txt">التفريغ</div>
+        <div class="tab on" data-t="txt">التفريغ</div>
         <div class="tab" data-t="sum">الملخص</div>
       </div>
-      <div class="pane" id="p-txt"><div class="txtp" id="txt"><div class="skel" style="height:120px"></div></div></div>
+      <div class="pane on" id="p-txt"><div class="txtp" id="txt"><div class="skel" style="height:120px"></div></div></div>
       <div class="pane" id="p-sum"><div id="sumw"><div class="skel" style="height:120px"></div></div></div>
       <div class="czone" style="flex-direction:row;justify-content:space-between;padding:8px 14px">
         ${pv?`<a class="chip" href="#/lesson/${pv}" style="text-decoration:none">→ ${esc((VID[pv]?.title||'').slice(0,28))}</a>`:'<span class="chip" style="opacity:.4">→ البداية</span>'}
@@ -290,13 +304,10 @@ function viewLesson(id){
     </div>
     <div class="side">${ser?ser.items.map((v,i)=>`<div class="ls${v===id?' cur':''}" onclick="location.hash='#/lesson/${v}'"><div class="num">${i+1}</div><div class="t">${esc(VID[v]?.title||v)}</div></div>`).join(''):''}</div>
   </div>`;
+  const cur=document.querySelector('.side .ls.cur');if(cur)setTimeout(()=>cur.scrollIntoView({block:'center'}),60);
   document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
     document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===t));
     document.querySelectorAll('.pane').forEach(x=>x.classList.toggle('on',x.id==='p-'+t.dataset.t));
-  });
-  document.addEventListener('click',e=>{
-    const sp=e.target.closest('.stage .w');
-    if(sp&&YTP){YTP.seekTo(parseFloat(sp.dataset.s),true);YTP.playVideo()}
   });
   if(V.yt)mountPlayer(V.yt);
   if(timer){clearInterval(timer);timer=null}
