@@ -58,6 +58,7 @@
 .u-sr .t{flex:1;min-width:0;text-align:center}
 .u-sr .sn{flex:none;display:flex;gap:6px;direction:ltr}
 .u-sr .sn .n{font-style:normal;color:var(--ink-3);font-size:.85rem;font-weight:700;font-family:var(--font-ui);font-variant-numeric:tabular-nums}
+.mvok{display:inline-block;flex:none;margin-inline-start:6px;padding:1px 7px;border-radius:999px;background:var(--gold);color:#141414;font-size:.72rem;font-weight:800;vertical-align:2px}
 .u-sr .sn .n.ok{color:var(--green)}
 .u-sr .sn .sep{color:var(--ink-3);font-size:.7rem}
 .shn{font-size:1.3rem;font-weight:800;line-height:1.4;margin:0}.shs{color:var(--ink-3);font-size:var(--fs-xs);margin-top:4px}
@@ -90,7 +91,7 @@
 <script src="common.js?v=11"></script>
 <script>
 let flt=new Set();
-let _rows=[],_slug='',_st=null;
+let _rows=[],_slug='',_st=null,_mig={};
 const ic=id=>'<svg class="i"><use href="icons.svg?v=12#'+id+'"/></svg>';
 const FCOUNT={rd:r=>r.rdn||0,yt:r=>r.ytn||0,lsn:r=>r.wan||0,qu:r=>r.qn||0,aud:r=>(r.ytn||0)+(r.aun||0),fav:r=>store.fav(r.id)?1:0,sm:r=>r.sun||0};
 const FALABEL={rd:'قراءة',yt:'يوتيوب',lsn:'مشاهدة حية',qu:'أسئلة',aud:'استماع',fav:'مفضلة',sm:'تلخيص'};
@@ -115,7 +116,7 @@ function renderSeries(){
     const L=lessonsOf(r),sn=seenIn(r),h=hist.find(x=>x.r===r.id);
     const av=[['rd',r.rdn],['lsn',r.wan],['sm',r.sun],['qu',r.qn]].filter(x=>x[1]).map(([k,n])=>'<i class="a-'+k+'" title="'+FALABEL[k]+'">'+ic(FIC[k])+n+'</i>').join('');
     return '<a class="sr cin" href="row.html?r='+encodeURIComponent(r.id)+'">'
-      +'<span class="sr-t"><bdi>'+esc(r.title)+'</bdi></span>'
+      +'<span class="sr-t"><bdi>'+esc(r.title)+'</bdi>'+(_mig[r.id]&&_mig[r.id].done?'<i class="mvok" title="نُقلت كاملة إلى إرث">✓ منقولة</i>':'')+'</span>'
       +'<span class="sr-m"><span>'+pluralLesson(L)+'</span>'+av+(store.fav(r.id)?'<i class="a-fav">'+ic('i-star')+'</i>':'')+'</span>'
       +(sn?'<span class="sr-p"><i style="width:'+Math.min(100,Math.round(sn/Math.max(1,L)*100))+'%"></i></span><span class="sr-c">'+(h?'تابع الدرس '+h.n:'')+'<small>شاهدت '+sn+' من '+L+'</small></span>':'')
       +'</a>'}).join('')||'<div class="empty">'+(flt.has('fav')?'لا سلاسل مفضلة بعد — اضغط ☆ في صفحة السلسلة':'لا نتائج')+'</div>';
@@ -144,6 +145,7 @@ function renderHero(){
   const q=new URLSearchParams(location.search);
   _slug=q.get('s')||'';
   const stats=await j('data/sheikh_stats.json');
+  try{const mj=await j('data/migration.json');_mig=(mj&&mj.rows)||{}}catch(e){_mig={}}
   const B=document.getElementById('body');
   const st=stats&&stats[_slug];_st=st;
   if(!st){B.innerHTML='<div class="errbox">لم يُعثر على الشيخ المطلوب — <a href=".">عودة للقائمة</a></div>';return}
