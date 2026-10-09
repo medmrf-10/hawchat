@@ -191,6 +191,7 @@ a.row:active{transform:scale(.985)}
 .icob.on{color:var(--gold);border-color:var(--gold)}
 .icob:active{background:var(--press)}
 .chip:active{background:var(--press)}
+.chip.on{color:var(--gold);border-color:var(--gold)}
 .pane{margin:12px 16px 0;background:var(--card);border:1px solid var(--line);border-radius:var(--r-2);padding:16px}
 .txtp{font-family:var(--font-body);font-size:15.5px;line-height:2.1;white-space:pre-wrap;max-height:60vh;overflow:auto}
 .sump{font-family:var(--font-body);font-size:15.5px;line-height:2}
@@ -486,6 +487,14 @@ const SPEEDS=[1,1.25,1.5,2,0.75];let spdI=0;
 function cycleSpeed(){spdI=(spdI+1)%SPEEDS.length;const v=SPEEDS[spdI];
   if(YTP&&YTP.setPlaybackRate)YTP.setPlaybackRate(v);
   const el=document.getElementById('spd');if(el)el.textContent='×'+v}
+const SLEEPS=[10,20,30];let slpI=-1,slpT=null;
+function cycleSleep(){slpI=(slpI+1)%(SLEEPS.length+1);clearTimeout(slpT);slpT=null;
+  const el=document.getElementById('slp');if(!el)return;
+  if(slpI===SLEEPS.length){el.classList.remove('on');el.textContent='نوم';tost('مؤقت النوم ملغى');return}
+  const m=SLEEPS[slpI];el.classList.add('on');el.textContent='نوم '+m;
+  slpT=setTimeout(()=>{slpI=-1;const e=document.getElementById('slp');if(e){e.classList.remove('on');e.textContent='نوم'}
+    if(YTP&&YTP.pauseVideo)YTP.pauseVideo();tost('توقّف التشغيل — مؤقت النوم')},m*60000);
+  tost(`مؤقت نوم: إيقاف بعد ${m} دقيقة`)}
 function autoNext(){const ser=SER.find(x=>x.items.includes(curLes));
   if(!ser)return;const i=ser.items.indexOf(curLes);
   const nx=ser.items[i+1];if(!nx)return;
@@ -553,7 +562,8 @@ function viewLesson(id){
       <div class="csub"><span id="tm">0:00</span><span id="pos" class="ppos"></span>
         <button class="icob${FAV.has(id)?' on':''}" id="favb" onclick="favToggle('${id}')" aria-label="مفضلة">${I('fav')}</button>
         <button class="icob" onclick="shareLes()" aria-label="مشاركة">${I('share')}</button>
-        <button class="chip" id="spd" onclick="cycleSpeed()">×1</button></div>
+        <button class="chip" id="spd" onclick="cycleSpeed()">×1</button>
+        <button class="chip" id="slp" onclick="cycleSleep()">نوم</button></div>
       <div class="pbar"><i id="pbar"></i></div>
     </div>
   </div>
