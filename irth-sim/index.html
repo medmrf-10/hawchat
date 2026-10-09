@@ -539,6 +539,7 @@ function viewLesson(id){
     <button class="mtab on" data-m="live" onclick="setMode('live')" aria-label="حية">${I('watch')}</button>
     ${(V.has||[]).includes('transcript')?`<button class="mtab" data-m="read" onclick="setMode('read')" aria-label="تفريغ">${I('read')}</button>`:''}
     ${(V.has||[]).includes('questions')?`<button class="mtab" data-m="qu" onclick="setMode('qu')" aria-label="أسئلة">${I('qu')}</button>`:''}
+    ${(V.has||[]).includes('summary')?`<button class="mtab" data-m="sum" onclick="setMode('sum')" aria-label="ملخص">${I('sum')}</button>`:''}
     ${V.yt?`<a class="mtab" href="https://youtu.be/${V.yt}" target="_blank" rel="noopener" aria-label="يوتيوب">${I('yt')}</a>`:''}
     <button class="mtab" id="b-list" onclick="openDrawer()" aria-label="الدروس">${I('list')}</button>`;
   app.innerHTML=`
