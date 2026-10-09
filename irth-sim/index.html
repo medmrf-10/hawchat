@@ -444,6 +444,7 @@ function renderPhrase(i){
   const pos=document.getElementById('pos');
   if(i<0||i>=PH.length)return;curPh=i;curW=-1;
   st.innerHTML='<div class="ln">'+PH[i].map((w,k)=>`<span class="w" data-s="${w[1]}">${esc(w[0])}</span>`).join(' ')+'</div>';
+  st.querySelectorAll('.w').forEach(sp=>sp.onclick=()=>{const s=+sp.dataset.s;if(YTP&&YTP.seekTo){YTP.seekTo(s,true);tost('انتقال إلى '+fmtT(s))}});
   if(pos)pos.textContent=`جملة ${i+1} / ${PH.length}`;
   SPANS=st.querySelectorAll('.w');
 }
