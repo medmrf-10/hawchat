@@ -66,6 +66,7 @@ main .wrap>div:last-child{padding:0 var(--sp-3)}
 .u-sh .shc i,.u-sh .shc i.v,.u-sh .shc i.s{color:var(--ink-2)}.u-sh .shc .i{color:var(--gold-2)}.u-sh .shc .i{width:14px;height:14px}
 .u-sh .nm{min-height:2.8em;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;padding:0 6px;max-width:100%;overflow-wrap:anywhere}
 .u-sh .shc{flex-wrap:nowrap;gap:9px;padding:0 4px;max-width:100%}.u-sh .shc i{gap:3px;white-space:nowrap}
+.u-sh .shc i.mig{color:var(--gold-2);font-weight:800;border:1px solid var(--gold-2);border-radius:999px;padding:0 5px;font-size:.68rem}
 .u-sh .shm{padding:0 4px}
 @media(max-width:360px){.u-sh .ph{width:60px;height:60px}.u-sh .shc{gap:6px}.u-sh .shc i{font-size:.66rem}.u-sh .shc .i{width:12px;height:12px}}
 .gsrch{position:relative;margin:0 var(--sp-3) 16px}
@@ -101,7 +102,7 @@ main .wrap>div:last-child{padding:0 var(--sp-3)}
   <span class="brand">سلاسل</span>
 </div></header>
 <main><div class="wrap">
-  <section class="hhero"><span class="kick">مكتبة الدروس المسموعة والمقروءة</span><h1>دروس المشايخ<br><em>اقرأ · شاهد · استمع</em></h1><div class="hstats"><div><b id="hs1">—</b><span>شيخاً</span></div><div><b id="hs2">—</b><span>سلسلة</span></div><div><b id="hs3">—</b><span>درساً</span></div></div></section>
+  <section class="hhero"><span class="kick">مكتبة الدروس المسموعة والمقروءة</span><h1>دروس المشايخ<br><em>اقرأ · شاهد · استمع</em></h1><div class="hstats"><div><b id="hs1">—</b><span>شيخاً</span></div><div><b id="hs2">—</b><span>سلسلة</span></div><div><b id="hs3">—</b><span>درساً</span></div><div><b id="hs4">—</b><span>منقولة لإرث ✓</span></div></div></section>
   <div class="gsrch"><input id="gq" type="search" placeholder="ابحث عن سلسلة أو درس أو شيخ…" aria-label="بحث شامل" autocomplete="off"><div id="gres" aria-live="polite"></div></div>
   <div id="cont"></div>
   <div class="u-sech"><h2>المشايخ</h2><span class="cnt" id="shcnt"></span></div>
@@ -116,7 +117,7 @@ main .wrap>div:last-child{padding:0 var(--sp-3)}
 <script src="common.js?v=11"></script>
 <script src="core.js?v=2"></script>
 <script>
-let _stats={},showSoon=false,_mode='lsn';
+let _stats={},showSoon=false,_mode='lsn',_mig={};
 const ic=id=>'<svg class="i"><use href="icons.svg?v=12#'+id+'"/></svg>';
 const MODES=[['rd','i-read','قراءة'],['yt','i-yt','يوتيوب'],['lsn','i-watch','مشاهدة حية'],['qu','i-qu','أسئلة'],['aud','i-audio','استماع'],['sm','i-list','تلخيص']];
 const MCOUNT={rd:r=>r.rdn||0,yt:r=>r.ytn||0,lsn:r=>r.wan||0,qu:r=>r.qn||0,aud:r=>(r.ytn||0)+(r.aun||0),sm:r=>r.sun||0};
@@ -126,9 +127,10 @@ function drawBar(){
   document.querySelectorAll('#ubar .ftile').forEach(b=>b.onclick=()=>{
     _mode=(_mode===b.dataset.k)?'':b.dataset.k;
     draw();
-  let S=0,R=0,L=0;for(const k in stats){if(k==='_meta')continue;const rs=stats[k].rows||[];if(rs.length)S++;R+=rs.length;
-    for(const r of rs)L+=Math.max(r.ytn||0,r.wtt||0,r.rtt||0,r.rdn||0)}
+  let S=0,R=0,L=0,MG=0;for(const k in _stats){if(k==='_meta')continue;const rs=_stats[k].rows||[];if(rs.length)S++;R+=rs.length;
+    for(const r of rs){L+=Math.max(r.ytn||0,r.wtt||0,r.rtt||0,r.rdn||0);if(_mig[r.id]&&_mig[r.id].done)MG++}}
   document.getElementById('hs1').textContent=S;document.getElementById('hs2').textContent=kfmt(R);document.getElementById('hs3').textContent=kfmt(L);
+  const h4=document.getElementById('hs4');if(h4)h4.textContent=MG;
   document.getElementById('shcnt').textContent=S;
   });
   const lbl=document.getElementById('ubar-sub'),mn=_mode&&(MODES.find(x=>x[0]===_mode)||[])[2];
@@ -136,15 +138,15 @@ function drawBar(){
 }
 function shCard(st,slug){
   const init=(st.name||'؟').replace(/^ال/,'').trim()[0]||'؟';
-  let L=0,rd=0,ls=0,sm=0;
-  for(const r of st.rows||[]){L+=Math.max(r.ytn||0,r.wtt||0,r.rtt||0,r.rdn||0);rd+=r.rdn||0;ls+=r.wan||0;sm+=r.sun||0}
+  let L=0,rd=0,ls=0,sm=0,mg=0;
+  for(const r of st.rows||[]){L+=Math.max(r.ytn||0,r.wtt||0,r.rtt||0,r.rdn||0);rd+=r.rdn||0;ls+=r.wan||0;sm+=r.sun||0;if(_mig[r.id]&&_mig[r.id].done)mg++}
   const seen=(store.get('hist',[])||[]).some(h=>(st.rows||[]).some(r=>r.id===h.r));
   return '<a class="u-sh cin" href="sheikh.html?s='+encodeURIComponent(slug)+'">'
     +(seen?'<span class="u-badge">تتابعه</span>':'')
     +'<span class="ph">'+(st.photo?'<img src="'+esc(st.photo)+'" alt="" loading="lazy" onerror="this.remove()">':'')+'<span>'+init+'</span></span>'
     +'<span class="nm">'+esc(st.name)+'</span>'
     +'<span class="shm">'+pluralSeries((st.rows||[]).length)+' · '+kfmt(L)+' درس</span>'
-    +'<span class="shc">'+(rd?'<i title="دروس مكتوبة">'+ic('i-read')+kfmt(rd)+'</i>':'')+(ls?'<i class="v" title="مشاهدة حية">'+ic('i-watch')+kfmt(ls)+'</i>':'')+(sm?'<i class="s" title="ملخصات">'+ic('i-list')+kfmt(sm)+'</i>':'')+'</span>'
+    +'<span class="shc">'+(mg?'<i class="mig" title="سلاسل منقولة كاملة إلى إرث">✓ '+mg+'</i>':'')+(rd?'<i title="دروس مكتوبة">'+ic('i-read')+kfmt(rd)+'</i>':'')+(ls?'<i class="v" title="مشاهدة حية">'+ic('i-watch')+kfmt(ls)+'</i>':'')+(sm?'<i class="s" title="ملخصات">'+ic('i-list')+kfmt(sm)+'</i>':'')+'</span>'
     +'</a>';
 }
 
@@ -223,12 +225,14 @@ drawCont();
 (async()=>{
   document.getElementById('groups').innerHTML='<div class="skel" style="height:200px;border-radius:18px"></div><div class="skel" style="height:200px;border-radius:18px"></div>';
   const stats=await j('data/sheikh_stats.json');
+  try{const mj=await j('data/migration.json');_mig=(mj&&mj.rows)||{}}catch(e){_mig={}}
   if(!stats){document.getElementById('groups').innerHTML='<div class="errbox">تعذر تحميل بيانات السلاسل — <a href=".">أعد المحاولة</a></div>';return}
   _stats=stats;
   draw();drawCont();
-  let S=0,R=0,L=0;for(const k in stats){if(k==='_meta')continue;const rs=stats[k].rows||[];if(rs.length)S++;R+=rs.length;
-    for(const r of rs)L+=Math.max(r.ytn||0,r.wtt||0,r.rtt||0,r.rdn||0)}
+  let S=0,R=0,L=0,MG=0;for(const k in _stats){if(k==='_meta')continue;const rs=_stats[k].rows||[];if(rs.length)S++;R+=rs.length;
+    for(const r of rs){L+=Math.max(r.ytn||0,r.wtt||0,r.rtt||0,r.rdn||0);if(_mig[r.id]&&_mig[r.id].done)MG++}}
   document.getElementById('hs1').textContent=S;document.getElementById('hs2').textContent=kfmt(R);document.getElementById('hs3').textContent=kfmt(L);
+  const h4=document.getElementById('hs4');if(h4)h4.textContent=MG;
   document.getElementById('shcnt').textContent=S;
 })();
 if('serviceWorker' in navigator)swRegister('../sw.js');
