@@ -450,6 +450,11 @@ const SPEEDS=[1,1.25,1.5,2,0.75];let spdI=0;
 function cycleSpeed(){spdI=(spdI+1)%SPEEDS.length;const v=SPEEDS[spdI];
   if(YTP&&YTP.setPlaybackRate)YTP.setPlaybackRate(v);
   const el=document.getElementById('spd');if(el)el.textContent='×'+v}
+function autoNext(){const ser=SER.find(x=>x.items.includes(curLes));
+  if(!ser)return;const i=ser.items.indexOf(curLes);
+  const nx=ser.items[i+1];if(!nx)return;
+  tost('انتهى الدرس — التالي بعد لحظات');
+  setTimeout(()=>{if(curLes===ser.items[i])location.hash='#/lesson/'+nx},1800)}
 function playToggle(b){if(!YTP){pendPlay=true;return}
   const s=YTP.getPlayerState&&YTP.getPlayerState();
   (s===1||s===3)?YTP.pauseVideo():YTP.playVideo()}
@@ -466,7 +471,7 @@ function mountPlayer(vid){
         const b=document.getElementById('playb');const playing=(e.data===1||e.data===3);
         if(b)b.innerHTML=playing?ICONS.pause:ICONS.play;
         if(e.data===1){if(!timer)timer=setInterval(tick,150)}
-        else{if(e.data===0&&curLes)posSave(curLes,0);
+        else{if(e.data===0&&curLes){posSave(curLes,0);autoNext()}
           if(e.data!==3&&timer){clearInterval(timer);timer=null}}}}})};
   if(window.YT&&YT.Player){create()}
   else{
