@@ -475,7 +475,7 @@ function viewLesson(id){
     ${(V.has||[]).includes('transcript')?`<button class="mode" data-m="read" onclick="setMode('read')">${I('read')} تفريغ</button>`:''}
     ${(V.has||[]).includes('summary')?`<button class="mode" data-m="sum" onclick="setMode('sum')">${I('sum')} ملخص</button>`:''}
     ${V.yt?`<a class="mode" href="https://youtu.be/${V.yt}" target="_blank" rel="noopener">${I('yt')} يوتيوب</a>`:''}
-    <button class="mode" id="b-list" onclick="document.getElementById('drawer').classList.add('open')">${I('list')} الدروس</button>
+    <button class="mode" id="b-list" onclick="openDrawer()">${I('list')} الدروس</button>
   </div>
   <div id="live">
     ${V.yt?`<div class="player"><div id="yfp"></div></div>`:''}
@@ -513,6 +513,8 @@ async function loadStage(id){
     const st=document.getElementById('stage');if(st)renderPhrase(0);
   }catch(e){const st=document.getElementById('stage');if(st)st.innerHTML='<span class="wait">لا محاذاة لهذا الدرس — جرّب «قراءة تفريغ»</span>'}
 }
+function openDrawer(){const d=document.getElementById('drawer');d.classList.add('open');
+  const c=d.querySelector('.drow.cur');if(c)c.scrollIntoView({block:'center'})}
 async function loadTxt(id){
   const el=document.getElementById('txt');if(!el)return;
   try{el.textContent=await tget(`/content/tube/${id}/transcript.txt`)}
