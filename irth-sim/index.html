@@ -258,7 +258,7 @@ async function boot(){
 function navOn(k){document.querySelectorAll('.nav a').forEach(a=>a.classList.remove('on'));const n=document.getElementById('nv-'+k);if(n)n.classList.add('on')}
 function route(){
   const h=location.hash.slice(2)||'';
-  YTP&&YTP.destroy&&YTP.destroy();YTP=null;if(timer){clearInterval(timer);timer=null}
+  try{YTP&&YTP.destroy&&YTP.destroy()}catch(_){}YTP=null;pendPlay=false;if(timer){clearInterval(timer);timer=null}
   const les=h.startsWith('lesson/');
   document.body.classList.toggle('lk',les);
   document.getElementById('b-search').style.display=les?'none':'';
@@ -374,17 +374,23 @@ function playToggle(b){if(!YTP){pendPlay=true;return}
   const s=YTP.getPlayerState&&YTP.getPlayerState();
   (s===1||s===3)?YTP.pauseVideo():YTP.playVideo()}
 function mountPlayer(vid){
-  const tag=document.createElement('script');tag.src='https://www.youtube.com/iframe_api';document.head.appendChild(tag);
   let ready=false;
   setTimeout(()=>{if(!ready){const s=document.getElementById('stage');if(s)s.innerHTML='<span class="wait">المشغّل يتأخر — <a href="https://youtu.be/'+vid+'" target="_blank" rel="noopener">افتح على يوتيوب</a></span>'}},9000);
-  window.onYouTubeIframeAPIReady=()=>{
-    YTP=new YT.Player('yfp',{events:{
+  const create=()=>{if(!document.getElementById('yfp'))return;
+    YTP=new YT.Player('yfp',{videoId:vid,playerVars:{rel:0,playsinline:1,enablejsapi:1},events:{
       onReady:()=>{ready=true;if(pendPlay){YTP.playVideo();pendPlay=false}},
+      onError:e=>{const s=document.getElementById('stage');if(s)s.innerHTML='<span class="wait">يوتيوب منع تضمين هذا الفيديو ('+e.data+') — <a href="https://youtu.be/'+vid+'" target="_blank" rel="noopener">افتحه على يوتيوب</a></span>'},
       onStateChange:e=>{
         const b=document.getElementById('playb');const playing=(e.data===1||e.data===3);
         if(b)b.innerHTML=playing?ICONS.pause:ICONS.play;
         if(e.data===1){if(!timer)timer=setInterval(tick,150)}
         else if(e.data!==3&&timer){clearInterval(timer);timer=null}}}})};
+  if(window.YT&&YT.Player){create()}
+  else{
+    window.onYouTubeIframeAPIReady=create;
+    if(!document.querySelector('script[src*="iframe_api"]')){
+      const tag=document.createElement('script');tag.src='https://www.youtube.com/iframe_api';document.head.appendChild(tag)}
+  }
 }
 function setMode(m){
   MODE=m;
