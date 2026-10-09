@@ -434,7 +434,7 @@ function viewSeries(id){
     const fin=V.duration&&pv>=V.duration*.95;
     return `<a class="row" style="--i:${i}" href="#/lesson/${v}"><span class="ph" style="font-size:18px">${fin?`<span class="done">${ICONS.ok}</span>`:i+1}</span>
     <span class="tx"><span class="nm" style="font-size:16px">${esc(V.title||v)}</span>
-    <span class="mt">${V.duration?fmtT(V.duration):''}${FAV.has(v)?`<span class="fvm">${ICONS.fav}</span>`:''}</span></span>${ICONS.chev}${pc?`<span class="rbar"><i style="width:${pc}%"></i></span>`:''}</a>`}).join('')}</div>`;
+    <span class="mt">${V.duration?fmtT(V.duration):''}${pv>10&&!fin&&V.duration?` · متبقٍ ${fmtT(V.duration-pv)}`:''}${FAV.has(v)?`<span class="fvm">${ICONS.fav}</span>`:''}</span></span>${ICONS.chev}${pc?`<span class="rbar"><i style="width:${pc}%"></i></span>`:''}</a>`}).join('')}</div>`;
 }
 
 /* ===== محرك الكاريوكي — نفس lesson.html: امتلاء ذهبي داخل الكلمة ===== */
