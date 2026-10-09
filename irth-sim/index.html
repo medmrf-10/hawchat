@@ -111,6 +111,7 @@ body.les main{padding-top:calc(148px + env(safe-area-inset-top))}
 .ctx a:active{color:var(--primary)}
 .ctx b{color:var(--text);font-weight:600}
 .ctx .dim{opacity:.75;font-size:12px}
+.newb{flex:none;font-size:11px;color:var(--gold);border:1px solid var(--gold);border-radius:999px;padding:1px 8px;white-space:nowrap}
 
 /* الشريط السفلي */
 .nav{position:fixed;z-index:7;bottom:0;left:0;right:0;display:flex;max-width:var(--app-max);margin:0 auto;
@@ -400,9 +401,10 @@ function viewScience(id){
   document.title=(SCI[id]?.name||id)+' — إرث';
   app.innerHTML=`<div class="list">${rows.map((r,i)=>{
     const sh=VID[r.items[0]]?.speakers?.[0];
+    const nw=r.items.filter(v=>(POS.get(v)||0)<=10).length;
     return `<a class="row" style="--i:${i}" href="#/series/${r.id}"><span class="ph">${firstLetter(r.title)}</span>
     <span class="tx"><span class="nm" style="font-size:17px">${esc(r.title)}</span>
-    <span class="mt">${pl3(r.items.length,'درس','درسان','دروس','درساً')}${sh?' · '+esc(PER[sh]?.short||PER[sh]?.name||sh):''}${r.kind?' · '+kindAr(r.kind):''}</span></span>${ICONS.chev}</a>`}).join('')}</div>`;
+    <span class="mt">${pl3(r.items.length,'درس','درسان','دروس','درساً')}${sh?' · '+esc(PER[sh]?.short||PER[sh]?.name||sh):''}${r.kind?' · '+kindAr(r.kind):''}</span></span>${nw?`<span class="newb">${nw===r.items.length?'لم تشاهدها':pl3(nw,'درس جديد','درسان جديدان','دروس جديدة','درساً جديداً')}</span>`:''}${ICONS.chev}</a>`}).join('')}</div>`;
 }
 function viewSeries(id){
   navOn('home');
