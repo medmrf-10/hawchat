@@ -221,6 +221,13 @@ a.row:active{transform:scale(.985)}
 .qq summary b{color:var(--gold);margin-inline-end:6px}
 .qq[open] summary{border-bottom:1px solid var(--line)}
 .qq .qa{padding:12px 14px;font-family:var(--font-body);font-size:14.5px;line-height:1.9;color:var(--muted)}
+.qr{display:flex;align-items:center;gap:4px;margin-top:12px;padding-top:10px;border-top:1px dashed var(--line)}
+.qrl{font-size:12px;color:var(--dim);margin-inline-end:6px}
+.qrb{width:30px;height:30px;border:none;border-radius:8px;background:none;color:var(--dim);cursor:pointer;display:grid;place-items:center;padding:0}
+.qrb svg{width:22px;height:22px}
+.qrb:active{background:var(--press)}
+.qrb.on{color:var(--gold)}
+.qrb.on svg{fill:var(--gold)}
 .pts{margin:10px 0 0;padding:0 18px 0 0;color:var(--muted);font-size:14px;line-height:2}
 .navbt{display:flex;justify-content:space-between;gap:8px;margin:12px 16px 0}
 .navbt .chip{max-width:48%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
@@ -362,6 +369,9 @@ function route(){
   else viewHome();
 }
 const FAVK='irth_fav';let FAV=new Set(JSON.parse(localStorage.getItem(FAVK)||'[]'));
+const QRK='irth_qrate';let QRATE={};try{QRATE=JSON.parse(localStorage.getItem(QRK)||'{}')}catch(e){QRATE={}}
+function qrate(id,i,n,btn){QRATE[id+'#'+i]=n;try{localStorage.setItem(QRK,JSON.stringify(QRATE))}catch(e){}
+  btn.closest('.qr').querySelectorAll('.qrb').forEach((b,j)=>b.classList.toggle('on',j<n))}
 (function(){const f=document.createElement('button');f.id='fab';f.className='fab';f.setAttribute('aria-label','العودة لأعلى');
   f.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 14 6-6 6 6"/></svg>';
   f.onclick=()=>scrollTo({top:0,behavior:'smooth'});document.body.appendChild(f)})();
@@ -659,7 +669,8 @@ async function loadQu(id){
   const el=document.getElementById('quw');if(!el)return;
   try{const q=await jget(`/content/tube/${id}/questions.json`);
     const qs=q.questions||[];
-    el.innerHTML=qs.length?qs.map((x,i)=>`<details class="qq"><summary><b>${i+1}.</b> ${esc(x.q)}</summary><div class="qa">${esc(x.a||'')}</div></details>`).join(''):'<div class="empty">لا أسئلة بعد</div>'}
+    el.innerHTML=qs.length?qs.map((x,i)=>{const k=id+'#'+i,r=QRATE[k]||0;
+      return `<details class="qq"><summary><b>${i+1}.</b> ${esc(x.q)}</summary><div class="qa">${esc(x.a||'')}<div class="qr"><span class="qrl">قيّم إجابتك:</span>${[1,2,3,4,5].map(n=>`<button class="qrb${n<=r?' on':''}" onclick="qrate('${id}',${i},${n},this)" aria-label="تقييم ${n} من 5">${ICONS.fav}</button>`).join('')}</div></div></details>`}).join(''):'<div class="empty">لا أسئلة بعد</div>'}
   catch(e){el.innerHTML='<div class="empty">الأسئلة غير متوفرة بعد</div>'}
 }
 boot();
