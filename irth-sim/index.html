@@ -429,7 +429,10 @@ const POSK='irth_pos';let POS=new Map(JSON.parse(localStorage.getItem(POSK)||'[]
 function posSave(id,t){POS.set(id,Math.round(t));localStorage.setItem(POSK,JSON.stringify([...POS]));localStorage.setItem('irth_last',id)}
 const PBRK=/[،؛.!؟:…—]$/;
 function normAlign(a){const ws=a.words.split(' ').filter(Boolean);
-  return ws.map((w,i)=>[w,(a.start[i]||0)/100,((a.start[i]||0)+(a.dur[i]||0))/100,0])}
+  const st=a.start||[],du=a.dur||[];
+  const asEnd=du.filter((d,i)=>d>(st[i]||0)).length>du.length*0.5;
+  const off=a.off||0;
+  return ws.map((w,i)=>[w,off+(st[i]||0)/100,off+(asEnd?(du[i]||0):((st[i]||0)+(du[i]||0)))/100,0])}
 function buildPhrases(ws){const ph=[];let cur=[],prevE=-1;
   for(const w of ws){const gap=w[1]-prevE;
     if(cur.length&&(gap>1.2||cur.length>=12)){ph.push(cur);cur=[]}
