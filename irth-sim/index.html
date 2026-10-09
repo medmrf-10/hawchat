@@ -146,6 +146,8 @@ a{color:var(--primary)}
 .cbtn:active{background:var(--press)}
 .csub{display:flex;align-items:center;justify-content:space-between;gap:8px;color:var(--muted);font-size:13px}
 .csub .ppos{margin-inline-start:10px}
+.fvm{display:inline-block;width:12px;height:12px;color:var(--gold);vertical-align:-1px;margin-inline-start:6px}
+.fvm svg{width:100%;height:100%;display:block;fill:currentColor;stroke:none}
 .cta{display:flex;align-items:center;justify-content:center;gap:8px;height:44px;margin:12px 16px 4px;
   border-radius:var(--r-2);background:var(--primary);color:var(--card);font:inherit;font-size:15px;cursor:pointer;
   text-decoration:none}
@@ -350,7 +352,7 @@ function viewSearch(q){
   setCrumb([{t:'العلوم',a:'#/'},{t:'بحث: '+q}]);
   const srows=sres.map((s,i)=>`<a class="row" style="--i:${i}" href="#/series/${s.id}"><span class="ph">${firstLetter(s.title)}</span><span class="tx"><span class="nm" style="font-size:16px">${esc(s.title)}</span><span class="mt">سلسلة · ${pl3(s.items.length,'درس','درسان','دروس','درساً')}</span></span>${ICONS.chev}</a>`).join('');
   const vrows=res.map((v,i)=>{const s=SER.find(x=>x.items.includes(v.id));
-    return `<a class="row" style="--i:${i+sres.length}" href="#/lesson/${v.id}"><span class="ph">${firstLetter(v.title)}</span><span class="tx"><span class="nm" style="font-size:16px">${esc(v.title)}</span><span class="mt">${esc(s?s.title:'')}</span></span>${ICONS.chev}</a>`}).join('');
+    return `<a class="row" style="--i:${i+sres.length}" href="#/lesson/${v.id}"><span class="ph">${firstLetter(v.title)}</span><span class="tx"><span class="nm" style="font-size:16px">${esc(v.title)}</span><span class="mt">${esc(s?s.title:'')}${FAV.has(v.id)?`<span class="fvm">${ICONS.fav}</span>`:''}</span></span>${ICONS.chev}</a>`}).join('');
   app.innerHTML=`<div class="list">${srows}${vrows||''}${!srows&&!vrows?'<div class="empty">لا نتائج</div>':''}</div>`;
 }
 function route0(){viewHome()}
@@ -385,7 +387,7 @@ function viewSeries(id){
   app.innerHTML=`<div class="list"><a class="cta" href="#/lesson/${r.items[0]}">${ICONS.play}<span>استمع من البداية</span></a>${r.items.map((v,i)=>{const V=VID[v]||{};
     return `<a class="row" style="--i:${i}" href="#/lesson/${v}"><span class="ph" style="font-size:18px">${i+1}</span>
     <span class="tx"><span class="nm" style="font-size:16px">${esc(V.title||v)}</span>
-    <span class="mt">${V.duration?fmtT(V.duration):''}</span></span>${ICONS.chev}</a>`}).join('')}</div>`;
+    <span class="mt">${V.duration?fmtT(V.duration):''}${FAV.has(v)?`<span class="fvm">${ICONS.fav}</span>`:''}</span></span>${ICONS.chev}</a>`}).join('')}</div>`;
 }
 
 /* ===== محرك الكاريوكي — نفس lesson.html: امتلاء ذهبي داخل الكلمة ===== */
