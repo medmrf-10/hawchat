@@ -446,7 +446,7 @@ function viewScience(id){
     const wp=r.items.length?Math.round(r.items.filter(v=>{const V=VID[v]||{};return V.duration&&(POS.get(v)||0)>=V.duration*.95}).length/r.items.length*100):0;
     return `<a class="row" style="--i:${i}" href="#/series/${r.id}"><span class="ph">${firstLetter(r.title)}</span>
     <span class="tx"><span class="nm" style="font-size:17px">${esc(r.title)}</span>
-    <span class="mt">${pl3(r.items.length,'درس','درسان','دروس','درساً')}${sh?' · '+esc(PER[sh]?.short||PER[sh]?.name||sh):''}${r.kind?' · '+kindAr(r.kind):''}</span></span>${nw?`<span class="newb">${nw===r.items.length?'لم تشاهدها':pl3(nw,'درس جديد','درسان جديدان','دروس جديدة','درساً جديداً')}</span>`:''}${ICONS.chev}${wp>0&&wp<100?`<span class="rbar"><i style="width:${wp}%"></i></span>`:''}</a>`}).join('')}</div>`;
+    <span class="mt">${pl3(r.items.length,'درس','درسان','دروس','درساً')}${sh?' · '+esc(PER[sh]?.short||PER[sh]?.name||sh):''}${r.kind?' · '+kindAr(r.kind):''}</span></span>${wp===100?`<span class="newb" style="color:var(--gold);border-color:var(--gold)">اكتملت ✓</span>`:nw?`<span class="newb">${nw===r.items.length?'لم تشاهدها':pl3(nw,'درس جديد','درسان جديدان','دروس جديدة','درساً جديداً')}</span>`:''}${ICONS.chev}${wp>0&&wp<100?`<span class="rbar"><i style="width:${wp}%"></i></span>`:''}</a>`}).join('')}</div>`;
 }
 function shareSer(id){const u=location.origin+location.pathname+'#/series/'+id;
   if(navigator.share){navigator.share({title:document.title,url:u}).catch(()=>{})}
