@@ -378,10 +378,10 @@ function shareLes(){const u=location.href;
     const p=document.getElementById('pos');if(p){const t=p.textContent;p.textContent='نُسخ الرابط';setTimeout(()=>p.textContent=t,1600)}}).catch(()=>{})}}
 function viewFav(){navOn('fav');setCrumb([{t:'العلوم',a:'#/'},{t:'المفضلة'}]);document.title='المفضلة — إرث';
   const ids=[...FAV].filter(i=>VID[i]).reverse();
-  app.innerHTML=ids.length?`<div class="list">${ids.map((v,i)=>{const V=VID[v];const s=SER.find(x=>x.items.includes(v));
+  app.innerHTML=ids.length?`<div class="list">${ids.map((v,i)=>{const V=VID[v];const s=SER.find(x=>x.items.includes(v));const pv=POS.get(v)||0;const pc=V.duration?Math.min(99,Math.round(pv/V.duration*100)):0;
     return `<a class="row" style="--i:${i}" href="#/lesson/${v}"><span class="ph">${firstLetter(V.title)}</span>
     <span class="tx"><span class="nm" style="font-size:16px">${esc(V.title)}</span>
-    <span class="mt">${esc(s?s.title:'')}${V.duration?' · '+fmtT(V.duration):''}</span></span><button class="ufav" onclick="unfav(event,'${v}')" aria-label="إزالة من المفضلة">${I('fav')}</button></a>`}).join('')}</div>`
+    <span class="mt">${esc(s?s.title:'')}${V.duration?' · '+fmtT(V.duration):''}</span></span><button class="ufav" onclick="unfav(event,'${v}')" aria-label="إزالة من المفضلة">${I('fav')}</button>${pc?`<span class="rbar"><i style="width:${pc}%"></i></span>`:''}</a>`}).join('')}</div>`
   :'<div class="empty" style="margin-top:60px">لا مفضلات بعد — اضغط ★ داخل أي درس ليظهر هنا</div>'}
 function viewStats(){
   navOn('stats');setCrumb([{t:'إحصائي'}]);
