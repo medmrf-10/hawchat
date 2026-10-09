@@ -47,6 +47,10 @@ a{color:var(--primary)}
 .acts{display:flex}
 .ib{flex:none;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;
   color:var(--muted);border:0;background:none;font:inherit;cursor:pointer}
+/* نمط فيسبوك: الترويسة تنكمش لصف أيقونات عند النزول */
+.top.min{height:calc(48px + env(safe-area-inset-top))}
+.top.min .brand img,.top.min .sim{display:none}
+.top.min .brand b{font-size:20px}
 .ib:active{background:var(--press)}
 .sbar{position:absolute;left:8px;right:8px;bottom:7px;height:44px;display:flex;align-items:center;gap:6px;
 .sbar[hidden]{display:none}
@@ -256,6 +260,8 @@ async function boot(){
   addEventListener('hashchange',route);route();
 }
 function navOn(k){document.querySelectorAll('.nav a').forEach(a=>a.classList.remove('on'));const n=document.getElementById('nv-'+k);if(n)n.classList.add('on')}
+addEventListener('scroll',()=>{if(document.body.classList.contains('lk'))return;
+  document.getElementById('top').classList.toggle('min',scrollY>48)},{passive:true});
 function route(){
   const h=location.hash.slice(2)||'';
   try{YTP&&YTP.destroy&&YTP.destroy()}catch(_){}YTP=null;pendPlay=false;if(timer){clearInterval(timer);timer=null}
