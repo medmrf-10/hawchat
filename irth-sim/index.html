@@ -467,7 +467,8 @@ function viewScience(id){
   const rows=SER.filter(x=>x.science===id);
   setCrumb([{t:'العلوم',a:'#/'},{t:SCI[id]?.name||id}]);
   document.title=(SCI[id]?.name||id)+' — إرث';
-  app.innerHTML=`<div class="list">${rows.map((r,i)=>{
+  const full=rows.filter(r=>r.items.every(v=>['transcript','align','summary','questions'].every(k=>(VID[v]?.has||[]).includes(k)))).length;
+  app.innerHTML=`${full?`<div class="sprog" style="padding-top:0"><span style="font-size:11px;opacity:.75">${full===rows.length?'كل السلاسل مكتملة الطبقات ✓':`مكتملة بالكامل: ${full} من ${rows.length} سلسلة`}</span><div class="sbar"><i style="width:${Math.round(full/rows.length*100)}%"></i></div></div>`:''}<div class="list">${rows.map((r,i)=>{
     const sh=VID[r.items[0]]?.speakers?.[0];
     const nw=r.items.filter(v=>(POS.get(v)||0)<=10).length;
     const qn=r.items.filter(v=>(VID[v]?.has||[]).includes('questions')).length;
