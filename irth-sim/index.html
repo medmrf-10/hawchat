@@ -174,6 +174,9 @@ body.les main{padding-top:calc(104px + env(safe-area-inset-top))}
 .list{position:relative}
 .sprog .sbar{height:4px;border-radius:4px;background:var(--soft);overflow:hidden}
 .sprog .sbar i{display:block;height:100%;background:var(--gold);border-radius:4px}
+.hf a.row.fin{display:none}
+.hfbtn{align-self:flex-start;background:none;border:1px solid var(--soft);color:var(--dim);border-radius:20px;padding:4px 12px;font-size:12px;cursor:pointer}
+.hfbtn.on{color:var(--gold);border-color:var(--gold)}
 .hst{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:0 14px 12px}
 .hc{text-decoration:none;color:var(--fg);border:1px solid var(--soft);border-radius:14px;padding:8px;background:var(--card);min-width:0}
 .hph{display:grid;place-items:center;height:56px;border-radius:10px;color:var(--gold);font-weight:700;font-size:22px;background:var(--soft)}
@@ -485,7 +488,7 @@ function viewSeries(id){
   document.title=r.title+' — إرث';
   const cont=r.items.find(v=>{const V=VID[v]||{},pv=POS.get(v)||0;return pv>10&&(!V.duration||pv<V.duration*.95)});
   const finN=r.items.filter(v=>{const V=VID[v]||{};return V.duration&&(POS.get(v)||0)>=V.duration*.95}).length;
-  app.innerHTML=`<div class="list">${finN?`<div class="sprog"><span>شاهدت ${pl3(finN,'درس','درسان','دروس','درساً')} من ${r.items.length}${r.items.length>finN?` — بقي ${r.items.length-finN} (${Math.round(finN/r.items.length*100)}٪)`:' — اكتملت ✓'}</span><div class="sbar"><i style="width:${Math.round(finN/r.items.length*100)}%"></i></div></div>`:''}<a class="cta" href="#/lesson/${cont||r.items[0]}">${ICONS.play}<span>${cont?'أكمل: '+esc(VID[cont]?.title||''):'استمع من البداية'}</span></a><button class="shr" onclick="shareSer('${r.id}')" aria-label="مشاركة السلسلة">${ICONS.share||ICONS.link||'↗'}</button><button class="shr" onclick="shufSer('${r.id}')" aria-label="درس عشوائي غير مُشاهد">${ICONS.shuf}</button>${r.items.map((v,i)=>{const V=VID[v]||{};const pv=POS.get(v)||0;
+  app.innerHTML=`<div class="list">${finN?`<div class="sprog"><span>شاهدت ${pl3(finN,'درس','درسان','دروس','درساً')} من ${r.items.length}${r.items.length>finN?` — بقي ${r.items.length-finN} (${Math.round(finN/r.items.length*100)}٪)`:' — اكتملت ✓'}</span><div class="sbar"><i style="width:${Math.round(finN/r.items.length*100)}%"></i></div>${finN<r.items.length?`<button class="hfbtn" onclick="this.classList.toggle('on');document.body.classList.toggle('hf')">إخفاء المشاهَدة</button>`:''}</div>`:''}<a class="cta" href="#/lesson/${cont||r.items[0]}">${ICONS.play}<span>${cont?'أكمل: '+esc(VID[cont]?.title||''):'استمع من البداية'}</span></a><button class="shr" onclick="shareSer('${r.id}')" aria-label="مشاركة السلسلة">${ICONS.share||ICONS.link||'↗'}</button><button class="shr" onclick="shufSer('${r.id}')" aria-label="درس عشوائي غير مُشاهد">${ICONS.shuf}</button>${r.items.map((v,i)=>{const V=VID[v]||{};const pv=POS.get(v)||0;
     const pc=pv>10&&V.duration?Math.min(98,Math.round(pv/V.duration*100)):0;
     const fin=V.duration&&pv>=V.duration*.95;
     return `<a class="row${fin?' fin':''}" style="--i:${i}" href="#/lesson/${v}"><span class="ph" style="font-size:18px">${fin?`<span class="done">${ICONS.ok}</span>`:i+1}</span>
