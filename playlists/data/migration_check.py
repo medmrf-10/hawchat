@@ -20,6 +20,21 @@ SLUG2IRTH = {
     'alsayed-mut-675': 'tadabburElanfal', 'alsayed-mut-630': 'tari5ElfikrElgharbi',
     'alsayed-mut-687': 'ma9asidElssowar', 'alsayed-mut-659': 'eltazkiaLilmosli7in',
     'alsayed-mut-656': 'riyadElsali7in',
+    'aouni-ibada': 'aouniIbada', 'aouni-jabir': 'aouniJabir', 'aouni-mousiqa': 'aouniMousiqa',
+    'abdelwahid-tawassul': 'abdelwahidTawassul',
+    'abdelmonem-juz30': 'abdelmonemJuz30',
+    'alasri-arbaa': 'alasriArbaa',
+    'fadel-juz30': 'fadelJuz30', 'fadel-dawra': 'fadelDawra', 'fadel-farsh': 'fadelFarsh',
+    'alamri-adab-murid': 'alamriAdabMurid', 'alamri-barahin-kitab': 'alamriBarahinKitab',
+    'alamri-barahin-muqtatafat': 'alamriBarahinMuqtatafat', 'alamri-barahin-sharh': 'alamriBarahinSharh',
+    'alamri-bath': 'alamriBath', 'alamri-durus-amma': 'alamriDurusAmma',
+    'alamri-falsafa-din': 'alamriFalsafaDin', 'alamri-falsafa-haditha': 'alamriFalsafaHaditha',
+    'alamri-hisam': 'alamriHisam', 'alamri-iqtisad': 'alamriIqtisad',
+    'alamri-liqaat': 'alamriLiqaat', 'alamri-manhaj-iman': 'alamriManhajIman',
+    'alamri-mayar-ilm': 'alamriMayarIlm', 'alamri-mughni': 'alamriMughni',
+    'alamri-muhadara': 'alamriMuhadara', 'alamri-nasafiyya': 'alamriNasafiyya',
+    'alamri-qawaid-tasawwuf': 'alamriQawaidTasawwuf', 'alamri-qushayriyya': 'alamriQushayriyya',
+    'alamri-sulam': 'alamriSulam',
 }
 
 def main():
