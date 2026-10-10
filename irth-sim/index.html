@@ -470,10 +470,11 @@ function viewScience(id){
   app.innerHTML=`<div class="list">${rows.map((r,i)=>{
     const sh=VID[r.items[0]]?.speakers?.[0];
     const nw=r.items.filter(v=>(POS.get(v)||0)<=10).length;
+    const qn=r.items.filter(v=>(VID[v]?.has||[]).includes('questions')).length;
     const wp=r.items.length?Math.round(r.items.filter(v=>{const V=VID[v]||{};return V.duration&&(POS.get(v)||0)>=V.duration*.95}).length/r.items.length*100):0;
     return `<a class="row" style="--i:${i}" href="#/series/${r.id}"><span class="ph">${firstLetter(r.title)}</span>
     <span class="tx"><span class="nm" style="font-size:17px">${esc(r.title)}</span>
-    <span class="mt"><span class="mi">${pl3(r.items.length,'درس','درسان','دروس','درساً')}</span>${sh?`<span class="mi">${esc(PER[sh]?.short||PER[sh]?.name||sh)}</span>`:''}${r.kind?`<span class="mi">${kindAr(r.kind)}</span>`:''}</span></span>${wp===100?`<span class="newb" style="color:var(--gold);border-color:var(--gold)">اكتملت ✓</span>`:nw?`<span class="newb">${nw===r.items.length?'لم تشاهدها':pl3(nw,'درس جديد','درسان جديدان','دروس جديدة','درساً جديداً')}</span>`:''}${ICONS.chev}${wp>0&&wp<100?`<span class="rbar"><i style="width:${wp}%"></i></span>`:''}</a>`}).join('')}</div>`;
+    <span class="mt"><span class="mi">${pl3(r.items.length,'درس','درسان','دروس','درساً')}</span>${sh?`<span class="mi">${esc(PER[sh]?.short||PER[sh]?.name||sh)}</span>`:''}${r.kind?`<span class="mi">${kindAr(r.kind)}</span>`:''}${qn?`<span class="mi"><span class="fvm" style="color:var(--gold)">${ICONS.qu}</span>${qn===r.items.length?'':qn}</span>`:''}</span></span>${wp===100?`<span class="newb" style="color:var(--gold);border-color:var(--gold)">اكتملت ✓</span>`:nw?`<span class="newb">${nw===r.items.length?'لم تشاهدها':pl3(nw,'درس جديد','درسان جديدان','دروس جديدة','درساً جديداً')}</span>`:''}${ICONS.chev}${wp>0&&wp<100?`<span class="rbar"><i style="width:${wp}%"></i></span>`:''}</a>`}).join('')}</div>`;
 }
 function shufSer(id){const s=SER.find(x=>x.id===id);if(!s)return;const pool=s.items.filter(v=>{const V=VID[v]||{};return!(V.duration&&(POS.get(v)||0)>=V.duration*.95)});const pick=(pool.length?pool:s.items)[Math.floor(Math.random()*(pool.length||s.items.length))];location.hash='#/lesson/'+pick}
 function shufQuiz(id){const s=SER.find(x=>x.id===id);if(!s)return;const pool=s.items.filter(v=>(VID[v]?.has||[]).includes('questions'));if(!pool.length)return tost('لا اختبارات في هذه السلسلة بعد');const pick=pool[Math.floor(Math.random()*pool.length)];location.hash='#/lesson/'+pick}
